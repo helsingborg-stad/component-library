@@ -1,0 +1,42 @@
+{
+    "slug": "image",
+    "default": {
+        "src": false,
+        "alt": "",
+        "caption": "",
+        "fullWidth": false,
+        "rounded": false,
+        "roundedTopLeft": false,
+        "roundedTopRight": false,
+        "roundedBottomLeft": false,
+        "roundedBottomRight": false,
+        "roundedRadius": "",
+        "openModal": false,
+        "placeholderText": "Image missing",
+        "placeholderIcon": "broken_image",
+        "placeholderIconSize": "xl"
+    },
+    "description": {
+        "rounded": "Image radius on all 4 corners",
+        "roundedTopLeft": "Image radius on top left corner",
+        "roundedTopRight": "Image radius on top right corners",
+        "roundedBottomLeft": "Image radius on bottom left corners",
+        "roundedBottomRight": "Image radius on bottom right corners",
+        "roundedRadius": "Radius size: xs, sm, md and lg",
+        "openModal": "If the image should be able to open in a modal",
+        "placeholderText": "Label to show if image is missing",
+        "placeholderIcon": "Icon to display if image is missing / false to hide",
+        "placeholderIconSize": "Icons size, please refer to image component for size."
+    },
+    "view": "image.blade.php",
+    "dependency": {
+        "sass": {
+            "components": [
+                "image",
+                "modal",
+                "button",
+                "icon"
+            ]
+        }
+    }
+}

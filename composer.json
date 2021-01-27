@@ -1,0 +1,12 @@
+{
+    "name": "helsingborg-stad/component-library",
+    "authors": [
+        {
+            "name": "Eric Rosenborg",
+            "email": "eric.rosenborg@hiq.se"
+        }
+    ],
+    "require": {
+        "helsingborg-stad/blade-engine-wrapper": "dev-master"
+    }
+}

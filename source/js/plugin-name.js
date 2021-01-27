@@ -1,1 +1,0 @@
-var (#plugin_namespace#) = {};

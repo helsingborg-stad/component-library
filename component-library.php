@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * Plugin Name:       component-library
+ * Plugin URI:        (#plugin_url#)
+ * Description:       A library of blade components
+ * Version:           1.0.0
+ * Author:            Eric Rosenborg
+ * Author URI:        (#plugin_author_url#)
+ * License:           MIT
+ * License URI:       https://opensource.org/licenses/MIT
+ * Text Domain:       component-library
+ * Domain Path:       /languages
+ */
+
+ // Protect agains direct file access
+if (! defined('WPINC')) {
+    die;
+}
+
+define('COMPONENTLIBRARY_PATH', plugin_dir_path(__FILE__));
+define('COMPONENTLIBRARY_URL', plugins_url('', __FILE__));
+define('COMPONENTLIBRARY_TEMPLATE_PATH', COMPONENTLIBRARY_PATH . 'templates/');
+
+load_plugin_textdomain('component-library', false, plugin_basename(dirname(__FILE__)) . '/languages');
+
+require_once COMPONENTLIBRARY_PATH . 'source/php/Vendor/Psr4ClassLoader.php';
+require_once COMPONENTLIBRARY_PATH . 'Public.php';
+
+// Instantiate and register the autoloader
+$loader = new ComponentLibrary\Vendor\Psr4ClassLoader();
+$loader->addPrefix('ComponentLibrary', COMPONENTLIBRARY_PATH);
+$loader->addPrefix('ComponentLibrary', COMPONENTLIBRARY_PATH . 'source/php/');
+$loader->register();
+
+// Start application
+new ComponentLibrary\App();

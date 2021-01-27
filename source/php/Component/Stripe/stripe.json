@@ -1,0 +1,17 @@
+{
+    "slug": "stripe",
+    "default": {
+        "componentElement": "div"
+    },
+    "description": {
+        "componentElement": "The tag for the component"
+    },
+    "view": "stripe.blade.php",
+    "dependency": {
+        "sass": {
+            "components": [
+                "stripe"
+            ]
+        }
+    }
+}

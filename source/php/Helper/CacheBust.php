@@ -1,6 +1,6 @@
 <?php
 
-namespace (#plugin_namespace#)\Helper;
+namespace ComponentLibrary\Helper;
 
 class CacheBust
 {
@@ -31,12 +31,12 @@ class CacheBust
      */
     public static function getRevManifest()
     {
-        $jsonPath = (#plugin_cap#)_PATH . apply_filters('(#plugin_namespace#)/Helper/CacheBust/RevManifestPath', 'dist/rev-manifest.json');
+        $jsonPath = COMPONENTLIBRARY_PATH . apply_filters('ComponentLibrary/Helper/CacheBust/RevManifestPath', 'dist/rev-manifest.json');
 
         if (file_exists($jsonPath)) {
             return json_decode(file_get_contents($jsonPath), true);
         } elseif (WP_DEBUG) {
-            echo '<div style="color:red">Error: Assets not built. Go to ' . (#plugin_cap#)_PATH . ' and run gulp. See '. (#plugin_cap#)_PATH . 'README.md for more info.</div>';
+            echo '<div style="color:red">Error: Assets not built. Go to ' . COMPONENTLIBRARY_PATH . ' and run gulp. See '. COMPONENTLIBRARY_PATH . 'README.md for more info.</div>';
         }
     }
 }

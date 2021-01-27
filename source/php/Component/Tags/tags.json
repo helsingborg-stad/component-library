@@ -1,0 +1,23 @@
+{
+    "slug": "tags",
+    "default": {
+        "componentElement": "div",
+        "beforeLabel": "# ",
+        "afterLabel": ""
+    },
+    "description": {
+        "componentElement": "",
+        "beforeLabel": "",
+        "afterLabel": ""
+    },
+    "view": "tags.blade.php",
+    "dependency": {
+        "sass": {
+            "components": [
+                "tags",
+                "icon",
+                "link"
+            ]
+        }
+    }
+}

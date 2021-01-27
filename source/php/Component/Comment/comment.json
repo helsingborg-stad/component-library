@@ -1,0 +1,42 @@
+{
+    "slug": "comment",
+    "default": {
+        "author": "",
+        "author_url": "",
+        "author_image": "",
+        "text": "",
+        "icon": "",
+        "bubble_color": "dark",
+        "date": "01/02/2019",
+        "date_suffix": "",
+        "componentElement": "div",
+        "is_reply": false,
+        "filterHtml": false,
+        "allowedTags": "<b><strong><i><em><mark><small><del><ins><sub><sup>"
+    },
+    "description": {
+        "author": "Name of the commenter",
+        "author_url": "URL to the profile of the author",
+        "author_image": "A link to an image",
+        "text": "Content of the comment",
+        "icon": "Which icon to show",
+        "bubble_color": "Color for comment bubble background: light or dark",
+        "date": "The date when the comment was posted",
+        "date_suffix": "Time elapsed 'since' ",
+        "componentElement": "Element of the component",
+        "is_reply": "If true the comment will be displayed as a reply",
+        "filterHtml": "If set to true the comment will be filtered from html tags",
+        "allowedTags": "Which tags should be excluded from filtration"
+    },
+    "view": "comment.blade.php",
+    "dependency": {
+        "sass": {
+            "components": [
+                "comment",
+                "avatar",
+                "typography",
+                "link"
+            ]
+        }
+    }
+}
