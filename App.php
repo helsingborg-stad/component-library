@@ -5,19 +5,11 @@ namespace ComponentLibrary;
 class App
 {
     public function __construct()
-    {
-        //Define basepath
-        define('BCL_BASEPATH', dirname(__FILE__) . '/');
-
-        //Autload controllers etc
-        require_once BCL_BASEPATH . 'vendor/autoload.php';
-
-        //Include base classes
-        include BCL_BASEPATH . 'source/php/Init.php';
-        include BCL_BASEPATH . 'source/php/Register.php';
-        
-        add_action('admin_enqueue_scripts', array($this, 'enqueueStyles'));
-        add_action('admin_enqueue_scripts', array($this, 'enqueueScripts'));
+    {   
+        if(function_exists('add_action')) {
+            add_action('admin_enqueue_scripts', array($this, 'enqueueStyles'));
+            add_action('admin_enqueue_scripts', array($this, 'enqueueScripts'));
+        }
     }
 
     /**
