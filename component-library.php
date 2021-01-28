@@ -15,14 +15,21 @@
 
  // Protect agains direct file access
 if (! defined('WPINC')) {
-    die;
+    //die;
 }
 
-define('COMPONENTLIBRARY_PATH', plugin_dir_path(__FILE__));
-define('COMPONENTLIBRARY_URL', plugins_url('', __FILE__));
+if(function_exists('plugin_dir_path') && function_exists('plugin_url')) {
+    define('COMPONENTLIBRARY_PATH', plugin_dir_path(__FILE__));
+    define('COMPONENTLIBRARY_URL', plugins_url('', __FILE__));
+} else {
+    define('COMPONENTLIBRARY_PATH', dirname(__FILE__) . '/');
+}
+
 define('COMPONENTLIBRARY_TEMPLATE_PATH', COMPONENTLIBRARY_PATH . 'templates/');
 
-load_plugin_textdomain('component-library', false, plugin_basename(dirname(__FILE__)) . '/languages');
+if(function_exists('plugin_basename')) {
+    load_plugin_textdomain('component-library', false, plugin_basename(dirname(__FILE__)) . '/languages');
+}
 
 require_once COMPONENTLIBRARY_PATH . 'source/php/Vendor/Psr4ClassLoader.php';
 require_once COMPONENTLIBRARY_PATH . 'Public.php';
