@@ -1,5 +1,6 @@
 {
     "name": "helsingborg-stad/component-library",
+    "type": "wordpress-muplugin", 
     "authors": [
         {
             "name": "Eric Rosenborg",
