@@ -1,8 +1,8 @@
 <?php
 
-namespace ComponentLibrary\Component\Signature;
+namespace BladeComponentLibrary\Component\Signature;
 
-class Signature extends \ComponentLibrary\Component\BaseController
+class Signature extends \BladeComponentLibrary\Component\BaseController
 {
 
     public function init()

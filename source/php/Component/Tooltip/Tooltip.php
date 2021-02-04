@@ -1,8 +1,8 @@
 <?php
 
-namespace ComponentLibrary\Component\Tooltip;
+namespace BladeComponentLibrary\Component\Tooltip;
 
-class Tooltip extends \ComponentLibrary\Component\BaseController
+class Tooltip extends \BladeComponentLibrary\Component\BaseController
 {
     public function init() {
         //Extract array for eazy access (fetch only)

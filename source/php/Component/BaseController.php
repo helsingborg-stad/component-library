@@ -1,6 +1,6 @@
 <?php
 
-namespace ComponentLibrary\Component;
+namespace BladeComponentLibrary\Component;
 
 class BaseController
 {
@@ -72,7 +72,7 @@ class BaseController
 
         //Applies a general wp filter
         if (function_exists('apply_filters')) {
-            $data = apply_filters("ComponentLibrary/Component/Data", $data);
+            $data = apply_filters("BladeComponentLibrary/Component/Data", $data);
         }
 
         //Applies a general wp filter
@@ -151,7 +151,7 @@ class BaseController
 
         //Applies a general wp filter
         if (function_exists('apply_filters')) {
-            $class = apply_filters("ComponentLibrary/Component/Class", $class);
+            $class = apply_filters("BladeComponentLibrary/Component/Class", $class);
         }
 
         //Return manipulated classes as array
@@ -225,7 +225,7 @@ class BaseController
 
         //Applies a general wp filter
         if (function_exists('apply_filters')) {
-            $attribute = apply_filters("ComponentLibrary/Component/Attribute", $attribute);
+            $attribute = apply_filters("BladeComponentLibrary/Component/Attribute", $attribute);
         }
 
         //Return manipulated classes as array

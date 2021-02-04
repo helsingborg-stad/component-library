@@ -1,8 +1,8 @@
 <?php
 
-namespace ComponentLibrary\Component\Field;
+namespace BladeComponentLibrary\Component\Field;
 
-class Field extends \ComponentLibrary\Component\Form\Form
+class Field extends \BladeComponentLibrary\Component\Form\Form
 {
     public function init()
     {

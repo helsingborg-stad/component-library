@@ -1,12 +1,12 @@
 <?php
 
-namespace ComponentLibrary\Component\Testimonials;
+namespace BladeComponentLibrary\Component\Testimonials;
 
 /**
  * Class Testimonials
- * @package ComponentLibrary\Component\Testimonials
+ * @package BladeComponentLibrary\Component\Testimonials
  */
-class Testimonials extends \ComponentLibrary\Component\BaseController
+class Testimonials extends \BladeComponentLibrary\Component\BaseController
 {
     public function init()
     {

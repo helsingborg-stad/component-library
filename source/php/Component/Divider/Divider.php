@@ -1,12 +1,12 @@
 <?php
 
-namespace ComponentLibrary\Component\Divider;
+namespace BladeComponentLibrary\Component\Divider;
 
 /**
  * Class Dropdown
- * @package ComponentLibrary\Component\Dropdown
+ * @package BladeComponentLibrary\Component\Dropdown
  */
-class Divider extends \ComponentLibrary\Component\BaseController
+class Divider extends \BladeComponentLibrary\Component\BaseController
 {
 
     public function init() {

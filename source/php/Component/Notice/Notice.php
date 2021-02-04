@@ -1,8 +1,8 @@
 <?php
 
-namespace ComponentLibrary\Component\Notice;
+namespace BladeComponentLibrary\Component\Notice;
 
-class Notice extends \ComponentLibrary\Component\BaseController  
+class Notice extends \BladeComponentLibrary\Component\BaseController  
 {
     
     public function init() {

@@ -1,12 +1,12 @@
 <?php
 
-namespace ComponentLibrary\Component\Textarea;
+namespace BladeComponentLibrary\Component\Textarea;
 
 /**
  * Class Textarea
- * @package ComponentLibrary\Component\Textarea
+ * @package BladeComponentLibrary\Component\Textarea
  */
-class Textarea extends \ComponentLibrary\Component\BaseController
+class Textarea extends \BladeComponentLibrary\Component\BaseController
 {
     public function init()
     {

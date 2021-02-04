@@ -1,12 +1,12 @@
 <?php
 
-namespace ComponentLibrary\Component\Date;
+namespace BladeComponentLibrary\Component\Date;
 
 /**
  * Class Dropdown
- * @package ComponentLibrary\Component\Date
+ * @package BladeComponentLibrary\Component\Date
  */
-class Date extends \ComponentLibrary\Component\BaseController
+class Date extends \BladeComponentLibrary\Component\BaseController
 {
 
     

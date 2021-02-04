@@ -1,8 +1,8 @@
 <?php
 
-namespace ComponentLibrary\Component\Grid;
+namespace BladeComponentLibrary\Component\Grid;
 
-class Grid extends \ComponentLibrary\Component\BaseController  
+class Grid extends \BladeComponentLibrary\Component\BaseController  
 {
     public function init() {
         //Extract array for eazy access (fetch only)

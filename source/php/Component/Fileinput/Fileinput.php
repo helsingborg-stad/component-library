@@ -1,8 +1,8 @@
 <?php
 
-namespace ComponentLibrary\Component\Fileinput;
+namespace BladeComponentLibrary\Component\Fileinput;
 
-class Fileinput extends \ComponentLibrary\Component\BaseController
+class Fileinput extends \BladeComponentLibrary\Component\BaseController
 {
     public function init()
     {

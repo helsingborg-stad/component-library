@@ -1,12 +1,12 @@
 <?php
 
-namespace ComponentLibrary\Component\Avatar;
+namespace BladeComponentLibrary\Component\Avatar;
 
 /**
  * Class Avatar
- * @package ComponentLibrary\Component\Avatar
+ * @package BladeComponentLibrary\Component\Avatar
  */
-class Avatar extends \ComponentLibrary\Component\BaseController
+class Avatar extends \BladeComponentLibrary\Component\BaseController
 {
 	public function init()
 	{

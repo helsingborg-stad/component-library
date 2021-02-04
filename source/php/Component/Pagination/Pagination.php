@@ -1,8 +1,8 @@
 <?php
 
-namespace ComponentLibrary\Component\Pagination;
+namespace BladeComponentLibrary\Component\Pagination;
 
-class Pagination extends \ComponentLibrary\Component\BaseController  
+class Pagination extends \BladeComponentLibrary\Component\BaseController  
 {
     
     public function init() {

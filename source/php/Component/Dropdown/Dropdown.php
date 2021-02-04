@@ -1,12 +1,12 @@
 <?php
 
-namespace ComponentLibrary\Component\Dropdown;
+namespace BladeComponentLibrary\Component\Dropdown;
 
 /**
  * Class Dropdown
- * @package ComponentLibrary\Component\Dropdown
+ * @package BladeComponentLibrary\Component\Dropdown
  */
-class Dropdown extends \ComponentLibrary\Component\BaseController
+class Dropdown extends \BladeComponentLibrary\Component\BaseController
 {
 
     public function init() {

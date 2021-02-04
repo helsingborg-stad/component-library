@@ -1,12 +1,12 @@
 <?php
 
-namespace ComponentLibrary\Component\Breadcrumb;
+namespace BladeComponentLibrary\Component\Breadcrumb;
 
 /**
  * Class Breadcrumb
- * @package ComponentLibrary\Component\Breadcrumb
+ * @package BladeComponentLibrary\Component\Breadcrumb
  */
-class Breadcrumb extends \ComponentLibrary\Component\BaseController  
+class Breadcrumb extends \BladeComponentLibrary\Component\BaseController  
 {
     
     public function init() {

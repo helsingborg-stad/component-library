@@ -1,8 +1,8 @@
 <?php
 
-namespace ComponentLibrary\Component\Gallery;
+namespace BladeComponentLibrary\Component\Gallery;
 
-class Gallery extends \ComponentLibrary\Component\BaseController
+class Gallery extends \BladeComponentLibrary\Component\BaseController
 {
 	public function init() {
 		//Extract array for eazy access (fetch only)

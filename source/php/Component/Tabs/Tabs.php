@@ -1,8 +1,8 @@
 <?php
 
-namespace ComponentLibrary\Component\Tabs;
+namespace BladeComponentLibrary\Component\Tabs;
 
-class Tabs extends \ComponentLibrary\Component\BaseController
+class Tabs extends \BladeComponentLibrary\Component\BaseController
 {
     public function init() {
         //Extract array for eazy access (fetch only)

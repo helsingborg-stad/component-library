@@ -1,7 +1,7 @@
 <!-- gallery.blade.php -->
 @if($list)
     @php
-        $uniqueId = "gallery_".\ComponentLibrary\Component\Gallery\Gallery::getUnique();
+        $uniqueId = "gallery_".\BladeComponentLibrary\Component\Gallery\Gallery::getUnique();
     @endphp
 
     <ul id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>

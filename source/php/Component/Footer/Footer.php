@@ -1,8 +1,8 @@
 <?php
 
-namespace ComponentLibrary\Component\Footer;
+namespace BladeComponentLibrary\Component\Footer;
 
-class Footer extends \ComponentLibrary\Component\BaseController  
+class Footer extends \BladeComponentLibrary\Component\BaseController  
 {
     public function init() {
         //Extract array for eazy access (fetch only)

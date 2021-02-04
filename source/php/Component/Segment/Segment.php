@@ -1,8 +1,8 @@
 <?php
 
-namespace ComponentLibrary\Component\Segment;
+namespace BladeComponentLibrary\Component\Segment;
 
-class Segment extends \ComponentLibrary\Component\BaseController
+class Segment extends \BladeComponentLibrary\Component\BaseController
 {
 
     public function init() {

@@ -1,8 +1,8 @@
 <?php
 
-namespace ComponentLibrary\Component\Collection__item;
+namespace BladeComponentLibrary\Component\Collection__item;
 
-class Collection__item extends \ComponentLibrary\Component\BaseController  
+class Collection__item extends \BladeComponentLibrary\Component\BaseController  
 {
     
     public function init() {

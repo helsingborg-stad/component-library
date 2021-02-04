@@ -1,12 +1,12 @@
 <?php
 
-namespace ComponentLibrary\Component\Navbar;
+namespace BladeComponentLibrary\Component\Navbar;
 
 /**
  * Class Card
- * @package ComponentLibrary\Component\Navbar
+ * @package BladeComponentLibrary\Component\Navbar
  */
-class Navbar extends \ComponentLibrary\Component\BaseController
+class Navbar extends \BladeComponentLibrary\Component\BaseController
 {
     public function init() {
 

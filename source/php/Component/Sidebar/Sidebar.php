@@ -1,8 +1,8 @@
 <?php
 
-namespace ComponentLibrary\Component\Sidebar;
+namespace BladeComponentLibrary\Component\Sidebar;
 
-class Sidebar extends \ComponentLibrary\Component\BaseController
+class Sidebar extends \BladeComponentLibrary\Component\BaseController
 {
 
     public function init()

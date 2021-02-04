@@ -1,8 +1,8 @@
 <?php
 
-namespace ComponentLibrary\Component\Video;
+namespace BladeComponentLibrary\Component\Video;
 
-class Video extends \ComponentLibrary\Component\BaseController  
+class Video extends \BladeComponentLibrary\Component\BaseController  
 {
     
     public function init() {

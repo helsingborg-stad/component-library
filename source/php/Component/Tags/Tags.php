@@ -1,8 +1,8 @@
 <?php
 
-namespace ComponentLibrary\Component\Tags;
+namespace BladeComponentLibrary\Component\Tags;
 
-class Tags extends \ComponentLibrary\Component\BaseController
+class Tags extends \BladeComponentLibrary\Component\BaseController
 {
     public function init()
     {
