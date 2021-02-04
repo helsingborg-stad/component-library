@@ -1,8 +1,8 @@
 <?php
 
-namespace BladeComponentLibrary\Component\Loader;
+namespace ComponentLibrary\Component\Loader;
 
-class Loader extends \BladeComponentLibrary\Component\BaseController
+class Loader extends \ComponentLibrary\Component\BaseController
 {
     public function init()
     {

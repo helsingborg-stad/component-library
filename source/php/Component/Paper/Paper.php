@@ -1,8 +1,8 @@
 <?php
 
-namespace BladeComponentLibrary\Component\Paper;
+namespace ComponentLibrary\Component\Paper;
 
-class Paper extends \BladeComponentLibrary\Component\BaseController 
+class Paper extends \ComponentLibrary\Component\BaseController 
 {
     public function init() {
         //Extract array for eazy access (fetch only)

@@ -1,8 +1,8 @@
 <?php
 
-namespace BladeComponentLibrary\Component\Calendar;
+namespace ComponentLibrary\Component\Calendar;
 
-class Calendar extends \BladeComponentLibrary\Component\BaseController
+class Calendar extends \ComponentLibrary\Component\BaseController
 {
 
     public function init()

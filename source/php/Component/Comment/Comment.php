@@ -1,8 +1,8 @@
 <?php
 
-namespace BladeComponentLibrary\Component\Comment;
+namespace ComponentLibrary\Component\Comment;
 
-class Comment extends \BladeComponentLibrary\Component\BaseController {
+class Comment extends \ComponentLibrary\Component\BaseController {
     public function init() {
         //Extract array for eazy access (fetch only)
         extract($this->data);

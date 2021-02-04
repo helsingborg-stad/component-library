@@ -1,8 +1,8 @@
 <?php
 
-namespace BladeComponentLibrary\Component\Button;
+namespace ComponentLibrary\Component\Button;
 
-class Button extends \BladeComponentLibrary\Component\BaseController
+class Button extends \ComponentLibrary\Component\BaseController
 {
 
   public function init() {

@@ -1,12 +1,12 @@
 <?php
 
-namespace BladeComponentLibrary\Component\Alert;
+namespace ComponentLibrary\Component\Alert;
 
 /**
  * Class Alert
- * @package BladeComponentLibrary\Component\Alert
+ * @package ComponentLibrary\Component\Alert
  */
-class Alert extends \BladeComponentLibrary\Component\BaseController  
+class Alert extends \ComponentLibrary\Component\BaseController  
 {
     public function init() {
 

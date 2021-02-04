@@ -1,12 +1,12 @@
 <?php
 
-namespace BladeComponentLibrary\Component\Card;
+namespace ComponentLibrary\Component\Card;
 
 /**
  * Class Card
- * @package BladeComponentLibrary\Component\Card
+ * @package ComponentLibrary\Component\Card
  */
-class Card extends \BladeComponentLibrary\Component\BaseController
+class Card extends \ComponentLibrary\Component\BaseController
 {
 	public function init()
 	{

@@ -1,12 +1,12 @@
 <?php
 
-namespace BladeComponentLibrary\Component\Fab;
+namespace ComponentLibrary\Component\Fab;
 
 /**
  * Class Fab
- * @package BladeComponentLibrary\Component\Fab
+ * @package ComponentLibrary\Component\Fab
  */
-class Fab extends \BladeComponentLibrary\Component\BaseController
+class Fab extends \ComponentLibrary\Component\BaseController
 {
 
     public function init() {

@@ -1,12 +1,12 @@
 <?php
 
-namespace BladeComponentLibrary\Component\Option;
+namespace ComponentLibrary\Component\Option;
 
 /**
  * Class Option
- * @package BladeComponentLibrary\Component\Option
+ * @package ComponentLibrary\Component\Option
  */
-class Option extends \BladeComponentLibrary\Component\BaseController
+class Option extends \ComponentLibrary\Component\BaseController
 {
     public function init()
     {

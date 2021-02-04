@@ -1,12 +1,12 @@
 <?php
 
-namespace BladeComponentLibrary\Component\ButtonGroup;
+namespace ComponentLibrary\Component\ButtonGroup;
 
 /**
  * Class ButtonGroup
- * @package BladeComponentLibrary\Component\ButtonGroup
+ * @package ComponentLibrary\Component\ButtonGroup
  */
-class ButtonGroup extends \BladeComponentLibrary\Component\BaseController
+class ButtonGroup extends \ComponentLibrary\Component\BaseController
 {
     public function init() {
       

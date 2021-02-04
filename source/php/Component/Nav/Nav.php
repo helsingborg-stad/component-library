@@ -1,10 +1,10 @@
 <?php
 
-namespace BladeComponentLibrary\Component\Nav;
+namespace ComponentLibrary\Component\Nav;
 
 use SubItem; 
 
-class Nav extends \BladeComponentLibrary\Component\BaseController
+class Nav extends \ComponentLibrary\Component\BaseController
 {
 
     public function init()

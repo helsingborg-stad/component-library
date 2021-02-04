@@ -1,8 +1,8 @@
 <?php
 
-namespace BladeComponentLibrary\Component\Code;
+namespace ComponentLibrary\Component\Code;
 
-class Code extends \BladeComponentLibrary\Component\BaseController  
+class Code extends \ComponentLibrary\Component\BaseController  
 {
     
     public function init() {

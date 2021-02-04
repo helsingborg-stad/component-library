@@ -1,8 +1,8 @@
 <?php
 
-namespace BladeComponentLibrary\Component\Logotype;
+namespace ComponentLibrary\Component\Logotype;
 
-class Logotype extends \BladeComponentLibrary\Component\BaseController
+class Logotype extends \ComponentLibrary\Component\BaseController
 {
 
     public function init() {

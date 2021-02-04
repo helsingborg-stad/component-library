@@ -1,8 +1,8 @@
 <?php
 
-namespace BladeComponentLibrary\Component\Image;
+namespace ComponentLibrary\Component\Image;
 
-class Image extends \BladeComponentLibrary\Component\BaseController
+class Image extends \ComponentLibrary\Component\BaseController
 {
 
 	public function init()

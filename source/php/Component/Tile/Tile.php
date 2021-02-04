@@ -1,8 +1,8 @@
 <?php
 
-namespace BladeComponentLibrary\Component\Tile;
+namespace ComponentLibrary\Component\Tile;
 
-class Tile extends \BladeComponentLibrary\Component\BaseController
+class Tile extends \ComponentLibrary\Component\BaseController
 {
     public function init()
     {

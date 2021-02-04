@@ -1,8 +1,8 @@
 <?php
 
-namespace BladeComponentLibrary\Component\Link;
+namespace ComponentLibrary\Component\Link;
 
-class Link extends \BladeComponentLibrary\Component\BaseController
+class Link extends \ComponentLibrary\Component\BaseController
 {
 
     public function init() {

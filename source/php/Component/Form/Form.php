@@ -1,12 +1,12 @@
 <?php
 
-namespace BladeComponentLibrary\Component\Form;
+namespace ComponentLibrary\Component\Form;
 
 /**
  * Class Form
- * @package BladeComponentLibrary\Component\Form
+ * @package ComponentLibrary\Component\Form
  */
-class Form extends \BladeComponentLibrary\Component\BaseController
+class Form extends \ComponentLibrary\Component\BaseController
 {
     public function init()
     {

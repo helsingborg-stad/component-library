@@ -1,8 +1,8 @@
 <?php
 
-namespace BladeComponentLibrary\Component\Steppers;
+namespace ComponentLibrary\Component\Steppers;
 
-class Steppers extends \BladeComponentLibrary\Component\BaseController
+class Steppers extends \ComponentLibrary\Component\BaseController
 {
     public function init() {
         //Extract array for eazy access (fetch only)

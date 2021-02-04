@@ -1,12 +1,12 @@
 <?php
 
-namespace BladeComponentLibrary\Component\Icon;
+namespace ComponentLibrary\Component\Icon;
 
 /**
  * Class Icon
- * @package BladeComponentLibrary\Component\Icon
+ * @package ComponentLibrary\Component\Icon
  */
-class Icon extends \BladeComponentLibrary\Component\BaseController {
+class Icon extends \ComponentLibrary\Component\BaseController {
 
     public function init() {
 

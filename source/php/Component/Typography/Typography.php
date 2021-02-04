@@ -1,8 +1,8 @@
 <?php
 
-namespace BladeComponentLibrary\Component\Typography;
+namespace ComponentLibrary\Component\Typography;
 
-class Typography extends \BladeComponentLibrary\Component\BaseController  
+class Typography extends \ComponentLibrary\Component\BaseController  
 {
     
     public function init() {

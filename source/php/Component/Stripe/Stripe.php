@@ -1,8 +1,8 @@
 <?php
 
-namespace BladeComponentLibrary\Component\Stripe;
+namespace ComponentLibrary\Component\Stripe;
 
-class Stripe extends \BladeComponentLibrary\Component\BaseController
+class Stripe extends \ComponentLibrary\Component\BaseController
 {
     public function init()
     {

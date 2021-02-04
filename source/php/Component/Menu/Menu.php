@@ -1,8 +1,8 @@
 <?php
 
-namespace BladeComponentLibrary\Component\Menu;
+namespace ComponentLibrary\Component\Menu;
 
-class Menu extends \BladeComponentLibrary\Component\BaseController  
+class Menu extends \ComponentLibrary\Component\BaseController  
 {
     
     public function init() {

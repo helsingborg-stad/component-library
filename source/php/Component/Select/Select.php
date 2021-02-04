@@ -1,8 +1,8 @@
 <?php
 
-namespace BladeComponentLibrary\Component\Select;
+namespace ComponentLibrary\Component\Select;
 
-class Select extends \BladeComponentLibrary\Component\BaseController
+class Select extends \ComponentLibrary\Component\BaseController
 {
 
     public function init() {

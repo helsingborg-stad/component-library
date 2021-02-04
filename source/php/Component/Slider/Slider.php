@@ -1,8 +1,8 @@
 <?php
 
-namespace BladeComponentLibrary\Component\Slider;
+namespace ComponentLibrary\Component\Slider;
 
-class Slider extends \BladeComponentLibrary\Component\BaseController
+class Slider extends \ComponentLibrary\Component\BaseController
 {
 
     public function init()
