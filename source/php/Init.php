@@ -8,7 +8,6 @@ use HelsingborgStad\BladeEngineWrapper as Blade;
 class Init {
     
     public function __construct($externalViewPaths) {
-        var_dump("FUCK");
         $blade = new Blade();
         $paths = array(
             'viewPaths' => array(),
