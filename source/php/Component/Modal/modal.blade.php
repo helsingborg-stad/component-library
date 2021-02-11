@@ -1,6 +1,13 @@
 <!-- modal.blade.php -->
 <div id="{{ $id }}" class="{{ $parentClass }}" role="dialog" aria-modal="true" aria-labelledby="modal__label__{{$id}}">
     <div class="{{$class}}"  {!! $attribute !!}>
+
+        @if($top)
+            <div class="{{$baseClass}}__top">
+                {!! $top !!}
+            </div>
+        @endif
+
         <header class="{{$baseClass}}__header">
             @if ($heading)
                 @typography([
@@ -19,6 +26,7 @@
                 'style' => 'basic',
                 'attributeList' => ['data-close' => ''],
                 'classList' => [$baseClass . "__close"],
+                'size' => 'lg'
             ])
             @endbutton
         </header>
@@ -39,7 +47,7 @@
                 @endbutton
             @endif
 
-            {!! $top !!}
+            
             {!! $slot !!}
 
             {{-- Next button --}}
@@ -57,9 +65,12 @@
             @endif
         </section>
 
-        <footer class="{{$baseClass}}__footer">
-            {!! $bottom !!}
-        </footer>
+        @if($bottom)
+            <footer class="{{$baseClass}}__footer">
+                {!! $bottom !!}
+            </footer>
+        @endif
+
         @if ($navigation)
 
             @steppers(

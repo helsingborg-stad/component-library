@@ -16,8 +16,19 @@ class Modal extends \ComponentLibrary\Component\BaseController
 			$this->data['classList'][] = $this->getBaseClass() . "--is-modal";
 		}
 
-		if($size) {
+		//The size
+		if($size && in_array($size, ['sm','md','lg'])) {
 			$this->data['classList'][] = $this->getBaseClass() . "--size-".$size;
+		}
+
+		//Padding
+		if($padding && in_array($padding, range(0, 4))) {
+			$this->data['classList'][] = $this->getBaseClass() . "--padding-".$padding;
+		}
+
+		//Border radius
+		if($borderRadius && in_array($borderRadius, ['sm','md','lg'])) {
+			$this->data['classList'][] = $this->getBaseClass() . "--border-radius-".$borderRadius;
 		}
 
 		//Ensure animation is present

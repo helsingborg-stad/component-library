@@ -10,18 +10,22 @@
         "id": "",
         "animation": "",
         "navigation": false,
-        "size": ""
+        "size": "",
+        "padding": 3,
+        "borderRadius": false
     },
     "description": {
         "heading": "The title of the modal",
         "slot": "The main content of the modal",
         "top": "Extra slot at the top of the modal (above title)",
         "bottom": "Extra slot at the bottom of the modal (below content)",
-        "isPanel": "Removes padding, to enable a panel like behaviour.",
+        "isPanel": "Removes padding, to enable a panel like behaviour. Cover whole page viewport.",
         "id": "A unique id which will be used to target the modal to open with the correct data-attr",
         "animation": "Which animation to use when opening  and closing the modal.",
-        "navigation": "You can use ",
-        "size": "Empty as default is set to max width 800px. But you can use sm, md, lg and xl"
+        "navigation": "Adds navigation arrows, to slide between stuff.",
+        "size": "Empty as default is set to max width 800px. But you can use sm, md and lg",
+        "padding": "Adds whitespace around the content. Value: 1 - 4",
+        "borderRadius": "Rounded edges. Value: sm, md, lg"
     },
     "view": "modal.blade.php",
     "dependency": {
