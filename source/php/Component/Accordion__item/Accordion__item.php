@@ -15,7 +15,7 @@ class Accordion__item extends \ComponentLibrary\Component\BaseController
         $this->data['baseClass'] = 'c-accordion';
         $this->data['id'] = uniqid();
 
-        $this->data['headingType'] = ( is_array($this->heading) ) ? $this->data['baseClass'] . '__heading-is-array' : '';
+        $this->data['headingType'] = ( isset($this->heading) && is_array($this->heading) ) ? $this->data['baseClass'] . '__heading-is-array' : '';
 
     }
 }

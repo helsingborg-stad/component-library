@@ -2,6 +2,7 @@
     "slug": "accordion__item",
     "default": {
         "id": "",
+        "heading": "",
         "beforeHeading": "",
         "afterHeading": "",
         "beforeContent": "",
@@ -14,11 +15,12 @@
     },
     "description": {
         "id": "ID for the accordion",
+        "heading": "The heading",
         "beforeHeading": "Insert before heading",
         "afterHeading": "Insert after heading",
         "beforeContent": "Insert before content",
         "afterContent": "Insert after content",
-            "sectionElement": "Section element",
+        "sectionElement": "Section element",
         "sectionHeadingElement": "Section heading component",
         "sectionContentElement": "Section content component",
         "taxonomy": "Array of taxonomies such as tags",
