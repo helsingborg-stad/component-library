@@ -2,9 +2,9 @@
 @if($list)
     <{{$componentElement}} id="{{ $id }}" class="{{ $class }}" js-expand-container {!! $attribute !!}>
     @foreach($list as $section)
-        <{{$sectionElement}} class="{{$baseClass}}__section">
+        <{{$sectionElement}} class="{{$baseClass}}__section" aria-label="{{$section['heading']}}">
 
-        <{{$sectionHeadingElement}} class="{{$baseClass}}__button" role="button" aria-controls="{{ $baseClass }}__aria-{{ $id }}-{{ $loop->index }}" aria-expanded="false" js-expand-button>
+        <{{$sectionHeadingElement}} id="{{$baseClass}}-{{ $id }}-{{ $loop->index }}-label" class="{{$baseClass}}__button" role="button" aria-controls="{{ $baseClass }}__aria-{{ $id }}-{{ $loop->index }}" aria-expanded="false" js-expand-button>
         <span class="{{$baseClass}}__button-wrapper" tabindex="-1">
                 {!!$beforeHeading!!}
 
