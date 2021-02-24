@@ -1,39 +1,47 @@
 <{{$componentElement}} id="{{ $id }}" class="{{$class}}" {!! $attribute !!}>
     
-    @avatar([
-        'image' => ($avatar) ? $avatar : false,
-        'name' => $author,
-        'size' => $avatar_size
-    ])
-    @endavatar
+    @if($author)
+        @avatar([
+            'image' => ($avatar) ? $avatar : false,
+            'name' => $author,
+            'size' => $avatar_size,
+            "classList" => [
+                $baseClass.'__avatar'
+            ]
+        ])
+        @endavatar
 
-    <div class="{{$baseClass}}__content">
-        
-        @if($author)
-            @typography([
-                "element" => "span",
-                "variant" => "subtitle",
-                "classList" => [
-                    $baseClass.'__author'
-                ]
-            ])
-                {{$author}}
-            @endtypography
-        @endif
+        <div class="{{$baseClass}}__author-box">
+            <div>
+                @typography([
+                    "element" => "span",
+                    "variant" => "subtitle",
+                    "classList" => [
+                        $baseClass.'__author'
+                    ]
+                ])
+                    {{$author}}
+                @endtypography
 
-        @if($authorRole && $author) 
-            @typography([
-                "element" => "span",
-                "variant" => "byline",
-                "classList" => [
-                    $baseClass.'__title'
-                ]
-            ])
-                {{$authorRole}}
-            @endtypography
-        @endif
+                @if($authorRole ) 
+                    @typography([
+                        "element" => "span",
+                        "variant" => "byline",
+                        "classList" => [
+                            $baseClass.'__title'
+                        ]
+                    ])
+                        {{$authorRole}}
+                    @endtypography
+                @endif
+            </div>
+        </div>
+    @endif
 
-        @if ($published)
+    
+    @if($published)
+        <div class="{{$baseClass}}__dates {{$author ? $baseClass.'__dates--aligned' : ''}}">
+
             @typography([
                 "element" => "span",
                 "variant" => "byline",
@@ -43,18 +51,20 @@
             ])
                 {{$label->publish}}: @date(['action' => 'formatDate','timestamp' => $published])@enddate
             @endtypography
-        @endif
+            
 
-        @if ($updated)
-            @typography([
-                "element" => "span",
-                "variant" => "byline",
-                "classList" => [
-                    $baseClass.'__updated'
-                ]
-            ])
-                {{$label->updated}}: @date(['action' => 'formatDate','timestamp' => $updated])@enddate
-            @endtypography
-        @endif
-    </div>
+            @if ($updated)
+                @typography([
+                    "element" => "span",
+                    "variant" => "byline",
+                    "classList" => [
+                        $baseClass.'__updated'
+                    ]
+                ])
+                    {{$label->updated}}: @date(['action' => 'formatDate','timestamp' => $updated])@enddate
+                @endtypography
+            @endif
+        </div>
+    @endif
+
 </{{$componentElement}}>
