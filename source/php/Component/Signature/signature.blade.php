@@ -40,31 +40,31 @@
 
     
     @if($published)
-    <div class="{{$baseClass}}__dates {{$author ? $baseClass.'__dates--aligned' : ''}}">
+        <div class="{{$baseClass}}__dates {{$author ? $baseClass.'__dates--aligned' : ''}}">
 
-        @typography([
-            "element" => "span",
-            "variant" => "byline",
-            "classList" => [
-                $baseClass.'__published'
-            ]
-        ])
-            {{$label->publish}}: @date(['action' => 'formatDate','timestamp' => $published])@enddate
-        @endtypography
-        
-
-        @if ($updated)
             @typography([
                 "element" => "span",
                 "variant" => "byline",
                 "classList" => [
-                    $baseClass.'__updated'
+                    $baseClass.'__published'
                 ]
             ])
-                {{$label->updated}}: @date(['action' => 'formatDate','timestamp' => $updated])@enddate
+                {{$label->publish}}: @date(['action' => 'formatDate','timestamp' => $published])@enddate
             @endtypography
-        @endif
-    </div>
+            
+
+            @if ($updated)
+                @typography([
+                    "element" => "span",
+                    "variant" => "byline",
+                    "classList" => [
+                        $baseClass.'__updated'
+                    ]
+                ])
+                    {{$label->updated}}: @date(['action' => 'formatDate','timestamp' => $updated])@enddate
+                @endtypography
+            @endif
+        </div>
     @endif
 
 </{{$componentElement}}>
