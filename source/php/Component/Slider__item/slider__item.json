@@ -11,7 +11,8 @@
         "desktop_image": "",
         "mobile_image": "",
         "link": false,
-        "containerColor": "none"
+        "containerColor": "none",
+        "alt": ""
     },
     "description": {
         "title": "A title for predefined layout",
@@ -24,7 +25,8 @@
         "background_video": "A video background for the segment",
         "mobile_image": "URL to mobile image",
         "link": "Where the slide should link to",
-        "containerColor": "Determines what color the container and text should be"
+        "containerColor": "Determines what color the container and text should be",
+        "alt": "Alternative text"
     },
     "view": "slider__item.blade.php",
     "dependency": {
