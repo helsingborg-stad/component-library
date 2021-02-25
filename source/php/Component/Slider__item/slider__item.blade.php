@@ -13,7 +13,7 @@
     @endif
 
     @if ($mobile_image)
-        <img class="{{ $baseClass }}__image__mobile" src="{{ $mobile_image }}" alt="{{$alt}}"/>
+        <img class="{{ $baseClass }}__image__mobile" src="{{ $mobile_image }}" alt="{{$altMobile}}"/>
     @endif
 
     @if ($slotHasData || $showContainer)
