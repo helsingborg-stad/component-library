@@ -12,7 +12,8 @@
         "mobile_image": "",
         "link": false,
         "containerColor": "none",
-        "alt": ""
+        "alt": "",
+        "altMobile": ""
     },
     "description": {
         "title": "A title for predefined layout",
@@ -26,7 +27,8 @@
         "mobile_image": "URL to mobile image",
         "link": "Where the slide should link to",
         "containerColor": "Determines what color the container and text should be",
-        "alt": "Alternative text"
+        "alt": "Alternative text",
+        "altMobile": "Alternative text for mobile image"
     },
     "view": "slider__item.blade.php",
     "dependency": {
