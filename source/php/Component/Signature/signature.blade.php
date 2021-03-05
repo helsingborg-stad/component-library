@@ -52,7 +52,6 @@
                 {{$label->publish}}: @date(['action' => null,'timestamp' => $published])@enddate
             @endtypography
             
-
             @if ($updated)
                 @typography([
                     "element" => "span",
@@ -64,6 +63,7 @@
                     {{$label->updated}}: @date(['action' => null,'timestamp' => $updated])@enddate
                 @endtypography
             @endif
+            
         </div>
     @endif
 
