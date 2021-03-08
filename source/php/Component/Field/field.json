@@ -8,7 +8,9 @@
         "value": "",
         "icon": false,
         "size": "md",
-        "radius": "md"
+        "radius": "md",
+        "placeholder": "",
+        "hideLabel": false
     },
     "description": {
         "label": "Array of label items like labelText.",
@@ -17,7 +19,9 @@
         "autocomplete": "Browser automatically completes the input values based on values that the user has entered before",
         "value": "Field value",
         "icon": "Adds a icon before the input field.",
-        "radius": "Rounded edges say you? (none, xs, sm, md, lg)"
+        "radius": "Rounded edges say you? (none, xs, sm, md, lg)",
+        "placeholder": "Example value for field",
+        "hideLabel": "This will remove the visible label, it's still recommended to supply a label that will be used for labelling attributes"
     },
     "view": "field.blade.php",
     "dependency": {
