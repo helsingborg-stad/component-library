@@ -9,7 +9,9 @@ class Field extends \ComponentLibrary\Component\Form\Form
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
-        $this->data['id'] = uniqid();
+        if(!$id) {
+            $this->data['id'] = uniqid();
+        }
 
         $this->compParams = [
             'label' => $label ?? '',
