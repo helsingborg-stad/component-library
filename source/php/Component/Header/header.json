@@ -6,7 +6,8 @@
     },
     "descriptions": {
         "componentElement": "The element tag to render",
-        "logotypeHref": "The url to link the logotype to."
+        "logotypeHref": "The url to link the logotype to.",
+        "id" :  "Custom container id"
     },
     "view": "header.blade.php",
     "dependency": {

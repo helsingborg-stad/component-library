@@ -9,7 +9,10 @@
     },
     "descriptions": {
         "componentElement": "The element tag to render",
+        "slotOnly": "Set to true will enable only slot area",
+        "id" :  "Custom container id",
         "logotypeHref": "The url to link the logotype to."
+
     },
     "view": "footer.blade.php",
     "dependency": {
