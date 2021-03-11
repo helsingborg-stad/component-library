@@ -2,6 +2,8 @@
     "slug": "footer",
     "default": {
         "componentElement": "footer",
+        "slotOnly": false,
+        "id": null,
         "logotype": "/",
         "links": {}
     },
