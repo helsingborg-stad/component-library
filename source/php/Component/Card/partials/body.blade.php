@@ -5,7 +5,7 @@
     @includeWhen($content, 'Card.components.content')
 
     @if($arrowRight)
-    @icon(['icon' => 'chevron_right', 'size' => 'md', 'classList' => ['c-card__chevron']])
+    @icon(['icon' => 'chevron_right', 'size' => 'md', 'classList' => ['c-card__arrow-right']])
     @endicon
     @endif
 </div>
