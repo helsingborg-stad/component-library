@@ -16,7 +16,8 @@
         "paddedImage": "",
         "color": "default",
         "tags":  null,
-        "link": ""
+        "link": "",
+        "arrowRight": false
     },
     "description": {
         "image": "A url to a image.",
@@ -35,7 +36,8 @@
         "dropdown": "Array with the dropdown parameters as items as an array, direction: top, right, bottom, left, position: top, bottom ",
         "accordion": "Array with the accordion parameters such as heading and content data",
         "dark_background": "Set the background of the card to a dark color",
-        "link": "A hyperlink to another location."
+        "link": "A hyperlink to another location.",
+        "arrowRight": "Adds an arrow to card component"
     },
     "view": "card.blade.php",
     "dependency": {
