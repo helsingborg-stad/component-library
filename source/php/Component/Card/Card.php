@@ -25,6 +25,10 @@ class Card extends \ComponentLibrary\Component\BaseController
 			$this->data['classList'][] = $this->getBaseClass() . '--image-first'; 
 		} 
 
+		if($arrowRight){
+			$this->data['classList'][] = $this->getBaseClass() . '--arrow-right'; 
+		}
+
 		if($collapsible && $content){
 			$this->data['collapsible'] = $this->getBaseClass() . '--collapse';
 		}
