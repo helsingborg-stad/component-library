@@ -49,6 +49,7 @@ class BaseController
 
         //Generate classes string
         $data['class'] = $this->getClass();
+            
         $data['baseClass'] = $this->getBaseClass();
 
         //Create attibute string
@@ -124,6 +125,25 @@ class BaseController
         }
         return $this->uid = uniqid();
     }
+
+    private function getNameSpaceParts() {
+        //Get all parts of the location
+        return explode(
+            "\\",
+            get_called_class()
+        );
+
+    }
+
+    private function setModifier($class, $modifier) {
+        if(!empty($modifier)) {
+            foreach($modifier as &$value) {
+                $class[] =  $this->getBaseClass() . '--' . $value;
+            }
+        } 
+
+        return $class;
+    }
     
     /**
      * Returns the classes
@@ -138,11 +158,13 @@ class BaseController
                 $this->data['classList'],
                 (string) $this->getBaseClass()
             );
-
             $class = (array) $this->data['classList'];
+            
         } else {
             $class = array();
         }
+
+        $componentName = end($this->getNameSpaceParts());
 
         //Applies a general wp filter
         if (function_exists('apply_filters')) {
@@ -151,13 +173,31 @@ class BaseController
 
         //Applies a general wp filter
         if (function_exists('apply_filters')) {
+            $modifier = apply_filters("ComponentLibrary/Component/Modifier", $modifier);
+            $class = $this->setModifier($class, $modifier);
+        }
+        //Applies component specific wp filter
+        if (function_exists('apply_filters')) {
+            $modifier = apply_filters("ComponentLibrary/Component/". $componentName ."/Modifier", $modifier);
+            $class = $this->setModifier($class, $modifier);
+        }
+
+        //Applies a general wp filter
+        if (function_exists('apply_filters')) {
             $class = apply_filters("ComponentLibrary/Component/Class", $class);
+            
+        }
+
+        //Applies component specific wp filter
+        if (function_exists('apply_filters')) {
+            $class = apply_filters("ComponentLibrary/Component/". $componentName ."/Class", $class);
         }
 
         //Return manipulated classes as array
         if ($implode === false) {
             return (array) $class;
         }
+
 
         //Return manipulated data array as string
         return (string) implode(" ", (array) $class);
@@ -189,15 +229,9 @@ class BaseController
         if ($this->data['baseClass']) {
             return $this->data['baseClass'];
         }
-        
-        //Get all parts of the location
-        $namespaceParts = explode(
-            "\\",
-            get_called_class()
-        );
 
         //Create string
-        return strtolower("c-" . end($namespaceParts));
+        return strtolower("c-" . end($this->getNameSpaceParts()));
     }
 
     private function getAttribute($implode = true)
