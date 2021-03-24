@@ -126,7 +126,7 @@ class BaseController
         return $this->uid = uniqid();
     }
 
-    private function getNameSpaceParts() {
+    private function getNamespaceParts() {
         //Get all parts of the location
         return explode(
             "\\",
@@ -164,16 +164,17 @@ class BaseController
             $class = array();
         }
 
-        $componentName = end($this->getNameSpaceParts());
+        $namespaceParts =  $this->getNameSpaceParts();
+        $componentName = end($namespaceParts);
 
         //Applies a general wp filter
         if (function_exists('apply_filters')) {
-            $modifier = apply_filters("ComponentLibrary/Component/Modifier", $modifier);
+            $modifier = apply_filters("ComponentLibrary/Component/Modifier", []);
             $class = $this->setModifier($class, $modifier);
         }
         //Applies component specific wp filter
         if (function_exists('apply_filters')) {
-            $modifier = apply_filters("ComponentLibrary/Component/". $componentName ."/Modifier", $modifier);
+            $modifier = apply_filters("ComponentLibrary/Component/". $componentName ."/Modifier", []);
             $class = $this->setModifier($class, $modifier);
         }
 
@@ -226,7 +227,8 @@ class BaseController
         }
 
         //Create string
-        return strtolower("c-" . end($this->getNameSpaceParts()));
+        $namespaceParts = $this->getNamespaceParts();
+        return strtolower("c-" . end($namespaceParts));
     }
 
     private function getAttribute($implode = true)
