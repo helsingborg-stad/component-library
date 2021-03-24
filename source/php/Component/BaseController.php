@@ -85,7 +85,7 @@ class BaseController
         if (function_exists('apply_filters')) {
             if (is_array($data) && !empty($data)) {
                 foreach ($data as $key => $item) {
-                    if (!in_array($key, array("data", "classes"))) {
+                    if (!in_array($key, array("data", "classes", 'class'))) {                        
                         $data[$key] = apply_filters($this->createFilterName($this) . DIRECTORY_SEPARATOR . ucfirst($key), $data[$key]);
                     }
                 }
@@ -168,11 +168,6 @@ class BaseController
 
         //Applies a general wp filter
         if (function_exists('apply_filters')) {
-            $class = apply_filters($this->createFilterName($this) . DIRECTORY_SEPARATOR . "Class", $class);
-        }
-
-        //Applies a general wp filter
-        if (function_exists('apply_filters')) {
             $modifier = apply_filters("ComponentLibrary/Component/Modifier", $modifier);
             $class = $this->setModifier($class, $modifier);
         }
@@ -189,7 +184,7 @@ class BaseController
         }
 
         //Applies component specific wp filter
-        if (function_exists('apply_filters')) {
+        if (function_exists('apply_filters')) {            
             $class = apply_filters("ComponentLibrary/Component/". $componentName ."/Class", $class);
         }
 
