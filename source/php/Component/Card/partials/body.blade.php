@@ -4,8 +4,8 @@
     @includeWhen($subHeading, 'Card.components.subHeading')
     @includeWhen($content, 'Card.components.content')
 
-    @if($arrowRight)
-    @icon(['icon' => 'chevron_right', 'size' => 'md', 'classList' => ['c-card__arrow-right']])
+    @if($hasAction)
+    @icon(['icon' => 'chevron_right', 'size' => 'md', 'classList' => ['c-card__action']])
     @endicon
     @endif
 </div>
