@@ -79,6 +79,7 @@
                         @button([
                             'style' => 'basic',
                             'color' => 'primary',
+                            'size' => 'sm',
                             'attributeList' => [
                                 'js-table-pagination--link' => '1'
                             ],
