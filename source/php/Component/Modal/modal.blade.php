@@ -42,7 +42,8 @@
                     'style' => 'basic',
                     'attributeList' => ['data-prev' => ''],
                     'classList' => [$baseClass . "__prev"],
-                    'label' => 'Slide to previous'
+                    'label' => 'Slide to previous',
+                    'size' => 'lg'
                 ])
                 @endbutton
             @endif
@@ -59,7 +60,8 @@
                     'style' => 'basic',
                     'attributeList' => ['data-next' => ''],
                     'classList' => [$baseClass . "__next"],
-                    'label' => 'Slide to next'
+                    'label' => 'Slide to next',
+                    'size' => 'lg'
                 ])
                 @endbutton
             @endif
