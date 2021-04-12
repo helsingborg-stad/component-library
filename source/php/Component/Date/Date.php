@@ -20,6 +20,8 @@ class Date extends \ComponentLibrary\Component\BaseController
             $this->data['refinedDate'] = $this->convertToHumanReadableUnit(strtotime($timestamp), true);
         } else if ($action == "timeuntil") {
             $this->data['refinedDate'] = $this->convertToHumanReadableUnit(strtotime($timestamp));
+        } else {
+            $this->data['refinedDate'] = $timestamp; 
         }
 
         //Display tipbox with exact time, if relative shown. 

@@ -15,7 +15,7 @@ class Card extends \ComponentLibrary\Component\BaseController
 
     $this->data['collpaseID'] = uniqid();
 
-		$this->data['classList'][] = $baseClass . '--' . $color; 
+		$this->data['classList'][] = $this->getBaseClass() . '--' . $color; 
 
 		if(isset($image['padded']) && $image['padded']){
 			$this->data['paddedImage'] = $this->getBaseClass() . '__image-background--padded'; 	
@@ -24,6 +24,10 @@ class Card extends \ComponentLibrary\Component\BaseController
 		if($imageFirst){
 			$this->data['classList'][] = $this->getBaseClass() . '--image-first'; 
 		} 
+
+		if($hasAction){
+			$this->data['classList'][] = $this->getBaseClass() . '--action'; 
+		}
 
 		if($collapsible && $content){
 			$this->data['collapsible'] = $this->getBaseClass() . '--collapse';

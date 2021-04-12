@@ -9,11 +9,11 @@
     @endif
 
     @if ($desktop_image)
-        <img class="{{ $baseClass }}__image" src="{{ $desktop_image }}"/>
+        <img class="{{ $baseClass }}__image" src="{{ $desktop_image }}" alt="{{$alt}}"/>
     @endif
 
     @if ($mobile_image)
-        <img class="{{ $baseClass }}__image__mobile" src="{{ $mobile_image }}"/>
+        <img class="{{ $baseClass }}__image__mobile" src="{{ $mobile_image }}" alt="{{$altMobile}}"/>
     @endif
 
     @if ($slotHasData || $showContainer)

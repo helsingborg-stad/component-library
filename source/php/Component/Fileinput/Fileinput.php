@@ -12,5 +12,9 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
         if ($display === 'area') {
             $this->data['classList'][] = 'c-fileinput--area';
         }
+        
+        if($filesMax) {
+            $this->data['attributeList']['filesMax'] = $filesMax;
+        }
     }
 }

@@ -34,5 +34,9 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
         if (!empty($title) || !empty($sub_title) ||!empty($text) || !empty($bottom)) {
             $this->data['showContainer'] = true;
         }
+
+        if (!empty($alt) && empty($altMobile)) {
+            $this->data['altMobile'] = $alt;
+        }
     }
 }

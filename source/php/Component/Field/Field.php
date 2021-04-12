@@ -9,6 +9,10 @@ class Field extends \ComponentLibrary\Component\Form\Form
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
+        if(!$id) {
+            $this->data['id'] = uniqid();
+        }
+
         $this->compParams = [
             'label' => $label ?? '',
             'type' => $type ?? 'text',
@@ -16,6 +20,14 @@ class Field extends \ComponentLibrary\Component\Form\Form
             'invalidMessage' => $invalidMessage ?? '',
             'value' => $value ?? ''
         ];
+
+        $this->data['showLabel'] = !$hideLabel && !empty($label);
+
+        if($this->data['showLabel']) {
+            $this->data['attributeList']['aria-labelledby'] = 'label_' . $this->data['id'];
+        } else {
+            $this->data['attributeList']['aria-label'] = $label;
+        }
 
         //Set type
         $this->data['classList'][] = $this->getBaseClass() . "__" . $type; 

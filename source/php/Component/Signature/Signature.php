@@ -22,8 +22,8 @@ class Signature extends \ComponentLibrary\Component\BaseController
 
         //Labels
         $this->data['label'] = (object) [
-            'publish' => $publishedLabel,
-            'updated' => $updatedLabel
+            'publish' => $publishedLabel ?: false,
+            'updated' => $updatedLabel ?: false
         ]; 
 
     }
