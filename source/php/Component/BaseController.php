@@ -139,7 +139,9 @@ class BaseController
     private function setModifier($class, $modifier) {
         if(!empty($modifier)) {
             foreach($modifier as &$value) {
-                $class[] =  $this->getBaseClass() . '--' . $value;
+                if($value) {
+                    $class[] =  $this->getBaseClass() . '--' . $value;
+                }
             }
         } 
 
