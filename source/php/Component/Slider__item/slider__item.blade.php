@@ -56,6 +56,21 @@
             @if (isset($bottom))
                 {{ $bottom }}
             @endif
+
+            @if ($cta)
+                @button([
+                    'text'  => $cta['title'],
+                    'href'  => $cta['href'],
+                    'color' => 'default',
+                    'style' => 'filled',
+                    'icon'  => 'arrow_forward',
+                    'classList' => [
+                        $baseClass.'__cta'
+                    ]
+                ])
+                @endbutton
+            @endif
+            
         </div>
     @endif
 

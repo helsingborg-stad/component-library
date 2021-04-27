@@ -13,7 +13,8 @@
         "link": false,
         "containerColor": "none",
         "alt": "",
-        "altMobile": ""
+        "altMobile": "",
+        "cta": []
     },
     "description": {
         "title": "A title for predefined layout",
@@ -28,7 +29,8 @@
         "link": "Where the slide should link to",
         "containerColor": "Determines what color the container and text should be",
         "alt": "Alternative text",
-        "altMobile": "Alternative text for mobile image"
+        "altMobile": "Alternative text for mobile image",
+        "cta": "Adds button with a link"
     },
     "view": "slider__item.blade.php",
     "dependency": {

@@ -38,5 +38,9 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
         if (!empty($alt) && empty($altMobile)) {
             $this->data['altMobile'] = $alt;
         }
+
+        if(!(count($cta) > 1)) {
+            $this->data['cta'] = false;
+        }
     }
 }
