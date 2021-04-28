@@ -11,9 +11,9 @@ class Card extends \ComponentLibrary\Component\BaseController
 	public function init()
 	{
 		//Extract array for eazy access (fetch only)
-    extract($this->data);
+        extract($this->data);
 
-    $this->data['collpaseID'] = uniqid();
+        $this->data['collpaseID'] = uniqid();
 
 		$this->data['classList'][] = $this->getBaseClass() . '--' . $color; 
 
@@ -45,6 +45,11 @@ class Card extends \ComponentLibrary\Component\BaseController
 			$this->data['componentElement'] = "a"; 
 		} else {
 			$this->data['componentElement'] = "div"; 
+        }
+
+        if ($ratio) {
+            $ratio = str_replace(":", "-", $ratio);
+            $this->data['classList'][] = $this->getBaseClass() . '--ratio-' . $ratio;
+        }
     }
-  }
 }

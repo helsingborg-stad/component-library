@@ -17,7 +17,8 @@
         "color": "default",
         "tags":  null,
         "link": "",
-        "hasAction": false
+        "hasAction": false,
+        "ratio": "4:3"
     },
     "description": {
         "image": "A url to a image.",
@@ -37,7 +38,8 @@
         "accordion": "Array with the accordion parameters such as heading and content data",
         "dark_background": "Set the background of the card to a dark color",
         "link": "A hyperlink to another location.",
-        "hasAction": "Adds indicator that the card has an action (i.e. a link)"
+        "hasAction": "Adds indicator that the card has an action (i.e. a link)",
+        "ratio": "The ratio of the image"
     },
     "view": "card.blade.php",
     "dependency": {
