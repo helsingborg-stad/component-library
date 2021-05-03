@@ -14,7 +14,8 @@
         "containerColor": "none",
         "alt": "",
         "altMobile": "",
-        "cta": []
+        "cta": [],
+        "hero_style": false
     },
     "description": {
         "title": "A title for predefined layout",
@@ -30,7 +31,8 @@
         "containerColor": "Determines what color the container and text should be",
         "alt": "Alternative text",
         "altMobile": "Alternative text for mobile image",
-        "cta": "Adds button with a link"
+        "cta": "Adds button with a link",
+        "hero_style": "Gives the slide a hero like appearance with larger text"
     },
     "view": "slider__item.blade.php",
     "dependency": {
