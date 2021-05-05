@@ -49,7 +49,7 @@
                         !($title) ? 'u-margin__top--0' : '',
                     ]
                 ])
-                    {{ $text}}
+                    {!! $text !!}
                 @endtypography
             @endif
 
