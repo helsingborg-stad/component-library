@@ -39,7 +39,7 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
             $this->data['altMobile'] = $alt;
         }
 
-        if ($hero_style) {
+        if ($heroStyle) {
             $this->data['classList'][] = $this->getBaseClass() . "--hero";
         }
     }

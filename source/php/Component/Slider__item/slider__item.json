@@ -15,7 +15,7 @@
         "alt": "",
         "altMobile": "",
         "cta": [],
-        "hero_style": false
+        "heroStyle": false
     },
     "description": {
         "title": "A title for predefined layout",
@@ -32,7 +32,7 @@
         "alt": "Alternative text",
         "altMobile": "Alternative text for mobile image",
         "cta": "Adds button with a link",
-        "hero_style": "Gives the slide a hero like appearance with larger text"
+        "heroStyle": "Gives the slide a hero like appearance with larger text"
     },
     "view": "slider__item.blade.php",
     "dependency": {
