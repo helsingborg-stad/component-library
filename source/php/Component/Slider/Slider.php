@@ -32,6 +32,10 @@ class Slider extends \ComponentLibrary\Component\BaseController
             $delay = is_int($autoSlide) ? $autoSlide : 5;
             $this->data['attributeList']['js-slider__autoslide'] = $delay;
         }
+
+        if ($shadow) {
+            $this->data['classList'][] = 'c-slider__shadow';
+        }
         
     }
 }

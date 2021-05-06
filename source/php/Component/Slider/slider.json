@@ -6,7 +6,8 @@
         "peekSlides": false,
         "navigationHover": true,
         "ratio": "16:9",
-        "repeatSlide": false
+        "repeatSlide": false,
+        "shadow": true
     },
     "description": {
         "showStepper": "Option to hide or show stepper.",
