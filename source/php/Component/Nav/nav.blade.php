@@ -43,7 +43,8 @@
                         @nav([
                             'items' => $item['children'],
                             'isExpanded' => (boolval($item['active']) || boolval($item['ancestor']) ) ? true : false,
-                            'includeToggle' => $includeToggle
+                            'includeToggle' => $includeToggle,
+                            'depth' =>  ($depth = ($depth + 1))
                         ])
                         @endnav
                     @endif

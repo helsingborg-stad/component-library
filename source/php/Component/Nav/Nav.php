@@ -12,6 +12,9 @@ class Nav extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
+        //Add depth class
+        $this->data['classList'][] = $this->getBaseClass() . "--depth-" . $this->data['depth'];
+
         //Set default values to items array
         $this->data['items'] = $this->fillItemsData($items);
 
