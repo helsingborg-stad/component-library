@@ -4,7 +4,7 @@
         "items": [],
         "direction": "vertical",
         "includeToggle": false,
-        "depth": 1
+        "depth": 0
     },
     "description":{
         "items": "An nested array of items containing: id, label, active, ancestor, children(bool = async loading, or array), href.",
