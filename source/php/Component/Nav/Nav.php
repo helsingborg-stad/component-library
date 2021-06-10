@@ -13,6 +13,7 @@ class Nav extends \ComponentLibrary\Component\BaseController
         extract($this->data);
 
         //Add depth class
+        $this->data['depth'] + 1;  
         $this->data['classList'][] = $this->getBaseClass() . "--depth-" . $this->data['depth'];
 
         //Set default values to items array
@@ -33,6 +34,11 @@ class Nav extends \ComponentLibrary\Component\BaseController
 
         //Attributes
         $this->data['attributeList']['aria-orientation'] = $direction; 
+
+        //Attributes
+        if($direction == "horizontal") {
+            $this->data['attributeList']['js-resize-by-children'] = "1";
+        }
     }
 
     public function fillItemsData($items)

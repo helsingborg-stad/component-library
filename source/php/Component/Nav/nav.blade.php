@@ -2,7 +2,6 @@
 @if ($items) 
     <ul id="{{ $id }}" class="{{$class}}" {!! $attribute !!} role="menu">
         @foreach ($items as $item)
-            @php $depth = 0; @endphp
             <li 
                 class="{{$baseClass}}__item {{$item['active'] ? 'is-current' : ''}}{{$item['active'] && $item['children'] || $item['ancestor'] ? ' is-open has-fetched' : ''}}"
         
@@ -45,8 +44,8 @@
                             'items' => $item['children'],
                             'isExpanded' => (boolval($item['active']) || boolval($item['ancestor']) ) ? true : false,
                             'includeToggle' => $includeToggle,
-                            'depth' =>  ($depth = ($depth + 1)),
-                            'attributeList' => ['js-resize-by-children' => $depth]
+                            'depth' =>  $depth + 1,
+                            'direction' => $direction
                         ])
                         @endnav
                     @endif
