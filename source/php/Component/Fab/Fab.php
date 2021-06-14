@@ -8,34 +8,19 @@ namespace ComponentLibrary\Component\Fab;
  */
 class Fab extends \ComponentLibrary\Component\BaseController
 {
-
     public function init() {
         //Extract array for easy access (fetch only)
         extract($this->data);
 
-        // Make data accessible
-        $this->compParams = [
-			'position' 	=> $position,
-			'spacing' 	=> $spacing
-		];
+        //Generate panel id js support
+        $this->data['panelId'] = "panel-id-" . uniqid(); 
 
-        // Builds class
-        $this->buildFabClass();
-    }
+        //Create panel trigger
+        if(is_array($button) && !empty($button)) {
+            $this->data['button']['attributeList'] = ['js-toggle-trigger' => $this->data['panelId']];
+        }
 
-    /**
-	 * Build class based on position and spacing
-	 * @return array
-	 */
-    public function buildFabClass() {
-        $tempPosition = !empty($this->compParams['position'])
-            ? $this->compParams['position'] : "bottom-right";
-
-        $tempSpacing = !empty($this->compParams['spacing'])
-            ? $this->compParams['spacing'] : "md";
-
-        $this->data['classList'][] = "{$this->getBaseClass()}__{$tempPosition}--{$tempSpacing}";
-
-        return $this->data;
+        //Position
+        $this->data['classList'][] = "{$this->getBaseClass()}__{$position}";
     }
 }
