@@ -23,6 +23,12 @@ class Icon extends \ComponentLibrary\Component\BaseController {
         $this->setColor();
         $this->appendSpace();
         $this->setSize();
+
+        //Set material icon class
+        $this->data['classList'][] = "material-icons"; 
+
+        //Do not translate the icon
+        $this->data['attributeList']['translate'] = "no"; 
     }
 
     /**

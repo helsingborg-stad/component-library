@@ -1,6 +1,6 @@
 <!-- icon.blade.php -->
 @if($icon)
-    <{{$componentElement}} id="{{ $id }}" class="{{ $class }} material-icons" {!! $attribute !!} translate="no">
+    <{{$componentElement}} id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
         @if($icon)
             {{$icon}}
         @else 
