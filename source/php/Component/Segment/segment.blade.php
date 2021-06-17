@@ -1,45 +1,28 @@
 <!-- segment.blade.php -->
 <section id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
-    @if ($background_video)
-        @include('Segment.sub.video')
-    @endif
 
-    @if ($slotHasData || $showContainer)
-        <div class="{{ $baseClass }}__container">
-            {{$slot}}
+    <img class="{{$baseClass}}__image" src="https://picsum.photos/1080/720"/>
 
-            @if($title)
-                @typography(["variant" => "h1",
-                    "element" => "h2",
-                    'classList' => [$baseClass.'__heading']
-                ])
-                    {{ $title }}
-                @endtypography
-            @endif
-        
-            @if($sub_title)
-                @typography([
-                    'variant' => 'body',
-                    'element' => 'p',
-                    'classList' =>  [$baseClass.'__body']
-                ])
-                    {{ $sub_title }}
-                @endtypography
-            @endif
-        
-            @if(!empty($text))
-                @typography([
-                    'variant' => 'body',
-                    'element' => 'p',
-                    'classList' =>  [$baseClass.'__body']
-                ])
-                    {{ $text}}
-                @endtypography
-            @endif
+    <div class="{{$baseClass}}__content">
+        @if($title)
+        @typography([
+            "variant" => "h1",
+            "classList" => [$baseClass . '__title'],
+        ])
+            {{ $title }}
+        @endtypography
+        @endif
 
-            @if (isset($bottom))
-                {{ $bottom }}
-            @endif
-        </div>
-    @endif
+        @if($content)
+        @typography([
+            "variant" => "p",
+            "classList" => [$baseClass . '__text'],
+        ])
+            {{ $content }}
+        @endtypography
+        @endif
+
+        {{ $slot }}
+    </div>
+
 </section>
