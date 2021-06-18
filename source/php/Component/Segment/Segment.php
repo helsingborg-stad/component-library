@@ -54,7 +54,7 @@ class Segment extends \ComponentLibrary\Component\BaseController
         // Handle background data
         if ($background) {
             if (filter_var($background, FILTER_VALIDATE_URL)) {
-                // $this->data['attributeList']['style'] = 'background-image: url(' . $background . ');';
+                $this->data['image'] = $background;
 
                 // Overlay
                 if ($overlay) {

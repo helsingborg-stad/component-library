@@ -1,7 +1,7 @@
 <!-- segment.blade.php -->
 <section id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
 
-    <img class="{{$baseClass}}__image" src="https://picsum.photos/1080/720"/>
+    <img class="{{$baseClass}}__image" src="{{$image}}"/>
 
     <div class="{{$baseClass}}__content o-container o-container--content">
         @if($title)
