@@ -45,10 +45,16 @@ class Segment extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = 'c-segment--alignment-' . $textAlignment;
         }
 
+        // Text Alignment
+        if ($reverseColumns) {
+            $this->data['classList'][] = 'c-segment--reverse';
+        }
+
+
         // Handle background data
         if ($background) {
             if (filter_var($background, FILTER_VALIDATE_URL)) {
-                $this->data['attributeList']['style'] = 'background-image: url(' . $background . ');';
+                // $this->data['attributeList']['style'] = 'background-image: url(' . $background . ');';
 
                 // Overlay
                 if ($overlay) {

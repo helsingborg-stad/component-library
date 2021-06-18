@@ -12,7 +12,8 @@
         "paddingTop": true,
         "paddingBottom": true,
         "textAlignment": "top",
-        "reverseColumns": false
+        "reverseColumns": false,
+        "overlay": false
     },
     "description": {
         "layout": "Which layout to use",
@@ -26,7 +27,8 @@
         "paddingTop": "If it should have padding in the top",
         "paddingBottom": "If it should have padding in the bottom",
         "textAlignment": "How to align the text vertically",
-        "reverseColumns": "If image and text should change order"
+        "reverseColumns": "If image and text should change order",
+        "overlay": "Add an overlay over an image to make text more legible"
     },
     "view": "segment.blade.php",
     "dependency": {
