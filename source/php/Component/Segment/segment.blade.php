@@ -26,6 +26,11 @@
 
     </div>
     
-    {{ $slot }}
+    @if ($slotHasData)
+    <div class="{{$baseClass}}__slot o-container o-container--wide">
+        {{ $slot }}
+    </div>
+    @endif
+    
 
 </section>
