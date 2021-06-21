@@ -50,6 +50,7 @@ class Segment extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = 'c-segment--reverse';
         }
 
+        $this->data['image'] = false;
 
         // Handle background data
         if ($background) {
@@ -65,7 +66,7 @@ class Segment extends \ComponentLibrary\Component\BaseController
                 $this->data['attributeList']['style'] = 'background-color: ' . $background . ';';
             }
             else {
-                $this->data['classList'][] = 'c-segment--background-' . $background;
+                $this->data['classList'][] = 'u-color__bg--' . $background;
             }
         }
 

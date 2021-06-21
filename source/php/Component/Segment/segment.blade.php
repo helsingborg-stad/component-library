@@ -1,7 +1,9 @@
 <!-- segment.blade.php -->
 <section id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
 
+    @if ($image)
     <img class="{{$baseClass}}__image" src="{{$image}}"/>
+    @endif
 
     <div class="{{$baseClass}}__content o-container o-container--content">
         @if($title)
@@ -22,7 +24,6 @@
         @endtypography
         @endif
 
-        
     </div>
     
     {{ $slot }}
