@@ -36,8 +36,9 @@ class Nav extends \ComponentLibrary\Component\BaseController
         $this->data['attributeList']['aria-orientation'] = $direction; 
 
         //Attributes
-        if($direction == "horizontal") {
+        if ($direction == "horizontal") {
             $this->data['attributeList']['js-resize-by-children'] = "1";
+            $this->data['attributeList']['js-keep-in-viewport-after-resize'] = "1";
         }
     }
 
