@@ -7,7 +7,7 @@
             </span>
 
             <span class="{{$baseClass}}__label-icon{{$labelMod}}">
-                @icon(['icon' => $icon])
+                @icon(['icon' => $icon, 'size' => $size])
                 @endicon
             </span>
         @elseif($text && !$icon)
