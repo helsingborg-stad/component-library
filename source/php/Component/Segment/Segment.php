@@ -50,19 +50,17 @@ class Segment extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = 'c-segment--reverse';
         }
 
-        $this->data['image'] = false;
+        //Handle image based on view 
+        if (filter_var($image, FILTER_VALIDATE_URL) && $layout == 'full-width') {
+            // Overlay
+            if ($overlay) {
+                $this->data['classList'][] = 'c-segment--overlay-' . $overlay;
+            }
+        }
 
         // Handle background data
         if ($background) {
-            if (filter_var($background, FILTER_VALIDATE_URL)) {
-                $this->data['image'] = $background;
-
-                // Overlay
-                if ($overlay) {
-                    $this->data['classList'][] = 'c-segment--overlay-' . $overlay;
-                }
-            }
-            else if (preg_match('^#(?:[0-9a-fA-F]{3}){1,2}$^', $background)) {
+            if (preg_match('^#(?:[0-9a-fA-F]{3}){1,2}$^', $background)) {
                 $this->data['attributeList']['style'] = 'background-color: ' . $background . ';';
             }
             else {
