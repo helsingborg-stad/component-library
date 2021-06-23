@@ -21,6 +21,7 @@
         "title": "The quick brown fox jumps over the lazy dog",
         "content": "Maecenas sed diam eget risus varius blandit sit amet non magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.",
         "textSize": "The sizing of the font",
+        "image": "Add a URL for an image",
         "background": "The background color, can be an URL to an image, hex value or a color name (i.e. primary, secondary, etc)",
         "backgroundOverlay": "Which overlay to use",
         "textColor": "Color of the text",
