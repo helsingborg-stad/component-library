@@ -5,35 +5,68 @@ namespace ComponentLibrary\Component\Segment;
 class Segment extends \ComponentLibrary\Component\BaseController
 {
 
-    public function init() {
+    public function init()
+    {
 
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
-        if (!empty($layout)) {
-            $this->data['classList'][] = $this->getBaseClass() . "--layout-" . $layout;
+        // Set the layout
+        if ($layout) {
+            $this->data['classList'][] = 'c-segment--' . $layout;
         }
 
-        if (!empty($background_image)) {
-            $this->data['attributeList']['style'] = "background-image: url('".$background_image."');";
+        // Remove padding
+        if (!$paddingTop) {
+            $this->data['classList'][] = 'u-padding__top--0';
         }
 
-        if (!empty($height)) {
-            $this->data['classList'][] = $this->getBaseClass() . "--height-" . $height;
+        if (!$paddingBottom) {
+            $this->data['classList'][] = 'u-padding__bottom--0';
         }
 
-        if (!empty($color)) {
-            $this->data['classList'][] = $this->getBaseClass() . "--color-" . $color;
+        // Set text color
+        if ($textColor) {
+            $this->data['classList'][] = 'c-segment--text-' . $textColor;
         }
 
-        if (!empty($containerColor)) {
-            $this->data['classList'][] = $this->getBaseClass() . "--container-" . $containerColor;
+        // Height
+        if ($height) {
+            $this->data['classList'][] = 'c-segment--height-' . $height;
         }
 
-        $this->data['showContainer'] = false;
-
-        if (!empty($title) || !empty($sub_title) ||!empty($text) || !empty($bottom)) {
-            $this->data['showContainer'] = true;
+        // Text Size
+        if ($textSize) {
+            $this->data['classList'][] = 'c-segment--text-' . $textSize;
         }
+
+        // Text Alignment
+        if ($textAlignment) {
+            $this->data['classList'][] = 'c-segment--alignment-' . $textAlignment;
+        }
+
+        // Text Alignment
+        if ($reverseColumns) {
+            $this->data['classList'][] = 'c-segment--reverse';
+        }
+
+        //Handle image based on view 
+        if (filter_var($image, FILTER_VALIDATE_URL) && $layout == 'full-width') {
+            // Overlay
+            if ($overlay) {
+                $this->data['classList'][] = 'c-segment--overlay-' . $overlay;
+            }
+        }
+
+        // Handle background data
+        if ($background) {
+            if (preg_match('^#(?:[0-9a-fA-F]{3}){1,2}$^', $background)) {
+                $this->data['attributeList']['style'] = 'background-color: ' . $background . ';';
+            }
+            else {
+                $this->data['classList'][] = 'u-color__bg--' . $background;
+            }
+        }
+
     }
 }

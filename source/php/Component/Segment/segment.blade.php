@@ -1,45 +1,36 @@
 <!-- segment.blade.php -->
 <section id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
-    @if ($background_video)
-        @include('Segment.sub.video')
+
+    @if ($image)
+    <img class="{{$baseClass}}__image" src="{{$image}}"/>
     @endif
 
-    @if ($slotHasData || $showContainer)
-        <div class="{{ $baseClass }}__container">
-            {{$slot}}
+    <div class="{{$baseClass}}__content o-container o-container--content o-container--keep-spacing">
+        @if($title)
+        @typography([
+            "variant" => "h2",
+            "classList" => [$baseClass . '__title'],
+        ])
+            {{ $title }}
+        @endtypography
+        @endif
 
-            @if($title)
-                @typography(["variant" => "h1",
-                    "element" => "h2",
-                    'classList' => [$baseClass.'__heading']
-                ])
-                    {{ $title }}
-                @endtypography
-            @endif
-        
-            @if($sub_title)
-                @typography([
-                    'variant' => 'body',
-                    'element' => 'p',
-                    'classList' =>  [$baseClass.'__body']
-                ])
-                    {{ $sub_title }}
-                @endtypography
-            @endif
-        
-            @if(!empty($text))
-                @typography([
-                    'variant' => 'body',
-                    'element' => 'p',
-                    'classList' =>  [$baseClass.'__body']
-                ])
-                    {{ $text}}
-                @endtypography
-            @endif
+        @if($content)
+        @typography([
+            "variant" => "p",
+            "classList" => [$baseClass . '__text'],
+        ])
+            {{ $content }}
+        @endtypography
+        @endif
 
-            @if (isset($bottom))
-                {{ $bottom }}
-            @endif
-        </div>
+    </div>
+    
+    @if ($slotHasData)
+    <div class="{{$baseClass}}__slot o-container o-container--wide">
+        {{ $slot }}
+    </div>
     @endif
+    
+
 </section>
