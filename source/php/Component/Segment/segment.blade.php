@@ -8,7 +8,8 @@
     <div class="{{$baseClass}}__content o-container o-container--content o-container--keep-spacing">
         @if($title)
         @typography([
-            "variant" => "h2",
+            "element" => "h2",
+            "variant" => "h1",
             "classList" => [$baseClass . '__title'],
         ])
             {{ $title }}
