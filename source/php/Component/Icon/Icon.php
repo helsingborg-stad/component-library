@@ -29,6 +29,9 @@ class Icon extends \ComponentLibrary\Component\BaseController {
 
         //Do not translate the icon
         $this->data['attributeList']['translate'] = "no"; 
+
+        //Identify as an image
+        $this->data['attributeList']['role'] = "img"; 
     }
 
     /**
