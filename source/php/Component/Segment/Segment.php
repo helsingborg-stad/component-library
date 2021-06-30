@@ -16,13 +16,17 @@ class Segment extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = 'c-segment--' . $layout;
         }
 
+        $this->data['imageClassList'] = []; 
+
         // Remove padding
         if (!$paddingTop) {
             $this->data['classList'][] = 'u-padding__top--0';
+            $this->data['imageClassList'][] = 'u-margin__top--0'; 
         }
 
         if (!$paddingBottom) {
             $this->data['classList'][] = 'u-padding__bottom--0';
+            $this->data['imageClassList'][] = 'u-margin__bottom--0'; 
         }
 
         // Set text color
@@ -57,6 +61,9 @@ class Segment extends \ComponentLibrary\Component\BaseController
                 $this->data['classList'][] = 'c-segment--overlay-' . $overlay;
             }
         }
+
+        //Stringify image classlist
+        $this->data['imageClass'] = implode("" , $this->data['imageClassList']); 
 
         // Handle background data
         if ($background) {
