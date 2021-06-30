@@ -23,7 +23,7 @@
        
           @if($key +1 == $current)
           <{{$listItem}} class="{{$baseClass}}__item {{$baseClass}}__item{{ $currentClass }}" js-pagination-index="{{ $key +1 }}">
-            <a class="{{$baseClass}}__link" href="{{ $item['href'] }}" aria-label="{{ $item['label'] }}" aria-current="true">
+            <a class="{{$baseClass}}__link" href="{{ $item['href'] }}" aria-label="{{ $key +1 }}" aria-current="true">
               <span class="{{$baseClass}}__label">
                 {{ $key +1 }}
               </span>
@@ -31,7 +31,7 @@
           </{{$listItem}}>
           @else
           <{{$listItem}} class="{{$baseClass}}__item" js-pagination-index="{{ $key +1 }}">
-            <a class="{{$baseClass}}__link" href="{{ $item['href'] }}" aria-label="{{ $item['label'] }}">
+            <a class="{{$baseClass}}__link" href="{{ $item['href'] }}" aria-label="{{ $key +1 }}">
               <span class="{{$baseClass}}__label">
                 {{ $key +1 }}
               </span>
