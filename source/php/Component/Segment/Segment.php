@@ -30,6 +30,11 @@ class Segment extends \ComponentLibrary\Component\BaseController
         }
 
         // Set text color
+        if ($stretch) {
+            $this->data['classList'][] = 'c-segment--stretch';
+        }
+
+        // Set text color
         if ($textColor) {
             $this->data['classList'][] = 'c-segment--text-' . $textColor;
         }
@@ -49,7 +54,7 @@ class Segment extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = 'c-segment--alignment-' . $textAlignment;
         }
 
-        // Text Alignment
+        // Column reverse
         if ($reverseColumns) {
             $this->data['classList'][] = 'c-segment--reverse';
         }

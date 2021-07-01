@@ -14,7 +14,9 @@
         "paddingBottom": true,
         "textAlignment": "top",
         "reverseColumns": false,
-        "overlay": false
+        "overlay": false,
+        "stretch": false,
+        "buttons": false
     },
     "description": {
         "layout": "Which layout to use",
@@ -30,7 +32,9 @@
         "paddingBottom": "If it should have padding in the bottom",
         "textAlignment": "How to align the text vertically",
         "reverseColumns": "If image and text should change order",
-        "overlay": "Add an overlay over an image to make text more legible"
+        "overlay": "Add an overlay over an image to make text more legible",
+        "stretch": "Always stretch the section vertically. Makes the section the width of the viewport. Requires a centered container.",
+        "buttons": "Array of buttons according to the @button specification. Do not use more than two buttons, one primary and on secondary."
     },
     "view": "segment.blade.php",
     "dependency": {

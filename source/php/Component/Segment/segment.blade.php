@@ -29,6 +29,15 @@
                     @endtypography
                 @endif
 
+                @if($buttons)
+                    <div class="{{$baseClass}}__buttons">
+                        @foreach($buttons as $button) 
+                            @button($button)
+                            @endbutton
+                        @endforeach
+                    </div>
+                @endif
+
                 @if ($slotHasData && $layout == 'split')
                     <div class="{{$baseClass}}__slot">
                         {{ $slot }}
@@ -46,5 +55,4 @@
         </div>
     @endif
     
-
 </section>
