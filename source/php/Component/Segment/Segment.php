@@ -70,7 +70,23 @@ class Segment extends \ComponentLibrary\Component\BaseController
         //Stringify image classlist
         $this->data['imageClass'] = implode("" , $this->data['imageClassList']); 
 
-        // Handle background data
+        //Create image style tag
+        $this->data['imageStyle'] = []; 
+
+        //Add image to image styles
+        if($image) {
+            $this->data['imageStyle']['background-image'] = "url('" . $image . "')"; 
+        }
+
+        //Add background position to image styles
+        if(array_filter($imageFocus)) {
+            $this->data['imageStyle']['background-position'] = $imageFocus['left'] . "% " . $imageFocus['top'] . "%"; 
+        }
+
+        //Stringify image styles
+        $this->data['imageStyleString'] = self::buildInlineStyle($this->data['imageStyle']); 
+
+        // Handle background data (wrapper)
         if ($background) {
             if (preg_match('^#(?:[0-9a-fA-F]{3}){1,2}$^', $background)) {
                 $this->data['attributeList']['style'] = 'background-color: ' . $background . ';';

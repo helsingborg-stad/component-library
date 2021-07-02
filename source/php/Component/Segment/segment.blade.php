@@ -2,7 +2,7 @@
 <section id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
 
     @if ($image)
-        <img class="{{$baseClass}}__image {{ $imageClass }}" src="{{$image}}" alt=""/>
+        <div class="{{$baseClass}}__image {{ $imageClass }}" style="{{ $imageStyleString }}"></div>
     @endif
 
     <div class="{{$baseClass}}__content o-container o-container--content o-container--keep-spacing">

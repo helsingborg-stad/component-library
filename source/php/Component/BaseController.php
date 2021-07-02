@@ -285,6 +285,20 @@ class BaseController
         );
     }
 
+    public static function buildInlineStyle($styles)
+    {
+        return (string) implode(
+            ' ',
+            array_map(
+                function ($v, $k) {
+                    return sprintf('%s: %s;', $k, $v);
+                },
+                array_values($styles),
+                array_keys($styles)
+            )
+        );
+    }
+
     /**
      * Creates a filter name
      *
