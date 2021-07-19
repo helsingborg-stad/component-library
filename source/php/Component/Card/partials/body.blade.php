@@ -2,6 +2,7 @@
     @includeWhen($collapsible, 'Card.components.collapsiableButton')
     @includeWhen($heading, 'Card.components.heading')
     @includeWhen($subHeading, 'Card.components.subHeading')
+    @includeWhen($meta, 'Card.components.meta')
     @includeWhen($content, 'Card.components.content')
 
     @if($hasAction)
