@@ -6,7 +6,7 @@
            placeholder="{{$label}}"
            value="{{$value}}"
            @if($checked !== false) checked @endif
-           aria-checked={{$checked}}
+           aria-checked="{{$checked ? 'true' : 'false'}}"
            tabindex="0"
            label="{{$label}}"
            aria-labelledby="label_{{ $id }}"
