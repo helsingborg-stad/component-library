@@ -15,7 +15,8 @@
         "alt": "",
         "altMobile": "",
         "cta": [],
-        "heroStyle": false
+        "heroStyle": false,
+        "imageFocus": {"top": 30, "left": 50}
     },
     "description": {
         "title": "A title for predefined layout",
@@ -32,7 +33,8 @@
         "alt": "Alternative text",
         "altMobile": "Alternative text for mobile image",
         "cta": "Adds button with a link",
-        "heroStyle": "Gives the slide a hero like appearance with larger text"
+        "heroStyle": "Gives the slide a hero like appearance with larger text",
+        "imageFocus": "Where the focus point should be of an image when container dosen't match image ratio."
     },
     "view": "slider__item.blade.php",
     "dependency": {
