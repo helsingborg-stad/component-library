@@ -10,6 +10,8 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
+        $this->data['classListDesktop'] = $this->getBaseClass() . "__image";
+
         if (!empty($containerColor)) {
             $this->data['classList'][] = $this->getBaseClass() . "--bg-" . $containerColor;
         }
@@ -43,21 +45,25 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . "--hero";
         }
 
-        //Create image style tag
-        $this->data['imageStyle'] = []; 
+        if($focusPoint) {
+            //Make img-element screen reader only
+            $this->data['classListDesktop'] = $this->data['classListDesktop'] . ' u-sr__only';
 
-        //Add image to image styles
-        if($desktop_image) {
-            $this->data['imageStyle']['background-image'] = "url('" . $desktop_image . "')"; 
+            //Create image style tag
+            $this->data['imageStyle'] = []; 
+
+            //Add image to image styles
+            if($desktop_image) {
+                $this->data['imageStyle']['background-image'] = "url('" . $desktop_image . "')"; 
+            }
+
+            //Add background position to image styles
+            if(array_filter($focusPoint)) {
+                $this->data['imageStyle']['background-position'] = $focusPoint['left'] . "% " . $focusPoint['top'] . "%"; 
+            }
+
+            //Stringify image styles
+            $this->data['attributeList']['style'] = self::buildInlineStyle($this->data['imageStyle']); 
         }
-
-        //Add background position to image styles
-        if(array_filter($imageFocus)) {
-            $this->data['imageStyle']['background-position'] = $imageFocus['left'] . "% " . $imageFocus['top'] . "%"; 
-        }
-
-        //Stringify image styles
-        $this->data['attributeList']['style'] = self::buildInlineStyle($this->data['imageStyle']); 
-
     }
 }
