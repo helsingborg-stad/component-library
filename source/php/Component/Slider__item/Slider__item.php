@@ -46,9 +46,24 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
         }
 
         if($focusPoint) {
+            //Make img-element screen reader only
             $this->data['classListDesktop'] = $this->data['classListDesktop'] . ' u-sr__only';
-            $focusStyle = "background-position:".$focusPoint['top']."% ".$focusPoint['left']."%;";
-            $this->data['attributeList']['style'] = "background-image: url('".$desktop_image."');".$focusStyle;
+
+            //Create image style tag
+            $this->data['imageStyle'] = []; 
+
+            //Add image to image styles
+            if($desktop_image) {
+                $this->data['imageStyle']['background-image'] = "url('" . $desktop_image . "')"; 
+            }
+
+            //Add background position to image styles
+            if(array_filter($imageFocus)) {
+                $this->data['imageStyle']['background-position'] = $imageFocus['left'] . "% " . $imageFocus['top'] . "%"; 
+            }
+
+            //Stringify image styles
+            $this->data['attributeList']['style'] = self::buildInlineStyle($this->data['imageStyle']); 
         }
     }
 }
