@@ -42,5 +42,12 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
         if ($heroStyle) {
             $this->data['classList'][] = $this->getBaseClass() . "--hero";
         }
+
+        if($focusPoint) {
+            $this->data['classListDesktop'] = $this->getBaseClass() . "__image";
+            $this->data['classListDesktop'] = $this->data['classListDesktop'] . ' u-sr__only';
+            $focusStyle = "background-position:".$focusPoint['top']."% ".$focusPoint['left']."%;";
+            $this->data['attributeList']['style'] = "background-image: url('".$desktop_image."');".$focusStyle;
+        }
     }
 }

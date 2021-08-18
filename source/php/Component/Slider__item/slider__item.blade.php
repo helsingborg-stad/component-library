@@ -9,7 +9,7 @@
     @endif
 
     @if ($desktop_image)
-        <img class="{{ $baseClass }}__image" src="{{ $desktop_image }}" alt="{{$alt}}"/>
+        <img class="{{ $classListDesktop }}" src="{{ $desktop_image }}" alt="{{$alt}}"/>
     @endif
 
     @if ($mobile_image)
