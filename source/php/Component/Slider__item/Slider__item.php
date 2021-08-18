@@ -10,6 +10,8 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
+        $this->data['classListDesktop'] = $this->getBaseClass() . "__image";
+
         if (!empty($containerColor)) {
             $this->data['classList'][] = $this->getBaseClass() . "--bg-" . $containerColor;
         }
@@ -44,7 +46,6 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
         }
 
         if($focusPoint) {
-            $this->data['classListDesktop'] = $this->getBaseClass() . "__image";
             $this->data['classListDesktop'] = $this->data['classListDesktop'] . ' u-sr__only';
             $focusStyle = "background-position:".$focusPoint['top']."% ".$focusPoint['left']."%;";
             $this->data['attributeList']['style'] = "background-image: url('".$desktop_image."');".$focusStyle;
