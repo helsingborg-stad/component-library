@@ -58,8 +58,8 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
             }
 
             //Add background position to image styles
-            if(array_filter($imageFocus)) {
-                $this->data['imageStyle']['background-position'] = $imageFocus['left'] . "% " . $imageFocus['top'] . "%"; 
+            if(array_filter($focusPoint)) {
+                $this->data['imageStyle']['background-position'] = $focusPoint['left'] . "% " . $focusPoint['top'] . "%"; 
             }
 
             //Stringify image styles
