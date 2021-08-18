@@ -15,7 +15,7 @@
                 {{$text}}
             </span>
         @elseif($icon && !$text)
-            @icon(['icon' => $icon])
+            @icon(['icon' => $icon, 'size' => $size])
             @endicon
         @endif
 
