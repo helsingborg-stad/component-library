@@ -8,12 +8,8 @@
         @include('Slider__item.sub.video')
     @endif
 
-    @if ($desktop_image)
-        <img class="{{ $classListDesktop }}" src="{{ $desktop_image }}" alt="{{$alt}}"/>
-    @endif
-
-    @if ($mobile_image)
-        <img class="{{ $baseClass }}__image__mobile" src="{{ $mobile_image }}" alt="{{$altMobile}}"/>
+    @if ($image)
+        <img class="u-sr__only {{ $classListDesktop }}" src="{{ $image }}" alt="{{$alt}}"/>
     @endif
 
     @if ($slotHasData || $showContainer)
@@ -29,17 +25,7 @@
                     {{ $title }}
                 @endtypography
             @endif
-        
-            {{-- @if($sub_title)
-                @typography([
-                    'variant' => 'body',
-                    'element' => 'p',
-                    'classList' =>  [$baseClass.'__body']
-                ])
-                    {{ $sub_title }}
-                @endtypography
-            @endif --}}
-        
+
             @if(!empty($text))
                 @typography([
                     'variant' => 'body',
