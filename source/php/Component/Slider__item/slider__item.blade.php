@@ -8,8 +8,8 @@
         @include('Slider__item.sub.video')
     @endif
 
-    @if ($image)
-        <img class="u-sr__only {{ $classListDesktop }}" src="{{ $image }}" alt="{{$alt}}"/>
+    @if ($desktop_image)
+        <img class="u-sr__only {{ $classListDesktop }}" src="{{ $desktop_image }}" alt="{{$alt}}"/>
     @endif
 
     @if ($slotHasData || $showContainer)

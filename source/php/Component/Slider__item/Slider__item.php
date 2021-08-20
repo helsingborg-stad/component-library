@@ -24,8 +24,8 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . "--layout-" . $layout;
         }
 
-        if (!empty($image)) {
-            $this->data['attributeList']['style'] = "background-image: url('".$image."');";
+        if (!empty($desktop_image)) {
+            $this->data['attributeList']['style'] = "background-image: url('".$desktop_image."');";
         }
 
         $this->data['showContainer'] = false;
@@ -47,8 +47,8 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
             $this->data['imageStyle'] = []; 
 
             //Add image to image styles
-            if($image) {
-                $this->data['imageStyle']['background-image'] = "url('" . $image . "')"; 
+            if($desktop_image) {
+                $this->data['imageStyle']['background-image'] = "url('" . $desktop_image . "')"; 
             }
 
             //Add background position to image styles
