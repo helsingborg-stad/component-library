@@ -9,14 +9,12 @@
         "background_image": "",
         "background_video": false,
         "desktop_image": "",
-        "mobile_image": "",
         "link": false,
         "containerColor": "none",
         "alt": "",
-        "altMobile": "",
         "cta": [],
         "heroStyle": false,
-        "imageFocus": {"top": 30, "left": 50}
+        "focusPoint": {"top": 30, "left": 50}
     },
     "description": {
         "title": "A title for predefined layout",
@@ -24,17 +22,15 @@
         "text": "A text for predefined layout",
         "layout": "Which layouts to use",
         "theme": "The color palette to be used",
-        "desktop_image": "An url or path to an image to use as background for the segment",
-        "background_image": "An url or path to an image to use as mobile background for the segment",
+        "image": "An url or path to an image to use as background for the segment",
         "background_video": "A video background for the segment",
         "mobile_image": "URL to mobile image",
         "link": "Where the slide should link to",
         "containerColor": "Determines what color the container and text should be",
         "alt": "Alternative text",
-        "altMobile": "Alternative text for mobile image",
         "cta": "Adds button with a link",
         "heroStyle": "Gives the slide a hero like appearance with larger text",
-        "imageFocus": "Where the focus point should be of an image when container dosen't match image ratio."
+        "focusPoint": "Where the focus point should be of an image when container dosen't match image ratio."
     },
     "view": "slider__item.blade.php",
     "dependency": {

@@ -24,12 +24,8 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . "--layout-" . $layout;
         }
 
-        if(!empty($desktop_image) && empty($mobile_image)) {
-            $this->data['classList'][] = $this->getBaseClass() . "--no-mobile-image";
-        }
-
-        if (!empty($background_image)) {
-            $this->data['attributeList']['style'] = "background-image: url('".$background_image."');";
+        if (!empty($desktop_image)) {
+            $this->data['attributeList']['style'] = "background-image: url('".$desktop_image."');";
         }
 
         $this->data['showContainer'] = false;
@@ -46,8 +42,6 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
         }
 
         if($focusPoint) {
-            //Make img-element screen reader only
-            $this->data['classListDesktop'] = $this->data['classListDesktop'] . ' u-sr__only';
 
             //Create image style tag
             $this->data['imageStyle'] = []; 
