@@ -44,6 +44,10 @@
                     </div>
                 @endif
 
+                @if($layout == 'split')
+                    {!! '<InnerBlocks />' !!}
+                @endif
+
             </div>
         @endif
 
@@ -53,6 +57,10 @@
         <div class="{{$baseClass}}__slot o-container">
             {{ $slot }}
         </div>
+    @endif
+
+    @if($layout == 'full-width')
+        {!! '<InnerBlocks />' !!}
     @endif
     
 </section>
