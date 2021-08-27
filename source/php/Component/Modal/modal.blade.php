@@ -26,7 +26,7 @@
                 'style' => 'basic',
                 'attributeList' => ['data-close' => ''],
                 'classList' => [$baseClass . "__close"],
-                'size' => 'lg'
+                'size' => 'xl'
             ])
             @endbutton
         </header>
