@@ -22,7 +22,7 @@
                         @endicon
                     @endif
 
-                    {{$item['label']}}
+                    <span class="{{$baseClass}}__text">{{$item['label']}}</span>
                 </a>
 
                 @if ($item['children'])
