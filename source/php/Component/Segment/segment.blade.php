@@ -1,6 +1,5 @@
 <!-- segment.blade.php -->
 <section id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
-
     @if ($image)
         <div class="{{$baseClass}}__image {{ $imageClass }}" style="{{ $imageStyleString }}"></div>
     @endif
@@ -45,7 +44,8 @@
                 @endif
 
                 @if($layout == 'split')
-                    {!! '<InnerBlocks />' !!}
+                    {{-- Oneline to enable the use of css:empty() function --}}
+                    <div class="{{$baseClass}}__inner-blocks u-hide-empty">{!! '<InnerBlocks />' !!}</div>
                 @endif
 
             </div>
@@ -60,7 +60,8 @@
     @endif
 
     @if($layout == 'full-width')
-        {!! '<InnerBlocks />' !!}
+        {{-- Oneline to enable the use of css:empty() function --}}
+        <div class="{{$baseClass}}__inner-blocks o-container u-margin__x--auto u-hide-empty">{!! '<InnerBlocks />' !!}</div>
     @endif
     
 </section>
