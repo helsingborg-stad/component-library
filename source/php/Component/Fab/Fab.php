@@ -18,6 +18,14 @@ class Fab extends \ComponentLibrary\Component\BaseController
         //Create panel trigger
         if(is_array($button) && !empty($button)) {
             $this->data['button']['attributeList'] = ['js-toggle-trigger' => $this->data['panelId']];
+
+            if ($closeLabel) {
+                $this->data['button']['attributeList']['data-toggle-label'] = $closeLabel;
+            }
+
+            if ($closeIcon) {
+                $this->data['button']['attributeList']['data-toggle-icon'] = $closeIcon;
+            }
         }
 
         //Position
