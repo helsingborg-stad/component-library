@@ -36,6 +36,10 @@ class Slider extends \ComponentLibrary\Component\BaseController
         if ($shadow) {
             $this->data['classList'][] = 'c-slider__shadow';
         }
+
+        if($showStepper) {
+            $this->data['classList'][] = 'c-slider--has-stepper';
+        }
         
     }
 }

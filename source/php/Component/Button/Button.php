@@ -31,6 +31,8 @@ class Button extends \ComponentLibrary\Component\BaseController
 			$this->reversePositions();
 		}
 
+		$this->setIconOnly($text, $icon);
+
 		if($href) {
 			$this->data['componentElement'] = "a"; 
 		} else {
@@ -86,6 +88,20 @@ class Button extends \ComponentLibrary\Component\BaseController
 		$class = (!$text && $icon) ? '__icon-size--' . $size : '--' . $size;
 
 		$this->addToClassList(true, $class);
+	}
+
+	/**
+	 * Adds modifier to indicate that this button is missing a label
+	 *
+	 * @param String $text The buttons text
+	 * @param String $icon The name of the icon
+	 * @return void
+	 */
+	private function setIconOnly($text, $icon)
+	{
+		if(!empty($icon) && empty($text)) {
+			$this->addToClassList(true, '--icon-only');
+		}
 	}
 
 	/**
