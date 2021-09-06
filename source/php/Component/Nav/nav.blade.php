@@ -3,7 +3,7 @@
     <ul id="{{ $id }}" class="{{$class}}" {!! $attribute !!} role="menu">
         @foreach ($items as $item)
             <li 
-                class="{{$baseClass}}__item {{$item['active'] ? 'is-current' : ''}}{{$item['active'] && $item['children'] || $item['ancestor'] ? ' is-open has-fetched' : ''}}"
+                id="{{$item['id']}}" class="{{$baseClass}}__item {{$item['active'] ? 'is-current' : ''}}{{$item['active'] && $item['children'] || $item['ancestor'] ? ' is-open has-fetched' : ''}}"
         
                 {{-- Append dynamic attributes --}}
                 {!! !empty($item['attributeList']) ? $buildAttributes($item['attributeList']) : '' !!}
