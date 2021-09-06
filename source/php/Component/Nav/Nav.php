@@ -50,7 +50,7 @@ class Nav extends \ComponentLibrary\Component\BaseController
                 !isset($item['active']) ? $item['active'] = false : "";
                 !isset($item['children']) ? $item['children'] = false : "";
                 !isset($item['id']) ? $item['id'] = $item['label'] : "";
-
+                
                 if(is_array($item['children'])) {
                     $item['children'] = $this->fillItemsData($item['children']);
                 }
