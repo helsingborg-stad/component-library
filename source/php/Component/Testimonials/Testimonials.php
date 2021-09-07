@@ -13,6 +13,9 @@ class Testimonials extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
+        //Overwrite baseclass
+        $this->data['baseClass'] = 'c-testimonial';
+
         $this->compParams = [
             'testimonials' => $testimonials,
             'perRow' => $perRow,
