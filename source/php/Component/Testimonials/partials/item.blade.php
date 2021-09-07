@@ -1,3 +1,10 @@
+@image([
+    'classList' => [$baseClass . '__image'],
+    'src'=> $testimonial['image'],
+    'alt' => $testimonial['name']
+])
+@endimage
+
 <div class="{{ $baseClass}}__header">
     @typography([
             
@@ -5,9 +12,10 @@
         ])
         {{$testimonial['name']}}
     @endtypography
+
     @divider(['style' => 'solid'])
     @enddivider
-</div>
+
     @typography([                            
         "element" => "h3",
         'variant' => 'h3',
@@ -15,8 +23,14 @@
     ])
         {{$testimonial['title']}}
     @endtypography
-    @image([
-        'src'=> $testimonial['image'],
-        'alt' => $testimonial['name']
+</div>
+
+<div class="{{ $baseClass }}__quote">
+    @typography([
+        "variant" => "p",
+        "element" => "p",
+        "classList" => ['u-color__text--darker']
     ])
-    @endimage
+        "{{$testimonial['testimonial']}}"
+    @endtypography
+</div>
