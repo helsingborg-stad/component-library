@@ -15,6 +15,7 @@ class Testimonials extends \ComponentLibrary\Component\BaseController
 
         //Overwrite baseclass
         $this->data['baseClass'] = 'c-testimonial';
+        $this->data['wrapperClassList'] = [];
 
         if($isCarousel) {
             $this->data['wrapperClassList'][] = 'c-testimonials__wrapper--is-carousel';

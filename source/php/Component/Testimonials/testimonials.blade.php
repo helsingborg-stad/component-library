@@ -6,26 +6,26 @@
             @include('Testimonials.partials.item')    
         </{{ $componentElement }}>
     @endforeach
-
-    @if (count($testimonials) > 1)
-        @button([
-            'style' => 'filled',
-            'icon' => 'arrow_back',
-            'size' => 'lg',
-            'classList' => [
-                $baseClass . 's__button'
-            ]
-        ])
-        @endbutton
-        @button([
-            'style' => 'filled',
-            'icon' => 'arrow_forward',
-            'size' => 'lg',
-            'classList' => [
-                $baseClass . 's__button',
-            ]
-        ])
-        @endbutton
-    @endif
 </div>
+
+@if (count($testimonials) > 1 && $isCarousel)
+    @button([
+        'style' => 'filled',
+        'icon' => 'arrow_back',
+        'size' => 'lg',
+        'classList' => [
+            $baseClass . 's__button'
+        ]
+    ])
+    @endbutton
+    @button([
+        'style' => 'filled',
+        'icon' => 'arrow_forward',
+        'size' => 'lg',
+        'classList' => [
+            $baseClass . 's__button',
+        ]
+    ])
+    @endbutton
+@endif
 @endif
