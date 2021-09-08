@@ -51,7 +51,6 @@
                         </tr>
                     @endforeach
                 </tbody>
-
                 @if($showFooter)
                     <tfoot class="{{$baseClass}}__foot">
                         <tr class="{{$baseClass}}__line">
@@ -62,7 +61,7 @@
                     </tfoot>
                 @endif
             </table>
-        
+                            
             @if($pagination)
                 <div style="text-align: center;" class="u-padding--1" js-table-pagination>
                     @button([
@@ -99,6 +98,10 @@
                     @endbutton
                 </div>
             @endif
+        </div>
+        <div class="{{$baseClass}}__scroll-indicator-wrapper">
+            <div class="{{$baseClass}}__scroll-indicator">
+            </div>
         </div>
     </div>
 @else
