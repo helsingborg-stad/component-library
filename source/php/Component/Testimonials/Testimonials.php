@@ -16,11 +16,17 @@ class Testimonials extends \ComponentLibrary\Component\BaseController
         //Overwrite baseclass
         $this->data['baseClass'] = 'c-testimonial';
 
+        if($isCarousel) {
+            $this->data['wrapperClassList'][] = 'c-testimonials__wrapper--is-carousel';
+        } 
+
         $this->compParams = [
             'testimonials' => $testimonials,
             'perRow' => $perRow,
             'componentElement' => $componentElement
         ];
+
+        $this->data['wrapperClassList'] = implode(' ', $this->data['wrapperClassList'] );
 
         $this->mapData();
     }

@@ -1,6 +1,6 @@
 <!-- testimonials.blade.php -->
 @if($testimonials)
-<div class="{{$baseClass .'s__wrapper'}}">
+<div class="{{$baseClass .'s__wrapper'}} {{$wrapperClassList}}">
     @foreach($testimonials as $testimonial)
         <{{ $componentElement }} id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
             @include('Testimonials.partials.item')    
