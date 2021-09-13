@@ -6,7 +6,12 @@
                 <h2 class="{{$baseClass}}__title">{{$title}}</h2>
             @endif
             @if($fullscreen)
-                @icon(['icon' => 'fullscreen', 'attributeList' => ['data-open' => '123']])
+                @icon([
+                    'icon'          => 'fullscreen',
+                    'size'          => 'md',
+                    'color'         => 'primary',
+                    'classList'     =>[$baseClass.'__fullscreen'],
+                    'attributeList' => ['data-open' => '123']])
                 @endicon
             @endif
             @if($filterable)
