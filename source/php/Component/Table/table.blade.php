@@ -1,31 +1,29 @@
 <!-- table.blade.php -->
 @if($list)
     <div id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
-        @if($title)
-            <h2 class="{{$baseClass}}__title">{{$title}}</h2>
-        @endif
-        @if($fullscreen)
-            @icon(['icon' => 'fullscreen', 'attributeList' => ['data-open' => '123']])
-            @endicon
-        @endif
-        @if($filterable)
-            @field([
-                'type' => 'text',
-                'classList' => [
-                    'u-margin--2'
-                ],
-                'attributeList' => [
-                    'type' => 'search',
-                    'name' => 'search',
-                    'js-table-filter-input' => ''
-                ],
-                'placeholder' => !empty($labels) && !empty($labels['searchPlaceholder']) ? $labels['searchPlaceholder'] : 'Search',
-                'icon' => ['icon' => 'search']
-            ])
-            @endfield
+        <div class="{{ $baseClass}}__header">
+            @if($title)
+                <h2 class="{{$baseClass}}__title">{{$title}}</h2>
+            @endif
+            @if($fullscreen)
+                @icon(['icon' => 'fullscreen', 'attributeList' => ['data-open' => '123']])
+                @endicon
+            @endif
+            @if($filterable)
+                @field([
+                    'type' => 'text',
+                    'attributeList' => [
+                        'type' => 'search',
+                        'name' => 'search',
+                        'js-table-filter-input' => ''
+                    ],
+                    'placeholder' => !empty($labels) && !empty($labels['searchPlaceholder']) ? $labels['searchPlaceholder'] : 'Search',
+                    'icon' => ['icon' => 'search']
+                ])
+                @endfield
+            @endif
+        </div>
 
-            
-        @endif
         <div class="{{$baseClass}}__inner">
             <table class="{{$baseClass}}__table">
                 @if($showCaption)
@@ -37,11 +35,8 @@
                         <tr class="{{$baseClass}}__line">
                             @foreach($headings as $heading)
                                 <th scope="col" class="{{$baseClass}}__column {{$baseClass}}__column-{{ $loop->index }}" js-table-sort--btn="{{ $loop->index }}">
-                                    <span>
-                                        <span>
                                     {{ $heading }}
-                                        </span>
-                                    </span>
+
                                     @if($collapsible && $loop->index === 0)
                                         @icon([
                                             'icon' => 'chevron_left',
@@ -82,52 +77,52 @@
                     </tfoot>
                 @endif
             </table>
-                            
-            
         </div>
         
+        <div class="{{$baseClass}}__footer">
 
-        @if($pagination)
-            <div style="text-align: center;" class="u-padding--1" js-table-pagination>
-                @button([
-                    'style' => 'basic',
-                    'color' => 'primary',
-                    'icon' => 'chevron_left',
-                    'attributeList' => [
-                        'js-table-pagination-btn' => 'prev'
-                    ],
-                ])
-                @endbutton
+            <div class="{{$baseClass}}__scroll-indicator-wrapper">
+                <div class="{{$baseClass}}__scroll-indicator">
+                </div>
+            </div>
 
-                <div class="u-display--inline-block" js-table-pagination--links>
+            @if($pagination)
+                <div style="text-align: center;" class="{{$baseClass}}__pagination" js-table-pagination>
                     @button([
                         'style' => 'basic',
                         'color' => 'primary',
-                        'size' => 'sm',
+                        'icon' => 'chevron_left',
                         'attributeList' => [
-                            'js-table-pagination--link' => '1'
+                            'js-table-pagination-btn' => 'prev'
                         ],
                     ])
-                    1
+                    @endbutton
+
+                    <div class="u-display--inline-block" js-table-pagination--links>
+                        @button([
+                            'style' => 'basic',
+                            'color' => 'primary',
+                            'size' => 'sm',
+                            'attributeList' => [
+                                'js-table-pagination--link' => '1'
+                            ],
+                        ])
+                        1
+                        @endbutton
+                    </div>
+
+                    @button([
+                        'style' => 'basic',
+                        'color' => 'primary',
+                        'icon' => 'chevron_right',
+                        'attributeList' => [
+                            'js-table-pagination-btn' => 'next'
+                        ],
+                    ])
                     @endbutton
                 </div>
+            @endif
 
-                @button([
-                    'style' => 'basic',
-                    'color' => 'primary',
-                    'icon' => 'chevron_right',
-                    'attributeList' => [
-                        'js-table-pagination-btn' => 'next'
-                    ],
-                ])
-                @endbutton
-            </div>
-        @endif
-
-        
-        <div class="{{$baseClass}}__scroll-indicator-wrapper">
-            <div class="{{$baseClass}}__scroll-indicator">
-            </div>
         </div>
         
     </div>
