@@ -1,6 +1,31 @@
 <!-- table.blade.php -->
 @if($list)
     <div id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
+        @if($title)
+            <h2 class="{{$baseClass}}__title">{{$title}}</h2>
+        @endif
+        @if($fullscreen)
+            @icon(['icon' => 'fullscreen', 'attributeList' => ['data-open' => '123']])
+            @endicon
+        @endif
+        @if($filterable)
+            @field([
+                'type' => 'text',
+                'classList' => [
+                    'u-margin--2'
+                ],
+                'attributeList' => [
+                    'type' => 'search',
+                    'name' => 'search',
+                    'js-table-filter-input' => ''
+                ],
+                'placeholder' => !empty($labels) && !empty($labels['searchPlaceholder']) ? $labels['searchPlaceholder'] : 'Search',
+                'icon' => ['icon' => 'search']
+            ])
+            @endfield
+
+            
+        @endif
         <div class="{{$baseClass}}__inner">
             <table class="{{$baseClass}}__table">
                 @if($showCaption)
@@ -8,27 +33,23 @@
                 @endif
 
                 @if($showHeader)
-                    <thead class="{{$baseClass}}__head">
-                        @if($filterable)
-                            @field([
-                                'type' => 'text',
-                                'classList' => [
-                                    'u-margin--2'
-                                ],
-                                'attributeList' => [
-                                    'type' => 'search',
-                                    'name' => 'search',
-                                    'js-table-filter-input' => ''
-                                ],
-                                'label' => !empty($labels) && !empty($labels['searchPlaceholder']) ? $labels['searchPlaceholder'] : 'Search'
-                            ])
-                            @endfield
-                        @endif
-                        
+                    <thead class="{{$baseClass}}__head">                                                
                         <tr class="{{$baseClass}}__line">
                             @foreach($headings as $heading)
                                 <th scope="col" class="{{$baseClass}}__column {{$baseClass}}__column-{{ $loop->index }}" js-table-sort--btn="{{ $loop->index }}">
+                                    <span>
+                                        <span>
                                     {{ $heading }}
+                                        </span>
+                                    </span>
+                                    @if($collapsible && $loop->index === 0)
+                                        @icon([
+                                            'icon' => 'chevron_left',
+                                            'size' => 'lg',
+                                            'classList' => ['c-table__collapse-button']
+                                        ])
+                                        @endicon
+                                    @endif
                                     @if($sortable)
                                         @icon(['icon' => 'swap_vert', 'size' => 'md'])
                                         @endicon
@@ -62,48 +83,63 @@
                 @endif
             </table>
                             
-            @if($pagination)
-                <div style="text-align: center;" class="u-padding--1" js-table-pagination>
+            
+        </div>
+        
+
+        @if($pagination)
+            <div style="text-align: center;" class="u-padding--1" js-table-pagination>
+                @button([
+                    'style' => 'basic',
+                    'color' => 'primary',
+                    'icon' => 'chevron_left',
+                    'attributeList' => [
+                        'js-table-pagination-btn' => 'prev'
+                    ],
+                ])
+                @endbutton
+
+                <div class="u-display--inline-block" js-table-pagination--links>
                     @button([
                         'style' => 'basic',
                         'color' => 'primary',
-                        'icon' => 'chevron_left',
+                        'size' => 'sm',
                         'attributeList' => [
-                            'js-table-pagination-btn' => 'prev'
+                            'js-table-pagination--link' => '1'
                         ],
                     ])
-                    @endbutton
-
-                    <div class="u-display--inline-block" js-table-pagination--links>
-                        @button([
-                            'style' => 'basic',
-                            'color' => 'primary',
-                            'size' => 'sm',
-                            'attributeList' => [
-                                'js-table-pagination--link' => '1'
-                            ],
-                        ])
-                        1
-                        @endbutton
-                    </div>
-
-                    @button([
-                        'style' => 'basic',
-                        'color' => 'primary',
-                        'icon' => 'chevron_right',
-                        'attributeList' => [
-                            'js-table-pagination-btn' => 'next'
-                        ],
-                    ])
+                    1
                     @endbutton
                 </div>
-            @endif
-        </div>
+
+                @button([
+                    'style' => 'basic',
+                    'color' => 'primary',
+                    'icon' => 'chevron_right',
+                    'attributeList' => [
+                        'js-table-pagination-btn' => 'next'
+                    ],
+                ])
+                @endbutton
+            </div>
+        @endif
+
+        
         <div class="{{$baseClass}}__scroll-indicator-wrapper">
             <div class="{{$baseClass}}__scroll-indicator">
             </div>
         </div>
+        
     </div>
 @else
   <!-- No table list data -->
 @endif
+
+
+@include('Table.sub.modal', ['list' => $list, 'title'         => 'En titel',    
+'headings'      => ['Name', 'Description', 'Details', 'Link', 'Link', 'Link', 'Link', 'Link', 'Link', 'Link', 'Link', 'Link'],
+'showFooter'    => false,
+'filterable'    => true,
+'sortable'      => false,
+'pagination'    => false,
+'collapsible'   => true])

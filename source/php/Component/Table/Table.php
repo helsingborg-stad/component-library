@@ -46,5 +46,30 @@ class Table extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['js-table-pagination'] = $pagination;
             $this->data['attributeList']['js-table-pagination--current'] = 1;
         }
+        
+        if($collapsible) {
+            $this->data['attributeList']['js-table-collapsible'] = true;
+        }
+        
+
+        if($showSum) {
+            $sumRow = ['columns' => []];
+            foreach($list as $rowIndex => $row) {
+                
+                foreach($row['columns'] as $cellIndex => $cell) {
+                    if($cellIndex !== 0) {
+                        if(!isset($sumRow['columns'][$cellIndex])) {
+                            $sumRow['columns'][$cellIndex] = (int)$cell;
+                        } else {
+                            $sumRow['columns'][$cellIndex] += (int)$cell;
+                        }
+                    }
+                }
+            }            
+            
+            array_unshift($sumRow['columns'], 'Sum');
+            array_push($list,$sumRow);
+            $this->data['list'] = $list;
+        }
     }
 }
