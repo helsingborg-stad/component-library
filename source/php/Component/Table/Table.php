@@ -53,6 +53,8 @@ class Table extends \ComponentLibrary\Component\BaseController
         
 
         if($showSum) {
+            $this->data['attributeList']['table-sum'] = true;
+
             $sumRow = ['columns' => []];
             foreach($list as $rowIndex => $row) {
                 
