@@ -86,8 +86,8 @@
         
         <div class="{{$baseClass}}__footer">
 
-            <div class="{{$baseClass}}__scroll-indicator-wrapper">
-                <div class="{{$baseClass}}__scroll-indicator">
+            <div class="{{$baseClass}}__scroll-indicator-wrapper u-display--none">
+                <div class="{{$baseClass}}__scroll-indicator u-display--none">
                 </div>
             </div>
 
@@ -131,15 +131,13 @@
         </div>
         
     </div>
+
 @else
   <!-- No table list data -->
 @endif
 
+@if ($openModal)
+    @include('Image.sub.modal')
+@endif
 
-@include('Table.sub.modal', ['list' => $list, 'title'         => 'En titel',    
-'headings'      => ['Name', 'Description', 'Details', 'Link', 'Link', 'Link', 'Link', 'Link', 'Link', 'Link', 'Link', 'Link'],
-'showFooter'    => false,
-'filterable'    => true,
-'sortable'      => false,
-'pagination'    => false,
-'collapsible'   => true])
+
