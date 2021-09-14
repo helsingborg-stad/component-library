@@ -3,20 +3,14 @@
     "default": {
         "list": [],
         "headings": [],
-        "showFooter": false,
         "showHeader": true,
         "showCaption": false,
-        "hasZebraStripes": true,
-        "hasHoverEffect": false,
-        "isBordered": true,
-        "isLarge": false,
-        "isSmall": false,
         "filterable": false,
         "sortable": false,
         "pagination": false,
         "collapsible": false,
         "showSum": true,
-        "fullscreen": true,
+        "fullscreen": false,
         "labels": {
             "searchPlaceholder" : "Search"
         }
@@ -24,7 +18,6 @@
     "description": {
         "list": "Array of items",
         "headings": "Array of items",
-        "showFooter": "If footer should be printed",
         "showHeader": "If header should be printed",
         "showCaption": "Show caption element (description)",
         "hasZebraStripes": "If has stripes",

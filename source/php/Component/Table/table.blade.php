@@ -71,16 +71,7 @@
                             @endforeach
                         </tr>
                     @endforeach
-                </tbody>
-                @if($showFooter)
-                    <tfoot class="{{$baseClass}}__foot">
-                        <tr class="{{$baseClass}}__line">
-                            @foreach($headings as $heading)
-                                <th scope="col" class="{{$baseClass}}__column {{$baseClass}}__column-{{ $loop->index }}">{{ $heading }}</th>
-                            @endforeach
-                        </tr>
-                    </tfoot>
-                @endif
+                </tbody>                
             </table>
         </div>
         
@@ -136,8 +127,9 @@
   <!-- No table list data -->
 @endif
 
-@if ($openModal)
-    @include('Image.sub.modal')
+@if($fullscreen)
+    @include('Table.sub.modal')
 @endif
+
 
 
