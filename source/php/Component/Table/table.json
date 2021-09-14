@@ -11,6 +11,7 @@
         "collapsible": false,
         "showSum": true,
         "fullscreen": false,
+        "isMultidimensional": false,
         "labels": {
             "searchPlaceholder" : "Search"
         }

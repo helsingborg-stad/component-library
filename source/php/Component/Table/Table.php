@@ -26,7 +26,10 @@ class Table extends \ComponentLibrary\Component\BaseController
         if($collapsible) {
             $this->data['attributeList']['js-table-collapsible'] = true;
         }
-        
+
+        if($isMultidimensional) {
+            $this->data['classList'][]  = $this->getBaseClass() . '--multidimensional';
+        }
 
         if($showSum) {
             $this->data['attributeList']['table-sum'] = true;
