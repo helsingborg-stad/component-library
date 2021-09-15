@@ -31,17 +31,7 @@ class Testimonials extends \ComponentLibrary\Component\BaseController
         ];
 
         $this->data['wrapperClassList'] = implode(' ', $this->data['wrapperClassList'] );
-
-        $this->data['wrapperAttributeList'] = implode(
-            ' ',
-            array_map(
-                function ($v, $k) {
-                    return sprintf('%s="%s"', $k, $v);
-                },
-                array_values($this->data['wrapperAttributeList']),
-                array_keys($this->data['wrapperAttributeList'])
-            )
-        );
+        $this->data['wrapperAttributeList'] = self::buildAttributes($this->data['wrapperAttributeList']);
 
         $this->mapData();
     }
