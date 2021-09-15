@@ -9,7 +9,7 @@
         "sortable": false,
         "pagination": false,
         "collapsible": false,
-        "showSum": true,
+        "showSum": false,
         "fullscreen": false,
         "isMultidimensional": false,
         "labels": {
