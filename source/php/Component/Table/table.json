@@ -21,12 +21,15 @@
         "headings": "Array of items",
         "showHeader": "If header should be printed",
         "showCaption": "Show caption element (description)",
-        "hasZebraStripes": "If has stripes",
-        "hasHoverEffect": "Highlight row on hover",
-        "isBordered": "Has borders",
-        "isLarge": "If is large",
-        "isSmall": "If is small",
-        "labels": "Label strings - replace for translation etc"
+        "labels": "Label strings - replace for translation etc",
+        "sortable": "Makes each th a button that sorts corresponding cells in column",
+        "filterable": "Renders a field for real time filtering",
+        "pagination": "Renders a pagination navigation, if not false set to the number of pages you like",
+        "collapsible": "Makes the first column collapsible",
+        "showSum": "Shows the sum of each column at the bottom of the table",
+        "fullscreen": "Renders a button, that when clicked, makes the table fullscreen"
+        
+
     },
     "view": "table.blade.php",
     "dependency": {

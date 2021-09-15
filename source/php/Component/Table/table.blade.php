@@ -51,8 +51,10 @@
                                         @endicon
                                     @endif
                                     @if($sortable)
-                                        @icon(['icon' => 'swap_vert', 'size' => 'md'])
-                                        @endicon
+                                        @if(($collapsible && $loop->index !== 0) || !$collapsible )                                        
+                                            @icon(['icon' => 'swap_vert', 'size' => 'md'])
+                                            @endicon
+                                        @endif
                                     @endif
                                 </th>
                             @endforeach
