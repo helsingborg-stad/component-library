@@ -27,7 +27,8 @@
         "pagination": "Renders a pagination navigation, if not false set to the number of pages you like",
         "collapsible": "Makes the first column collapsible",
         "showSum": "Shows the sum of each column at the bottom of the table",
-        "fullscreen": "Renders a button, that when clicked, makes the table fullscreen"
+        "fullscreen": "Renders a button, that when clicked, makes the table fullscreen",
+        "isMultidimensional": "Makes the first column a second dimension of headers and locks in it place when scrolling"
         
 
     },
