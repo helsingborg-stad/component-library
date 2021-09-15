@@ -16,6 +16,7 @@
         'pagination'    => $pagination,
         'showSum'       => $showSum,
         'fullscreen'    => false,
+        'boxShadow'     => false
     ])
    @endtable
    

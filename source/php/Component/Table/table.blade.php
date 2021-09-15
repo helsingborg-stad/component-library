@@ -42,7 +42,7 @@
                                 <th scope="col" class="{{$baseClass}}__column {{$baseClass}}__column-{{ $loop->index }}" js-table-sort--btn="{{ $loop->index }}">
                                     {{ $heading }}
 
-                                    @if($collapsible && $loop->index === 0)
+                                    @if($isMultidimensional && $loop->index === 0)
                                         @icon([
                                             'icon' => 'chevron_left',
                                             'size' => 'lg',
@@ -51,7 +51,7 @@
                                         @endicon
                                     @endif
                                     @if($sortable)
-                                        @if(($collapsible && $loop->index !== 0) || !$collapsible )                                        
+                                        @if(($isMultidimensional && $loop->index !== 0) || !$isMultidimensional )                                        
                                             @icon(['icon' => 'swap_vert', 'size' => 'md'])
                                             @endicon
                                         @endif

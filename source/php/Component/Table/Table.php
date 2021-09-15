@@ -31,6 +31,10 @@ class Table extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][]  = $this->getBaseClass() . '--multidimensional';
         }
 
+        if($boxShadow) {
+            $this->data['classList'][]  = $this->getBaseClass() . '--box-shadow';
+        }
+
         if($showSum) {
             $this->data['attributeList']['table-sum'] = true;
 

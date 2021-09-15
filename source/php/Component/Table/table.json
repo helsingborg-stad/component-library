@@ -12,6 +12,8 @@
         "showSum": false,
         "fullscreen": false,
         "isMultidimensional": false,
+        "title": " ",
+        "boxShadow": true,
         "labels": {
             "searchPlaceholder" : "Search"
         }
