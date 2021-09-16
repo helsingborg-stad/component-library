@@ -3,12 +3,14 @@
     "default": {
         "componentElement": "div",
         "testimonials": [],
-        "perRow": 4
+        "perRow": 4,
+        "isCarousel": false
     },
     "description": {
         "componentElement": "The tag for the component",
         "testimonials": "List containing testimonial items",
-        "perRow": "Number of columns per row. Must be integer divisible by 12"
+        "perRow": "Number of columns per row. Must be integer divisible by 12",
+        "isCarousel": "If there should be a carousel between for the testimonials"
     },
     "view": "testimonials.blade.php",
     "dependency": {
