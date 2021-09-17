@@ -16,5 +16,9 @@ class Header extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = "{$this->getBaseClass()}--text-{$textColor}";
         }
 
+        if ($sticky) {
+            $this->data['classList'][] = "{$this->getBaseClass()}--sticky";
+        }
+
     }
 }

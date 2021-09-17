@@ -13,11 +13,25 @@ class Testimonials extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
+        //Overwrite baseclass
+        $this->data['baseClass'] = 'c-testimonial';
+        $this->data['wrapperClassList'] = [];
+        $this->data['wrapperAttributeList'] = [];
+
+        if($isCarousel) {
+            $this->data['wrapperClassList'][] = 'c-testimonials__wrapper--is-carousel';
+
+            $this->data['wrapperAttributeList']['js-testimonials--is-carousel'] = true;
+        } 
+
         $this->compParams = [
             'testimonials' => $testimonials,
             'perRow' => $perRow,
             'componentElement' => $componentElement
         ];
+
+        $this->data['wrapperClassList'] = implode(' ', $this->data['wrapperClassList'] );
+        $this->data['wrapperAttributeList'] = self::buildAttributes($this->data['wrapperAttributeList']);
 
         $this->mapData();
     }
