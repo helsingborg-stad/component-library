@@ -172,9 +172,10 @@ class BaseController
 
         //Applies a general wp filter
         if (function_exists('apply_filters')) {
-            $modifier = apply_filters("ComponentLibrary/Component/Modifier", []);
+            $modifier = apply_filters("ComponentLibrary/Component/Modifier", [], $this->data['context']);
             $class = $this->setModifier($class, $modifier);
         }
+        
         //Applies component specific wp filter
         if (function_exists('apply_filters')) {
             $modifier = apply_filters("ComponentLibrary/Component/". $componentName ."/Modifier", [], $this->data['context']);
