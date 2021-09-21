@@ -3,14 +3,14 @@
     'isPanel' => true,
     'id' => '123',
     'overlay' => 'dark',
-    'animation' => 'scale-up'
+    'animation' => 'scale-up',
+    'heading' => $title
 ])
     
    @table(
     [
         'list' => $list, 
         'headings' => $headings, 
-        'title' => $title,
         'filterable'    => $filterable,
         'sortable'      => $sortable,
         'pagination'    => $pagination,
