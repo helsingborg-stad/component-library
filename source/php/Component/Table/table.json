@@ -8,12 +8,12 @@
         "filterable": false,
         "sortable": false,
         "pagination": false,
-        "collapsible": false,
         "showSum": false,
         "fullscreen": false,
         "isMultidimensional": false,
         "title": " ",
         "boxShadow": true,
+        "caption": false,
         "labels": {
             "searchPlaceholder" : "Search"
         }
@@ -22,15 +22,16 @@
         "list": "Array of items",
         "headings": "Array of items",
         "showHeader": "If header should be printed",
-        "showCaption": "Show caption element (description)",
+        "Caption": "Add a caption text at the below the table",
         "labels": "Label strings - replace for translation etc",
         "sortable": "Makes each th a button that sorts corresponding cells in column",
         "filterable": "Renders a field for real time filtering",
-        "pagination": "Renders a pagination navigation, if not false set to the number of pages you like",
-        "collapsible": "Makes the first column collapsible",
+        "pagination": "Renders a pagination navigation, if not false set to the number of pages you like",        
         "showSum": "Shows the sum of each column at the bottom of the table",
         "fullscreen": "Renders a button, that when clicked, makes the table fullscreen",
-        "isMultidimensional": "Makes the first column a second dimension of headers and locks in it place when scrolling"
+        "isMultidimensional": "Makes the first column a second dimension of headers and locks in it place when scrolling. Also allows the user to collapse the first column.",
+        "boxShadow": "Disable or enable box-shadow",
+        "title": "A title at above the table"
         
 
     },
