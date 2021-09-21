@@ -6,7 +6,7 @@ class Table extends \ComponentLibrary\Component\BaseController
 {
     
     public function init() {
-        
+        $this->padCells();
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
@@ -21,10 +21,6 @@ class Table extends \ComponentLibrary\Component\BaseController
         if($pagination) {
             $this->data['attributeList']['js-table-pagination'] = $pagination;
             $this->data['attributeList']['js-table-pagination--current'] = 1;
-        }
-        
-        if($collapsible) {
-            $this->data['attributeList']['js-table-collapsible'] = true;
         }
 
         if($isMultidimensional) {
@@ -50,9 +46,7 @@ class Table extends \ComponentLibrary\Component\BaseController
                         }
                     }
                 }
-            }            
-            
-            
+            }                                
 
             if($list[count($list) - 1]['columns'][0] !== 'Sum') {
                 array_unshift($sumRow['columns'], 'Sum');
@@ -61,5 +55,23 @@ class Table extends \ComponentLibrary\Component\BaseController
 
             $this->data['list'] = $list;
         }        
+    }
+
+    private function padCells() {
+        $longest = 0;
+        foreach($this->data['list'] as $row) {
+            $current = count($row['columns']);
+            if($current > $longest) {
+                $longest = $current;
+            }
+
+        }
+
+        foreach($this->data['list'] as &$row) {
+            
+            $row['columns'] = array_pad($row['columns'], $longest, ' ');
+            
+
+        }
     }
 }
