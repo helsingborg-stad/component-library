@@ -45,7 +45,7 @@
                                     @if($isMultidimensional && $loop->index === 0)
                                         @icon([
                                             'icon' => 'chevron_left',
-                                            'size' => 'lg',
+                                            'size' => 'md',
                                             'classList' => ['c-table__collapse-button']
                                         ])
                                         @endicon
@@ -120,7 +120,7 @@
                     @endbutton
                 </div>
             @endif
-
+            <p class="c-table__caption"> {{$caption}} </p>
         </div>
         
     </div>
