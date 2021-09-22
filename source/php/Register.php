@@ -27,6 +27,8 @@ class Register
             $this->data = (object) array();
         }
 
+        
+
         //Prohibit reserved names
         if(in_array($slug, $this->_reservedNames)) {
             throw new \Exception("Invalid slug (" . $slug . ") provided, cannot be used as a view name since it is reserved for internal purposes.");
@@ -34,7 +36,7 @@ class Register
 
         //Get view name
         $view = $this->getViewName($slug, $view); 
-
+        
         //Check if valid slug name
         if ($this->sanitizeSlug($slug) != $slug) {
             //throw new \Exception("Invalid slug (" . $slug . ") provided, must be a lowercase string only containing letters and hypens.");
@@ -54,8 +56,8 @@ class Register
         );
 
         //Add include alias
-  
         $this->registerComponentAlias($slug);
+
         // Register view composer
         $this->registerViewComposer($this->data->{$slug});
     }
@@ -124,7 +126,7 @@ class Register
                 if(!$configJson = file_get_contents($configFile)) {
                     throw new \Exception("Configuration file unreadable at " . $configFile);
                 }
-
+                
                 //Check if valid json
                 if(!$configJson = json_decode($configJson, true)) {
                     throw new \Exception("Invalid formatting of configuration file in " . $configFile);
@@ -188,11 +190,14 @@ class Register
             ucfirst($componentSlug)  . '.' . $componentSlug,
             $componentSlug
         );
-        
+
     }
     
     public function registerViewComposer($component)
     {
+
+        
+
         try{
             $this->blade->composer(
                 ucfirst($component->slug) . '.' . $component->slug,
@@ -200,7 +205,7 @@ class Register
                     $controllerName = $this->camelCase(
                         $this->cleanViewName($component->slug)
                     );
-                    
+
                     $viewData = $this->accessProtected($view, 'data');
     
                     // Get controller data
@@ -239,7 +244,7 @@ class Register
     public function getControllerArgs($data, $controllerName): array
     {
         //Run controller & fetch data
-        if ($controllerLocation = $this->locateController($controllerName)) {
+        if ($controllerLocation = $this->locateController(ucfirst($controllerName))) {
 
             $controllerId = md5($controllerLocation); 
 
