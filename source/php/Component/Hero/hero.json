@@ -2,17 +2,23 @@
     "slug": "hero",
     "default": {
         "image": false,
+        "imageFocus": {"top": 30, "left": 50},
         "size": "normal",
         "overlay": "neutral",
+        "color": "light",
         "title": "",
-        "paragraph": ""
+        "byline": "",
+        "body": ""
     },
     "description": {
         "image": "Background image",
+        "imageFocus": "Where to focus in the background.",
         "size": "Ratio (normal, large)",
         "overlay": "Overlay color, false no overlay. (neutral, primary)",
-        "title": "The title element",
-        "paragraph": "The paragraph."
+        "color": "Font color (light, dark)",
+        "title": "The title text",
+        "byline": "The byline text",
+        "body": "The body text."
     },
     "view": "hero.blade.php",
     "dependency": {

@@ -122,15 +122,11 @@ class Register
                     throw new \Exception("No config file found in " . $path);
                 }
 
-                
-
                 //Read config
                 if(!$configJson = file_get_contents($configFile)) {
                     throw new \Exception("Configuration file unreadable at " . $configFile);
                 }
-
                 
-
                 //Check if valid json
                 if(!$configJson = json_decode($configJson, true)) {
                     throw new \Exception("Invalid formatting of configuration file in " . $configFile);
