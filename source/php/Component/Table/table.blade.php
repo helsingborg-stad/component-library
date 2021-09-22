@@ -1,6 +1,34 @@
 <!-- table.blade.php -->
 @if($list)
     <div id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
+        <div class="{{ $baseClass}}__header">
+            @if($title)
+                <h2 class="{{$baseClass}}__title">{{$title}}</h2>
+            @endif
+            @if($fullscreen)
+                @icon([
+                    'icon'          => 'fullscreen',
+                    'size'          => 'md',
+                    'color'         => 'primary',
+                    'classList'     =>[$baseClass.'__fullscreen'],
+                    'attributeList' => ['data-open' => '123']])
+                @endicon
+            @endif
+            @if($filterable)
+                @field([
+                    'type' => 'text',
+                    'attributeList' => [
+                        'type' => 'search',
+                        'name' => 'search',
+                        'js-table-filter-input' => ''
+                    ],
+                    'placeholder' => !empty($labels) && !empty($labels['searchPlaceholder']) ? $labels['searchPlaceholder'] : 'Search',
+                    'icon' => ['icon' => 'search']
+                ])
+                @endfield
+            @endif
+        </div>
+
         <div class="{{$baseClass}}__inner">
             <table class="{{$baseClass}}__table">
                 @if($showCaption)
@@ -8,30 +36,25 @@
                 @endif
 
                 @if($showHeader)
-                    <thead class="{{$baseClass}}__head">
-                        @if($filterable)
-                            @field([
-                                'type' => 'text',
-                                'classList' => [
-                                    'u-margin--2'
-                                ],
-                                'attributeList' => [
-                                    'type' => 'search',
-                                    'name' => 'search',
-                                    'js-table-filter-input' => ''
-                                ],
-                                'label' => !empty($labels) && !empty($labels['searchPlaceholder']) ? $labels['searchPlaceholder'] : 'Search'
-                            ])
-                            @endfield
-                        @endif
-                        
+                    <thead class="{{$baseClass}}__head">                                                
                         <tr class="{{$baseClass}}__line">
                             @foreach($headings as $heading)
                                 <th scope="col" class="{{$baseClass}}__column {{$baseClass}}__column-{{ $loop->index }}" js-table-sort--btn="{{ $loop->index }}">
                                     {{ $heading }}
-                                    @if($sortable)
-                                        @icon(['icon' => 'swap_vert', 'size' => 'md'])
+
+                                    @if($isMultidimensional && $loop->index === 0)
+                                        @icon([
+                                            'icon' => 'chevron_left',
+                                            'size' => 'md',
+                                            'classList' => ['c-table__collapse-button']
+                                        ])
                                         @endicon
+                                    @endif
+                                    @if($sortable)
+                                        @if(($isMultidimensional && $loop->index !== 0) || !$isMultidimensional )                                        
+                                            @icon(['icon' => 'swap_vert', 'size' => 'md'])
+                                            @endicon
+                                        @endif
                                     @endif
                                 </th>
                             @endforeach
@@ -50,21 +73,19 @@
                             @endforeach
                         </tr>
                     @endforeach
-                </tbody>
-
-                @if($showFooter)
-                    <tfoot class="{{$baseClass}}__foot">
-                        <tr class="{{$baseClass}}__line">
-                            @foreach($headings as $heading)
-                                <th scope="col" class="{{$baseClass}}__column {{$baseClass}}__column-{{ $loop->index }}">{{ $heading }}</th>
-                            @endforeach
-                        </tr>
-                    </tfoot>
-                @endif
+                </tbody>                
             </table>
+        </div>
         
+        <div class="{{$baseClass}}__footer">
+
+            <div class="{{$baseClass}}__scroll-indicator-wrapper u-display--none">
+                <div class="{{$baseClass}}__scroll-indicator u-display--none">
+                </div>
+            </div>
+
             @if($pagination)
-                <div style="text-align: center;" class="u-padding--1" js-table-pagination>
+                <div style="text-align: center;" class="{{$baseClass}}__pagination" js-table-pagination>
                     @button([
                         'style' => 'basic',
                         'color' => 'primary',
@@ -99,8 +120,18 @@
                     @endbutton
                 </div>
             @endif
+            <p class="c-table__caption"> {{$caption}} </p>
         </div>
+        
     </div>
+
 @else
   <!-- No table list data -->
 @endif
+
+@if($fullscreen)
+    @include('Table.sub.modal')
+@endif
+
+
+
