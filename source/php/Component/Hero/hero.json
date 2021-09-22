@@ -1,0 +1,26 @@
+{
+    "slug": "hero",
+    "default": {
+        "image": false,
+        "size": "normal",
+        "overlay": "neutral",
+        "title": "",
+        "paragraph": ""
+    },
+    "description": {
+        "image": "Background image",
+        "size": "Ratio (normal, large)",
+        "overlay": "Overlay color, false no overlay. (neutral, primary)",
+        "title": "The title element",
+        "paragraph": "The paragraph."
+    },
+    "view": "hero.blade.php",
+    "dependency": {
+        "sass": {
+            "components": [
+                "heroo",
+                "typography"
+            ]
+        }
+    }
+}
