@@ -1,5 +1,5 @@
 <!-- hero.blade.php -->
-<div id="{{ $id }}" class="{{ $class }}" {!! $attribute !!} style="{!! $imageStyleString !!}">
+<section id="{{ $id }}" class="{{ $class }}" {!! $attribute !!} style="{!! $imageStyleString !!}">
     
     @if($overlay)
         <div class="{{ $baseClass }}__overlay"></div>
@@ -28,8 +28,11 @@
                     @endtypography
                 @endif
 
+                {{-- Oneline to enable the use of css:empty() function --}}
+                <div class="{{$baseClass}}__inner-blocks u-hide-empty">{!! '<InnerBlocks />' !!}</div>
+
             </div>
 
         </div>
     @endif
-</div>
+</section>
