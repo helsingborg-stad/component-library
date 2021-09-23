@@ -40,5 +40,10 @@ class Hero extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . '--overlay-' . $overlay; 
         }
 
+        //Full width
+        if($stretch) {
+            $this->data['classList'][] = $this->getBaseClass() . '--stretch'; 
+        }
+
     }
 }

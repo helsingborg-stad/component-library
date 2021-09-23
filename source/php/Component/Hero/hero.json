@@ -8,7 +8,8 @@
         "color": "light",
         "title": "",
         "byline": "",
-        "body": ""
+        "body": "",
+        "stretch": false
     },
     "description": {
         "image": "Background image",
@@ -18,7 +19,8 @@
         "color": "Font color (light, dark)",
         "title": "The title text",
         "byline": "The byline text",
-        "body": "The body text."
+        "body": "The body text.",
+        "stretch": "stretch to full width."
     },
     "view": "hero.blade.php",
     "dependency": {
