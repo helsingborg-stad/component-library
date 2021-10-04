@@ -263,6 +263,16 @@ class BaseController
             $attribute = apply_filters("ComponentLibrary/Component/Attribute", $attribute);
         }
 
+        //Sanitize "broken" css. 
+        if(isset($attribute['style'])) {
+            $attribute['style'] = trim($this->sanitizeInlineCss($attribute['style'])); 
+        }
+
+        //Remove empty style attrs
+        if(empty($attribute['style'])) {
+            unset($attribute['style']); 
+        }
+
         //Return manipulated classes as array
         if ($implode === false) {
             return (array) $attribute;
@@ -270,6 +280,16 @@ class BaseController
 
         //Return manipulated data array as string
         return (string) self::buildAttributes($attribute);
+    }
+
+    /**
+     * Removes empty css properties
+     *
+     * @param string $inlineCss
+     * @return string $inlineCss
+     */
+    private function sanitizeInlineCss($inlineCss) {
+        return preg_replace('/.*:\s*;/i', '', $inlineCss);
     }
 
     public static function buildAttributes($attributes)
