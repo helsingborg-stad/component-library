@@ -22,6 +22,7 @@
                         'name' => 'search',
                         'js-table-filter-input' => ''
                     ],
+                    'classList' => ['u-margin__top--2'],
                     'placeholder' => !empty($labels) && !empty($labels['searchPlaceholder']) ? $labels['searchPlaceholder'] : 'Search',
                     'icon' => ['icon' => 'search']
                 ])
