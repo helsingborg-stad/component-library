@@ -13,7 +13,7 @@ class Date extends \ComponentLibrary\Component\BaseController
     public function init() {
         //Extract array for eazy access (fetch only)
         extract($this->data);
-
+        
         if ($action == "formatDate") {
             $this->data['refinedDate'] = $this->formatDate(strtotime($timestamp), $format);
         } else if ($action == "timesince") {
@@ -37,9 +37,9 @@ class Date extends \ComponentLibrary\Component\BaseController
 
     private function formatDate($timestamp, $format) {
         $format = $format ? $format : 'D d M Y';
-
-        if(function_exists('wp_date')) {
-            $date = wp_date($format, $timestamp);
+        
+        if(function_exists('date_i18n')) {
+            $date = date_i18n($format, $timestamp);
         } else {
             $date = date ($format, $timestamp );
         }
