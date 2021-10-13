@@ -22,6 +22,7 @@ class Testimonials extends \ComponentLibrary\Component\BaseController
             $this->data['wrapperClassList'][] = 'c-testimonials__wrapper--is-carousel';
 
             $this->data['wrapperAttributeList']['js-testimonials--is-carousel'] = true;
+            $this->data['classList'][] = $this->getBaseClass() . '--is-hidden'; 
         } 
 
         $this->compParams = [
