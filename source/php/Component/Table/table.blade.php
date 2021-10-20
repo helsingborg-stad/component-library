@@ -68,9 +68,15 @@
                     @foreach($list as $row) 
                         <tr class="{{$baseClass}}__line {{$baseClass}}__line-{{ $loop->index }}" js-table-sort--sortable js-table-filter-item>
                             @foreach($row['columns'] as $column) 
-                                <td scope="row" class="{{$baseClass}}__column {{$baseClass}}__column-{{ $loop->index }}" js-table-sort-data="{{ $loop->index }}" js-table-filter-data>
-                                    {!! $column !!}
-                                </td>
+                                @if($isMultidimensional && $loop->first)
+                                    <th scope="row" class="{{$baseClass}}__column {{$baseClass}}__column-{{ $loop->index }}" js-table-sort-data="{{ $loop->index }}" js-table-filter-data>
+                                        {!! $column !!}
+                                    </th>
+                                @else
+                                    <td scope="row" class="{{$baseClass}}__column {{$baseClass}}__column-{{ $loop->index }}" js-table-sort-data="{{ $loop->index }}" js-table-filter-data>
+                                        {!! $column !!}
+                                    </td>
+                                @endif
                             @endforeach
                         </tr>
                     @endforeach
