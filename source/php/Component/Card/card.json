@@ -3,6 +3,7 @@
     "default": {
         "heading": "",
         "subHeading": "",
+        "meta": "",
         "content": "",
         "buttons": [],
         "padded": false,
@@ -27,6 +28,7 @@
         "content": "The card content",
         "title": "Array of the card title. Key: 'text' for text and 'position' (top | body).",
         "byline": "Array of the small(er) text below the title, single row. Key: 'text' for text and 'position' (top | body).",
+        "meta": "Small text below title, in meta style.",
         "slot": "Empty slot placed in the middle of card.",
         "top": "Empty slot placed in the top of card.",
         "bottom": "Empty slot placed in the bottom of card.",
