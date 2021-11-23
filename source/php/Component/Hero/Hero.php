@@ -10,34 +10,29 @@ class Hero extends \ComponentLibrary\Component\BaseController
         extract($this->data);
 
         //Create image style tag
-        $this->data['imageStyle'] = []; 
+        $this->data['imageStyle'] = [];
 
         //Add image to image styles
-        if($image) {
-            $this->data['imageStyle']['background-image'] = "url('" . $image . "')"; 
+        if ($image) {
+            $this->data['imageStyle']['background-image'] = "url('" . $image . "')";
         }
 
         //Add background position to image styles
-        if(isset($imageFocus) && is_array($imageFocus) && array_filter($imageFocus)) {
-            $this->data['imageStyle']['background-position'] = $imageFocus['left'] . "% " . $imageFocus['top'] . "%"; 
+        if (isset($imageFocus) && is_array($imageFocus) && array_filter($imageFocus)) {
+            $this->data['imageStyle']['background-position'] = $imageFocus['left'] . "% " . $imageFocus['top'] . "%";
         }
 
         //Stringify image styles
-        $this->data['imageStyleString'] = self::buildInlineStyle($this->data['imageStyle']); 
-
-        //Font color
-        if($color) {
-            $this->data['classList'][] = $this->getBaseClass() . '--text-' . $color; 
-        }
+        $this->data['imageStyleString'] = self::buildInlineStyle($this->data['imageStyle']);
 
         //Ratio
-        if($size) {
-            $this->data['classList'][] = $this->getBaseClass() . '--' . $size; 
+        if ($size) {
+            $this->data['classList'][] = $this->getBaseClass() . '--' . $size;
         }
 
         //Overlay
-        if($overlay) {
-            $this->data['classList'][] = $this->getBaseClass() . '--overlay-' . $overlay; 
+        if ($overlay) {
+            $this->data['classList'][] = $this->getBaseClass() . '--overlay';
         }
 
     }
