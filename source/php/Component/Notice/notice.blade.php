@@ -7,11 +7,19 @@
                 @endicon
             </span>
         @endif
-    <span id="notice__text__{{ $id }}" for="" class="{{$baseClass}}__message--{{$message['size']}}">
-        @if(isset($message['text']))
-            {!! $message['text'] !!}
+        @if($title)
+            @typography([
+                "variant" => "notice-title",
+                "element" => "b"
+            ])
+                {{ $title }}
+            @endtypography
         @endif
-        {!! $slot !!}
+        <span id="notice__text__{{ $id }}" for="" class="{{$baseClass}}__message--{{$message['size']}}">
+            @if(isset($message['text']))
+                {!! $message['text'] !!}
+            @endif
+            {!! $slot !!}
         </span>
     </div>
 

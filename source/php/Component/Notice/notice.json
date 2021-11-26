@@ -3,13 +3,15 @@
     "default": {
         "type": null,
         "message": [],
-        "icon": []
+        "icon": [],
+        "title": null
     },
     "description": {
         "isSuccess": "Green'ish message",
         "isWarning": "Yellow'ish message",
         "isDanger": "Red'ish message",
         "isInfo": "Blue'ish message",
+        "title": "Title to display above the message",
         "message": "an array with two parameters: text and size",
         "icon": "An array of the icon properties. See icon component."
     },

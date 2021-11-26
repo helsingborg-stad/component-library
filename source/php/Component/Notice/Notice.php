@@ -2,12 +2,12 @@
 
 namespace ComponentLibrary\Component\Notice;
 
-class Notice extends \ComponentLibrary\Component\BaseController  
+class Notice extends \ComponentLibrary\Component\BaseController
 {
-    
+
     public function init() {
 
-        //Extract array for eazy access (fetch only)
+        //Extract array for easy access (fetch only)
         extract($this->data);
 
         //Message
@@ -17,7 +17,7 @@ class Notice extends \ComponentLibrary\Component\BaseController
         }
 
         if(isset($message['size'])){
-            $this->data['messageSize'] = $this->getBaseClass() . '__message--' . $message['size'];                
+            $this->data['messageSize'] = $this->getBaseClass() . '__message--' . $message['size'];
         }
 
         //Set icon size (depending on avatar size)
@@ -27,22 +27,22 @@ class Notice extends \ComponentLibrary\Component\BaseController
 
         //Success
         if($type === 'success') {
-            $this->data['classList'][] = $this->getBaseClass() . "--success";                
+            $this->data['classList'][] = $this->getBaseClass() . "--success";
         }
 
         //Warning
-        if($type === 'warning') {      
-            $this->data['classList'][] = $this->getBaseClass() . "--warning"; 
+        if($type === 'warning') {
+            $this->data['classList'][] = $this->getBaseClass() . "--warning";
         }
 
         //Danger
         if($type === 'danger') {
-            $this->data['classList'][] = $this->getBaseClass() . "--danger"; 
+            $this->data['classList'][] = $this->getBaseClass() . "--danger";
         }
 
         //Info
         if($type === 'info') {
-            $this->data['classList'][] = $this->getBaseClass() . "--info"; 
+            $this->data['classList'][] = $this->getBaseClass() . "--info";
         }
     }
 }
