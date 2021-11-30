@@ -4,8 +4,7 @@
         "image": false,
         "imageFocus": {"top": 30, "left": 50},
         "size": "normal",
-        "overlay": "neutral",
-        "color": "light",
+        "overlay": true,
         "title": "",
         "byline": "",
         "body": ""
@@ -14,8 +13,7 @@
         "image": "Background image",
         "imageFocus": "Where to focus in the background.",
         "size": "Ratio (normal, large)",
-        "overlay": "Overlay color, false no overlay. (neutral, primary)",
-        "color": "Font color (light, dark)",
+        "overlay": "True for overlay, false for no overlay.",
         "title": "The title text",
         "byline": "The byline text",
         "body": "The body text."

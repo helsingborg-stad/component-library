@@ -15,7 +15,8 @@
             'c-slider__button',
             'c-slider__button-prev'
         ],
-        'label' => 'Slide to previous'
+        'label' => 'Slide to previous',
+        'context' => ['component.slider', 'component.slider.prev']
     ])
     @endbutton
 
@@ -29,7 +30,8 @@
             'c-slider__button',
             'c-slider__button-next'
         ],
-        'label' => 'Slide to previous'
+        'label' => 'Slide to previous',
+        'context' => ['component.slider', 'component.slider.next']
     ])
     @endbutton
 
