@@ -3,11 +3,9 @@
 <div class="{{$baseClass .'s'}}">
     <div class="{{$baseClass .'s__wrapper'}} {{$wrapperClassList}}"  {!! $wrapperAttributeList !!} style="transform: translateX(0%);">
         @foreach($testimonials as $testimonial)
-            @paper([])
-                <{{ $componentElement }} id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
-                    @include('Testimonials.partials.item')    
-                </{{ $componentElement }}>
-            @endpaper
+            <{{ $componentElement }} id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
+                @include('Testimonials.partials.item')    
+            </{{ $componentElement }}>
         @endforeach
     </div>
 
