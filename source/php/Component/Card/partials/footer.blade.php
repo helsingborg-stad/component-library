@@ -5,11 +5,9 @@
             @endbutton
         @endforeach 
     @endif
-
+    
     @if($tags)
-        @if($buttons) <div class="u-margin__top--2"> @endif
-            @tags(['tags' => $tags])
-            @endtags
-        @if($buttons) </div> @endif
+        @tags(['tags' => $tags, 'classList' => ($buttons) ? ['u-margin__top--2'] : []])
+        @endtags
     @endif
 </div>
