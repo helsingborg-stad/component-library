@@ -7,9 +7,9 @@
     @endif
 
     @if($tags)
-        <div class="u-margin__top--2">
-            @tags(['tags' => $tags,'classList' => ['u-margin__top--1']])
+        @if($buttons) <div class="u-margin__top--2"> @endif
+            @tags(['tags' => $tags])
             @endtags
-        </div>
+        @if($buttons) </div> @endif
     @endif
 </div>
