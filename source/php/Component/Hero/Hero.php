@@ -33,6 +33,9 @@ class Hero extends \ComponentLibrary\Component\BaseController
         //Overlay
         if ($title || $paragraph || $byline) {
             $this->data['classList'][] = $this->getBaseClass() . '--overlay';
+            $this->data['overlay'] = true;
+        } else {
+            $this->data['overlay'] = false;
         }
 
     }
