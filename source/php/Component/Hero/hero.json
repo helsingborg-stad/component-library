@@ -6,7 +6,7 @@
         "size": "normal",
         "title": "",
         "byline": "",
-        "body": ""
+        "paragraph": ""
     },
     "description": {
         "image": "Background image",
@@ -14,7 +14,7 @@
         "size": "Ratio (normal, large)",
         "title": "The title text",
         "byline": "The byline text",
-        "body": "The body text."
+        "paragraph": "The body text."
     },
     "view": "hero.blade.php",
     "dependency": {
