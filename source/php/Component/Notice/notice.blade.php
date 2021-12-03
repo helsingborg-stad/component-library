@@ -1,25 +1,33 @@
 <!-- notice.blade.php -->
-
-    <div id="{{ $id }}" class="{{ $class }}" {!! $attribute !!} aria-labelledby="notice__text__{{ $id }}">
-        @if(isset($icon) && is_array($icon) && !empty($icon))
-            <span class="{{$baseClass}}__icon">
-                @icon(['icon' => $icon['name'], 'size' => $icon['size']])
-                @endicon
-            </span>
-        @endif
-        @if($title)
-            @typography([
-                "variant" => "notice-title",
-                "element" => "b"
-            ])
-                {{ $title }}
-            @endtypography
-        @endif
-        <span id="notice__text__{{ $id }}" for="" class="{{$baseClass}}__message--{{$message['size']}}">
-            @if(isset($message['text']))
-                {!! $message['text'] !!}
-            @endif
-            {!! $slot !!}
+<div id="{{ $id }}" class="{{ $class }}" {!! $attribute !!} aria-labelledby="notice__text__{{ $id }}">
+    
+    <!-- notice__ico -->
+    @if($icon)
+        <span class="{{$baseClass}}__icon">
+            @icon(['icon' => $icon['name'], 'size' => 'md'])
+            @endicon
         </span>
-    </div>
+    @endif
+    
+    <!-- notice__title -->
+    @if($message['title'])
+        @typography([
+            "variant" => "h4",
+            "element" => "h4",
+            'classList' => [
+                $baseClass . '__title'
+            ]
+        ])
+            {{ $message['title'] }}
+        @endtypography
+    @endif
 
+    <!-- notice__text -->
+    <span id="notice__text__{{ $id }}" for="" class="{{$baseClass}}__message">
+        @if(isset($message['text']))
+            {!! $message['text'] !!}
+        @endif
+        {!! $slot !!}
+    </span>
+
+</div>

@@ -4,44 +4,11 @@ namespace ComponentLibrary\Component\Notice;
 
 class Notice extends \ComponentLibrary\Component\BaseController
 {
-
-    public function init() {
-
-        //Extract array for easy access (fetch only)
-        extract($this->data);
-
-        //Message
-        if(isset($message) && is_array($message) && !empty($message)){
-            $message['text'] = ucfirst($message['text']);
-            $this->data['message'] = $message;
-        }
-
-        if(isset($message['size'])){
-            $this->data['messageSize'] = $this->getBaseClass() . '__message--' . $message['size'];
-        }
-
-        //Set icon size (depending on avatar size)
-        if(isset($icon) && is_array($icon) && !empty($icon) && isset($icon['name'])) {
-            $this->data['icon'] = $icon;
-        }
-
-        //Success
-        if($type === 'success') {
-            $this->data['classList'][] = $this->getBaseClass() . "--success";
-        }
-
-        //Warning
-        if($type === 'warning') {
-            $this->data['classList'][] = $this->getBaseClass() . "--warning";
-        }
-
-        //Danger
-        if($type === 'danger') {
-            $this->data['classList'][] = $this->getBaseClass() . "--danger";
-        }
-
-        //Info
-        if($type === 'info') {
+    public function init()
+    {
+        if (in_array($this->data['type'], ['success', 'warning', 'danger', 'info'])) {
+            $this->data['classList'][] = $this->getBaseClass() . "--" . $this->data['type'];
+        } else {
             $this->data['classList'][] = $this->getBaseClass() . "--info";
         }
     }

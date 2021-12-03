@@ -1,19 +1,14 @@
 {
     "slug": "notice",
     "default": {
-        "type": null,
-        "message": [],
-        "icon": [],
-        "title": null
+        "type": "info",
+        "message": {"title": false, "message": ""},
+        "icon": false
     },
     "description": {
-        "isSuccess": "Green'ish message",
-        "isWarning": "Yellow'ish message",
-        "isDanger": "Red'ish message",
-        "isInfo": "Blue'ish message",
-        "title": "Title to display above the message",
-        "message": "an array with two parameters: text and size",
-        "icon": "An array of the icon properties. See icon component."
+        "type": "Type of notice: success, warning, danger, info.",
+        "message": "An array with two parameters: title and text",
+        "icon": "The icon name as a string."
     },
     "view": "notice.blade.php",
     "dependency": {
