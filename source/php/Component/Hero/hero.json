@@ -4,19 +4,17 @@
         "image": false,
         "imageFocus": {"top": 30, "left": 50},
         "size": "normal",
-        "overlay": true,
         "title": "",
         "byline": "",
-        "body": ""
+        "paragraph": ""
     },
     "description": {
         "image": "Background image",
         "imageFocus": "Where to focus in the background.",
         "size": "Ratio (normal, large)",
-        "overlay": "True for overlay, false for no overlay.",
         "title": "The title text",
         "byline": "The byline text",
-        "body": "The body text."
+        "paragraph": "The body text."
     },
     "view": "hero.blade.php",
     "dependency": {
