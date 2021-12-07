@@ -1,7 +1,7 @@
 <div class="{{$baseClass}}">
     <div id="{{ $id }}" class="{{$baseClass}}__preview">
         <div class="{{$baseClass}}__image material-icons">
-            <img src="" style="display:none" />
+            <img src="" class="u-visibility--hidden" />
         </div>
         <span>Bildnamn.jpg, 1200*700px, 234kb</span>
     </div>
@@ -19,3 +19,4 @@
     ])
     @endfileinput
 </div>
+
