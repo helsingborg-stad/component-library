@@ -1,23 +1,21 @@
 @modal([
-    
     'isPanel' => true,
-    'id' => '123',
+    'id' => 'modal-' . $id,
     'overlay' => 'dark',
     'animation' => 'scale-up',
-    'heading' => $title
+    'heading' => $title,
+    'classList' => [
+        'c-table__modal'
+    ],
 ])
-    
-   @table(
-    [
+   @table([
         'list' => $list, 
         'headings' => $headings, 
         'filterable'    => $filterable,
         'sortable'      => $sortable,
-        'pagination'    => $pagination,
         'showSum'       => $showSum,
         'fullscreen'    => false,
-        'boxShadow'     => false
+        'includePaper'  => false,
     ])
    @endtable
-   
 @endmodal
