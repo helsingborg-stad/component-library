@@ -3,7 +3,7 @@
         <div class="{{$baseClass}}__image material-icons">
             <img src="" class="u-visibility--hidden" />
         </div>
-        <span>Bildnamn.jpg, 1200*700px, 234kb</span>
+        <span></span>
     </div>
     @fileinput([
         'id' => $id . '-input',
