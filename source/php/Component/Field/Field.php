@@ -30,7 +30,7 @@ class Field extends \ComponentLibrary\Component\Form\Form
         }
 
         //Set type
-        $this->data['classList'][] = $this->getBaseClass() . "__" . $type;
+        $this->data['classList'][] = $this->getBaseClass() . "--" . $type;
 
         //Handle icon
         $this->data['icon'] = $this->getIcon($icon, $size);
