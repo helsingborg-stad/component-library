@@ -1,5 +1,5 @@
 <div class="{{$baseClass}}">
-    <div id="{{ $id }}" class="{{$baseClass}}__preview">
+    <div id="{{$id}}" class="{{$baseClass}}__preview">
         <div class="{{$baseClass}}__image material-icons">
             <img src="" class="u-visibility--hidden" />
         </div>
