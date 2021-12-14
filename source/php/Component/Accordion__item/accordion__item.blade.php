@@ -1,8 +1,10 @@
 {{-- Accordion Item --}}
-<{{$sectionElement}} class="{{$baseClass}}__section" {!! $attribute !!} aria-label="{{$heading}}">
+<{{$sectionElement}} class="{{$class}}" {!! $attribute !!} aria-label="{{$heading}}">
     <{{$sectionHeadingElement}} class="{{$baseClass}}__button" aria-controls="{{ $baseClass }}__aria-{{ $id }}" aria-expanded="false" js-expand-button>
         <span class="{{$baseClass}}__button-wrapper {{$headingType}} " tabindex="-1">
+            
             {!!$beforeHeading!!}
+            
             @if (is_array($heading))
                 @foreach($heading as $headingItem)
                     <span class="{{$baseClass}}__button-column">{{$headingItem}}</span>
