@@ -10,8 +10,8 @@ class Accordion__item extends \ComponentLibrary\Component\BaseController
 {
     public function init() {
         //Extract array for eazy access (fetch only)
-
         extract($this->data);
+
         $this->data['baseClass'] = 'c-accordion';
         $this->data['classList'][] = 'c-accordion__section';
         $this->data['id'] = uniqid();
