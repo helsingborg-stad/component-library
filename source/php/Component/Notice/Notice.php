@@ -11,5 +11,8 @@ class Notice extends \ComponentLibrary\Component\BaseController
         } else {
             $this->data['classList'][] = $this->getBaseClass() . "--info";
         }
+
+        //Avoid empty array items
+        $this->data['message'] = array_merge(['title' => null, 'message' => null], $this->data['message']);
     }
 }
