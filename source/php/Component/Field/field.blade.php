@@ -12,7 +12,17 @@
     @endif
 
 
-
+    @if($multiline)
+        <textarea id="input_{{ $id }}"
+            {!! $attribute !!}
+            @if($required)
+                required
+                data-required="1"
+                aria-required="true"
+            @endif
+            placeholder="{{$placeholder}}"
+        >{{$value ?? null}}</textarea>
+    @else
         <input id="input_{{ $id }}"
             value="{{$value}}"
             {!! $attribute !!}
@@ -23,7 +33,7 @@
             @endif
             placeholder="{{$placeholder}}"
         />
-
+    @endif
 
     <small class="{{$baseClass}}__helper">{{$helperText}}</small>
 </div>
