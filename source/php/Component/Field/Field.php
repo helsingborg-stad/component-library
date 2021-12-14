@@ -18,7 +18,8 @@ class Field extends \ComponentLibrary\Component\Form\Form
             'type' => $type ?? 'text',
             'required' => $required ?? false,
             'invalidMessage' => $invalidMessage ?? '',
-            'value' => $value ?? ''
+            'value' => $value ?? '',
+            'isValid' => $isValid ?? null,
         ];
 
         $this->data['showLabel'] = !$hideLabel && !empty($label);
@@ -43,6 +44,12 @@ class Field extends \ComponentLibrary\Component\Form\Form
             $size = "md";
         }
         $this->data['classList'][] = $this->getBaseClass() . "--" . $size;
+
+        if ($isValid === true) {
+            $this->data['classList'][] = 'is-valid';
+        } elseif ($isValid === false) {
+            $this->data['classList'][] = 'is-invalid';
+        }
 
         //Handle radius
         if ($this->data['radius']) {
