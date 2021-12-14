@@ -1,0 +1,31 @@
+{
+  "slug": "imageinput",
+  "default": {
+    "display": "",
+    "name": "imageFiles",
+    "multiple": false,
+    "beforeLabel": "",
+    "afterLabel": "",
+    "label": ""
+  },
+  "description": {
+    "display": "Display input uploader as button or area",
+    "name": "images",
+    "accept": "image/*",
+    "multiple": "Allow single or multiple files",
+    "beforeLabel": "Insert before label",
+    "afterLabel": "Input label",
+    "label": "Insert after label",
+    "icon": "@link:component/icon"
+  },
+  "view": "imageinput.blade.php",
+  "dependency": {
+    "sass": {
+      "components": [
+        "imageInput",
+        "icon",
+        "listing"
+      ]
+    }
+  }
+}
