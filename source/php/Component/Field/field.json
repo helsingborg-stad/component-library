@@ -10,7 +10,9 @@
         "size": "md",
         "radius": "md",
         "placeholder": "",
-        "hideLabel": false
+        "hideLabel": false,
+        "helperText": "",
+        "multiline": false
     },
     "description": {
         "label": "Array of label items like labelText.",
@@ -21,7 +23,9 @@
         "icon": "Adds a icon before the input field.",
         "radius": "Rounded edges say you? (none, xs, sm, md, lg)",
         "placeholder": "Example value for field",
-        "hideLabel": "This will remove the visible label, it's still recommended to supply a label that will be used for labelling attributes"
+        "hideLabel": "This will remove the visible label, it's still recommended to supply a label that will be used for labelling attributes",
+        "helperText": "Text displayed in the bottom (can be used for explainers or error messages",
+        "multiline": "Render textarea instead of input"
     },
     "view": "field.blade.php",
     "dependency": {
