@@ -19,7 +19,7 @@ class Icon extends \ComponentLibrary\Component\BaseController {
             'color'     => $color,
             'size'      => $size
         ];
-        
+
         $this->setColor();
         $this->appendSpace();
         $this->setSize();
@@ -31,13 +31,14 @@ class Icon extends \ComponentLibrary\Component\BaseController {
         $this->data['attributeList']['translate'] = "no"; 
 
         //Identify as an image
-        $this->data['attributeList']['role'] = "img"; 
+        $this->data['attributeList']['role'] = "img";
+        $this->data['attributeList']['alt'] = "";
     }
 
     /**
-	 * Appends space before label
-	 * @return array
-	 */
+     * Appends space before label
+     * @return array
+     */
     public function appendSpace() {
         if($this->compParams['label'] = trim($this->compParams['label'])) {
             $this->data['label'] = " " . $this->compParams['label'];
@@ -47,14 +48,13 @@ class Icon extends \ComponentLibrary\Component\BaseController {
     }
 
     /**
-	 * Build class for color
-	 * @return array
-	 */
+     * Build class for color
+     * @return array
+     */
     public function setColor() {
         // Set color based on provided name
-        if(isset($this->compParams['color']) && !empty($this->compParams['color'])) {
-            $this->data['classList'][] =
-                $this->getBaseClass()."--color-". strtolower($this->compParams['color']);
+        if (isset($this->compParams['color']) && !empty($this->compParams['color'])) {
+            $this->data['classList'][] = $this->getBaseClass() . "--color-" . strtolower($this->compParams['color']);
         }
 
         return $this->data;
@@ -62,9 +62,9 @@ class Icon extends \ComponentLibrary\Component\BaseController {
 
 
     /**
-	 * Build class for size
-	 * @return array
-	 */
+     * Build class for size
+     * @return array
+     */
     public function setSize() {
         //Available sizes
         $sizes = [
@@ -77,8 +77,8 @@ class Icon extends \ComponentLibrary\Component\BaseController {
         ];
 
         //Size class
-        if(isset($sizes[$this->compParams['size']])) {
-            $this->data['classList'][] = $this->getBaseClass()."--size-".$this->compParams['size'];
+        if (isset($sizes[$this->compParams['size']])) {
+            $this->data['classList'][] = $this->getBaseClass() . "--size-" . $this->compParams['size'];
         } else {
             $this->data['classList'][] = $this->getBaseClass() . "--size-inherit";
         }
