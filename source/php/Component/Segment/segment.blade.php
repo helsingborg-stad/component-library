@@ -12,7 +12,7 @@
                 @if($title)
                     @typography([
                         "element" => "h2",
-                        "variant" => "h2",
+                        "variant" => ($layout == 'full-width') ? 'h1' : 'h2',
                         "classList" => [$baseClass . '__title'],
                     ])
                         {{ $title }}
