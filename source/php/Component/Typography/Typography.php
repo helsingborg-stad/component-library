@@ -11,13 +11,14 @@ class Typography extends \ComponentLibrary\Component\BaseController
         //Extract array for easy access (fetch only)
         extract($this->data);
 
+        //Set default
+        $this->data['isPromotedHeading'] = false;
+
         //If this is the first heading of the page, promote it to h1
         if ($autopromote === true) {
             if (in_array($element, ['h1', 'h2', 'h3']) && self::$numberOfItems == 0) {
                 $this->data['isPromotedHeading'] = true;
                 $this->data['element'] = 'h1';
-            } else {
-                $this->data['isPromotedHeading'] = false;
             }
 
             if (substr($element, 0, 1) == 'h') {
