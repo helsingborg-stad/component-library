@@ -13,7 +13,7 @@ class Typography extends \ComponentLibrary\Component\BaseController
 
         //If this is the first heading of the page, promote it to h1
         if ($autopromote === true) {
-            if (in_array($element, ['h1', 'h2', 'h3']) && self::$numberOfItems == 1) {
+            if (in_array($element, ['h1', 'h2', 'h3']) && self::$numberOfItems == 0) {
                 $this->data['isPromotedHeading'] = true;
                 $this->data['element'] = 'h1';
             } else {
