@@ -12,7 +12,7 @@
                 @if($title)
                     @typography([
                         "element" => "h2",
-                        "variant" => "h1",
+                        "variant" => "h2",
                         "classList" => [$baseClass . '__title'],
                     ])
                         {{ $title }}
@@ -43,7 +43,7 @@
                     </div>
                 @endif
 
-                @if($layout == 'split')
+                @if($layout == 'split' || $layout == 'featured')
                     {{-- Oneline to enable the use of css:empty() function --}}
                     <div class="{{$baseClass}}__inner-blocks u-hide-empty">{!! '<InnerBlocks />' !!}</div>
                 @endif
