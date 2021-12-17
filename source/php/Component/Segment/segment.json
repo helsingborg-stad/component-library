@@ -2,8 +2,8 @@
     "slug": "segment",
     "default": {
         "layout": "full-width",
-        "title": "The quick brown fox jumps over the lazy dog",
-        "content": "Maecenas sed diam eget risus varius blandit sit amet non magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.",
+        "title": "",
+        "content": "",
         "textSize": "default",
         "image": false,
         "imageFocus": {"top": 30, "left": 50},
@@ -21,8 +21,8 @@
     },
     "description": {
         "layout": "Which layout to use",
-        "title": "The quick brown fox jumps over the lazy dog",
-        "content": "Maecenas sed diam eget risus varius blandit sit amet non magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.",
+        "title": "The title of the segment",
+        "content": "The content of the segment",
         "textSize": "The sizing of the font",
         "image": "Add a URL for an image",
         "imageFocus": "Where the focus point should be of an image when container dosen't match image ratio.",
