@@ -4,7 +4,7 @@
         "variant": "p",
         "element": "p",
         "slot": "",
-        "autopromote" : true
+        "autopromote" : false
     },
     "description": {
         "variant": "What element the component should base its looks off of.",
