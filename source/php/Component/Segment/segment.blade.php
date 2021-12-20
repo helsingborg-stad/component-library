@@ -14,6 +14,7 @@
                         "element" => "h2",
                         "variant" => ($layout == 'full-width') ? 'h1' : 'h2',
                         "classList" => [$baseClass . '__title'],
+                        "autopromote" => true
                     ])
                         {{ $title }}
                     @endtypography
