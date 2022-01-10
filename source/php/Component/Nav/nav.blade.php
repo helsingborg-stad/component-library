@@ -13,7 +13,8 @@
 
                 @if($item['style'] == 'button')
                     @button([
-                        'icon' => isset($item['icon']) ? $item['icon'] : false,
+                        'id' => $id . "-" . $loop->index . "__label",
+                        'icon' => isset($item['icon']['icon']) ? $item['icon']['icon'] : false,
                         'reversePositions' => true,
                         'text' => $item['label'],
                         'style' => 'filled',
