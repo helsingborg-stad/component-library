@@ -6,13 +6,20 @@ class Notice extends \ComponentLibrary\Component\BaseController
 {
     public function init()
     {
-        if (in_array($this->data['type'], ['success', 'warning', 'danger', 'info'])) {
-            $this->data['classList'][] = $this->getBaseClass() . "--" . $this->data['type'];
+        //Extract array for eazy access (fetch only)
+        extract($this->data);
+
+        if (in_array($type, ['success', 'warning', 'danger', 'info'])) {
+            $this->data['classList'][] = $this->getBaseClass() . "--" . $type;
         } else {
             $this->data['classList'][] = $this->getBaseClass() . "--info";
         }
 
+        if ($stretch) {
+            $this->data['classList'][] = $this->getBaseClass() . "--stretch";
+        }
+
         //Avoid empty array items
-        $this->data['message'] = array_merge(['title' => null, 'message' => null], $this->data['message']);
+        $this->data['message'] = array_merge(['title' => null, 'message' => null], $message);
     }
 }
