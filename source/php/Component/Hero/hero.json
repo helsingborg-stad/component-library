@@ -6,7 +6,8 @@
         "size": "normal",
         "title": "",
         "byline": "",
-        "paragraph": ""
+        "paragraph": "",
+        "stretch": false
     },
     "description": {
         "image": "Background image",
@@ -14,13 +15,14 @@
         "size": "Ratio (normal, large)",
         "title": "The title text",
         "byline": "The byline text",
-        "paragraph": "The body text."
+        "paragraph": "The body text.",
+        "stretch": "Always stretch the hero vertically. Makes the hero the width of the viewport. Requires a centered container."
     },
     "view": "hero.blade.php",
     "dependency": {
         "sass": {
             "components": [
-                "heroo",
+                "hero",
                 "typography"
             ]
         }
