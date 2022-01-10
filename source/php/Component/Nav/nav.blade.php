@@ -11,7 +11,7 @@
                 aria-labelledby="{{$id}}-{{$loop->index}}__label"
             >
 
-                @if($item['style'] == 'button')
+                @if($allowStyle && $item['style'] == 'button')
                     @button([
                         'id' => $id . "-" . $loop->index . "__label",
                         'icon' => isset($item['icon']['icon']) ? $item['icon']['icon'] : false,
