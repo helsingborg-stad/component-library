@@ -9,9 +9,8 @@ class Hero extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
-        //Full width
         if ($stretch) {
-            $this->data['classList'][] = 'c-hero--stretch';
+            $this->data['classList'][] = $this->getBaseClass() . "--stretch";
         }
 
         //Create image style tag

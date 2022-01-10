@@ -16,7 +16,7 @@ class Segment extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = 'c-segment--' . $layout;
         }
 
-        $this->data['imageClassList'] = []; 
+        $this->data['imageClassList'] = [];
 
         // Remove padding
         if (!$paddingTop) {
@@ -59,7 +59,7 @@ class Segment extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = 'c-segment--reverse';
         }
 
-        //Handle image based on view 
+        //Handle image based on view
         if (filter_var($image, FILTER_VALIDATE_URL) && $layout == 'full-width') {
             // Overlay
             if ($overlay) {
@@ -68,13 +68,13 @@ class Segment extends \ComponentLibrary\Component\BaseController
         }
 
         //Stringify image classlist
-        $this->data['imageClass'] = implode("" , $this->data['imageClassList']); 
+        $this->data['imageClass'] = implode("" , $this->data['imageClassList']);
 
         //Create image style tag
-        $this->data['imageStyle'] = []; 
+        $this->data['imageStyle'] = [];
 
         //Add image to image styles
-        if($image) {
+        if ($image) {
             $this->data['imageStyle']['background-image'] = "url('" . $image . "')"; 
         }
 
