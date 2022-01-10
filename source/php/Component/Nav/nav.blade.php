@@ -3,28 +3,44 @@
     <ul id="{{ $id }}" class="{{$class}}" {!! $attribute !!} role="menu">
         @foreach ($items as $item)
             <li 
-                id="{{$item['id']}}" class="{{$baseClass}}__item {{$item['active'] ? 'is-current' : ''}}{{$item['active'] && $item['children'] || $item['ancestor'] ? ' is-open has-fetched' : ''}} {{!$item['active'] && is_array($item['children']) ? ' has-fetched' : ''}}"
+                id="{{$item['id']}}" class="{{$baseClass}}__item {{$baseClass}}__item--{{$item['style']}} {{$item['active'] ? 'is-current' : ''}}{{$item['active'] && $item['children'] || $item['ancestor'] ? ' is-open has-fetched' : ''}} {{!$item['active'] && is_array($item['children']) ? ' has-fetched' : ''}}"
         
                 {{-- Append dynamic attributes --}}
                 {!! !empty($item['attributeList']) ? $buildAttributes($item['attributeList']) : '' !!}
                 role="menuitem"
                 aria-labelledby="{{$id}}-{{$loop->index}}__label"
             >
+
+                @if($item['style'] == 'button')
+                    @button([
+                        'icon' => isset($item['icon']) ? $item['icon'] : false,
+                        'reversePositions' => true,
+                        'text' => $item['label'],
+                        'style' => 'filled',
+                        'color' => 'primary',
+                        'href' => $item['href'],
+                        'classList' => [
+                            $baseClass . '__link',
+                        ],
+                        'attributeList' => [
+                            'aria-label' => $item['label']
+                        ]
+                    ])
+                    @endbutton
+                @else
+                    <a  id="{{$id}}-{{$loop->index}}__label"
+                        class="{{$baseClass}}__link {{$item['class']}}" 
+                        href="{{$item['href']}}" 
+                        aria-label="{{$item['label']}}" 
+                    >
+                        @if(isset($item['icon']))
+                            @icon($item['icon'])
+                            @endicon
+                        @endif
+                        <span class="{{$baseClass}}__text">{{$item['label']}}</span>
+                    </a>
+                @endif
                 
-                <a  id="{{$id}}-{{$loop->index}}__label"
-                    class="{{$baseClass}}__link" 
-                    href="{{$item['href']}}" 
-                    aria-label="{{$item['label']}}" 
-                >
-
-                    @if(isset($item['icon']))
-                        @icon($item['icon'])
-                        @endicon
-                    @endif
-
-                    <span class="{{$baseClass}}__text">{{$item['label']}}</span>
-                </a>
-
                 @if ($item['children'])
                     @if($includeToggle)
                         @button([
