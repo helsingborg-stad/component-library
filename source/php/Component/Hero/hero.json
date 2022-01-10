@@ -16,7 +16,7 @@
         "title": "The title text",
         "byline": "The byline text",
         "paragraph": "The body text.",
-        "stretch": "Stretch to full width, requires element to be centered."
+        "stretch": "Always stretch the hero vertically. Makes the hero the width of the viewport. Requires a centered container."
     },
     "view": "hero.blade.php",
     "dependency": {
