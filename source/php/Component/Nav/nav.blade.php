@@ -21,7 +21,7 @@
                         'color' => 'primary',
                         'href' => $item['href'],
                         'classList' => [
-                            $baseClass . '__link',
+                            $baseClass . '__button',
                         ],
                         'attributeList' => [
                             'aria-label' => $item['label']
