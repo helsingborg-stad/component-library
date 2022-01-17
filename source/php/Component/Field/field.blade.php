@@ -35,5 +35,7 @@
         />
     @endif
 
+    @if ($helperText)
     <small class="{{$baseClass}}__helper">{{$helperText}}</small>
+    @endif
 </div>
