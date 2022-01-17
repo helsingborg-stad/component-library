@@ -21,6 +21,7 @@ class Field extends \ComponentLibrary\Component\Form\Form
             'value' => $value ?? '',
             'isValid' => $isValid ?? null,
             'helperText' => $helperText ?? $invalidMessage ?? '',
+            'hideLabel' => $hideLabel ?? false,
         ];
 
         $this->data['showLabel'] = !$hideLabel && !empty($label);
