@@ -6,8 +6,7 @@
         @endicon
     @endif
 
-
-    @if(!empty($label))
+    @if(!empty($label) && !$hideLabel)
         <label class="{{$baseClass}}__label" for="input_{{ $id }}" id="label_{{ $id }}">{{$label}}</label>
     @endif
 
