@@ -10,7 +10,6 @@
         <label class="{{$baseClass}}__label" for="input_{{ $id }}" id="label_{{ $id }}">{{$label}}</label>
     @endif
 
-
     @if($multiline)
         <textarea id="input_{{ $id }}"
             {!! $attribute !!}
