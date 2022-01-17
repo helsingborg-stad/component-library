@@ -1,8 +1,8 @@
 <!-- field.blade.php -->
 <div class="{{$class}}" id="{{ $id }}">
 
-    @if($icon)
-        @icon($icon)
+    @if(!empty($icon))
+        @icon(array_merge(['classList' => [$baseClass . '__icon']], $icon))
         @endicon
     @endif
 
@@ -34,6 +34,6 @@
     @endif
 
     @if ($helperText)
-    <small class="{{$baseClass}}__helper">{{$helperText}}</small>
+        <small class="{{$baseClass}}__helper">{{$helperText}}</small>
     @endif
 </div>
