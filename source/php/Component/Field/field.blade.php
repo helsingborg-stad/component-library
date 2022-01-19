@@ -10,23 +10,8 @@
             @endicon
         @endif
 
-
-    @if($multiline)
-        <textarea id="input_{{ $id }}"
-            {!! $attribute !!}
-            @if($required)
-                required
-                data-required="1"
-                aria-required="true"
-            @endif
-            placeholder="{{$placeholder}}"
-        >{{$value ?? null}}</textarea>
-    @else
-        @if(!empty($suffix))<div class="c-field__suffix-wrapper">@endif
-
-            <input id="input_{{ $id }}"
-                style="flex: 1"
-                value="{{$value}}"
+        @if($multiline)
+            <textarea id="input_{{ $id }}"
                 {!! $attribute !!}
                 @if($required)
                     required
@@ -34,25 +19,23 @@
                     aria-required="true"
                 @endif
                 placeholder="{{$placeholder}}"
-            />
+            >{{$value ?? null}}</textarea>
+        @else
+            @if(!empty($suffix))<div class="c-field__suffix-wrapper">@endif
 
-        @if(!empty($suffix))<span class="c-field__suffix">{{$suffix}}</span></div>@endif
-    @endif
+                <input id="input_{{ $id }}"
+                    value="{{$value}}"
+                    {!! $attribute !!}
+                    @if($required)
+                        required
+                        data-required="1"
+                        aria-required="true"
+                    @endif
+                    placeholder="{{$placeholder}}"
+                />
 
-            <input id="input_{{ $id }}"
-                style="flex: 1"
-                value="{{$value}}"
-                {!! $attribute !!}
-                @if($required)
-                    required
-                    data-required="1"
-                    aria-required="true"
-                @endif
-                placeholder="{{$placeholder}}"
-            />
-
-        @if(!empty($suffix))<span class="c-field__suffix">{{$suffix}}</span></div>@endif
-    @endif
+            @if(!empty($suffix))<span class="c-field__suffix">{{$suffix}}</span></div>@endif
+        @endif
     </div>
     @if ($helperText)
         <small class="{{$baseClass}}__helper">{{$helperText}}</small>
