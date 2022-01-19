@@ -38,6 +38,21 @@
 
         @if(!empty($suffix))<span class="c-field__suffix">{{$suffix}}</span></div>@endif
     @endif
+
+            <input id="input_{{ $id }}"
+                style="flex: 1"
+                value="{{$value}}"
+                {!! $attribute !!}
+                @if($required)
+                    required
+                    data-required="1"
+                    aria-required="true"
+                @endif
+                placeholder="{{$placeholder}}"
+            />
+
+        @if(!empty($suffix))<span class="c-field__suffix">{{$suffix}}</span></div>@endif
+    @endif
     </div>
     @if ($helperText)
         <small class="{{$baseClass}}__helper">{{$helperText}}</small>
