@@ -5,11 +5,6 @@
     @endif
     
     <div class="{{$baseClass}}__inner">
-        @if(!empty($icon))
-            @icon(array_merge(['classList' => [$baseClass . '__icon']], $icon))
-            @endicon
-        @endif
-
         @if($multiline)
             <textarea id="input_{{ $id }}"
                 {!! $attribute !!}
@@ -21,6 +16,16 @@
                 placeholder="{{$placeholder}}"
             >{{$value ?? null}}</textarea>
         @else
+            @if(!empty($icon))
+                @icon(array_merge(['classList' => [$baseClass . '__icon']], $icon))
+                @endicon
+            @endif
+            @if(!empty($prefix))
+                <span class="c-field__prefix">
+                    {{$prefix}}
+                </span>
+            @endif
+
             <input id="input_{{ $id }}"
                 value="{{$value}}"
                 {!! $attribute !!}
@@ -31,6 +36,10 @@
                 @endif
                 placeholder="{{$placeholder}}"
             />
+
+            @if(!empty($suffix))
+                <span class="c-field__suffix">{{$suffix}}</span>
+            @endif
         @endif
     </div>
     @if ($helperText)
