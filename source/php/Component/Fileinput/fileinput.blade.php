@@ -2,7 +2,19 @@
 
 <div id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
 
-<input type="file" class="{{ $baseClass }}__input " name="{{ $multiple ? $name . '[]' : $name }}" id="fs_{{ $id }}" accept="{{ $accept }}" {{ $multiple ? 'multiple' : '' }} />
+    <input type="file"
+        class="{{ $baseClass }}__input "
+        name="{{ $multiple ? $name . '[]' : $name }}"
+        id="fs_{{ $id }}"
+        accept="{{ $accept }}"
+        {{ $multiple ? 'multiple' : '' }}
+        @if($required)
+            required
+            data-required="1"
+            aria-required="true"
+        @endif
+    />
+
     <label for="fs_{{ $id }}" class="{{ $baseClass }}__label">
         
         @icon([
