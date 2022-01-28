@@ -13,6 +13,7 @@
         'label' => __('Upload an image', 'event-integration'),
         'accept' => "image/gif, image/jpeg, image/png",
         'classList' => ['u-margin__top--1'],
+        'required' => $required,
         'attributeList' => [
             'required' => 'required',
             'data-image-preview' => $id
