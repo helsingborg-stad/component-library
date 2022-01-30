@@ -8,7 +8,8 @@
         "beforeLabel": "",
         "afterLabel": "",
         "label": "",
-        "icon": "file_upload"
+        "icon": "file_upload",
+        "required": false
     },
     "description": {
         "display": "Display input uploader as button or area",
