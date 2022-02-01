@@ -6,8 +6,7 @@
     "multiple": false,
     "beforeLabel": "",
     "afterLabel": "",
-    "label": "",
-    "aspectRatio": "16:9"
+    "label": ""
   },
   "description": {
     "display": "Display input uploader as button or area",
