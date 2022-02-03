@@ -3,12 +3,14 @@
     "default": {
         "type": "info",
         "message": {"title": false, "message": ""},
-        "icon": false
+        "icon": false,
+        "stretch": false
     },
     "description": {
         "type": "Type of notice: success, warning, danger, info.",
         "message": "An array with two parameters: title and text",
-        "icon": "The icon name as a string."
+        "icon": "The icon name as a string.",
+        "stretch": "If true, the notice will stretch to the full width of the viewport."
     },
     "view": "notice.blade.php",
     "dependency": {
