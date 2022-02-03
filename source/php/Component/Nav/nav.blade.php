@@ -3,17 +3,17 @@
     <ul id="{{ $id }}" class="{{$class}}" {!! $attribute !!} role="menu">
         @foreach ($items as $item)
             <li 
-                id="{{$item['id']}}" class="{{$baseClass}}__item {{$baseClass}}__item--{{$item['style']}} {{$item['active'] ? 'is-current' : ''}}{{$item['active'] && $item['children'] || $item['ancestor'] ? ' is-open has-fetched' : ''}} {{!$item['active'] && is_array($item['children']) ? ' has-fetched' : ''}}"
+                id="{{$id}}-{{$item['id']}}-{{$loop->index}}__item" class="{{$baseClass}}__item {{$baseClass}}__item--{{$item['style']}} {{$item['active'] ? 'is-current' : ''}}{{$item['active'] && $item['children'] || $item['ancestor'] ? ' is-open has-fetched' : ''}} {{!$item['active'] && is_array($item['children']) ? ' has-fetched' : ''}}"
         
                 {{-- Append dynamic attributes --}}
                 {!! !empty($item['attributeList']) ? $buildAttributes($item['attributeList']) : '' !!}
                 role="menuitem"
-                aria-labelledby="{{$id}}-{{$loop->index}}__label"
+                aria-labelledby="{{$id}}-{{$item['id']}}-{{$loop->index}}__label"
             >
 
                 @if($allowStyle && $item['style'] == 'button')
                     @button([
-                        'id' => $id . "-" . $loop->index . "__label",
+                        'id' => $id . " - " . $item['id'] ."-" . $loop->index . "__label",
                         'icon' => isset($item['icon']['icon']) ? $item['icon']['icon'] : false,
                         'reversePositions' => true,
                         'text' => $item['label'],
@@ -29,7 +29,7 @@
                     ])
                     @endbutton
                 @else
-                    <a  id="{{$id}}-{{$loop->index}}__label"
+                    <a  id="{{$id}}-{{$item['id']}}-{{$loop->index}}__label"
                         class="{{$baseClass}}__link {{$item['class']}}" 
                         href="{{$item['href']}}" 
                         aria-label="{{$item['label']}}" 
