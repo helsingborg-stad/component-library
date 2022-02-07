@@ -104,8 +104,6 @@ class BaseController
      */
     private function getId()
     {
-
-        var_dump($this->data['id']); 
         //Store locally
         if (isset($this->data['id']) && !empty($this->data['id'])) {
             $id = (string) $this->data['id'];
