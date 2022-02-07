@@ -86,7 +86,7 @@ class BaseController
         if (function_exists('apply_filters')) {
             if (is_array($data) && !empty($data)) {
                 foreach ($data as $key => $item) {
-                    if (!in_array($key, array("data", "classes", 'class'))) {                        
+                    if (!in_array($key, array("data", "classes", 'class'))) {
                         $data[$key] = apply_filters($this->createFilterName($this) . DIRECTORY_SEPARATOR . ucfirst($key), $data[$key]);
                     }
                 }
@@ -104,6 +104,8 @@ class BaseController
      */
     private function getId()
     {
+
+        var_dump($this->data['id']); 
         //Store locally
         if (isset($this->data['id']) && !empty($this->data['id'])) {
             $id = (string) $this->data['id'];
@@ -137,17 +139,17 @@ class BaseController
     }
 
     private function setModifier($class, $modifier) {
-        if(!empty($modifier)) {
-            foreach($modifier as &$value) {
-                if($value) {
+        if (!empty($modifier)) {
+            foreach ($modifier as &$value) {
+                if ($value) {
                     $class[] =  $this->getBaseClass() . '--' . $value;
                 }
             }
-        } 
+        }
 
         return $class;
     }
-    
+
     /**
      * Returns the classes
      *
