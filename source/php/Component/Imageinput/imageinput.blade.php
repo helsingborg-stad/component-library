@@ -13,7 +13,10 @@
         'classList' => ['u-margin__top--1'],
         'attributeList' => [
             'required' => 'required',
-            'data-image-preview' => $id
+            'data-image-preview' => $id,
+            'data-max-file-size' => $maxFileSize ?? 0,
+            'data-max-width' => $maxWidth ?? 0,
+            'data-max-height' => $maxHeight ?? 0
         ]
     ])
     @endfileinput
