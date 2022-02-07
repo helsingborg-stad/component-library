@@ -16,5 +16,7 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
         if($filesMax) {
             $this->data['attributeList']['filesMax'] = $filesMax;
         }
+
+        $this->data['required'] = $required ?? false;
     }
 }

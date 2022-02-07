@@ -6,7 +6,8 @@
     "multiple": false,
     "beforeLabel": "",
     "afterLabel": "",
-    "label": ""
+    "label": "",
+    "required": false
   },
   "description": {
     "display": "Display input uploader as button or area",
