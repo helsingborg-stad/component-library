@@ -10,8 +10,6 @@ class Button extends \ComponentLibrary\Component\BaseController
 		//Extract array for eazy access (fetch only)
 		extract($this->data);
 
-		$this->data['id'] = uniqid("", true);
-
 		$styleClass = '__' . $style;
 		$colorClass = '__' . $style . '--' . $color;
 	
