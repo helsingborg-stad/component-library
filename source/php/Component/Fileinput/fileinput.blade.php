@@ -30,13 +30,4 @@
         </span>
     </label>
 
-    @listing([
-        'list' => [
-            ['label' => ''],
-        ],
-        'elementType' => 'ul',
-        'id' => $id.'_fileContainer'
-
-    ])
-    @endlisting
 </div>
