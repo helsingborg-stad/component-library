@@ -23,11 +23,11 @@
             'color' => 'white'
         ])
         @endicon
-
-        {{ $beforeLabel }}
-            {{ $label }}
-        {{ $afterLabel }}
-
+        <span>
+            {{ $beforeLabel }}
+                {{ $label }}
+            {{ $afterLabel }}
+        </span>
     </label>
 
     @listing([
