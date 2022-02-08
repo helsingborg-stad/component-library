@@ -1,6 +1,6 @@
 <div class="{{$baseClass}}">
     <div id="{{$id}}" class="{{$baseClass}}__preview">
-        <div class="{{$baseClass}}__image material-icons {{$aspectRatioClass}}"></div>
+        <div class="{{$baseClass}}__image material-icons {{$aspectRatioClass}} is-empty"></div>
         <span></span>
     </div>
     @fileinput([
