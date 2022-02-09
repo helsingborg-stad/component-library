@@ -22,10 +22,16 @@ class Option extends \ComponentLibrary\Component\BaseController
             'required' => $required ?? false,
             'invalidMessage' => $invalidMessage ?? '',
             'value' => $value ?? '',
-            'checked' =>  $checked ?? false
+            'checked' =>  $checked ?? false,
         ];
 
         $this->setData();
+
+        //Handle size
+        if (!in_array($size, ['sm', 'md', 'lg'])) {
+            $size = "md";
+        }
+        $this->data['classList'][] = $this->getBaseClass() . "--" . $size;
     }
 
     /**
