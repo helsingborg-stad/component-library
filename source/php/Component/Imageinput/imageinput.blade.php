@@ -1,4 +1,7 @@
-<div class="{{$baseClass}}">
+<div class="{{$baseClass}} c-field">
+    @if(!empty($label) && !$hideLabel)
+        <label class="{{$baseClass}}__label c-field__label" for="{{ $id }}-input" id="label_{{ $id }}">{{$label}}</label>
+    @endif
     <div id="{{$id}}" class="{{$baseClass}}__preview">
         <div class="{{$baseClass}}__image material-icons {{$aspectRatioClass}} is-empty"></div>
         <span></span>
@@ -21,4 +24,7 @@
         ]
     ])
     @endfileinput
+    @if ($helperText)
+        <small class="{{$baseClass}}__helper c-field__helper">{!!$helperText!!}</small>
+    @endif
 </div>
