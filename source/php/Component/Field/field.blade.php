@@ -40,6 +40,8 @@
             @if(!empty($suffix))
                 <span class="c-field__suffix">{{$suffix}}</span>
             @endif
+            
+            <i class="c-icon c-field__suffix material-icons c-field__error-icon" translate="no" role="img">error_outline</i>
         @endif
     </div>
     @if ($helperText)
