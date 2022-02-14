@@ -15,7 +15,7 @@
         @endif
     />
 
-    <label for="fs_{{ $id }}" class="{{ $baseClass }}__label">
+    <label for="fs_{{ $id }}" class="c-button c-button__filled c-button__filled--primary c-button--md {{ $baseClass }}__label">
         
         @icon([
             'icon' => 'file_upload',
