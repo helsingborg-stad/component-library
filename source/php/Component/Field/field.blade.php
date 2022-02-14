@@ -4,7 +4,7 @@
         <label class="{{$baseClass}}__label" for="input_{{ $id }}" id="label_{{ $id }}">{{$label}}</label>
     @endif
     
-    <div class="{{$baseClass}}__inner">
+    <div class="{{$baseClass}}__inner {{$baseClass}}__inner--{{$type}}">
         @if($multiline)
             <textarea id="input_{{ $id }}"
                 {!! $attribute !!}
@@ -15,6 +15,8 @@
                 @endif
                 placeholder="{{$placeholder}}"
             >{{$value ?? null}}</textarea>
+
+            <i class="c-icon c-field__suffix material-icons c-field__error-icon" translate="no" role="img">error_outline</i>
         @else
             @if(!empty($icon))
                 @icon(array_merge(['classList' => [$baseClass . '__icon']], $icon))
