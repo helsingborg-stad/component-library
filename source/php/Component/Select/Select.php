@@ -28,5 +28,11 @@ class Select extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['required'] = 'required';
             $this->data['attributeList']['data-required'] = '1';
         }
+
+        //Handle size
+        if (!in_array($size, ['sm', 'md', 'lg'])) {
+            $size = "md";
+        }
+        $this->data['classList'][] = $this->getBaseClass() . "--" . $size;
     }
 }

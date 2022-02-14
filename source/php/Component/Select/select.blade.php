@@ -1,10 +1,10 @@
-<div class="c-select__container c-field">
+<div id="{{$id}}" class="{{$class}} c-field">
     @if($label)
         <label for="{{ $id }}" class="c-field__label">{{$label}}</label>
     @endif
     
     <div class="u-position--relative">
-        <select id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
+        <select {!! $attribute !!} id="select_{{$id}}">
             @if($label)
             <option class="c-select__option" {{ $preselected === '' ? 'selected' : ''}} value="">{!!$label!!}</option>
             @endif
@@ -26,7 +26,7 @@
         @endicon
     </div>
 
-    <div id="error_input_{{ $id }}_message" class="c-field__input-invalid-message">
+    <div id="error_input_{{ $id }}_message" class="c-select__select-invalid-message">
         @icon([
             'icon' => 'error',
             'size' => 'sm'
