@@ -9,7 +9,8 @@
         "afterLabel": "",
         "label": "",
         "icon": "file_upload",
-        "required": false
+        "required": false,
+        "filesMax": false
     },
     "description": {
         "display": "Display input uploader as button or area",
@@ -19,7 +20,9 @@
         "beforeLabel": "Insert before label",
         "afterLabel": "Input label",
         "label": "Insert after label",
-        "icon": "@link:component/icon"
+        "icon": "@link:component/icon",
+        "required": "If field is required",
+        "filesMax": "Maximum number of files (false, int)"
     },
     "view": "fileinput.blade.php",
     "dependency": {
