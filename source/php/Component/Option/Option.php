@@ -26,12 +26,6 @@ class Option extends \ComponentLibrary\Component\BaseController
         ];
 
         $this->setData();
-
-        //Handle size
-        if (!in_array($size, ['sm', 'md', 'lg'])) {
-            $size = "md";
-        }
-        $this->data['classList'][] = $this->getBaseClass() . "--" . $size;
     }
 
     /**
