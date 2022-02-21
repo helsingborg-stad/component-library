@@ -47,9 +47,9 @@ class Field extends \ComponentLibrary\Component\Form\Form
         }
         $this->data['classList'][] = $this->getBaseClass() . "--" . $size;
 
-        if ($isValid === true) {
+        if (isset($isValid) && $isValid === true) {
             $this->data['classList'][] = 'is-valid';
-        } elseif ($isValid === false) {
+        } elseif (isset($isValid) && $isValid === false) {
             $this->data['classList'][] = 'is-invalid';
         }
 
