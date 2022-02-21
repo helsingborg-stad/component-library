@@ -17,20 +17,25 @@ class Textarea extends \ComponentLibrary\Component\BaseController
             'required' => $required ?? false,
             'invalidMessage' => $invalidMessage ?? '',
             'value' => $value ?? '',
+            'placeholder' => $placeholder ?? '',
+            'helperText' => $helperText ?? '',
         ];
 
         $this->setData();
 
         //Populate attributes
-        $this->data['attributeList']['aria-multiline'] = "true"; 
-        $this->data['attributeList']['placeholder'] = $label; 
-        $this->data['attributeList']['aria-placeholder'] = $label; 
+        $this->data['attributeList']['aria-multiline'] = "true";
+
+        if (!empty($placeholder)) {
+            $this->data['attributeList']['placeholder'] = $placeholder;
+            $this->data['attributeList']['aria-placeholder'] = $placeholder;
+        }
 
         //Is required props
-        if($required) {
-            $this->data['attributeList']['required'] = "required"; 
-            $this->data['attributeList']['data-required'] = "1"; 
-            $this->data['attributeList']['aria-required'] = "true"; 
+        if ($required) {
+            $this->data['attributeList']['required'] = "required";
+            $this->data['attributeList']['data-required'] = "1";
+            $this->data['attributeList']['aria-required'] = "true";
         }
     }
 
@@ -43,8 +48,5 @@ class Textarea extends \ComponentLibrary\Component\BaseController
         $this->data['required'] = $this->compParams['required'];
         $this->data['invalidMessage'] = $this->compParams['invalidMessage'];
         $this->data['value'] = $this->compParams['value'];
-
     }
-
-
 }
