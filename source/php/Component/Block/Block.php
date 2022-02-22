@@ -10,46 +10,46 @@ class Block extends \ComponentLibrary\Component\BaseController
 {
 	public function init()
 	{
-		//Extract array for eazy access (fetch only)
-        extract($this->data);
+		// Extract array for easy access (fetch only)
+		extract($this->data);
 
-        $this->data['collapseID'] = uniqid();
+		$this->data['collapseID'] = uniqid();
 
-		$this->data['classList'][] = $this->getBaseClass() . '--' . $color; 
-
-		if(isset($image['padded']) && $image['padded']){
-			$this->data['paddedImage'] = $this->getBaseClass() . '__image-background--padded'; 	
-		} 
-
-		if($imageFirst){
-			$this->data['classList'][] = $this->getBaseClass() . '--image-first'; 
-		} 
-
-		if($hasAction){
-			$this->data['classList'][] = $this->getBaseClass() . '--action'; 
+		if (isset($image['padded']) && $image['padded']) {
+			$this->data['paddedImage'] = $this->getBaseClass() . '__image-background--padded';
 		}
 
-		if($collapsible && $content){
-			$this->data['collapsible'] = $this->getBaseClass() . '--collapse';
+		if ($imageFirst) {
+			$this->data['classList'][] = $this->getBaseClass() . '--image-first';
+		}
+
+		if ($hasAction) {
+			$this->data['classList'][] = $this->getBaseClass() . '--action';
 		}
 		
-		if($image && !isset($image['backgroundColor'])) {
+		if ($filled) {
+			$this->data['classList'][] = $this->getBaseClass() . '--filled';
+		} else {
+			$this->data['classList'][] = $this->getBaseClass() . '--default';
+		}
+
+		if ($image && !isset($image['backgroundColor'])) {
 			$this->data['image']['backgroundColor'] = 'white';
 		}
 
-		if($image && !isset($image['src']) || (isset($image['src']) && empty($image['src']))) {
+		if ($image && !isset($image['src']) || (isset($image['src']) && empty($image['src']))) {
 			$this->data['image'] = false;
 		}
 
-		if($link) {
-			$this->data['componentElement'] = "a"; 
+		if ($link) {
+			$this->data['componentElement'] = "a";
 		} else {
-			$this->data['componentElement'] = "div"; 
-        }
+			$this->data['componentElement'] = "div";
+		}
 
-        if ($ratio) {
-            $ratio = str_replace(":", "-", $ratio);
-            $this->data['classList'][] = $this->getBaseClass() . '--ratio-' . $ratio;
-        }
-    }
+		if ($ratio) {
+			$ratio = str_replace(":", "-", $ratio);
+			$this->data['classList'][] = $this->getBaseClass() . '--ratio-' . $ratio;
+		}
+	}
 }
