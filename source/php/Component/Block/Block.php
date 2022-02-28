@@ -37,10 +37,6 @@ class Block extends \ComponentLibrary\Component\BaseController
 			$this->data['image']['backgroundColor'] = 'white';
 		}
 
-		if ($image && !isset($image['src'])) {
-			$this->data['image'] = false;
-		}
-
 		if ($link) {
 			$this->data['componentElement'] = "a";
 		} else {
