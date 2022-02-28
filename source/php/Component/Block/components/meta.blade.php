@@ -1,3 +1,3 @@
-@typography(['variant' => 'meta', 'element' => 'p'])
+@typography(['variant' => 'meta', 'element' => 'span'])
     {!! $meta !!}
 @endtypography
