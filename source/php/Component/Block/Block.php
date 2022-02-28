@@ -26,7 +26,7 @@ class Block extends \ComponentLibrary\Component\BaseController
 		if ($hasAction) {
 			$this->data['classList'][] = $this->getBaseClass() . '--action';
 		}
-		
+
 		if ($filled) {
 			$this->data['classList'][] = $this->getBaseClass() . '--filled';
 		} else {
@@ -37,7 +37,7 @@ class Block extends \ComponentLibrary\Component\BaseController
 			$this->data['image']['backgroundColor'] = 'white';
 		}
 
-		if ($image && !isset($image['src']) || (isset($image['src']) && empty($image['src']))) {
+		if ($image && !isset($image['src'])) {
 			$this->data['image'] = false;
 		}
 
