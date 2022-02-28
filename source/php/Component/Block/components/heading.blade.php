@@ -1,6 +1,6 @@
 @typography([
     'element'   => 'h2',
-    'variant'   => 'h3',
+    'variant'   => 'h2',
     'classList' => [
         $baseClass."__heading"
     ]
