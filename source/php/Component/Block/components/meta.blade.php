@@ -1,4 +1,4 @@
-@typography(['variant' => 'meta', 'element' => 'span'])
+@typography(['variant' => 'meta', 'element' => 'span', 'classList' => [$baseClass."__meta"]])
     @if (is_array($meta))
         @if (array_filter($meta, 'is_string') !== [])
             {{ implode(', ', $meta) }}
