@@ -13,26 +13,6 @@ class Block extends \ComponentLibrary\Component\BaseController
 		// Extract array for easy access (fetch only)
 		extract($this->data);
 
-		$this->data['collapseID'] = uniqid();
-
-		if (isset($image['padded']) && $image['padded']) {
-			$this->data['paddedImage'] = $this->getBaseClass() . '__image-background--padded';
-		}
-
-		if ($imageFirst) {
-			$this->data['classList'][] = $this->getBaseClass() . '--image-first';
-		}
-
-		if ($hasAction) {
-			$this->data['classList'][] = $this->getBaseClass() . '--action';
-		}
-
-		if ($filled) {
-			$this->data['classList'][] = $this->getBaseClass() . '--filled';
-		} else {
-			$this->data['classList'][] = $this->getBaseClass() . '--default';
-		}
-
 		if ($image && !isset($image['backgroundColor'])) {
 			$this->data['image']['backgroundColor'] = 'white';
 		}
