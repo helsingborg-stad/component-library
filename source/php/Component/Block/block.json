@@ -3,54 +3,24 @@
     "default": {
         "heading": "",
         "meta": "",
-        "buttons": [],
-        "padded": false,
-        "imageFirst": false,
-        "dropdown": false,
         "image": false,
-        "toggleItem": "",
-        "toggleClass": "",
-        "hidden": "",
-        "paddedImage": "",
-        "tags":  null,
         "link": "",
-        "hasAction": false,
         "ratio": "4:3"
     },
     "description": {
-        "image": "A url to a image.",
-        "href": "Link to a larger version of the image.",
-        "alt": "The alt text.",
-        "content": "The card content",
-        "title": "Array of the card title. Key: 'text' for text and 'position' (top | body).",
-        "byline": "Array of the small(er) text below the title, single row. Key: 'text' for text and 'position' (top | body).",
-        "meta": "Small text below title, in meta style.",
-        "slot": "Empty slot placed in the middle of card.",
-        "top": "Empty slot placed in the top of card.",
-        "bottom": "Empty slot placed in the bottom of card.",
-        "hasRipple": "Enable / disable ripple fx",
-        "buttons": "Array with buttons that has parameters like href, text and attributeList.",
-        "icons": "Array with icons that has parameters like name, size, attributeList, classList.",
-        "avatar": "Array with the avatar data such as image and name.",
-        "dropdown": "Array with the dropdown parameters as items as an array, direction: top, right, bottom, left, position: top, bottom ",
-        "accordion": "Array with the accordion parameters such as heading and content data",
-        "dark_background": "Set the background of the card to a dark color",
-        "link": "A hyperlink to another location.",
-        "hasAction": "Adds indicator that the card has an action (i.e. a link)",
-        "ratio": "The ratio of the image"
+        "heading": "The heading of the block",
+        "meta": "String or array of strings containing the meta information",
+        "image": "Array of image attributes, src, alt, backgroudColor.",
+        "link": "Simple href link",
+        "ratio": "Ratio of the block"
     },
     "view": "block.blade.php",
     "dependency": {
         "sass": {
             "components": [
                 "block",
-                "paper",
-                "dropdown",
-                "icon",
-                "accordion",
                 "image",
-                "typography",
-                "avatar"
+                "typography"
             ]
         }
     }
