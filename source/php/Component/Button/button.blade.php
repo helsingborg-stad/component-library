@@ -3,7 +3,7 @@
     
         @if($text && $icon)
             <span class="{{$baseClass}}__label-text{{$labelMod}}">
-                {{$text}}
+                {!!$text!!}
             </span>
 
             <span class="{{$baseClass}}__label-icon{{$labelMod}}">
@@ -12,7 +12,7 @@
             </span>
         @elseif($text && !$icon)
             <span class="{{$baseClass}}__label-text{{$labelMod}}">
-                {{$text}}
+                {!!$text!!}
             </span>
         @elseif($icon && !$text)
             @icon(['icon' => $icon, 'size' => $size])
