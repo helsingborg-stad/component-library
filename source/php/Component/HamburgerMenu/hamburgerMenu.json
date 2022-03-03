@@ -1,0 +1,22 @@
+{
+    "slug": "hamburgerMenu",
+    "default": {
+        "menuItems": [],
+        "parentButtons": false,
+        "showSearch": false
+    },
+    "description": {
+        "menuItems": "List of arrays containing at least 'label' and 'href' option 'icon' name as string.",
+        "parentButtons": "If true, the menu parents will be displayed as buttons.",
+        "showSearch": "If true, a search box will be displayed at the top of the hamburger menu."
+    },
+    "view": "hamburgerMenu.blade.php",
+    "dependency": {
+        "sass": {
+            "components": [
+                "menu",
+                "icon"
+            ]
+        }
+    }
+}
