@@ -2,7 +2,13 @@
 <{{ $componentElement }} href="{{ $link }}" id="{{ $id }}" class="{{$class}}" {!! $attribute !!}>
     @if(!$slotHasData)
         <div class="{{$baseClass}}__body">
-            
+
+            @if($date)
+                @typography(['variant' => 'meta', 'element' => 'span', 'classList' => [$baseClass."__date"]])
+                    {{ $date }}
+                @endtypography
+            @endif
+
             @if($meta)
                 @typography(['variant' => 'meta', 'element' => 'span', 'classList' => [$baseClass."__meta"]])
                     @if (is_array($meta))
