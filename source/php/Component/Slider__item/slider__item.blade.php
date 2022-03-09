@@ -1,5 +1,5 @@
 <!-- segment.blade.php -->
-<section id="{{ $id }}" class="{{ $class }}" {!! $attribute !!} js-slider-slide>
+<section id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
     @if ($link)
         <a class="{{ $baseClass }}__link" href="{{ $link }}">
     @endif

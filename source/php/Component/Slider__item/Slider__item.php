@@ -11,6 +11,7 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
         extract($this->data);
 
         $this->data['classListDesktop'] = $this->getBaseClass() . "__image";
+        $this->data['classList'][] = 'splide__slide';
 
         if (!empty($containerColor)) {
             $this->data['classList'][] = $this->getBaseClass() . "--bg-" . $containerColor;
