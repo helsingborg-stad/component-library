@@ -29,15 +29,15 @@
 
         <ul class="{{$baseClass}}__list o-grid unlist u-padding__top--3">
             @foreach ($menuItems as $item)
-                <li id="{{$id}}-item-{{$item->id}}"
-                    class="{{$baseClass}}__item {{$baseClass}}__item--parent o-grid-12 o-grid-6@md o-grid-4@lg u-mb-6 u-margin__top--1 {{$item->classNames}}">
+                <li id="{{$id}}-item-{{$item['id']}}"
+                    class="{{$baseClass}}__item {{$baseClass}}__item--parent o-grid-12 o-grid-6@md o-grid-4@lg u-mb-6 u-margin__top--1 {{$item['classNames']}}">
                     @if($parentButtons)
                         @button([
-                            'text' => $item->label,
+                            'text' => $item['label'],
                             'style' => 'outlined',
                             'color' => 'primary',
                             'icon' => 'chevron_right',
-                            'href' => $item->href,
+                            'href' => $item['href'],
                             'classList' => [
                                 '{{$baseClass}}__link',
                                 '{{$baseClass}}__link--button',
@@ -45,15 +45,15 @@
                         ])
                         @endbutton
                     @else
-                        <a href="{{$item->href}}" class="{{$baseClass}}__link {{$baseClass}}__link--title">{{$item->label}}</a>
+                        <a href="{{$item['href']}}" class="{{$baseClass}}__link {{$baseClass}}__link--title">{{$item['label']}}</a>
                     @endif
                     {{-- Children --}}
-                    @if (!empty($item->children))
+                    @if (!empty($item['children']))
                         <ul class="{{$baseClass}}__sublist unlist u-margin__top--2">
-                            @foreach ($item->children as $child)
-                                <li id="{{$id}}-item-{{$item->id}}"
-                                    class="{{$baseClass}}__item hamburger-menu__item--child {{ $child->classNames }}">
-                                    <a href="{{ $child->href }}">{{ $child->label }}</a>
+                            @foreach ($item['children'] as $child)
+                                <li id="{{$id}}-item-{{$item['id']}}"
+                                    class="{{$baseClass}}__item hamburger-menu__item--child {{ $child['classNames'] }}">
+                                    <a href="{{ $child['href'] }}">{{ $child['label'] }}</a>
                                 </li>
                             @endforeach
                         </ul>
