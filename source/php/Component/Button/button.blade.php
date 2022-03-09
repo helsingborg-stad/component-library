@@ -2,16 +2,16 @@
     <{{$labelElement}} class="{{$baseClass}}__label">
     
         @if($text && $icon)
-            <span class="{{$baseClass}}__label-text{{$labelMod}}">
+            <span class="{{$baseClass}}__label-text {{$labelMod != '' ?? $baseClass . '__label-text' . $labelMod }}">
                 {{$text}}
             </span>
 
-            <span class="{{$baseClass}}__label-icon{{$labelMod}}">
+            <span class="{{$baseClass}}__label-icon {{$labelMod != '' ?? $baseClass . '__label-icon' . $labelMod }}">
                 @icon(['icon' => $icon, 'size' => $size])
                 @endicon
             </span>
         @elseif($text && !$icon)
-            <span class="{{$baseClass}}__label-text{{$labelMod}}">
+            <span class="{{$baseClass}}__label-text {{$labelMod != '' ?? $baseClass . '__label-text' . $labelMod }}">
                 {{$text}}
             </span>
         @elseif($icon && !$text)
