@@ -1,0 +1,29 @@
+{
+    "slug": "block",
+    "default": {
+        "heading": "",
+        "meta": "",
+        "image": false,
+        "link": "",
+        "ratio": "4:3",
+        "date": false
+    },
+    "description": {
+        "heading": "The heading of the block",
+        "meta": "String or array of strings containing the meta information",
+        "image": "Array of image attributes, src, alt, backgroudColor.",
+        "link": "Simple href link",
+        "ratio": "Ratio of the block",
+        "date": "Pre-formatted date"
+    },
+    "view": "block.blade.php",
+    "dependency": {
+        "sass": {
+            "components": [
+                "block",
+                "image",
+                "typography"
+            ]
+        }
+    }
+}

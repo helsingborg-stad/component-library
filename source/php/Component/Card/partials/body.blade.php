@@ -3,6 +3,7 @@
     @includeWhen($heading, 'Card.components.heading')
     @includeWhen($subHeading, 'Card.components.subHeading')
     @includeWhen($meta, 'Card.components.meta')
+    @includeWhen($date, 'Card.components.date')
     @includeWhen($content, 'Card.components.content')
 
     @if($hasAction)

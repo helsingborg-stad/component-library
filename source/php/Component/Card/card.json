@@ -19,7 +19,8 @@
         "tags":  null,
         "link": "",
         "hasAction": false,
-        "ratio": "4:3"
+        "ratio": "4:3",
+        "date": false
     },
     "description": {
         "image": "A url to a image.",
@@ -41,7 +42,8 @@
         "dark_background": "Set the background of the card to a dark color",
         "link": "A hyperlink to another location.",
         "hasAction": "Adds indicator that the card has an action (i.e. a link)",
-        "ratio": "The ratio of the image"
+        "ratio": "The ratio of the image",
+        "date": "Preformatted date"
     },
     "view": "card.blade.php",
     "dependency": {
