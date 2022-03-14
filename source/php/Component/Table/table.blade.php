@@ -89,11 +89,14 @@
                     @foreach($list as $row) 
                         <tr class="{{$baseClass}}__line {{$baseClass}}__line-{{ $loop->index }}" js-table-sort--sortable js-table-filter-item>
                             @foreach($row['columns'] as $column) 
-                                @if($isMultidimensional && $loop->first)
+                                @if($loop->first)
                                     <th scope="row" class="{{$baseClass}}__column {{$baseClass}}__column-{{ $loop->index }}" js-table-sort-data="{{ $loop->index }}" js-table-filter-data>
-                                        <span class="{{$baseClass}}__column-content">
+                                        @link([
+                                            'href' => (isset($row['href']) && !empty($row['href']) ? $row['href'] : false),
+                                            'classList' => [$baseClass . '__column-content'],
+                                        ])
                                             {!! $column !!}
-                                        </span>
+                                        @endlink  
                                     </th>
                                 @else
                                     <td scope="row" class="{{$baseClass}}__column {{$baseClass}}__column-{{ $loop->index }}" js-table-sort-data="{{ $loop->index }}" js-table-filter-data>
