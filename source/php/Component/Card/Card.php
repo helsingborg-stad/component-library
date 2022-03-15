@@ -29,7 +29,7 @@ class Card extends \ComponentLibrary\Component\BaseController
 			$this->data['classList'][] = $this->getBaseClass() . '--action'; 
 		}
 
-        if($hasFooter){
+        if($hasFooter || $tags || $buttons){
 			$this->data['classList'][] = $this->getBaseClass() . '--has-footer'; 
 		}
 
