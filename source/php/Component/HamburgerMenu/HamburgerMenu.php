@@ -24,7 +24,7 @@ class HamburgerMenu extends \ComponentLibrary\Component\BaseController
                 $menuItem['classList'][] = 'is-current';
             }
 
-            if($menuItem['children']) {
+            if($menuItem['children'] && is_array($menuItem['children']) && !empty($menuItem['children'])) {
                 $menuItem['classList'][] = $this->getBaseClass() . '__item--has-children';
                 $menuItem['children'] = $this->generateMenuItems($menuItem['children']);
             }
