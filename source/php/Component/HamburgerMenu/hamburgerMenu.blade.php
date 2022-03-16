@@ -1,5 +1,5 @@
 <!-- hamburgerMenu.blade.php -->
-<nav id="{{$id}}" class="{{$class}} u-padding__y--4" js-toggle-item="hamburger-menu" js-toggle-class="u-display--none">
+<nav id="{{$id}}" class="{{$class}} u-padding__bottom--4" js-toggle-item="hamburger-menu" js-toggle-class="u-display--none">
     <div class="container">
         @if($showSearch)
             @form(['method' => 'get', 'action' => '/'])
