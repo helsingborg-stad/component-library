@@ -10,12 +10,12 @@
         "background_video": false,
         "desktop_image": "",
         "link": false,
-        "containerColor": "transparent",
+        "containerColor": "",
         "alt": "",
         "cta": [],
         "heroStyle": false,
         "focusPoint": {"top": 30, "left": 50},
-        "textAlignment": "left"
+        "textAlignment": ""
     },
     "description": {
         "title": "A title for predefined layout",
