@@ -9,9 +9,15 @@ class HamburgerMenu extends \ComponentLibrary\Component\BaseController
 
         //Extract array for eazy access (fetch only)
         extract($this->data);
+
+        $this->data['classList'][] = 'u-display--none';
         
         if($menuItems) {
             $this->data['menuItems'] = $this->generateMenuItems($menuItems);
+        }
+
+        if(!$mobile) {
+            $this->data['classList'][] = 'u-display--none@xs u-display--none@sm u-display--none@md';
         }
     }
 
