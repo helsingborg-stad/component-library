@@ -17,7 +17,9 @@ class HamburgerMenu extends \ComponentLibrary\Component\BaseController
         }
 
         if(!$mobile) {
-            $this->data['classList'][] = 'u-display--none@xs u-display--none@sm u-display--none@md';
+            $this->data['classList'][] = 'u-display--none@xs';
+            $this->data['classList'][] = 'u-display--none@sm';
+            $this->data['classList'][] = 'u-display--none@md';
         }
     }
 
