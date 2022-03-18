@@ -53,7 +53,7 @@
                     <ul class="{{$baseClass}}__sublist unlist u-margin__top--2">
                         @foreach ($item['children'] as $child)
                             <li id="{{$id}}-item-{{$item['id']}}"
-                                class="{{$baseClass}}__item hamburger-menu__item--child {{ $child['classNames'] }}">
+                                class="{{$baseClass}}__item {{$baseClass}}__item--child {{ $child['classNames'] }}">
                                 <a href="{{ $child['href'] }}">{{ $child['label'] }}</a>
                             </li>
                         @endforeach
