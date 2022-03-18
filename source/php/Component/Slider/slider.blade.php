@@ -1,5 +1,4 @@
 <div id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
-    <?php var_dump($arrowButtons['style']); ?>
     <div class="splide__arrows c-slider__arrows">
         @button([
             'color' => $arrowButtons['color'],
