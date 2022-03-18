@@ -1,16 +1,17 @@
 <div id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
+    <?php var_dump($arrowButtons['style']); ?>
     <div class="splide__arrows c-slider__arrows">
         @button([
             'color' => $arrowButtons['color'],
             'icon' => 'keyboard_arrow_left',
-            'type' => $arrowButtons['style'],
+            'style' => $arrowButtons['style'],
             'classList' => ['splide__arrow', 'splide__arrow--prev']
         ])
         @endbutton
         @button([
             'color' => $arrowButtons['color'],
             'icon' => 'keyboard_arrow_right',
-            'type' => $arrowButtons['style'],
+            'style' => $arrowButtons['style'],
             'classList' => ['splide__arrow', 'splide__arrow--next']
         ])
         @endbutton
