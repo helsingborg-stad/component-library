@@ -40,8 +40,8 @@
                         'icon' => 'chevron_right',
                         'href' => $item['href'],
                         'classList' => [
-                            '{{$baseClass}}__link',
-                            '{{$baseClass}}__link--button',
+                            $baseClass . '__link',
+                            $baseClass . '__link--button',
                         ]
                     ])
                     @endbutton
