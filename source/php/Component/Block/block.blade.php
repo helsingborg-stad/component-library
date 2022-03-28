@@ -1,9 +1,15 @@
 <!-- block.blade.php -->
 <{{ $componentElement }} href="{{ $link }}" id="{{ $id }}" class="{{$class}}" {!! $attribute !!}>
+
+    @if($date && $dateBadge)
+        @datebadge(['date' => $date, 'classList' => ['u-position--absolute', 'u-margin--3', 'u-fixed--top-left']])
+        @enddatebadge
+    @endif
+
     @if(!$slotHasData)
         <div class="{{$baseClass}}__body">
 
-            @if($date)
+            @if($date && !$dateBadge)
                 @typography(['variant' => 'meta', 'element' => 'span', 'classList' => [$baseClass."__date"]])
                     {{ $date }}
                 @endtypography
