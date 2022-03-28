@@ -1,10 +1,12 @@
 {
-    "slug": "notice",
+    "slug": "datebadge",
     "default": {
-        "date": false
+        "date": false,
+        "size": "md"
     },
     "description": {
-        "date": "A date string in any format."
+        "date": "A date string in any format.",
+        "size": "md"
     },
     "view": "datebadge.blade.php",
     "dependency": {
