@@ -4,23 +4,20 @@ namespace ComponentLibrary;
 
 class Register
 {
-    public  $data;
-    public  $cachePath = ""; 
-    public  $viewPaths = [];
-    public  $controllerPaths = [];
-    
-    private  $_reservedNames = ["data", "class", "list"];
-    
-    private  $_controllers = [];
-    
+    public $data;
+    public $cachePath = ""; 
+    public $viewPaths = [];
+    public $controllerPaths = [];
+    private $_reservedNames = ["data", "class", "list"];
+    private $_controllers = [];
     private $blade = null;
-    
-    function __construct($engine)
+
+    public function __construct($engine)
     {
         $this->blade = $engine;
     }
 
-    public  function add($slug, $defaultArgs, $view = null)
+    public function add($slug, $defaultArgs, $view = null)
     {
         //Create utility data object
         if (is_null($this->data)) {
@@ -55,7 +52,7 @@ class Register
      *
      * @return string The updated object with controller paths
      */
-    public  function addControllerPath($path, $prepend = true): array
+    public function addControllerPath($path, $prepend = true): array
     {
         //Sanitize path
         $path = rtrim($path, "/");
@@ -155,14 +152,13 @@ class Register
 
     /**
      * Santize string
-     * 
      * @return string The string to be sanitized
      */
-    private function sanitizeSlug($string) : string 
+    private function sanitizeSlug($string): string
     {
         return preg_replace(
-            "/[^a-z-]/i", 
-            "", 
+            "/[^a-z-]/i",
+            "",
             str_replace(".blade.php", "", $string)
         );
     }
