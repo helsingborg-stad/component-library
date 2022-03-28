@@ -195,10 +195,14 @@ class Register
     
     public function registerViewComposer($component)
     {
+<<<<<<< Updated upstream
 
         
 
         try{
+=======
+        try {
+>>>>>>> Stashed changes
             $this->blade->composer(
                 ucfirst($component->slug) . '.' . $component->slug,
                 function ($view) use ($component) {
@@ -217,10 +221,16 @@ class Register
                     $view->with($controllerArgs);
                 }
             );
+<<<<<<< Updated upstream
         }catch(Throwable $e){
             echo  '<pre>' . var_dump($e) . '<pre>';
         }
         
+=======
+        } catch (Throwable $e) {
+            echo  '<pre>' . var_dump($e) . '<pre>';
+        }
+>>>>>>> Stashed changes
     }
 
     /**
