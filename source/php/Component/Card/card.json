@@ -20,7 +20,8 @@
         "link": "",
         "hasAction": false,
         "ratio": "4:3",
-        "date": false
+        "date": false,
+        "dateBadge": false
     },
     "description": {
         "image": "A url to a image.",
@@ -43,7 +44,8 @@
         "link": "A hyperlink to another location.",
         "hasAction": "Adds indicator that the card has an action (i.e. a link)",
         "ratio": "The ratio of the image",
-        "date": "Preformatted date"
+        "date": "Preformatted date",
+        "dateBadge": "Display date as a badge. Requires image to be set."
     },
     "view": "card.blade.php",
     "dependency": {
