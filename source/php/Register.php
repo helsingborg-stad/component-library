@@ -182,9 +182,7 @@ class Register
 
     public function registerViewComposer($component)
     {
-
-
-        //try {
+        try {
             $this->blade->composer(
                 ucfirst($component->slug) . '.' . $component->slug,
                 function ($view) use ($component) {
@@ -204,10 +202,9 @@ class Register
                     $view->with($controllerArgs);
                 }
             );
-        }catch(Throwable $e){
+        } catch (Throwable $e) {
             echo  '<pre>' . var_dump($e) . '<pre>';
         }
-        
     }
 
     /**
