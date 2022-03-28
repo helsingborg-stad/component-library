@@ -1,0 +1,17 @@
+{
+    "slug": "notice",
+    "default": {
+        "date": false
+    },
+    "description": {
+        "date": "A date string in any format."
+    },
+    "view": "datebadge.blade.php",
+    "dependency": {
+        "sass": {
+            "components": [
+                "typography"
+            ]
+        }
+    }
+}
