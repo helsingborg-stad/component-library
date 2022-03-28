@@ -1,0 +1,19 @@
+{
+    "slug": "datebadge",
+    "default": {
+        "date": false,
+        "size": "md"
+    },
+    "description": {
+        "date": "A date string in any format.",
+        "size": "The size of the datebadge. Can be either 'sm' or 'md'."
+    },
+    "view": "datebadge.blade.php",
+    "dependency": {
+        "sass": {
+            "components": [
+                "typography"
+            ]
+        }
+    }
+}
