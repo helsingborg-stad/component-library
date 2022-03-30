@@ -29,6 +29,10 @@ class Card extends \ComponentLibrary\Component\BaseController
 			$this->data['classList'][] = $this->getBaseClass() . '--action'; 
 		}
 
+        if($hasFooter || $tags || $buttons){
+			$this->data['classList'][] = $this->getBaseClass() . '--has-footer'; 
+		}
+
 		if($collapsible && $content){
 			$this->data['collapsible'] = $this->getBaseClass() . '--collapse';
 		}
