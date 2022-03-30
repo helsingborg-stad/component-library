@@ -27,9 +27,10 @@ class Block extends \ComponentLibrary\Component\BaseController
             $this->data['componentElement'] = "div";
         }
 
-        if ($ratio) {
-            $ratio = str_replace(":", "-", $ratio);
-            $this->data['classList'][] = $this->getBaseClass() . '--ratio-' . $ratio;
+        if (!in_array($ratio, ['4:3', '12:16'])) {
+            $ratio = '4:3';
         }
+
+        $this->data['classList'][] = $this->getBaseClass() . '--ratio-' . str_replace(":", "-", $ratio);
     }
 }
