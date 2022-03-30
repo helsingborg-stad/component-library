@@ -32,13 +32,19 @@ class Card extends \ComponentLibrary\Component\BaseController
 		if($collapsible && $content){
 			$this->data['collapsible'] = $this->getBaseClass() . '--collapse';
 		}
-		
-		if($image && !isset($image['backgroundColor'])) {
-			$this->data['image']['backgroundColor'] = 'white';
-		}
 
+		if(!empty($image) && is_string($image)){
+			$image = $this->data['image'] = [
+				'src' => $image
+			];
+		}
+		
 		if($image && !isset($image['src']) || (isset($image['src']) && empty($image['src']))) {
 			$this->data['image'] = false;
+		}
+
+		if(is_array($image) && !isset($image['backgroundColor'])) {
+			$this->data['image']['backgroundColor'] = 'white';
 		}
 
 		if($link) {
