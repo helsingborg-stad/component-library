@@ -5,7 +5,9 @@
         "slotOnly": false,
         "id": null,
         "logotype": "/",
-        "links": {}
+        "links": {},
+        "subFooterContent": [],
+        "subfooterDirection": "horizontal"
     },
     "descriptions": {
         "componentElement": "The element tag to render",

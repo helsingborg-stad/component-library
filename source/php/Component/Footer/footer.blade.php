@@ -42,4 +42,6 @@
         </div>
       </div>
   @endif
+
+  @includeWhen(!empty($subFooterContent), 'footer.partials.subfooter')
 </{{$componentElement}}>
