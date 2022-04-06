@@ -43,5 +43,5 @@
       </div>
   @endif
 
-  @includeWhen(!empty($subFooterContent), 'footer.partials.subfooter')
+  @includeWhen(!empty($subFooterContent) || $subfooterLogotype->url, 'footer.partials.subfooter')
 </{{$componentElement}}>
