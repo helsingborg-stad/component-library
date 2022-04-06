@@ -8,8 +8,8 @@ class Register
     public $cachePath = ""; 
     public $viewPaths = [];
     public $controllerPaths = [];
-    private $_reservedNames = ["data", "class", "list"];
-    private $_controllers = [];
+    private $reservedNames = ["data", "class", "list"];
+    private $controllers = [];
     private $blade = null;
 
     public function __construct($engine)
@@ -25,7 +25,7 @@ class Register
         }
 
         //Prohibit reserved names
-        if (in_array($slug, $this->_reservedNames)) {
+        if (in_array($slug, $this->reservedNames)) {
             throw new \Exception("Invalid slug (" . $slug . ") provided, cannot be used as a view name since it is reserved for internal purposes.");
         }
 
@@ -33,7 +33,7 @@ class Register
         $view = $this->getViewName($slug, $view);
 
         //Adds to full object
-        $this->data->{$slug} = (object) $x = array(
+        $this->data->{$slug} = (object) array(
             'slug'       => (string) $slug,
             'args'       => (object) $defaultArgs,
             'view'       => (string) $slug . DIRECTORY_SEPARATOR . $view,
@@ -228,8 +228,8 @@ class Register
 
             $controllerId = md5($controllerLocation);
 
-            if (in_array($controllerId, $this->_controllers)) {
-                $controller = $this->_controllers[$controllerId];
+            if (in_array($controllerId, $this->controllers)) {
+                $controller = $this->controllers[$controllerId];
             } else {
                 $controller = (string) ("\\" . $this->getNamespace($controllerLocation) . "\\" . $controllerName);
                 $controller = new $controller($data);
