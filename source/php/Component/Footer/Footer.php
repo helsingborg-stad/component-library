@@ -19,7 +19,7 @@ class Footer extends \ComponentLibrary\Component\BaseController
 
         $subfooterDirection = $subfooterDirection === 'vertical' ? 'vertical' : 'horizontal';
         $subFooterClass[] = $this->getBaseClass() . '__subfooter--' . $subfooterDirection;
-        $subFooterClass[] = $this->getBaseClass() . '__subfooter--align-' . $subfooterAlignment;
+        $subFooterClass[] = $this->getBaseClass() . '__subfooter--align-' . $subfooterAlignment ?? 'flex-start';
 
         $this->data['subfooterClass'] = implode(' ', $subFooterClass);
     }
