@@ -1,4 +1,9 @@
-<div class="{{ $baseClass }}__subfooter {{$subfooterClass}}">
+@php
+$directionClass = $baseClass . '__subfooter--' . ($subfooter['direction'] === 'vertical' ? 'vertical' : 'horizontal');
+$alignmentClass = $baseClass . '__subfooter--align-' . $subfooter['alignment'] ?? 'flex-start';
+@endphp
+
+<div class="{{$baseClass}}__subfooter {{$directionClass}} {{$alignmentClass}}">
     <div class="o-container">
         <div class="{{$baseClass}}__subfooter__wrapper">
             @if($subfooterLogotype->url)

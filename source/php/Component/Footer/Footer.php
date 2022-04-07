@@ -13,15 +13,6 @@ class Footer extends \ComponentLibrary\Component\BaseController
         if(!isset($this->data['logotypeHref'])) {
             $this->data['logotypeHref'] = "/";
         }
-
-        // Subfooter
-        $subFooterClass = $subfooterClass ?? [];
-
-        $subfooterDirection = $subfooter['direction'] === 'vertical' ? 'vertical' : 'horizontal';
-        $subFooterClass[] = $this->getBaseClass() . '__subfooter--' . $subfooterDirection;
-        $subFooterClass[] = $this->getBaseClass() . '__subfooter--align-' . $subfooter['alignment'] ?? 'flex-start';
-
-        $this->data['subfooterClass'] = implode(' ', $subFooterClass);
     }
 
     protected function addTargetToLinks($arr)
