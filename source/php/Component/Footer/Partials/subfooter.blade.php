@@ -15,7 +15,7 @@
                 </div>
             @endif
             <ul class="{{$baseClass}}__subfooter__list">
-                @foreach($subFooterContent as $index => $item)
+                @foreach($subfooter['content'] as $index => $item)
                     <li>
                         <strong>{{ $item['title'] }}</strong>
                         @if($item['link'])
