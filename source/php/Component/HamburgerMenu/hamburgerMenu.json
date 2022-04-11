@@ -9,7 +9,8 @@
     "description": {
         "menuItems": "List of arrays containing at least 'label' and 'href' option 'icon' name as string.",
         "parentStyle": "Select the style of menu parents.",
-        "showSearch": "If true, a search box will be displayed at the top of the hamburger menu."
+        "showSearch": "If true, a search box will be displayed at the top of the hamburger menu.",
+        "mobile": "If true, the hamburger menu will be visible on mobile as well."
     },
     "view": "hamburgerMenu.blade.php",
     "dependency": {

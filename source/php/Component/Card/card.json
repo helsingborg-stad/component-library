@@ -21,7 +21,8 @@
         "hasAction": false,
         "ratio": "4:3",
         "date": false,
-        "dateBadge": false
+        "dateBadge": false,
+        "hasFooter": false
     },
     "description": {
         "image": "A url to a image.",
@@ -45,7 +46,8 @@
         "hasAction": "Adds indicator that the card has an action (i.e. a link)",
         "ratio": "The ratio of the image",
         "date": "Preformatted date",
-        "dateBadge": "Display date as a badge. Requires image to be set."
+        "dateBadge": "Display date as a badge. Requires image to be set.",
+        "hasFooter": "Inidcate if the card has a footer section."
     },
     "view": "card.blade.php",
     "dependency": {
