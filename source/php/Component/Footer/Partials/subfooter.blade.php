@@ -25,8 +25,7 @@ $alignmentClass = $baseClass . '__subfooter--align-' . $subfooter['alignment'] ?
                         <strong>{{ $item['title'] }}</strong>
                         @if($item['link'])
                             @link([
-                                'href' => $item['link'],
-                                'target' => $item['openNewTab'] ? '_blank' : '_top'
+                                'href' => $item['link']
                             ])
                                 {{ $item['content'] }}
                             @endlink
