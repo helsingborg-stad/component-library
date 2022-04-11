@@ -28,11 +28,11 @@ class HamburgerMenu extends \ComponentLibrary\Component\BaseController
         foreach($menuItems as $key => $menuItem) {
             $menuItem['classList'] = $menuItem['classList'] ?? [];
 
-            if($menuItem['active']) {
+            if($menuItem['active'] ?? false) {
                 $menuItem['classList'][] = 'is-current';
             }
 
-            if($menuItem['children'] && is_array($menuItem['children']) && !empty($menuItem['children'])) {
+            if($menuItem['children'] ?? false && is_array($menuItem['children']) && !empty($menuItem['children'])) {
                 $menuItem['classList'][] = $this->getBaseClass() . '__item--has-children';
                 $menuItem['children'] = $this->generateMenuItems($menuItem['children']);
             }
