@@ -11,7 +11,8 @@
         "sectionHeadingElement": "button",
         "sectionContentElement": "div",
         "taxonomy": [],
-        "taxonomyPosition":  ""
+        "taxonomyPosition":  "",
+        "icon": "keyboard_arrow_down"
     },
     "description": {
         "id": "ID for the accordion",
@@ -24,7 +25,8 @@
         "sectionHeadingElement": "Section heading component",
         "sectionContentElement": "Section content component",
         "taxonomy": "Array of taxonomies such as tags",
-        "taxonomyPosition":  "Taxonomy position like top or below"
+        "taxonomyPosition":  "Taxonomy position like top or below",
+        "icon": "Icon to show for expand functionality."
     },
     "view": "accordion__item.blade.php",
     "dependency": {

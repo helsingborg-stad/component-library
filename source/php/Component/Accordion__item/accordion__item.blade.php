@@ -22,7 +22,7 @@
 
             {!!$afterHeading!!}
 
-            @icon(['icon' => 'keyboard_arrow_down', 'size' => 'md', 'classList' => [$baseClass . '__icon']])
+            @icon(['icon' => $icon, 'size' => 'md', 'classList' => [$baseClass . '__icon', $baseClass . '__icon--' . $icon]])
             @endicon
         </span>
 
