@@ -1,5 +1,5 @@
 @php
-$directionClass = $baseClass . '__subfooter--' . ($subfooter['direction'] === 'vertical' ? 'vertical' : 'horizontal');
+$directionClass = $baseClass . '__subfooter--' . ($subfooter['direction'] ?? 'horizontal');
 $alignmentClass = $baseClass . '__subfooter--align-' . $subfooter['alignment'] ?? 'flex-start';
 @endphp
 
