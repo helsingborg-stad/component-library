@@ -7,13 +7,13 @@ $alignmentClass = $baseClass . '__subfooter--align-' . $subfooter['alignment'] ?
     <div class="o-container">
         <div class="{{$baseClass}}__subfooter__wrapper">
             @if($subfooterLogotype->url)
-                <div class="{{$baseClass}}__subfooter__logotype">
+                <div class="{{$baseClass}}__subfooter__logotype-wrapper">
                     @link(['href' => $homeUrl, 'classList' => ['u-margin__right--auto']])
                         @logotype([
                             'id' => 'footer-logotype',
                             'src'=> $subfooterLogotype->url,
                             'alt' => $lang->goToHomepage,
-                            'classList' => ['site-footer__logo', 'c-footer__logotype']
+                            'classList' => ['site-footer__logo', $baseClass . '__subfooter__logotype']
                         ])
                         @endlogotype
                     @endlink
