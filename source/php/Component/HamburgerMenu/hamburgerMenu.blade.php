@@ -1,32 +1,7 @@
 <!-- hamburgerMenu.blade.php -->
 <nav id="{{$id}}" class="{{$class}} o-grid" js-toggle-item="hamburger-menu" js-toggle-class="u-display--none">
-    @if($showSearch)
-        <div class="o-grid-12">
-            @form(['method' => 'get', 'action' => '/'])
-                <label for="hamburger-menu-search" class="u-sr__only">{{ __('Search', 'component-library') }}</label>
-
-                @group([])
-                    @field([
-                        'id' => 'hamburger-menu-search',
-                        'type' => 'text',
-                        'attributeList' => [
-                            'type' => 'text',
-                            'name' => 's',
-                        ],
-                        'placeholder' => __('What are you looking for?', 'component-library'),
-                        'required' => true,
-                    ])
-                    @endfield
-                    @button([
-                        'color' => 'primary',
-                        'type' => 'submit',
-                        'text' => __('Search', 'component-library')
-                    ])
-                    @endbutton
-                @endgroup
-            @endform
-        </div>
-    @endif
+    
+    {!! $slot !!}
 
     <ul class="{{$baseClass}}__list o-grid unlist o-grid-12">
         @foreach ($menuItems as $item)
