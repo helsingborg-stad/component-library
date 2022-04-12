@@ -1,22 +1,20 @@
 @php
-$directionClass = $baseClass . '__subfooter--' . ($subfooter['direction'] ?? 'horizontal');
+$directionClass = $baseClass . '__subfooter--' . ($subfooter['flexDirection'] == 'row' ? 'horizontal' : 'vertical');
 $alignmentClass = $baseClass . '__subfooter--align-' . $subfooter['alignment'] ?? 'flex-start';
 @endphp
 
 <div class="{{$baseClass}}__subfooter {{$directionClass}} {{$alignmentClass}}">
     <div class="o-container">
         <div class="{{$baseClass}}__subfooter__wrapper">
-            @if($subfooterLogotype->url)
-                <div class="{{$baseClass}}__subfooter__logotype">
-                    @link(['href' => $homeUrl, 'classList' => ['u-margin__right--auto']])
-                        @logotype([
-                            'id' => 'footer-logotype',
-                            'src'=> $subfooterLogotype->url,
-                            'alt' => $lang->goToHomepage,
-                            'classList' => ['site-footer__logo', 'c-footer__logotype']
-                        ])
-                        @endlogotype
-                    @endlink
+            @if($subfooterLogotype)
+                <div class="{{$baseClass}}__subfooter__logotype-wrapper">
+                    @logotype([
+                        'id' => 'footer-logotype',
+                        'src'=> $subfooterLogotype,
+                        'alt' => __('Go to homepage', 'component-library'),
+                        'classList' => [$baseClass . '__subfooter__logotype']
+                    ])
+                    @endlogotype
                 </div>
             @endif
             <ul class="{{$baseClass}}__subfooter__list">
@@ -25,8 +23,7 @@ $alignmentClass = $baseClass . '__subfooter--align-' . $subfooter['alignment'] ?
                         <strong>{{ $item['title'] }}</strong>
                         @if($item['link'])
                             @link([
-                                'href' => $item['link'],
-                                'target' => $item['openNewTab'] ? '_blank' : '_top'
+                                'href' => $item['link']
                             ])
                                 {{ $item['content'] }}
                             @endlink
