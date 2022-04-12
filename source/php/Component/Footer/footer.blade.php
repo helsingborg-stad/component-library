@@ -1,8 +1,28 @@
 <!-- footer.blade.php -->
 <{{$componentElement}} id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
  @if ($slotOnly && $slot)
+
+     @if($prefooter)
+      <div class="c-footer__prefooter-wrapper">
+        <div class="o-container">
+            <div class="o-grid-12">
+                {{$prefooter}}
+            </div>
+        </div>
+      </div>
+    @endif
     
-     {{$slot}}
+    {{$slot}}
+
+    @if($postfooter)
+     <div class="c-footer__postfooter-wrapper">
+        <div class="o-container">
+            <div class="o-grid-12">
+                {{$postfooter}}
+            </div>
+        </div>
+      </div>
+    @endif
      
  @else
       <div class="g-divider g-divider--lg"></div>
