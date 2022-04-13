@@ -5,6 +5,7 @@
         "slotOnly": false,
         "id": null,
         "logotype": "/",
+        "logotypeHref": "",
         "links": {},
         "subfooterLogotype": ""
     },
@@ -12,8 +13,9 @@
         "componentElement": "The element tag to render",
         "slotOnly": "Set to true will enable only slot area",
         "id" :  "Custom container id",
+        "logotype": "Footer logotype url.",
         "logotypeHref": "The url to link the logotype to.",
-        "subfooterLogotype": "The url to link the subfooter logotype to."
+        "subfooterLogotype": "Subfooter logotype url."
     },
     "view": "footer.blade.php",
     "dependency": {
