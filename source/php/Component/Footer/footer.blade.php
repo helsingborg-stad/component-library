@@ -4,6 +4,25 @@
 
         <div class="c-footer__main-wrapper {{ $preFooterTextAlignment }}">
 
+            @if ($logotype)
+                <div class="c-footer__header-wrapper">
+                    <div class="o-container">
+                        <div class="o-grid-12">
+                            @link(['href' => $logotypeHref, 'classList' => ['u-margin__right--auto']])
+                            @logotype([
+                              'id' => 'footer-logotype',
+                              'src'=> $logotype,
+                              'alt' => __('Go to homepage', 'component-library'),
+                              'classList' => ['site-footer__logo', 'c-footer__logotype'],
+                              'context' => 'footer.logotype'
+                            ])
+                            @endlogotype
+                            @endlink
+                        </div>
+                    </div>
+                </div>
+            @endif
+
             @if ($prefooter)
                 <div class="c-footer__prefooter-wrapper">
                     <div class="o-container">
@@ -15,25 +34,10 @@
             @endif
 
             {{ $slot }}
-            
-            @if($logotype || $footerareas)
+
+            @if ($footerareas)
                 <div class="o-container">
                     <div class="o-grid">
-                        @if ($logotype)
-                            <div class="o-grid-12">
-                                @link(['href' => $logotypeHref, 'classList' => ['u-margin__right--auto']])
-                                    @logotype([
-                                        'id' => 'footer-logotype',
-                                        'src'=> $logotype,
-                                        'alt' => __('Go to homepage', 'component-library'),
-                                        'classList' => ['site-footer__logo', 'c-footer__logotype'],
-                                        'context' => 'footer.logotype'
-                                    ])
-                                    @endlogotype
-                                @endlink
-                            </div>
-                        @endif
-
                         @if ($footerareas)
                             {{ $footerareas }}
                         @endif
@@ -67,8 +71,8 @@
                         <div class="c-footer__links">
                             @if (!array_key_exists('href', $value))
                                 @typography([
-                                "variant" => "h4",
-                                "element" => "h4"
+                                  "variant" => "h4",
+                                  "element" => "h4"
                                 ])
                                 {{ $key }}
                                 @endtypography
