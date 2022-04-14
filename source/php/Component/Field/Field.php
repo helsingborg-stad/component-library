@@ -58,9 +58,6 @@ class Field extends \ComponentLibrary\Component\Form\Form
             $this->data['classList'][] = $this->getBaseClass() . "--radius-" . $this->data['radius'];
         }
 
-        // Set data
-        $this->setData();
-
         // Make backwards compatible
         if ($type === 'datepicker') {
             $type = 'date';
@@ -79,6 +76,9 @@ class Field extends \ComponentLibrary\Component\Form\Form
 
             $this->setMinAndMaxDate($datepicker['minDate'] ?? false, $datepicker['maxDate'] ?? false, $this->data['type']);
         }
+
+        // Set data
+        $this->setData();
     }
 
     /**
