@@ -58,29 +58,26 @@ class Field extends \ComponentLibrary\Component\Form\Form
             $this->data['classList'][] = $this->getBaseClass() . "--radius-" . $this->data['radius'];
         }
 
-        //Set data
+        // Set data
         $this->setData();
 
-        //Hsandle datepicker exceptions
-        if ($type == 'datepicker') {
-            $this->compParams = [
-                'type' => 'text'
-            ];
-            $this->data['type'] = 'text';
+        // Make backwards compatible
+        if ($type === 'datepicker') {
+            $type = 'date';
+        } elseif ($type === 'datetime') {
+            $type = 'datetime-local';
+        } 
 
-            $this->data['attributeList']['js-datepicker'] = true;
+        // Handle datepicker exceptions
+        if ($type === 'date' || $type === 'datetime-local' || $type === 'time') {
+            $this->data['type'] = $type;
+            $this->compParams['type'] = $type;
 
-            $this->setMinAndMaxDate(isset($datepicker['minDate']) ? $datepicker['minDate'] : '', isset($datepicker['maxDate']) ? $datepicker['maxDate'] : '');
+            if($datepicker['required']) {
+                $this->data['required'] = true;
+            }
 
-            $this->setOptionals(isset($datepicker['title']) ? $datepicker['title'] : 'Select a date');
-
-            $this->buildUI([
-                'showResetButton' => isset($datepicker['showResetButton']) ? $datepicker['showResetButton'] : false,
-                'showDaysOutOfMonth' => isset($datepicker['showDaysOutOfMonth']) ? $datepicker['showDaysOutOfMonth'] : true,
-                'showClearButton' => isset($datepicker['showClearButton']) ? $datepicker['showClearButton'] : true,
-                'hideOnBlur' => isset($datepicker['hideOnBlur']) ? $datepicker['hideOnBlur'] : true,
-                'hideOnSelect' => isset($datepicker['hideOnSelect']) ? $datepicker['hideOnSelect'] : true,
-            ]);
+            $this->setMinAndMaxDate($datepicker['minDate'] ?? false, $datepicker['maxDate'] ?? false, $this->data['type']);
         }
     }
 
@@ -129,32 +126,25 @@ class Field extends \ComponentLibrary\Component\Form\Form
         $this->data['value'] = $this->compParams['value'];
     }
 
-    public function setMinAndMaxDate($minDate, $maxDate)
+    public function setMinAndMaxDate($minDate, $maxDate, $type = 'date')
     {
+        switch ($type) {
+            case 'time':
+                $format = 'H:i';
+                break;
+            case 'date':
+                $format = 'Y-m-d';
+                break;
+            case 'datetime-local':
+                $format = 'Y-m-d\TH:i';
+                break;
+        }
+
         $minDate ?
-            $this->data['attributeList']['c-datepicker-min'] = date("n/j/Y", strtotime($minDate))
+            $this->data['attributeList']['min'] = date($format, strtotime($minDate))
             : '';
         $maxDate ?
-            $this->data['attributeList']['c-datepicker-max'] = date("n/j/Y", strtotime($maxDate))
+            $this->data['attributeList']['max'] = date($format, strtotime($maxDate))
             : '';
-    }
-
-    public function setOptionals($title)
-    {
-        $this->data['attributeList']['c-datepicker-title'] = $title;
-    }
-
-    public function setRequired($required)
-    {
-        $this->data['attributeList']['c-datepicker-required'] = $required;
-    }
-
-    public function buildUI($UI)
-    {
-        $this->data['attributeList']['c-datepicker-showResetButton'] = $UI['showResetButton'];
-        $this->data['attributeList']['c-datepicker-showDaysOutOfMonth'] = $UI['showDaysOutOfMonth'];
-        $this->data['attributeList']['c-datepicker-showClearButton'] = $UI['showClearButton'];
-        $this->data['attributeList']['c-datepicker-hideOnBlur'] = $UI['hideOnBlur'];
-        $this->data['attributeList']['c-datepicker-hideOnSelect'] = $UI['hideOnSelect'];
     }
 }

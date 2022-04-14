@@ -36,3 +36,26 @@ $alignmentClass = $baseClass . '__subfooter--align-' . $subfooter['alignment'] ?
         </div>
     </div>
 </div>
+@field([
+    'type' => 'time',
+    'value' => '',
+    'label' => 'Enter a date',
+    'attributeList' => [
+        'type' => 'text',
+        'name' => 'text',
+        'data-invalid-message' => "You need to add a valid date!",
+    ],
+    'required' => true,
+    'datepicker' => [
+        'title'                 => 'Välj ett datum',
+        'minDate'               => "6/29/1997",
+        'maxDate'               => "tomorrow",
+        'required'              => true,
+        'showResetButton'       => true,
+        'showDaysOutOfMonth'    => true,
+        'showClearButton'       => true,
+        'hideOnBlur'            => true,
+        'hideOnSelect'          => false,
+    ]
+])
+@endfield
