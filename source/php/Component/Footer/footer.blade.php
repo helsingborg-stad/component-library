@@ -60,7 +60,7 @@
         <div class="g-divider g-divider--lg"></div>
         <div class="{{ $baseClass }}__body">
             <a href="{{ $logotypeHref }}" class="{{ $baseClass }}__home-link">
-                <img id="logotype" src="{{ $logotype }}" alt="{{ __('Go to homepage', 'component-library') }}">
+                <img id="logotype" src="{{ $logotype }}" alt="{{ 'Go to homepage' }}">
             </a>
             <div class="{{ $baseClass }}__nav">
                 @if ($slot)
