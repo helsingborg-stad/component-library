@@ -9,7 +9,7 @@ $alignmentClass = $baseClass . '__subfooter--align-' . $subfooter['alignment'] ?
             @if($subfooterLogotype)
                 <div class="{{$baseClass}}__subfooter__logotype-wrapper">
                     @logotype([
-                        'id' => 'footer-logotype',
+                        'id' => 'footer-subfooter-logotype',
                         'src'=> $subfooterLogotype,
                         'alt' => __('Go to homepage', 'component-library'),
                         'classList' => [$baseClass . '__subfooter__logotype']
