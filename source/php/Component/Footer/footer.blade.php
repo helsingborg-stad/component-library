@@ -8,7 +8,7 @@
                 <div class="c-footer__header-wrapper">
                     <div class="o-container">
                         <div class="o-grid-12">
-                            @link(['href' => $logotypeHref, 'classList' => ['u-margin__right--auto']])
+                            @link(['href' => $logotypeHref])
                             @logotype([
                               'id' => 'footer-logotype',
                               'src'=> $logotype,
