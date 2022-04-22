@@ -10,9 +10,13 @@
         <div class="{{$baseClass}}__body">
 
             @if($date && !$dateBadge)
-                @typography(['variant' => 'meta', 'element' => 'span', 'classList' => [$baseClass."__date"]])
-                    {{ $date }}
-                @endtypography
+                @tags([
+                    'tags' => [
+                        ['label' => $date]
+                    ],
+                    'beforeLabel' => ''
+                ])
+                @endtags
             @endif
 
             @if($meta)
