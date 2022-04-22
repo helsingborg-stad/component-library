@@ -2,7 +2,7 @@
     "slug": "tags",
     "default": {
         "componentElement": "div",
-        "beforeLabel": "# ",
+        "beforeLabel": "#",
         "afterLabel": "",
         "format": true
     },
