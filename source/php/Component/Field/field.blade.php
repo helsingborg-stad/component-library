@@ -29,6 +29,7 @@
             @endif
 
             <input id="input_{{ $id }}"
+                type="{{$type}}"
                 value="{{$value}}"
                 {!! $attribute !!}
                 @if($required)
