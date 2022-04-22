@@ -2,6 +2,7 @@
     "slug": "block",
     "default": {
         "heading": "",
+        "content": "",
         "meta": "",
         "image": false,
         "link": "",
@@ -11,6 +12,7 @@
     },
     "description": {
         "heading": "The heading of the block",
+        "content": "Short text to describe target content.",
         "meta": "String or array of strings containing the meta information",
         "image": "Array of image attributes, src, alt, backgroudColor.",
         "link": "Simple href link",
