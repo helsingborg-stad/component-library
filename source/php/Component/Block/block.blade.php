@@ -14,7 +14,8 @@
                     'tags' => [
                         ['label' => $date]
                     ],
-                    'beforeLabel' => ''
+                    'beforeLabel' => '',
+                    'format' => false
                 ])
                 @endtags
             @endif
