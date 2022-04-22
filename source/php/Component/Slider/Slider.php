@@ -24,6 +24,10 @@ class Slider extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = 'c-slider__peek';
         }
 
+        if ($arrowButtons && is_array($arrowButtons)) {
+            $this->data['arrowButtons'] = $arrowButtons;
+        }
+
         if ($navigationHover) {
             $this->data['classList'][] = 'c-slider__navigation--hover';
         }
@@ -40,6 +44,5 @@ class Slider extends \ComponentLibrary\Component\BaseController
         if($showStepper) {
             $this->data['classList'][] = 'c-slider--has-stepper';
         }
-        
     }
 }

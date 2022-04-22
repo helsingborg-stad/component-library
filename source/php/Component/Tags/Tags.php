@@ -10,6 +10,10 @@ class Tags extends \ComponentLibrary\Component\BaseController
         extract($this->data);
 
         $this->data['tags'] = $this->arrayCleanUp($tags);
+
+        if ($format) {
+            $this->data['classList'][] = $this->getBaseClass() . "--format";
+        }
     }
 
     /**
@@ -33,11 +37,11 @@ class Tags extends \ComponentLibrary\Component\BaseController
                 if (!array_key_exists('color', $tag)) {
                     $tag['color'] = "default";
                 }
-                
+
                 $filteredTags[] = $tag;
             }
         }
-            
+
         return $filteredTags;
     }
 }

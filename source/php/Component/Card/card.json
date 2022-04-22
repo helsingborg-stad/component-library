@@ -18,8 +18,10 @@
         "color": "default",
         "tags":  null,
         "link": "",
-        "hasAction": false,
-        "ratio": "4:3"
+        "ratio": "4:3",
+        "date": false,
+        "dateBadge": false,
+        "hasFooter": false
     },
     "description": {
         "image": "A url to a image.",
@@ -40,8 +42,10 @@
         "accordion": "Array with the accordion parameters such as heading and content data",
         "dark_background": "Set the background of the card to a dark color",
         "link": "A hyperlink to another location.",
-        "hasAction": "Adds indicator that the card has an action (i.e. a link)",
-        "ratio": "The ratio of the image"
+        "ratio": "The ratio of the image",
+        "date": "Preformatted date",
+        "dateBadge": "Display date as a badge. Requires image to be set.",
+        "hasFooter": "Inidcate if the card has a footer section."
     },
     "view": "card.blade.php",
     "dependency": {

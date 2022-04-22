@@ -1,0 +1,22 @@
+{
+    "slug": "hamburgerMenu",
+    "default": {
+        "menuItems": [],
+        "parentStyle": false,
+        "mobile": false
+    },
+    "description": {
+        "menuItems": "List of arrays containing at least 'label' and 'href' option 'icon' name as string.",
+        "parentStyle": "Select the style of menu parents.",
+        "mobile": "If true, the hamburger menu will be visible on mobile as well."
+    },
+    "view": "hamburgerMenu.blade.php",
+    "dependency": {
+        "sass": {
+            "components": [
+                "menu",
+                "icon"
+            ]
+        }
+    }
+}

@@ -3,12 +3,14 @@
     "default": {
         "componentElement": "div",
         "beforeLabel": "# ",
-        "afterLabel": ""
+        "afterLabel": "",
+        "format": true
     },
     "description": {
         "componentElement": "",
         "beforeLabel": "",
-        "afterLabel": ""
+        "afterLabel": "",
+        "format": "If the component should format the input text."
     },
     "view": "tags.blade.php",
     "dependency": {

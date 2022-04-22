@@ -1,3 +1,3 @@
 @includeWhen($image && $image['src'], 'Card.components.image')
-@includeWhen($heading || $subHeading || $content || $collapsible, 'Card.partials.body')
-@includeWhen($tags || $buttons, 'Card.partials.footer')
+@includeWhen($image && $image['src'] && $dateBadge && $date, 'Card.components.datebadge')
+@includeWhen($collapsible || $heading || $subHeading || $meta || ($date && !$dateBadge) || $content || $tags || $buttons, 'Card.partials.body')
