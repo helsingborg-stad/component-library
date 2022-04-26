@@ -1,6 +1,11 @@
 <div class="{{$baseClass}} c-field">
     @if(!empty($label) && !$hideLabel)
-        <label class="{{$baseClass}}__label c-field__label" for="{{ $id }}-input" id="label_{{ $id }}">{{$label}}</label>
+        <label class="{{$baseClass}}__label c-field__label" for="{{ $id }}-input" id="label_{{ $id }}">
+            {{$label}}
+            @if($required)
+                <span class="u-color__text--danger">*</span></label>
+            @endif
+        </label>
     @endif
     <div id="{{$id}}" class="{{$baseClass}}__preview">
         <div class="{{$baseClass}}__image material-icons {{$aspectRatioClass}} is-empty"></div>
