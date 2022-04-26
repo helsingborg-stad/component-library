@@ -1,7 +1,12 @@
 <!-- field.blade.php -->
 <div class="{{$class}}" id="{{ $id }}">
     @if(!empty($label) && !$hideLabel)
-        <label class="{{$baseClass}}__label" for="input_{{ $id }}" id="label_{{ $id }}">{{$label}}</label>
+        <label class="{{$baseClass}}__label" for="input_{{ $id }}" id="label_{{ $id }}">
+            {{$label}}
+            @if($required)
+                <span class="u-color__text--danger">*</span></label>
+            @endif
+        </label>
     @endif
     
     <div class="{{$baseClass}}__inner {{$baseClass}}__inner--{{$type}}">
