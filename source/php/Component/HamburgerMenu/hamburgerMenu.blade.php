@@ -21,15 +21,30 @@
                     ])
                     @endbutton
                 @else
-                    <a href="{{$item['href']}}" class="{{$baseClass}}__link {{$baseClass}}__link--title">{{$item['label']}}</a>
+                    @link([
+                        'href' => $item['href'],
+                        'classList' => [
+                            $baseClass . '__link', 
+                            $baseClass . '__link--title'
+                        ]
+                    ])
+                        {{ $item['label'] }}
+                    @endbutton
                 @endif
                 {{-- Children --}}
                 @if (!empty($item['children']))
                     <ul class="{{$baseClass}}__sublist unlist u-margin__top--2">
                         @foreach ($item['children'] as $child)
-                            <li id="{{$id}}-item-{{$item['id']}}"
-                                class="{{$baseClass}}__item {{$baseClass}}__item--child {{ $child['classNames'] }}">
-                                <a href="{{ $child['href'] }}">{{ $child['label'] }}</a>
+                            <li id="{{$id}}-item-{{$item['id']}}" class="{{$baseClass}}__item {{$baseClass}}__item--child {{ $child['classNames'] }}">
+                                @link([
+                                    'href' => $child['href'],
+                                    'classList' => [
+                                        $baseClass . '__link', 
+                                        $baseClass . '__link--child'
+                                    ]
+                                ])
+                                    {{ $child['label'] }}
+                                @endbutton
                             </li>
                         @endforeach
                     </ul>
