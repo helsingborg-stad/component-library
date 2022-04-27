@@ -17,6 +17,10 @@ class Button extends \ComponentLibrary\Component\BaseController
 		$this->addToClassList(true, $styleClass, $colorClass);
 		$this->setSize($text, $icon, $size);
 
+        if($fullWidth) {
+            $this->data['classList'][] = $this->getBaseClass() . '__full-width';
+        }
+
 		$this->data['attributeList']['type'] = $type;
 
 		if ($toggle) {
