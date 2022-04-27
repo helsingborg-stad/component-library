@@ -22,9 +22,6 @@ class Button extends \ComponentLibrary\Component\BaseController
 		if ($toggle) {
 			$this->setToggleAttributes();
 		}
-		if ($ripple) {
-			$this->setRipple();
-		}
 
 		if ($reversePositions) {
 			$this->reversePositions();
@@ -103,16 +100,6 @@ class Button extends \ComponentLibrary\Component\BaseController
 		if (!empty($icon) && empty($text)) {
 			$this->addToClassList(true, '--icon-only');
 		}
-	}
-
-	/**
-	 * Set ripple animation on click
-	 *
-	 * @return void
-	 */
-	private function setRipple()
-	{
-		$this->addToClassList(false, 'ripple', 'ripple--before');
 	}
 
 	/**
