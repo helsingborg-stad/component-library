@@ -11,7 +11,7 @@
                 @endicon
             </span>
         @elseif($text && !$icon)
-            <span class="{{$baseClass}}__label-text {{$labelMod != '' ? ($baseClass . '__label-text' . $labelMod) : '' }}">
+            <span class="{{$baseClass}}__label-text {{$labelMod != '' ? $baseClass . '__label-text' . $labelMod : '' }}">
                 {{$text}}
             </span>
         @elseif($icon && !$text)
