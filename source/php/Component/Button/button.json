@@ -18,7 +18,9 @@
       "icon": false,
       "labelMod": "",
       "attributeList": {"js-toggle-trigger": "", "js-toggle-item": ""},
-      "reversePositions": false
+      "reversePositions": false,
+      "classListIcon": [],
+      "classListText": []
    },
    "description":{
       "label":"The label of the button.",
@@ -34,7 +36,9 @@
       "toggle": "Will toggle the color of the font.",
       "type": "What button type.",
       "style": "The type of appearance, can be basic, filled or outlined.",
-      "reversePositions": "Reverse the position of icon and text."
+      "reversePositions": "Reverse the position of icon and text.",
+      "classListIcon": "Array of classes placed on the icon",
+      "classListText": "Array of classes placed on the text"
    },
    "view":"button.blade.php",
    "dependency": {

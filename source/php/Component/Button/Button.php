@@ -18,21 +18,41 @@ class Button extends \ComponentLibrary\Component\BaseController
             $this->setToggleAttributes();
         }
 
-        if ($reversePositions) {
-            $this->reversePositions();
-        }
-
         $this->setIconOnly($text, $icon);
 
+        //Set type (submit etc.)
         if ($type) {
             $this->data['attributeList']['type'] = $type;
         }
 
+        //Make linked buttons links
         if ($href) {
             $this->data['componentElement'] = "a";
         } else {
             $this->data['componentElement'] = "button";
             $this->data['attributeList']['aria-pressed'] = $pressed;
+        }
+
+        //Reversed positions
+        if ($reversePositions && is_array($classListIcon)) {
+            $classListIcon[] = $this->getBaseClass() . '--reverse';
+        }
+        if ($reversePositions && is_array($classListText)) {
+            $classListText[] = $this->getBaseClass() . '--reverse';
+        }
+
+        //Add classes to ico
+        if (is_array($classListIcon) && !empty($classListIcon)) {
+            $this->data['classListIcon'] = implode(" ", $classListIcon);
+        } else {
+            $this->data['classListIcon'] = "";
+        }
+
+        //Add classes to text
+        if (is_array($classListText) && !empty($classListText)) {
+            $this->data['classListText'] = implode(" ", $classListText);
+        } else {
+            $this->data['classListText'] = "";
         }
     }
 
@@ -66,15 +86,5 @@ class Button extends \ComponentLibrary\Component\BaseController
         if (!empty($icon) && empty($text)) {
             $this->data['classList'][] = $this->getBaseClass() . '--icon-only';
         }
-    }
-
-    /**
-     * Reverse the positions of text and icon
-     *
-     * @return void
-     */
-    private function reversePositions()
-    {
-        $this->data['labelMod'] = '--reverse';
     }
 }
