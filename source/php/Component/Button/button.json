@@ -16,7 +16,6 @@
       "pressed": "false",
       "toggle": false,
       "icon": false,
-      "labelMod": "",
       "attributeList": {"js-toggle-trigger": "", "js-toggle-item": ""},
       "reversePositions": false,
       "classListIcon": [],
