@@ -31,6 +31,37 @@ class Block extends \ComponentLibrary\Component\BaseController
             $ratio = '4:3';
         }
 
+        if ($content) {
+            $this->data['content'] = $this->strWordCut(
+                strip_tags($content),
+                80
+            );
+        }
+
         $this->data['classList'][] = $this->getBaseClass() . '--ratio-' . str_replace(":", "-", $ratio);
+    }
+
+    /**
+     * Create a excerpt from a string
+     *
+     * @param string $string
+     * @param int $length
+     * @param string $end
+     * @return string
+     */
+    private function strWordCut($string, $length, $end = '...')
+    {
+        $string = strip_tags($string);
+
+        if (strlen($string) > $length) {
+            $stringCut = substr($string, 0, $length);
+            $string = substr(
+                $stringCut,
+                0,
+                strrpos($stringCut, ' ')
+            ) . $end;
+        }
+
+        return $string;
     }
 }

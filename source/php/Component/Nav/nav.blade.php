@@ -48,7 +48,7 @@
                             'classList' => [ $baseClass . '__toggle', 'js-toggle-children'],
                             'style' => 'basic',
                             'icon' => 'expand_more',
-                            'size' => 'lg',
+                            'size' => 'md',
                             'pressed' =>  $item['active'] ? 'true' : 'false',
                         ])
                             @loader(['size' => 'sm'])

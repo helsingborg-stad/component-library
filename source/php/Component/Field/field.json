@@ -12,7 +12,8 @@
         "placeholder": "",
         "hideLabel": false,
         "helperText": "",
-        "multiline": false
+        "multiline": false,
+        "borderless": false
     },
     "description": {
         "label": "Array of label items like labelText.",
@@ -25,7 +26,8 @@
         "placeholder": "Example value for field",
         "hideLabel": "This will remove the visible label, it's still recommended to supply a label that will be used for labelling attributes",
         "helperText": "Text displayed in the bottom (can be used for explainers or error messages",
-        "multiline": "Render textarea instead of input"
+        "multiline": "Render textarea instead of input",
+        "borderless": "Removes the border around the input field"
     },
     "view": "field.blade.php",
     "dependency": {
