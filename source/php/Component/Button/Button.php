@@ -32,6 +32,10 @@ class Button extends \ComponentLibrary\Component\BaseController
             $this->data['componentElement'] = "button";
             $this->data['attributeList']['aria-pressed'] = $pressed;
         }
+      
+        if($fullWidth) {
+            $this->data['classList'][] = $this->getBaseClass() . '__full-width';
+        }
 
         //Reversed positions
         if ($reversePositions && is_array($classListIcon)) {
