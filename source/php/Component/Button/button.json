@@ -18,6 +18,7 @@
       "icon": false,
       "attributeList": {"js-toggle-trigger": "", "js-toggle-item": ""},
       "reversePositions": false,
+      "fullWidth": false,
       "classListIcon": [],
       "classListText": []
    },
@@ -36,6 +37,7 @@
       "type": "What button type.",
       "style": "The type of appearance, can be basic, filled or outlined.",
       "reversePositions": "Reverse the position of icon and text.",
+      "fullWidth": "Makes button full width.",
       "classListIcon": "Array of classes placed on the icon",
       "classListText": "Array of classes placed on the text"
    },
