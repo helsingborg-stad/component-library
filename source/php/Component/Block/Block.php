@@ -27,7 +27,7 @@ class Block extends \ComponentLibrary\Component\BaseController
             $this->data['componentElement'] = "div";
         }
 
-        if (!in_array($ratio, ['4:3', '12:16'])) {
+        if (!in_array($ratio, ['1:1', '4:3', '12:16'])) {
             $ratio = '4:3';
         }
 
