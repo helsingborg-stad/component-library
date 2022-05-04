@@ -10,9 +10,29 @@ class Footer extends \ComponentLibrary\Component\BaseController
 
         $this->data['links'] = $this->addTargetToLinks($links);
 
-        if(!isset($this->data['logotypeHref'])) {
+        if (!isset($this->data['logotypeHref'])) {
             $this->data['logotypeHref'] = "/";
         }
+
+        $this->data['displaySubFooter'] = $this->displaySubFooter(
+            $subfooterLogotype ?? false,
+            $subfooter['content'] ?? false
+        );
+    }
+
+    /**
+     * Toggle display of subfooter
+     *
+     * @param string $logotype
+     * @param array $content
+     * @return bool
+     */
+    private function displaySubFooter($logotype, $content): bool
+    {
+        if (!$logotype && empty($content)) {
+            return false;
+        }
+        return true;
     }
 
     protected function addTargetToLinks($arr)
