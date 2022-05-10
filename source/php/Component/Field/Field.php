@@ -65,6 +65,11 @@ class Field extends \ComponentLibrary\Component\Form\Form
             $this->data['classList'][] = 'is-invalid';
         }
 
+        //Borderless
+        if ($borderless) {
+            $this->data['classList'][] = $this->getBaseClass() . "--borderless";
+        }
+
         //Handle radius
         if ($this->data['radius']) {
             $this->data['classList'][] = $this->getBaseClass() . "--radius-" . $this->data['radius'];
