@@ -9,13 +9,19 @@
     @if(!$slotHasData)
         <div class="{{$baseClass}}__body">
 
+            @if($image)
+                @image(array_merge($image, ['classList' => [$baseClass."__image"]]))
+                @endimage
+            @endif
+
             @if($date && !$dateBadge)
                 @tags([
                     'tags' => [
                         ['label' => $date]
                     ],
                     'beforeLabel' => '',
-                    'format' => false
+                    'format' => false,
+                    'classList' => [$baseClass."__tags"]
                 ])
                 @endtags
             @endif

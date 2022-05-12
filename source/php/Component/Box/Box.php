@@ -20,7 +20,7 @@ class Box extends \ComponentLibrary\Component\BaseController
         }
 
         if (!in_array($ratio, ['1:1', '4:3', '12:16'])) {
-            $ratio = '4:3';
+            $ratio = '1:1';
         }
 
         if ($content) {
