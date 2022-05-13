@@ -31,19 +31,6 @@ class Modal extends \ComponentLibrary\Component\BaseController
 			$this->data['classList'][] = $this->getBaseClass() . "--border-radius-".$borderRadius;
 		}
 
-		//Ensure animation is present
-		$animation ? $animation : $animation = "slide-down";
-
-		$this->data['parentClass'][] = "c-modal__bg";
-
-		if(isset($animation) && $animation) {
-			$this->data['parentClass'][] = "c-modal__bg__animation--" . $animation;
-		}
-
-		$this->data['parentClass'] = implode(" ", $this->data['parentClass']);
-
-		//die(var_dump( $this->data['parentClass']));
-
 		//Overlay
 		$this->data['classList'][] = $this->getBaseClass() . "--overlay-" . $overlay;
 	}
