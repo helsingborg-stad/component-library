@@ -21,13 +21,10 @@
         <{{$listItem}} class="{{$baseClass}}__page-wrapper">
             <{{$listElement}} class="{{$baseClass}}__pages" js-table-pagination--links>
                 @foreach($list as $key => $item)
-                    <{{$listItem}} class="{{$baseClass}}__item">
+                    <{{$listItem}} class="{{$baseClass}}__item" js-pagination-index="{{$key + 1}}">
                         @button([
                             'style' => $key + 1 == $current ? 'filled' : 'basic',
                             'color' => 'primary',
-                            'attributeList' => [
-                                'js-pagination-index' => $key + 1
-                            ],
                             'href' => $item['href'],
                             'classList' => [
                                 $baseClass . '__link',
