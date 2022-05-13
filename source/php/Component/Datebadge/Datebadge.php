@@ -20,5 +20,6 @@ class Datebadge extends \ComponentLibrary\Component\BaseController
         $date = strtotime($date);
         $this->data['month']    = date("M", $date);
         $this->data['day']      = date("j", $date);
+        $this->data['time']     = date("H:i", $date);
     }
 }

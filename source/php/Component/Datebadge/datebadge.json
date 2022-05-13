@@ -2,10 +2,12 @@
     "slug": "datebadge",
     "default": {
         "date": false,
+        "includeTime": false,
         "size": "md"
     },
     "description": {
         "date": "A date string in any format.",
+        "includeTime": "Will add a box with timestamp below the date.",
         "size": "The size of the datebadge. Can be either 'sm' or 'md'."
     },
     "view": "datebadge.blade.php",
