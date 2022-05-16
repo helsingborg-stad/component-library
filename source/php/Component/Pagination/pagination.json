@@ -13,7 +13,9 @@
         "nextDisabled": "false",
         "useJS": false,
         "perPage": 10,
-        "maxPages": false
+        "maxPages": false,
+        "buttonStyle": "filled",
+        "buttonSize": "sm"
     },
     "description": {
         "list": "Array with pages",
@@ -26,7 +28,9 @@
         "anchorTag": "Adds the ability to add an anchor tag in the end of every link.",
         "useJS": "If the item should use default JS to supply pagination",
         "perPage": "How many items per page",
-        "maxPages": "Maximum amount of pages"
+        "maxPages": "Maximum amount of pages",
+        "buttonStyle": "The style of button to display",
+        "buttonSize": "Size of the buttons"
     },
     "view": "pagination.blade.php",
     "dependency": {

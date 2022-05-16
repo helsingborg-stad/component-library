@@ -2,15 +2,17 @@
 @if($list)
 <{{$componentElement}} id="{{ $id }}" class="{{ $class }}" role="navigation" aria-label="Pagination Navigation" {!! $attribute !!}>
     <{{$listElement}} class="{{$baseClass}}__list">
+        
         <{{$listItem}} class="{{$baseClass}}__item--previous {{$baseClass}}__item">
             @button([
-            'style' => 'basic',
-            'color' => 'primary',
+            'style' => $buttonStyle,
+            'size' => $buttonSize,
+            'color' => 'default',
             'icon' => 'chevron_left',
             'attributeList' => [
                 'disabled' => $previousDisabled,
                 'js-pagination-prev' => ''
-                ],
+            ],
             'href' => $previous,
             ])
             @endbutton
@@ -23,12 +25,13 @@
                 @foreach($list as $key => $item)
                     <{{$listItem}} class="{{$baseClass}}__item" js-pagination-index="{{$key + 1}}">
                         @button([
-                            'style' => $key + 1 == $current ? 'filled' : 'basic',
-                            'color' => 'primary',
+                            'style' => $buttonStyle,
+                            'size' => $buttonSize,
+                            'color' => $key + 1 == $current ? 'primary' : 'default',
                             'href' => $item['href'],
                             'classList' => [
                                 $baseClass . '__link',
-                                $key + 1 == $current ? $baseClass.'__item'.$currentClass : ''
+                                $key + 1 == $current ? $baseClass.'__item' . $currentClass : ''
                             ],
                             'text' => $key +1
                         ])
@@ -42,8 +45,9 @@
 
         <{{$listItem}} class="{{$baseClass}}__item--next {{$baseClass}}__item">
             @button([
-                'style' => 'basic',
-                'color' => 'primary',
+                'style' => $buttonStyle,
+                'size' => $buttonSize,
+                'color' => 'default',
                 'icon' => 'chevron_right',
                 'attributeList' => [
                     'disabled' => $nextDisabled,

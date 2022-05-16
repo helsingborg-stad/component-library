@@ -1,16 +1,24 @@
-@icon([
-    'icon' => 'more_horiz',
-    'size' => 'md',
-    'attributeList' => [
-        'style' => 'line-height: 40px;'
-    ]
-])
-@endicon
+<{{$listItem}} class="{{$baseClass}}__item u-display--none@xs">  
+    @icon([
+        'icon' => 'more_horiz',
+        'size' => $buttonSize
+    ])
+    @endicon
+</{{$listItem}}>
 
-<{{$listItem}} class="{{$baseClass}}__item">
-    <a class="{{$baseClass}}__link" href="{{ $lastItem['href'] }}" aria-label="{{ $lastItem['label'] }}">
-        <span class="{{$baseClass}}__label">
-            {{ $lastItem['key'] +1 }}
-        </span>
-    </a>
+<{{$listItem}} class="{{$baseClass}}__item u-display--none@xs">
+    @button([
+        'style' => $buttonStyle,
+        'size' => $buttonSize,
+        'color' => 'default',
+        'href' => $lastItem['href'],
+        'classList' => [
+            $baseClass . '__link'
+        ],
+        'text' => ($lastItem['key'] +1),
+        'attributeList' => [
+            'aria-label' => $lastItem['label']
+        ]
+    ])
+    @endbutton
 </{{$listItem}}>
