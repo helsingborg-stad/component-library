@@ -2,59 +2,61 @@
 @if($list)
 <{{$componentElement}} id="{{ $id }}" class="{{ $class }}" role="navigation" aria-label="Pagination Navigation" {!! $attribute !!}>
     <{{$listElement}} class="{{$baseClass}}__list">
-        @button([
-          'style' => 'basic',
-          'color' => 'primary',
-          'icon' => 'chevron_left',
-          'attributeList' => [
-              'disabled' => $previousDisabled,
-              'js-pagination-prev' => ''
+        
+        <{{$listItem}} class="{{$baseClass}}__item--previous {{$baseClass}}__item">
+            @button([
+            'style' => $buttonStyle,
+            'size' => $buttonSize,
+            'color' => 'default',
+            'icon' => 'chevron_left',
+            'attributeList' => [
+                'disabled' => $previousDisabled,
+                'js-pagination-prev' => ''
             ],
-          'href' => $previous,
-          'classList' => [$baseClass . '__item--previous', $baseClass . '__item']
-        ])
-        @endbutton
+            'href' => $previous,
+            ])
+            @endbutton
+        </{{$listItem}}>
 
         @includeWhen($firstItem, 'Pagination.Partials.less_indicator')
 
-        <div class="u-display--flex" js-table-pagination--links>
-
-        @foreach($list as $key => $item)
-       
-          @if($key +1 == $current)
-          <{{$listItem}} class="{{$baseClass}}__item {{$baseClass}}__item{{ $currentClass }}" js-pagination-index="{{ $key +1 }}">
-            <a class="{{$baseClass}}__link" href="{{ $item['href'] }}" aria-label="{{ $key +1 }}" aria-current="true">
-              <span class="{{$baseClass}}__label">
-                {{ $key +1 }}
-              </span>
-            </a>
-          </{{$listItem}}>
-          @else
-          <{{$listItem}} class="{{$baseClass}}__item" js-pagination-index="{{ $key +1 }}">
-            <a class="{{$baseClass}}__link" href="{{ $item['href'] }}" aria-label="{{ $key +1 }}">
-              <span class="{{$baseClass}}__label">
-                {{ $key +1 }}
-              </span>
-            </a>
-          </{{$listItem}}>
-          @endif
-        @endforeach
-        </div>
+        <{{$listItem}} class="{{$baseClass}}__page-wrapper">
+            <{{$listElement}} class="{{$baseClass}}__pages" js-table-pagination--links>
+                @foreach($list as $key => $item)
+                    <{{$listItem}} class="{{$baseClass}}__item" js-pagination-index="{{$key + 1}}">
+                        @button([
+                            'style' => $buttonStyle,
+                            'size' => $buttonSize,
+                            'color' => $key + 1 == $current ? 'primary' : 'default',
+                            'href' => $item['href'],
+                            'classList' => [
+                                $baseClass . '__link',
+                                $key + 1 == $current ? $baseClass.'__item' . $currentClass : ''
+                            ],
+                            'text' => $key +1
+                        ])
+                        @endbutton
+                    </{{$listItem}}>
+                @endforeach
+            </{{$listElement}}>
+        </{{$listItem}}>
 
         @includeWhen($lastItem, 'Pagination.Partials.more_indicator')
 
-        @button([
-          'style' => 'basic',
-          'color' => 'primary',
-          'icon' => 'chevron_right',
-          'attributeList' => [
-              'disabled' => $nextDisabled,
-            'js-pagination-next' => ''
-          ],
-          'href' => $next,
-          'classList' => [$baseClass . '__item--next', $baseClass . '__item']
-        ])
-        @endbutton
+        <{{$listItem}} class="{{$baseClass}}__item--next {{$baseClass}}__item">
+            @button([
+                'style' => $buttonStyle,
+                'size' => $buttonSize,
+                'color' => 'default',
+                'icon' => 'chevron_right',
+                'attributeList' => [
+                    'disabled' => $nextDisabled,
+                    'js-pagination-next' => ''
+                ],
+                'href' => $next
+            ])
+            @endbutton
+        </{{$listItem}}>
 
     </{{$listElement}}>
 </{{$componentElement}}>
