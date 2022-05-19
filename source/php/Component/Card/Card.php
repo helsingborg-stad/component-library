@@ -39,6 +39,10 @@ class Card extends \ComponentLibrary\Component\BaseController
                 ];
         }
 
+        if ($hasPlaceholder) {
+            $this->data['classList'][] = $this->getBaseClass() . '--svg-background';
+        }
+
         if ($image && !isset($image['src']) || (isset($image['src']) && empty($image['src']))) {
                 $this->data['image'] = false;
         }
