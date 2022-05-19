@@ -34,5 +34,4 @@ class Modal extends \ComponentLibrary\Component\BaseController
         //Overlay
         $this->data['classList'][] = $this->getBaseClass() . "--overlay-" . $overlay;
     }
-
 }
