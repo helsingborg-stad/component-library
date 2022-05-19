@@ -18,7 +18,7 @@ class Modal extends \ComponentLibrary\Component\BaseController
 
         //The size
         if ($size && in_array($size, ['sm','md','lg'])) {
-            $this->data['classList'][] = $this->getBaseClass() . "--size-".$size;
+            $this->data['classList'][] = $this->getBaseClass() . "--size-" . $size;
         }
 
         //Padding
