@@ -16,7 +16,7 @@
                         "classList" => [$baseClass . '__title'],
                         "autopromote" => true
                     ])
-                        {{ $title }}
+                        {!! $title !!}
                     @endtypography
                 @endif
 
@@ -25,7 +25,7 @@
                         "variant" => "p",
                         "classList" => [$baseClass . '__text'],
                     ])
-                        {{ $content }}
+                        {!! $content !!}
                     @endtypography
                 @endif
 

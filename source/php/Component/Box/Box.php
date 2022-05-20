@@ -1,25 +1,17 @@
 <?php
 
-namespace ComponentLibrary\Component\Block;
+namespace ComponentLibrary\Component\Box;
 
 /**
- * Class Block
- * @package ComponentLibrary\Component\Block
+ * Class Box
+ * @package ComponentLibrary\Component\Box
  */
-class Block extends \ComponentLibrary\Component\BaseController
+class Box extends \ComponentLibrary\Component\BaseController
 {
     public function init()
     {
         // Extract array for easy access (fetch only)
         extract($this->data);
-
-        if ($image && !isset($image['backgroundColor'])) {
-            $this->data['image']['backgroundColor'] = 'primary';
-        }
-
-        if ($hasPlaceholder) {
-            $this->data['classList'][] = $this->getBaseClass() . '--svg-background';
-        }
 
         if ($link) {
             $this->data['componentElement'] = "a";
@@ -28,13 +20,13 @@ class Block extends \ComponentLibrary\Component\BaseController
         }
 
         if (!in_array($ratio, ['1:1', '4:3', '12:16'])) {
-            $ratio = '4:3';
+            $ratio = '1:1';
         }
 
         if ($content) {
             $this->data['content'] = $this->strWordCut(
                 strip_tags($content),
-                80
+                200
             );
         }
 

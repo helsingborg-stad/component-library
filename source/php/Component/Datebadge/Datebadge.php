@@ -18,7 +18,8 @@ class Datebadge extends \ComponentLibrary\Component\BaseController
 
         //Format
         $date = strtotime($date);
-        $this->data['month']    = date("M", $date);
-        $this->data['day']      = date("j", $date);
+        $this->data['month']    = wp_date("M", $date);
+        $this->data['day']      = wp_date("j", $date);
+        $this->data['time']     = wp_date("H:i", $date);
     }
 }

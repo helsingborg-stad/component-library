@@ -1,5 +1,5 @@
 <!-- block.blade.php -->
-<{{ $componentElement }} href="{{ $link }}" id="{{ $id }}" class="{{$class}}" @if($image && isset($image['src']))style="background-image:url('{{$image['src']}}');" @endif{!! $attribute !!}>
+<{{ $componentElement }} href="{{ $link }}" id="{{ $id }}" class="{{$class}}" {!! $attribute !!}>
 
     @if($date && $dateBadge)
         @datebadge(['date' => $date, 'classList' => ['u-position--absolute', 'u-margin--3', 'u-fixed--top-left']])
@@ -9,13 +9,19 @@
     @if(!$slotHasData)
         <div class="{{$baseClass}}__body">
 
+            @if($image)
+                @image(array_merge($image, ['classList' => [$baseClass."__image"]]))
+                @endimage
+            @endif
+
             @if($date && !$dateBadge)
                 @tags([
                     'tags' => [
                         ['label' => $date]
                     ],
                     'beforeLabel' => '',
-                    'format' => false
+                    'format' => false,
+                    'classList' => [$baseClass."__tags"]
                 ])
                 @endtags
             @endif

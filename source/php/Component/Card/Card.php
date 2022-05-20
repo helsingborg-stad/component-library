@@ -39,12 +39,16 @@ class Card extends \ComponentLibrary\Component\BaseController
                 ];
         }
 
+        if ($hasPlaceholder) {
+            $this->data['classList'][] = $this->getBaseClass() . '--svg-background';
+        }
+
         if ($image && !isset($image['src']) || (isset($image['src']) && empty($image['src']))) {
                 $this->data['image'] = false;
         }
 
         if (is_array($image) && !isset($image['backgroundColor'])) {
-                $this->data['image']['backgroundColor'] = 'white';
+                $this->data['image']['backgroundColor'] = 'primary';
         }
 
         if ($link) {
