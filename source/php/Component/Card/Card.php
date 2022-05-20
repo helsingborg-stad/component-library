@@ -48,7 +48,7 @@ class Card extends \ComponentLibrary\Component\BaseController
         }
 
         if (is_array($image) && !isset($image['backgroundColor'])) {
-                $this->data['image']['backgroundColor'] = 'white';
+                $this->data['image']['backgroundColor'] = 'primary';
         }
 
         if ($link) {
