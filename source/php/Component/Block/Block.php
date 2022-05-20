@@ -14,7 +14,7 @@ class Block extends \ComponentLibrary\Component\BaseController
         extract($this->data);
 
         if ($image && !isset($image['backgroundColor'])) {
-            $this->data['image']['backgroundColor'] = 'white';
+            $this->data['image']['backgroundColor'] = 'primary';
         }
 
         if ($hasPlaceholder) {
