@@ -32,18 +32,18 @@ class BaseController
         //Load input data
         if (!is_null($data) && is_array($data)) {
             $this->data = array_merge($this->data, $data);
-
-            //Applies a general wp filter
-            if (function_exists('apply_filters')) {
-                $this->data = apply_filters("ComponentLibrary/Component/Data", $this->data);
-            }
-
-            //Applies a general wp filter
-            if (function_exists('apply_filters')) {
-                $this->data = apply_filters($this->createFilterName($this) . DIRECTORY_SEPARATOR . "Data", $this->data);
-            }
+        }
+        
+        //Applies a general wp filter
+        if (function_exists('apply_filters')) {
+            $this->data = apply_filters("ComponentLibrary/Component/Data", $this->data);
         }
 
+        //Applies a general wp filter
+        if (function_exists('apply_filters')) {
+            $this->data = apply_filters($this->createFilterName($this) . DIRECTORY_SEPARATOR . "Data", $this->data);
+        }
+        
         //Run
         $this->init();
     }
