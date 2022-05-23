@@ -3,12 +3,19 @@
     "default": {
         "componentElement": "div",
         "style": "dashed",
-        "size": "md"
+        "size": "md",
+        "title": "",
+        "titleVariant": "h2",
+        "align": "center",
+        "frame": true
     },
     "description": {
         "componentElement": "The tag to use for this component.",
         "style": "Either dashed, solid or dotted.",
-        "size": "The length of the divider. Either sm, md or lg."
+        "size": "The length of the divider. Either sm, md or lg.",
+        "title": "Title to be displayed in the devider.",
+        "align": "Alignment of text in the divider. left, center or right.",
+        "frame": "If set to true, the title will be wrapped in a frame."
     },
     "view": "dropdown.blade.php",
     "dependency": {
