@@ -14,6 +14,16 @@ class Footer extends \ComponentLibrary\Component\BaseController
             $this->data['logotypeHref'] = "/";
         }
 
+        if (isset($subfooter['flexDirection'])) {
+            $direction = $subfooter['flexDirection'] == 'row' ? 'horizontal' : 'vertical';
+            $this->data['directionClass'] = $this->getBaseClass() . '__subfooter--' . $direction;
+        }
+
+        if (isset($subfooter['alignment'])) {
+            $alignment = $subfooter['alignment'] ?? 'flex-start';
+            $this->data['alignmentClass'] = $this->getBaseClass() . '__subfooter--align-' . $alignment;
+        }
+
         $this->data['displaySubFooter'] = $this->displaySubFooter(
             $subfooterLogotype ?? false,
             $subfooter['content'] ?? false
