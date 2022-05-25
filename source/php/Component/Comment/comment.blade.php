@@ -1,14 +1,7 @@
 <{{$componentElement}} id="{{ $id }}" class="{{ $class }}"  {!! $attribute !!}>
     <div class="{{$baseClass}}__top">
 
-
-        @if ($author_url)
-            @link([
-                'href' => $author_url,
-                'classList' => ['c-comment__link']
-            ])
-        @endif
-
+        @link(['href' => $author_url, 'classList' => ['c-comment__link']])
             @typography([
                 "variant" => "title",
                 "element" => "h6",
@@ -16,11 +9,7 @@
             ])
                 {{$author}}
             @endtypography
-
-        @if ($author_url)
-            @endlink
-        @endif
-
+        @endlink
 
         @if ($date)
             @typography([
@@ -33,20 +22,21 @@
                     'timestamp' => $date
                 ])
                 @enddate
+
+                @if ($date_suffix) {{$date_suffix}} @endif
             @endtypography
         @endif
-        @if ($date_suffix) {{$date_suffix}} @endif
     </div>
-
 
     <div class="{{$baseClass}}__bubble {{$baseClass}}__bubble--color-{{$bubble_color}}">
         @avatar([
             'name' => $author,
+            'image' => $author_image,
             'icon' => [
-            'name' => $icon,
-            'size' => 'lg'
-        ],
-            'image' => $author_image
+                'name' => $icon,
+                'size' => 'lg'
+            ],
+            
         ])
         @endavatar
 
@@ -65,5 +55,6 @@
                 {!! $slot !!}
             </div>
         @endif
+
     </div>
 </{{$componentElement}}>
