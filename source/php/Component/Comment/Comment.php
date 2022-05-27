@@ -2,36 +2,39 @@
 
 namespace ComponentLibrary\Component\Comment;
 
-class Comment extends \ComponentLibrary\Component\BaseController {
-    public function init() {
+class Comment extends \ComponentLibrary\Component\BaseController
+{
+    public function init()
+    {
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
-        $this->data['id'] = uniqid("", true);
+        //Define actions (slot)
+        $this->data['actions'] = isset($actions) ? $actions : false;
 
-        $this->isReply($is_reply);
-
-        if($filterHtml) {
-            $this->filterTags($text, $allowedTags);
-        }
-        
-    }
-
-    /**
-	 * Check if comment is a reply
-	 */
-    public function isReply($is_reply) {
+        //Is reply
         if ($is_reply) {
             $this->data['classList'][] = $this->getBaseClass() . '__is-reply';
         }
+
+        //Filter html
+        if ($filterHtml) {
+            $this->data['text'] = $this->filterTags(
+                $text,
+                $allowedTags
+            );
+        }
     }
 
-    public function filterTags($text, $allowedTextTags) {
-
+    /**
+     * Filter tags
+     */
+    public function filterTags($text, $allowedTextTags)
+    {
         $allowedTextTags = '<b><strong><i><em><mark><small><del><ins><sub><sup>';
-
         if ($text !== strip_tags($text, $allowedTextTags)) {
-            $this->data['text'] = strip_tags($text, $allowedTextTags); 
+            return strip_tags($text, $allowedTextTags);
         }
+        return $text;
     }
 }

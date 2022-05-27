@@ -60,5 +60,11 @@
                 </div>
             @endif
         </div>
+
+        @if($actions)
+            <div class="{{$baseClass}}__actions">
+                {!! $actions !!}
+            </div>
+        @endif
     </div>
 </{{$componentElement}}>
