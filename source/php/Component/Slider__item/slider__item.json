@@ -15,7 +15,8 @@
         "cta": [],
         "heroStyle": false,
         "focusPoint": {"top": 30, "left": 50},
-        "textAlignment": ""
+        "textAlignment": "",
+        "overlay": "none"
     },
     "description": {
         "title": "A title for predefined layout",
