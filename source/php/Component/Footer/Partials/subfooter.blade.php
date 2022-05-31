@@ -1,8 +1,3 @@
-@php
-$directionClass = $baseClass . '__subfooter--' . ($subfooter['flexDirection'] == 'row' ? 'horizontal' : 'vertical');
-$alignmentClass = $baseClass . '__subfooter--align-' . $subfooter['alignment'] ?? 'flex-start';
-@endphp
-
 <div class="{{$baseClass}}__subfooter {{$directionClass}} {{$alignmentClass}}">
     <div class="o-container">
         <div class="{{$baseClass}}__subfooter__wrapper">

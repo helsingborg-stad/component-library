@@ -1,20 +1,15 @@
 <!-- modal.blade.php -->
 <dialog id="{{ $id }}" class="{{ $class }}" role="dialog" aria-modal="true"
     aria-labelledby="modal__label__{{ $id }}" {!! $attribute !!}>
-    @if ($top)
-        <div class="{{ $baseClass }}__top">
-            {!! $top !!}
-        </div>
-    @endif
 
     <header class="{{ $baseClass }}__header">
         @if ($heading)
             @typography([
-            "id" => "modal__label__".$id,
-            "variant" => "h2",
-            "element" => "h2",
+                "id" => "modal__label__".$id,
+                "variant" => "h2",
+                "element" => "h2",
             ])
-            {{ $heading }}
+                {{ $heading }}
             @endtypography
         @endif
 
@@ -25,7 +20,7 @@
             'style' => 'basic',
             'attributeList' => ['data-close' => ''],
             'classList' => [$baseClass . '__close'],
-            'size' => 'xl',
+            'size' => 'lg',
         ])
         @endbutton
     </header>

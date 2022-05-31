@@ -29,8 +29,9 @@ class Button extends \ComponentLibrary\Component\BaseController
         if ($href) {
             $this->data['componentElement'] = "a";
         } else {
-            $this->data['componentElement'] = "button";
-            $this->data['attributeList']['aria-pressed'] = $pressed;
+            if (in_array($this->data['componentElement'], ['button', 'submit'])) {
+                $this->data['attributeList']['aria-pressed'] = $pressed;
+            }
         }
       
         if($fullWidth) {
