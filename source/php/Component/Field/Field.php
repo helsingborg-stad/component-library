@@ -135,13 +135,13 @@ class Field extends \ComponentLibrary\Component\Form\Form
     {
         switch ($type) {
             case 'time':
-                $format = 'H:i';
+                $format = \ComponentLibrary\Helper\Date::getDate('time');
                 break;
             case 'date':
-                $format = 'Y-m-d';
+                $format = \ComponentLibrary\Helper\Date::getDate('date');
                 break;
             case 'datetime-local':
-                $format = 'Y-m-d\TH:i';
+                $format = \ComponentLibrary\Helper\Date::getDate('date-time');
                 break;
         }
 

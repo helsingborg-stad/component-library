@@ -32,7 +32,7 @@ class Date extends \ComponentLibrary\Component\BaseController
         }
 
         //Add excact date as metadata
-        $this->data['metaDate'] = $this->formatDate(strtotime($timestamp), "Y-m-d H:i:s");
+        $this->data['metaDate'] = $this->formatDate(strtotime($timestamp), \ComponentLibrary\Helper\Date::getDate('date-time'));
     }
 
     private function formatDate($timestamp, $format) {
