@@ -134,7 +134,7 @@ class Field extends \ComponentLibrary\Component\Form\Form
     public function setMinAndMaxDate($minDate, $maxDate, $type = 'date')
     {
         $type = $type === 'datetime-local' ? 'date-time' : $type;
-        $format = \ComponentLibrary\Helper\Date::getDate($type);
+        $format = \ComponentLibrary\Helper\Date::getDateFormat($type);
 
         $minDate ?
         $this->data['attributeList']['min'] = date($format, strtotime($minDate))
