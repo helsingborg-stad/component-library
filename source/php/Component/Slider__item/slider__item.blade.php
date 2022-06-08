@@ -20,7 +20,8 @@
                 @typography([
                     "variant" => "h2",
                     "element" => "h2",
-                    'classList' => [$baseClass.'__heading']
+                    'classList' => [$baseClass.'__heading'],
+                    'autopromote' => true
                 ])
                     {{ $title }}
                 @endtypography
