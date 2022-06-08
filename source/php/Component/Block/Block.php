@@ -32,10 +32,7 @@ class Block extends \ComponentLibrary\Component\BaseController
         }
 
         if ($content) {
-            $this->data['content'] = $this->strWordCut(
-                strip_tags($content),
-                80
-            );
+            $this->data['content'] = strip_tags($content);
         }
 
         $this->data['classList'][] = $this->getBaseClass() . '--ratio-' . str_replace(":", "-", $ratio);
