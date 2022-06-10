@@ -4,10 +4,6 @@
         <div class="{{$baseClass}}__image {{ $imageClass }}" style="{{ $imageStyleString }}"></div>
     @endif
 
-    @if($layout == 'full-width' && $title||$content)
-        <div class="{{ $baseClass }}__overlay"></div>
-    @endif
-
     <div class="{{$baseClass}}__content o-container o-container--content o-container--keep-spacing">
     
         @if($title||$content)
