@@ -16,5 +16,9 @@ class Product extends \ComponentLibrary\Component\BaseController
         if (isset($image['padded']) && $image['padded']) {
             $this->data['paddedImage'] = 'c-card__image-background--padded';
         }
+
+        if ($featured) {
+            $this->data['classList'][] = 'c-product--featured';
+        }
     }
 }
