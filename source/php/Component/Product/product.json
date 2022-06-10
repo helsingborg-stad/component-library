@@ -12,18 +12,15 @@
         "featured": false
     },
     "description": {
-        "label": "Array of label items like labelText.",
-        "type": "text, checkbox and radio",
-        "required": "HTML5 validation on fields",
-        "autocomplete": "Browser automatically completes the input values based on values that the user has entered before",
-        "value": "Field value",
-        "icon": "Adds a icon before the input field.",
-        "radius": "Rounded edges say you? (none, xs, sm, md, lg)",
-        "placeholder": "Example value for field",
-        "hideLabel": "This will remove the visible label, it's still recommended to supply a label that will be used for labelling attributes",
-        "helperText": "Text displayed in the bottom (can be used for explainers or error messages",
-        "multiline": "Render textarea instead of input",
-        "borderless": "Removes the border around the input field"
+        "heading": "Product name",
+        "image": "An image object",
+        "prices": "Array of price objects",
+        "currencyFirst": "Should currency be displayed before the price",
+        "label": "Label describing the product",
+        "meta": "Extra text displayed above bullet points",
+        "bulletPoints": "Array of bullet points for the product",
+        "button": "The button to display at the bottom",
+        "featured": "Is the product featured? Make the product stand out from the rest"
     },
     "view": "field.blade.php",
     "dependency": {
