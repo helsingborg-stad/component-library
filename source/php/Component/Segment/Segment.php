@@ -63,7 +63,7 @@ class Segment extends \ComponentLibrary\Component\BaseController
         if (filter_var($image, FILTER_VALIDATE_URL) && $layout == 'full-width') {
             // Overlay
             if ($overlay) {
-                $this->data['classList'][] = 'c-segment--overlay-' . $overlay;
+                $this->data['classList'][] = 'c-segment__overlay' . $overlay;
             }
         }
 
