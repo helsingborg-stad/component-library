@@ -30,8 +30,27 @@ class Box extends \ComponentLibrary\Component\BaseController
             );
         }
 
+        //Reset - Decides how to switch between data inputs
+		$this->renderMostImportant();
+
         $this->data['classList'][] = $this->getBaseClass() . '--ratio-' . str_replace(":", "-", $ratio);
     }
+
+    /**
+	 * renderMostImportant
+	 */
+	public function renderMostImportant()
+	{
+		//Reset icon if image set
+		if ($this->data['image']['src'] ?? false) {
+			$this->data['icon'] = null;
+		}
+
+		//Reset image if icon set
+		if ($this->data['icon']['name'] ?? false) {
+			$this->data['image'] = null;
+		}
+	}
 
     /**
      * Create a excerpt from a string

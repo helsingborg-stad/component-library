@@ -14,6 +14,16 @@
                 @endimage
             @endif
 
+            @if($icon)
+                @icon(
+                    [
+                        'icon' => $icon['name'],
+                        'classList' => [$baseClass . '__icon']
+                    ]
+                )
+                @endicon
+            @endif
+
             @if($date && !$dateBadge)
                 @tags([
                     'tags' => [

@@ -7,7 +7,8 @@
         "link": "",
         "ratio": "1:1",
         "date": false,
-        "image": false
+        "image": false,
+        "icon": false
     },
     "description": {
         "heading": "The heading of the block",
@@ -16,7 +17,8 @@
         "link": "Simple href link",
         "ratio": "Ratio of the block",
         "date": "Preformatted date",
-        "image": "Image object (see image component), svg or raster image."
+        "image": "Image object (see image component), svg or raster image.",
+        "icon": "Attributes for @icon component (separate reference)."
     },
     "view": "box.blade.php",
     "dependency": {
