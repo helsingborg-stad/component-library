@@ -68,14 +68,14 @@ class Field extends \ComponentLibrary\Component\Form\Form
             $type = 'date';
         } elseif ($type === 'datetime') {
             $type = 'datetime-local';
-        } 
+        }
 
         // Handle datepicker exceptions
         if ($type === 'date' || $type === 'datetime-local' || $type === 'time') {
             $this->data['type'] = $type;
             $this->compParams['type'] = $type;
 
-            if($datepicker['required']) {
+            if ($datepicker['required']) {
                 $this->data['required'] = true;
             }
 
@@ -97,7 +97,7 @@ class Field extends \ComponentLibrary\Component\Form\Form
         if (is_array($icon) && !empty($icon)) {
             return array_merge([
                 'size' => $this->getIconSize($size),
-                'icon' => 'search'
+                'icon' => 'search',
             ], $icon);
         }
 
@@ -118,7 +118,7 @@ class Field extends \ComponentLibrary\Component\Form\Form
                 break;
             default:
                 return 'md';
-            break;
+                break;
         }
     }
 
@@ -133,23 +133,14 @@ class Field extends \ComponentLibrary\Component\Form\Form
 
     public function setMinAndMaxDate($minDate, $maxDate, $type = 'date')
     {
-        switch ($type) {
-            case 'time':
-                $format = 'H:i';
-                break;
-            case 'date':
-                $format = 'Y-m-d';
-                break;
-            case 'datetime-local':
-                $format = 'Y-m-d\TH:i';
-                break;
-        }
+        $type = $type === 'datetime-local' ? 'date-time' : $type;
+        $format = \ComponentLibrary\Helper\Date::getDateFormat($type);
 
         $minDate ?
-            $this->data['attributeList']['min'] = date($format, strtotime($minDate))
-            : '';
+        $this->data['attributeList']['min'] = date($format, strtotime($minDate))
+        : '';
         $maxDate ?
-            $this->data['attributeList']['max'] = date($format, strtotime($maxDate))
-            : '';
+        $this->data['attributeList']['max'] = date($format, strtotime($maxDate))
+        : '';
     }
 }
