@@ -39,11 +39,15 @@ class Button extends \ComponentLibrary\Component\BaseController
         }
 
         //Reversed positions
-        if ($reversePositions && is_array($classListIcon)) {
-            $classListIcon[] = $this->getBaseClass() . '--reverse';
-        }
-        if ($reversePositions && is_array($classListText)) {
-            $classListText[] = $this->getBaseClass() . '--reverse';
+        if ($reversePositions) {
+            if (!is_array($classListIcon) && empty($classListIcon)) {
+                $classListIcon = [];
+            }
+            $classListIcon[] = $this->getBaseClass() . '__label-icon--reverse';
+            if (!is_array($classListText) && empty($classListText)) {
+                $classListText = [];
+            }
+            $classListText[] = $this->getBaseClass() . '__label-text--reverse';
         }
 
         //Add classes to ico

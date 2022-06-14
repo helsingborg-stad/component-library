@@ -27,41 +27,14 @@ class Block extends \ComponentLibrary\Component\BaseController
             $this->data['componentElement'] = "div";
         }
 
-        if (!in_array($ratio, ['1:1', '4:3', '12:16'])) {
+        if (!in_array($ratio, ['1:1', '4:3', '12:16', '16:9'])) {
             $ratio = '4:3';
         }
 
         if ($content) {
-            $this->data['content'] = $this->strWordCut(
-                strip_tags($content),
-                80
-            );
+            $this->data['content'] = strip_tags($content);
         }
 
         $this->data['classList'][] = $this->getBaseClass() . '--ratio-' . str_replace(":", "-", $ratio);
-    }
-
-    /**
-     * Create a excerpt from a string
-     *
-     * @param string $string
-     * @param int $length
-     * @param string $end
-     * @return string
-     */
-    private function strWordCut($string, $length, $end = '...')
-    {
-        $string = strip_tags($string);
-
-        if (strlen($string) > $length) {
-            $stringCut = substr($string, 0, $length);
-            $string = substr(
-                $stringCut,
-                0,
-                strrpos($stringCut, ' ')
-            ) . $end;
-        }
-
-        return $string;
     }
 }

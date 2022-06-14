@@ -59,12 +59,9 @@ class Segment extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = 'c-segment--reverse';
         }
 
-        //Handle image based on view
-        if (filter_var($image, FILTER_VALIDATE_URL) && $layout == 'full-width') {
-            // Overlay
-            if ($overlay) {
-                $this->data['classList'][] = 'c-segment--overlay-' . $overlay;
-            }
+        // Add overlay class
+        if ($layout === 'full-width' && $title||$content) {
+            $this->data['classList'][] = 'c-segment' . '--has-overlay';
         }
 
         //Stringify image classlist
