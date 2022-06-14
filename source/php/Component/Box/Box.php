@@ -44,12 +44,16 @@ class Box extends \ComponentLibrary\Component\BaseController
 		//Reset icon if image set
 		if ($this->data['image']['src'] ?? false) {
 			$this->data['icon'] = null;
-		}
+		} else {
+            $this->data['image'] = null;
+        }
 
 		//Reset image if icon set
 		if ($this->data['icon']['name'] ?? false) {
 			$this->data['image'] = null;
-		}
+		} else {
+            $this->data['icon'] = null;
+        }
 	}
 
     /**
