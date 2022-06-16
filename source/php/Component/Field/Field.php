@@ -47,6 +47,18 @@ class Field extends \ComponentLibrary\Component\Form\Form
         }
         $this->data['classList'][] = $this->getBaseClass() . "--" . $size;
 
+        if ($isValid === true) {
+            $this->data['classList'][] = 'is-valid';
+        } elseif ($isValid === false) {
+            $this->data['classList'][] = 'is-invalid';
+        }
+
+        //Handle radius
+        if ($this->data['radius']) {
+            $this->data['classList'][] = $this->getBaseClass() . "--radius-" . $this->data['radius'];
+        }
+        $this->data['classList'][] = $this->getBaseClass() . "--" . $size;
+
         if (isset($isValid) && $isValid === true) {
             $this->data['classList'][] = 'is-valid';
         } elseif (isset($isValid) && $isValid === false) {
