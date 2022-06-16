@@ -60,7 +60,7 @@ class Segment extends \ComponentLibrary\Component\BaseController
         }
 
         // Add overlay class
-        if ($layout === 'full-width' && $title||$content) {
+        if ($layout === 'full-width' && ($title||$content) && !empty($image)) {
             $this->data['classList'][] = 'c-segment' . '--has-overlay';
         }
 
