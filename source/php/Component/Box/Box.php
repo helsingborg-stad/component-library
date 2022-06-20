@@ -30,31 +30,36 @@ class Box extends \ComponentLibrary\Component\BaseController
             );
         }
 
+        //Make componet take string as ico param (backward compatibility)
+        if (is_string($icon) && !empty($icon)) {
+            $this->data['icon'] = ['name' => $icon];
+        }
+
         //Reset - Decides how to switch between data inputs
-		$this->renderMostImportant();
+        $this->renderMostImportant();
 
         $this->data['classList'][] = $this->getBaseClass() . '--ratio-' . str_replace(":", "-", $ratio);
     }
 
     /**
-	 * renderMostImportant
-	 */
-	public function renderMostImportant()
-	{
-		//Reset icon if image set
-		if ($this->data['image']['src'] ?? false) {
-			$this->data['icon'] = null;
-		} else {
+     * renderMostImportant
+     */
+    public function renderMostImportant()
+    {
+        //Reset icon if image set
+        if ($this->data['image']['src'] ?? false) {
+            $this->data['icon'] = null;
+        } else {
             $this->data['image'] = null;
         }
 
-		//Reset image if icon set
-		if ($this->data['icon']['name'] ?? false) {
-			$this->data['image'] = null;
-		} else {
+        //Reset image if icon set
+        if ($this->data['icon']['name'] ?? false) {
+            $this->data['image'] = null;
+        } else {
             $this->data['icon'] = null;
         }
-	}
+    }
 
     /**
      * Create a excerpt from a string
