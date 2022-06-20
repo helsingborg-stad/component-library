@@ -18,7 +18,7 @@
         "ratio": "Ratio of the block",
         "date": "Preformatted date",
         "image": "Image object (see image component), svg or raster image.",
-        "icon": "Attributes for @icon component (separate reference)."
+        "icon": "Icon name as a string."
     },
     "view": "box.blade.php",
     "dependency": {
