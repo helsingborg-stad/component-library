@@ -17,9 +17,9 @@ class Date extends \ComponentLibrary\Component\BaseController
         if ($action == "formatDate") {
             $this->data['refinedDate'] = $this->formatDate(strtotime($timestamp), $format);
         } else if ($action == "timesince") {
-            $this->data['refinedDate'] = $this->convertToHumanReadableUnit(strtotime($timestamp), true);
+            $this->data['refinedDate'] = $this->convertToHumanReadableUnit(strtotime($timestamp), true, $labels, $labelsPlural);
         } else if ($action == "timeuntil") {
-            $this->data['refinedDate'] = $this->convertToHumanReadableUnit(strtotime($timestamp));
+            $this->data['refinedDate'] = $this->convertToHumanReadableUnit(strtotime($timestamp), false, $labels, $labelsPlural);
         } else {
             $this->data['refinedDate'] = $timestamp;
         }
@@ -32,8 +32,10 @@ class Date extends \ComponentLibrary\Component\BaseController
         }
 
         //Add excact date as metadata
-        $this->data['metaDate'] = $this->formatDate(strtotime($timestamp),
-            \ComponentLibrary\Helper\Date::getDateFormat('date-time'));
+        $this->data['metaDate'] = $this->formatDate(
+            strtotime($timestamp),
+            \ComponentLibrary\Helper\Date::getDateFormat('date-time')
+        );
     }
 
     private function formatDate($timestamp, $format)
@@ -54,7 +56,7 @@ class Date extends \ComponentLibrary\Component\BaseController
      * @param Date A timestamp of which date to count since
      * @return String Time since in words
      */
-    private function convertToHumanReadableUnit($time, $timeSince = false)
+    private function convertToHumanReadableUnit($time, $timeSince = false, $labels = [], $labelsPlural = [])
     {
         $time = $timeSince ? time() - $time : $time - time();
         $time = ($time < 1) ? 1 : $time;
@@ -69,12 +71,21 @@ class Date extends \ComponentLibrary\Component\BaseController
         );
 
         foreach ($tokens as $unit => $text) {
-            $numberOfUnits = floor($time / $unit);
+            $numberOfUnits = (int) floor($time / $unit);
 
-            if ($time > $unit) {
-                return $numberOfUnits . ' ' . $text . (($numberOfUnits > 1) ? 's' : '');
+            if ($numberOfUnits > 1) {
+                if (array_key_exists($text, $labelsPlural)) {
+                    $text = $labelsPlural[$text];
+                }
+            } else {
+                if (array_key_exists($text, $labels)) {
+                    $text = $labels[$text];
+                }
             }
 
+            if ($time >= $unit) {
+                return $numberOfUnits . ' ' . $text;
+            }
         }
 
     }
