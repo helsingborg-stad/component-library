@@ -34,7 +34,9 @@
                 ])
                     @date([
                         'action' => 'timesince',
-                        'timestamp' => $date
+                        'timestamp' => $date,
+                        'labels' => $dateLabels,
+                        'labelsPlural' => $dateLabelsPlural
                     ])
                     @enddate
     
