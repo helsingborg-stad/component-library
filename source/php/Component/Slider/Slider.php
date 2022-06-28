@@ -35,13 +35,14 @@ class Slider extends \ComponentLibrary\Component\BaseController
         if ($autoSlide) {
             $delay = is_int($autoSlide) ? $autoSlide : 5;
             $this->data['attributeList']['js-slider__autoslide'] = $delay;
+            $this->data['autoSlide'] = true;
         }
 
         if ($shadow) {
             $this->data['classList'][] = 'c-slider--shadow';
         }
 
-        if($showStepper) {
+        if ($showStepper) {
             $this->data['classList'][] = 'c-slider--has-stepper';
         }
     }
