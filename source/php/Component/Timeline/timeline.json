@@ -1,0 +1,17 @@
+{
+    "slug": "timeline",
+    "default": {
+        "events": []
+    },
+    "description": {
+        "events": "An array of events"
+    },
+    "view": "catimelinerd.blade.php",
+    "dependency": {
+        "sass": {
+            "components": [
+                "card"
+            ]
+        }
+    }
+}
