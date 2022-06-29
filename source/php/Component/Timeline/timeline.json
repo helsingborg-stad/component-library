@@ -6,7 +6,7 @@
     "description": {
         "events": "An array of events"
     },
-    "view": "catimelinerd.blade.php",
+    "view": "timeline.blade.php",
     "dependency": {
         "sass": {
             "components": [
