@@ -20,4 +20,21 @@
             {{ $slot }}
         </div>
     </div>
+
+    @if($autoSlide)
+        <div class="{{ $baseClass }}__autoslide-toggle">
+            @icon([
+                'icon' => 'play_circle',
+                'size' => 'lg',
+                'classList' => [$baseClass . '__autoslide-play']
+            ])
+            @endicon
+            @icon([
+                'icon' => 'pause_circle',
+                'size' => 'lg',
+                'classList' => [$baseClass . '__autoslide-pause']
+            ])
+            @endicon
+        </div>
+    @endif
 </div>
