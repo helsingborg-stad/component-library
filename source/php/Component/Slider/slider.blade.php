@@ -25,13 +25,13 @@
         <div class="{{ $baseClass }}__autoslide-toggle">
             @icon([
                 'icon' => 'play_circle',
-                'size' => 'lg',
+                'size' => 'xl',
                 'classList' => [$baseClass . '__autoslide-play']
             ])
             @endicon
             @icon([
                 'icon' => 'pause_circle',
-                'size' => 'lg',
+                'size' => 'xl',
                 'classList' => [$baseClass . '__autoslide-pause']
             ])
             @endicon
