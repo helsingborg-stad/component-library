@@ -13,19 +13,17 @@
             @card([
                 'classList' => [$baseClass . '__event__card'],
                 'context' => 'module.timeline.card',
-                'link' => $event['link']
+                'link' => $event['link'],
+                'heading' => $event['title'],
+                'content' => $event['content'],
+                'image' => isset($event['imageSrc'])
+                    ? [
+                        'src' => $event['imageSrc'][0],
+                        'alt' => $event['title'],
+                        'backgroundColor' => 'none'
+                    ]
+                    : []
             ])
-                @if (isset($event['imageSrc']))
-                    <div class="c-card__image">
-                        <div class="c-card__image-background u-ratio-16-9" alt="{{ $event['title'] }}"
-                            style="background-image:url('{{ $event['imageSrc'][0] }}');"></div>
-                    </div>
-                @endif
-
-                <div class="c-card__body">
-                    <h3 class="{{ $baseClass }}__title">{{ $event['title'] }}</h3>
-                    {!! $event['content'] !!}
-                </div>
             @endcard
         </li>
     @endforeach
