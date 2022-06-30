@@ -1,8 +1,8 @@
 @foreach ($prices as $price)
-    <div class="{{ $baseClass }}__price {{ $baseClass }}__price--{{ $price['backgroundColor'] ?? 'primary' }}">
+    <div class="{{ $baseClass }}__price {{ $baseClass }}__price--{{ $price['color'] ?? $backgroundColor ?? 'primary' }}">
         @typography([
             'element' => 'span',
-            'variant' => 'title',
+            'variant' => 'marketing',
             'classList' => [$baseClass . '__amount']
         ])
             {{ $price['amount'] }}
@@ -10,7 +10,7 @@
         @if (!empty($price['currency']))
             @typography([
                 'element' => 'span',
-                'variant' => 'subtitle',
+                'variant' => 'marketing',
                 'classList' => [$baseClass . '__currency']
             ])
                 {{ $price['currency'] }}
@@ -19,7 +19,7 @@
         @if (!empty($price['frequency']))
             @typography([
                 'element' => 'span',
-                'variant' => 'meta',
+                'variant' => 'subtitle',
                 'classList' => [$baseClass . '__frequency']
             ])
                 <span class="{{ $baseClass . '__seperator' }}">/</span>

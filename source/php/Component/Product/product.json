@@ -2,6 +2,7 @@
     "slug": "product",
     "default": {
         "heading": "",
+        "backgroundColor": "primary",
         "image": false,
         "prices": [],
         "currencyFirst": false,
@@ -13,6 +14,7 @@
     },
     "description": {
         "heading": "Product name",
+        "backgroundColor" : "Background color to use",
         "image": "An image object",
         "prices": "Array of price objects",
         "currencyFirst": "Should currency be displayed before the price",

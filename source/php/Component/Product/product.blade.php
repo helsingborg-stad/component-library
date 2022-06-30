@@ -1,11 +1,12 @@
 <!-- product.blade.php -->
 <div class="{{ $class }}" id="{{ $id }}">
     @card()
+        @includeWhen($image && $image['src'], 'Product.components.image')
         <div class="c-card__header">
             @typography([
                 'element' => 'h2',
                 'variant' => 'h3',
-                'classList' => [$baseClass . '__heading']
+                'classList' => [$baseClass . '__heading', $baseClass . '__heading--' . $backgroundColor]
             ])
                 {{ $heading }}
             @endtypography
@@ -18,13 +19,12 @@
             @endtypography
             @includeWhen($prices, 'Product.components.price')
         </div>
-        @includeWhen($image && $image['src'], 'Product.components.image')
         <div class="c-card__body">
             @if ($meta)
                 @typography([
                     'element' => 'p',
                     'variant' => 'meta',
-                    'classList' => ['c-product__listing']
+                    'classList' => [$baseClass . '__meta']
                 ])
                     {{ $meta }}
                 @endtypography
@@ -32,7 +32,11 @@
             @if (!empty($bulletPoints))
                 @listing([
                     'list' => $bulletPoints,
-                    'classList' => ['c-product__listing']
+                    'classList' => [$baseClass . '__listing', $baseClass . '__listing--' . $backgroundColor],
+                    'icon' => [
+                        'icon' => '',
+                        'size' => ''
+                    ]
                 ])
                 @endlisting
             @endif
