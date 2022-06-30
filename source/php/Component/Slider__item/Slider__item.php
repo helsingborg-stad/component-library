@@ -46,10 +46,6 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
             $this->data['altMobile'] = $alt;
         }
 
-        if ($heroStyle) {
-            $this->data['classList'][] = $this->getBaseClass() . "--hero";
-        }
-
         if($focusPoint) {
 
             //Create image style tag
