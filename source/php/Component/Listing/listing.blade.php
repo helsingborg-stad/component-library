@@ -12,7 +12,7 @@
               {{ $item['label'] }}
             </span>
 
-            @icon(['icon' => 'arrow_forward', 'size' => 'lg'])
+            @icon(['icon' => $icon['icon'] ?? 'arrow_forward', $icon['size'] ?? 'size' => 'lg'])
             @endicon
           </a>
           @include('Listing.sub') {{--- Recursive action ---}}
