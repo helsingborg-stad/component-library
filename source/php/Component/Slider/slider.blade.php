@@ -22,19 +22,21 @@
     </div>
 
     @if($autoSlide)
-        <div class="{{ $baseClass }}__autoslide-toggle">
-            @icon([
-                'icon' => 'play_circle',
-                'size' => 'xl',
-                'classList' => [$baseClass . '__autoslide-play']
-            ])
-            @endicon
-            @icon([
-                'icon' => 'pause_circle',
-                'size' => 'xl',
-                'classList' => [$baseClass . '__autoslide-pause']
-            ])
-            @endicon
+        <div class="{{ $baseClass }}__controls">
+            <div class="{{ $baseClass }}__autoslide-toggle">
+                @icon([
+                    'icon' => 'play_circle',
+                    'size' => 'xl',
+                    'classList' => [$baseClass . '__autoslide-play']
+                ])
+                @endicon
+                @icon([
+                    'icon' => 'pause_circle',
+                    'size' => 'xl',
+                    'classList' => [$baseClass . '__autoslide-pause']
+                ])
+                @endicon
+            </div>
         </div>
     @endif
 </div>
