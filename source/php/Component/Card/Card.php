@@ -23,6 +23,8 @@ class Card extends \ComponentLibrary\Component\BaseController
 
         if ($imageFirst) {
                 $this->data['classList'][] = $this->getBaseClass() . '--image-first';
+        } else {
+                $this->data['classList'][] = $this->getBaseClass() . '--image-last';
         }
 
         if ($hasFooter || $tags || $buttons) {
