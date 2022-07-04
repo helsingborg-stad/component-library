@@ -21,12 +21,10 @@ class Card extends \ComponentLibrary\Component\BaseController
                 $this->data['paddedImage'] = $this->getBaseClass() . '__image-background--padded';
         }
 
-        if ($imageFirst) {
+        if($imageFirst || !$image) {
                 $this->data['classList'][] = $this->getBaseClass() . '--image-first';
-        } else {
-                $this->data['classList'][] = $this->getBaseClass() . '--image-last';
-        }
-
+        }     
+        
         if ($hasFooter || $tags || $buttons) {
                 $this->data['classList'][] = $this->getBaseClass() . '--has-footer';
         }
