@@ -4,7 +4,8 @@ namespace ComponentLibrary\Component\Hero;
 
 class Hero extends \ComponentLibrary\Component\BaseController
 {
-    public function init() {
+    public function init()
+    {
 
         //Extract array for eazy access (fetch only)
         extract($this->data);
@@ -19,15 +20,19 @@ class Hero extends \ComponentLibrary\Component\BaseController
         //Add image to image styles
         if ($image) {
             $this->data['imageStyle']['background-image'] = "url('" . $image . "')";
+
+            //Add background position to image styles
+            if (isset($imageFocus) && is_array($imageFocus) && array_filter($imageFocus)) {
+                $this->data['imageStyle']['background-position'] = $imageFocus['left'] . "% " . $imageFocus['top'] . "%";
+            }
+
+            //Stringify image styles
+            $this->data['imageStyleString'] = self::buildInlineStyle($this->data['imageStyle']);
         }
 
-        //Add background position to image styles
-        if (isset($imageFocus) && is_array($imageFocus) && array_filter($imageFocus)) {
-            $this->data['imageStyle']['background-position'] = $imageFocus['left'] . "% " . $imageFocus['top'] . "%";
+        if ($video) {
+            $this->data['videoUrl'] = $video;
         }
-
-        //Stringify image styles
-        $this->data['imageStyleString'] = self::buildInlineStyle($this->data['imageStyle']);
 
         //Ratio
         if ($size) {
@@ -41,6 +46,5 @@ class Hero extends \ComponentLibrary\Component\BaseController
         } else {
             $this->data['overlay'] = false;
         }
-
     }
 }
