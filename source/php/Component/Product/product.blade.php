@@ -2,7 +2,7 @@
 <div class="{{ $class }}" id="{{ $id }}" {!! $attribute !!}>
     @card()
         @includeWhen($image && $image['src'], 'Product.components.image')
-        <div class="c-card__header">
+        <div class="c-card__header c-product__header">
             @typography([
                 'element' => 'h2',
                 'variant' => 'h3',
@@ -19,7 +19,7 @@
             @endtypography
             @includeWhen($prices, 'Product.components.price')
         </div>
-        <div class="c-card__body">
+        <div class="c-card__body c-product__body">
             @if ($meta)
                 @typography([
                     'element' => 'p',
