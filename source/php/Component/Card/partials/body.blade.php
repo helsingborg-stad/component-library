@@ -5,5 +5,5 @@
     @includeWhen($meta, 'Card.components.meta')
     @includeWhen($date, 'Card.components.date')
     @includeWhen($content, 'Card.components.content')
-{{--     @includeWhen($tags, 'Card.components.footer')
- --}}</div>
+    @includeWhen($tags, 'Card.components.footer')
+ </div>
