@@ -28,7 +28,6 @@ class Tags extends \ComponentLibrary\Component\BaseController
 
         if (!empty($arr)) {
             foreach ($arr as $tag) {
-                //var_dump($arr);
                 if (!array_key_exists('href', $tag)) {
                     $tag['href'] = "";
                 }
@@ -40,7 +39,6 @@ class Tags extends \ComponentLibrary\Component\BaseController
                 }
 
                 $filteredTags[] = $tag;
-                //var_dump($filteredTags);
             }
         }
 
