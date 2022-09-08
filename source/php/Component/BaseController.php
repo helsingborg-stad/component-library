@@ -107,7 +107,9 @@ class BaseController
         //Store locally
         if (isset($this->data['id']) && !empty($this->data['id'])) {
             $id = (string) $this->data['id'];
-        } 
+        } else {
+            $id = uniqid();
+        }
 
         return (string) strtolower($id);
     }

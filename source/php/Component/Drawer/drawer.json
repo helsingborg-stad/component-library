@@ -1,0 +1,17 @@
+{
+    "slug": "drawer",
+ 
+    "description": {
+        
+    },
+    "view": "drawer.blade.php",
+    "dependency": {
+        "sass": {
+            "components": [
+                "button",
+                "icon",
+                "nav"
+            ]
+        }
+    }
+}
