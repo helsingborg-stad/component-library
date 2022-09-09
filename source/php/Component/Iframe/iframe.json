@@ -1,0 +1,20 @@
+{
+    "slug":"iframe",
+    "default":{
+       "errorMessage":"This component is not supported by your browser.",
+       "height":300,
+       "width":600,
+	   "title": "",
+	   "src": "about:blank"
+    },
+    "view":"iframe.blade.php",
+    "dependency": {
+        "sass": {
+            "components": [
+                "notice",
+                "button",
+                "icon"
+            ]
+        }
+    }
+ }
