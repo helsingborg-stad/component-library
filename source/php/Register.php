@@ -170,7 +170,7 @@ class Register
      */
     private function registerComponentAlias($componentSlug)
     {
-        $this->blade->component(
+        $this->blade->aliasComponent(
             ucfirst($componentSlug)  . '.' . $componentSlug,
             $componentSlug
         );
