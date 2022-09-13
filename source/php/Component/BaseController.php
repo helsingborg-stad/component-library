@@ -104,14 +104,10 @@ class BaseController
      */
     private function getId()
     {
-        //Store locally
         if (isset($this->data['id']) && !empty($this->data['id'])) {
-            $id = (string) $this->data['id'];
-        } else {
-            $id = uniqid();
+            return (string) strtolower($this->data['id']);
         }
-
-        return (string) strtolower($id);
+        return "";
     }
 
     /**
