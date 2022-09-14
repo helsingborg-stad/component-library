@@ -1,11 +1,11 @@
 {
     "slug":"iframe",
     "default":{
-       "errorMessage":"This component is not supported by your browser.",
-       "height":300,
+       "height":400,
        "width":600,
 	   "title": "",
-	   "src": "about:blank"
+	   "src": "about:blank",
+	   "data-src": ""
     },
     "view":"iframe.blade.php",
     "dependency": {
