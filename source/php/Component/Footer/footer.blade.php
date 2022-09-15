@@ -23,7 +23,7 @@
                 </div>
             @endif
 
-            @if ($prefooter)
+            @if (isset($prefooter) && $prefooter)
                 <div class="c-footer__prefooter-wrapper">
                     <div class="o-container">
                         <div class="o-grid-12">
@@ -45,7 +45,7 @@
                 </div>
             @endif
 
-            @if ($postfooter)
+            @if (isset($postfooter) && $postfooter)
                 <div class="c-footer__postfooter-wrapper">
                     <div class="o-container">
                         <div class="o-grid-12">
