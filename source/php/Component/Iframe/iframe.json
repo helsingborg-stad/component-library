@@ -1,0 +1,12 @@
+{
+    "slug":"iframe",
+    "default":{
+    },
+    "view":"iframe.blade.php",
+    "dependency": {
+        "sass": {
+            "components": [
+            ]
+        }
+    }
+ }
