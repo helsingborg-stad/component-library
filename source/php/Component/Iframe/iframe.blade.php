@@ -6,5 +6,5 @@
     loading="{{ $loading }}" 
     height="{{ $height }}" 
     width="{{ $width }}" 
-    src="about:blank" {!! $attribute !!}>
+    src="about:blank">
 </iframe>
