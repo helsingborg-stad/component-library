@@ -29,6 +29,10 @@ class BaseController
      */
     public function __construct($data)
     {
+
+        //Add default context
+        $this->data['context'][] = $this->createDefaultContext($this);
+
         //Load input data
         if (!is_null($data) && is_array($data)) {
             $this->data = array_merge($this->data, $data);
@@ -43,6 +47,7 @@ class BaseController
         if (function_exists('apply_filters')) {
             $this->data = apply_filters($this->createFilterName($this) . DIRECTORY_SEPARATOR . "Data", $this->data);
         }
+
         
         //Run
         $this->init();
@@ -334,6 +339,30 @@ class BaseController
 
         //Create string
         return implode(DIRECTORY_SEPARATOR, $name);
+    }
+
+    /**
+     * Creates a context name
+     *
+     * @return string
+     */
+    private function createDefaultContext($class)
+    {
+        //Get all parts of the location
+        $name = explode(
+            "\\",
+            get_class($class)
+        );
+
+        if (isset($name[0])) {
+            unset($name[0]);
+        }
+
+        //Remove duplicates
+        $name = array_unique($name);
+
+        //Create string
+        return strtolower(implode(".", $name));
     }
 
     /**
