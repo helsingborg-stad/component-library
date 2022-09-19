@@ -13,7 +13,7 @@ class Option extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
-        if(!isset($this->data['id']) ) {
+        if(empty($this->data['id']) ) {
             $this->data['id'] = uniqid();
         }
 
