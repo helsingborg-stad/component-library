@@ -15,7 +15,7 @@
                     'u-display--none@lg'
                 ],
                 'size' => 'md',
-                'text' => "close"
+                'text' => $label
             ])
             @endbutton
 
