@@ -29,14 +29,16 @@ class BaseController
      */
     public function __construct($data)
     {
-
-        //Add default context
-        $this->data['context'][] = $this->createDefaultContext($this);
-
         //Load input data
         if (!is_null($data) && is_array($data)) {
             $this->data = array_merge($this->data, $data);
         }
+
+        //Add default context
+        if (!is_array($this->data['context'])) {
+            $this->data['context'] = [];
+        }
+        $this->data['context'][] = $this->createDefaultContext($this);
 
         //Applies a general wp filter
         if (function_exists('apply_filters')) {
