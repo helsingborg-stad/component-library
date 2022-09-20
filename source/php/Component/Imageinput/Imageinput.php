@@ -18,6 +18,10 @@ class Imageinput extends \ComponentLibrary\Component\BaseController
         //Extract array for easy access (fetch only)
         extract($this->data);
 
+        if(empty($this->data['id']) ) {
+            $this->data['id'] = uniqid();
+        }
+
         if ($display === 'area') {
             $this->data['classList'][] = 'c-imageinput--area';
         }
