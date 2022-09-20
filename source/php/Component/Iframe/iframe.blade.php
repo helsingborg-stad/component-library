@@ -5,6 +5,7 @@
     data-src="{{ $src }}" 
     loading="{{ $loading }}" 
     height="{{ $height }}" 
-    width="{{ $width }}" 
+    width="{{ $width }}"
+    frameborder="0" 
     src="{{ $src }}">
 </iframe>
