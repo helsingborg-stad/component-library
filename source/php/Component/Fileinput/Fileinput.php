@@ -9,6 +9,10 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
+        if(empty($this->data['id']) ) {
+            $this->data['id'] = uniqid();
+        }
+
         if ($display === 'area') {
             $this->data['classList'][] = 'c-fileinput--area';
         }
