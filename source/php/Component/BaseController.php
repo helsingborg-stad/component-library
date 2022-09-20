@@ -35,10 +35,7 @@ class BaseController
 
         //Load input data
         if (!is_null($data) && is_array($data)) {
-            $this->data = array_merge_recursive(
-                array_filter($this->data),
-                $data
-            );
+            $this->data = array_merge($this->data, $data);
         }
 
         //Applies a general wp filter
@@ -67,7 +64,7 @@ class BaseController
 
         //Generate classes string
         $data['class'] = $this->getClass();
-
+            
         $data['baseClass'] = $this->getBaseClass();
 
         //Create attibute string
@@ -76,7 +73,7 @@ class BaseController
         //Create id strings
         $data['id'] = $this->getId(); //"static" id dependent on the content
         $data['uid'] = $this->getUid(); //"random" id
-
+        
         //Key for if slot contains any data
         $data['slotHasData'] = !empty($this->accessProtected($this->data['slot'], "html"));
 
