@@ -7,5 +7,6 @@
     height="{{ $height }}" 
     width="{{ $width }}"
     frameborder="0" 
-    src="{{ $src }}">
+    src="{{ $src }}"
+	{!! $attribute !!}>
 </iframe>

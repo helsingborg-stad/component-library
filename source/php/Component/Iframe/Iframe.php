@@ -13,14 +13,17 @@ class Iframe extends \ComponentLibrary\Component\BaseController
 
             $suppliers = $this->getSuppliers();
             if (is_array($suppliers)) {
-                $src_url = parse_url($src);
-
-                // echo '<pre>' . print_r($src, true) . '</pre>';
+                $src_parsed = parse_url($src);
 
                 foreach ($suppliers as $supplier) {
-                    foreach ($supplier->domains as $domain) {
-                        if ($src_url['host'] == $domain) {
-                            $this->data['attributeList']['data-supplier-host'] = $domain;
+    
+                    $key = array_search($src_parsed['host'], $supplier->domain, true);
+	
+                    if (is_integer($key)) {
+                        $this->data['attributeList']['data-supplier-host'] = $supplier->domain[$key];
+                        $this->data['attributeList']['data-supplier-name'] = $supplier->name;
+                        if (isset($supplier->policy)) {
+                            $this->data['attributeList']['data-supplier-policy'] = $supplier->policy;
                         }
                     }
                 }
@@ -29,29 +32,22 @@ class Iframe extends \ComponentLibrary\Component\BaseController
     }
     public function getSuppliers()
     {
+		// TODO: Implement correct suppliers
         $suppliers = array(
             new Supplier(
                 'Google Maps',
-                'google.com',
-                true,
-                'https://policies.google.com/privacy?hl=en-US'
+                array( 'google.com', 'maps.google.com', 'google.se', 'maps.google.se' ),
+                'https://policies.google.com/privacy'
             ),
             new Supplier(
                 'YouTube',
-                'youtube.com',
-                true,
-                'https://policies.google.com/privacy?hl=en-US'
-            ),
-            new Supplier(
-                'YouTube',
-                'youtu.be',
-                true,
-                'https://policies.google.com/privacy?hl=en-US'
+                array( 'youtube.com', 'www.youtube.com', 'youtu.be' ),
+                'https://policies.google.com/privacy'
             ),
             new Supplier(
                 'Helsingborg Stad',
-                'helsingborg.se',
-                true,
+                array( 'helsingborg.se', 'www.helsingborg.se' ),
+                'https://helsingborg.se/om-webbplatsen/sa-har-behandlar-vi-dina-personuppgifter/'
             ),
         );
 
@@ -61,11 +57,11 @@ class Iframe extends \ComponentLibrary\Component\BaseController
 
 class Supplier
 {
-    public function __construct(string $name, array $domains, bool $requires_accept = true, string $policy_document = '')
+    public function __construct(string $name, array $domain, string $policy = '', bool $requires_accept = true)
     {
         $this->name = $name;
-        $this->domains = $domains;
+        $this->domain = $domain;
+        $this->policy = $policy;
         $this->requires_accept = $requires_accept;
-        $this->policy_document = $policy_document;
     }
 }
