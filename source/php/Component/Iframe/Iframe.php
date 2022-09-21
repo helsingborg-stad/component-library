@@ -12,15 +12,15 @@ class Iframe extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['data-src'] = $src;
 
             $suppliers = $this->getSuppliers();
+
             if (is_array($suppliers)) {
-                $src_url = parse_url($src);
-
-                // echo '<pre>' . print_r($src, true) . '</pre>';
-
+                $src_parsed = parse_url($src);
+                // TODO extract just the host domain without any sub domains from src and $supplier->host to make sure we're matching as broadly as possible
                 foreach ($suppliers as $supplier) {
-                    foreach ($supplier->domains as $domain) {
-                        if ($src_url['host'] == $domain) {
-                            $this->data['attributeList']['data-supplier-host'] = $domain;
+                    if ($src_parsed['host'] == $supplier->domain) {
+                        $this->data['attributeList']['data-supplier'] = $supplier->domain;
+                        if ((bool) $supplier->policy) {
+                            $this->data['attributeList']['data-policy'] = $supplier->policy;
                         }
                     }
                 }
@@ -33,25 +33,22 @@ class Iframe extends \ComponentLibrary\Component\BaseController
             new Supplier(
                 'Google Maps',
                 'google.com',
-                true,
-                'https://policies.google.com/privacy?hl=en-US'
+                'https://policies.google.com/privacy'
             ),
             new Supplier(
                 'YouTube',
                 'youtube.com',
-                true,
-                'https://policies.google.com/privacy?hl=en-US'
+                'https://policies.google.com/privacy'
             ),
             new Supplier(
                 'YouTube',
                 'youtu.be',
-                true,
-                'https://policies.google.com/privacy?hl=en-US'
+                'https://policies.google.com/privacy'
             ),
             new Supplier(
                 'Helsingborg Stad',
                 'helsingborg.se',
-                true,
+                'https://helsingborg.se/om-webbplatsen/sa-har-behandlar-vi-dina-personuppgifter/'
             ),
         );
 
@@ -61,11 +58,11 @@ class Iframe extends \ComponentLibrary\Component\BaseController
 
 class Supplier
 {
-    public function __construct(string $name, array $domains, bool $requires_accept = true, string $policy_document = '')
+    public function __construct(string $name, string $domain, string $policy = '', bool $requires_accept = true)
     {
         $this->name = $name;
-        $this->domains = $domains;
+        $this->domain = $domain;
+        $this->policy = $policy;
         $this->requires_accept = $requires_accept;
-        $this->policy_document = $policy_document;
     }
 }

@@ -3,6 +3,7 @@
     "default":{
         "loading":"lazy",
         "width":"100%",
+		"height": "400",
         "frameborder":"0"
     },
     "view":"iframe.blade.php",
