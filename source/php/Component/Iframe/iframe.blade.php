@@ -8,7 +8,7 @@
     width="{{ $width }}"
     frameborder="0" 
     src="{{ $src }}"
-    @if ($supplier) 
+    @if ($supplier && $policy) 
     data-supplier="{{$supplier}}"
     data-policy="{{$policy}}"
     @endif
