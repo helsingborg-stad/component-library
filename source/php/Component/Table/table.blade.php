@@ -5,7 +5,7 @@
             
             @if($title)
                 @typography([
-                    "variant" => "h2",
+                    "variant" => "h4",
                     "element" => "h2",
                     "classList" => [$baseClass . '__title']
                 ])
