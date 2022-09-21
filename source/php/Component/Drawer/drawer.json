@@ -1,7 +1,11 @@
 {
     "slug": "drawer",
-    "default": {},
-    "description": {},
+    "default": {
+        "label": "Close"
+    },
+    "description": {
+        "label": "What to say in the label of the close drawer button."
+    },
     "view": "drawer.blade.php",
     "dependency": {
         "sass": {
