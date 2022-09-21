@@ -35,10 +35,14 @@ class BaseController
         }
 
         //Add default context
-        if (!is_array($this->data['context'])) {
-            $this->data['context'] = [];
+        if (is_array($this->data['context'])) {
+            $this->data['context'][] = $this->createDefaultContext($this);
+        } elseif (is_string($this->data['context'])) {
+            $this->data['context'] = [
+                $this->data['context'],
+                $this->createDefaultContext($this)
+            ];
         }
-        $this->data['context'][] = $this->createDefaultContext($this);
 
         //Applies a general wp filter
         if (function_exists('apply_filters')) {
