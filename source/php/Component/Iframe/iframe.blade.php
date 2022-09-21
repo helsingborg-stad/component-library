@@ -7,5 +7,10 @@
     height="{{ $height }}" 
     width="{{ $width }}"
     frameborder="0" 
-    src="{{ $src }}">
+    src="{{ $src }}"
+    @if ($supplier) 
+    data-supplier="{{$supplier}}"
+    data-policy="{{$policy}}"
+    @endif
+    >
 </iframe>
