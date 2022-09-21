@@ -15,11 +15,12 @@ class Iframe extends \ComponentLibrary\Component\BaseController
             if (is_array($suppliers)) {
                 $src_url = parse_url($src);
 
+                // echo '<pre>' . print_r($src, true) . '</pre>';
+
                 foreach ($suppliers as $supplier) {
                     foreach ($supplier->domains as $domain) {
-                        echo '<pre>' . print_r($domain, true) . '</pre>';
-                        if ($src_url['host'] == $domain_url) {
-                            $this->data['attributeList']['data-supplier']['host'] = $domain_url;
+                        if ($src_url['host'] == $domain) {
+                            $this->data['attributeList']['data-supplier-host'] = $domain;
                         }
                     }
                 }
@@ -31,19 +32,25 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         $suppliers = array(
             new Supplier(
                 'Google Maps',
-                array( 'maps.google.com', 'google.com/maps', 'www.google.com/maps'),
+                'google.com',
                 true,
                 'https://policies.google.com/privacy?hl=en-US'
             ),
             new Supplier(
                 'YouTube',
-                array( 'youtube.com', 'www.youtube.com' ),
+                'youtube.com',
+                true,
+                'https://policies.google.com/privacy?hl=en-US'
+            ),
+            new Supplier(
+                'YouTube',
+                'youtu.be',
                 true,
                 'https://policies.google.com/privacy?hl=en-US'
             ),
             new Supplier(
                 'Helsingborg Stad',
-                array( 'helsingborg.se', 'www.helsingborg.se'),
+                'helsingborg.se',
                 true,
             ),
         );
