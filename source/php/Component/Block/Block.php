@@ -17,7 +17,7 @@ class Block extends \ComponentLibrary\Component\BaseController
             $this->data['image']['backgroundColor'] = 'primary';
         }
 
-        if ($hasPlaceholder) {
+        if (isset($hasPlaceholder) && $hasPlaceholder) {
             $this->data['classList'][] = $this->getBaseClass() . '--svg-background';
         }
 
