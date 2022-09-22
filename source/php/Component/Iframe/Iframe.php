@@ -8,6 +8,10 @@ class Iframe extends \ComponentLibrary\Component\BaseController
     {
         extract($this->data);
 
+		if ( $options ) {
+			$this->data['attributeList']['options'] = $options;
+		}
+
         if ($src) {
             $this->data['attributeList']['data-src'] = $src;
 
