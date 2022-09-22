@@ -17,8 +17,8 @@ class Iframe extends \ComponentLibrary\Component\BaseController
 
                 $this->data['supplier'] = $supplier->domain;
                 $this->data['policy'] = $supplier->policy;
+
             }
-            
         }
 		
 		if($src) {
@@ -31,7 +31,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
     {
         $suppliers = array(
             new Supplier(
-            'www.google.com',
+            'Hej',
             'https://policies.google.com/privacy?hl=en-US'
             ),
             new Supplier(
