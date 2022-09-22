@@ -37,10 +37,9 @@ class Iframe extends \ComponentLibrary\Component\BaseController
 	}
 	public function getSuppliers()
 	{
-		// TODO: Implement correct suppliers
 		$suppliers = array(
 			new Supplier(
-				'Google Maps',
+				'Google',
 				array( 'google.com', 'maps.google.com', 'google.se', 'maps.google.se' ),
 				'https://policies.google.com/privacy'
 			),
@@ -50,9 +49,9 @@ class Iframe extends \ComponentLibrary\Component\BaseController
 				'https://policies.google.com/privacy'
 			),
 			new Supplier(
-				'Helsingborg Stad',
-				array( 'helsingborg.se', 'www.helsingborg.se' ),
-				'https://helsingborg.se/om-webbplatsen/sa-har-behandlar-vi-dina-personuppgifter/'
+				'Vimeo',
+				array( 'vimeo.com', 'www.vimeo.com' ),
+				'https://policies.google.com/privacy'
 			),
 		);
 
