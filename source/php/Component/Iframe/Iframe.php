@@ -12,6 +12,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['data-src'] = $src;
 
             $suppliers = $this->getSuppliers();
+
             if (is_array($suppliers)) {
                 $src_parsed = parse_url($src);
 
