@@ -20,7 +20,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['frameborder'] = $frameborder;
         }
 
-        if ($options) {
+        if (isset($options)) {
             $this->data['attributeList']['options'] = $options;
         }
         if ($loading) {
