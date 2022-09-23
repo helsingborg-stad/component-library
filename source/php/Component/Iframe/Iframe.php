@@ -10,28 +10,28 @@ class Iframe extends \ComponentLibrary\Component\BaseController
 
         $this->data['classList'][] = 'js-suppressed-iframe';
 
-        if ($width) {
+        if (isset($width)) {
             $this->data['attributeList']['width'] = $width;
         }
 
-        if ($height) {
+        if (isset($height)) {
             $this->data['attributeList']['height'] = $height;
         }
 
-        if ($frameborder) {
+        if (isset($frameborder)) {
             $this->data['attributeList']['frameborder'] = $frameborder;
         }
 
         if (isset($options)) {
             $this->data['attributeList']['options'] = $options;
         }
-        if ($loading) {
+        if (isset($loading)) {
             $this->data['attributeList']['loading'] = $loading;
         }
 
         $this->data['attributeList']['src'] = "about:blank";
 
-        if ($src) {
+        if (isset($src)) {
             $this->data['attributeList']['data-src'] = $src;
 
             $suppliers = $this->getSuppliers();
