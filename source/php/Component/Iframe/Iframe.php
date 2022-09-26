@@ -29,31 +29,13 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         $this->data['attributeList']['src'] = "about:blank";
 
         if (isset($src)) {
-            $src_parsed = parse_url($src);
+            $srcParsed = parse_url($src);
+            $this->data['attributeList']['data-src'] = "//{$srcParsed['host']}";
 
-            $embed_url = "//{$src_parsed['host']}";
-            $embed_url .= isset($src_parsed['path']) ? $src_parsed['path'] : '';
-
-            $this->data['attributeList']['data-src'] = $embed_url;
-
-            $suppliers = $this->getSuppliers();
-
-            if (is_array($suppliers)) {
-                foreach ($suppliers as $supplier) {
-                    $key = array_search($src_parsed['host'], $supplier->domain, true);
-
-                    if (is_integer($key)) {
-                        $this->data['attributeList']['data-supplier-host'] = "//{$supplier->domain[$key]}";
-                        $this->data['attributeList']['data-supplier-name'] = $supplier->name;
-                        if (isset($supplier->policy)) {
-                            $this->data['attributeList']['data-supplier-policy'] = $supplier->policy;
-                        }
-                    }
-                }
-            }
+            $this->setSupplierDataAttributes($srcParsed['host'], $this->data);
         }
     }
-    public function getSuppliers()
+    public static function getSuppliers()
     {
         $suppliers = array(
             new Supplier(
@@ -91,15 +73,36 @@ class Iframe extends \ComponentLibrary\Component\BaseController
 
         return $suppliers;
     }
+    private function setSupplierDataAttributes(string $host, $data)
+    {
+        $this->data = $data;
+        $suppliers = $this::getSuppliers();
+
+        if (is_array($suppliers) && is_string($host)) {
+            foreach ($suppliers as $supplier) {
+                $key = array_search($host, $supplier->domain, true);
+
+                if (is_integer($key)) {
+                    $this->data['attributeList']['data-supplier-host'] = "//{$supplier->domain[$key]}";
+                    $this->data['attributeList']['data-supplier-name'] = $supplier->name;
+                    if (isset($supplier->policy)) {
+                        $this->data['attributeList']['data-supplier-policy'] = $supplier->policy;
+                    }
+                }
+            }
+        }
+
+        return $data;
+    }
 }
 
 class Supplier
 {
-    public function __construct(string $name, array $domain, string $policy = '', bool $requires_accept = true)
+    public function __construct(string $name, array $domain, string $policy = '', bool $requiresAccept = true)
     {
         $this->name = $name;
         $this->domain = $domain;
         $this->policy = $policy;
-        $this->requires_accept = $requires_accept;
+        $this->requiresAccept = $requiresAccept;
     }
 }
