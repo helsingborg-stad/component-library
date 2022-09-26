@@ -68,6 +68,11 @@ class Iframe extends \ComponentLibrary\Component\BaseController
                 array( 'vimeo.com', 'www.vimeo.com' ),
                 'https://vimeo.com/privacy'
             ),
+            new Supplier(
+                'Helsingborg Stad',
+                array( 'helsingborg.se', 'www.helsingborg.se' ),
+                'https://helsingborg.se/om-webbplatsen/sa-har-behandlar-vi-dina-personuppgifter/'
+            ),
         );
 
         return $suppliers;
