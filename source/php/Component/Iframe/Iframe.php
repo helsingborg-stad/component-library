@@ -72,6 +72,17 @@ class Iframe extends \ComponentLibrary\Component\BaseController
                 array( 'helsingborg.se', 'www.helsingborg.se' ),
                 'https://helsingborg.se/om-webbplatsen/sa-har-behandlar-vi-dina-personuppgifter/'
             ),
+            new Supplier(
+                'Mynewsdesk',
+                array( 'helsingborg.mynewsdesk.com', 'mynewsdesk.com' ),
+                'https://www.mynewsdesk.com/se/about/terms-and-conditions/'
+            ),
+            new Supplier(
+                'KommersAnnons.se',
+                array( 'kommersannons.se' ),
+                'https://kommersannons.se/'
+            ),
+
         );
 
         return $suppliers;
