@@ -29,14 +29,14 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         $this->data['attributeList']['src'] = "about:blank";
 
         if (isset($src)) {
-            $src_parsed = parse_url($src);
-            $this->data['attributeList']['data-src'] = "//{$src_parsed['host']}";
+            $srcParsed = parse_url($src);
+            $this->data['attributeList']['data-src'] = "//{$srcParsed['host']}";
 
             $suppliers = $this->getSuppliers();
 
             if (is_array($suppliers)) {
                 foreach ($suppliers as $supplier) {
-                    $key = array_search($src_parsed['host'], $supplier->domain, true);
+                    $key = array_search($srcParsed['host'], $supplier->domain, true);
 
                     if (is_integer($key)) {
                         $this->data['attributeList']['data-supplier-host'] = "//{$supplier->domain[$key]}";
@@ -91,11 +91,11 @@ class Iframe extends \ComponentLibrary\Component\BaseController
 
 class Supplier
 {
-    public function __construct(string $name, array $domain, string $policy = '', bool $requires_accept = true)
+    public function __construct(string $name, array $domain, string $policy = '', bool $requiresAccept = true)
     {
         $this->name = $name;
         $this->domain = $domain;
         $this->policy = $policy;
-        $this->requires_accept = $requires_accept;
+        $this->requiresAccept = $requiresAccept;
     }
 }
