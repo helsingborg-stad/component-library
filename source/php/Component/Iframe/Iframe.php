@@ -32,24 +32,10 @@ class Iframe extends \ComponentLibrary\Component\BaseController
             $srcParsed = parse_url($src);
             $this->data['attributeList']['data-src'] = "//{$srcParsed['host']}";
 
-            $suppliers = $this->getSuppliers();
-
-            if (is_array($suppliers)) {
-                foreach ($suppliers as $supplier) {
-                    $key = array_search($srcParsed['host'], $supplier->domain, true);
-
-                    if (is_integer($key)) {
-                        $this->data['attributeList']['data-supplier-host'] = "//{$supplier->domain[$key]}";
-                        $this->data['attributeList']['data-supplier-name'] = $supplier->name;
-                        if (isset($supplier->policy)) {
-                            $this->data['attributeList']['data-supplier-policy'] = $supplier->policy;
-                        }
-                    }
-                }
-            }
+            $this->setSupplierDataAttributes($srcParsed['host'], $this->data);
         }
     }
-    public function getSuppliers()
+    public static function getSuppliers()
     {
         $suppliers = array(
             new Supplier(
@@ -86,6 +72,27 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         );
 
         return $suppliers;
+    }
+    private function setSupplierDataAttributes(string $host, $data)
+    {
+        $this->data = $data;
+        $suppliers = $this::getSuppliers();
+
+        if (is_array($suppliers) && is_string($host)) {
+            foreach ($suppliers as $supplier) {
+                $key = array_search($host, $supplier->domain, true);
+
+                if (is_integer($key)) {
+                    $this->data['attributeList']['data-supplier-host'] = "//{$supplier->domain[$key]}";
+                    $this->data['attributeList']['data-supplier-name'] = $supplier->name;
+                    if (isset($supplier->policy)) {
+                        $this->data['attributeList']['data-supplier-policy'] = $supplier->policy;
+                    }
+                }
+            }
+        }
+
+        return $data;
     }
 }
 
