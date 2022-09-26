@@ -29,18 +29,17 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         $this->data['attributeList']['src'] = "about:blank";
 
         if (isset($src)) {
-            $this->data['attributeList']['data-src'] = $src;
+            $src_parsed = parse_url($src);
+            $this->data['attributeList']['data-src'] = "//{$src_parsed['host']}";
 
             $suppliers = $this->getSuppliers();
 
             if (is_array($suppliers)) {
-                $src_parsed = parse_url($src);
-
                 foreach ($suppliers as $supplier) {
                     $key = array_search($src_parsed['host'], $supplier->domain, true);
 
                     if (is_integer($key)) {
-                        $this->data['attributeList']['data-supplier-host'] = $supplier->domain[$key];
+                        $this->data['attributeList']['data-supplier-host'] = "//{$supplier->domain[$key]}";
                         $this->data['attributeList']['data-supplier-name'] = $supplier->name;
                         if (isset($supplier->policy)) {
                             $this->data['attributeList']['data-supplier-policy'] = $supplier->policy;
