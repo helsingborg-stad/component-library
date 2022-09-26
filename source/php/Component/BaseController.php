@@ -70,7 +70,7 @@ class BaseController
 
         //Generate classes string
         $data['class'] = $this->getClass();
-            
+
         $data['baseClass'] = $this->getBaseClass();
 
         //Create attibute string
@@ -79,7 +79,7 @@ class BaseController
         //Create id strings
         $data['id'] = $this->getId(); //"static" id dependent on the content
         $data['uid'] = $this->getUid(); //"random" id
-        
+
         //Key for if slot contains any data
         $data['slotHasData'] = !empty($this->accessProtected($this->data['slot'], "html"));
 
@@ -133,16 +133,17 @@ class BaseController
         return $this->uid = uniqid();
     }
 
-    private function getNamespaceParts() {
+    private function getNamespaceParts()
+    {
         //Get all parts of the location
         return explode(
             "\\",
             get_called_class()
         );
-
     }
 
-    private function setModifier($class, $modifier) {
+    private function setModifier($class, $modifier)
+    {
         if (!empty($modifier)) {
             foreach ($modifier as &$value) {
                 if ($value) {
@@ -168,7 +169,6 @@ class BaseController
                 (string) $this->getBaseClass()
             );
             $class = (array) $this->data['classList'];
-            
         } else {
             $class = array();
         }
@@ -181,7 +181,7 @@ class BaseController
             $modifier = apply_filters("ComponentLibrary/Component/Modifier", [], $this->data['context']);
             $class = $this->setModifier($class, $modifier);
         }
-        
+
         //Applies component specific wp filter
         if (function_exists('apply_filters')) {
             $modifier = apply_filters("ComponentLibrary/Component/". $componentName ."/Modifier", [], $this->data['context']);
@@ -191,7 +191,6 @@ class BaseController
         //Applies a general wp filter
         if (function_exists('apply_filters')) {
             $class = apply_filters("ComponentLibrary/Component/Class", $class);
-            
         }
 
         //Applies component specific wp filter
@@ -243,7 +242,6 @@ class BaseController
 
     private function getAttribute($implode = true)
     {
-
         //Store locally
         if (isset($this->data['attributeList']) && is_array($this->data['attributeList'])) {
             $attribute = (array) $this->data['attributeList'];
@@ -252,7 +250,7 @@ class BaseController
         }
 
         //Add attribute for container awareness
-        if($this->getContainerAware() == true) {
+        if ($this->getContainerAware() == true) {
             $attribute['data-observe-resizes'] = "";
         }
 
@@ -269,14 +267,14 @@ class BaseController
             $attribute = apply_filters("ComponentLibrary/Component/Attribute", $attribute);
         }
 
-        //Sanitize "broken" css. 
-        if(isset($attribute['style'])) {
-            $attribute['style'] = trim($this->sanitizeInlineCss($attribute['style'])); 
+        //Sanitize "broken" css.
+        if (isset($attribute['style'])) {
+            $attribute['style'] = trim($this->sanitizeInlineCss($attribute['style']));
         }
 
         //Remove empty style attrs
-        if(empty($attribute['style'])) {
-            unset($attribute['style']); 
+        if (empty($attribute['style'])) {
+            unset($attribute['style']);
         }
 
         //Return manipulated classes as array
@@ -294,7 +292,8 @@ class BaseController
      * @param string $inlineCss
      * @return string $inlineCss
      */
-    private function sanitizeInlineCss($inlineCss) {
+    private function sanitizeInlineCss($inlineCss)
+    {
         return preg_replace('/.*:\s*;/i', '', $inlineCss);
     }
 
