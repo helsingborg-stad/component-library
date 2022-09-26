@@ -22,9 +22,6 @@ class Iframe extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['frameborder'] = $frameborder;
         }
 
-        if (isset($options)) {
-            $this->data['attributeList']['options'] = $options;
-        }
         if (isset($loading)) {
             $this->data['attributeList']['loading'] = $loading;
         }
