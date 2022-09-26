@@ -30,7 +30,11 @@ class Iframe extends \ComponentLibrary\Component\BaseController
 
         if (isset($src)) {
             $src_parsed = parse_url($src);
-            $this->data['attributeList']['data-src'] = "//{$src_parsed['host']}";
+
+            $embed_url = "//{$src_parsed['host']}";
+            $embed_url .= isset($src_parsed['path']) ? $src_parsed['path'] : '';
+
+            $this->data['attributeList']['data-src'] = $embed_url;
 
             $suppliers = $this->getSuppliers();
 
