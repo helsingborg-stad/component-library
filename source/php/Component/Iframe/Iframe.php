@@ -37,6 +37,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
 			$this->data['attributeList']['data-src'] = $embedUrl;
 
 			$this->setSupplierDataAttributes($embedUrl, $this->data);
+
 		}
 	}
 	public static function getSuppliers()
