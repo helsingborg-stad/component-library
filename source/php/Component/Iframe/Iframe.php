@@ -76,7 +76,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         );
 
         if (function_exists('apply_filters')) {
-            $suppliers = apply_filters(__NAMESPACE__ . '\\' . ucfirst(__FUNCTION__), $suppliers);
+            return apply_filters(__NAMESPACE__ . '\\' . ucfirst(__FUNCTION__), $suppliers);
         }
 
         return $suppliers;
