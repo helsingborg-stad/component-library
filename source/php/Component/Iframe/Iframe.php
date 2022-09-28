@@ -30,7 +30,9 @@ class Iframe extends \ComponentLibrary\Component\BaseController
 
         if (isset($src)) {
             $srcParsed = parse_url($src);
-            $embedUrl = $srcParsed['scheme'] . '://' . $srcParsed['host'];
+
+            $scheme = $srcParsed['scheme'] ?? 'https';
+            $embedUrl = $scheme . '://' . $srcParsed['host'];
             if (isset($srcParsed['path'])) {
                 $embedUrl .= $srcParsed['path'];
             }
