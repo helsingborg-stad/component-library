@@ -36,7 +36,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
             }
             $this->data['attributeList']['data-src'] = $embedUrl;
 
-            $this->setSupplierDataAttributes($embedUrl, $this->data);
+            $this->data = $this->setSupplierDataAttributes($srcParsed['host'], $this->data);
         }
     }
     public static function getSuppliers()
@@ -100,7 +100,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
             }
         }
 
-        return $data;
+        return $this->data;
     }
 }
 
