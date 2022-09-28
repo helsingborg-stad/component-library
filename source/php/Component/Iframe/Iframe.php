@@ -29,16 +29,8 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         $this->data['attributeList']['src'] = "about:blank";
 
         if (isset($src)) {
-            $srcParsed = parse_url($src);
-
-            $scheme = $srcParsed['scheme'] ?? 'https';
-            $embedUrl = $scheme . '://' . $srcParsed['host'];
-            if (isset($srcParsed['path'])) {
-                $embedUrl .= $srcParsed['path'];
-            }
-            $this->data['attributeList']['data-src'] = $embedUrl;
-
-            $this->data = $this->setSupplierDataAttributes($srcParsed['host'], $this->data);
+            $this->data['attributeList']['data-src'] = $this->buildEmbedUrl($src);
+            $this->data = $this->setSupplierDataAttributes($src, $this->data);
         }
     }
     public static function getSuppliers()
@@ -83,14 +75,16 @@ class Iframe extends \ComponentLibrary\Component\BaseController
 
         return $suppliers;
     }
-    private function setSupplierDataAttributes(string $host, $data)
+    private function setSupplierDataAttributes(string $src, array $data)
     {
         $this->data = $data;
         $suppliers = $this::getSuppliers();
 
-        if (is_array($suppliers) && is_string($host)) {
+        $srcParsed = parse_url($src);
+
+        if (is_array($suppliers)) {
             foreach ($suppliers as $supplier) {
-                $key = array_search($host, $supplier->domain, true);
+                $key = array_search($srcParsed['host'], $supplier->domain, true);
 
                 if (is_integer($key)) {
                     $this->data['attributeList']['data-supplier-host'] = $supplier->domain[$key];
@@ -103,6 +97,37 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         }
 
         return $this->data;
+    }
+    public function buildEmbedUrl($src)
+    {
+        $srcParsed = parse_url($src);
+
+        $scheme = $srcParsed['scheme'] ?? 'https';
+
+        switch ($srcParsed['host']) {
+            case 'youtube.com':
+            case 'www.youtube.com':
+                $srcParsed['path'] = '/embed/'; // Replace any existing path with /embed/
+
+                parse_str($srcParsed['query'], $query);
+                if (isset($query['v'])) {
+                    $srcParsed['path'] .= $query['v'];
+                }
+                break;
+            default:
+                break;
+        }
+
+        $embedUrl = $scheme . '://' . $srcParsed['host'];
+
+        if (isset($srcParsed['path'])) {
+            $embedUrl .= $srcParsed['path'];
+        }
+        if (isset($srcParsed['query'])) {
+            $embedUrl .= '?' . $srcParsed['query'];
+        }
+
+        return $embedUrl;
     }
 }
 
