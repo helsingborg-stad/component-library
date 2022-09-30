@@ -121,12 +121,16 @@ class Iframe extends \ComponentLibrary\Component\BaseController
                 break;
             case 'youtu.be':
                 $srcParsed['host'] = 'youtube.com';
-                $srcParsed['path'] = '/embed/' . $srcParsed['path'];
+                if (isset($srcParsed['path'])) {
+                    $srcParsed['path'] = '/embed/' . $srcParsed['path'];
+                }
                 break;
             case 'vimeo.com':
             case 'www.vimeo.com':
                 $srcParsed['host'] = 'player.vimeo.com';
-                $srcParsed['path'] = '/video' . $srcParsed['path'];
+                if (isset($srcParsed['path'])) {
+                    $srcParsed['path'] = '/video' . $srcParsed['path'];
+                }
                 break;
             default:
                 break;
