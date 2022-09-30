@@ -104,7 +104,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
     {
         $srcParsed = parse_url($src);
 
-        $ytParams = '?autoplay=0&autohide=1&cc_load_policy=0&enablejsapi=1&modestbranding=1&showinfo=0&autohide=1&iv_load_policy=3&rel=0';
+        $ytParams = 'autoplay=0&showinfo=0&rel=0';
 
         switch ($srcParsed['host']) {
             case 'youtube.com':
