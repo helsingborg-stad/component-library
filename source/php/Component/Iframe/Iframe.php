@@ -98,26 +98,31 @@ class Iframe extends \ComponentLibrary\Component\BaseController
 
         return $this->data;
     }
-    public function buildEmbedUrl($src)
+    private function buildEmbedUrl($src)
     {
         $srcParsed = parse_url($src);
-
-        $scheme = $srcParsed['scheme'] ?? 'https';
 
         switch ($srcParsed['host']) {
             case 'youtube.com':
             case 'www.youtube.com':
-                $srcParsed['path'] = '/embed/'; // Replace any existing path with /embed/
-
+                /* Replacing the path with /embed/ and then adding the v query parameter to the path and removing the v parameter from the query string. */
+                $srcParsed['path'] = '/embed/';
                 parse_str($srcParsed['query'], $query);
                 if (isset($query['v'])) {
                     $srcParsed['path'] .= $query['v'];
+                    unset($query['v']);
+                    $queryStr = http_build_query($query);
+                    $srcParsed['query'] = $queryStr;
                 }
+                break;
+            case 'vimeo.com':
+            case 'www.vimeo.com':
                 break;
             default:
                 break;
         }
 
+        $scheme = $srcParsed['scheme'] ?? 'https';
         $embedUrl = $scheme . '://' . $srcParsed['host'];
 
         if (isset($srcParsed['path'])) {
