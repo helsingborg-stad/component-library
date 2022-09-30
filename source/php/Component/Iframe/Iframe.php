@@ -48,7 +48,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
             ),
             new Supplier(
                 'Vimeo',
-                array( 'vimeo.com', 'www.vimeo.com' ),
+                array( 'vimeo.com', 'www.vimeo.com', 'player.vimeo.com' ),
                 'https://vimeo.com/privacy'
             ),
             new Supplier(
