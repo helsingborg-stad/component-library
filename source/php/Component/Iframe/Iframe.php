@@ -149,7 +149,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
             $embedUrl .= '?' . $srcParsed['query'];
         }
 
-        return $embedUrl;
+        return strtolower($embedUrl);
     }
 }
 
