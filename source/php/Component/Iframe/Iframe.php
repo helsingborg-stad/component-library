@@ -102,6 +102,8 @@ class Iframe extends \ComponentLibrary\Component\BaseController
     {
         $srcParsed = parse_url($src);
 
+        $ytParams = '?autoplay=0&autohide=1&cc_load_policy=0&enablejsapi=1&modestbranding=1&showinfo=0&autohide=1&iv_load_policy=3&rel=0';
+
         switch ($srcParsed['host']) {
             case 'youtube.com':
             case 'www.youtube.com':
@@ -113,9 +115,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
                     parse_str($srcParsed['query'], $query);
                     if (isset($query['v'])) {
                         $srcParsed['path'] .= $query['v'];
-                        unset($query['v']);
-                        $queryStr = http_build_query($query);
-                        $srcParsed['query'] = $queryStr;
+                        $srcParsed['query'] = $ytParams;
                     }
                 }
                 break;
@@ -123,6 +123,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
                 $srcParsed['host'] = 'youtube.com';
                 if (isset($srcParsed['path'])) {
                     $srcParsed['path'] = '/embed/' . $srcParsed['path'];
+                    $srcParsed['query'] = $ytParams;
                 }
                 break;
             case 'vimeo.com':
