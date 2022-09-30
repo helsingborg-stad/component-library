@@ -18,7 +18,8 @@
             "components": [
                 "testimonials",
                 "image",
-                "typography"
+                "typography",
+                "card"
             ]
         }
     }
