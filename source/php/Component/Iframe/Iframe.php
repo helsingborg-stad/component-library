@@ -140,7 +140,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         }
 
         $scheme = $srcParsed['scheme'] ?? 'https';
-        $embedUrl = $scheme . '://' . $srcParsed['host'];
+        $embedUrl = $scheme . '://' . strtolower( $srcParsed['host'] );
 
         if (isset($srcParsed['path'])) {
             $embedUrl .= $srcParsed['path'];
@@ -149,7 +149,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
             $embedUrl .= '?' . $srcParsed['query'];
         }
 
-        return strtolower($embedUrl);
+        return $embedUrl;
     }
 }
 
