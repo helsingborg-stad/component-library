@@ -106,14 +106,22 @@ class Iframe extends \ComponentLibrary\Component\BaseController
             case 'youtube.com':
             case 'www.youtube.com':
                 /* Replacing the path with /embed/ and then adding the v query parameter to the path and removing the v parameter from the query string. */
+                $srcParsed['host'] = 'youtube.com';
                 $srcParsed['path'] = '/embed/';
-                parse_str($srcParsed['query'], $query);
-                if (isset($query['v'])) {
-                    $srcParsed['path'] .= $query['v'];
-                    unset($query['v']);
-                    $queryStr = http_build_query($query);
-                    $srcParsed['query'] = $queryStr;
+
+                if (isset($srcParsed['query'])) {
+                    parse_str($srcParsed['query'], $query);
+                    if (isset($query['v'])) {
+                        $srcParsed['path'] .= $query['v'];
+                        unset($query['v']);
+                        $queryStr = http_build_query($query);
+                        $srcParsed['query'] = $queryStr;
+                    }
                 }
+                break;
+            case 'youtu.be':
+                $srcParsed['host'] = 'youtube.com';
+                $srcParsed['path'] = '/embed/' . $srcParsed['path'];
                 break;
             case 'vimeo.com':
             case 'www.vimeo.com':
