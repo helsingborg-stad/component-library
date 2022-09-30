@@ -98,26 +98,46 @@ class Iframe extends \ComponentLibrary\Component\BaseController
 
         return $this->data;
     }
-    public function buildEmbedUrl($src)
+    private function buildEmbedUrl($src)
     {
         $srcParsed = parse_url($src);
 
-        $scheme = $srcParsed['scheme'] ?? 'https';
+        $ytParams = '?autoplay=0&autohide=1&cc_load_policy=0&enablejsapi=1&modestbranding=1&showinfo=0&autohide=1&iv_load_policy=3&rel=0';
 
         switch ($srcParsed['host']) {
             case 'youtube.com':
             case 'www.youtube.com':
-                $srcParsed['path'] = '/embed/'; // Replace any existing path with /embed/
+                /* Replacing the path with /embed/ and then adding the v query parameter to the path and removing the v parameter from the query string. */
+                $srcParsed['host'] = 'youtube.com';
+                $srcParsed['path'] = '/embed/';
 
-                parse_str($srcParsed['query'], $query);
-                if (isset($query['v'])) {
-                    $srcParsed['path'] .= $query['v'];
+                if (isset($srcParsed['query'])) {
+                    parse_str($srcParsed['query'], $query);
+                    if (isset($query['v'])) {
+                        $srcParsed['path'] .= $query['v'];
+                        $srcParsed['query'] = $ytParams;
+                    }
+                }
+                break;
+            case 'youtu.be':
+                $srcParsed['host'] = 'youtube.com';
+                if (isset($srcParsed['path'])) {
+                    $srcParsed['path'] = '/embed/' . $srcParsed['path'];
+                    $srcParsed['query'] = $ytParams;
+                }
+                break;
+            case 'vimeo.com':
+            case 'www.vimeo.com':
+                $srcParsed['host'] = 'player.vimeo.com';
+                if (isset($srcParsed['path'])) {
+                    $srcParsed['path'] = '/video' . $srcParsed['path'];
                 }
                 break;
             default:
                 break;
         }
 
+        $scheme = $srcParsed['scheme'] ?? 'https';
         $embedUrl = $scheme . '://' . $srcParsed['host'];
 
         if (isset($srcParsed['path'])) {
