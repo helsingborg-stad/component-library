@@ -81,13 +81,15 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         $suppliers = $this::getSuppliers();
 
         $srcParsed = parse_url($src);
+        $host = strtolower($srcParsed['host']);
 
         if (is_array($suppliers)) {
             foreach ($suppliers as $supplier) {
-                $key = array_search($srcParsed['host'], $supplier->domain, true);
+                $supplierDomain = strtolower($supplier->domain);
+                $key = array_search($host, $supplierDomain, true);
 
                 if (is_integer($key)) {
-                    $this->data['attributeList']['data-supplier-host'] = $supplier->domain[$key];
+                    $this->data['attributeList']['data-supplier-host'] = $supplierDomain[$key];
                     $this->data['attributeList']['data-supplier-name'] = $supplier->name;
                     if (isset($supplier->policy)) {
                         $this->data['attributeList']['data-supplier-policy'] = $supplier->policy;
