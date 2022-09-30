@@ -125,6 +125,8 @@ class Iframe extends \ComponentLibrary\Component\BaseController
                 break;
             case 'vimeo.com':
             case 'www.vimeo.com':
+                $srcParsed['host'] = 'player.vimeo.com';
+                $srcParsed['path'] = '/video' . $srcParsed['path'];
                 break;
             default:
                 break;
