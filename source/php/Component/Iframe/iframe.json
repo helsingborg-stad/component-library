@@ -1,17 +1,19 @@
 {
-	"slug":"iframe",
-	"default":{
-		"src":"about:blank",
-		"loading":"lazy",
-		"width":"100%",
+	"slug": "iframe",
+	"default": {
+		"src": "about:blank",
+		"loading": "lazy",
+		"width": "100%",
 		"height": "400",
-		"frameborder":"0",
-		"options":""
+		"frameborder": "0",
+		"options": ""
 	},
-	"view":"iframe.blade.php",
+	"view": "iframe.blade.php",
 	"dependency": {
 		"sass": {
 			"components": [
+				"button",
+				"typography"
 			]
 		}
 	}
