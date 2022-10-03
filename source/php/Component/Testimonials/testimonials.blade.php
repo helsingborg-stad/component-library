@@ -38,32 +38,30 @@
         ])
             @card([
             ])                
-                <div class="{{ $baseClass}}__header">
-                    @typography([
-                            "element" => "h2",
-                            "classList" => ['u-color__text--darker']
-                        ])
-                        name
-                    @endtypography
+                @typography([
+                    "element" => "h2",
+                    "classList" => ['u-color__text--darker']
+                ])
+                    name
+                @endtypography
                 
-                    @typography([                            
-                        "element" => "h3",
-                        'variant' => 'h3',
-                        "classList" => ['u-color__text--darker']
-                    ])
-                        title
-                    @endtypography
-                </div>
+                @typography([                            
+                    "element" => "h3",
+                    'variant' => 'h3',
+                    "classList" => ['u-color__text--darker']
+                ])
+                title
+                @endtypography
+
                 
-                <div class="{{ $baseClass }}__quote">
-                    @typography([
-                        "variant" => "p",
-                        "element" => "p",
-                        "classList" => ['u-color__text--darker']
-                    ])
-                        "testimonial..."
-                    @endtypography
-                </div>
+                @typography([
+                    "variant" => "p",
+                    "element" => "p",
+                    "classList" => ['u-color__text--darker']
+                ])
+                "testimonial..."
+                @endtypography
+
             @endcard 
         @endslider__item
 
