@@ -14,56 +14,97 @@
 @endif
 
 @if (count($testimonials) > 1 && $isCarousel)
+<div class="{{$baseClass . 's-carousel'}}">
     @slider([
-        'showStepper' => true,
+        'showStepper' => false,
         'autoSlide' => false,
         'repeatSlide' => true,
     ])
-        @slider__item([
-            'title' => 'First slider item',
-            'sub_title' => 'This is a slightly longer title called subtitle',
-            'text' => 'Here I could put some lorem ipsum text but I am too lazy to Google for one so I wrote all this instead. Woo!',
-            'layout' => 'center',
-            'containerColor' => 'none',
-            'overlay' => 'dark',
-            'textColor' => 'white',
-            'textAlignment' => 'center',
-            'mobile_image' => 'https://picsum.photos/720/720',
-            'desktop_image' => 'https://picsum.photos/1080/720',
-            'heroStyle' => true
-        ])
+        {{-- 1st ITEM --}}
+        @slider__item([])
+            @card(['classList' => [$baseClass .'s-carousel__item']]) 
+                @image([
+                    'classList' => [$baseClass . '__image'],
+                    'src'=> 'https://picsum.photos/1080/720',
+                    'alt' => ''
+                    ])
+                @endimage
+                    
+                <div class="{{$baseClass .'__header'}}">               
+                    @typography([
+                        "element" => "h2",
+                        "classList" => ['u-color__text--darker']
+                    ])
+                        Pamela Cronqvist
+                    @endtypography
+
+                    @divider(['style' => 'solid'])
+                    @enddivider
+                    
+                    @typography([                            
+                        "element" => "h3",
+                        'variant' => 'h3',
+                        "classList" => ['u-color__text--darker']
+                    ])
+                        Lärare i svenska och engelska
+                    @endtypography
+                </div>
+
+                <div class="{{ $baseClass }}__quote">
+                    @typography([
+                        "variant" => "p",
+                        "element" => "p",
+                        "classList" => ['u-color__text--darker', ]
+                    ])
+                        ”Tycho Braheskolan är en skola där både elever och lärare trivs. Vi har en stark studietradition och är en uttalad ”pluggskola”, men samtidigt vet vi att man måste ha roligt för att lära sig. Ambitionerna är höga och tillsammans jobbar vi för att nå bästa möjliga resultat.”
+                    @endtypography
+                </div> 
+            @endcard 
         @endslider__item
+        
+        {{-- 2nd ITEM --}}
+        @slider__item([])
+            @card(['classList' => [$baseClass .'s-carousel__item']]) 
+                @image([
+                    'classList' => [$baseClass . '__image'],
+                    'src'=> 'https://picsum.photos/1080/720',
+                    'alt' => ''
+                    ])
+                @endimage
+                    
+                <div class="{{$baseClass .'__header'}}">               
+                    @typography([
+                        "element" => "h2",
+                        "classList" => ['u-color__text--darker']
+                    ])
+                        Pamela Cronqvist
+                    @endtypography
 
-        @slider__item([
-        ])
-            @card([
-            ])                
-                @typography([
-                    "element" => "h2",
-                    "classList" => ['u-color__text--darker']
-                ])
-                    name
-                @endtypography
-                
-                @typography([                            
-                    "element" => "h3",
-                    'variant' => 'h3',
-                    "classList" => ['u-color__text--darker']
-                ])
-                title
-                @endtypography
+                    @divider(['style' => 'solid'])
+                    @enddivider
+                    
+                    @typography([                            
+                        "element" => "h3",
+                        'variant' => 'h3',
+                        "classList" => ['u-color__text--darker']
+                    ])
+                        Lärare i svenska och engelska
+                    @endtypography
+                </div>
 
-                
-                @typography([
-                    "variant" => "p",
-                    "element" => "p",
-                    "classList" => ['u-color__text--darker']
-                ])
-                "testimonial..."
-                @endtypography
-
+                <div class="{{ $baseClass }}__quote">
+                    @typography([
+                        "variant" => "p",
+                        "element" => "p",
+                        "classList" => ['u-color__text--darker', ]
+                    ])
+                        ”Tycho Braheskolan är en skola där både elever och lärare trivs. Vi har en stark studietradition och är en uttalad ”pluggskola”, men samtidigt vet vi att man måste ha roligt för att lära sig. Ambitionerna är höga och tillsammans jobbar vi för att nå bästa möjliga resultat.”
+                    @endtypography
+                </div> 
             @endcard 
         @endslider__item
 
+
     @endslider
+</div>
 @endif
