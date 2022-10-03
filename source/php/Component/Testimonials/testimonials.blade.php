@@ -21,8 +21,8 @@
         'repeatSlide' => true,
     ])
         {{-- 1st ITEM --}}
-        @slider__item([])
-            @card(['classList' => [$baseClass .'s-carousel__item']]) 
+        @slider__item(['classList' => [$baseClass .'s-carousel__item']])
+            @card([]) 
                 @image([
                     'classList' => [$baseClass . '__image'],
                     'src'=> 'https://picsum.photos/1080/720',
@@ -63,8 +63,8 @@
         @endslider__item
         
         {{-- 2nd ITEM --}}
-        @slider__item([])
-            @card(['classList' => [$baseClass .'s-carousel__item']]) 
+        @slider__item(['classList' => [$baseClass .'s-carousel__item']])
+            @card([]) 
                 @image([
                     'classList' => [$baseClass . '__image'],
                     'src'=> 'https://picsum.photos/1080/720',
