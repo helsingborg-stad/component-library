@@ -63,7 +63,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
             ),
             new Supplier(
                 'KommersAnnons.se',
-                array( 'kommersannons.se' ),
+                array( 'kommersannons.se', 'www.kommersannons.se' ),
                 'https://kommersannons.se/'
             ),
 
@@ -85,7 +85,6 @@ class Iframe extends \ComponentLibrary\Component\BaseController
 
         if (is_array($suppliers)) {
             foreach ($suppliers as $supplier) {
-				
                 $key = array_search($host, $supplier->domain, true);
 
                 if (is_integer($key)) {
@@ -140,7 +139,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         }
 
         $scheme = $srcParsed['scheme'] ?? 'https';
-        $embedUrl = $scheme . '://' . strtolower( $srcParsed['host'] );
+        $embedUrl = $scheme . '://' . strtolower($srcParsed['host']);
 
         if (isset($srcParsed['path'])) {
             $embedUrl .= $srcParsed['path'];
