@@ -19,7 +19,7 @@
     @typography([                            
         "element" => "h3",
         'variant' => 'h3',
-        "classList" => [ $baseClass . '__title' ]
+        "classList" => [ $baseClass . '__title']
     ])
         {{$testimonial['title']}}
     @endtypography

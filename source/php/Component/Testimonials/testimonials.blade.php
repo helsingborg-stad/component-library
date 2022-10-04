@@ -14,97 +14,19 @@
 @endif
 
 @if (count($testimonials) > 1 && $isCarousel)
-<div class="{{$baseClass . 's-carousel'}}">
+<div class="{{$baseClass . 's__carousel'}}">
     @slider([
         'showStepper' => false,
         'autoSlide' => false,
-        'repeatSlide' => true,
     ])
-        {{-- 1st ITEM --}}
-        @slider__item(['classList' => [$baseClass .'s-carousel__item']])
-            @card([]) 
-                @image([
-                    'classList' => [$baseClass . '__image'],
-                    'src'=> 'https://picsum.photos/1080/720',
-                    'alt' => ''
-                    ])
-                @endimage
-                    
-                <div class="{{$baseClass .'__header'}}">               
-                    @typography([
-                        "element" => "h2",
-                        "classList" => ['u-color__text--darker']
-                    ])
-                        Pamela Cronqvist
-                    @endtypography
-
-                    @divider(['style' => 'solid'])
-                    @enddivider
-                    
-                    @typography([                            
-                        "element" => "h3",
-                        'variant' => 'h3',
-                        "classList" => ['u-color__text--darker']
-                    ])
-                        Lärare i svenska och engelska
-                    @endtypography
-                </div>
-
-                <div class="{{ $baseClass }}__quote">
-                    @typography([
-                        "variant" => "p",
-                        "element" => "p",
-                        "classList" => ['u-color__text--darker', ]
-                    ])
-                        ”Tycho Braheskolan är en skola där både elever och lärare trivs. Vi har en stark studietradition och är en uttalad ”pluggskola”, men samtidigt vet vi att man måste ha roligt för att lära sig. Ambitionerna är höga och tillsammans jobbar vi för att nå bästa möjliga resultat.”
-                    @endtypography
-                </div> 
-            @endcard 
-        @endslider__item
+        @foreach($testimonials as $testimonial)
+            @slider__item(['classList' => [$baseClass .'s__carousel__item']])
+                @card([]) 
+                    @include('Testimonials.partials.item')
+                @endcard 
+            @endslider__item
+        @endforeach
         
-        {{-- 2nd ITEM --}}
-        @slider__item(['classList' => [$baseClass .'s-carousel__item']])
-            @card([]) 
-                @image([
-                    'classList' => [$baseClass . '__image'],
-                    'src'=> 'https://picsum.photos/1080/720',
-                    'alt' => ''
-                    ])
-                @endimage
-                    
-                <div class="{{$baseClass .'__header'}}">               
-                    @typography([
-                        "element" => "h2",
-                        "classList" => ['u-color__text--darker']
-                    ])
-                        Pamela Cronqvist
-                    @endtypography
-
-                    @divider(['style' => 'solid'])
-                    @enddivider
-                    
-                    @typography([                            
-                        "element" => "h3",
-                        'variant' => 'h3',
-                        "classList" => ['u-color__text--darker']
-                    ])
-                        Lärare i svenska och engelska
-                    @endtypography
-                </div>
-
-                <div class="{{ $baseClass }}__quote">
-                    @typography([
-                        "variant" => "p",
-                        "element" => "p",
-                        "classList" => ['u-color__text--darker', ]
-                    ])
-                        ”Tycho Braheskolan är en skola där både elever och lärare trivs. Vi har en stark studietradition och är en uttalad ”pluggskola”, men samtidigt vet vi att man måste ha roligt för att lära sig. Ambitionerna är höga och tillsammans jobbar vi för att nå bästa möjliga resultat.”
-                    @endtypography
-                </div> 
-            @endcard 
-        @endslider__item
-
-
     @endslider
 </div>
 @endif
