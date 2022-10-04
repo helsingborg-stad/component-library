@@ -14,13 +14,13 @@
 @endif
 
 @if (count($testimonials) > 1 && $isCarousel)
-<div class="{{$baseClass . 's__carousel'}}">
+<div class="{{$baseClass . 's__slider'}}">
     @slider([
         'showStepper' => false,
         'autoSlide' => false,
     ])
         @foreach($testimonials as $testimonial)
-            @slider__item(['classList' => [$baseClass .'s__carousel__item']])
+            @slider__item(['classList' => [$baseClass .'s__slider__item']])
                 @card([]) 
                     @include('Testimonials.partials.item')
                 @endcard 
