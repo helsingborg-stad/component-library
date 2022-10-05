@@ -18,7 +18,8 @@
             @button([
                 'text' => $labels->button,
                 'color' => 'primary',
-                'attributeList' => ['js-suppressed-iframe-button' => '']
+                'attributeList' => ['js-suppressed-iframe-button' => ''],
+                'classList' => ['u-margin__top--3'],
             ])
             @endbutton
         </div>
