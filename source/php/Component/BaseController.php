@@ -303,7 +303,7 @@ class BaseController
             ' ',
             array_map(
                 function ($v, $k) {
-                    return sprintf('%s="%s"', $k, $v);
+                    return sprintf("%s='%s'", $k, $v);
                 },
                 array_values($attributes),
                 array_keys($attributes)
