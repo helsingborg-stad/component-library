@@ -10,6 +10,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
 
         $this->data['classList'][] = 'js-suppressed-iframe';
 
+        $this->data['attributeList']['options'] = $options;
         if (isset($width)) {
             $this->data['attributeList']['width'] = $width;
         }
@@ -85,7 +86,6 @@ class Iframe extends \ComponentLibrary\Component\BaseController
 
         if (is_array($suppliers)) {
             foreach ($suppliers as $supplier) {
-				
                 $key = array_search($host, $supplier->domain, true);
 
                 if (is_integer($key)) {
@@ -140,7 +140,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         }
 
         $scheme = $srcParsed['scheme'] ?? 'https';
-        $embedUrl = $scheme . '://' . strtolower( $srcParsed['host'] );
+        $embedUrl = $scheme . '://' . strtolower($srcParsed['host']);
 
         if (isset($srcParsed['path'])) {
             $embedUrl .= $srcParsed['path'];
