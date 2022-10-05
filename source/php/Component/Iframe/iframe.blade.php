@@ -6,32 +6,28 @@
                 'variant' => 'h3',
                 'element' => 'h3',
             ])
-            Titel text
+           
+            {{$labels->title}}
             @endtypography
             @typography([
 
             ])
-            Content text
+             {!!$labels->info!!}
             @endtypography
 
             @button([
-                'text' => 'Knapp text',
+                'text' => $labels->button,
                 'color' => 'primary',
                 'attributeList' => ['js-suppressed-iframe-button' => '']
             ])
             @endbutton
         </div>
     </div>
-
-<iframe 
-    id="{{ $id }}" 
-    class="{{ $class }}" 
-	options="{{ $options }}"
-	{!! $attribute !!}>
-</iframe>
+    <iframe 
+        id="{{ $id }}" 
+        class="{{ $class }}" 
+        options="{{ $options }}"
+        {!! $attribute !!}>
+    </iframe>
 
 </div>
-
-<script>
-
-</script>
