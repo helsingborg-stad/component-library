@@ -2,6 +2,5 @@
 <iframe 
     id="{{ $id }}" 
     class="{{ $class }}" 
-	options="{{ $options }}"
 	{!! $attribute !!}>
 </iframe>
