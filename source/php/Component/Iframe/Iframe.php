@@ -37,7 +37,10 @@ class Iframe extends \ComponentLibrary\Component\BaseController
             $json = json_decode($this->data['options']);
 
             if(isset($this->data['attributeList']['data-supplier-host'])) {
-                $json->knownLabels->info = str_replace(array('{SUPPLIER_WEBSITE}', '{SUPPLIER_POLICY}'), array($this->data['attributeList']['data-supplier-name'], $this->data['attributeList']['data-supplier-policy']), $json->knownLabels->info);
+
+                $json->knownLabels->info = str_replace(array('{SUPPLIER_WEBSITE}', '{SUPPLIER_POLICY}'), 
+                array($this->data['attributeList']['data-supplier-name'], $this->data['attributeList']['data-supplier-policy']), 
+                $json->knownLabels->info);
  
                 $this->data['labels'] = $json->knownLabels;
             } else {
