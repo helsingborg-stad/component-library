@@ -14,6 +14,9 @@
     @slider([
         'showStepper' => false,
         'autoSlide' => false,
+        'attributeList' => [
+            'data-slides-per-page' => $slidesPerPage,
+        ]
     ])
         @foreach($testimonials as $testimonial)
             @slider__item(['classList' => [$baseClass .'s__slider__item']])
