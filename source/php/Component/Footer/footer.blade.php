@@ -4,7 +4,7 @@
 
         <div class="c-footer__main-wrapper {{ $preFooterTextAlignment }}">
 
-            @if ($logotype)
+            @if (!empty($logotype))
                 <div class="c-footer__header-wrapper">
                     <div class="o-container">
                         <div class="o-grid-12">
@@ -23,7 +23,7 @@
                 </div>
             @endif
 
-            @if ($prefooter)
+            @if (!empty($prefooter))
                 <div class="c-footer__prefooter-wrapper">
                     <div class="o-container">
                         <div class="o-grid-12">
@@ -35,7 +35,7 @@
 
             {{ $slot }}
 
-            @if ($footerareas)
+            @if (!empty($footerareas))
                 <div class="o-container">
                     <div class="o-grid">
                         @if ($footerareas)
@@ -45,7 +45,7 @@
                 </div>
             @endif
 
-            @if ($postfooter)
+            @if (!empty($postfooter))
                 <div class="c-footer__postfooter-wrapper">
                     <div class="o-container">
                         <div class="o-grid-12">
