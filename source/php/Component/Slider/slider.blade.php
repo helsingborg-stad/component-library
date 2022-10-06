@@ -1,4 +1,4 @@
-<div id="{{ $id }}" class="{{ $class }}" {!! $attribute !!} data-splide={{!! $slidesPerPage !!}} >
+<div id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
     <div class="splide__arrows c-slider__arrows">
         @button([
             'color' => $arrowButtons['color'],
