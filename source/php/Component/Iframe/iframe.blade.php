@@ -1,7 +1,8 @@
 <!-- iframe.blade.php -->
 <div class="js-suppressed-iframe-wrapper"> 
-    <div class="js-suppressed-iframe-prompt" style="position:absolute; left:0; top:0; width:100%; height:100%; z-index:1; display: flex; align-items: center; overflow:auto;">
-        <div style="max-width: 600px; width: 100%; margin: auto; padding: 0 24px;">
+
+    <div class="js-suppressed-iframe-prompt u-display--flex u-align-items--center u-overflow--auto">
+        <div class="js-suppressed-iframe-prompt-content u-padding__x--3 u-width--100">
             @typography([
                 'variant' => 'h3',
                 'element' => 'h3',
@@ -19,7 +20,7 @@
                 'text' => $labels->button,
                 'color' => 'primary',
                 'attributeList' => ['js-suppressed-iframe-button' => ''],
-                'classList' => ['u-margin__top--3'],
+                'classList' => ['u-margin__y--3'],
             ])
             @endbutton
         </div>
