@@ -7,7 +7,9 @@
         "logotype": "/",
         "logotypeHref": "",
         "links": {},
-        "subfooterLogotype": ""
+        "subfooterLogotype": "",
+        "prefooter": false,
+        "postfooter": false
     },
     "descriptions": {
         "componentElement": "The element tag to render",
@@ -15,7 +17,9 @@
         "id" :  "Custom container id",
         "logotype": "Footer logotype url.",
         "logotypeHref": "The url to link the logotype to.",
-        "subfooterLogotype": "Subfooter logotype url."
+        "subfooterLogotype": "Subfooter logotype url.",
+        "prefooter": "Arbitrary HTML placed before the main footer content. Wrapped in container and 12col grid.",
+        "postfooter": "Arbitrary HTML placed after the main footer content. Wrapped in container and 12col grid."
     },
     "view": "footer.blade.php",
     "dependency": {
