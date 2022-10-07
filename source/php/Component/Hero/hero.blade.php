@@ -7,9 +7,9 @@
 
     @if ($title || $paragraph || $byline)
         <div class="o-container {{ $baseClass }}__container">
-            @if($videoUrl)
+            @if($video)
                 <video autoplay muted loop class="c-hero__video">
-                    <source src="{{$videoUrl}}" type="video/mp4">
+                    <source src="{{$video}}" type="video/mp4">
                 </video>
             @endif
 
