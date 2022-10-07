@@ -18,8 +18,8 @@
         "logotype": "Footer logotype url.",
         "logotypeHref": "The url to link the logotype to.",
         "subfooterLogotype": "Subfooter logotype url.",
-        "prefooter": "Arbritary HTML placed before the main footer content. Wrapped in container and 12col grid.",
-        "postfooter": "Arbritary HTML placed after the main footer content. Wrapped in container and 12col grid."
+        "prefooter": "Arbitrary HTML placed before the main footer content. Wrapped in container and 12col grid.",
+        "postfooter": "Arbitrary HTML placed after the main footer content. Wrapped in container and 12col grid."
     },
     "view": "footer.blade.php",
     "dependency": {
