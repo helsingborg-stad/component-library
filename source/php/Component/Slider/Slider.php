@@ -39,9 +39,10 @@ class Slider extends \ComponentLibrary\Component\BaseController
             $this->data['autoSlide'] = true;
         }
 
-        if ($shadow) {
-            $this->data['classList'][] = 'c-slider--shadow';
-        }
+        // Shadow class is set here
+        // if ($shadow) {
+        //     $this->data['classList'][] = 'c-slider--shadow';
+        // }
 
         if ($showStepper) {
             $this->data['classList'][] = 'c-slider--has-stepper';
