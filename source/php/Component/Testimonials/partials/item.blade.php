@@ -11,7 +11,8 @@
     <div class="{{ $baseClass}}__header">
         @typography([
                 
-                "element" => "h2"
+                "element" => "h2",
+                "classList" => [$baseClass . '__author']
             ])
             {{$testimonial['name']}}
         @endtypography
@@ -22,7 +23,7 @@
         @typography([                            
             "element" => "h3",
             'variant' => 'h3',
-            "classList" => [ $baseClass . '__title']
+            "classList" => [$baseClass . '__title']
         ])
             {{$testimonial['title']}}
         @endtypography
