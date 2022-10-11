@@ -10,6 +10,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
 
         $this->data['classList'][] = 'js-suppressed-iframe';
 
+        $this->data['attributeList']['options'] = $options;
         if (isset($width)) {
             $this->data['attributeList']['width'] = $width;
         }

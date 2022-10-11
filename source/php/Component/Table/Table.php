@@ -11,10 +11,6 @@ class Table extends \ComponentLibrary\Component\BaseController
 
         $this->padCells();
 
-        if ($includePaper) {
-            $this->data['classList'][]  = 'c-paper';
-        }
-
         if ($filterable) {
             $this->data['attributeList']['js-table-filter'] = '';
         }

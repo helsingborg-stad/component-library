@@ -3,6 +3,7 @@
     "default": {
         "image": false,
         "imageFocus": {"top": 30, "left": 50},
+        "video": false,
         "size": "normal",
         "title": "",
         "byline": "",
@@ -12,6 +13,7 @@
     "description": {
         "image": "Background image",
         "imageFocus": "Where to focus in the background.",
+        "video": "Display a video as a background. This option will replace image.",
         "size": "Ratio (normal, large)",
         "title": "The title text",
         "byline": "The byline text",
