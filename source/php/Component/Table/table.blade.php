@@ -1,5 +1,8 @@
 <!-- table.blade.php -->
 @if($list)
+@card([
+
+])
     <div id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
         <div class="{{ $baseClass}}__header">
             
@@ -121,6 +124,7 @@
         </div>
 
     </div>
+@endcard
 @else
   <!-- No table list data -->
 @endif

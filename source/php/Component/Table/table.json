@@ -35,7 +35,8 @@
                 "table",
                 "icon",
                 "modal",
-                "field"
+                "field",
+                "card"
             ]
         }
     }
