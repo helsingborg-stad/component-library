@@ -28,10 +28,26 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         }
 
         $this->data['attributeList']['src'] = "about:blank";
-
+         
         if (isset($src)) {
             $this->data['attributeList']['data-src'] = $this->buildEmbedUrl($src);
             $this->data = $this->setSupplierDataAttributes($src, $this->data);
+        }
+
+        if (isset($this->data['options'])) {
+            $json = json_decode($this->data['options']);
+
+            if (isset($this->data['attributeList']['data-supplier-host'])) {
+                $json->knownLabels->info = str_replace(
+                    array('{SUPPLIER_WEBSITE}', '{SUPPLIER_POLICY}'),
+                    array($this->data['attributeList']['data-supplier-name'], $this->data['attributeList']['data-supplier-policy']),
+                    $json->knownLabels->info
+                );
+ 
+                $this->data['labels'] = $json->knownLabels;
+            } else {
+                $this->data['labels'] = $json->unknownLabels;
+            }
         }
     }
     public static function getSuppliers()
@@ -64,7 +80,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
             ),
             new Supplier(
                 'KommersAnnons.se',
-                array( 'kommersannons.se' ),
+                array( 'kommersannons.se', 'www.kommersannons.se' ),
                 'https://kommersannons.se/'
             ),
 
@@ -97,7 +113,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
                 }
             }
         }
-
+   
         return $this->data;
     }
     private function buildEmbedUrl($src)
