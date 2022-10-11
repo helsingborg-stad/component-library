@@ -8,6 +8,8 @@ class Iframe extends \ComponentLibrary\Component\BaseController
     {
         extract($this->data);
 
+        $this->data['classList'][] = 'js-suppressed-iframe';
+
         if (isset($width)) {
             $this->data['attributeList']['width'] = $width;
         }
@@ -31,21 +33,21 @@ class Iframe extends \ComponentLibrary\Component\BaseController
             $this->data = $this->setSupplierDataAttributes($src, $this->data);
         }
 
-        if(isset($this->data['options'])) {
+        if (isset($this->data['options'])) {
             $json = json_decode($this->data['options']);
 
-            if(isset($this->data['attributeList']['data-supplier-host'])) {
-
-                $json->knownLabels->info = str_replace(array('{SUPPLIER_WEBSITE}', '{SUPPLIER_POLICY}'), 
-                array($this->data['attributeList']['data-supplier-name'], $this->data['attributeList']['data-supplier-policy']), 
-                $json->knownLabels->info);
+            if (isset($this->data['attributeList']['data-supplier-host'])) {
+                $json->knownLabels->info = str_replace(
+                    array('{SUPPLIER_WEBSITE}', '{SUPPLIER_POLICY}'),
+                    array($this->data['attributeList']['data-supplier-name'], $this->data['attributeList']['data-supplier-policy']),
+                    $json->knownLabels->info
+                );
  
                 $this->data['labels'] = $json->knownLabels;
             } else {
-                $this->data['labels'] = $json->unknownLabels; 
-            }  
+                $this->data['labels'] = $json->unknownLabels;
+            }
         }
-
     }
     public static function getSuppliers()
     {

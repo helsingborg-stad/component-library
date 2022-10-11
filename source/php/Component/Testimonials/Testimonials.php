@@ -17,7 +17,6 @@ class Testimonials extends \ComponentLibrary\Component\BaseController
         $this->data['baseClass'] = 'c-testimonial';
         $this->data['wrapperClassList'] = [];
         $this->data['wrapperAttributeList'] = [];
-        $this->data['classList'][] = 'c-paper';
 
         if($isCarousel) {
             $this->data['wrapperClassList'][] = 'c-testimonials__wrapper--is-carousel';
@@ -34,6 +33,7 @@ class Testimonials extends \ComponentLibrary\Component\BaseController
 
         $this->data['wrapperClassList'] = implode(' ', $this->data['wrapperClassList'] );
         $this->data['wrapperAttributeList'] = self::buildAttributes($this->data['wrapperAttributeList']);
+        
 
         $this->mapData();
     }
@@ -62,11 +62,9 @@ class Testimonials extends \ComponentLibrary\Component\BaseController
                 );
             },
             $this->compParams['testimonials']
-        );
+        ); 
 
         $grid = $this->calculateGrid();
-        $this->data['componentElement'] = ($this->compParams['componentElement']) ?
-            $this->compParams['componentElement'] : 'div';
         
         $this->data['gridClasses'] = 'grid-xs-12 grid-sm-6 grid-lg-' . $grid;
     }
