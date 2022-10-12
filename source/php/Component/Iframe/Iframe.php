@@ -34,6 +34,14 @@ class Iframe extends \ComponentLibrary\Component\BaseController
             $this->data = $this->setSupplierDataAttributes($src, $this->data);
         }
 
+        if(isset($placeholderImage)) {
+            $this->data['placeholderImage'] = $placeholderImage;
+        }
+
+        if(isset($embedVideo)) {
+            $this->data['isVideo'] = $embedVideo;
+        }
+
         if (isset($this->data['options'])) {
             $json = json_decode($this->data['options']);
 
