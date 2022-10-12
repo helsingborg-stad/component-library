@@ -8,32 +8,32 @@ namespace ComponentLibrary\Component\Divider;
  */
 class Divider extends \ComponentLibrary\Component\BaseController
 {
-
-    public function init() {
+    public function init()
+    {
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
-        if($style) {
+        if (isset($style)) {
             $this->data['classList'][] = $this->getBaseClass() . '--' . $style;
         }
 
-        if($size) {
+        if (isset($size)) {
             $this->data['classList'][] = $this->getBaseClass() . '--' . $size;
         }
 
-        if($align) {
+        if (isset($align)) {
             $this->data['classList'][] = $this->getBaseClass() . '--align-' . $align;
         }
 
-        if($frame) {
+        if (isset($frame)) {
             $this->data['classList'][] = $this->getBaseClass() . '--has-frame';
         }
 
-        if($customFont) {
+        if (isset($customFont)) {
             $this->data['classList'][] = $this->getBaseClass() . '--custom-font';
         }
 
-        if(empty($title)) {
+        if (empty($title)) {
             $this->data['classList'][] = $this->getBaseClass() . '--without-title';
         }
     }
