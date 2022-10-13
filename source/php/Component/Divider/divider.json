@@ -7,7 +7,8 @@
         "title": "",
         "titleVariant": "h2",
         "align": "center",
-        "frame": true
+        "frame": true,
+        "customFont": false
     },
     "description": {
         "componentElement": "The tag to use for this component.",
@@ -15,7 +16,8 @@
         "size": "The length of the divider. Either sm, md or lg.",
         "title": "Title to be displayed in the devider.",
         "align": "Alignment of text in the divider. left, center or right.",
-        "frame": "If set to true, the title will be wrapped in a frame."
+        "frame": "If set to true, the title will be wrapped in a frame.",
+        "customFont": "Enable if font color should be customized. Default: false"
     },
     "view": "dropdown.blade.php",
     "dependency": {
