@@ -34,10 +34,18 @@ class Iframe extends \ComponentLibrary\Component\BaseController
             $this->data = $this->setSupplierDataAttributes($src, $this->data);
         }
 
+        if(isset($placeholderImage)) {
+            $this->data['placeholderImage'] = $placeholderImage;
+        }
+
+        if(isset($embedVideo)) {
+            $this->data['isVideo'] = $embedVideo;
+        }
+
         if (isset($this->data['options'])) {
             $json = json_decode($this->data['options']);
 
-            if (isset($this->data['attributeList']['data-supplier-host'])) {
+            if (isset($this->data['attributeList']['data-supplier-policy'])) {
                 $json->knownLabels->info = str_replace(
                     array('{SUPPLIER_WEBSITE}', '{SUPPLIER_POLICY}'),
                     array($this->data['attributeList']['data-supplier-name'], $this->data['attributeList']['data-supplier-policy']),
@@ -46,6 +54,11 @@ class Iframe extends \ComponentLibrary\Component\BaseController
  
                 $this->data['labels'] = $json->knownLabels;
             } else {
+                $json->unknownLabels->info = str_replace(
+                    '{SUPPLIER_WEBSITE}',
+                    $this->data['attributeList']['data-supplier-host'],
+                    $json->unknownLabels->info
+                );
                 $this->data['labels'] = $json->unknownLabels;
             }
         }
@@ -103,9 +116,9 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         if (is_array($suppliers)) {
             foreach ($suppliers as $supplier) {
                 $key = array_search($host, $supplier->domain, true);
+                $this->data['attributeList']['data-supplier-host'] = $supplier->domain[$key];
 
                 if (is_integer($key)) {
-                    $this->data['attributeList']['data-supplier-host'] = $supplier->domain[$key];
                     $this->data['attributeList']['data-supplier-name'] = $supplier->name;
                     if (isset($supplier->policy)) {
                         $this->data['attributeList']['data-supplier-policy'] = $supplier->policy;
