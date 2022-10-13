@@ -3,9 +3,11 @@
 <div class="{{$baseClass .'s'}}">
     <div class="{{$baseClass .'s__wrapper'}} {{$wrapperClassList}}"  {!! $wrapperAttributeList !!} style="transform: translateX(0%);">
         @foreach($testimonials as $testimonial)
-            <{{ $componentElement }} id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
+            @card ([
+                'classList' => [$class]
+            ])
                 @include('Testimonials.partials.item')    
-            </{{ $componentElement }}>
+            @endcard
         @endforeach
     </div>
 
