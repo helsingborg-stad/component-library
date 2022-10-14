@@ -1,7 +1,7 @@
 <!-- testimonials.blade.php -->
 @if($testimonials && !$isCarousel)
 <div class="{{$baseClass .'s'}}">
-    <div class="{{$baseClass .'s__wrapper'}} {{$wrapperClassList}}"  {!! $wrapperAttributeList !!} style="transform: translateX(0%);">
+    <div class="{{$baseClass .'s__wrapper'}} {{$wrapperClassList}}"  {!! $wrapperAttributeList !!}>
         @foreach($testimonials as $testimonial)
             @include('Testimonials.partials.item')    
         @endforeach
@@ -17,6 +17,7 @@
             'autoSlide' => false,
             'attributeList' => [
                 'data-slides-per-page' => $slidesPerPage,
+                'data-slider-gap' => (8*6)
             ]
         ])
             @foreach($testimonials as $testimonial)
