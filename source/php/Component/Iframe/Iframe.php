@@ -36,6 +36,8 @@ class Iframe extends \ComponentLibrary\Component\BaseController
 
         if(isset($embedVideo)) {
             $this->data['isVideo'] = $embedVideo;
+        } else {
+            $this->data['isVideo'] = false;
         }
 
         if (isset($this->data['options'])) {
