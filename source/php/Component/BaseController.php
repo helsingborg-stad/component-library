@@ -68,9 +68,13 @@ class BaseController
         //Store locally
         $data = $this->data;
 
+        //Get main identity
+        $data['component'] = $this->getComponentName();
+
         //Generate classes string
         $data['class'] = $this->getClass();
 
+        //Provide base class
         $data['baseClass'] = $this->getBaseClass();
 
         //Create attibute string
@@ -221,6 +225,18 @@ class BaseController
         } else {
             return false;
         }
+    }
+
+    /**
+     * Get the components main identity
+     *
+     * @return string
+     */
+    protected function getComponentName(): string
+    {
+        $namespace = $this->getNamespaceParts(); 
+
+        return strtolower(end($namespace));
     }
 
     /**

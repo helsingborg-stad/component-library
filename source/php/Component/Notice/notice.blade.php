@@ -1,5 +1,5 @@
 <!-- notice.blade.php -->
-<div id="{{ $id }}" class="{{ $class }}" {!! $attribute !!} aria-labelledby="notice__text__{{ $id }}">
+<{{$component}} id="{{ $id }}" class="{{ $class }}" {!! $attribute !!} aria-labelledby="notice__text__{{ $id }}">
     
     <!-- notice__ico -->
     @if($icon)
@@ -30,4 +30,4 @@
         {!! $slot !!}
     </span>
 
-</div>
+</{{$component}}>
