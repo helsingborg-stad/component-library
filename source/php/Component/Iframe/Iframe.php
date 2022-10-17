@@ -35,7 +35,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         }
 
         if(isset($embedVideo)) {
-            $this->data['wrapperClasses'] = $embedVideo . " u-position--static";
+            $this->data['wrapperClasses'] = $embedVideo;
         } else {
             $this->data['wrapperClasses'] = false;
         }
