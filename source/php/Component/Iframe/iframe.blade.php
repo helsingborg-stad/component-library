@@ -1,5 +1,5 @@
 <!-- iframe.blade.php -->
-<div class="js-suppressed-iframe-wrapper {{$isVideo}}"> 
+<div class="js-suppressed-iframe-wrapper {{$wrapperClasses}} u-height--100"> 
     <div class="js-suppressed-iframe-prompt u-overflow--auto u-padding__top--3">
         <div class="js-suppressed-iframe-prompt-content u-padding__x--3 u-width--100 u-level-1">
             @typography([
