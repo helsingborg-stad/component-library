@@ -1,19 +1,23 @@
 <!-- iframe.blade.php -->
-<div class="js-suppressed-iframe-wrapper {{$isVideo}}"> 
-    <div class="js-suppressed-iframe-prompt u-overflow--auto u-padding__top--3">
-        <div class="js-suppressed-iframe-prompt-content u-padding__x--3 u-width--100 u-level-1">
-            @typography([
-                'variant' => 'h3',
-                'element' => 'h3',
-            ])
-                {{$labels->title}}
-            @endtypography
-            @typography(['element' => 'p'])
-                {!!$labels->info!!}
-            @endtypography
+<div id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
 
-            @if($isVideo)
-                <div class="suppressed-iframe-icon-button u-margin__y--3">
+    <!-- Prompt accept -->
+    <div class="{{$baseClass}}__modal">
+
+            <div class="{{$baseClass}}__modal-description">
+                @typography([
+                    'variant' => 'h3',
+                    'element' => 'h3',
+                ])
+                    {{$labels->title}}
+                @endtypography
+                @typography(['element' => 'p'])
+                    {!!$labels->info!!}
+                @endtypography
+            </div>
+
+            <div class="{{$baseClass}}__modal-action">
+                @if($isVideo)
                     @icon([
                         'icon' => 'play_circle', 
                         'size' => 'xxl',
@@ -21,22 +25,21 @@
 
                     ])
                     @endicon
-                </div>
-            @else 
-                @button([
-                    'text' => $labels->button,
-                    'color' => 'primary',
-                    'attributeList' => ['js-suppressed-iframe-button' => ''],
-                    'classList' => ['u-margin__y--3'],
-                ])
-                @endbutton
-            @endif
-        </div>
+                @else 
+                    @button([
+                        'text' => $labels->button,
+                        'color' => 'primary',
+                        'attributeList' => ['js-suppressed-iframe-button' => ''],
+                        'classList' => ['u-margin__y--3'],
+                    ])
+                    @endbutton
+                @endif
+            </div>
     </div>
-    <iframe 
-        id="{{ $id }}" 
-        class="{{ $class }}" 
-        options="{{ $options }}"
-        {!! $attribute !!}>
-    </iframe>
+
+    <!-- Display after accept -->
+    <div class="{{$baseClass}}__content">
+        <iframe id="{{ $id }}" class="{{ $class }}" options="{{ $options }}"></iframe>
+    </div>
+
 </div>
