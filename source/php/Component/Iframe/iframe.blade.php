@@ -33,9 +33,21 @@
             @endif
         </div>
     </div>
+    @if($isVideo)
+        <div class="suppressed-iframe-icon-button suppressed-video-placeholder-button u-position--absolute">
+            @icon([
+                'icon' => 'play_circle', 
+                'size' => 'xxl',
+                'attributeList' => ['js-suppressed-video-placeholder-button' => ''],
+
+            ])
+            @endicon
+        </div>
+    @endif
+
     <iframe 
         id="{{ $id }}" 
-        class="{{ $class }}" 
+        class="{{ $class }} {{$isVideo ? 'u-display--none' : ''}}" 
         options="{{ $options }}"
         {!! $attribute !!}>
     </iframe>
