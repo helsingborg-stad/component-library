@@ -8,10 +8,11 @@
                 @typography([
                     'variant' => 'h3',
                     'element' => 'h3',
+                    'classList' => [$baseClass . '__modal-description-title'],
                 ])
                     {{$labels->title}}
                 @endtypography
-                @typography(['element' => 'p'])
+                @typography(['element' => 'p', 'classList' => [$baseClass . '__modal-description-body']])
                     {!!$labels->info!!}
                 @endtypography
             </div>
