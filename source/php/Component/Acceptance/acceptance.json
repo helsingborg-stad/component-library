@@ -4,13 +4,19 @@
         "labels": false,
         "modifier": "",
         "height": "",
-        "data-src": ""
+        "src": "",
+        "policy": "",
+        "host": "",
+        "name": ""
     },
     "description": {
        "labels" : "array of button, title and content labels",
        "modifier" : "String containing class modifier ex. --iframe",
        "height" : "height in number ex 500",
-       "data-src" : "url ex. https://www.youtube.com"
+       "src" : "url ex. https://www.youtube.com",
+       "policy" : "URL to third party website policy",
+       "host" : "host ex. youtube.com",
+       "name" : "name of the host"  
     },
     "view": "acceptance.blade.php",
     "dependency": {

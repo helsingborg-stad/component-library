@@ -25,6 +25,19 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
         if(isset($height)) {
             $this->data['attributeList']['style'] = "height:" . $height . "px;"; 
         }
-        
+
+        if(isset($src)) {
+            $this->data['attributeList']['data-src'] = $src;
+        }
+
+        if(isset($name)) {
+            $this->data['attributeList']['data-supplier-name'] = $name;
+        }
+        if(isset($policy)) {
+            $this->data['attributeList']['data-supplier-policy'] = $policy;
+        }
+        if(isset($host)) {
+            $this->data['attributeList']['data-supplier-host'] = $host;
+        }
     }
 }
