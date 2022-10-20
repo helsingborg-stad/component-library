@@ -3,17 +3,20 @@
     "default": {
         "labels": false,
         "modifier": "",
-        "height": ""
+        "height": "",
+        "data-src": ""
     },
     "description": {
        "labels" : "array of button, title and content labels",
        "modifier" : "String containing class modifier ex. --iframe",
-       "height" : "height in number ex 500"
+       "height" : "height in number ex 500",
+       "data-src" : "url ex. https://www.youtube.com"
     },
-    "view": "button.blade.php",
+    "view": "acceptance.blade.php",
     "dependency": {
         "sass": {
             "components": [
+                "acceptance",
                 "button",
                 "icon",
                 "typography",

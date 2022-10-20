@@ -3,10 +3,11 @@
     "labels" => $labels,
     "modifier" => $modifier,
     "height" => $height,
+    "data-src" => $src,
 ])
     <iframe 
         id="{{ $id }}" 
-        src="about:blank"
+        src="{{$src}}"
         height="{{$height}}" 
         width="{{$width}}" 
         loading="{{$loading}}">
