@@ -8,6 +8,15 @@ namespace ComponentLibrary\Component\Icon;
  */
 class Icon extends \ComponentLibrary\Component\BaseController {
 
+    //Written in swedish, due to lack of translate function.
+    //Needs to be adressed to comply with public code standard.
+    private $altTextPrefix = "Ikon: ";
+    private $altText = [
+        'apps'  => "Apprutnät",
+        'close' => "Kryss",
+        'language' => "Jordglob"
+    ];
+
     public function init() {
 
         //Extract array for easy access (fetch only)
@@ -25,14 +34,27 @@ class Icon extends \ComponentLibrary\Component\BaseController {
         $this->setSize();
 
         //Set material icon class
-        $this->data['classList'][] = "material-icons"; 
+        $this->data['classList'][] = "material-icons";
 
         //Do not translate the icon
-        $this->data['attributeList']['translate'] = "no"; 
+        $this->data['attributeList']['translate'] = "no";
 
         //Identify as an image
         $this->data['attributeList']['role'] = "img";
-        $this->data['attributeList']['alt'] = "";
+        $this->data['attributeList']['alt'] = $this->getAltText($icon);
+    }
+
+    /**
+     * Find and add a label to each icon.
+     *
+     * @param string $icon
+     * @return string
+     */
+    private function getAltText($icon) {
+        if (array_key_exists($icon, $this->altText)) {
+            return $this->altTextPrefix . $this->altText[$icon];
+        }
+        return "Ikon utan beskrivning";
     }
 
     /**
@@ -40,7 +62,7 @@ class Icon extends \ComponentLibrary\Component\BaseController {
      * @return array
      */
     public function appendSpace() {
-        if($this->compParams['label'] = trim($this->compParams['label'])) {
+        if ($this->compParams['label'] = trim($this->compParams['label'])) {
             $this->data['label'] = " " . $this->compParams['label'];
         }
 
