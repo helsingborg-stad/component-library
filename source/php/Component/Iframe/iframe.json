@@ -6,7 +6,8 @@
 		"width": "100%",
 		"height": "400",
 		"frameborder": "0",
-		"options": ""
+		"options": "",
+		"title": "Content from another website"
 	},
 	"view": "iframe.blade.php",
 	"dependency": {

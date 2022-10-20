@@ -9,8 +9,12 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         extract($this->data);
 
         $this->data['classList'][] = 'js-suppressed-iframe';
-
+        
+        $this->data['attributeList']['title'] = $title;
+        $this->data['attributeList']['aria-label'] = $title;
+        
         $this->data['attributeList']['options'] = $options;
+
         if (isset($width)) {
             $this->data['attributeList']['width'] = $width;
         }
@@ -34,7 +38,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
             $this->data = $this->setSupplierDataAttributes($src, $this->data);
         }
 
-        if(isset($embedVideo)) {
+        if (isset($embedVideo)) {
             $this->data['isVideo'] = $embedVideo;
         } else {
             $this->data['isVideo'] = false;
