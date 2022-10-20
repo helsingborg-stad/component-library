@@ -27,6 +27,10 @@ class Iframe extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['loading'] = $loading;
         }
 
+        if (isset($modifier)) {
+            $this->data['modifier'] = $modifier;
+        }
+
         $this->data['attributeList']['src'] = "about:blank";
          
         if (isset($src)) {

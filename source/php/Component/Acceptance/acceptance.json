@@ -1,0 +1,24 @@
+{
+    "slug": "acceptance",
+    "default": {
+        "labels": false,
+        "modifier": "",
+        "height": ""
+    },
+    "description": {
+       "labels" : "array of button, title and content labels",
+       "modifier" : "String containing class modifier ex. --iframe",
+       "height" : "height in number ex 500"
+    },
+    "view": "button.blade.php",
+    "dependency": {
+        "sass": {
+            "components": [
+                "button",
+                "icon",
+                "typography",
+                "iframe"
+            ]
+        }
+    }
+}
