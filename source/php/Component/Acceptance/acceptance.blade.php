@@ -5,7 +5,7 @@
                 @if($isVideo)
                 @icon([
                         'icon' => 'play_circle', 
-                        'attributeList' => ['js-suppressed-content-button' => ''],
+                        'attributeList' => ['js-suppressed-content-accept' => ''],
                         'classList' => [$baseClass . '__modal-icon-play'],
                     ])
                 @endicon
@@ -34,7 +34,7 @@
                         @button([
                             'text' => $labels->button,
                             'color' => 'primary',
-                            'attributeList' => ['js-suppressed-content-button' => ''],
+                            'attributeList' => ['js-suppressed-content-accept' => ''],
                             'classList' => ['u-margin__y--3'],
                         ])
                         @endbutton
