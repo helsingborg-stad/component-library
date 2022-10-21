@@ -98,7 +98,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         );
 
         if (function_exists('apply_filters')) {
-            return apply_filters(__NAMESPACE__ . '\\' . ucfirst(__FUNCTION__), $suppliers);
+            return apply_filters($this->createFilterName($this) . '/' . ucfirst(__FUNCTION__), $suppliers);
         }
 
         return $suppliers;
