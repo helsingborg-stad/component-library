@@ -48,7 +48,7 @@ class Icon extends \ComponentLibrary\Component\BaseController {
     private function altTextPrefix(): string
     {
         if (function_exists('apply_filters')) {
-            return apply_filters(__NAMESPACE__ . '\\' . ucfirst(__FUNCTION__), $this->altTextPrefix);
+            return apply_filters($this->createFilterName($this) . '/' . ucfirst(__FUNCTION__), $this->altTextPrefix);
         }
         return $this->altTextPrefix;
     }
@@ -61,7 +61,7 @@ class Icon extends \ComponentLibrary\Component\BaseController {
     private function altText(): array
     {
         if (function_exists('apply_filters')) {
-            return apply_filters(__NAMESPACE__ . '\\' . ucfirst(__FUNCTION__), $this->altText);
+            return apply_filters($this->createFilterName($this) . '/' . ucfirst(__FUNCTION__), $this->altText);
         }
         return $this->altText;
     }
@@ -74,7 +74,7 @@ class Icon extends \ComponentLibrary\Component\BaseController {
     private function altTextUndefined(): string
     {
         if (function_exists('apply_filters')) {
-            return apply_filters(__NAMESPACE__ . '\\' . ucfirst(__FUNCTION__), $this->altTextUndefined);
+            return apply_filters($this->createFilterName($this) . '/' . ucfirst(__FUNCTION__), $this->altTextUndefined);
         }
         return $this->altTextUndefined;
     }

@@ -330,7 +330,7 @@ class BaseController
      *
      * @return string
      */
-    private function createFilterName($class)
+    public function createFilterName($class)
     {
         //Get all parts of the location
         $name = explode(

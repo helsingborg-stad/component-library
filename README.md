@@ -54,7 +54,7 @@ Alter the undefined message used when describing icons.
 - ```@param string $altTextUndefined``` - String containing undefined message for alt text.
 
 ```php
-add_filter('ComponentLibrary/Component/Icon/AltTextPrefix', function($altTextUndefined) {
+add_filter('ComponentLibrary/Component/Icon/AltTextUndefined', function($altTextUndefined) {
   return $altTextUndefined;
 }, 10, 1 );
 ```
