@@ -12,10 +12,16 @@
                 @icon([
                         'icon' => 'info', 
                         'size' => 'md',
-                        'attributeList' => ['js-suppressed-content-info-button' => ''],
+                        'attributeList' => ['data-open' => 'modal-' . $uid],
                         'classList' => [$baseClass . '__modal-icon-info'],
                     ])
                 @endicon
+                @modal([
+                    'id' => 'modal-' . $uid,
+                    "heading" => "Example modal"
+                ])
+                test
+                @endmodal
                 @else
                 @typography([
                     'variant' => 'h3',
