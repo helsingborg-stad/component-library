@@ -15,26 +15,26 @@
                     ])
                     {!!$labels->info!!}
                 @endtypography
-                <div class="{{$baseClass}}__modal-button">
-                    @if($isVideo)
-                        @icon([
-                            'icon' => 'play_circle', 
-                            'size' => 'xxl',
-                            'attributeList' => ['js-suppressed-iframe-button' => ''],
-    
-                        ])
-                        @endicon
-                    @else 
-                        @button([
-                            'text' => $labels->button,
-                            'color' => 'primary',
-                            'attributeList' => ['js-suppressed-iframe-button' => ''],
-                            'classList' => ['u-margin__y--3'],
-                        ])
-                        @endbutton
-                    @endif
             </div>
-    </div>
+            <div class="{{$baseClass}}__modal-button">
+                @if($isVideo)
+                    @icon([
+                        'icon' => 'play_circle', 
+                        'size' => 'xxl',
+                        'attributeList' => ['js-suppressed-iframe-button' => ''],
+
+                    ])
+                    @endicon
+                @else 
+                    @button([
+                        'text' => $labels->button,
+                        'color' => 'primary',
+                        'attributeList' => ['js-suppressed-iframe-button' => ''],
+                        'classList' => ['u-margin__y--3'],
+                    ])
+                    @endbutton
+                @endif
+        </div>
 </div>
     <!-- Display after accept -->
     <div class="{{$baseClass}}__content">
