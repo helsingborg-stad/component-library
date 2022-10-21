@@ -20,6 +20,9 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
             else {
                 $this->data['isVideo'] = false;
             }
+            $this->data['modifier'] = $modifier;
+        } else {
+            $this->data['modifier'] = '--none';
         }
 
         if(isset($height)) {
