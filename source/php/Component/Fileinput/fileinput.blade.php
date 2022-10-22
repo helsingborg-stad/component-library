@@ -1,6 +1,6 @@
 <!-- fileinput.blade.php -->
 
-<div id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
+<div class="{{ $class }}" {!! $attribute !!}>
 
     <input type="file"
         class="{{ $baseClass }}__input "

@@ -1,5 +1,5 @@
 <!-- collection__item.blade.php -->
-<{{$componentElement}} id="{{$id}}" class="{{$class}}" {!!$attribute!!}>
+<{{$componentElement}} class="{{$class}}" {!!$attribute!!}>
     @if($prefix) 
         {!! $prefix !!}
     @endif

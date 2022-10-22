@@ -1,6 +1,6 @@
 <!-- logotypegrid.blade.php -->
 @if($items) 
-    <div id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
+    <div class="{{ $class }}" {!! $attribute !!}>
         @foreach($items as $item)
             @link(['href' => $item->url, 'classList' => [$baseClass . '__link']])
                 @logotype([

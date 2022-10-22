@@ -1,5 +1,5 @@
 <!-- block.blade.php -->
-<{{ $componentElement }} href="{{ $link }}" id="{{ $id }}" class="{{$class}}" {!! $attribute !!}>
+<{{ $componentElement }} class="{{$class}}" {!! $attribute !!}>
 
     @if($date && $dateBadge)
         @datebadge(['date' => $date, 'classList' => ['u-position--absolute', 'u-margin--3', 'u-fixed--top-left']])

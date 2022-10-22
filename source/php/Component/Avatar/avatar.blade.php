@@ -1,6 +1,6 @@
 <!-- avatar.blade.php -->
 @if($displayAvatar)
-    <div id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
+    <div class="{{ $class }}" {!! $attribute !!}>
         @if($image)
             <img src="{{ $image }}" class="{{$baseClass}}__image" alt="{{ $label }}" aria-label="{{ $label }}"/>
         @endif

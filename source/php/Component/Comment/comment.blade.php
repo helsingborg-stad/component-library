@@ -1,4 +1,4 @@
-<{{$componentElement}} id="{{ $id }}" class="{{ $class }}"  {!! $attribute !!}>
+<{{$componentElement}} class="{{ $class }}"  {!! $attribute !!}>
 
     <div class="{{$baseClass}}__col">
         @avatar([

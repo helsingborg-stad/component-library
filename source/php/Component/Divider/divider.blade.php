@@ -1,4 +1,4 @@
-<{{$componentElement}} class="{{$class}}">
+<{{$componentElement}} class="{{$class}}" {!! $attribute !!}>
     @if(!empty($title))
         @typography([
             'variant' => $titleVariant,

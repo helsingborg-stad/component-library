@@ -1,5 +1,5 @@
 <!-- option.blade.php -->
-<div id="{{ $id }}" class="{{$class}} c-option__{{$type}}">
+<div class="{{$class}} c-option__{{$type}}">
     <input {!! $attribute !!} type="{{$type}}"
         class="c-option__{{$type}}--hidden-box"
         id="trigger_{{ $id }}"

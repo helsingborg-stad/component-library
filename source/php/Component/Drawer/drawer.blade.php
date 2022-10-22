@@ -1,5 +1,5 @@
 <!-- drawer.blade.php -->
-<div class="c-drawer c-drawer--right c-drawer--primary js-drawer u-display--none@lg {{$class}}" js-toggle-class="is-open" js-toggle-item="js-drawer">
+<div class="c-drawer c-drawer--right c-drawer--primary js-drawer u-display--none@lg {{$class}}" js-toggle-class="is-open" js-toggle-item="js-drawer" {!! $attribute !!}>
         <div class="c-drawer__header">
             
             @button([

@@ -1,4 +1,4 @@
-<div id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
+<div class="{{ $class }}" {!! $attribute !!}>
     <div js-toggle-item="{{$panelId}}" js-toggle-class="{{$baseClass}}__panel--open" class="{{$baseClass}}__panel">
 
         @if($heading)
