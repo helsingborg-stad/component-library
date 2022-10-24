@@ -255,7 +255,7 @@ class BaseController
         }
 
         //Add id if defined
-        if (is_string($this->data['id']) && !empty($this->data['id'])) {
+        if (!empty($this->data['id'])) {
             $attribute['id'] = $this->data['id'];
         }
 
