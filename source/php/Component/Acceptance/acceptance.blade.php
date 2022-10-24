@@ -18,9 +18,9 @@
                 @endicon
                 @modal([
                     'id' => 'modal-' . $uid,
-                    "heading" => "Example modal"
+                    "heading" => $labels->title
                 ])
-                test
+                {!!$labels->info!!}
                 @endmodal
                 @else
                 @typography([
