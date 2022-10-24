@@ -7,10 +7,6 @@ class Iframe extends \ComponentLibrary\Component\BaseController
     public function init()
     {
         extract($this->data);
-
-        /* $this->data['classList'][] = 'js-suppressed-iframe'; */
-
-        //$this->data['attributeList']['options'] = $options;
         
         if (isset($width)) {
             $this->data['attributeList']['width'] = $width;
@@ -57,6 +53,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
                 $this->data['labels'] = $json->unknownLabels;
             }
         }
+        var_dump($this->data['supplierHost']);
     }
     public static function getSuppliers()
     {
@@ -123,7 +120,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
                 }
             }
         }
-   
+
         return $this->data;
     }
     private function buildEmbedUrl($src)
