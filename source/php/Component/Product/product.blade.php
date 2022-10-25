@@ -1,5 +1,5 @@
 <!-- product.blade.php -->
-<div class="{{ $class }}" id="{{ $id }}" {!! $attribute !!}>
+<div class="{{ $class }}" {!! $attribute !!}>
     @card()
         @includeWhen($image && $image['src'], 'Product.components.image')
         <div class="c-card__header c-product__header">

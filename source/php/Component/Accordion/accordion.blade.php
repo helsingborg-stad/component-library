@@ -1,6 +1,6 @@
 <!-- accordion.blade.php -->
 @if($list)
-    <{{$componentElement}} id="{{ $id }}" class="{{ $class }}" js-expand-container {!! $attribute !!}>
+    <{{$componentElement}} class="{{ $class }}" js-expand-container {!! $attribute !!}>
     @foreach($list as $section)
         <{{$sectionElement}} class="{{$baseClass}}__section" aria-label="{{$section['heading']}}">
 
@@ -43,7 +43,7 @@
     @endforeach
     </{{$componentElement}}>
 @elseif($slotHasData)
-    <{{$componentElement}} id="{{ $id }}" class="{{ $class }}" js-expand-container {!! $attribute !!}>
+    <{{$componentElement}} class="{{ $class }}" js-expand-container {!! $attribute !!}>
         {!! $slot !!}
     </{{$componentElement}}>
 @else

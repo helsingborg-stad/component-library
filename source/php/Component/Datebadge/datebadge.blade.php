@@ -1,5 +1,5 @@
 <!-- datebadge.blade.php -->
-<div id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
+<div class="{{ $class }}" {!! $attribute !!}>
     <div class="{{$baseClass . '__daymonth'}}">
         @typography(['variant' => 'h1', 'element' => 'span', 'classList' => [$baseClass . '__date']])
             {{ $day }}

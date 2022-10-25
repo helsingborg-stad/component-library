@@ -28,6 +28,7 @@ class Button extends \ComponentLibrary\Component\BaseController
         //Make linked buttons links
         if ($href) {
             $this->data['componentElement'] = "a";
+            $this->data['attributeList']['href'] = $href;
         } else {
             if (in_array($this->data['componentElement'], ['button', 'submit'])) {
                 $this->data['attributeList']['aria-pressed'] = $pressed;

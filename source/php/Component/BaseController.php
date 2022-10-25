@@ -254,6 +254,11 @@ class BaseController
             $attribute['data-observe-resizes'] = "";
         }
 
+        //Add id if defined
+        if (!empty($this->data['id'])) {
+            $attribute['id'] = $this->data['id'];
+        }
+
         //Add unique id
         $attribute['data-uid'] = $this->getUid();
 

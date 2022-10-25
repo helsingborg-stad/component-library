@@ -1,5 +1,5 @@
 <!-- navbar.blade.php -->
-<nav id="{{ $id }}" class="{{$class}}" {!! $attribute !!}>
+<nav class="{{$class}}" {!! $attribute !!}>
     <div class="{{$baseClass}}__toggle">
         @icon([
             'icon'          => 'menu',

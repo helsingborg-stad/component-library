@@ -4,7 +4,7 @@
         $uniqueId = "gallery_".\ComponentLibrary\Component\Gallery\Gallery::getUnique();
     @endphp
 
-    <ul id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
+    <ul class="{{ $class }}" {!! $attribute !!}>
         @foreach($list as $key => $item)
             <li class="{{$baseClass}}__item {{$baseClass}}__item-{{ $loop->index }}">
 
