@@ -54,7 +54,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
             }
         }
     }
-    public static function getSuppliers()
+    public function getSuppliers()
     {
         $suppliers = array(
             new Supplier(
@@ -99,7 +99,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
     private function setSupplierDataAttributes(string $src, array $data)
     {
         $this->data = $data;
-        $suppliers = $this::getSuppliers();
+        $suppliers = $this->getSuppliers();
 
         $srcParsed = parse_url($src);
         $host = strtolower($srcParsed['host']);
