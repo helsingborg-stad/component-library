@@ -53,7 +53,6 @@ class Iframe extends \ComponentLibrary\Component\BaseController
                 $this->data['labels'] = $json->unknownLabels;
             }
         }
-        var_dump($this->data['supplierHost']);
     }
     public static function getSuppliers()
     {

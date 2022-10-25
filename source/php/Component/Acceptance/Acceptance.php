@@ -9,20 +9,18 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
      //Extract array for eazy access (fetch only)
         extract($this->data);
 
-        $this->data['labels'] = $labels;     
+        $this->data['labels'] = $labels;
+        
+        $this->data['classList'][] = 'js-suppressed-content';
 
         if(isset($modifier)) {
             $this->data['classList'][] = $this->getBaseClass() . $modifier;
+            $this->data['classList'][] =  'js-suppressed-content' . $modifier;
             
-            if($modifier == '--video') {
-                $this->data['isVideo'] = true;
-            }
-            else {
-                $this->data['isVideo'] = false;
-            }
-            $this->data['modifier'] = $modifier;
+            $this->data['isVideo'] = $modifier == '--video' ? true : false;
+
         } else {
-            $this->data['modifier'] = '--none';
+            $this->data['classList'][] = 'js-suppressed-content' . '--none';
         }
 
         if(isset($height)) {
