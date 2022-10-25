@@ -40,10 +40,6 @@ class Field extends \ComponentLibrary\Component\Form\Form
         if ($this->data['icon']) {
             $this->data['classList'][] = $this->getBaseClass() . "--icon";
         }
- 
-        if($this->data['hideLabel']) {
-            $this->data['classList'][] = $this->getBaseClass() . "--hidden-label";
-        }
 
         //Handle size
         if (!in_array($size, ['sm', 'md', 'lg'])) {
