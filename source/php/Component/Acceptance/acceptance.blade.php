@@ -9,18 +9,24 @@
                         'classList' => [$baseClass . '__modal-icon-play'],
                     ])
                 @endicon
-                @icon([
-                        'icon' => 'info', 
-                        'size' => 'md',
-                        'attributeList' => ['data-open' => 'modal-' . $uid],
-                        'classList' => [$baseClass . '__modal-icon-info'],
-                    ])
-                @endicon
+                @button([
+                    'text' => 'Handling of personal data',
+                    'color' => 'default',
+                    'style' => 'basic',
+                    'icon' => 'info',
+                    'attributeList' => [
+                        'data-open' => 'modal-' . $uid
+                    ],
+                    'classList' => [
+                        $baseClass . '__modal-info'
+                    ],
+                ])
+                @endbutton
                 @modal([
                     'id' => 'modal-' . $uid,
                     "heading" => $labels->title
                 ])
-                {!!$labels->info!!}
+                    {!!$labels->info!!}
                 @endmodal
             @else
                 @typography([
@@ -48,7 +54,7 @@
             @endif
         </div>
     </div>
-    
+
     <!-- Display after accept -->
     <div class="{{$baseClass}}__content">
         <template>
