@@ -32,7 +32,7 @@
                     {{$prefix}}
                 </span>
             @endif
-            <label class="u-sr__only">{{$label}}</label>
+            <label for="input_{{ $id }}" class="u-sr__only">{{$label}}</label>
             <input id="input_{{ $id }}"
                 type="{{$type}}"
                 value="{{$value}}"
