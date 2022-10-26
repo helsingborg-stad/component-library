@@ -8,7 +8,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
     public function init()
     {
         extract($this->data);
-        
+
         if (isset($width)) {
             $this->data['attributeList']['width'] = $width;
         }
@@ -28,7 +28,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         if (isset($modifier)) {
             $this->data['modifier'] = $modifier;
         }
-         
+
         if (isset($src)) {
             $this->data['attributeList']['data-src'] = $this->buildEmbedUrl($src);
             $this->data = $this->setSupplierDataAttributes($src, $this->data);
@@ -43,7 +43,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
                     array($this->data['supplierName'], $this->data['supplierPolicy']),
                     $json->knownLabels->info
                 );
- 
+
                 $this->data['labels'] = $json->knownLabels;
             } else {
                 $json->unknownLabels->info = str_replace(
@@ -93,7 +93,6 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         );
 
         if (function_exists('apply_filters')) {
-			
             return apply_filters($this->createFilterName($this) . '/' . ucfirst(__FUNCTION__), $suppliers);
         }
 
@@ -110,7 +109,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         if (is_array($suppliers)) {
             foreach ($suppliers as $supplier) {
                 $key = array_search($host, $supplier->domain, true);
-                
+
                 if (is_integer($key)) {
                     $this->data['supplierHost'] = $supplier->domain[$key];
                     $this->data['supplierName'] = $supplier->name;
