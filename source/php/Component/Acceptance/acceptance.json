@@ -11,7 +11,7 @@
     },
     "description": {
        "labels" : "array of button, title and content labels",
-       "modifier" : "String containing class modifier ex. --iframe",
+       "modifier" : "String containing class modifier ex. video",
        "height" : "height in number ex 500",
        "src" : "url ex. https://www.youtube.com",
        "policy" : "URL to third party website policy",
@@ -26,7 +26,8 @@
                 "button",
                 "icon",
                 "typography",
-                "iframe"
+                "iframe",
+                "modal"
             ]
         }
     }
