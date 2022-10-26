@@ -58,7 +58,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
 
     public function getSuppliers()
     {
-        $this->suppliers = array(
+        $suppliers = array(
             new Supplier(
                 'Google',
                 array( 'google.com', 'maps.google.com', 'google.se', 'maps.google.se' ),
@@ -94,10 +94,10 @@ class Iframe extends \ComponentLibrary\Component\BaseController
 
         if (function_exists('apply_filters')) {
 			
-            return apply_filters($this->createFilterName($this) . '/' . ucfirst(__FUNCTION__), $this->$suppliers);
+            return apply_filters($this->createFilterName($this) . '/' . ucfirst(__FUNCTION__), $suppliers);
         }
 
-        return $this->$suppliers;
+        return $suppliers;
     }
     private function setSupplierDataAttributes(string $src, array $data)
     {
