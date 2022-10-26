@@ -4,7 +4,6 @@ namespace ComponentLibrary\Component\Iframe;
 
 class Iframe extends \ComponentLibrary\Component\BaseController
 {
-
     public function init()
     {
         extract($this->data);
@@ -56,6 +55,13 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         }
     }
 
+    /**
+     * Get suppliers
+     * Creates a list of suppliers with
+     * their hostnames, and policy documents.
+     *
+     * @return array
+     */
     public function getSuppliers()
     {
         $suppliers = array(
@@ -98,10 +104,18 @@ class Iframe extends \ComponentLibrary\Component\BaseController
 
         return $suppliers;
     }
+
+    /**
+     * Set supplier data attributes
+     *
+     * @param string $src
+     * @param array $data
+     * @return array
+     */
     private function setSupplierDataAttributes(string $src, array $data)
     {
         $this->data = $data;
-        $suppliers = $this->getSuppliers();
+        $suppliers  = $this->getSuppliers();
 
         $srcParsed = parse_url($src);
         $host = strtolower($srcParsed['host']);
@@ -124,6 +138,13 @@ class Iframe extends \ComponentLibrary\Component\BaseController
 
         return $this->data;
     }
+
+    /**
+     * Build embed url
+     *
+     * @param string    $src    Arbitrary embed url
+     * @return string   $src    Correct embed url
+     */
     private function buildEmbedUrl($src)
     {
         $srcParsed = parse_url($src);
@@ -133,7 +154,12 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         switch ($srcParsed['host']) {
             case 'youtube.com':
             case 'www.youtube.com':
-                /* Replacing the path with /embed/ and then adding the v query parameter to the path and removing the v parameter from the query string. */
+                /*
+                Replacing the path with /embed/ and then
+                adding the v query parameter to the path
+                and removing the v parameter from the
+                query string.
+                */
                 $srcParsed['host'] = 'youtube.com';
                 $srcParsed['path'] = '/embed/';
 
