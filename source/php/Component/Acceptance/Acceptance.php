@@ -29,7 +29,7 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['style'] = "height:" . $height . "px;"; 
         }
 
-        if(isset($src)) {
+        if(!empty($src)) {
             $this->data['attributeList']['data-src'] = $src;
         }
 
