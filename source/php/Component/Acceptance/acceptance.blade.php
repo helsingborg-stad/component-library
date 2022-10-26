@@ -1,28 +1,34 @@
 <!-- acceptance.blade.php -->
 <div class="{{ $class }}" {!! $attribute !!}>
-        <div class="{{$baseClass}}__modal js-suppressed-content-prompt">
-            <div class="{{$baseClass}}__modal-description js-suppressed-content-description">
-                @if($isVideo)
+    <div class="{{$baseClass}}__modal js-suppressed-content-prompt">
+        <div class="{{$baseClass}}__modal-description js-suppressed-content-description">
+            @if($isVideo)
                 @icon([
                         'icon' => 'play_circle', 
                         'attributeList' => ['js-suppressed-content-accept' => ''],
                         'classList' => [$baseClass . '__modal-icon-play'],
                     ])
                 @endicon
-                @icon([
-                        'icon' => 'info', 
-                        'size' => 'md',
-                        'attributeList' => ['data-open' => 'modal-' . $uid],
-                        'classList' => [$baseClass . '__modal-icon-info'],
-                    ])
-                @endicon
+                @button([
+                    'text' => 'Handling of personal data',
+                    'color' => 'default',
+                    'style' => 'basic',
+                    'icon' => 'info',
+                    'attributeList' => [
+                        'data-open' => 'modal-' . $uid
+                    ],
+                    'classList' => [
+                        $baseClass . '__modal-info'
+                    ],
+                ])
+                @endbutton
                 @modal([
                     'id' => 'modal-' . $uid,
                     "heading" => $labels->title
                 ])
-                {!!$labels->info!!}
+                    {!!$labels->info!!}
                 @endmodal
-                @else
+            @else
                 @typography([
                     'variant' => 'h3',
                     'element' => 'h3',
@@ -37,17 +43,18 @@
                     {!!$labels->info!!}
                 @endtypography
                 <div class="{{$baseClass}}__modal-button">
-                        @button([
-                            'text' => $labels->button,
-                            'color' => 'primary',
-                            'attributeList' => ['js-suppressed-content-accept' => ''],
-                            'classList' => ['u-margin__y--3'],
-                        ])
-                        @endbutton
-                    </div>
-                @endif
+                    @button([
+                        'text' => $labels->button,
+                        'color' => 'primary',
+                        'attributeList' => ['js-suppressed-content-accept' => ''],
+                        'classList' => ['u-margin__y--3'],
+                    ])
+                    @endbutton
+                </div>
+            @endif
+        </div>
     </div>
-</div>
+
     <!-- Display after accept -->
     <div class="{{$baseClass}}__content">
         <template>
