@@ -1,5 +1,5 @@
 <!-- footer.blade.php -->
-<{{ $componentElement }} id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
+<{{ $componentElement }} class="{{ $class }}" {!! $attribute !!}>
     @if ($slotOnly && $slot)
 
         <div class="c-footer__main-wrapper {{ $preFooterTextAlignment }}">

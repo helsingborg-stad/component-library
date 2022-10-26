@@ -1,5 +1,5 @@
 <!-- segment.blade.php -->
-<section id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
+<section class="{{ $class }}" {!! $attribute !!}>
     @if ($image)
         <div class="{{$baseClass}}__image {{ $imageClass }}" style="{{ $imageStyleString }}"></div>
     @endif

@@ -1,5 +1,5 @@
 <!-- hero.blade.php -->
-<section id="{{ $id }}" class="{{ $class }}" {!! $attribute !!} style="{!! $imageStyleString !!}">
+<section class="{{ $class }}" {!! $attribute !!} style="{!! $imageStyleString !!}">
 
     @if ($overlay)
         <div class="{{ $baseClass }}__overlay"></div>

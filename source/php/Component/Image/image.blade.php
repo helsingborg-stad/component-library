@@ -1,5 +1,5 @@
 <!-- image.blade.php -->
-<figure id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
+<figure class="{{ $class }}" {!! $attribute !!}>
     @if($src) 
         <img src="{{$src}}" alt="{{$alt}}" class="{{$baseClass}}__image @if($openModal){{$baseClass}}__modal @endif" @if($openModal) data-open="{{$modalId}}" @endif />
         @if($caption)

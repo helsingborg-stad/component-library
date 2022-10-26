@@ -1,6 +1,6 @@
 <!-- icon.blade.php -->
 @if($icon)
-    <{{$componentElement}} id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
+    <{{$componentElement}} class="{{ $class }}" {!! $attribute !!}>
         {{$icon}}
     </{{$componentElement}}>
 @endif

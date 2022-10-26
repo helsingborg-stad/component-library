@@ -1,5 +1,5 @@
 @if(!empty($tags))
-    <{{ $componentElement }} id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
+    <{{ $componentElement }} class="{{ $class }}" {!! $attribute !!}>
         @foreach($tags as $tag)
 
             @if(isset($tag['href']) && !empty($tag['href']))

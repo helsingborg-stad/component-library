@@ -1,6 +1,5 @@
 <!-- modal.blade.php -->
-<dialog id="{{ $id }}" class="{{ $class }}" role="dialog" aria-modal="true"
-    aria-labelledby="modal__label__{{ $id }}" {!! $attribute !!}>
+<dialog class="{{ $class }}" role="dialog" aria-modal="true" aria-labelledby="modal__label__{{ $id }}" {!! $attribute !!}>
 
     <header class="{{ $baseClass }}__header">
         @if ($heading)

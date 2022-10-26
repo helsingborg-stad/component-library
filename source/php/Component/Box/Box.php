@@ -15,6 +15,7 @@ class Box extends \ComponentLibrary\Component\BaseController
 
         if ($link) {
             $this->data['componentElement'] = "a";
+            $this->data['attributeList']['href'] = $link;
         } else {
             $this->data['componentElement'] = "div";
         }

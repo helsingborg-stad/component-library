@@ -1,7 +1,7 @@
 <!-- menu.blade.php -->
 @if($items)
   @if($wrapper)
-  <{{$elementType}} id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
+  <{{$elementType}} class="{{ $class }}" {!! $attribute !!}>
   @endif
     <ul class="{{ $baseClass }}__list">
       @foreach($items as $item)
