@@ -14,10 +14,10 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
         $this->data['classList'][] = 'js-suppressed-content';
 
         if(isset($modifier)) {
-            $this->data['classList'][] = $this->getBaseClass() . $modifier;
-            $this->data['classList'][] =  'js-suppressed-content' . $modifier;
+            $this->data['classList'][] = $this->getBaseClass() . '--' . $modifier;
+            $this->data['classList'][] =  'js-suppressed-content--' . $modifier;
             
-            $this->data['isVideo'] = $modifier == '--video' ? true : false;
+            $this->data['isVideo'] = $modifier == 'video' ? true : false;
 
         } else {
             $this->data['classList'][] = 'js-suppressed-content' . '--none';
