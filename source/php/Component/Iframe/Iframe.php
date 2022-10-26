@@ -4,6 +4,7 @@ namespace ComponentLibrary\Component\Iframe;
 
 class Iframe extends \ComponentLibrary\Component\BaseController
 {
+
     public function init()
     {
         extract($this->data);
@@ -54,9 +55,10 @@ class Iframe extends \ComponentLibrary\Component\BaseController
             }
         }
     }
-    public static function getSuppliers()
+
+    public function getSuppliers()
     {
-        $suppliers = array(
+        $this->suppliers = array(
             new Supplier(
                 'Google',
                 array( 'google.com', 'maps.google.com', 'google.se', 'maps.google.se' ),
@@ -91,15 +93,16 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         );
 
         if (function_exists('apply_filters')) {
-            return apply_filters($this->createFilterName($this) . '/' . ucfirst(__FUNCTION__), $suppliers);
+			
+            return apply_filters($this->createFilterName($this) . '/' . ucfirst(__FUNCTION__), $this->$suppliers);
         }
 
-        return $suppliers;
+        return $this->$suppliers;
     }
     private function setSupplierDataAttributes(string $src, array $data)
     {
         $this->data = $data;
-        $suppliers = $this::getSuppliers();
+        $suppliers = $this->getSuppliers();
 
         $srcParsed = parse_url($src);
         $host = strtolower($srcParsed['host']);
