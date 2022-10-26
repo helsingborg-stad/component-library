@@ -7,7 +7,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
     public function init()
     {
         extract($this->data);
-        
+
         if (isset($width)) {
             $this->data['attributeList']['width'] = $width;
         }
@@ -27,7 +27,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         if (isset($modifier)) {
             $this->data['modifier'] = $modifier;
         }
-         
+
         if (isset($src)) {
             $this->data['attributeList']['data-src'] = $this->buildEmbedUrl($src);
             $this->data = $this->setSupplierDataAttributes($src, $this->data);
@@ -42,7 +42,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
                     array($this->data['supplierName'], $this->data['supplierPolicy']),
                     $json->knownLabels->info
                 );
- 
+
                 $this->data['labels'] = $json->knownLabels;
             } else {
                 $json->unknownLabels->info = str_replace(
@@ -54,7 +54,15 @@ class Iframe extends \ComponentLibrary\Component\BaseController
             }
         }
     }
-    public static function getSuppliers()
+
+    /**
+     * Get suppliers
+     * Creates a list of suppliers with
+     * their hostnames, and policy documents.
+     *
+     * @return array
+     */
+    public function getSuppliers()
     {
         $suppliers = array(
             new Supplier(
@@ -96,10 +104,18 @@ class Iframe extends \ComponentLibrary\Component\BaseController
 
         return $suppliers;
     }
+
+    /**
+     * Set supplier data attributes
+     *
+     * @param string $src
+     * @param array $data
+     * @return array
+     */
     private function setSupplierDataAttributes(string $src, array $data)
     {
         $this->data = $data;
-        $suppliers = $this::getSuppliers();
+        $suppliers  = $this->getSuppliers();
 
         $srcParsed = parse_url($src);
         $host = strtolower($srcParsed['host']);
@@ -107,7 +123,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         if (is_array($suppliers)) {
             foreach ($suppliers as $supplier) {
                 $key = array_search($host, $supplier->domain, true);
-                
+
                 if (is_integer($key)) {
                     $this->data['supplierHost'] = $supplier->domain[$key];
                     $this->data['supplierName'] = $supplier->name;
@@ -122,6 +138,13 @@ class Iframe extends \ComponentLibrary\Component\BaseController
 
         return $this->data;
     }
+
+    /**
+     * Build embed url
+     *
+     * @param string    $src    Arbitrary embed url
+     * @return string   $src    Correct embed url
+     */
     private function buildEmbedUrl($src)
     {
         $srcParsed = parse_url($src);
@@ -131,7 +154,12 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         switch ($srcParsed['host']) {
             case 'youtube.com':
             case 'www.youtube.com':
-                /* Replacing the path with /embed/ and then adding the v query parameter to the path and removing the v parameter from the query string. */
+                /*
+                Replacing the path with /embed/ and then
+                adding the v query parameter to the path
+                and removing the v parameter from the
+                query string.
+                */
                 $srcParsed['host'] = 'youtube.com';
                 $srcParsed['path'] = '/embed/';
 
