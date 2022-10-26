@@ -29,7 +29,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         }
 
         if (isset($src)) {
-            $this->data['attributeList']['data-src'] = $this->buildEmbedUrl($src);
+            $this->data['attributeList']['src'] = $this->buildEmbedUrl($src);
             $this->data = $this->setSupplierDataAttributes($src, $this->data);
         }
 

@@ -3,7 +3,7 @@
     "labels"    => $labels,
     "modifier"  => $modifier,
     "height"    => $height,
-    "src"       => $attributeList['data-src'],
+    "src"       => $attributeList['src'],
     "policy"    => $supplierPolicy,
     "host"      => $supplierHost,
     "name"      => $supplierName,

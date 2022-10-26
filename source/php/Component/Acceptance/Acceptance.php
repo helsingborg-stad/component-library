@@ -12,7 +12,6 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
         $this->data['labels'] = $labels;
         
         $this->data['classList'][] = 'js-suppressed-content';
-
         if(isset($modifier)) {
             $this->data['classList'][] = $this->getBaseClass() . '--' . $modifier;
             $this->data['classList'][] =  'js-suppressed-content--' . $modifier;
