@@ -8,7 +8,7 @@
         "policy": null,
         "host": null,
         "name": null,
-		"options": null
+    		"options": null
     },
     "description": {
        "labels" : "object of button, title and content labels",
