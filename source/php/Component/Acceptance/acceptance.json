@@ -2,12 +2,12 @@
     "slug": "acceptance",
     "default": {
         "labels": false,
-        "modifier": null,
-        "height": null,
-        "src": null,
-        "policy": null,
-        "host": null,
-        "name": null
+        "modifier": false,
+        "height": false,
+        "src": false,
+        "policy": false,
+        "host": false,
+        "name": false
     },
     "description": {
        "labels" : "array of button, title and content labels",
