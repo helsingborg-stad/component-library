@@ -13,8 +13,16 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
 
         $this->data['labels'] = $labels;
         $this->data['classList'][] = 'js-suppressed-content';
+<<<<<<< Updated upstream
+        if(isset($modifier)) {
+=======
+<<<<<<< HEAD
+        if(!empty($modifier)) {
+=======
 
         if(isset($modifier)) {
+>>>>>>> iframe-modifier
+>>>>>>> Stashed changes
             $this->data['classList'][] = $this->getBaseClass() . '--' . $modifier;
             $this->data['classList'][] =  'js-suppressed-content--' . $modifier;
             $this->data['isVideo'] = $modifier == 'video' ? true : false;
