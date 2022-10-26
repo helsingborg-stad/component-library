@@ -13,7 +13,7 @@
                     'text' => 'Handling of personal data',
                     'color' => 'default',
                     'style' => 'basic',
-                    'icon' => 'info',
+                    'icon' => $icon,
                     'attributeList' => [
                         'data-open' => 'modal-' . $uid
                     ],

@@ -7,6 +7,7 @@
     "policy"    => $supplierPolicy,
     "host"      => $supplierHost,
     "name"      => $supplierName,
+    "icon"      => "info",
     ])
     <iframe 
         id="{{ $id }}" class="{{$class}}" {!! $attribute !!}>

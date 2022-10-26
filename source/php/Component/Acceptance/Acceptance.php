@@ -21,6 +21,10 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = 'js-suppressed-content' . '--none';
         }
 
+        if(isset($icon)) {
+            $this->data['icon'] = $icon;
+        }
+
         if(isset($height)) {
             $this->data['attributeList']['style'] = "height:" . $height . "px;"; 
         }
