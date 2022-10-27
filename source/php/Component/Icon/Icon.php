@@ -7,9 +7,14 @@ namespace ComponentLibrary\Component\Icon;
  * @package ComponentLibrary\Component\Icon
  */
 class Icon extends \ComponentLibrary\Component\BaseController {
+    private $altTextPrefix = "Icon: ";
+    private $altText = [
+        'key'  => "Label",
+    ];
+    private $altTextUndefined = "Undefined";
 
-    public function init() {
-
+    public function init()
+    {
         //Extract array for easy access (fetch only)
         extract($this->data);
 
@@ -25,22 +30,76 @@ class Icon extends \ComponentLibrary\Component\BaseController {
         $this->setSize();
 
         //Set material icon class
-        $this->data['classList'][] = "material-icons"; 
+        $this->data['classList'][] = "material-icons";
 
         //Do not translate the icon
-        $this->data['attributeList']['translate'] = "no"; 
+        $this->data['attributeList']['translate'] = "no";
 
         //Identify as an image
         $this->data['attributeList']['role'] = "img";
-        $this->data['attributeList']['alt'] = "";
+        $this->data['attributeList']['aria-label'] = $this->getAltText($icon);
+    }
+
+    /**
+     * Get a filtered alt text prefix
+     *
+     * @return string
+     */
+    private function altTextPrefix(): string
+    {
+        if (function_exists('apply_filters')) {
+            return apply_filters($this->createFilterName($this) . '/' . ucfirst(__FUNCTION__), $this->altTextPrefix);
+        }
+        return $this->altTextPrefix;
+    }
+
+    /**
+     * Get a filtered alt text array
+     *
+     * @return array
+     */
+    private function altText(): array
+    {
+        if (function_exists('apply_filters')) {
+            return apply_filters($this->createFilterName($this) . '/' . ucfirst(__FUNCTION__), $this->altText);
+        }
+        return $this->altText;
+    }
+
+    /**
+     * Get a filtered undefined alt text.
+     *
+     * @return string
+     */
+    private function altTextUndefined(): string
+    {
+        if (function_exists('apply_filters')) {
+            return apply_filters($this->createFilterName($this) . '/' . ucfirst(__FUNCTION__), $this->altTextUndefined);
+        }
+        return $this->altTextUndefined;
+    }
+
+    /**
+     * Find and add a label to each icon.
+     *
+     * @param string $icon
+     * @return string
+     */
+    private function getAltText($icon)
+    {
+        if (array_key_exists($icon, $this->altText())) {
+            return $this->altTextPrefix() . $this->altText()[$icon];
+        }
+        return $this->altTextPrefix() . $this->altTextUndefined();
     }
 
     /**
      * Appends space before label
      * @return array
      */
-    public function appendSpace() {
-        if($this->compParams['label'] = trim($this->compParams['label'])) {
+    public function appendSpace()
+    {
+        if ($this->compParams['label'] = trim($this->compParams['label'])) {
             $this->data['label'] = " " . $this->compParams['label'];
         }
 

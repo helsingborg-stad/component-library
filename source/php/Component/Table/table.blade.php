@@ -1,9 +1,7 @@
 <!-- table.blade.php -->
 @if($list)
-@card([
-
-])
-    <div id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
+@card([])
+    <div class="{{ $class }}" {!! $attribute !!}>
         <div class="{{ $baseClass}}__header">
             
             @if($title)

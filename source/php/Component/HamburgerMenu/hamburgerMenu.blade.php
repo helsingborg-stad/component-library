@@ -1,5 +1,5 @@
 <!-- hamburgerMenu.blade.php -->
-<nav id="{{$id}}" class="{{$class}} o-grid" js-toggle-item="hamburger-menu" js-toggle-class="u-display--none">
+<nav class="{{$class}} o-grid" js-toggle-item="hamburger-menu" js-toggle-class="u-display--none" {!! $attribute !!}>
     
     {!! $slot !!}
 

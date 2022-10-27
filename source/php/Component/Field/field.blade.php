@@ -1,5 +1,5 @@
 <!-- field.blade.php -->
-<div class="{{$class}}" id="{{ $id }}">
+<div class="{{$class}}">
     @if(!empty($label) && !$hideLabel)
         <label class="{{$baseClass}}__label" for="input_{{ $id }}" id="label_{{ $id }}">
             {{$label}}
@@ -32,7 +32,7 @@
                     {{$prefix}}
                 </span>
             @endif
-
+            <label for="input_{{ $id }}" class="u-sr__only">{{$label}}</label>
             <input id="input_{{ $id }}"
                 type="{{$type}}"
                 value="{{$value}}"

@@ -1,4 +1,4 @@
-<div id="{{$id}}" class="{{$class}} c-field">
+<div class="{{$class}} c-field">
     @if($label)
         <label for="{{ $id }}" class="c-field__label">{{$label}}</label>
     @endif

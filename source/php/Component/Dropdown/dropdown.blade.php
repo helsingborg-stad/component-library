@@ -1,7 +1,5 @@
-<{{$componentElement}} id="{{ $id }}" class="{{ $class }}">   
-    
+<{{$componentElement}} class="{{ $class }}" {!! $attribute !!}>   
     {{$slot}}
-    
     <div class="{{$baseClass}}__list {{$baseClass}}__list--{{$direction}}">
         <div>
             <ul>
@@ -11,5 +9,4 @@
             </ul>
         </div>
     </div>  
-    
 </{{$componentElement}}>

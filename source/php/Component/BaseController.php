@@ -254,6 +254,11 @@ class BaseController
             $attribute['data-observe-resizes'] = "";
         }
 
+        //Add id if defined
+        if (!empty($this->data['id'])) {
+            $attribute['id'] = $this->data['id'];
+        }
+
         //Add unique id
         $attribute['data-uid'] = $this->getUid();
 
@@ -330,7 +335,7 @@ class BaseController
      *
      * @return string
      */
-    private function createFilterName($class)
+    public function createFilterName($class)
     {
         //Get all parts of the location
         $name = explode(

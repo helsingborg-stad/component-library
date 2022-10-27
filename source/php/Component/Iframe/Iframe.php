@@ -8,13 +8,9 @@ class Iframe extends \ComponentLibrary\Component\BaseController
     {
         extract($this->data);
 
-        $this->data['classList'][] = 'js-suppressed-iframe';
-        
         $this->data['attributeList']['title'] = $title;
         $this->data['attributeList']['aria-label'] = $title;
         
-        $this->data['attributeList']['options'] = $options;
-
         if (isset($width)) {
             $this->data['attributeList']['width'] = $width;
         }
@@ -31,8 +27,10 @@ class Iframe extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['loading'] = $loading;
         }
 
-        $this->data['attributeList']['src'] = "about:blank";
-         
+        if (isset($modifier)) {
+            $this->data['modifier'] = $modifier;
+        }
+
         if (isset($src)) {
             $this->data['attributeList']['data-src'] = $this->buildEmbedUrl($src);
             $this->data = $this->setSupplierDataAttributes($src, $this->data);
@@ -43,29 +41,36 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         } else {
             $this->data['isVideo'] = false;
         }
-
         if (isset($this->data['options'])) {
             $json = json_decode($this->data['options']);
 
-            if (isset($this->data['attributeList']['data-supplier-policy'])) {
+            if (isset($this->data['supplierPolicy'])) {
                 $json->knownLabels->info = str_replace(
                     array('{SUPPLIER_WEBSITE}', '{SUPPLIER_POLICY}'),
-                    array($this->data['attributeList']['data-supplier-name'], $this->data['attributeList']['data-supplier-policy']),
+                    array($this->data['supplierName'], $this->data['supplierPolicy']),
                     $json->knownLabels->info
                 );
- 
+
                 $this->data['labels'] = $json->knownLabels;
             } else {
                 $json->unknownLabels->info = str_replace(
                     '{SUPPLIER_WEBSITE}',
-                    $this->data['attributeList']['data-supplier-host'],
+                    $this->data['supplierHost'],
                     $json->unknownLabels->info
                 );
                 $this->data['labels'] = $json->unknownLabels;
             }
         }
     }
-    public static function getSuppliers()
+
+    /**
+     * Get suppliers
+     * Creates a list of suppliers with
+     * their hostnames, and policy documents.
+     *
+     * @return array
+     */
+    public function getSuppliers()
     {
         $suppliers = array(
             new Supplier(
@@ -102,15 +107,23 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         );
 
         if (function_exists('apply_filters')) {
-            return apply_filters(__NAMESPACE__ . '\\' . ucfirst(__FUNCTION__), $suppliers);
+            return apply_filters($this->createFilterName($this) . '/' . ucfirst(__FUNCTION__), $suppliers);
         }
 
         return $suppliers;
     }
+
+    /**
+     * Set supplier data attributes
+     *
+     * @param string $src
+     * @param array $data
+     * @return array
+     */
     private function setSupplierDataAttributes(string $src, array $data)
     {
         $this->data = $data;
-        $suppliers = $this::getSuppliers();
+        $suppliers  = $this->getSuppliers();
 
         $srcParsed = parse_url($src);
         $host = strtolower($srcParsed['host']);
@@ -118,29 +131,43 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         if (is_array($suppliers)) {
             foreach ($suppliers as $supplier) {
                 $key = array_search($host, $supplier->domain, true);
-                $this->data['attributeList']['data-supplier-host'] = $supplier->domain[$key];
 
                 if (is_integer($key)) {
-                    $this->data['attributeList']['data-supplier-name'] = $supplier->name;
+                    $this->data['supplierHost'] = $supplier->domain[$key];
+                    $this->data['supplierName'] = $supplier->name;
                     if (isset($supplier->policy)) {
-                        $this->data['attributeList']['data-supplier-policy'] = $supplier->policy;
+                        $this->data['supplierPolicy'] = $supplier->policy;
                     }
+                } else {
+                     $this->data['supplierHost'] = $host;
                 }
             }
         }
-   
+
         return $this->data;
     }
+
+    /**
+     * Build embed url
+     *
+     * @param string    $src    Arbitrary embed url
+     * @return string   $src    Correct embed url
+     */
     private function buildEmbedUrl($src)
     {
         $srcParsed = parse_url($src);
 
-        $ytParams = 'autoplay=0&showinfo=0&rel=0';
+        $ytParams = 'autoplay=1&showinfo=0&rel=0';
 
         switch ($srcParsed['host']) {
             case 'youtube.com':
             case 'www.youtube.com':
-                /* Replacing the path with /embed/ and then adding the v query parameter to the path and removing the v parameter from the query string. */
+                /*
+                Replacing the path with /embed/ and then
+                adding the v query parameter to the path
+                and removing the v parameter from the
+                query string.
+                */
                 $srcParsed['host'] = 'youtube.com';
                 $srcParsed['path'] = '/embed/';
 
@@ -163,7 +190,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
             case 'www.vimeo.com':
                 $srcParsed['host'] = 'player.vimeo.com';
                 if (isset($srcParsed['path'])) {
-                    $srcParsed['path'] = '/video' . $srcParsed['path'];
+                    $srcParsed['path'] = '/video' . $srcParsed['path'] . "?autoplay=1";
                 }
                 break;
             default:
