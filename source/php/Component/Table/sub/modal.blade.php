@@ -1,6 +1,6 @@
 @modal([
     'isPanel' => true,
-    'id' => 'modal-' . $id,
+    'id' => 'modal-' . $uid,
     'overlay' => 'dark',
     'animation' => 'scale-up',
     'heading' => $title,
@@ -9,8 +9,8 @@
     ],
 ])
    @table([
-        'list' => $list, 
-        'headings' => $headings, 
+        'list'          => $list, 
+        'headings'      => $headings, 
         'filterable'    => $filterable,
         'sortable'      => $sortable,
         'showSum'       => $showSum,
