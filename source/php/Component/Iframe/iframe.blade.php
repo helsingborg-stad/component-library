@@ -4,9 +4,6 @@
     "modifier"  => $modifier,
     "height"    => $height,
     "src"       => $attributeList['src'],
-    "policy"    => $supplierPolicy,
-    "host"      => $supplierHost,
-    "name"      => $supplierName,
     "icon"      => "info",
     ])
     <iframe 

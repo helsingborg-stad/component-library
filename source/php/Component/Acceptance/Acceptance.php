@@ -8,8 +8,6 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
     {
         //Extract array for eazy access (fetch only)
         extract($this->data);
-
-        $this->data['labels'] = $labels;
         
         $this->data['isVideo'] = false;
         $this->data['classList'][] = 'js-suppressed-content';
@@ -45,8 +43,8 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['data-supplier-host'] = $host;
         }
 
-        if (!empty($this->data['options'])) {
-            $json = json_decode($this->data['options']);
+        if (!empty($this->data['labels'])) {
+            $json = json_decode($this->data['labels']);
 
             if (!empty($this->data['supplierPolicy'])) {
                 $json->knownLabels->info = str_replace(

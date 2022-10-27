@@ -31,6 +31,10 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         if (isset($src)) {
             $this->data['attributeList']['src'] = $this->buildEmbedUrl($src);
         }
+
+        if(isset($labels)) {
+            $this->data['labels'] = json_encode($labels);
+        }
     }
     /**
      * Build embed url
