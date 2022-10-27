@@ -45,10 +45,10 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['data-supplier-host'] = $host;
         }
 
-        if (isset($this->data['options'])) {
+        if (!empty($this->data['options'])) {
             $json = json_decode($this->data['options']);
 
-            if (isset($this->data['supplierPolicy'])) {
+            if (!empty($this->data['supplierPolicy'])) {
                 $json->knownLabels->info = str_replace(
                     array('{SUPPLIER_WEBSITE}', '{SUPPLIER_POLICY}'),
                     array($this->data['supplierName'], $this->data['supplierPolicy']),

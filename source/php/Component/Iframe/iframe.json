@@ -7,6 +7,10 @@
 		"height": "400",
 		"frameborder": "0",
 		"options": "",
+		"labels": "",
+		"supplierPolicy": false,
+        "supplierHost": false,
+        "supplierName": false,
 		"modifier": ""
 	},
 	"view": "iframe.blade.php",
