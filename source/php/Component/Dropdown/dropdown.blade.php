@@ -1,12 +1,16 @@
-<{{$componentElement}} class="{{ $class }}" {!! $attribute !!}>   
-    {{$slot}}
-    <div class="{{$baseClass}}__list {{$baseClass}}__list--{{$direction}}">
+<{{ $componentElement }} id="{{ $id }}" class="{{ $class }}">
+    {{ $slot }}
+    <div class="{{ $baseClass }}__list {{ $baseClass }}__list--{{ $direction }}">
         <div>
-            <ul>
+            <ul class="u-margin__top--0">
                 @foreach ($items as $item)
-                <{{$itemElement}} href="{{$item['link']}}"><li>{{$item['text']}}</li></{{$itemElement}}>
+                    <li @if (!empty($item['classList'])) class="{{ implode(' ', $item['classList']) }}" @endif>
+                        <{{ $itemElement }} href="{{ $item['link'] }}">
+                            {{ $item['text'] }}
+                            </{{ $itemElement }}>
+                    </li>
                 @endforeach
             </ul>
         </div>
-    </div>  
-</{{$componentElement}}>
+    </div>
+    </{{ $componentElement }}>
