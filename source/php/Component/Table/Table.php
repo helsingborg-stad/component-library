@@ -26,6 +26,9 @@ class Table extends \ComponentLibrary\Component\BaseController
         if ($showSum) {
             $this->data['classList'][]  = $this->getBaseClass() . '--summary';
         }
+        if($fullscreen && empty($title)) {
+            $this->data['classList'][] = $this->getBaseClass() . '--title-none';
+        }
 
         if ($showSum) {
             $this->data['attributeList']['table-sum'] = true;
