@@ -35,7 +35,7 @@ class Button extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['aria-label'] = $text;
         }
 
-        if($fullWidth) {
+        if ($fullWidth) {
             $this->data['classList'][] = $this->getBaseClass() . '__full-width';
         }
 
