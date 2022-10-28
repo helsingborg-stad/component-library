@@ -93,8 +93,9 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
             ),
             new Supplier(
                 'Helsingborg Stad',
-                array( 'helsingborg.se', 'www.helsingborg.se' ),
-                'https://helsingborg.se/om-webbplatsen/sa-har-behandlar-vi-dina-personuppgifter/'
+                array( 'helsingborg.se', 'www.helsingborg.se', 'driftinfo.helsingborg.se', 'it.helsingborg.se' ),
+                'https://helsingborg.se/om-webbplatsen/sa-har-behandlar-vi-dina-personuppgifter/',
+				false
             ),
             new Supplier(
                 'Mynewsdesk',
@@ -133,7 +134,8 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
 
         if (is_array($suppliers)) {
             foreach ($suppliers as $supplier) {
-                $key = array_search($host, $supplier->domain, true);
+
+				$key = array_search($host, $supplier->domain, true);
 
                 if (is_integer($key)) {
                     $this->data['supplierHost'] = $supplier->domain[$key];
@@ -144,6 +146,8 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
                 } else {
                     $this->data['supplierHost'] = $host;
                 }
+
+				$this->data['supplierRequiresAccept'] = (bool) $supplier->requiresAccept;
             }
         }
 
