@@ -46,7 +46,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
     {
         $srcParsed = parse_url($src);
 
-        $ytParams = 'autoplay=1&showinfo=0&rel=0';
+        $ytParams = 'autoplay=1&showinfo=0&rel=0&mute=1';
 
         switch ($srcParsed['host']) {
             case 'youtube.com':
@@ -79,7 +79,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
             case 'www.vimeo.com':
                 $srcParsed['host'] = 'player.vimeo.com';
                 if (isset($srcParsed['path'])) {
-                    $srcParsed['path'] = '/video' . $srcParsed['path'] . "?autoplay=1";
+                    $srcParsed['path'] = '/video' . $srcParsed['path'] . "?autoplay=1&autopause=0&muted=1";
                 }
                 break;
             default:
