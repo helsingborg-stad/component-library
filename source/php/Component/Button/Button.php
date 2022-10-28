@@ -30,8 +30,11 @@ class Button extends \ComponentLibrary\Component\BaseController
             $this->data['componentElement'] = "a";
             $this->data['attributeList']['href'] = $href;
         }
+
+        if ($text) {
+            $this->data['attributeList']['aria-label'] = $text;
         }
-      
+
         if($fullWidth) {
             $this->data['classList'][] = $this->getBaseClass() . '__full-width';
         }
@@ -92,6 +95,7 @@ class Button extends \ComponentLibrary\Component\BaseController
     {
         if (!empty($icon) && empty($text)) {
             $this->data['classList'][] = $this->getBaseClass() . '--icon-only';
+            $this->data['attributeList']['aria-label'] = $icon;
         }
     }
 }
