@@ -1,4 +1,5 @@
 <!-- acceptance.blade.php -->
+@if($requiresAccept)
 <div class="{{ $class }}" {!! $attribute !!}>
     <div class="{{$baseClass}}__modal js-suppressed-content-prompt">
         <div class="{{$baseClass}}__modal-description js-suppressed-content-description">
@@ -54,8 +55,6 @@
             @endif
         </div>
     </div>
-
-	{{ !! $requiresAccept ? 'requiresAccept true' : 'requiresAccept false' }}
 	
     <!-- Display after accept -->
     <div class="{{$baseClass}}__content">
@@ -64,3 +63,6 @@
         </template>
     </div>
 </div>
+@else
+{!! $slot !!} 
+@endif
