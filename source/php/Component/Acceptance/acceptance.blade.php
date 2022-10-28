@@ -55,6 +55,8 @@
         </div>
     </div>
 
+	{{ !! $requiresAccept ? 'requiresAccept true' : 'requiresAccept false' }}
+	
     <!-- Display after accept -->
     <div class="{{$baseClass}}__content">
         <template>

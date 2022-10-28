@@ -10,6 +10,8 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
         extract($this->data);
         
         $this->data['isVideo'] = false;
+		$this->data['requiresAccept'] = true;
+
         $this->data['classList'][] = 'js-suppressed-content';
         
         if (!empty($modifier)) {
@@ -32,7 +34,7 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['data-src'] = $src;
             $this->data = $this->setSupplierDataAttributes($src, $this->data);
         }
-
+		
         if (isset($name)) {
             $this->data['attributeList']['data-supplier-name'] = $name;
         }
@@ -95,7 +97,7 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
                 'Helsingborg Stad',
                 array( 'helsingborg.se', 'www.helsingborg.se', 'driftinfo.helsingborg.se', 'it.helsingborg.se' ),
                 'https://helsingborg.se/om-webbplatsen/sa-har-behandlar-vi-dina-personuppgifter/',
-				false
+                false
             ),
             new Supplier(
                 'Mynewsdesk',
@@ -117,6 +119,19 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
         return $suppliers;
     }
 
+    public static function getSupplier( string $host = '')
+    {
+        $suppliers = $this->getSuppliers();
+        if (is_iterable($suppliers)) {
+            foreach ($suppliers as $supplier) {
+                $key = array_search($host, $supplier->domain, true);
+                if (is_integer($key)) {
+                    return $supplier;
+                }
+            }
+        }
+        return false;
+    }
     /**
      * Set supplier data attributes
      *
@@ -131,17 +146,17 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
 
         $srcParsed = parse_url($src);
         $host = strtolower($srcParsed['host']);
-
-        if (is_iterable($suppliers)) {
-            foreach ($suppliers as $supplier) {
         
-				$key = array_search($host, $supplier->domain, true);
-				
-				if (is_integer($key)) {
-                    
-					$this->data['supplierHost'] = $supplier->domain[$key];
+		if (is_iterable($suppliers)) {
+            foreach ($suppliers as $supplier) {
+                $key = array_search($host, $supplier->domain, true);
+                
+                if (is_integer($key)) {
+
+                    $this->data['supplierHost'] = $supplier->domain[$key];
                     $this->data['supplierName'] = $supplier->name;
-					$this->data['supplierRequiresAccept'] = (bool) $supplier->requiresAccept;
+
+                    $this->data['requiresAccept'] = $supplier->requiresAccept;
 
                     if (isset($supplier->policy)) {
                         $this->data['supplierPolicy'] = $supplier->policy;
@@ -149,7 +164,6 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
                 } else {
                     $this->data['supplierHost'] = $host;
                 }
-
             }
         }
 
