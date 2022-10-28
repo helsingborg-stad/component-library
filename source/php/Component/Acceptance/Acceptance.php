@@ -135,6 +135,8 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
         if (is_iterable($suppliers)) {
             foreach ($suppliers as $supplier) {
         
+				$key = array_search($host, $supplier->domain, true);
+				
 				if (is_integer($key)) {
                     
 					$this->data['supplierHost'] = $supplier->domain[$key];
