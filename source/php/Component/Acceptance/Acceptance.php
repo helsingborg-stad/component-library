@@ -132,14 +132,15 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
         $srcParsed = parse_url($src);
         $host = strtolower($srcParsed['host']);
 
-        if (is_array($suppliers)) {
+        if (is_iterable($suppliers)) {
             foreach ($suppliers as $supplier) {
-
-				$key = array_search($host, $supplier->domain, true);
-
-                if (is_integer($key)) {
-                    $this->data['supplierHost'] = $supplier->domain[$key];
+        
+				if (is_integer($key)) {
+                    
+					$this->data['supplierHost'] = $supplier->domain[$key];
                     $this->data['supplierName'] = $supplier->name;
+					$this->data['supplierRequiresAccept'] = (bool) $supplier->requiresAccept;
+
                     if (isset($supplier->policy)) {
                         $this->data['supplierPolicy'] = $supplier->policy;
                     }
@@ -147,7 +148,6 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
                     $this->data['supplierHost'] = $host;
                 }
 
-				$this->data['supplierRequiresAccept'] = (bool) $supplier->requiresAccept;
             }
         }
 
