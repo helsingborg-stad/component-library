@@ -1,58 +1,72 @@
 <!-- field.blade.php -->
-<div class="{{$class}}">
+<div class="{{$class}}" {!! $attribute !!}>
+    
     @if(!empty($label) && !$hideLabel)
         <label class="{{$baseClass}}__label" for="input_{{ $id }}" id="label_{{ $id }}">
             {{$label}}
             @if($required)
-                <span class="u-color__text--danger">*</span></label>
+                <span class="u-color__text--danger" aria-hidden="true">*</span>
             @endif
         </label>
     @endif
     
     <div class="{{$baseClass}}__inner {{$baseClass}}__inner--{{$type}}">
+        
+        {{-- Multiline (textarea) --}}
         @if($multiline)
-            <textarea id="input_{{ $id }}"
-                {!! $attribute !!}
-                @if($required)
-                    required
-                    data-required="1"
-                    aria-required="true"
-                @endif
-                placeholder="{{$placeholder}}"
-            >{{$value ?? null}}</textarea>
 
-            <i class="c-icon c-field__suffix material-icons c-field__error-icon" translate="no" role="img">error_outline</i>
-        @else
+            {{-- Add screen reader, if visible label is hidden. --}}
+            @if($hideLabel)
+                <label for="input_{{ $id }}" class="u-sr__only">
+                    {{$label}}
+                </label>
+            @endif
+
+            <textarea id="input_{{ $id }}" {!! $fieldAttribute !!}>
+                {{ $value }}
+            </textarea>
+        @endif
+
+        {{-- Single line (input) --}}
+        @if(!$multiline)
             @if(!empty($icon))
                 @icon(array_merge(['classList' => [$baseClass . '__icon']], $icon))
                 @endicon
             @endif
+
             @if(!empty($prefix))
                 <span class="c-field__prefix">
                     {{$prefix}}
                 </span>
             @endif
-            <label for="input_{{ $id }}" class="u-sr__only">{{$label}}</label>
-            <input id="input_{{ $id }}"
-                type="{{$type}}"
-                value="{{$value}}"
-                {!! $attribute !!}
-                @if($required)
-                    required
-                    data-required="1"
-                    aria-required="true"
-                @endif
-                placeholder="{{$placeholder}}"
-            />
+
+            {{-- Add screen reader, if visible label is hidden. --}}
+            @if($hideLabel)
+                <label for="input_{{ $id }}" class="u-sr__only">
+                    {{$label}}
+                </label>
+            @endif
+            <input id="input_{{ $id }}" value="{{ $value }}" {!! $fieldAttribute !!}/>
 
             @if(!empty($suffix))
                 <span class="c-field__suffix">{{$suffix}}</span>
             @endif
-            
-            <i class="c-icon c-field__suffix material-icons c-field__error-icon" translate="no" role="img">error_outline</i>
         @endif
+
+        {{-- Icon when error occurs --}}
+        @icon([
+            'icon' => 'error_outline', 
+            'size' => 'md', 
+            'classList' => [
+                $baseClass . '__suffix',
+                $baseClass . '__error-icon'
+            ]])
+        @endicon
     </div>
+
     @if ($helperText)
-        <small class="{{$baseClass}}__helper">{{$helperText}}</small>
+        <small class="{{$baseClass}}__helper">
+            {{$helperText}}
+        </small>
     @endif
 </div>
