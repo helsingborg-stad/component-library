@@ -1,4 +1,5 @@
 <!-- acceptance.blade.php -->
+@if($requiresAccept)
 <div class="{{ $class }}" {!! $attribute !!}>
     <div class="{{$baseClass}}__modal js-suppressed-content-prompt">
         <div class="{{$baseClass}}__modal-description js-suppressed-content-description">
@@ -13,7 +14,7 @@
                     'text' => 'Handling of personal data',
                     'color' => 'default',
                     'style' => 'basic',
-                    'icon' => 'info',
+                    'icon' => $icon,
                     'attributeList' => [
                         'data-open' => 'modal-' . $uid
                     ],
@@ -54,7 +55,7 @@
             @endif
         </div>
     </div>
-
+	
     <!-- Display after accept -->
     <div class="{{$baseClass}}__content">
         <template>
@@ -62,3 +63,6 @@
         </template>
     </div>
 </div>
+@else
+{!! $slot !!} 
+@endif

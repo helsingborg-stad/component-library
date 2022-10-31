@@ -3,10 +3,8 @@
     "labels"    => $labels,
     "modifier"  => $modifier,
     "height"    => $height,
-    "src"       => $attributeList['data-src'],
-    "policy"    => $supplierPolicy,
-    "host"      => $supplierHost,
-    "name"      => $supplierName,
+    "src"       => $attributeList['src'],
+    "icon"      => "info",
     ])
     <iframe 
         id="{{ $id }}" class="{{$class}}" {!! $attribute !!}>

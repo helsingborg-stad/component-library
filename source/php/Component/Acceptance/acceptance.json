@@ -7,10 +7,12 @@
         "src": false,
         "policy": false,
         "host": false,
-        "name": false
+        "name": false,
+    	"options": false,
+        "icon": "info"
     },
     "description": {
-       "labels" : "array of button, title and content labels",
+       "labels" : "JSON string of an object containing button, title and info labels",
        "modifier" : "String containing class modifier ex. video",
        "height" : "height in number ex 500",
        "src" : "url ex. https://www.youtube.com",

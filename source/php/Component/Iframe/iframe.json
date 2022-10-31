@@ -6,15 +6,25 @@
 		"width": "100%",
 		"height": "400",
 		"frameborder": "0",
-		"options": "",
+		"labels": "",
 		"modifier": ""
+	},
+	"description": {
+		"src": "Source URL",
+		"loading": "Loading type (for defering)",
+		"width": "Width in number or % (ex: 100% or 400)",
+		"height": "Height in number",
+		"frameborder": "Default border of the iframe (0 for none, 1 for border)",
+		"labels": "JSON string of an object containing button, title and info labels",
+		"modifier": "Modifier variable ex. video"
 	},
 	"view": "iframe.blade.php",
 	"dependency": {
 		"sass": {
 			"components": [
 				"button",
-				"typography"
+				"typography",
+				"acceptance"
 			]
 		}
 	}
