@@ -4,20 +4,38 @@ namespace ComponentLibrary\Component\Field;
 
 class Field extends \ComponentLibrary\Component\Form\Form
 {
+    private $disallowedAttributeKeys = [
+        'required',
+        'autocomplete',
+        'name',
+        'type',
+        'value'
+    ];
+
     public function init()
     {
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
+        //Warn & backwards compability for disallowedAttributeKeys,
+        //TODO: Remove this backwards compatibility when all issues
+        // are resolved. Keep warning for the future.
+        $malformedAttributes = $this->malformedAttributeListWarning($attributeList);
+        if (is_iterable($malformedAttributes)) {
+            foreach ($malformedAttributes as $malformedAttributeKey => $malformedAttributeValue) {
+                ${$malformedAttributeKey} = $malformedAttributeValue;
+            }
+        }
+
         // Must include a id.
         if (!$id) {
-            $this->data['id'] = uniqid();
+            $id = $this->data['id'] = uniqid();
         }
 
         //Label visibility
         $this->data['showLabel'] = !$hideLabel && !empty($label);
         if ($this->data['showLabel']) {
-            $this->data['fieldAttributeList']['aria-labelledby'] = 'label_' . $this->data['id'];
+            $this->data['fieldAttributeList']['aria-labelledby'] = 'label_' . $id;
         } else {
             $this->data['fieldAttributeList']['aria-label'] = $label;
         }
@@ -62,8 +80,8 @@ class Field extends \ComponentLibrary\Component\Form\Form
         }
 
         // Handle datepicker exceptions
-        if ($type === 'date' || $type === 'datetime-local' || $type === 'time') {
-
+        if ($type === 'date' || $type === 'datetime-local' || $type === 'time')
+        {
             if (isset($datepicker['required']) && $datepicker['required']) {
                 $this->data['required'] = true;
             }
@@ -98,7 +116,7 @@ class Field extends \ComponentLibrary\Component\Form\Form
             $this->data['fieldAttributeList']['type'] = $type;
         }
 
-        // Handle required
+        // Handle required, as attribute and var
         if ($required) {
             $this->data['fieldAttributeList']['required']       = "required";
             $this->data['fieldAttributeList']['data-required']  = "1";
@@ -107,7 +125,7 @@ class Field extends \ComponentLibrary\Component\Form\Form
 
         // Autocomplete
         if ($autocomplete) {
-            $this->data['fieldAttributeList']['autocomplete']  = "on";
+            $this->data['fieldAttributeList']['autocomplete']  = $autocomplete;
         } else {
             $this->data['fieldAttributeList']['autocomplete']  = "off";
         }
@@ -200,7 +218,7 @@ class Field extends \ComponentLibrary\Component\Form\Form
      * Same as above but inverted
      *
      * @param   string  $key    The attribute key
-     * @return  boolean 
+     * @return  boolean
      */
     private function isNotFieldAttribute(string $key): bool
     {
@@ -219,7 +237,38 @@ class Field extends \ComponentLibrary\Component\Form\Form
                 }
             }
         }
-
         return $fieldAttributeList;
+    }
+
+    /**
+     * Sniff attributes list, to find stuff that dosent belong.
+     * Refer to the component parameters.
+     *
+     * @param array $attributeList
+     * @return bool
+     */
+    private function malformedAttributeListWarning($attributeList)
+    {
+        if (is_iterable($attributeList)) {
+            $stack = []; //Malformed attribute detection stack
+            foreach ($attributeList as $key => $attribute) {
+                if (in_array($key, $this->disallowedAttributeKeys)) {
+                    trigger_error(
+                        sprintf(
+                            'Attribute "%s" is not allowed in field component. 
+                            Please use the respective parameter. Component will 
+                            run in compability mode until this issue is resolved. 
+                            Attributes will override the component parameter.',
+                            $key
+                        ),
+                        E_USER_WARNING
+                    );
+                    $stack[$key] = $attribute;
+                }
+            }
+            return $stack;
+        }
+
+        return false;
     }
 }

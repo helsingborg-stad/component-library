@@ -2,6 +2,7 @@
     "slug": "field",
     "default": {
         "label": "",
+        "name": "",
         "type": "text",
         "required": false,
         "autocomplete": true,
@@ -18,6 +19,7 @@
     },
     "description": {
         "label": "Label for the field.",
+        "name": "The name of the field (html name='')",
         "type": "text, checkbox and radio",
         "required": "HTML5 validation on fields",
         "autocomplete": "Browser automatically completes the input values based on values that the user has entered before",

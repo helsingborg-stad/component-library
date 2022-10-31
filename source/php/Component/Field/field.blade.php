@@ -53,14 +53,18 @@
             @endif
         @endif
 
-        {{-- Icon when error occurs --}}
+        {{-- Icon when error occurs, otherwise hidden. --}}
         @icon([
             'icon' => 'error_outline',
             'size' => 'md',
             'classList' => [
                 $baseClass . '__suffix',
                 $baseClass . '__error-icon'
-            ]])
+            ],
+            'attributeList' => [
+                'aria-hidden' => 'true'
+            ]
+        ])
         @endicon
     </div>
 
