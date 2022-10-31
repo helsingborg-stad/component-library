@@ -24,8 +24,8 @@ class Field extends \ComponentLibrary\Component\Form\Form
             'hideLabel' => $hideLabel ?? false,
         ];
 
+        //Label visibility
         $this->data['showLabel'] = !$hideLabel && !empty($label);
-
         if ($this->data['showLabel']) {
             $this->data['attributeList']['aria-labelledby'] = 'label_' . $this->data['id'];
         } else {
@@ -47,18 +47,7 @@ class Field extends \ComponentLibrary\Component\Form\Form
         }
         $this->data['classList'][] = $this->getBaseClass() . "--" . $size;
 
-        if (isset($isValid) && $isValid === true) {
-            $this->data['classList'][] = 'is-valid';
-        } elseif (isset($isValid) && $isValid === false) {
-            $this->data['classList'][] = 'is-invalid';
-        }
-
-        //Handle radius
-        if ($this->data['radius']) {
-            $this->data['classList'][] = $this->getBaseClass() . "--radius-" . $this->data['radius'];
-        }
-        $this->data['classList'][] = $this->getBaseClass() . "--" . $size;
-
+        // Is valid indicator
         if (isset($isValid) && $isValid === true) {
             $this->data['classList'][] = 'is-valid';
         } elseif (isset($isValid) && $isValid === false) {
@@ -84,10 +73,10 @@ class Field extends \ComponentLibrary\Component\Form\Form
 
         // Handle datepicker exceptions
         if ($type === 'date' || $type === 'datetime-local' || $type === 'time') {
-            $this->data['type'] = $type;
-            $this->compParams['type'] = $type;
+            $this->data['type']         = $type;
+            $this->compParams['type']   = $type;
 
-            if ($datepicker['required']) {
+            if (isset($datepicker['required']) && $datepicker['required']) {
                 $this->data['required'] = true;
             }
 
@@ -136,11 +125,11 @@ class Field extends \ComponentLibrary\Component\Form\Form
 
     public function setData()
     {
-        $this->data['label'] = $this->compParams['label'];
-        $this->data['type'] = $this->compParams['type'];
-        $this->data['required'] = $this->compParams['required'];
-        $this->data['invalidMessage'] = $this->compParams['invalidMessage'];
-        $this->data['value'] = $this->compParams['value'];
+        $this->data['label']            = $this->compParams['label'];
+        $this->data['type']             = $this->compParams['type'];
+        $this->data['required']         = $this->compParams['required'];
+        $this->data['invalidMessage']   = $this->compParams['invalidMessage'];
+        $this->data['value']            = $this->compParams['value'];
     }
 
     public function setMinAndMaxDate($minDate, $maxDate, $type = 'date')
