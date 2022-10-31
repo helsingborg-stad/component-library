@@ -9,27 +9,17 @@ class Field extends \ComponentLibrary\Component\Form\Form
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
+        // Must include a id.
         if (!$id) {
             $this->data['id'] = uniqid();
         }
 
-        $this->compParams = [
-            'label' => $label ?? '',
-            'type' => $type ?? 'text',
-            'required' => $required ?? false,
-            'invalidMessage' => $invalidMessage ?? '',
-            'value' => $value ?? '',
-            'isValid' => $isValid ?? null,
-            'helperText' => $helperText ?? $invalidMessage ?? '',
-            'hideLabel' => $hideLabel ?? false,
-        ];
-
         //Label visibility
         $this->data['showLabel'] = !$hideLabel && !empty($label);
         if ($this->data['showLabel']) {
-            $this->data['attributeList']['aria-labelledby'] = 'label_' . $this->data['id'];
+            $this->data['fieldAttributeList']['aria-labelledby'] = 'label_' . $this->data['id'];
         } else {
-            $this->data['attributeList']['aria-label'] = $label;
+            $this->data['fieldAttributeList']['aria-label'] = $label;
         }
 
         //Set type
@@ -41,7 +31,7 @@ class Field extends \ComponentLibrary\Component\Form\Form
             $this->data['classList'][] = $this->getBaseClass() . "--icon";
         }
 
-        //Handle size
+        //Normalize size
         if (!in_array($size, ['sm', 'md', 'lg'])) {
             $size = "md";
         }
@@ -73,18 +63,59 @@ class Field extends \ComponentLibrary\Component\Form\Form
 
         // Handle datepicker exceptions
         if ($type === 'date' || $type === 'datetime-local' || $type === 'time') {
-            $this->data['type']         = $type;
-            $this->compParams['type']   = $type;
 
             if (isset($datepicker['required']) && $datepicker['required']) {
                 $this->data['required'] = true;
             }
 
-            $this->setMinAndMaxDate($datepicker['minDate'] ?? false, $datepicker['maxDate'] ?? false, $this->data['type']);
+            $this->setMinAndMaxDate(
+                $datepicker['minDate'] ?? false,
+                $datepicker['maxDate'] ?? false,
+                $this->data['type']
+            );
         }
 
-        // Set data
-        $this->setData();
+        //Move field specific attributes to field element.
+        $this->data['fieldAttributeList'] = $this->moveAttributes(
+            $this->data['attributeList'],
+            $this->data['fieldAttributeList']
+        );
+
+        //Remove field specific attributes from main element.
+        $this->data['attributeList'] = array_filter(
+            $this->data['attributeList'],
+            array($this, 'isNotFieldAttribute'),
+            ARRAY_FILTER_USE_KEY
+        );
+
+        //Placeholder
+        if ($placeholder) {
+            $this->data['fieldAttributeList']['placeholder'] = $placeholder;
+        }
+
+        // Type
+        if ($type) {
+            $this->data['fieldAttributeList']['type'] = $type;
+        }
+
+        // Handle required
+        if ($required) {
+            $this->data['fieldAttributeList']['required']       = "required";
+            $this->data['fieldAttributeList']['data-required']  = "1";
+            $this->data['fieldAttributeList']['aria-required']  = "true";
+        }
+
+        // Autocomplete
+        if ($autocomplete) {
+            $this->data['fieldAttributeList']['autocomplete']  = "on";
+        } else {
+            $this->data['fieldAttributeList']['autocomplete']  = "off";
+        }
+
+        //Create field attributes
+        $this->data['fieldAttribute'] = self::buildAttributes(
+            $this->data['fieldAttributeList']
+        );
     }
 
     /**
@@ -123,25 +154,71 @@ class Field extends \ComponentLibrary\Component\Form\Form
         }
     }
 
-    public function setData()
-    {
-        $this->data['label']            = $this->compParams['label'];
-        $this->data['type']             = $this->compParams['type'];
-        $this->data['required']         = $this->compParams['required'];
-        $this->data['invalidMessage']   = $this->compParams['invalidMessage'];
-        $this->data['value']            = $this->compParams['value'];
-    }
-
+    /**
+     * Set a minimum and maximum date to be selectable
+     *
+     * @param string $minDate
+     * @param string $maxDate
+     * @param string $type
+     * @return void
+     */
     public function setMinAndMaxDate($minDate, $maxDate, $type = 'date')
     {
         $type = $type === 'datetime-local' ? 'date-time' : $type;
         $format = \ComponentLibrary\Helper\Date::getDateFormat($type);
 
         $minDate ?
-        $this->data['attributeList']['min'] = date($format, strtotime($minDate))
+        $this->data['fieldAttributeList']['min'] = date($format, strtotime($minDate))
         : '';
+
         $maxDate ?
-        $this->data['attributeList']['max'] = date($format, strtotime($maxDate))
+        $this->data['fieldAttributeList']['max'] = date($format, strtotime($maxDate))
         : '';
+    }
+
+    /**
+     * Check if attribute should be placed in fieldAttributeList or attributeList
+     *
+     * @param   string  $key    The attribute key
+     * @return  boolean         True is attribute, false if field attribute.
+     */
+    private function isFieldAttribute(string $key): bool
+    {
+        return (bool) in_array($key, [
+            'type',
+            'name',
+            'pattern',
+            'autocomplete',
+            'data-invalid',
+            'data-invalid-message',
+            'message',
+            'id'
+        ]);
+    }
+
+    /**
+     * Same as above but inverted
+     *
+     * @param   string  $key    The attribute key
+     * @return  boolean         
+     */
+    private function isNotFieldAttribute(string $key): bool
+    {
+        return (bool) !$this->isFieldAttribute($key);
+    }
+
+    /**
+     * Moves attributes to field attributeList
+     */
+    private function moveAttributes($attributeList, $fieldAttributeList) {
+        if (is_iterable($attributeList)) {
+            foreach ($attributeList as $key => $attribute) {
+                if ($this->isFieldAttribute($key)) {
+                    $fieldAttributeList[$key] = $attribute;
+                }
+            }
+        }
+
+        return $fieldAttributeList;
     }
 }
