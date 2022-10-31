@@ -200,7 +200,7 @@ class Field extends \ComponentLibrary\Component\Form\Form
      * Same as above but inverted
      *
      * @param   string  $key    The attribute key
-     * @return  boolean         
+     * @return  boolean 
      */
     private function isNotFieldAttribute(string $key): bool
     {
@@ -210,7 +210,8 @@ class Field extends \ComponentLibrary\Component\Form\Form
     /**
      * Moves attributes to field attributeList
      */
-    private function moveAttributes($attributeList, $fieldAttributeList) {
+    private function moveAttributes(array $attributeList, array $fieldAttributeList): array
+    {
         if (is_iterable($attributeList)) {
             foreach ($attributeList as $key => $attribute) {
                 if ($this->isFieldAttribute($key)) {

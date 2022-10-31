@@ -55,8 +55,8 @@
 
         {{-- Icon when error occurs --}}
         @icon([
-            'icon' => 'error_outline', 
-            'size' => 'md', 
+            'icon' => 'error_outline',
+            'size' => 'md',
             'classList' => [
                 $baseClass . '__suffix',
                 $baseClass . '__error-icon'
