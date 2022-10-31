@@ -20,7 +20,7 @@
                     'size'          => 'md',
                     'color'         => 'primary',
                     'classList'     =>[$baseClass.'__fullscreen', 'u-display--none@xs', 'u-display--none@sm'],
-                    'attributeList' => ['data-open' => 'modal-' . $id]])
+                    'attributeList' => ['data-open' => 'modal-' . $uid]])
                 @endicon
             @endif
 
