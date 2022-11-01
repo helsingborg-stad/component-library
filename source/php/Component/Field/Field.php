@@ -9,7 +9,8 @@ class Field extends \ComponentLibrary\Component\Form\Form
         'autocomplete',
         'name',
         'type',
-        'value'
+        'value',
+        'rows'
     ];
 
     public function init()
@@ -30,6 +31,11 @@ class Field extends \ComponentLibrary\Component\Form\Form
         // Must include a id.
         if (!$id) {
             $id = $this->data['id'] = uniqid();
+        }
+
+        //Multiline
+        if (is_numeric($multiline)) {
+            $this->data['fieldAttributeList']['rows'] = $multiline;
         }
 
         //Label visibility

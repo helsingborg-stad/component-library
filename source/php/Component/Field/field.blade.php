@@ -22,9 +22,8 @@
                 </label>
             @endif
 
-            <textarea id="input_{{ $id }}" {!! $fieldAttribute !!}>
-                {{ $value }}
-            </textarea>
+            {{-- Do not break into multiple lines, will add space to value. --}}
+            <textarea id="input_{{ $id }}" {!! $fieldAttribute !!}>{{ $value }}</textarea>
         @endif
 
         {{-- Single line (input) --}}
@@ -49,7 +48,7 @@
             <input id="input_{{ $id }}" value="{{ $value }}" {!! $fieldAttribute !!}/>
 
             @if(!empty($suffix))
-                <span class="c-field__suffix">{{$suffix}}</span>
+                <span class="{{ $baseClass }}__suffix">{{$suffix}}</span>
             @endif
         @endif
 
@@ -66,6 +65,13 @@
             ]
         ])
         @endicon
+
+    </div>
+
+    <div class="c-field__error" aria-hidden="true" aria-label="@{{VALIDATION_ERROR_MESSAGE}}">
+        @typography(['variant' => 'meta', 'element' => 'span', 'classList' => ['c-field__error-message']])
+            @{{VALIDATION_ERROR_MESSAGE}}
+        @endtypography
     </div>
 
     @if ($helperText)
