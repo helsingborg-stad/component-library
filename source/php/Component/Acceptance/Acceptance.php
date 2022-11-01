@@ -80,7 +80,7 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
         $suppliers = array(
             new Supplier(
                 'Google',
-                array( 'google.com', 'maps.google.com', 'google.se', 'maps.google.se' ),
+                array( 'google.com', 'www.google.com', 'maps.google.com', 'google.se', 'www.google.se', 'maps.google.se' ),
                 'https://policies.google.com/privacy'
             ),
             new Supplier(
