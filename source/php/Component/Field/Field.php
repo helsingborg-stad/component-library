@@ -80,8 +80,7 @@ class Field extends \ComponentLibrary\Component\Form\Form
         }
 
         // Handle datepicker exceptions
-        if ($type === 'date' || $type === 'datetime-local' || $type === 'time')
-        {
+        if (in_array($type, ['time', 'datetime-local', 'date'])) {
             if (isset($datepicker['required']) && $datepicker['required']) {
                 $this->data['required'] = true;
             }
@@ -182,16 +181,19 @@ class Field extends \ComponentLibrary\Component\Form\Form
      */
     public function setMinAndMaxDate($minDate, $maxDate, $type = 'date')
     {
-        $type = $type === 'datetime-local' ? 'date-time' : $type;
-        $format = \ComponentLibrary\Helper\Date::getDateFormat($type);
+        $type = ($type === 'datetime-local') ? 'date-time' : $type;
 
         $minDate ?
-        $this->data['fieldAttributeList']['min'] = date($format, strtotime($minDate))
-        : '';
+        $this->data['fieldAttributeList']['min'] = date(
+            \ComponentLibrary\Helper\Date::getDateFormat($type),
+            strtotime($minDate)
+        ) : '';
 
         $maxDate ?
-        $this->data['fieldAttributeList']['max'] = date($format, strtotime($maxDate))
-        : '';
+        $this->data['fieldAttributeList']['max'] = date(
+            \ComponentLibrary\Helper\Date::getDateFormat($type),
+            strtotime($maxDate)
+        ) : '';
     }
 
     /**

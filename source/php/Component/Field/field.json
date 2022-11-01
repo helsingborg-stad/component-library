@@ -31,7 +31,7 @@
         "helperText": "Text displayed below the field.",
         "multiline": "Render textarea instead of input",
         "borderless": "Removes the border around the input field",
-        "fieldAttributeList": "Attributes for field element."
+        "fieldAttributeList": "Attributes for field element. Valid input attributes are casted to here from attributesList."
     },
     "view": "field.blade.php",
     "dependency": {
