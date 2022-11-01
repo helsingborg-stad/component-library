@@ -32,9 +32,12 @@ class Iframe extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['src'] = $this->buildEmbedUrl($src);
         }
 
-        if(isset($labels)) {
+        if (isset($labels)) {
             $this->data['labels'] = json_encode($labels);
         }
+
+        $this->data['attributeList']['title'] = $title;
+        $this->data['attributeList']['aria-label'] = $title;
     }
     /**
      * Build embed url

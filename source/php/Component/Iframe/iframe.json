@@ -7,7 +7,8 @@
 		"height": "400",
 		"frameborder": "0",
 		"labels": "",
-		"modifier": ""
+		"modifier": "",
+		"title": "External content"
 	},
 	"description": {
 		"src": "Source URL",
