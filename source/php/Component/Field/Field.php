@@ -36,6 +36,7 @@ class Field extends \ComponentLibrary\Component\Form\Form
         //Multiline
         if (is_numeric($multiline)) {
             $this->data['fieldAttributeList']['rows'] = $multiline;
+            $this->data['fieldAttributeList']['style'] = "resize: none;";
         }
 
         //Label visibility

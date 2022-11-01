@@ -29,7 +29,7 @@
         "placeholder": "Example value for field",
         "hideLabel": "This will remove the visible label. Label will be auditible for screen readers.",
         "helperText": "Text displayed below the field.",
-        "multiline": "Render textarea instead of input",
+        "multiline": "Render textarea instead of input. Boolean or number of rows to render.",
         "borderless": "Removes the border around the input field",
         "fieldAttributeList": "Attributes for field element. Valid input attributes are casted to here from attributesList."
     },
