@@ -34,16 +34,6 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['data-src'] = $src;
             $this->data = $this->setSupplierDataAttributes($src, $this->data);
         }
-        
-        if (isset($name)) {
-            $this->data['attributeList']['data-supplier-name'] = $name;
-        }
-        if (isset($policy)) {
-            $this->data['attributeList']['data-supplier-policy'] = $policy;
-        }
-        if (isset($host)) {
-            $this->data['attributeList']['data-supplier-host'] = $host;
-        }
 
         if (!empty($this->data['labels'])) {
             $json = json_decode($this->data['labels']);
