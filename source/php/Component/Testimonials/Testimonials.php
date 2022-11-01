@@ -17,6 +17,9 @@ class Testimonials extends \ComponentLibrary\Component\BaseController
         $this->data['baseClass'] = 'c-testimonial';
         $this->data['wrapperClassList'] = [];
         $this->data['wrapperAttributeList'] = [];
+        if(isset($ariaLabels)) {
+            $this->data['ariaLabels'] = $ariaLabels;
+        }
 
         if($isCarousel) {
             $this->data['wrapperClassList'][] = 'c-testimonials__wrapper--is-carousel';

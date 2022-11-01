@@ -17,7 +17,8 @@
             'autoSlide' => false,
             'attributeList' => [
                 'data-slides-per-page' => $slidesPerPage,
-                'data-slider-gap' => (8*6)
+                'data-slider-gap' => (8*6),
+                'data-aria-labels' => json_encode($ariaLabels)
             ]
         ])
             @foreach($testimonials as $testimonial)
