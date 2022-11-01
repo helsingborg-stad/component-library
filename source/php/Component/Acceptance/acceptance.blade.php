@@ -11,7 +11,7 @@
                     ])
                 @endicon
                 @button([
-                    'text' => 'Handling of personal data',
+                    'text' => $infoLabel,
                     'color' => 'default',
                     'style' => 'basic',
                     'icon' => $icon,
