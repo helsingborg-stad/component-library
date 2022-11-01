@@ -38,7 +38,7 @@ class Slider extends \ComponentLibrary\Component\BaseController
             $this->data['autoSlide'] = true;
         }
 
-        if ($shadow) {
+        if ($shadow && empty(get_theme_mod('flat_ui_design'))) {
             $this->data['classList'][] = 'c-slider--shadow';
         }
 
