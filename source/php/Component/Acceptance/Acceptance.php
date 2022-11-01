@@ -47,6 +47,10 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
 
         if (!empty($this->data['labels'])) {
             $json = json_decode($this->data['labels']);
+            
+            if(isset($json->infoLabel)) {
+                $this->data['infoLabel'] = $json->infoLabel;
+            }
 
             if (!empty($this->data['supplierPolicy'])) {
                 $json->knownLabels->info = str_replace(
