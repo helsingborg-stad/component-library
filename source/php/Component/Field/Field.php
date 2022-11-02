@@ -10,7 +10,9 @@ class Field extends \ComponentLibrary\Component\Form\Form
         'name',
         'type',
         'value',
-        'rows'
+        'rows',
+        'data-validation-message',
+        'data-validation-regexp'
     ];
 
     public function init()
@@ -274,7 +276,7 @@ class Field extends \ComponentLibrary\Component\Form\Form
                 if (in_array($key, $this->disallowedAttributeKeys)) {
                     trigger_error(
                         sprintf(
-                            'Attribute "%s" is not allowed in field component. 
+                            'Attribute "%s" is not allowed in attribute list. 
                             Please use the respective parameter. Component will 
                             run in compability mode until this issue is resolved. 
                             Attributes will override the component parameter.',
