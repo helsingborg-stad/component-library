@@ -5,8 +5,7 @@
         'id' => $id . '-validation-error',
         'type' => 'danger',
         'message' => [
-            'text' => '@{{FORM_VALIDATION_ERROR_MESSAGE}}',
-            'title' => '@{{FORM_VALIDATION_ERROR_TITLE}}'
+            'text' => '@{{FORM_VALIDATION_ERROR_MESSAGE}}'
         ],
         'icon' => [
             'name' => 'report',
@@ -29,7 +28,6 @@
         'type' => 'success',
         'message' => [
             'text' => '@{{FORM_VALIDATION_SUCCESS_MESSAGE}}',
-            'title' => '@{{FORM_VALIDATION_SUCCESS_TITLE}}'
         ],
         'icon' => [
             'name' => 'check',
