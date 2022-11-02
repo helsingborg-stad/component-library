@@ -2,17 +2,20 @@
     "slug":"form",
     "default":{
         "method":"POST",
-        "action": "#"
+        "action": "#",
+        "validation": true
     },
     "description":{
         "method":"Set to POST by default",
-        "action":"Path to file, set to # by default"
+        "action":"Path to file, set to # by default",
+        "validation":"Validation method toggle on off"
     },
     "view":"form.blade.php",
     "dependency": {
         "sass": {
             "components": [
-                "form"
+                "form",
+                "notice"
             ]
         }
     }
