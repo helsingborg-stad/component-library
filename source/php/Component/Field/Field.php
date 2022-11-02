@@ -40,6 +40,11 @@ class Field extends \ComponentLibrary\Component\Form\Form
             $this->data['fieldAttributeList']['onkeydown'] = 'return event.keyCode !== 69';
         }
 
+        //Prevent + from being entered into email field
+        if ($type = 'email') {
+            $this->data['fieldAttributeList']['onkeydown'] = 'return event.keyCode !== 107';
+        }
+
         //Regular expression for validation purposes
         if ($validationRegexp) {
             $this->data['fieldAttributeList']['data-validation-regexp'] = $validationRegexp;
