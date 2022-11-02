@@ -35,6 +35,11 @@ class Field extends \ComponentLibrary\Component\Form\Form
             $id = $this->data['id'] = uniqid();
         }
 
+        //Prevent e from being entered into number field
+        if ($type = 'number') {
+            $this->data['fieldAttributeList']['onkeydown'] = 'return event.keyCode !== 69';
+        }
+
         //Regular expression for validation purposes
         if ($validationRegexp) {
             $this->data['fieldAttributeList']['data-validation-regexp'] = $validationRegexp;
