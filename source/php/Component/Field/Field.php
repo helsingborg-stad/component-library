@@ -33,6 +33,16 @@ class Field extends \ComponentLibrary\Component\Form\Form
             $id = $this->data['id'] = uniqid();
         }
 
+        //Regular expression for validation purposes
+        if ($validationRegexp) {
+            $this->data['fieldAttributeList']['data-validation-regexp'] = $validationRegexp;
+        }
+
+        //Invalid message
+        if ($invalidMessage) {
+            $this->data['fieldAttributeList']['data-validation-message'] = $invalidMessage;
+        }
+
         //Multiline
         if (is_numeric($multiline)) {
             $this->data['fieldAttributeList']['rows'] = $multiline;
