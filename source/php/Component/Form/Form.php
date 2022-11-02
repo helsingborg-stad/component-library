@@ -21,6 +21,5 @@ class Form extends \ComponentLibrary\Component\BaseController
         if ($validation) {
             $this->data['classList'][] = 'js-form-validation';
         }
-
     }
 }
