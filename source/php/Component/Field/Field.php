@@ -233,16 +233,10 @@ class Field extends \ComponentLibrary\Component\Form\Form
      */
     private function isFieldAttribute(string $key): bool
     {
-        return (bool) in_array($key, [
-            'type',
-            'name',
-            'pattern',
-            'autocomplete',
-            'data-invalid',
-            'data-invalid-message',
-            'message',
-            'id',
-            'js-filter-input'
+        return (bool) !in_array($key, [
+            'class',
+            'data-uid',
+            'id'
         ]);
     }
 
