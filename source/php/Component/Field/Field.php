@@ -241,7 +241,8 @@ class Field extends \ComponentLibrary\Component\Form\Form
             'data-invalid',
             'data-invalid-message',
             'message',
-            'id'
+            'id',
+            'js-filter-input'
         ]);
     }
 
