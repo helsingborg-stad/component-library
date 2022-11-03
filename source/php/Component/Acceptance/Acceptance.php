@@ -26,11 +26,11 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
             $this->data['icon'] = $icon;
         }
 
-        if (isset($height)) {
+        if (!empty($height)) {
             $this->data['attributeList']['style'] = "height:" . $height . "px;";
         }
 
-        if (!empty($src)) {
+        if (!empty($src) && !is_null($src)) {
             $this->data['attributeList']['data-src'] = $src;
             $this->data = $this->setSupplierDataAttributes($src, $this->data);
         }
