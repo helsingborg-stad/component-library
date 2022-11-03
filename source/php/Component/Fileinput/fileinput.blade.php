@@ -2,6 +2,24 @@
 
 <div class="{{ $class }}" {!! $attribute !!}>
 
+    @if(!empty($label))
+        <label class="{{$baseClass}}__label" for="fs_{{ $id }}" id="label_{{ $id }}">
+            {{$label}}
+            @if($required)
+                <span class="u-color__text--danger">*</span></label>
+            @endif
+        </label>
+    @endif
+
+    @if(!empty($description))
+        @typography([
+            'element' => 'div',
+            'classList' => ['text-sm', 'text-dark-gray']
+            ])
+            {{ $description }}
+        @endtypography
+    @endif
+
     <input type="file"
         class="{{ $baseClass }}__input "
         name="{{ $multiple ? $name . '[]' : $name }}"
@@ -25,7 +43,7 @@
         @endicon
         <span>
             {{ $beforeLabel }}
-                {{ $label }}
+                {{ __('Select file') }}
             {{ $afterLabel }}
         </span>
     </label>

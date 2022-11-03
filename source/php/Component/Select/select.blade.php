@@ -1,8 +1,21 @@
 <div class="{{$class}} c-field">
     @if($label)
-        <label for="{{ $id }}" class="c-field__label">{{$label}}</label>
+        <label for="{{ $id }}" class="c-field__label">{{$label}}
+            @if($required)
+                <span class="u-color__text--danger">*</span>
+            @endif    
+        </label>    
     @endif
-    
+
+    @if(!empty($description))
+        @typography([
+            'element' => 'div',
+            'classList' => ['text-sm', 'text-dark-gray']
+            ])
+            {{ $description }}
+        @endtypography
+    @endif
+
     <div class="u-position--relative">
         <select {!! $attribute !!} id="select_{{$id}}">
             @if($label)

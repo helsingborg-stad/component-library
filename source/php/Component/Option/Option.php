@@ -13,7 +13,7 @@ class Option extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
-        if(empty($this->data['id']) ) {
+        if (empty($this->data['id'])) {
             $this->data['id'] = uniqid();
         }
 
@@ -26,12 +26,6 @@ class Option extends \ComponentLibrary\Component\BaseController
         ];
 
         $this->setData();
-
-        //Handle size
-        if (!in_array($size, ['sm', 'md', 'lg'])) {
-            $size = "md";
-        }
-        $this->data['classList'][] = $this->getBaseClass() . "--" . $size;
     }
 
     /**
@@ -43,12 +37,9 @@ class Option extends \ComponentLibrary\Component\BaseController
         $this->data['invalidMessage'] = $this->compParams['invalidMessage'];
         $this->data['value'] = $this->compParams['value'];
         $this->data['checked'] = $this->compParams['checked'];
-        
+
         if ($this->compParams['required']) {
              $this->data['attributeList']['required'] = true;
         }
-       
     }
-
-
 }
