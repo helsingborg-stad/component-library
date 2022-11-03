@@ -36,12 +36,12 @@ class Field extends \ComponentLibrary\Component\Form\Form
         }
 
         //Prevent e from being entered into number field
-        if ($type = 'number') {
+        if ($type == 'number') {
             $this->data['fieldAttributeList']['onkeydown'] = 'return event.keyCode !== 69';
         }
 
         //Prevent + from being entered into email field
-        if ($type = 'email') {
+        if ($type == 'email') {
             $this->data['fieldAttributeList']['onkeydown'] = 'return event.keyCode !== 107';
         }
 
