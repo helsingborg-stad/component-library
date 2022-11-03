@@ -144,6 +144,11 @@ class Field extends \ComponentLibrary\Component\Form\Form
             $this->data['fieldAttributeList']['type'] = $type;
         }
 
+        // Type
+        if ($name) {
+            $this->data['fieldAttributeList']['name'] = $name;
+        }
+
         // Handle required, as attribute and var
         if ($required) {
             $this->data['fieldAttributeList']['required']       = "required";
