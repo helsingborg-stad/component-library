@@ -9,25 +9,44 @@ namespace ComponentLibrary\Component\Dropdown;
 class Dropdown extends \ComponentLibrary\Component\BaseController
 {
 
-    public function init() {
+    public function init()
+    {
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
-        if(isset($direction)){
+        $this->data['items'] = array_map(
+            fn ($i) => array_merge(
+                $i,
+                [
+                    'attributes' => self::buildAttributes(
+                        array_merge(
+                            $i['attributeList'] ?? [],
+                            [
+                                'class' => implode(' ', $i['classList'] ?? [])
+                            ]
+                        )
+                    ),
+                    'linkAttributes' => self::buildAttributes($i['linkAttributeList'] ?? []),
+                ]
+            ),
+            $this->data['items'] ?? []
+        );
+
+        if (isset($direction)) {
             $this->data['direction'] = $direction;
             $this->data['classList'][] = $this->getBaseClass() . '-button--' . $direction;
         }
 
-        if(isset($direction) && $popup === 'focus'){
+        if (isset($direction) && $popup === 'focus') {
             $this->data['classList'][] = $this->getBaseClass() . '-button--' . $direction . '__focus';
         }
 
-        if(isset($direction) && $popup === 'click'){
+        if (isset($direction) && $popup === 'click') {
             $this->data['classList'][] = $this->getBaseClass() . '-button--' . $direction . '__click';
         }
 
-        if(isset($popup)){
-            $this->data['classList'][] = $this->getBaseClass() . '--on-' . $popup; 
+        if (isset($popup)) {
+            $this->data['classList'][] = $this->getBaseClass() . '--on-' . $popup;
         }
     }
 }
