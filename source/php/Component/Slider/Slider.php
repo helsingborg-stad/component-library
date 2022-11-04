@@ -55,5 +55,9 @@ class Slider extends \ComponentLibrary\Component\BaseController
         } else {
             $this->data['isPost'] = false;
         }
+
+        if(isset($customButtons)) {
+            $this->data['attributeList']['data-custom-buttons'] = $customButtons;
+        }
     }
 }

@@ -1,6 +1,6 @@
 <div class="{{ $class }}" {!! $attribute !!}>
 
-    @if($isPost === false)
+    @if(!$isPost)
         <div class="splide__arrows c-slider__arrows">
             @button([
                 'color' => $arrowButtons['color'],
@@ -45,17 +45,6 @@
 
         {{-- Slider when used in post module --}}
         @elseif($isPost)
-            <div class=" u-display--none splide__arrows c-slider__arrows">
-                @button([
-                    'classList' => ['splide__arrow', 'splide__arrow--prev']
-                ])
-                @endbutton
-                @button([
-                    'classList' => ['splide__arrow', 'splide__arrow--next']
-                ])
-                @endbutton
-            </div>
-        
             <div class="{{ $baseClass }}__container splide__track">
                 <div class="{{ $baseClass }}__inner splide__list" js-slider-inner>
                     {{ $slot }}
