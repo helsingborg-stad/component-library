@@ -45,7 +45,7 @@
                     {{$label}}
                 </label>
             @endif
-            <input id="input_{{ $id }}" value="{{ $value }}" {!! $fieldAttribute !!}/>
+            <input id="input_{{ $id }}" value="{{ $value }}" {!! $fieldAttribute !!}>
 
             @if(!empty($suffix))
                 <span class="{{ $baseClass }}__suffix">{{$suffix}}</span>
