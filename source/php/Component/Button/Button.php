@@ -64,6 +64,10 @@ class Button extends \ComponentLibrary\Component\BaseController
         } else {
             $this->data['classListText'] = "";
         }
+
+        if(!empty($this->data['ariaLabel'])) {
+            $this->data['attributeList']['aria-label'] = $this->data['ariaLabel'];
+        }
     }
 
     /**
@@ -95,7 +99,10 @@ class Button extends \ComponentLibrary\Component\BaseController
     {
         if (!empty($icon) && empty($text)) {
             $this->data['classList'][] = $this->getBaseClass() . '--icon-only';
-            $this->data['attributeList']['aria-label'] = $icon;
+            
+            if(!$this->data['ariaLabel']) {
+                $this->data['attributeList']['aria-label'] = $icon;
+            }
         }
     }
 }

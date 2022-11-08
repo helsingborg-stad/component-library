@@ -32,6 +32,7 @@
         'animation' => 'scale-up',
         'navigation' => true,
         'id' => $uniqueId,
+        'ariaLabels' => $ariaLabels,
         'classList' => [
             'c-modal--gallery',
             'c-modal--stepper'

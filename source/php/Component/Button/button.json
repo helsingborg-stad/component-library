@@ -20,7 +20,8 @@
       "reversePositions": false,
       "fullWidth": false,
       "classListIcon": [],
-      "classListText": []
+      "classListText": [],
+      "ariaLabel": false
    },
    "description":{
       "label":"The label of the button.",
@@ -39,7 +40,8 @@
       "reversePositions": "Reverse the position of icon and text.",
       "fullWidth": "Makes button full width.",
       "classListIcon": "Array of classes placed on the icon",
-      "classListText": "Array of classes placed on the text"
+      "classListText": "Array of classes placed on the text",
+      "ariaLabel": "Aria label text for the button"
    },
    "view":"button.blade.php",
    "dependency": {
