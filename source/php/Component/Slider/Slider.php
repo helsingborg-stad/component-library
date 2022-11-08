@@ -49,5 +49,15 @@ class Slider extends \ComponentLibrary\Component\BaseController
         if ($heroStyle) {
             $this->data['classList'][] = $this->getBaseClass() . "--hero";
         }
+
+        if (isset($isPost)) {
+            $this->data['isPost'] = $isPost;
+        } else {
+            $this->data['isPost'] = false;
+        }
+
+        if(isset($customButtons)) {
+            $this->data['attributeList']['data-custom-buttons'] = $customButtons;
+        }
     }
 }
