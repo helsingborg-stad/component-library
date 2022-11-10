@@ -66,6 +66,20 @@
         ])
         @endicon
 
+        {{-- Icon when valid, otherwise hidden. --}}
+        @icon([
+            'icon' => 'check_circle_outline',
+            'size' => 'md',
+            'classList' => [
+                $baseClass . '__suffix',
+                $baseClass . '__success-icon'
+            ],
+            'attributeList' => [
+                'aria-hidden' => 'true'
+            ]
+        ])
+        @endicon
+
     </div>
 
     <div class="c-field__error" aria-hidden="true" aria-label="@{{VALIDATION_ERROR_MESSAGE}}">
