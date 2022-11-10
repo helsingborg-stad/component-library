@@ -15,8 +15,7 @@
             ],
             'classList' => [
                 $baseClass . '__notice-failed',
-                'u-margin__bottom--4',
-                'u-display--none'
+                'u-margin__bottom--4'
             ],
             'attributeList' => [
                 'aria-hidden' => 'true',
@@ -39,8 +38,7 @@
             ],
             'classList' => [
                 $baseClass . '__notice-success',
-                'u-margin__bottom--4',
-                'u-display--none'
+                'u-margin__bottom--4'
             ],
             'attributeList' => [
                 'aria-hidden' => 'true',
