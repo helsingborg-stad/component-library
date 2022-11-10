@@ -134,8 +134,8 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
     private function setSupplierDataAttributes(array $src, array $data)
     {
 
-          $this->data = $data;
-
+        $this->data = $data;
+        
         if(count($src) > 1) {
             foreach ($src as &$value) {
                 $value = parse_url($value)['host'];
@@ -144,29 +144,30 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
             $this->data['supplierHost'] = strtolower(implode(', ', $src));
             
         } else {
-        $suppliers  = $this->getSuppliers();
+    $suppliers  = $this->getSuppliers();
 
-        $srcParsed = parse_url(implode($src));
-        $host = strtolower($srcParsed['host']);
-        
-        if (is_iterable($suppliers)) {
-            foreach ($suppliers as $supplier) {
-                $key = array_search($host, $supplier->domain, true);
-                
-                if (is_integer($key)) {
-                    $this->data['supplierHost'] = $supplier->domain[$key];
-                    $this->data['supplierName'] = $supplier->name;
+    $srcParsed = parse_url(implode($src));
+    $host = strtolower($srcParsed['host']);
 
-                    $this->data['requiresAccept'] = $supplier->requiresAccept;
+    if (is_iterable($suppliers)) {
+        foreach ($suppliers as $supplier) {
+            $key = array_search($host, $supplier->domain, true);
 
-                    if (isset($supplier->policy)) {
-                        $this->data['supplierPolicy'] = $supplier->policy;
-                    }
-                } else {
-                    $this->data['supplierHost'] = $host;
+            if (is_integer($key)) {
+                $this->data['supplierHost'] = $supplier->domain[$key];
+                $this->data['supplierName'] = $supplier->name;
+
+                $this->data['requiresAccept'] = $supplier->requiresAccept;
+
+                if (isset($supplier->policy)) {
+                    $this->data['supplierPolicy'] = $supplier->policy;
                 }
+            } else {
+                $this->data['supplierHost'] = $host;
             }
         }
+    }
+}
 
         return $this->data;
     }
