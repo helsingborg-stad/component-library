@@ -13,6 +13,7 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
         $this->data['requiresAccept'] = true;
 
         $this->data['classList'][] = 'js-suppressed-content';
+        $this->data['classList'][] = 'u-level-1';
         
         if (!empty($modifier)) {
             $this->data['classList'][] = $this->getBaseClass() . '--' . $modifier;

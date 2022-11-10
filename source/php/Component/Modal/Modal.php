@@ -31,6 +31,10 @@ class Modal extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . "--border-radius-" . $borderRadius;
         }
 
+        if(isset($ariaLabels)) {
+            $this->data['ariaLabels'] = $ariaLabels;
+        }
+
         //Overlay
         $this->data['classList'][] = $this->getBaseClass() . "--overlay-" . $overlay;
     }
