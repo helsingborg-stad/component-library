@@ -15,6 +15,61 @@ class Field extends \ComponentLibrary\Component\Form\Form
         'data-validation-regexp'
     ];
 
+    private $validAutocompleteValues = [
+        'on',
+        'off',
+        'honorific-prefix',
+        'given-name',
+        'additional-name',
+        'family-name',
+        'honorific-suffix',
+        'nickname',
+        'email',
+        'username',
+        'new-password',
+        'current-password',
+        'one-time-code',
+        'organization-title',
+        'street-address',
+        'address-line1',
+        'address-line2',
+        'address-line3',
+        'address-level4',
+        'address-level3',
+        'address-level2',
+        'address-level1',
+        'country',
+        'country-name',
+        'postal-code',
+        'cc-name',
+        'cc-given-name',
+        'cc-additional-name',
+        'cc-family-name',
+        'cc-number',
+        'cc-exp',
+        'cc-exp-month',
+        'cc-exp-year',
+        'cc-csc',
+        'cc-type',
+        'transaction-currency',
+        'transaction-amount',
+        'language',
+        'bday',
+        'bday-day',
+        'bday-month',
+        'bday-year',
+        'sex',
+        'tel',
+        'tel-country-code',
+        'tel-national',
+        'tel-area-code',
+        'tel-local',
+        'tel-extension',
+        'impp',
+        'url',
+        'photo'
+    ];
+
     public function init()
     {
         //Extract array for eazy access (fetch only)
@@ -158,6 +213,21 @@ class Field extends \ComponentLibrary\Component\Form\Form
 
         // Autocomplete
         if ($autocomplete) {
+            if (!in_array($autocomplete, $this->validAutocompleteValues)) {
+                trigger_error(
+                    sprintf(
+                        'Attribute "%s" is not a valid autocomplete value. 
+                        The component will fallback to generic "on" value. 
+                        Please set one of these: %s',
+                        $autocomplete,
+                        implode(", ", $this->validAutocompleteValues)
+                    ),
+                    E_USER_WARNING
+                );
+
+                $autocomplete = "on";
+            }
+
             $this->data['fieldAttributeList']['autocomplete']  = $autocomplete;
         } else {
             $this->data['fieldAttributeList']['autocomplete']  = "off";
