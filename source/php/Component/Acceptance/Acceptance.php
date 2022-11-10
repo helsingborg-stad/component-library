@@ -32,17 +32,17 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
         }
 
         if (!empty($src) && !is_null($src)) {
-            $this->data['attributeList']['data-src'] = $src;
+            $this->data['attributeList']['data-src'] = json_encode($src);
             $this->data = $this->setSupplierDataAttributes($src, $this->data);
         }
         
-        if (isset($name)) {
+        if (!empty($name)) {
             $this->data['attributeList']['data-supplier-name'] = $name;
         }
-        if (isset($policy)) {
+        if (!empty($policy)) {
             $this->data['attributeList']['data-supplier-policy'] = $policy;
         }
-        if (isset($host)) {
+        if (!empty($host)) {
             $this->data['attributeList']['data-supplier-host'] = $host;
         }
 
@@ -127,16 +127,26 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
     /**
      * Set supplier data attributes
      *
-     * @param string $src
+     * @param array $src
      * @param array $data
      * @return array
      */
-    private function setSupplierDataAttributes(string $src, array $data)
+    private function setSupplierDataAttributes(array $src, array $data)
     {
-        $this->data = $data;
+
+          $this->data = $data;
+
+        if(count($src) > 1) {
+            foreach ($src as &$value) {
+                $value = parse_url($value)['host'];
+            }
+
+            $this->data['supplierHost'] = strtolower(implode(', ', $src));
+            
+        } else {
         $suppliers  = $this->getSuppliers();
 
-        $srcParsed = parse_url($src);
+        $srcParsed = parse_url(implode($src));
         $host = strtolower($srcParsed['host']);
         
         if (is_iterable($suppliers)) {
