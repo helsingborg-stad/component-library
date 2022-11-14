@@ -3,7 +3,7 @@
 <div class="{{ $class }}" {!! $attribute !!}>
     <div class="{{$baseClass}}__modal js-suppressed-content-prompt">
         <div class="{{$baseClass}}__modal-description js-suppressed-content-description">
-            @if($isVideo)
+            @if($supplierSystemType == 'video')
                 @icon([
                         'icon' => 'play_circle', 
                         'attributeList' => ['js-suppressed-content-accept' => ''],

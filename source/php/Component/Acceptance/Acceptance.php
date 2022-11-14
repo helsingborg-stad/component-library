@@ -15,14 +15,6 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
         $this->data['classList'][] = 'js-suppressed-content';
         $this->data['classList'][] = 'u-level-1';
 
-        if (!empty($modifier)) {
-            $this->data['classList'][] = $this->getBaseClass() . '--' . $modifier;
-            $this->data['classList'][] =  'js-suppressed-content--' . $modifier;
-            $this->data['isVideo'] = $modifier == 'video' ? true : false;
-        } else {
-            $this->data['classList'][] = 'js-suppressed-content' . '--none';
-        }
-
         if (isset($icon)) {
             $this->data['icon'] = $icon;
         }
@@ -47,7 +39,8 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
         }
 
         if (isset($this->data['supplierSystemType'])) {
-            $this->data['classList'][] = $this->getBaseClass() . "--type-" . $this->data['supplierSystemType'];
+            $this->data['classList'][] = $this->getBaseClass() . "--" . $this->data['supplierSystemType'];
+            $this->data['classList'][] = 'js-suppressed-content--' . $this->data['supplierSystemType'];
         }
 
         if (!empty($this->data['labels'])) {
