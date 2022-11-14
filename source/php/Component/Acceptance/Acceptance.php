@@ -8,13 +8,13 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
     {
         //Extract array for eazy access (fetch only)
         extract($this->data);
-        
+
         $this->data['isVideo'] = false;
         $this->data['requiresAccept'] = true;
 
         $this->data['classList'][] = 'js-suppressed-content';
         $this->data['classList'][] = 'u-level-1';
-        
+
         if (!empty($modifier)) {
             $this->data['classList'][] = $this->getBaseClass() . '--' . $modifier;
             $this->data['classList'][] =  'js-suppressed-content--' . $modifier;
@@ -35,7 +35,7 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['data-src'] = $src;
             $this->data = $this->setSupplierDataAttributes($src, $this->data);
         }
-        
+
         if (isset($name)) {
             $this->data['attributeList']['data-supplier-name'] = $name;
         }
@@ -48,8 +48,8 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
 
         if (!empty($this->data['labels'])) {
             $json = json_decode($this->data['labels']);
-            
-            if(isset($json->infoLabel)) {
+
+            if (isset($json->infoLabel)) {
                 $this->data['infoLabel'] = $json->infoLabel;
             }
 
@@ -156,11 +156,11 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
 
         $srcParsed = parse_url($src);
         $host = strtolower($srcParsed['host']);
-        
+
         if (is_iterable($suppliers)) {
             foreach ($suppliers as $supplier) {
                 $key = array_search($host, $supplier->domain, true);
-                
+
                 if (is_integer($key)) {
                     $this->data['supplierHost'] = $supplier->domain[$key];
                     $this->data['supplierName'] = $supplier->name;
