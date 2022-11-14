@@ -4,6 +4,9 @@ namespace ComponentLibrary\Component\Acceptance;
 
 class Acceptance extends \ComponentLibrary\Component\BaseController
 {
+    //Indicated that there are exceptions of js behaviors in frontend
+    private $jsBehaviourSystemTypes = ['video'];
+
     public function init()
     {
         //Extract array for eazy access (fetch only)
@@ -40,7 +43,12 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
 
         if (isset($this->data['supplierSystemType'])) {
             $this->data['classList'][] = $this->getBaseClass() . "--" . $this->data['supplierSystemType'];
-            $this->data['classList'][] = 'js-suppressed-content--' . $this->data['supplierSystemType'];
+
+            if (in_array($this->data['supplierSystemType'], $this->jsBehaviourSystemTypes)) {
+                $this->data['classList'][] = 'js-suppressed-content--' . $this->data['supplierSystemType'];
+            } else {
+                $this->data['classList'][] = 'js-suppressed-content--none';
+            }
         }
 
         if (!empty($this->data['labels'])) {
