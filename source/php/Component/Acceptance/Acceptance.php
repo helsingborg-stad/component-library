@@ -46,6 +46,10 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['data-supplier-host'] = $host;
         }
 
+        if (isset($supplierSystemType)) {
+            $this->data['classList'][] = $this->getBaseClass() . "--type-" . $supplierSystemType;
+        }
+
         if (!empty($this->data['labels'])) {
             $json = json_decode($this->data['labels']);
 
@@ -169,6 +173,10 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
 
                     if (isset($supplier->policy)) {
                         $this->data['supplierPolicy'] = $supplier->policy;
+                    }
+
+                    if (isset($supplier->systemType)) {
+                        $this->data['supplierSystemType'] = $supplier->systemType;
                     }
                 } else {
                     $this->data['supplierHost'] = $host;
