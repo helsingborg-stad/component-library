@@ -46,8 +46,8 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['data-supplier-host'] = $host;
         }
 
-        if (isset($supplierSystemType)) {
-            $this->data['classList'][] = $this->getBaseClass() . "--type-" . $supplierSystemType;
+        if (isset($this->data['supplierSystemType'])) {
+            $this->data['classList'][] = $this->getBaseClass() . "--type-" . $this->data['supplierSystemType'];
         }
 
         if (!empty($this->data['labels'])) {
