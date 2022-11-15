@@ -11,7 +11,8 @@
         "navigation": false,
         "size": "",
         "padding": 3,
-        "borderRadius": false
+        "borderRadius": false,
+        "transparent": false
     },
     "description": {
         "heading": "The title of the modal",
@@ -24,7 +25,8 @@
         "navigation": "Adds navigation arrows, to slide between stuff.",
         "size": "Empty as default is set to max width 800px. But you can use sm, md and lg",
         "padding": "Adds whitespace around the content. Value: 1 - 4",
-        "borderRadius": "Rounded edges. Value: sm, md, lg"
+        "borderRadius": "Rounded edges. Value: sm, md, lg",
+        "transparent": "Transparent wrapper around the content"
     },
     "view": "modal.blade.php",
     "dependency": {

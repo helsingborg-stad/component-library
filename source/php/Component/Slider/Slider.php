@@ -4,7 +4,6 @@ namespace ComponentLibrary\Component\Slider;
 
 class Slider extends \ComponentLibrary\Component\BaseController
 {
-
     public function init()
     {
         //Extract array for eazy access (fetch only)
@@ -19,6 +18,11 @@ class Slider extends \ComponentLibrary\Component\BaseController
         
         $ratio = preg_replace('/:/i', '-', $ratio);
         $this->data['classList'][] = 'c-slider--' . $ratio;
+
+        $flatUiDesign = false;
+        if (function_exists('get_theme_mod')) {
+            $flatUiDesign = get_theme_mod('flat_ui_design');
+        }
 
         if ($peekSlides) {
             $this->data['classList'][] = 'c-slider__peek';
@@ -38,7 +42,7 @@ class Slider extends \ComponentLibrary\Component\BaseController
             $this->data['autoSlide'] = true;
         }
 
-        if ($shadow) {
+        if ($shadow && empty($flatUiDesign)) {
             $this->data['classList'][] = 'c-slider--shadow';
         }
 
@@ -48,6 +52,16 @@ class Slider extends \ComponentLibrary\Component\BaseController
 
         if ($heroStyle) {
             $this->data['classList'][] = $this->getBaseClass() . "--hero";
+        }
+
+        if (isset($isPost)) {
+            $this->data['isPost'] = $isPost;
+        } else {
+            $this->data['isPost'] = false;
+        }
+
+        if(isset($customButtons)) {
+            $this->data['attributeList']['data-custom-buttons'] = $customButtons;
         }
     }
 }

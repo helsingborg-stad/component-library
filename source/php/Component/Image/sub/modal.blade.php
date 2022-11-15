@@ -3,7 +3,8 @@
     'isPanel' => false,
     'id' => $modalId,
     'overlay' => 'dark',
-    'animation' => 'scale-up'
+    'animation' => 'scale-up',
+    'transparent' => true,
 ])
     @image([
         'src'=> $src,
