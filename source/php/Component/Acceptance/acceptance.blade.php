@@ -25,7 +25,8 @@
                 @endbutton
                 @modal([
                     'id' => 'modal-' . $uid,
-                    "heading" => $labels->title
+                    'heading' => $labels->title,
+                    'overlay' => 'dark',
                 ])
                     {!!$labels->info!!}
                 @endmodal
