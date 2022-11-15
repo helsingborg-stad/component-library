@@ -29,10 +29,10 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
         if (!empty($src) && !is_null($src)) {
             $this->data['attributeList']['data-src'] = json_encode($src);
 
-            if(is_string($src)) {
+            if (is_string($src)) {
                 $src = array($src);
             }
-            
+
             $this->data = $this->setSupplierDataAttributes($src, $this->data);
         }
 
@@ -153,37 +153,37 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
     {
 
         $this->data = $data;
-        
-        if(count($src) > 1) {
+
+        if (count($src) > 1) {
             foreach ($src as &$value) {
                 $value = parse_url($value)['host'];
             }
 
             $this->data['supplierHost'] = strtolower(implode(', ', $src));
-            
         } else {
-    $suppliers  = $this->getSuppliers();
+            $suppliers  = $this->getSuppliers();
 
-    $srcParsed = parse_url(implode($src));
-    $host = strtolower($srcParsed['host']);
+            $srcParsed = parse_url(implode($src));
+            $host = strtolower($srcParsed['host']);
 
-    if (is_iterable($suppliers)) {
-        foreach ($suppliers as $supplier) {
-            $key = array_search($host, $supplier->domain, true);
-            if (is_integer($key)) {
-                $this->data['supplierHost'] = $supplier->domain[$key];
-                $this->data['supplierName'] = $supplier->name;
-                $this->data['requiresAccept'] = $supplier->requiresAccept;
+            if (is_iterable($suppliers)) {
+                foreach ($suppliers as $supplier) {
+                    $key = array_search($host, $supplier->domain, true);
+                    if (is_integer($key)) {
+                        $this->data['supplierHost'] = $supplier->domain[$key];
+                        $this->data['supplierName'] = $supplier->name;
+                        $this->data['requiresAccept'] = $supplier->requiresAccept;
 
-                if (isset($supplier->policy)) {
-                    $this->data['supplierPolicy'] = $supplier->policy;
+                        if (isset($supplier->policy)) {
+                            $this->data['supplierPolicy'] = $supplier->policy;
+                        }
+                    } else {
+                        $this->data['supplierHost'] = $host;
+                    }
+                    $this->data['supplierSystemType'] = $supplier->systemType;
                 }
-            } else {
-                $this->data['supplierHost'] = $host;
             }
         }
-    }
-}
         return $this->data;
     }
 }
