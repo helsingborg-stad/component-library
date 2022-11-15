@@ -151,15 +151,14 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
      */
     private function setSupplierDataAttributes(array $src, array $data)
     {
-
         $this->data = $data;
 
         if (count($src) > 1) {
             foreach ($src as &$value) {
                 $value = parse_url($value)['host'];
             }
-
-            $this->data['supplierHost'] = strtolower(implode(', ', $src));
+            $this->data['supplierHost']         = strtolower(implode(', ', $src));
+            $this->data['supplierSystemType']   = 'general';
         } else {
             $suppliers  = $this->getSuppliers();
             $srcParsed  = parse_url(implode($src));
@@ -169,20 +168,24 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
                 foreach ($suppliers as $supplier) {
                     $key = array_search($host, $supplier->domain, true);
                     if (is_integer($key)) {
-                        $this->data['supplierHost'] = $supplier->domain[$key];
-                        $this->data['supplierName'] = $supplier->name;
-                        $this->data['requiresAccept'] = $supplier->requiresAccept;
+                        $this->data['supplierHost']         = $supplier->domain[$key];
+                        $this->data['supplierName']         = $supplier->name;
+                        $this->data['requiresAccept']       = $supplier->requiresAccept;
+                        $this->data['supplierSystemType']   = $supplier->systemType;
 
                         if (isset($supplier->policy)) {
                             $this->data['supplierPolicy'] = $supplier->policy;
                         }
-                        $this->data['supplierSystemType'] = $supplier->systemType;
+
+                        break;
                     } else {
-                        $this->data['supplierHost'] = $host;
+                        $this->data['supplierHost']         = $host;
+                        $this->data['supplierSystemType']   = 'general';
                     }
                 }
             }
         }
+
         return $this->data;
     }
 }
