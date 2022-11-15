@@ -28,6 +28,11 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
 
         if (!empty($src) && !is_null($src)) {
             $this->data['attributeList']['data-src'] = json_encode($src);
+
+            if(is_string($src)) {
+                $src = array($src);
+            }
+            
             $this->data = $this->setSupplierDataAttributes($src, $this->data);
         }
 
