@@ -4,24 +4,19 @@ namespace ComponentLibrary\Component\Acceptance;
 
 class Acceptance extends \ComponentLibrary\Component\BaseController
 {
+    //Indicated that there are exceptions of js behaviors in frontend
+    private $jsBehaviourSystemTypes = ['video'];
+
     public function init()
     {
         //Extract array for eazy access (fetch only)
         extract($this->data);
-        
+
         $this->data['isVideo'] = false;
         $this->data['requiresAccept'] = true;
 
         $this->data['classList'][] = 'js-suppressed-content';
         $this->data['classList'][] = 'u-level-1';
-        
-        if (!empty($modifier)) {
-            $this->data['classList'][] = $this->getBaseClass() . '--' . $modifier;
-            $this->data['classList'][] =  'js-suppressed-content--' . $modifier;
-            $this->data['isVideo'] = $modifier == 'video' ? true : false;
-        } else {
-            $this->data['classList'][] = 'js-suppressed-content' . '--none';
-        }
 
         if (isset($icon)) {
             $this->data['icon'] = $icon;
@@ -36,10 +31,20 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
             $this->data = $this->setSupplierDataAttributes($src, $this->data);
         }
 
+        if (isset($this->data['supplierSystemType'])) {
+            $this->data['classList'][] = $this->getBaseClass() . "--" . $this->data['supplierSystemType'];
+
+            if (in_array($this->data['supplierSystemType'], $this->jsBehaviourSystemTypes)) {
+                $this->data['classList'][] = 'js-suppressed-content--' . $this->data['supplierSystemType'];
+            } else {
+                $this->data['classList'][] = 'js-suppressed-content--none';
+            }
+        }
+
         if (!empty($this->data['labels'])) {
             $json = json_decode($this->data['labels']);
-            
-            if(isset($json->infoLabel)) {
+
+            if (isset($json->infoLabel)) {
                 $this->data['infoLabel'] = $json->infoLabel;
             }
 
@@ -75,36 +80,54 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
         $suppliers = array(
             new Supplier(
                 'Google',
-                array( 'google.com', 'www.google.com', 'maps.google.com', 'google.se', 'www.google.se', 'maps.google.se' ),
-                'https://policies.google.com/privacy'
+                array('maps.google.com', 'maps.google.se'),
+                'https://policies.google.com/privacy',
+                true,
+                'map'
+            ),
+            new Supplier(
+                'ArcGIS',
+                array('helsingborg.maps.arcgis.com', 'maps.arcgis.com'),
+                'https://trust.arcgis.com/en/privacy/gdpr.htm',
+                true,
+                'map'
+            ),
+            new Supplier(
+                'Google',
+                array('google.com', 'www.google.com', 'google.se', 'www.google.se'),
+                'https://policies.google.com/privacy',
+                true
             ),
             new Supplier(
                 'YouTube',
-                array( 'youtube.com', 'www.youtube.com', 'youtu.be' ),
-                'https://policies.google.com/privacy'
+                array('youtube.com', 'www.youtube.com', 'youtu.be'),
+                'https://policies.google.com/privacy',
+                true,
+                'video'
             ),
             new Supplier(
                 'Vimeo',
-                array( 'vimeo.com', 'www.vimeo.com', 'player.vimeo.com' ),
-                'https://vimeo.com/privacy'
+                array('vimeo.com', 'www.vimeo.com', 'player.vimeo.com'),
+                'https://vimeo.com/privacy',
+                true,
+                'video'
             ),
             new Supplier(
                 'Helsingborg Stad',
-                array( 'helsingborg.se', 'www.helsingborg.se', 'driftinfo.helsingborg.se', 'it.helsingborg.se' ),
+                array('helsingborg.se', 'www.helsingborg.se', 'driftinfo.helsingborg.se', 'it.helsingborg.se'),
                 'https://helsingborg.se/om-webbplatsen/sa-har-behandlar-vi-dina-personuppgifter/',
                 false
             ),
             new Supplier(
                 'Mynewsdesk',
-                array( 'helsingborg.mynewsdesk.com', 'mynewsdesk.com' ),
+                array( 'helsingborg.mynewsdesk.com', 'mynewsdesk.com'),
                 'https://www.mynewsdesk.com/se/about/terms-and-conditions/'
             ),
             new Supplier(
                 'KommersAnnons.se',
-                array( 'kommersannons.se', 'www.kommersannons.se' ),
-                'https://kommersannons.se/'
+                array( 'kommersannons.se', 'www.kommersannons.se'),
+                'https://kommersannons.se/',
             ),
-
         );
 
         if (function_exists('apply_filters')) {
@@ -136,28 +159,25 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
         } else {
     $suppliers  = $this->getSuppliers();
 
-    $srcParsed = parse_url(implode($src));
-    $host = strtolower($srcParsed['host']);
+        $srcParsed = parse_url($src);
+        $host = strtolower($srcParsed['host']);
 
-    if (is_iterable($suppliers)) {
-        foreach ($suppliers as $supplier) {
-            $key = array_search($host, $supplier->domain, true);
+        if (is_iterable($suppliers)) {
+            foreach ($suppliers as $supplier) {
+                $key = array_search($host, $supplier->domain, true);
+                if (is_integer($key)) {
+                    $this->data['supplierHost'] = $supplier->domain[$key];
+                    $this->data['supplierName'] = $supplier->name;
+                    $this->data['requiresAccept'] = $supplier->requiresAccept;
 
-            if (is_integer($key)) {
-                $this->data['supplierHost'] = $supplier->domain[$key];
-                $this->data['supplierName'] = $supplier->name;
-
-                $this->data['requiresAccept'] = $supplier->requiresAccept;
-
-                if (isset($supplier->policy)) {
-                    $this->data['supplierPolicy'] = $supplier->policy;
+                    if (isset($supplier->policy)) {
+                        $this->data['supplierPolicy'] = $supplier->policy;
+                    }
+                } else {
+                    $this->data['supplierHost'] = $host;
                 }
-            } else {
-                $this->data['supplierHost'] = $host;
             }
         }
-    }
-}
 
         return $this->data;
     }
@@ -165,11 +185,17 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
 
 class Supplier
 {
-    public function __construct(string $name, array $domain, string $policy = '', bool $requiresAccept = true)
-    {
+    public function __construct(
+        string $name,
+        array $domain,
+        string $policy = '',
+        bool $requiresAccept = true,
+        string $systemType = 'general'
+    ) {
         $this->name = $name;
         $this->domain = $domain;
         $this->policy = $policy;
         $this->requiresAccept = $requiresAccept;
+        $this->systemType = $systemType;
     }
 }

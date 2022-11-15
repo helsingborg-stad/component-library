@@ -2,7 +2,6 @@
     "slug": "acceptance",
     "default": {
         "labels": false,
-        "modifier": false,
         "height": false,
         "src": false,
         "policy": false,
@@ -13,7 +12,6 @@
     },
     "description": {
        "labels" : "JSON string of an object containing button, title and info labels",
-       "modifier" : "String containing class modifier ex. video",
        "height" : "height in number ex 500",
        "src" : "array of urls to hide ex. https://www.youtube.com",
        "policy" : "URL to third party website policy",
