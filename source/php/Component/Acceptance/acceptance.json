@@ -13,7 +13,7 @@
     "description": {
        "labels" : "JSON string of an object containing button, title and info labels",
        "height" : "height in number ex 500",
-       "src" : "url ex. https://www.youtube.com",
+       "src" : "array of urls to hide ex. https://www.youtube.com",
        "policy" : "URL to third party website policy",
        "host" : "host ex. youtube.com",
        "name" : "name of the host"  

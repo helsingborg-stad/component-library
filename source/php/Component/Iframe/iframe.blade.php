@@ -3,7 +3,7 @@
     "labels"    => $labels,
     "modifier"  => $modifier,
     "height"    => $height,
-    "src"       => $attributeList['src'],
+    "src"       => array($attributeList['src']),
     "icon"      => "info",
     ])
     <iframe 

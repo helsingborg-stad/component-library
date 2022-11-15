@@ -2,6 +2,7 @@
     "slug": "fileinput",
     "default": {
         "display": "",
+        "decription": "",
         "name": "files",
         "accept": "audio/*,video/*,image/*",
         "multiple": false,
@@ -14,6 +15,7 @@
     },
     "description": {
         "display": "Display input uploader as button or area",
+        "description": "Additional description or instructions.",
         "name": "files",
         "accept": "audio/*,video/*,image/*",
         "multiple": "Allow single or multiple files",
