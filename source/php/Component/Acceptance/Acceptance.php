@@ -162,9 +162,8 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
             $this->data['supplierHost'] = strtolower(implode(', ', $src));
         } else {
             $suppliers  = $this->getSuppliers();
-
-            $srcParsed = parse_url(implode($src));
-            $host = strtolower($srcParsed['host']);
+            $srcParsed  = parse_url(implode($src));
+            $host       = strtolower($srcParsed['host']);
 
             if (is_iterable($suppliers)) {
                 foreach ($suppliers as $supplier) {
@@ -177,10 +176,10 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
                         if (isset($supplier->policy)) {
                             $this->data['supplierPolicy'] = $supplier->policy;
                         }
+                        $this->data['supplierSystemType'] = $supplier->systemType;
                     } else {
                         $this->data['supplierHost'] = $host;
                     }
-                    $this->data['supplierSystemType'] = $supplier->systemType;
                 }
             }
         }
