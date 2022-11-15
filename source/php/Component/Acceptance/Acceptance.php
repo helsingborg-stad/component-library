@@ -159,26 +159,26 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
         } else {
     $suppliers  = $this->getSuppliers();
 
-        $srcParsed = parse_url($src);
-        $host = strtolower($srcParsed['host']);
+    $srcParsed = parse_url(implode($src));
+    $host = strtolower($srcParsed['host']);
 
-        if (is_iterable($suppliers)) {
-            foreach ($suppliers as $supplier) {
-                $key = array_search($host, $supplier->domain, true);
-                if (is_integer($key)) {
-                    $this->data['supplierHost'] = $supplier->domain[$key];
-                    $this->data['supplierName'] = $supplier->name;
-                    $this->data['requiresAccept'] = $supplier->requiresAccept;
+    if (is_iterable($suppliers)) {
+        foreach ($suppliers as $supplier) {
+            $key = array_search($host, $supplier->domain, true);
+            if (is_integer($key)) {
+                $this->data['supplierHost'] = $supplier->domain[$key];
+                $this->data['supplierName'] = $supplier->name;
+                $this->data['requiresAccept'] = $supplier->requiresAccept;
 
-                    if (isset($supplier->policy)) {
-                        $this->data['supplierPolicy'] = $supplier->policy;
-                    }
-                } else {
-                    $this->data['supplierHost'] = $host;
+                if (isset($supplier->policy)) {
+                    $this->data['supplierPolicy'] = $supplier->policy;
                 }
+            } else {
+                $this->data['supplierHost'] = $host;
             }
         }
-
+    }
+}
         return $this->data;
     }
 }
