@@ -44,6 +44,10 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
             } else {
                 $this->data['classList'][] = 'js-suppressed-content--none';
             }
+
+            if ($this->data['supplierSystemType'] == 'video') {
+                $this->data['classList'][] = 'u-ratio-16-9';
+            }
         }
 
         if (!empty($this->data['labels'])) {
