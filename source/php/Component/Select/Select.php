@@ -12,6 +12,8 @@ class Select extends \ComponentLibrary\Component\BaseController
 
         $this->data['id'] = $id ?? uniqid();
 
+        $this->data['options'] = $this->normalizeOptions($options);
+
         if ($multiple) {
             $this->data['attributeList']['multiple'] = 'multiple';
         }
@@ -34,5 +36,19 @@ class Select extends \ComponentLibrary\Component\BaseController
             $size = "md";
         }
         $this->data['classList'][] = $this->getBaseClass() . "--" . $size;
+    }
+
+    private function normalizeOptions($options) {
+        if (count($options) != count($options, COUNT_RECURSIVE)) {
+            $return = [];
+            array_walk_recursive(
+                $options,
+                function ($value) use (&$return) {
+                    $return[$value] = $value;
+                }
+            );
+            return $return;
+        }
+        return $return;
     }
 }
