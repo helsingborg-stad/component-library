@@ -46,6 +46,7 @@
                 </label>
             @endif
             <input id="input_{{ $id }}" value="{{ $value }}" {!! $fieldAttribute !!}>
+            <div class="{{ $baseClass }}_focus-styler"></div> 
 
             @if(!empty($suffix))
                 <span class="{{ $baseClass }}__suffix">{{$suffix}}</span>
