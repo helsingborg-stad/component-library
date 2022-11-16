@@ -101,7 +101,8 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
                 'Google',
                 array('google.com', 'www.google.com', 'google.se', 'www.google.se'),
                 'https://policies.google.com/privacy',
-                true
+                true,
+                'search'
             ),
             new Supplier(
                 'YouTube',
@@ -139,11 +140,25 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
                 'money'
             ),
             new Supplier(
-                'Stratsyse',
+                'Stratsys',
                 array( 'stratsys.se', 'www.stratsys.se', 'jamforelse.stratsys.se'),
                 'https://www.stratsys.com/sv/integritetspolicy',
                 false,
                 'stats'
+            ),
+            new Supplier(
+                'Sparkle',
+                array('5p4rk13.com'),
+                'https://getsparkle.io/terms/',
+                true,
+                'social'
+            ),
+            new Supplier(
+                'Curator',
+                array('cdn.curator.io', 'curator.io'),
+                'https://curator.io/privacy-policy',
+                true,
+                'social'
             ),
         );
 
