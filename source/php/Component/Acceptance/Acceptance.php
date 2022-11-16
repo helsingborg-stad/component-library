@@ -121,17 +121,29 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
                 'Helsingborg Stad',
                 array('helsingborg.se', 'www.helsingborg.se', 'driftinfo.helsingborg.se', 'it.helsingborg.se'),
                 'https://helsingborg.se/om-webbplatsen/sa-har-behandlar-vi-dina-personuppgifter/',
-                false
+                false,
+                'municipal'
             ),
             new Supplier(
                 'Mynewsdesk',
                 array( 'helsingborg.mynewsdesk.com', 'mynewsdesk.com'),
-                'https://www.mynewsdesk.com/se/about/terms-and-conditions/'
+                'https://www.mynewsdesk.com/se/about/terms-and-conditions/',
+                true,
+                'news'
             ),
             new Supplier(
                 'KommersAnnons.se',
                 array( 'kommersannons.se', 'www.kommersannons.se'),
                 'https://kommersannons.se/',
+                true,
+                'money'
+            ),
+            new Supplier(
+                'Stratsyse',
+                array( 'stratsys.se', 'www.stratsys.se', 'jamforelse.stratsys.se'),
+                'https://www.stratsys.com/sv/integritetspolicy',
+                false,
+                'stats'
             ),
         );
 
