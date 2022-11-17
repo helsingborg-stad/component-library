@@ -2,15 +2,6 @@
 
 <div class="{{ $class }}" {!! $attribute !!}>
 
-    @if(!empty($label))
-        <label class="{{$baseClass}}__label" for="fs_{{ $id }}" id="label_{{ $id }}">
-            {{$label}}
-            @if($required)
-                <span class="u-color__text--danger">*</span></label>
-            @endif
-        </label>
-    @endif
-
     @if(!empty($description))
         @typography([
             'element' => 'div',
