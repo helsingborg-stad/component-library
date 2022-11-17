@@ -16,6 +16,7 @@
 
             {!! $slot !!}
         </select>
+        <div class="{{ $baseClass }}_focus-styler u-level-top"></div> 
         @icon([
             'classList' => [
                 'c-select__icon'
