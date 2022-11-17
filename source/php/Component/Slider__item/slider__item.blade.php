@@ -1,4 +1,4 @@
-<!-- segment.blade.php -->
+<!-- slider__item.blade.php -->
 <section class="{{ $class }}" {!! $attribute !!}>
     @if ($link)
         <a class="{{ $baseClass }}__link" href="{{ $link }}">
