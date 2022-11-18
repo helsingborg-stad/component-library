@@ -8,6 +8,8 @@ class Iframe extends \ComponentLibrary\Component\BaseController
     {
         extract($this->data);
 
+        $this->data['attributeList']['allowfullscreen'] = true;
+
         if (isset($width)) {
             $this->data['attributeList']['width'] = $width;
         }
