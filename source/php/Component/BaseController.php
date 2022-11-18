@@ -133,6 +133,14 @@ class BaseController
         return $this->uid = uniqid();
     }
 
+   /**
+    * If the slot exists in the data array, and the html property of the slot is not empty, then
+    * return true
+    * 
+    * @param slotKey The name of the slot you want to check.
+    * 
+    * @return a boolean value.
+    */
     public function slotHasData($slotKey) 
     {
         if (!array_key_exists($slotKey, $this->data)) {
