@@ -12,12 +12,12 @@ class URL
      */
     public static function normalizeUrl(string $url, bool $forceHttps = true)
     {
-        if ($forceHttps && (str_starts_with($url, 'http://') || str_starts_with($url, '//'))) {
+        if ($forceHttps && (str_starts_with($url, 'http://'))) {
             return str_replace('http://', 'https://', $url);
         }
         
         if (str_starts_with($url, '//')) {
-            return 'https://' . $url;
+            return 'https:' . $url;
         }
 
         return $url;
