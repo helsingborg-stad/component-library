@@ -133,6 +133,17 @@ class BaseController
         return $this->uid = uniqid();
     }
 
+    public function slotHasData($slotKey) 
+    {
+        if (!array_key_exists($slotKey, $this->data)) {
+            return false;
+        }
+        if (empty($this->accessProtected($this->data[$slotKey], "html"))) {
+            return false;
+        }
+        return true;
+    }
+
     private function getNamespaceParts()
     {
         //Get all parts of the location
