@@ -19,14 +19,17 @@
             ])
             @endbutton
 
-            {!! $search !!}
-
+            @if($searchSlotHasData)
+                {!! $search !!}
+            @endif
         </div>
 
-         <div class="c-drawer__body">
-                
+         <div class="c-drawer__body">  
             {{-- Placed in another file, due to ajax loading --}}
-            {!! $menu !!}
+            
+            @if($menuSlotHasData)
+                {!! $menu !!}
+            @endif
 
         </div>
     </div>
