@@ -12,6 +12,11 @@ class Nav extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
+        //Add id if missing, prevents duploicate references
+        if (empty($id)) {
+            $this->data['id'] = uniqid();
+        }
+
         //Add depth class
         $this->data['depth'] + 1;
         $this->data['classList'][] = $this->getBaseClass() . "--depth-" . $this->data['depth'];
