@@ -24,6 +24,10 @@ class Nav extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['data-endpoint'] = $endpoint;
         }
 
+        if(empty($id)) {
+            $this->data['id'] = $this->getUid();
+        }
+
         //Add unlist class
         $this->data['classList'][] = "unlist";
 
