@@ -85,7 +85,7 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
         $suppliers = array(
             new Supplier(
                 'Google',
-                array('maps.google.com', 'maps.google.se'),
+                array('maps.google.com', 'maps.google.se', 'google.com', 'www.google.com', 'google.se', 'www.google.se'),
                 'https://policies.google.com/privacy',
                 true,
                 'map'
@@ -96,13 +96,6 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
                 'https://trust.arcgis.com/en/privacy/gdpr.htm',
                 true,
                 'map'
-            ),
-            new Supplier(
-                'Google',
-                array('google.com', 'www.google.com', 'google.se', 'www.google.se'),
-                'https://policies.google.com/privacy',
-                true,
-                'search'
             ),
             new Supplier(
                 'YouTube',
