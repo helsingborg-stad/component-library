@@ -24,6 +24,7 @@
 
             {{-- Do not break into multiple lines, will add space to value. --}}
             <textarea id="input_{{ $id }}" {!! $fieldAttribute !!}>{{ $value }}</textarea>
+            <div class="{{ $baseClass }}_focus-styler u-level-top"></div> 
         @endif
 
         {{-- Single line (input) --}}
@@ -46,6 +47,7 @@
                 </label>
             @endif
             <input id="input_{{ $id }}" value="{{ $value }}" {!! $fieldAttribute !!}>
+            <div class="{{ $baseClass }}_focus-styler u-level-top"></div> 
 
             @if(!empty($suffix))
                 <span class="{{ $baseClass }}__suffix">{{$suffix}}</span>
