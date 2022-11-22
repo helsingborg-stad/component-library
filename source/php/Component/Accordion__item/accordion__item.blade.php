@@ -1,6 +1,6 @@
 {{-- Accordion Item --}}
 <{{$sectionElement}} class="{{$class}}" {!! $attribute !!} aria-label="{{$heading}}">
-    <{{$sectionHeadingElement}} class="{{$baseClass}}__button" aria-controls="{{ $baseClass }}__aria-{{ $id }}" aria-expanded="false" js-expand-button>
+    <{{$sectionHeadingElement}} class="{{$baseClass}}__button" aria-controls="{{ $baseClass }}__aria-{{ $id }}" aria-expanded="false" js-expand-button href="#{{$id}}">
         <span class="{{$baseClass}}__button-wrapper {{$headingType}} " tabindex="-1">
             
             {!!$beforeHeading!!}
