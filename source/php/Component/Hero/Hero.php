@@ -14,6 +14,14 @@ class Hero extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . "--stretch";
         }
 
+        if ($video) {
+            $this->data['classList'][] = $this->getBaseClass() . "--video";
+        }
+
+        if (!$video) {
+            $this->data['classList'][] = $this->getBaseClass() . "--image";
+        }
+
         //Create image style tag
         $this->data['imageStyle'] = [];
 
