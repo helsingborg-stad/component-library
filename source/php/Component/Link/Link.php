@@ -14,9 +14,5 @@ class Link extends \ComponentLibrary\Component\BaseController
         if(!$href) {
             $this->data['href'] = "";
         }
-
-        if($href) {
-            $this->data['attributeList']['role'] = "link";
-        }
     }
 }
