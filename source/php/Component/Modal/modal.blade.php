@@ -1,7 +1,7 @@
 <!-- modal.blade.php -->
 <dialog class="{{ $class }}" aria-modal="true" aria-labelledby="modal__label__{{ $id }}" {!! $attribute !!}>
 
-    <header class="{{ $baseClass }}__header">
+    <div class="{{ $baseClass }}__header">
         @if ($heading)
             @typography([
                 "id" => "modal__label__".$id,
@@ -22,7 +22,7 @@
             'size' => 'lg',
         ])
         @endbutton
-    </header>
+    </div>
 
     <section class="{{ $baseClass }}__content">
 
@@ -63,9 +63,9 @@
     </section>
 
     @if ($bottom)
-        <footer class="{{ $baseClass }}__footer">
+        <div class="{{ $baseClass }}__footer">
             {!! $bottom !!}
-        </footer>
+        </div>
     @endif
 
     @if ($navigation)
