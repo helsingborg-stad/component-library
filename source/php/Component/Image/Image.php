@@ -4,11 +4,13 @@ namespace ComponentLibrary\Component\Image;
 
 class Image extends \ComponentLibrary\Component\BaseController
 {
+
     public function init()
     {
+
         //Extract array for eazy access (fetch only)
         extract($this->data);
-        
+
         //Add placeholder class
         if (!$src) {
             $this->data['classList'][] = $this->getBaseClass() . "--is-placeholder";
@@ -56,12 +58,11 @@ class Image extends \ComponentLibrary\Component\BaseController
 
         //Rounded corners radius
         if ($roundedRadius) {
-            $this->data['classList'][] = $this->getBaseClass() . "--rounded-" . $roundedRadius;
+                $this->data['classList'][] = $this->getBaseClass() . "--rounded-" . $roundedRadius;
         }
 
         if ($openModal) {
-            $this->data['modalId'] = uniqid();
+                $this->data['modalId'] = uniqid();
         }
-        
     }
 }
