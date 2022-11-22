@@ -175,13 +175,16 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
 
         if (count($src) > 1) {
             foreach ($src as &$value) {
-                $value = parse_url($value)['host'];
+                $url = \ComponentLibrary\Helper\URL::normalizeUrl($value);
+                $value = parse_url($url)['host'];
             }
             $this->data['supplierHost']         = strtolower(implode(', ', $src));
             $this->data['supplierSystemType']   = 'general';
         } else {
             $suppliers  = $this->getSuppliers();
-            $srcParsed  = parse_url(implode($src));
+            
+            $url = \ComponentLibrary\Helper\URL::normalizeUrl($src[0]);
+            $srcParsed  = parse_url($url);
             $host       = strtolower($srcParsed['host']);
 
             if (is_iterable($suppliers)) {

@@ -8,6 +8,10 @@ class Drawer extends \ComponentLibrary\Component\BaseController
     {
      //Extract array for eazy access (fetch only)
         extract($this->data);
+
+        $this->data['searchSlotHasData'] = $this->slotHasData('search');
+
+        $this->data['menuSlotHasData'] = $this->slotHasData('menu');
         
     }
 }

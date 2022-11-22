@@ -1,5 +1,5 @@
 <!-- drawer.blade.php -->
-<div class="c-drawer c-drawer--right c-drawer--primary js-drawer u-display--none@lg {{$class}}" js-toggle-class="is-open" js-toggle-item="js-drawer" {!! $attribute !!}>
+<div class="c-drawer c-drawer--right c-drawer--primary js-drawer {{$class}}" js-toggle-class="is-open" js-toggle-item="js-drawer" {!! $attribute !!}>
         <div class="c-drawer__header">
             
             @button([
@@ -19,14 +19,17 @@
             ])
             @endbutton
 
-            {!! $search !!}
-
+            @if($searchSlotHasData)
+                {!! $search !!}
+            @endif
         </div>
 
-         <div class="c-drawer__body">
-                
+         <div class="c-drawer__body">  
             {{-- Placed in another file, due to ajax loading --}}
-            {!! $menu !!}
+
+            @if($menuSlotHasData)
+                {!! $menu !!}
+            @endif
 
         </div>
     </div>
