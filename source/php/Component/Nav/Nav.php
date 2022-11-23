@@ -14,7 +14,7 @@ class Nav extends \ComponentLibrary\Component\BaseController
 
         //Add id if missing, prevents duploicate references
         if (empty($id)) {
-            $this->data['id'] = uniqid();
+            $this->data['id'] = $this->getUid();
         }
 
         //Add depth class
@@ -24,13 +24,12 @@ class Nav extends \ComponentLibrary\Component\BaseController
         //Set default values to items array
         $this->data['items'] = $this->fillItemsData($items);
 
+        //Set item attribute list
+        $this->data['items'] = $this->itemAttributeList($items, $this->data);
+
         //Endpoint for async fetching
         if (isset($endpoint)) {
             $this->data['attributeList']['data-endpoint'] = $endpoint;
-        }
-
-        if(empty($id)) {
-            $this->data['id'] = $this->getUid();
         }
 
         //Add unlist class
@@ -42,12 +41,32 @@ class Nav extends \ComponentLibrary\Component\BaseController
         }
 
         //Attributes
-        $this->data['attributeList']['aria-orientation'] = $direction; 
+        $this->data['attributeList']['aria-orientation'] = $direction;
+        $this->data['attributeList']['role'] = 'menu';
 
         //Attributes
         if ($direction == "horizontal") {
             $this->data['attributeList']['js-keep-in-viewport-after-resize'] = "1";
         }
+    }
+
+    public function itemAttributeList($items, $data)
+    {
+        if (is_array($items) && !empty($items)) {
+            foreach ($items as $key => $item) {
+                if (!isset($item['attributeList'])) {
+                    $item['attributeList'] = [];
+                }
+
+                $items[$key]['attributeList'] = array_merge(
+                    $item['attributeList'],
+                    [
+                        'role' => 'menuitem'
+                    ]
+                );
+            }
+        }
+        return $items;
     }
 
     public function fillItemsData($items)

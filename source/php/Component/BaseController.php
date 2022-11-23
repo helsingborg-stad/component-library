@@ -335,6 +335,14 @@ class BaseController
             unset($attribute['style']);
         }
 
+        //Remove empty aria attributes
+        if (empty($attribute['aria-labelledby'])) {
+            unset($attribute['aria-labelledby']);
+        }
+        if (empty($attribute['aria-label'])) {
+            unset($attribute['aria-label']);
+        }
+
         //Return manipulated classes as array
         if ($implode === false) {
             return (array) $attribute;

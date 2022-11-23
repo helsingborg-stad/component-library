@@ -8,7 +8,7 @@
         "beforeContent": "",
         "afterContent": "",
         "sectionElement": "div",
-        "sectionHeadingElement": "button",
+        "sectionHeadingElement": "a",
         "sectionContentElement": "div",
         "taxonomy": [],
         "taxonomyPosition":  "",
