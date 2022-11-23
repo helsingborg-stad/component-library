@@ -21,7 +21,10 @@
                     "variant" => "h2",
                     "element" => "h2",
                     'classList' => [$baseClass.'__heading'],
-                    'autopromote' => true
+                    'autopromote' => true,
+                    'attributeList' => [
+                        'id' => $uid . '__heading',
+                    ],
                 ])
                     {{ $title }}
                 @endtypography
