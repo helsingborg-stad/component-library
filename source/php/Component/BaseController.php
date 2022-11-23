@@ -175,12 +175,46 @@ class BaseController
     }
 
     /**
+     * Validate that all classes in classlist have their
+     * own array item. Also check for empty values.
+     *
+     * @param array $classList
+     * @return bool
+     */
+    private function validClassList($classList): bool
+    {
+        if (is_array($classList) && !empty($classList)) {
+            foreach ($classList as $classListItem) {
+                if (strpos($classListItem, " ")) {
+                    return false;
+                }
+                if (empty($classListItem)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
      * Returns the classes
      *
      * @return string Css classes
      */
     private function getClass($implode = true)
     {
+        if (!$this->validClassList($this->data['classList'])) {
+            trigger_error(
+                sprintf(
+                    'The parameter classList is not allowed to contain spaces or include empty strings. 
+                    Multiple classes may be separated by entering a array of items.
+                    Please review data inputted: %s',
+                    print_r($this, true)
+                ),
+                E_USER_WARNING
+            );
+        }
+
         //Store locally
         if (isset($this->data['classList']) && is_array($this->data['classList'])) {
             array_unshift(
