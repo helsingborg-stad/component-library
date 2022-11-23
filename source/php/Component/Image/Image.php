@@ -61,8 +61,13 @@ class Image extends \ComponentLibrary\Component\BaseController
 
         if ($openModal) {
             $this->data['modalId'] = uniqid();
+            $this->data['imgAttributeList']['data-open'] = $this->data['modalId'];
+            $this->data['imgAttributeList']['class'][] = $this->getBaseClass() . '__modal';
         }
         
+        $this->data['imgAttributeList']['class'][] = $this->getBaseClass() . '__image';
+        
+        $this->data['imgAttributeList']['class'] = implode(' ', $this->data['imgAttributeList']['class']);
         
         $this->data['imgAttributes'] = self::buildAttributes(
             $this->data['imgAttributeList']
