@@ -84,11 +84,13 @@
 
     </div>
 
+    @if($invalidMessage)
     <div class="c-field__error" aria-hidden="true" aria-label="@{{VALIDATION_ERROR_MESSAGE}}">
         @typography(['variant' => 'meta', 'element' => 'span', 'classList' => ['c-field__error-message']])
             @{{VALIDATION_ERROR_MESSAGE}}
         @endtypography
     </div>
+    @endif
 
     @if ($helperText)
         <small class="{{$baseClass}}__helper">
