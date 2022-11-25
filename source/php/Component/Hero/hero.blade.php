@@ -10,14 +10,14 @@
                 <source src="{{$video}}" type="video/mp4">
             </video>
         @endif
-
+        
     </section>
-
-    <div class="{{ $baseClass }}__controls "> 
+    
+    <div class="{{ $baseClass }}__controls" data-js-toggle-item="toggle-animation" data-js-toggle-class="show-pause-button"> 
         @icon([
             'icon' => 'pause_circle',
             'size' => 'xl',
-            'classList' => [$baseClass . '__animation-pause-btn'],
+            'classList' => [$baseClass . '__animation-pause-button'],
             'attributeList' => [
                 'data-js-toggle-trigger' => 'toggle-animation'
             ]
@@ -27,7 +27,7 @@
         @icon([
             'icon' => 'play_circle',
             'size' => 'xl',
-            'classList' => [$baseClass . '__animation-play-btn'],
+            'classList' => [$baseClass . '__animation-play-button'],
             'attributeList' => [
                 'data-js-toggle-trigger' => 'toggle-animation'
             ]
