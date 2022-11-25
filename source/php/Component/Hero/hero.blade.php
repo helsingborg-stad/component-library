@@ -1,6 +1,6 @@
 <!-- hero.blade.php -->
 <div class="c-hero__wrapper" >
-    <section class="{{ $class }}" {!! $attribute !!} style="{!! $imageStyleString !!}">
+    <section class="{{ $class }}" {!! $attribute !!} style="{!! $imageStyleString !!}" data-js-toggle-item="toggle-animation" data-js-toggle-class="c-hero--animation-paused" >
         @if ($overlay)
             <div class="{{ $baseClass }}__overlay"></div>
         @endif
@@ -10,7 +10,15 @@
                 <source src="{{$video}}" type="video/mp4">
             </video>
         @endif
+
     </section>
+        @button([
+            'icon' => 'play',
+            'attributeList' => [
+                'data-js-toggle-trigger' => 'toggle-animation'
+                ]
+            ])
+        @endbutton
 
     @if ($title || $paragraph || $byline)
         <div class="o-container {{ $baseClass }}__container">
@@ -40,4 +48,6 @@
             
         </div>
     @endif
+
+
 </div> 
