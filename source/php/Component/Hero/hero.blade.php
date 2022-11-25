@@ -1,26 +1,21 @@
 <!-- hero.blade.php -->
 <div class="c-hero__wrapper" >
     <section class="{{ $class }}" {!! $attribute !!} style="{!! $imageStyleString !!}">
-
         @if ($overlay)
             <div class="{{ $baseClass }}__overlay"></div>
         @endif
 
+        @if($video)
+            <video autoplay muted loop class="c-hero__video">
+                <source src="{{$video}}" type="video/mp4">
+            </video>
+        @endif
     </section>
 
     @if ($title || $paragraph || $byline)
         <div class="o-container {{ $baseClass }}__container">
-            @if($video)
-                <video autoplay muted loop class="c-hero__video">
-                    <source src="{{$video}}" type="video/mp4">
-                </video>
-            @endif
 
-            
-            @endif
-            
             <div class="{{ $baseClass }}__content">
-                
                 @if ($title)
                 @typography(['variant' => 'h1', 'element' => 'h1', 'classList' => [$baseClass . '__title']])
                 {!! $title !!}
@@ -41,7 +36,8 @@
                 
                 {{-- Oneline to enable the use of css:empty() function --}}
                 <div class="{{ $baseClass }}__inner-blocks u-hide-empty">{!! '<InnerBlocks />' !!}</div>
-                
             </div>
+            
         </div>
+    @endif
 </div> 
