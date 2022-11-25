@@ -1,6 +1,6 @@
 <!-- hero.blade.php -->
 <div class="c-hero__wrapper" >
-    <section class="{{ $class }}" {!! $attribute !!} style="{!! $imageStyleString !!}" data-js-toggle-item="toggle-animation" data-js-toggle-class="c-hero--animation-paused" >
+    <section class="{{ $class }}" {!! $attribute !!} style="{!! $imageStyleString !!}" data-js-toggle-item="toggle-animation" data-js-toggle-class="u-animation--pause" >
         @if ($overlay)
             <div class="{{ $baseClass }}__overlay"></div>
         @endif
@@ -12,13 +12,30 @@
         @endif
 
     </section>
-        @button([
-            'icon' => 'play',
+
+    <div class="{{ $baseClass }}__controls "> 
+        @icon([
+            'icon' => 'pause_circle',
+            'size' => 'xl',
+            'classList' => [$baseClass . '__animation-pause-btn'],
             'attributeList' => [
                 'data-js-toggle-trigger' => 'toggle-animation'
-                ]
-            ])
-        @endbutton
+            ]
+        ])
+        @endicon
+
+        @icon([
+            'icon' => 'play_circle',
+            'size' => 'xl',
+            'classList' => [$baseClass . '__animation-play-btn'],
+            'attributeList' => [
+                'data-js-toggle-trigger' => 'toggle-animation'
+            ]
+        ])
+        @endicon
+    </div>
+
+
 
     @if ($title || $paragraph || $byline)
         <div class="o-container {{ $baseClass }}__container">
