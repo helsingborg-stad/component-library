@@ -13,7 +13,7 @@
         
     </section>
     
-    <div class="{{ $baseClass }}__controls" data-js-toggle-item="toggle-animation" data-js-toggle-class="show-pause-button"> 
+    <div class="{{ $baseClass }}__controls" data-js-toggle-item="toggle-animation" data-js-toggle-class="show-play-button"> 
         @icon([
             'icon' => 'pause_circle',
             'size' => 'xl',
