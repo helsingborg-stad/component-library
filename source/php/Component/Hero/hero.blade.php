@@ -12,14 +12,14 @@
         @endif
         
     </section>
-    
-    <div class="{{ $baseClass }}__controls" data-js-toggle-item="toggle-animation" data-js-toggle-class="show-play-button"> 
+    @if($video || $hasAnimation)
+    <div class="{{ $baseClass }}__controls u-level-3" js-video-control data-js-toggle-item="toggle-animation" data-js-toggle-class="show-play-button"> 
         @icon([
             'icon' => 'pause_circle',
             'size' => 'xl',
-            'classList' => [$baseClass . '__animation-pause-button'],
+            'classList' => [$baseClass . '__pause-button'],
             'attributeList' => [
-                'data-js-toggle-trigger' => 'toggle-animation'
+                'data-js-toggle-trigger' => 'toggle-animation',
             ]
         ])
         @endicon
@@ -27,14 +27,14 @@
         @icon([
             'icon' => 'play_circle',
             'size' => 'xl',
-            'classList' => [$baseClass . '__animation-play-button'],
+            'classList' => [$baseClass . '__play-button'],
             'attributeList' => [
                 'data-js-toggle-trigger' => 'toggle-animation'
             ]
         ])
         @endicon
     </div>
-
+    @endif
 
 
     @if ($title || $paragraph || $byline)
