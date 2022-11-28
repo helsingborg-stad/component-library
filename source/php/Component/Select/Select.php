@@ -10,7 +10,10 @@ class Select extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
-        $this->data['id'] = empty($id) ?? uniqid();
+        // Must include a id.
+        if (!$id) {
+            $id = $this->data['id'] = uniqid();
+        }
 
         if ($multiple) {
             $this->data['attributeList']['multiple'] = 'multiple';

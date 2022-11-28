@@ -1,6 +1,6 @@
 <div class="{{$class}} c-field">
     @if($label)
-        <label for="{{ $id }}" class="c-field__label">{{$label}}
+        <label for="select_{{ $id }}" class="c-field__label">{{$label}}
             @if($required)
                 <span class="u-color__text--danger">*</span>
             @endif    
