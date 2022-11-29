@@ -8,7 +8,6 @@
                         'icon' => 'play_circle', 
                         'attributeList' => ['js-suppressed-content-accept' => ''],
                         'classList' => [$baseClass . '__modal-icon-play'],
-                        'isInteractive' => true
                     ])
                 @endicon
                 @button([
