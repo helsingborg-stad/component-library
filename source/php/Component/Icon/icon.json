@@ -5,7 +5,8 @@
         "label": "",
         "icon": "",
         "color": "",
-        "componentElement": "span"
+        "componentElement": "span",
+        "isInteractive": false
     },
     "description": {
         "size": "Sizes: xs, sm, md, lg, xl, xxl",

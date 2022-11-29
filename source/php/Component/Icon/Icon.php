@@ -6,7 +6,8 @@ namespace ComponentLibrary\Component\Icon;
  * Class Icon
  * @package ComponentLibrary\Component\Icon
  */
-class Icon extends \ComponentLibrary\Component\BaseController {
+class Icon extends \ComponentLibrary\Component\BaseController
+{
     private $altTextPrefix = "Icon: ";
     private $altText = [
         'key'  => "Label",
@@ -35,10 +36,13 @@ class Icon extends \ComponentLibrary\Component\BaseController {
         //Do not translate the icon
         $this->data['attributeList']['translate'] = "no";
 
-        //Identify as an image
-        $this->data['attributeList']['role'] = "img";
-        $this->data['attributeList']['aria-label'] = $this->getAltText($icon);
-        $this->data['attributeList']['alt'] = $this->getAltText($icon);
+        if (!$isInteractive || empty($this->data['attributeList']['aria-hidden'])) {
+            $this->data['attributeList']['aria-hidden'] = ''; // hide from screen readers specifically
+        } else {
+            $this->data['attributeList']['role']         = 'button';
+            $this->data['attributeList']['aria-pressed'] = 'false';
+            $this->data['attributeList']['aria-label']   = $this->getAltText($icon);
+        }
     }
 
     /**
@@ -111,7 +115,8 @@ class Icon extends \ComponentLibrary\Component\BaseController {
      * Build class for color
      * @return array
      */
-    public function setColor() {
+    public function setColor()
+    {
         // Set color based on provided name
         if (isset($this->compParams['color']) && !empty($this->compParams['color'])) {
             $this->data['classList'][] = $this->getBaseClass() . "--color-" . strtolower($this->compParams['color']);
@@ -125,7 +130,8 @@ class Icon extends \ComponentLibrary\Component\BaseController {
      * Build class for size
      * @return array
      */
-    public function setSize() {
+    public function setSize()
+    {
         //Available sizes
         $sizes = [
             'xs' => '16',
