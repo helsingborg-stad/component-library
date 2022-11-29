@@ -55,13 +55,12 @@ class Hero extends \ComponentLibrary\Component\BaseController
             $this->data['overlay'] = false;
         }
 
-        if(isset($sidebar) && $sidebar == 'sidebar.slider-area') {
-            if(!empty(get_theme_mod('hero_animation'))) {
-                $this->data['classList'][] = $this->getBaseClass() . '--has-animation';
-                $this->data['hasAnimation'] = true;
-            } else {
-                $this->data['hasAnimation'] = false;
-            }
+        if($animation) {
+            $this->data['classList'][] = $this->getBaseClass() . '--' . $animation;
+            $this->data['classList'][] = $this->getBaseClass() . '--has-animation';
+            $this->data['hasAnimation'] = true;
+        } else {
+            $this->data['hasAnimation'] = false;
         }
     }
 }
