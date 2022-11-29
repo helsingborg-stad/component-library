@@ -54,5 +54,13 @@ class Hero extends \ComponentLibrary\Component\BaseController
         } else {
             $this->data['overlay'] = false;
         }
+
+        if($animation) {
+            $this->data['classList'][] = $this->getBaseClass() . '--' . $animation;
+            $this->data['classList'][] = $this->getBaseClass() . '--has-animation';
+            $this->data['hasAnimation'] = true;
+        } else {
+            $this->data['hasAnimation'] = false;
+        }
     }
 }

@@ -8,7 +8,8 @@
         "title": "",
         "byline": "",
         "paragraph": "",
-        "stretch": false
+        "stretch": false,
+        "animation": false
     },
     "description": {
         "image": "Background image",
@@ -18,7 +19,8 @@
         "title": "The title text",
         "byline": "The byline text",
         "paragraph": "The body text.",
-        "stretch": "Always stretch the hero vertically. Makes the hero the width of the viewport. Requires a centered container."
+        "stretch": "Always stretch the hero vertically. Makes the hero the width of the viewport. Requires a centered container.",
+        "animation": "Name of the animation"
     },
     "view": "hero.blade.php",
     "dependency": {

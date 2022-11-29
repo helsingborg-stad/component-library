@@ -1,9 +1,12 @@
 <!-- hero.blade.php -->
-<section class="{{ $class }}" {!! $attribute !!} style="{!! $imageStyleString !!}" aria-role="region">
-
+<section class="{{ $class }}" {!! $attribute !!}>
+<div class="{{$baseClass}}__image" style="{!! $imageStyleString !!}" data-js-toggle-item="toggle-animation" data-js-toggle-class="u-animation--pause">
+    </div>
     @if ($overlay)
         <div class="{{ $baseClass }}__overlay"></div>
     @endif
+
+    @includeWhen($video || $hasAnimation, 'Hero.partials.controls');
 
     @if ($title || $paragraph || $byline)
         <div class="o-container {{ $baseClass }}__container">
