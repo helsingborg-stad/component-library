@@ -36,9 +36,11 @@ class Icon extends \ComponentLibrary\Component\BaseController
         //Do not translate the icon
         $this->data['attributeList']['translate'] = "no";
 
-        if (!$isInteractive || empty($this->data['attributeList']['aria-hidden'])) {
+        if (!$isInteractive) {
             $this->data['attributeList']['aria-hidden'] = ''; // hide from screen readers specifically
-        } else {
+        }
+        
+        if ($isInteractive) {
             $this->data['attributeList']['role']         = 'button';
             $this->data['attributeList']['aria-pressed'] = 'false';
             $this->data['attributeList']['aria-label']   = $this->getAltText($icon);
