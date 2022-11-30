@@ -183,6 +183,10 @@ class BaseController
      */
     private function validClassList($classList): bool
     {
+        if (is_array($classList)) {
+            $classList = array_filter($classList);
+        }
+
         if (is_array($classList) && !empty($classList)) {
             foreach ($classList as $classListItem) {
                 if (strpos($classListItem, " ")) {
