@@ -1,6 +1,6 @@
 <!-- icon.blade.php -->
 @if($icon)
     <{{$componentElement}} class="{{ $class }}" {!! $attribute !!}>
-        {{$icon}}
+        <span aria-hidden="true">{{$icon}}</span>
     </{{$componentElement}}>
 @endif
