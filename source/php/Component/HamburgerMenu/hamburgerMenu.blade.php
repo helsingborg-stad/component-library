@@ -35,7 +35,7 @@
                 @if (!empty($item['children']))
                     <ul class="{{$baseClass}}__sublist unlist u-margin__top--2">
                         @foreach ($item['children'] as $child)
-                            <li id="{{$id}}-item-{{$item['id']}}" class="{{$baseClass}}__item {{$baseClass}}__item--child {{ $child['classNames'] }}">
+                            <li id="{{$id}}-item-{{$child['id']}}" class="{{$baseClass}}__item {{$baseClass}}__item--child {{ $child['classNames'] }}">
                                 @link([
                                     'href' => $child['href'],
                                     'classList' => [

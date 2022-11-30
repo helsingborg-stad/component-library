@@ -4,10 +4,8 @@ namespace ComponentLibrary\Component\Image;
 
 class Image extends \ComponentLibrary\Component\BaseController
 {
-
     public function init()
     {
-
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
@@ -29,6 +27,17 @@ class Image extends \ComponentLibrary\Component\BaseController
         //Inherit the alt text
         if (!$alt && $caption) {
             $this->data['alt'] = $this->data['caption'];
+        }
+        //Inherit the caption text
+        if (empty($heading) && $caption) {
+            $this->data['heading'] = $caption;
+        }
+        
+        if (empty($isPanel)) {
+            $this->data['isPanel'] = false;
+        }
+        if (empty($isTransparent)) {
+            $this->data['isTransparent'] = false;
         }
 
         //Rounded corners all sides
@@ -58,11 +67,21 @@ class Image extends \ComponentLibrary\Component\BaseController
 
         //Rounded corners radius
         if ($roundedRadius) {
-                $this->data['classList'][] = $this->getBaseClass() . "--rounded-" . $roundedRadius;
+            $this->data['classList'][] = $this->getBaseClass() . "--rounded-" . $roundedRadius;
         }
 
+        $this->data['imgAttributeList']['class'][] = $this->getBaseClass() . '__image';
+        
         if ($openModal) {
-                $this->data['modalId'] = uniqid();
+            $this->data['modalId'] = uniqid();
+            $this->data['imgAttributeList']['data-open'] = $this->data['modalId'];
+            $this->data['imgAttributeList']['class'][] = $this->getBaseClass() . '__modal';
         }
+        
+        $this->data['imgAttributeList']['class'] = implode(' ', $this->data['imgAttributeList']['class']);
+        
+        $this->data['imgAttributes'] = self::buildAttributes(
+            $this->data['imgAttributeList']
+        );
     }
 }

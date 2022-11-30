@@ -50,6 +50,14 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . "--hero";
         }
 
+        
+        //Recognize as an image
+        if(!$background_video) {
+            $this->data['attributeList']['role'] = 'img';
+            $this->data['attributeList']['aria-label'] = $alt ? $alt : '';
+            $this->data['attributeList']['aria-labeledby'] = $uid . '__heading';
+        }
+
         if($focusPoint) {
 
             //Create image style tag

@@ -4,12 +4,6 @@
     <div class="{{$baseClass}}__modal js-suppressed-content-prompt">
         <div class="{{$baseClass}}__modal-description js-suppressed-content-description">
             @if($supplierSystemType == 'video')
-                @icon([
-                        'icon' => 'play_circle', 
-                        'attributeList' => ['js-suppressed-content-accept' => ''],
-                        'classList' => [$baseClass . '__modal-icon-play'],
-                    ])
-                @endicon
                 @button([
                     'text' => $infoLabel,
                     'color' => 'default',
@@ -21,8 +15,17 @@
                     'classList' => [
                         $baseClass . '__modal-info'
                     ],
+                    ])
+                @endbutton
+
+                @button([
+                    'icon'          => 'play_arrow',
+                    'color'         => 'primary',
+                    'attributeList' => ['js-suppressed-content-accept' => ''],
+                    'classList'     => [$baseClass . '__modal-icon-play'],
                 ])
                 @endbutton
+
                 @modal([
                     'id' => 'modal-' . $uid,
                     'heading' => $labels->title,
