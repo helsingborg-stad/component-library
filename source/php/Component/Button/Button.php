@@ -31,7 +31,7 @@ class Button extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['href'] = $href;
         }
 
-        if ($text) {
+        if ($text && empty($this->data['attributeList']['aria-label'])) {
             $this->data['attributeList']['aria-label'] = $text;
         }
 
