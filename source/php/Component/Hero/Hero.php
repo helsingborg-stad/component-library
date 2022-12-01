@@ -9,7 +9,7 @@ class Hero extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
         
-        $this->data['attibuteList']['aria-role'] = 'region';
+        $this->data['attributeList']['aria-role'] = 'region';
 
         if ($stretch) {
             $this->data['classList'][] = $this->getBaseClass() . "--stretch";
