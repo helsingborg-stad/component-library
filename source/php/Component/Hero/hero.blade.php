@@ -6,7 +6,7 @@
         <div class="{{ $baseClass }}__overlay"></div>
     @endif
 
-    @includeWhen($video || $hasAnimation, 'Hero.partials.controls');
+    @includeWhen($video || $hasAnimation, 'Hero.partials.controls')
 
     @if ($title || $paragraph || $byline)
         <div class="o-container {{ $baseClass }}__container">

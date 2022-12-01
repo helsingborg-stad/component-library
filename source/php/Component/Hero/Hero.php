@@ -6,9 +6,10 @@ class Hero extends \ComponentLibrary\Component\BaseController
 {
     public function init()
     {
-
         //Extract array for eazy access (fetch only)
         extract($this->data);
+        
+        $this->data['attibuteList']['aria-role'] = 'region';
 
         if ($stretch) {
             $this->data['classList'][] = $this->getBaseClass() . "--stretch";
@@ -55,7 +56,7 @@ class Hero extends \ComponentLibrary\Component\BaseController
             $this->data['overlay'] = false;
         }
 
-        if($animation) {
+        if ($animation) {
             $this->data['classList'][] = $this->getBaseClass() . '--' . $animation;
             $this->data['classList'][] = $this->getBaseClass() . '--has-animation';
             $this->data['hasAnimation'] = true;
