@@ -10,7 +10,7 @@ class Hero extends \ComponentLibrary\Component\BaseController
         extract($this->data);
         
         $this->data['attributeList']['role'] = 'region';
-        $this->data['attributeList']['aria-label'] = "Hero";
+        $this->data['attributeList']['aria-label'] = $ariaLabel;
 
         if ($stretch) {
             $this->data['classList'][] = $this->getBaseClass() . "--stretch";

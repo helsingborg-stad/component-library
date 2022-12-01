@@ -9,7 +9,8 @@
         "byline": "",
         "paragraph": "",
         "stretch": false,
-        "animation": false
+        "animation": false,
+        "ariaLabel": "Hero"
     },
     "description": {
         "image": "Background image",
@@ -20,7 +21,8 @@
         "byline": "The byline text",
         "paragraph": "The body text.",
         "stretch": "Always stretch the hero vertically. Makes the hero the width of the viewport. Requires a centered container.",
-        "animation": "Name of the animation"
+        "animation": "Name of the animation",
+        "ariaLabel": "Label provided for accessibility tools such as screen readers"
     },
     "view": "hero.blade.php",
     "dependency": {
