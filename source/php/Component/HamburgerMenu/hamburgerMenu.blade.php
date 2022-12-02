@@ -1,5 +1,5 @@
 <!-- hamburgerMenu.blade.php -->
-<nav class="{{$class}} o-grid" js-toggle-item="hamburger-menu" js-toggle-class="u-display--none" {!! $attribute !!}>
+<nav class="{{$class}} o-container o-container--wide o-grid" js-toggle-item="hamburger-menu" js-toggle-class="u-display--none" {!! $attribute !!}>
     
     {!! $slot !!}
 
@@ -53,3 +53,4 @@
         @endforeach
     </ul>
 </nav>
+</div>
