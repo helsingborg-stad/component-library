@@ -19,7 +19,7 @@
         {{ $multiple ? 'multiple' : '' }}
     />
 
-    <label for="fs_{{ $id }}" class="{{ $baseClass }}__input-label">
+    <label for="fs_{{ $id }}" class="{{ $baseClass }}__button">
         
         @icon([
             'icon' => 'file_upload',
