@@ -12,7 +12,7 @@
                         'text' => $item['label'],
                         'style' => $parentStyle,
                         'color' => 'primary',
-                        'icon' => 'chevron_right',
+                        'icon' => $item['icon']['icon'] !== "" ? $item['icon']['icon'] : 'chevron_right',
                         'href' => $item['href'],
                         'classList' => [
                             $baseClass . '__link',
@@ -28,8 +28,16 @@
                             $baseClass . '__link--title'
                         ]
                     ])
+                     @if(isset($item['icon']) && !empty($item['icon']['icon']))
+                        @icon([
+                            'icon' => $item['icon']['icon'],
+                            'size' => $item['icon']['size'],
+                            'classList' => $item['icon']['classList'],
+                        ])
+                        @endicon
+                    @endif
                         {{ $item['label'] }}
-                    @endbutton
+                    @endlink
                 @endif
                 {{-- Children --}}
                 @if (!empty($item['children']))
@@ -43,8 +51,16 @@
                                         $baseClass . '__link--child'
                                     ]
                                 ])
+                                @if(isset($child['icon']) && !empty($child['icon']['icon']))
+                                    @icon([
+                                        'icon' => $child['icon']['icon'],
+                                        'size' => $child['icon']['size'],
+                                        'classList' => $child['icon']['classList'],
+                                    ])
+                                    @endicon
+                                @endif
                                     {{ $child['label'] }}
-                                @endbutton
+                                @endlink
                             </li>
                         @endforeach
                     </ul>
