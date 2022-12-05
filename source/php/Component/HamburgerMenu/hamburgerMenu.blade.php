@@ -28,14 +28,14 @@
                             $baseClass . '__link--title'
                         ]
                     ])
-                     @if(isset($item['icon']) && !empty($item['icon']['icon']))
+                     {{-- @if(isset($item['icon']) && !empty($item['icon']['icon'])) --}}
                         @icon([
-                            'icon' => $item['icon']['icon'],
+                            'icon' => 'all_out',
                             'size' => $item['icon']['size'],
                             'classList' => $item['icon']['classList'],
                         ])
                         @endicon
-                    @endif
+                    {{-- @endif --}}
                         {{ $item['label'] }}
                     @endlink
                 @endif
@@ -51,11 +51,11 @@
                                         $baseClass . '__link--child'
                                     ]
                                 ])
-                                @if(isset($item['icon']) && !empty($item['icon']['icon']))
+                                @if(isset($child['icon']) && !empty($child['icon']['icon']))
                                     @icon([
-                                        'icon' => $item['icon']['icon'],
-                                        'size' => $item['icon']['size'],
-                                        'classList' => $item['icon']['classList'],
+                                        'icon' => $child['icon']['icon'],
+                                        'size' => $child['icon']['size'],
+                                        'classList' => $child['icon']['classList'],
                                     ])
                                     @endicon
                                 @endif
