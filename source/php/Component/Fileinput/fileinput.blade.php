@@ -1,7 +1,7 @@
 <!-- fileinput.blade.php -->
 
 <div class="{{ $class }}" {!! $attribute !!}>
-
+    <label class="{{$baseClass}}__label" for="fs_{{$id}}">{{$label}}{!! $required ? '<span class="u-color__text--danger">*</span>' : '' !!}</label>
     @if(!empty($description))
         @typography([
             'element' => 'div',
@@ -17,25 +17,19 @@
         id="fs_{{ $id }}"
         accept="{{ $accept }}"
         {{ $multiple ? 'multiple' : '' }}
-        @if($required)
-            required
-            data-required="1"
-            aria-required="true"
-        @endif
     />
 
-    <label for="fs_{{ $id }}" class="c-button c-button__filled c-button__filled--primary c-button--md {{ $baseClass }}__label">
+    <label for="fs_{{ $id }}" class="{{ $baseClass }}__input-label">
         
         @icon([
             'icon' => 'file_upload',
             'size' => 'md',
-            'color' => 'white'
         ])
         @endicon
-        @if(!empty($label))
+        @if(!empty($label) || !empty($buttonLabel))
             <span>
                 {{ $beforeLabel }}               
-                    {{ $label }}               
+                    {{ !empty($buttonLabel) ? $buttonLabel : $label }}               
                 {{ $afterLabel }}
             </span>
         @endif

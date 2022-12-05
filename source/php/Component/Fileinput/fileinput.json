@@ -9,6 +9,7 @@
         "beforeLabel": "",
         "afterLabel": "",
         "label": "",
+        "buttonLabel": "",
         "icon": "file_upload",
         "required": false,
         "filesMax": false
