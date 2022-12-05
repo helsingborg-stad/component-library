@@ -30,7 +30,7 @@
                     ])
                      @if(isset($item['icon']) && !empty($item['icon']['icon']))
                         @icon([
-                            'icon' => 'all_out',
+                            'icon' => $item['icon']['icon'],
                             'size' => $item['icon']['size'],
                             'classList' => $item['icon']['classList'],
                         ])
@@ -53,7 +53,7 @@
                                 ])
                                 @if(isset($item['icon']) && !empty($item['icon']['icon']))
                                     @icon([
-                                        'icon' => 'all_out',
+                                        'icon' => $item['icon']['icon'],
                                         'size' => $item['icon']['size'],
                                         'classList' => $item['icon']['classList'],
                                     ])
