@@ -12,7 +12,7 @@
                         'text' => $item['label'],
                         'style' => $parentStyle,
                         'color' => 'primary',
-                        'icon' => 'chevron_right',
+                        'icon' => $item['icon']['icon'] !== "" ? $item['icon']['icon'] : 'chevron_right',
                         'href' => $item['href'],
                         'classList' => [
                             $baseClass . '__link',
@@ -28,14 +28,14 @@
                             $baseClass . '__link--title'
                         ]
                     ])
-                     {{-- @if(isset($item['icon']) && !empty($item['icon']['icon'])) --}}
+                     @if(isset($item['icon']) && !empty($item['icon']['icon']))
                         @icon([
-                            'icon' => 'all_out',
+                            'icon' => $item['icon']['icon'],
                             'size' => $item['icon']['size'],
                             'classList' => $item['icon']['classList'],
                         ])
                         @endicon
-                    {{-- @endif --}}
+                    @endif
                         {{ $item['label'] }}
                     @endlink
                 @endif
