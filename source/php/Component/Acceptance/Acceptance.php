@@ -27,7 +27,7 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
         }
 
         if (!empty($src) && !is_null($src)) {
-            $this->data['attributeList']['data-src'] = json_encode($src);
+            $this->data['attributeList']['data-src'] = json_encode($src, JSON_UNESCAPED_SLASHES);
 
             if (is_string($src)) {
                 $src = array($src);
