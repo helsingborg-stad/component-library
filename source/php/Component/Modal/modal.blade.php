@@ -7,11 +7,22 @@
                 "id" => "modal__label__".$id,
                 "variant" => "h2",
                 "element" => "h2",
-                'attributeList' => ['tabindex' => '1']
+                'attributeList' => ['tabindex' => '1'],
+                'classList' => [$baseClass . '__heading']
             ])
                 {{ $heading }}
             @endtypography
         @endif
+            @button([
+                'text' => '',
+                'icon' => 'close',
+                'color' => 'default',
+                'style' => 'basic',
+                'attributeList' => ['data-close' => ''],
+                'classList' => [$baseClass . '__close'],
+                'size' => 'lg',
+            ])
+            @endbutton
     </div>
 
     <section class="{{ $baseClass }}__content" tabindex="2">
@@ -64,15 +75,4 @@
         ])
         @endsteppers
     @endif
-
-    @button([
-        'text' => '',
-        'icon' => 'close',
-        'color' => 'default',
-        'style' => 'basic',
-        'attributeList' => ['data-close' => ''],
-        'classList' => [$baseClass . '__close'],
-        'size' => 'lg',
-    ])
-    @endbutton
 </dialog>
