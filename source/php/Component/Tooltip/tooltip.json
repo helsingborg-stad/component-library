@@ -7,13 +7,19 @@
         "title": "",
         "slot": "",
         "beforeContent": "",
-        "afterContent": ""
+        "afterContent": "",
+        "icon": "info",
+        "label": false,
+        "backgroundColor": "#000000",
+        "color": "#ffffff",
+        "width": "200px"
     },
     "view": "tooltip.blade.php",
     "dependency": {
         "sass": {
             "components": [
-                "tooltip"
+                "tooltip",
+                "icon"
             ]
         }
     }
