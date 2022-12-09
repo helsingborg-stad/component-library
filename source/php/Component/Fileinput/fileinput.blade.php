@@ -19,21 +19,15 @@
         {{ $multiple ? 'multiple' : '' }}
     />
 
-    <label for="fs_{{ $id }}" class="{{ $baseClass }}__button">
-        
-        @icon([
-            'icon' => 'file_upload',
-            'size' => 'md',
-        ])
-        @endicon
-        @if(!empty($label) || !empty($buttonLabel))
-            <span>
-                {{ $beforeLabel }}               
-                    {{ !empty($buttonLabel) ? $buttonLabel : $label }}               
-                {{ $afterLabel }}
-            </span>
-        @endif
-    </label>
+    @button([
+        'componentElement' => 'label',
+        'style' => 'basic',
+        'text' => !empty($buttonLabel) ? $buttonLabel : $label,
+        'icon' => 'file_upload',
+        'classList' => [$baseClass . '__button'],
+        'attributeList' => ['for' => 'fs_' . $id],
+    ])
+    @endbutton
 
       <ul class="{{ $baseClass }}__files js-form-file-input u-display--none">
             <template>
