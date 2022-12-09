@@ -1,28 +1,19 @@
-{{-- <{{ $componentElement }} 
-    @if($isLink)
-        href="{{ $href }}" 
-    @endif
-    class="{{ $class }}"
-    {!! $attribute !!}
-    >
-    {{$beforeContent}} {{ $slot }} {{$afterContent}}
-</{{ $componentElement }}> --}}
-<div style="float:left; width:700px; height:500px;"></div>
-
 <div class="{{$class}}" {!! $attribute !!}>
-    @if($label) {
-        {{$label}}
-    }
-    @endif
     @if($icon)
         @icon([
-            'icon' => 'arrow_circle_up',
+            'icon' => 'info',
             'size' => 'md',
         ])
         @endicon
     @endif
+    @if($label) {
+        {{$label}}
+    }
+    @endif
     <div class="{{$baseClass}}__container" style="background-color: {{$backgroundColor}}; color:{{$backgroundColor}};">
-        <div class="{{$baseClass}}__content" style="color: {{$color}}">TJA! TJA! TJA! TJA!TJA! TJA!TJA! TJA!TJA!TJA!TJA!TJA!TJA!</div>
+        <div class="{{$baseClass}}__content" style="color: {{$color}}">
+            {!! $slot !!}
+        </div>
         <span class="{{$baseClass}}__arrow"></span>
     </div>
 
