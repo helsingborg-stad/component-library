@@ -8,23 +8,14 @@ class Tooltip extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
-        //Remove html
-        $title = strip_tags($title); 
-        
-        //Is link? 
-        $this->data['isLink'] = $this->data['componentElement'] === 'a';
-
         //Add classes
         $this->data['classList'][] = $this->getBaseClass() . '--'.$placement; 
-        $this->data['attributeList']['original'] = $this->getBaseClass() . '--' . $placement; 
 
-        //Adds attributes
-        $this->data['attributeList']['js-bind-hover'] = 'tooltip'; 
-        $this->data['attributeList']['data-title'] = $title; 
+        $this->data['attributeList']['original'] = $this->getBaseClass() . '--' . $placement; 
         $this->data['attributeList']['role'] = 'tooltip'; 
         
-        if($title) {
-            $this->data['attributeList']['aria-label'] = 'Tooltip: ' . $title; 
+        if($label) {
+            $this->data['attributeList']['aria-label'] = 'Tooltip: ' . $label; 
         }
     }
 }
