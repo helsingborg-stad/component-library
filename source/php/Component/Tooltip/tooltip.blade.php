@@ -7,9 +7,9 @@
     >
     {{$beforeContent}} {{ $slot }} {{$afterContent}}
 </{{ $componentElement }}> --}}
-<div style="float:left; width:500px; height:500px;"></div>
+<div style="float:left; width:700px; height:500px;"></div>
 
-<div class="{{$class}}">
+<div class="{{$class}}" {!! $attribute !!}>
     @if($label) {
         {{$label}}
     }
@@ -21,7 +21,7 @@
         ])
         @endicon
     @endif
-    <div class="{{$baseClass}}__container" style="background-color: {{$backgroundColor}}; color:{{$backgroundColor}};"> {{-- width:{{$width}}; max-width:400px; --}}
+    <div class="{{$baseClass}}__container" style="background-color: {{$backgroundColor}}; color:{{$backgroundColor}};">
         <div class="{{$baseClass}}__content" style="color: {{$color}}">TJA! TJA! TJA! TJA!TJA! TJA!TJA! TJA!TJA!TJA!TJA!TJA!TJA!</div>
         <span class="{{$baseClass}}__arrow"></span>
     </div>

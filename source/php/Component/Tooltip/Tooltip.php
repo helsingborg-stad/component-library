@@ -15,7 +15,8 @@ class Tooltip extends \ComponentLibrary\Component\BaseController
         $this->data['isLink'] = $this->data['componentElement'] === 'a';
 
         //Add classes
-        $this->data['classList'][] = $this->getBaseClass() . '__'.$placement; 
+        $this->data['classList'][] = $this->getBaseClass() . '--'.$placement; 
+        $this->data['attributeList']['original'] = $this->getBaseClass() . '--' . $placement; 
 
         //Adds attributes
         $this->data['attributeList']['js-bind-hover'] = 'tooltip'; 
