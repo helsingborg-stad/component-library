@@ -6,6 +6,7 @@
     @if($icon)
         @icon([
             'icon' => $icon,
+            'size' => $iconSize
         ])
         @endicon
     @endif
