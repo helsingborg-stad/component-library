@@ -6,13 +6,12 @@
     @if($icon)
         @icon([
             'icon' => $icon,
-            'size' => $iconSize,
         ])
         @endicon
     @endif
     </div>
-    <div class="{{$baseClass}}__container" aria-hidden="true" style="background-color: {{$backgroundColor}}; color:{{$backgroundColor}};">
-        <div class="{{$baseClass}}__content" style="color: {{$color}};">
+    <div class="{{$baseClass}}__container" aria-hidden="true">
+        <div class="{{$baseClass}}__content">
             {!! $slot !!}
         </div>
         <span class="{{$baseClass}}__arrow"></span>

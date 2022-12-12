@@ -3,18 +3,12 @@
     "default": {
         "placement": "bottom",
         "icon": "info",
-        "iconSize": "md",
-        "label": false,
-        "backgroundColor": "#000000",
-        "color": "#ffffff"
+        "label": false
     },
     "description": {
         "placement": "Selects the placement of the tooltip",
         "icon": "Name of the icon, alternatively false",
-        "iconSize": "Size of the icon (xs, sm, md, lg, xl, xxl)",
-        "label": "Label of the tooltip, alternatively false",
-        "backgroundColor": "Hex value of the background color for the tooltip",
-        "color": "Hex value of the text color for the tooltip"
+        "label": "Label of the tooltip, alternatively false"
     },
     "view": "tooltip.blade.php",
     "dependency": {
