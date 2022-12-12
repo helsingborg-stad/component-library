@@ -1,4 +1,5 @@
 <div class="{{$class}}" {!! $attribute !!}>
+    <div class="{{$baseClass}}__label" tabindex="1">
     @if($label)
         {{$label}}
     @endif
@@ -9,12 +10,12 @@
         ])
         @endicon
     @endif
-    <div class="{{$baseClass}}__container" style="background-color: {{$backgroundColor}}; color:{{$backgroundColor}};">
+    </div>
+    <div class="{{$baseClass}}__container" aria-hidden="true" style="background-color: {{$backgroundColor}}; color:{{$backgroundColor}};">
         <div class="{{$baseClass}}__content" style="color: {{$color}};">
             {!! $slot !!}
         </div>
         <span class="{{$baseClass}}__arrow"></span>
     </div>
-
 </div>
 

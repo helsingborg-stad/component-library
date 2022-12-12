@@ -9,9 +9,10 @@ class Tooltip extends \ComponentLibrary\Component\BaseController
         extract($this->data);
 
         //Add classes
-        $this->data['classList'][] = $this->getBaseClass() . '--'.$placement; 
+        $this->data['classList'][] = $this->getBaseClass() . '--'. $placement; 
+        $this->data['classList'][] = $this->getBaseClass() . '--hidden'; 
 
-        $this->data['attributeList']['original'] = $this->getBaseClass() . '--' . $placement; 
+        $this->data['attributeList']['original-placement'] = $this->getBaseClass() . '--' . $placement; 
         $this->data['attributeList']['role'] = 'tooltip'; 
         
         if($label) {
