@@ -1,10 +1,21 @@
 {
     "slug": "group",
     "default": {
-        "direction": "horizontal"
+        "direction": "horizontal",
+        "jusitifyContent": "",
+        "alignItems": "",
+        "alignContent": "",
+        "flex": "",
+        "wrap": ""
+
     },
     "description": {
-        "direction": "What direction to group (horizontal or vertical)"
+        "direction": "What direction to group (horizontal or vertical)",
+        "jusitifyContent": "Justify the content to either position (ex. left, center, right)",
+        "alignItems": "Alignment of the content items (ex. center)",
+        "alignContent": "Alignment of the content (ex. end)",
+        "flex": "Type of flex (ex. inline-flex)",
+        "wrap": "Wrap the content (ex. nowrap, wrap, wrap-reverse"
     },
     "view": "group.blade.php",
     "dependency": {
