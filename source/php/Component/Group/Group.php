@@ -18,5 +18,27 @@ class Group extends \ComponentLibrary\Component\BaseController
         } else {
             $this->data['classList'][] = $this->getBaseClass() . "--horizontal";
         }
+
+        if(!empty($justifyContent)) {
+            $this->data['classList'][] = $this->getBaseClass() . "--justify-content-" . $justifyContent;      
+        }
+        
+        if(!empty($alignItems)) {
+            $this->data['classList'][] = $this->getBaseClass() . "--align-items-" . $alignItems;      
+        }
+
+        if(!empty($alignContent)) {
+            $this->data['classList'][] = $this->getBaseClass() . "--align-content-" . $alignContent;      
+        }
+
+        if(!empty($flex)) {
+            $this->data['classList'][] = $this->getBaseClass() . "--flex-" . $flex;      
+        }
+
+        if(!empty($wrap)) {
+            $this->data['classList'][] = $this->getBaseClass() . "--flex-wrap-" . $wrap;      
+        }
+
     }
+
 }
