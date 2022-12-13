@@ -19,23 +19,23 @@ class Group extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . "--horizontal";
         }
 
-        if(isset($justify)) {
-            $this->data['classList'][] = $this->getBaseClass() . "--justify-content-" . $justify;      
+        if(!empty($justifyContent)) {
+            $this->data['classList'][] = $this->getBaseClass() . "--justify-content-" . $justifyContent;      
         }
         
-        if(isset($alignItems)) {
+        if(!empty($alignItems)) {
             $this->data['classList'][] = $this->getBaseClass() . "--align-items-" . $alignItems;      
         }
 
-        if(isset($alignContent)) {
+        if(!empty($alignContent)) {
             $this->data['classList'][] = $this->getBaseClass() . "--align-content-" . $alignContent;      
         }
 
-        if(isset($flex)) {
+        if(!empty($flex)) {
             $this->data['classList'][] = $this->getBaseClass() . "--flex-" . $flex;      
         }
 
-        if(isset($wrap)) {
+        if(!empty($wrap)) {
             $this->data['classList'][] = $this->getBaseClass() . "--flex-wrap-" . $wrap;      
         }
 
