@@ -31,8 +31,8 @@ class Group extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . "--align-content-" . $alignContent;      
         }
 
-        if(!empty($flex)) {
-            $this->data['classList'][] = $this->getBaseClass() . "--flex-" . $flex;      
+        if(!empty($display)) {
+            $this->data['classList'][] = $this->getBaseClass() . "--display-" . $display;      
         }
 
         if(!empty($wrap)) {

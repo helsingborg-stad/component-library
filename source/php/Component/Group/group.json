@@ -5,7 +5,7 @@
         "jusitifyContent": "",
         "alignItems": "",
         "alignContent": "",
-        "flex": "",
+        "display": "",
         "wrap": "",
         "flexGrow": false,
         "flexShrink": true
