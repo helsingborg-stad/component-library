@@ -1,0 +1,17 @@
+{
+    "slug": "progress",
+    "default": {
+        
+    },
+    "description": {
+       
+    },
+    "view": "progress.blade.php",
+    "dependency": {
+        "sass": {
+            "components": [
+                "progress"
+            ]
+        }
+    }
+}
