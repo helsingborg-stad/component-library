@@ -4,6 +4,7 @@
         "heading": "",
         "subHeading": "",
         "meta": "",
+        "metaFirst": false,
         "content": "",
         "buttons": [],
         "padded": false,

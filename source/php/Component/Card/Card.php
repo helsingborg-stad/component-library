@@ -29,6 +29,10 @@ class Card extends \ComponentLibrary\Component\BaseController
                 $this->data['classList'][] = $this->getBaseClass() . '--has-footer';
         }
 
+        if($metaFirst) {
+                $this->data['classList'][] = $this->getBaseClass() . '--meta-first';
+        }
+
         if ($collapsible && $content) {
                 $this->data['collapsible'] = $this->getBaseClass() . '--collapse';
         }
