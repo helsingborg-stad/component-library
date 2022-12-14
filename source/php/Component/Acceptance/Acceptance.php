@@ -12,8 +12,9 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
-        $this->data['isVideo'] = false;
         $this->data['requiresAccept'] = true;
+        
+        $this->data['coverArt'] = false;
 
         $this->data['classList'][] = 'js-suppressed-content';
         $this->data['classList'][] = 'u-level-1';
@@ -23,10 +24,10 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
         }
 
         if (!empty($height)) {
-            $this->data['attributeList']['style'] = "height:" . $height . "px;";
+            $this->data['attributeList']['style'][] = "height:{$height}px";
         }
-
-        if (!empty($src) && !is_null($src)) {
+        
+        if (!empty($src)) {
             $this->data['attributeList']['data-src'] = json_encode($src, JSON_UNESCAPED_SLASHES);
 
             if (is_string($src)) {
@@ -36,7 +37,7 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
             $this->data = $this->setSupplierDataAttributes($src, $this->data);
         }
 
-        if (isset($this->data['supplierSystemType'])) {
+        if (!empty($this->data['supplierSystemType'])) {
             $this->data['classList'][] = $this->getBaseClass() . "--" . $this->data['supplierSystemType'];
 
             if (in_array($this->data['supplierSystemType'], $this->jsBehaviourSystemTypes)) {
@@ -44,6 +45,22 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
             } else {
                 $this->data['classList'][] = 'js-suppressed-content--none';
             }
+        }
+        
+        
+        /* If supplierSystemType or modifier is set and is video, fetch a cover image */
+        if (
+            !empty($this->data['supplierSystemType']) 
+            || !empty($this->data['modifier'])
+            && !empty($src[0])
+            && in_array('video', [$this->data['supplierSystemType'], $this->data['modifier']], true)
+        ) {
+        
+            $videoService = new \ComponentLibrary\Helper\VideoService($src[0]);
+            $coverImage = $videoService->getCoverUrl();
+                        
+            $this->data['attributeList']['style'][] = "background-image:url($coverImage);background-size:cover";
+            
         }
 
         if (!empty($this->data['labels'])) {
@@ -70,9 +87,30 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
                 $this->data['labels'] = $json->unknownLabels;
             }
         }
+        
+        if (is_iterable($this->data['attributeList']['style'])) {
+            $this->data['attributeList']['style'] = implode(';', $this->data['attributeList']['style']);
+        }
     }
+    
 
-
+    /**
+     * Detect video service from url.
+     *
+     * @param string        $url The embed url
+     * @return string|bool       Video service name, or false if not detected.
+     */
+    private function detectVideoService($url)
+    {
+        if (str_contains($url, 'vimeo')) {
+            return 'vimeo';
+        }
+        if (str_contains($url, 'youtu')) { //Matches youtu.be and full domain
+            return 'youtube';
+        }
+        return false;
+    }
+    
     /**
      * Get suppliers
      * Creates a list of suppliers with
