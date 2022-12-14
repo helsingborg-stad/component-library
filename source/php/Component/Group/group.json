@@ -6,7 +6,9 @@
         "alignItems": "",
         "alignContent": "",
         "flex": "",
-        "wrap": ""
+        "wrap": "",
+        "flexGrow": false,
+        "flexShrink": true
 
     },
     "description": {
@@ -15,7 +17,9 @@
         "alignItems": "Alignment of the content items (ex. center)",
         "alignContent": "Alignment of the content (ex. end)",
         "flex": "Type of flex (ex. inline-flex)",
-        "wrap": "Wrap the content (ex. nowrap, wrap, wrap-reverse"
+        "wrap": "Wrap the content (ex. nowrap, wrap, wrap-reverse)",
+        "flexGrow": "Allow to grow the content within the group",
+        "flexShrink": "Allow to shrink the content within the group"
     },
     "view": "group.blade.php",
     "dependency": {

@@ -39,6 +39,14 @@ class Group extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . "--flex-wrap-" . $wrap;      
         }
 
+        if($flexGrow) {
+            $this->data['classList'][] = $this->getBaseClass() . "--flex-grow";
+        }
+
+        if(!$flexShrink) {
+            $this->data['classList'][] = $this->getBaseClass() . "--flex-shrink-none";
+        }
+
     }
 
 }
