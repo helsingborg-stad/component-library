@@ -11,6 +11,10 @@ class ProgressBar extends \ComponentLibrary\Component\BaseController
         extract($this->data);
 
         $this->data['progressionValue'] = 'width:' . $value . '%;';
+
+        if($isCancelled) {
+            $this->data['classList'][] = $this->getBaseClass() . '--cancelled';
+        }
      
     }
 }
