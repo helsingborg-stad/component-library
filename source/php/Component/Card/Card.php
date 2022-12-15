@@ -17,6 +17,8 @@ class Card extends \ComponentLibrary\Component\BaseController
 
         $this->data['classList'][] = $this->getBaseClass() . '--' . $color;
 
+        $this->data['afterContentSlotHasData'] = $this->slotHasData('afterContent');
+
         if (isset($image['padded']) && $image['padded']) {
                 $this->data['paddedImage'] = $this->getBaseClass() . '__image-background--padded';
         }
