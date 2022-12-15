@@ -9,7 +9,8 @@ class Progress extends \ComponentLibrary\Component\BaseController
 
         //Extract array for easy access (fetch only)
         extract($this->data);
-     
         
+        $this->data['progressionValue'] = 'u-width--' . $value;
+     
     }
 }
