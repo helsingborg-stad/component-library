@@ -1,19 +1,22 @@
 {
     "slug": "tooltip",
     "default": {
-        "componentElement": "a",
-        "href": "#",
         "placement": "bottom",
-        "title": "",
-        "slot": "",
-        "beforeContent": "",
-        "afterContent": ""
+        "icon": "info",
+        "iconSize": "md",
+        "label": false
+    },
+    "description": {
+        "placement": "Selects the placement of the tooltip",
+        "icon": "Name of the icon, alternatively false",
+        "label": "Label of the tooltip, alternatively false"
     },
     "view": "tooltip.blade.php",
     "dependency": {
         "sass": {
             "components": [
-                "tooltip"
+                "tooltip",
+                "icon"
             ]
         }
     }

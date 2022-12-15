@@ -1,9 +1,21 @@
-<{{ $componentElement }} 
-    @if($isLink)
-        href="{{ $href }}" 
+<div class="{{$class}}" {!! $attribute !!}>
+    <div class="{{$baseClass}}__label" tabindex="1" aria-describedby="{{$id}}">
+    @if($label)
+        {{$label}}
     @endif
-    class="{{ $class }}"
-    {!! $attribute !!}
-    >
-    {{$beforeContent}} {{ $slot }} {{$afterContent}}
-</{{ $componentElement }}>
+    @if($icon)
+        @icon([
+            'icon' => $icon,
+            'size' => $iconSize
+        ])
+        @endicon
+    @endif
+    </div>
+    <div class="{{$baseClass}}__container" aria-hidden="true" role="tooltip" id="{{$id}}">
+        <div class="{{$baseClass}}__content">
+            {!! $slot !!}
+        </div>
+        <span class="{{$baseClass}}__arrow"></span>
+    </div>
+</div>
+
