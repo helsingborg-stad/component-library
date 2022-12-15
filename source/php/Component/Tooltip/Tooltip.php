@@ -13,10 +13,8 @@ class Tooltip extends \ComponentLibrary\Component\BaseController
         $this->data['classList'][] = $this->getBaseClass() . '--hidden'; 
 
         $this->data['attributeList']['original-placement'] = $this->getBaseClass() . '--' . $placement; 
-        $this->data['attributeList']['role'] = 'tooltip'; 
+
+        $this->data['id'] = $this->getUid();
         
-        if($label) {
-            $this->data['attributeList']['aria-label'] = 'Tooltip: ' . $label; 
-        }
     }
 }
