@@ -1,7 +1,8 @@
 {
     "slug": "progress",
     "default": {
-        
+        "isCancelled": false,
+        "value": 0
     },
     "description": {
        
