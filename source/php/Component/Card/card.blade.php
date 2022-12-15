@@ -6,3 +6,4 @@
         {!! $afterContent !!}
     @endif
 </{{ $componentElement }}>
+
