@@ -1,5 +1,5 @@
 <div class="{{$class}}" {!! $attribute !!}>
-    <div class="{{$baseClass}}__label" tabindex="1" aria-describedby="{{$id}}">
+    <div class="{{$baseClass}}__wrapper" tabindex="1" aria-describedby="{{$id}}">
     @if($label)
         {{$label}}
     @endif
@@ -10,12 +10,12 @@
         ])
         @endicon
     @endif
-    </div>
-    <div class="{{$baseClass}}__container" aria-hidden="true" role="tooltip" id="{{$id}}">
-        <div class="{{$baseClass}}__content">
-            {!! $slot !!}
+            <div class="{{$baseClass}}__container" aria-hidden="true" role="tooltip" id="{{$id}}">
+            <div class="{{$baseClass}}__content">
+                {!! $slot !!}
+            </div>
+            <span class="{{$baseClass}}__arrow"></span>
         </div>
-        <span class="{{$baseClass}}__arrow"></span>
     </div>
 </div>
 
