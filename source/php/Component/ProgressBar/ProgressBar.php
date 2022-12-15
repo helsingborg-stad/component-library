@@ -10,7 +10,7 @@ class ProgressBar extends \ComponentLibrary\Component\BaseController
         //Extract array for easy access (fetch only)
         extract($this->data);
 
-        $this->data['progressionValue'] = $value;
+        $this->data['progressionValue'] = 'width:' . $value . '%;';
      
     }
 }
