@@ -1,5 +1,5 @@
 {
-    "slug": "progress",
+    "slug": "progressbar",
     "default": {
         "isCancelled": false,
         "value": 0
@@ -7,11 +7,10 @@
     "description": {
        
     },
-    "view": "progress.blade.php",
+    "view": "progressBar.blade.php",
     "dependency": {
         "sass": {
             "components": [
-                "progress"
             ]
         }
     }
