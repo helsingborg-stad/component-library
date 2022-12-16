@@ -24,11 +24,18 @@
     @endif
 
     @if($action) 
+        
         <div class="c-collection__secondary">
-            @link(['href' => $action['link']])
-                @icon(['icon' => $action['icon'], 'size' => 'md'])
-                @endicon
-            @endlink
+            @button([
+                'href'  => $action['link'],
+                'icon'  => $action['icon'],
+                'style' => $action['style'] ? $action['style'] : 'basic',
+                'text'  => $action['text'],
+                'color' => $action['color'] ? $action['color'] : 'default',
+                'target' => $action['target'] ? $action['target'] : '_top',
+            ])
+            @endbutton
+
         </div>
     @endif
 </{{$componentElement}}>

@@ -13,14 +13,16 @@
         "elementType": "The type of list item. Default: li",
         "isCurrent": "Mark this as current",
         "isAligned": "Do not flow around elements placed either side of content.",
-        "subItem": "Slot for providing subitems (automatically wrapped in new collection, with subcollection flag. )"
+        "subItem": "Slot for providing subitems (automatically wrapped in new collection, with subcollection flag. )",
+        "action": "array containing the available button parameters"
     },
     "view": "collection__item.blade.php",
     "dependency": {
         "sass": {
             "components": [
                 "collection",
-                "collection__item"
+                "collection__item",
+                "button"
             ]
         }
     }
