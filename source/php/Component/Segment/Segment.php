@@ -20,10 +20,9 @@ class Segment extends \ComponentLibrary\Component\BaseController
 
         // Create paragraph
         if($content) {
-            $this->data['content'] = preg_split("/\r\n|\n|\r/", $content);
             if (!is_array($this->data['content'])) {
                 $this->data['content'] = [$this->data['content']];
-        }
+            }
         }
 
         // Remove padding
