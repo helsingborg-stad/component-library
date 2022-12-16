@@ -80,24 +80,6 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
         }
     }
     
-
-    /**
-     * Detect video service from url.
-     *
-     * @param string        $url The embed url
-     * @return string|bool       Video service name, or false if not detected.
-     */
-    private function detectVideoService($url)
-    {
-        if (str_contains($url, 'vimeo')) {
-            return 'vimeo';
-        }
-        if (str_contains($url, 'youtu')) { //Matches youtu.be and full domain
-            return 'youtube';
-        }
-        return false;
-    }
-    
     /**
      * Get suppliers
      * Creates a list of suppliers with
