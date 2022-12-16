@@ -19,9 +19,11 @@ class Segment extends \ComponentLibrary\Component\BaseController
         $this->data['imageClassList'] = [];
 
         // Create paragraph
-        $this->data['content'] = preg_split("/\r\n|\n|\r/", $content);
-        if (!is_array($this->data['content'])) {
-            $this->data['content'] = [$this->data['content']];
+        if($content) {
+            $this->data['content'] = preg_split("/\r\n|\n|\r/", $content);
+            if (!is_array($this->data['content'])) {
+                $this->data['content'] = [$this->data['content']];
+        }
         }
 
         // Remove padding
@@ -98,6 +100,5 @@ class Segment extends \ComponentLibrary\Component\BaseController
                 $this->data['classList'][] = 'u-color__bg--' . $background;
             }
         }
-
     }
 }
