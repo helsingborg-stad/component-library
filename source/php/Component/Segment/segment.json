@@ -2,8 +2,8 @@
     "slug": "segment",
     "default": {
         "layout": "full-width",
-        "title": "",
-        "content": "",
+        "title": false,
+        "content": false,
         "textSize": "default",
         "image": false,
         "imageFocus": {"top": 30, "left": 50},
