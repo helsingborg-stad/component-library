@@ -9,22 +9,16 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
 
     public function init()
     {
-        //Extract array for eazy access (fetch only)
+        //Extract array for easy access (fetch only)
         extract($this->data);
 
         $this->data['requiresAccept'] = true;
-        
-        $this->data['coverArt'] = false;
 
         $this->data['classList'][] = 'js-suppressed-content';
         $this->data['classList'][] = 'u-level-1';
 
         if (isset($icon)) {
             $this->data['icon'] = $icon;
-        }
-
-        if (!empty($height)) {
-            $this->data['attributeList']['style'][] = "height:{$height}px";
         }
         
         if (!empty($src)) {
@@ -47,22 +41,15 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
             }
         }
         
-        
-        /* If supplierSystemType or modifier is set and is video, fetch a cover image */
-        if (
-            !empty($this->data['supplierSystemType']) 
-            || !empty($this->data['modifier'])
-            && !empty($src[0])
-            && in_array('video', [$this->data['supplierSystemType'], $this->data['modifier']], true)
-        ) {
-        
-            $videoService = new \ComponentLibrary\Helper\VideoService($src[0]);
-            $coverImage = $videoService->getCoverUrl();
-                        
-            $this->data['attributeList']['style'][] = "background-image:url($coverImage);background-size:cover";
-            
+        if ($cover)
+        {
+            $this->data['attributeList']['style'][] = "background-image:url(\"$cover\");background-size:cover";
         }
 
+        if (!empty($height)) {
+            $this->data['attributeList']['style'][] = "height:{$height}px";
+        }
+        
         if (!empty($this->data['labels'])) {
             $json = json_decode($this->data['labels']);
 

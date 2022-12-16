@@ -8,7 +8,8 @@
         "host": false,
         "name": false,
     	"options": false,
-        "icon": "info"
+        "icon": "info",
+        "cover": false
     },
     "description": {
        "labels" : "JSON string of an object containing button, title and info labels",
@@ -16,7 +17,7 @@
        "src" : "array of urls to hide ex. https://www.youtube.com",
        "policy" : "URL to third party website policy",
        "host" : "host ex. youtube.com",
-       "name" : "name of the host"  
+       "name" : "name of the host"
     },
     "view": "acceptance.blade.php",
     "dependency": {

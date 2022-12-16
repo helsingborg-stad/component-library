@@ -8,7 +8,8 @@
 		"frameborder": "0",
 		"labels": "",
 		"modifier": "",
-		"title": "External content"
+		"title": "External content",
+		"poster": false
 	},
 	"description": {
 		"src": "Source URL",
