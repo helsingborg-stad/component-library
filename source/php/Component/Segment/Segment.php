@@ -19,11 +19,7 @@ class Segment extends \ComponentLibrary\Component\BaseController
         $this->data['imageClassList'] = [];
 
         // Create paragraph
-        if($content) {
-            if (!is_array($this->data['content'])) {
-                $this->data['content'] = [$this->data['content']];
-            }
-        }
+        $this->data['content'] = $content;
 
         // Remove padding
         if (!$paddingTop) {

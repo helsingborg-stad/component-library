@@ -20,14 +20,12 @@
                 @endif
 
                 @if($content)
-                    @foreach($content as $paragraph)
-                        @typography([
-                            "variant" => "p",
-                            "classList" => [$baseClass . '__text'],
-                        ])
-                            {!! $paragraph !!}
-                        @endtypography
-                    @endforeach
+                    @typography([
+                        "variant" => "p",
+                        "classList" => [$baseClass . '__text'],
+                    ])
+                        {!! $content !!}
+                    @endtypography
                 @endif
 
                 @if($buttons)
