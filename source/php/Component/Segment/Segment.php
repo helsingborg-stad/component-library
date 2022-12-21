@@ -4,10 +4,8 @@ namespace ComponentLibrary\Component\Segment;
 
 class Segment extends \ComponentLibrary\Component\BaseController
 {
-
     public function init()
     {
-
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
@@ -18,18 +16,27 @@ class Segment extends \ComponentLibrary\Component\BaseController
 
         $this->data['imageClassList'] = [];
 
-        // Create paragraph
-        $this->data['content'] = $content;
+        if ($this->data['content'] == strip_tags($this->data['content'], [])) {
+            // Create paragraphs
+            $paragraphs = preg_split("/\r\n|\n|\r/", $this->data['content']);
+            foreach ($paragraphs as &$part) {
+                if(empty($part)) {
+                    continue;
+                }
+                $part = "<p>{$part}</p>";
+            }
+            $this->data['content'] = implode('', $paragraphs);
+        }
 
         // Remove padding
         if (!$paddingTop) {
             $this->data['classList'][] = 'u-padding__top--0';
-            $this->data['imageClassList'][] = 'u-margin__top--0'; 
+            $this->data['imageClassList'][] = 'u-margin__top--0';
         }
 
         if (!$paddingBottom) {
             $this->data['classList'][] = 'u-padding__bottom--0';
-            $this->data['imageClassList'][] = 'u-margin__bottom--0'; 
+            $this->data['imageClassList'][] = 'u-margin__bottom--0';
         }
 
         // Set text color
@@ -68,30 +75,29 @@ class Segment extends \ComponentLibrary\Component\BaseController
         }
 
         //Stringify image classlist
-        $this->data['imageClass'] = implode("" , $this->data['imageClassList']);
+        $this->data['imageClass'] = implode("", $this->data['imageClassList']);
 
         //Create image style tag
         $this->data['imageStyle'] = [];
 
         //Add image to image styles
         if ($image) {
-            $this->data['imageStyle']['background-image'] = "url('" . $image . "')"; 
+            $this->data['imageStyle']['background-image'] = "url('" . $image . "')";
         }
 
         //Add background position to image styles
-        if(array_filter($imageFocus)) {
-            $this->data['imageStyle']['background-position'] = $imageFocus['left'] . "% " . $imageFocus['top'] . "%"; 
+        if (array_filter($imageFocus)) {
+            $this->data['imageStyle']['background-position'] = $imageFocus['left'] . "% " . $imageFocus['top'] . "%";
         }
 
         //Stringify image styles
-        $this->data['imageStyleString'] = self::buildInlineStyle($this->data['imageStyle']); 
+        $this->data['imageStyleString'] = self::buildInlineStyle($this->data['imageStyle']);
 
         // Handle background data (wrapper)
         if ($background) {
             if (preg_match('^#(?:[0-9a-fA-F]{3}){1,2}$^', $background)) {
                 $this->data['attributeList']['style'] = 'background-color: ' . $background . ';';
-            }
-            else {
+            } else {
                 $this->data['classList'][] = 'u-color__bg--' . $background;
             }
         }
