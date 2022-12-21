@@ -19,8 +19,9 @@
                 @endbutton
 
                 @button([
-                    'icon'          => 'play_arrow',
-                    'color'         => 'primary',
+                    'icon'          => 'play_circle',
+                    'style'         => 'basic',
+                    'size'          => 'xxxl',
                     'attributeList' => ['js-suppressed-content-accept' => ''],
                     'classList'     => [$baseClass . '__modal-icon-play'],
                 ])
