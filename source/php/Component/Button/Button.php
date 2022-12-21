@@ -25,6 +25,12 @@ class Button extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['type'] = $type;
         }
 
+        if($componentElement == 'label') {
+            $this->data['isLabel'] = true;
+        } else {
+            $this->data['isLabel'] = false;
+        }
+
         //Make linked buttons links
         if ($href) {
             $this->data['componentElement'] = "a";

@@ -1,5 +1,5 @@
 <{{$componentElement}} class="{{ $class }}" target="{{ $target }}" {!! $attribute !!}>   
-    <{{$labelElement}} class="{{$baseClass}}__label">
+    @if(!$isLabel) <{{$labelElement}} class="{{$baseClass}}__label"> @endif
         
         @if($icon)
             <span class="{{$baseClass}}__label-icon {{ $classListIcon }}">
@@ -14,5 +14,5 @@
             </span>
         @endif
 
-    </{{$labelElement}}>
+   @if(!$isLabel) </{{$labelElement}}> @endif
 </{{$componentElement}}>
