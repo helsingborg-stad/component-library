@@ -22,6 +22,7 @@
                 @if($content)
                     @typography([
                         "variant" => "p",
+                        "element" => "div",
                         "classList" => [$baseClass . '__text'],
                     ])
                         {!! $content !!}
