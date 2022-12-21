@@ -4,11 +4,10 @@
         <div class="{{$baseClass}}__image {{ $imageClass }}" style="{{ $imageStyleString }}"></div>
     @endif
 
+    @if($title || $content)
     <div class="{{$baseClass}}__content o-container o-container--content o-container--keep-spacing">
     
-        @if($title||$content)
             <div class="{{$baseClass}}__padder">
-                
                 @if($title)
                     @typography([
                         "element" => "h2",
@@ -21,9 +20,13 @@
                 @endif
 
                 @if($content)
-                    <div class="{{$baseClass }}__text">
-                    {!! $content !!}
-                    </div>
+                    @typography([
+                        "variant" => "p",
+                        "element" => "div",
+                        "classList" => [$baseClass . '__text'],
+                    ])
+                        {!! $content !!}
+                    @endtypography
                 @endif
 
                 @if($buttons)
@@ -46,11 +49,10 @@
                     <div class="{{$baseClass}}__inner-blocks u-hide-empty">{!! '<InnerBlocks />' !!}</div>
                 @endif
 
-            </div>
-        @endif
-
+        </div>
     </div>
-    
+    @endif
+
     @if ($slotHasData && $layout == 'full-width')
         <div class="{{$baseClass}}__slot o-container">
             {{ $slot }}
