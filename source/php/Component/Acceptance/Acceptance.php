@@ -9,10 +9,9 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
 
     public function init()
     {
-        //Extract array for eazy access (fetch only)
+        //Extract array for easy access (fetch only)
         extract($this->data);
 
-        $this->data['isVideo'] = false;
         $this->data['requiresAccept'] = true;
 
         $this->data['classList'][] = 'js-suppressed-content';
@@ -21,12 +20,8 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
         if (isset($icon)) {
             $this->data['icon'] = $icon;
         }
-
-        if (!empty($height)) {
-            $this->data['attributeList']['style'] = "height:" . $height . "px;";
-        }
-
-        if (!empty($src) && !is_null($src)) {
+        
+        if (!empty($src)) {
             $this->data['attributeList']['data-src'] = json_encode($src, JSON_UNESCAPED_SLASHES);
 
             if (is_string($src)) {
@@ -36,7 +31,7 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
             $this->data = $this->setSupplierDataAttributes($src, $this->data);
         }
 
-        if (isset($this->data['supplierSystemType'])) {
+        if (!empty($this->data['supplierSystemType'])) {
             $this->data['classList'][] = $this->getBaseClass() . "--" . $this->data['supplierSystemType'];
 
             if (in_array($this->data['supplierSystemType'], $this->jsBehaviourSystemTypes)) {
@@ -45,7 +40,16 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
                 $this->data['classList'][] = 'js-suppressed-content--none';
             }
         }
+        
+        if ($cover)
+        {
+            $this->data['attributeList']['style'][] = "background-image:url(\"$cover\");background-size:cover";
+        }
 
+        if (!empty($height)) {
+            $this->data['attributeList']['style'][] = "height:{$height}px";
+        }
+        
         if (!empty($this->data['labels'])) {
             $json = json_decode($this->data['labels']);
 
@@ -70,9 +74,12 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
                 $this->data['labels'] = $json->unknownLabels;
             }
         }
+        
+        if (is_iterable($this->data['attributeList']['style'])) {
+            $this->data['attributeList']['style'] = implode(';', $this->data['attributeList']['style']);
+        }
     }
-
-
+    
     /**
      * Get suppliers
      * Creates a list of suppliers with

@@ -37,6 +37,10 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         if (isset($labels)) {
             $this->data['labels'] = json_encode($labels);
         }
+        
+        if($poster) {
+            $this->data['attributeList']['poster'] = $poster;
+        }
 
         $this->data['attributeList']['title'] = $title;
         $this->data['attributeList']['aria-label'] = $title;
