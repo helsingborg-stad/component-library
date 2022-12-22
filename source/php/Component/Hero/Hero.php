@@ -29,6 +29,7 @@ class Hero extends \ComponentLibrary\Component\BaseController
 
         //Add image to image styles
         if ($image) {
+            $this->data['imageSrc'] = $image;
             $this->data['imageStyle']['background-image'] = "url('" . $image . "')";
 
             //Add background position to image styles
