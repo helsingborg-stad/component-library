@@ -5,7 +5,7 @@
         @foreach ($items as $item)
                 <li 
                 id="{{$id}}-{{$item['id']}}-{{$loop->index}}__item"
-                class="{{$baseClass}}__depth-{{$depth}} {{$baseClass}}__item {{$baseClass}}__item--{{$item['style']}} {{$item['active'] ? 'is-current' : ''}}{{$item['active'] && $item['children'] || $item['ancestor'] ? ' is-open has-fetched' : ''}} {{!$item['active'] && is_array($item['children']) ? ' has-fetched' : ''}}"
+                class="{{$baseClass}}__item {{$baseClass}}__item--{{$item['style']}} {{$item['active'] ? 'is-current' : ''}}{{$item['active'] && $item['children'] || $item['ancestor'] ? ' is-open has-fetched' : ''}} {{!$item['active'] && is_array($item['children']) ? ' has-fetched' : ''}}"
                 {{-- Append dynamic attributes --}}
                 {!! !empty($item['attributeList']) ? $buildAttributes($item['attributeList']) : '' !!}
             >
