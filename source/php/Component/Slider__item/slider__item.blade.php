@@ -1,7 +1,7 @@
 <!-- slider__item.blade.php -->
 <section class="{{ $class }}" {!! $attribute !!}>
     @if ($link)
-        <a class="{{ $baseClass }}__link" href="{{ $link }}">
+        <a class="{{ $baseClass }}__link" href="{{ $link }}" tabindex="0">
     @endif
 
     @if ($background_video)
