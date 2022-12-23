@@ -8,24 +8,24 @@
     @includeWhen($video || $hasAnimation, 'Hero.partials.controls')
 
     @if ($title || $paragraph || $byline)
-    {{-- {{ $baseClass }}__container --}}
-        <div class="o-container">
+        <div class="o-container ">
 
             @group([
                 'wrap' => 'wrap',
-                'classList' => ['o-grid', 'u-flex-direction--row--reverse', $baseClass . '__content']
+                'classList' => [$baseClass . '__content', 'o-grid', 'u-flex-direction--row--reverse']
             ])
-                <div class="{{$baseClass}}__content-group">
+                <div class="{{$baseClass}}__group">
                     @image([
                         'src' => $imageSrc,
-                        'classList' => ['u-margin__bottom--0', $baseClass . '__content-image']
+                        'classList' => ['u-margin__bottom--0', $baseClass . '__group-image']
                     ])
                     @endimage
                 </div>
+                <div class="{{$baseClass}}__group">
                 @group([
                     'justifyContent' => 'center',
                     'direction' => 'vertical',
-                    'classList' => [$baseClass . '__content-group']
+                    'classList' => [$baseClass . '__group-content']
                 ])
                     @typography([
                         'variant' => 'h1',
@@ -51,6 +51,7 @@
                         {!! $paragraph !!}
                     @endtypography
                 @endgroup
+                </div>
             @endgroup
         </div>
     @endif
