@@ -10,7 +10,8 @@
         "paragraph": "",
         "stretch": false,
         "animation": false,
-        "ariaLabel": "Hero"
+        "ariaLabel": "Hero",
+        "type": false
     },
     "description": {
         "image": "Background image",
@@ -22,7 +23,8 @@
         "paragraph": "The body text.",
         "stretch": "Always stretch the hero vertically. Makes the hero the width of the viewport. Requires a centered container.",
         "animation": "Name of the animation",
-        "ariaLabel": "Label provided for accessibility tools such as screen readers"
+        "ariaLabel": "Label provided for accessibility tools such as screen readers",
+        "type": "Array that contains parameters such as 'type', 'image', 'background' and 'modifiers."
     },
     "view": "hero.blade.php",
     "dependency": {

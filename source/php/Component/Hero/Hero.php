@@ -29,7 +29,6 @@ class Hero extends \ComponentLibrary\Component\BaseController
 
         //Add image to image styles
         if ($image) {
-            $this->data['imageSrc'] = $image;
             $this->data['imageStyle']['background-image'] = "url('" . $image . "')";
 
             //Add background position to image styles
@@ -64,6 +63,29 @@ class Hero extends \ComponentLibrary\Component\BaseController
             $this->data['hasAnimation'] = true;
         } else {
             $this->data['hasAnimation'] = false;
+        }
+
+        /* Different hero types */
+        if($type) {
+            $this->data['contentSlotHasData'] = $this->slotHasData('content');
+            if(is_string($type)) {
+                $this->data['type'] = 'Hero.views.' . $type;
+                $this->data['classList'][] = $this->getBaseClass() . '--' . $type;
+            } else {
+                $this->data['type'] = 'Hero.views.' . $type['type'];
+                $this->data['classList'][] = $this->getBaseClass() . '--' . $type['type'];
+                $this->data['background'] = $type['background'] ? $type['background'] : ($type['image'] ? 'url(' .$type['image'] . ')' : '');
+                $this->data['imageSrc'] = $type['image'] ? $type['image'] : '';
+
+                if($type['modifiers']) {
+                    if(is_string($type['modifiers'])) {
+                        $type['modifiers'] = explode(" ", $type['modifiers']);
+                    }
+                    foreach($type['modifiers'] as $modifier) {
+                        $this->data['classList'][] = $this->getBaseClass() . '--' . $modifier;
+                    }
+                }
+            }  
         }
     }
 }
