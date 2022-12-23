@@ -45,5 +45,7 @@
     @endif
 </section>
 
+@include('Hero.views.twoColumn')
+
 
 

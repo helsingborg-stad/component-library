@@ -1,16 +1,9 @@
-<section class="{{ $class }} c-hero--overflow" {!! $attribute !!}>
-    <div class="{{$baseClass}}__image" style="{!! $imageStyleString !!}" data-js-toggle-item="toggle-animation" data-js-toggle-class="u-animation--pause">
+
+<section class="{{ $class }} c-hero--two-column" {!! $attribute !!}>
+    <div class="{{$baseClass}}__background" style="background:url({{$imageSrc}});">
     </div>
-    @if ($overlay)
-        <div class="{{ $baseClass }}__overlay"></div>
-    @endif
-
-    @includeWhen($video || $hasAnimation, 'Hero.partials.controls')
-
-    @if ($title || $paragraph || $byline)
         <div class="o-container ">
-
-            @group([
+              @group([
                 'wrap' => 'wrap',
                 'classList' => [$baseClass . '__content', 'o-grid', 'u-flex-direction--row--reverse']
             ])
@@ -54,5 +47,5 @@
                 </div>
             @endgroup
         </div>
-    @endif
 </section>
+
