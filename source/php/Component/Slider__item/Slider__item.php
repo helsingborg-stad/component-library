@@ -14,7 +14,7 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
         $this->data['classList'][] = 'splide__slide';
 
         if (!empty($containerColor)) {
-            $this->data['classList'][] = $this->getBaseClass() . "--bg-" . $containerColor;
+            $this->data['classList'][] = 'u-color__bg--' . $containerColor;
         }
 
         if (!empty($textAlignment)) {
