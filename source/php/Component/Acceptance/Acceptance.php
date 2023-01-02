@@ -160,6 +160,13 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
                 true,
                 'social'
             ),
+            new Supplier(
+                'Visma',
+                array('visma.se', 'visma.com', 'minsida.siriusit.net', 'siriusit.net'),
+                'https://www.visma.com/privacy-statement/sweden/',
+                false,
+                'login'
+            ),
         );
 
         if (function_exists('apply_filters')) {
