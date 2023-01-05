@@ -22,13 +22,4 @@
             {!! $secondary !!}
         </div>
     @endif
-
-    @if($action) 
-        <div class="c-collection__secondary">
-            @link(['href' => $action['link']])
-                @icon(['icon' => $action['icon'], 'size' => 'md'])
-                @endicon
-            @endlink
-        </div>
-    @endif
 </{{$componentElement}}>
