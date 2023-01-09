@@ -25,7 +25,8 @@
         "stretch": "Always stretch the hero vertically. Makes the hero the width of the viewport. Requires a centered container.",
         "animation": "Name of the animation",
         "ariaLabel": "Label provided for accessibility tools such as screen readers",
-        "type": "Array that contains parameters such as 'type', 'image', 'background' and 'modifiers."
+        "heroView": "Select which view to display",
+        "customHeroData": "An array containing the custom data for the selected view (heroView)."
     },
     "view": "hero.blade.php",
     "dependency": {

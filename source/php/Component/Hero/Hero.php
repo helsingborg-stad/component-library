@@ -67,7 +67,7 @@ class Hero extends \ComponentLibrary\Component\BaseController
             $this->data['hasAnimation'] = false;
         }
 
-        $this->data['customData'] = $this->handleCustomDataFunc($heroView, $customHeroData);
+        $this->data['customHeroData'] = $this->handleCustomDataFunc($heroView, $customHeroData);
 
         if($customHeroData['modifiers']) {
             if(!is_array($customHeroData['modifiers'])) {
