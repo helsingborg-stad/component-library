@@ -67,20 +67,23 @@ class Hero extends \ComponentLibrary\Component\BaseController
             $this->data['hasAnimation'] = false;
         }
 
-        /* Different custom hero */
-        if($heroView === 'initiative') {
-            $this->data['contentSlotHasData'] = $this->slotHasData('content');
-            $this->data['background'] = $customHeroData['background'] ? 'background: ' . $customHeroData['background'] . ';' : ($customHeroData['image'] ? 'background-image:url(' .$customHeroData['image'] . ')' . ';' : '');
-            $this->data['imageSrc'] = $customHeroData['image'] ? $customHeroData['image'] : '';
+        $this->data['initiative'] = $this->initiative($customHeroData, $this->data);
+        if($customHeroData['modifiers']) {
+            if(is_string($customHero['modifiers'])) {
+                $customHeroData['modifiers'] = explode(" ", $customHeroData['modifiers']);
+            }
+            foreach($customHeroData['modifiers'] as $modifier) {
+                $this->data['classList'][] = $this->getBaseClass() . '--' . $modifier;
+            }
+        } 
 
-            if($customHeroData['modifiers']) {
-                if(is_string($customHero['modifiers'])) {
-                    $customHeroData['modifiers'] = explode(" ", $customHeroData['modifiers']);
-                }
-                foreach($customHeroData['modifiers'] as $modifier) {
-                    $this->data['classList'][] = $this->getBaseClass() . '--' . $modifier;
-                }
-            } 
-        }
     }
+    
+    private function initiative($customHeroData) {
+        $data['image'] = $customHeroData['image'] ? $customHeroData['image'] : '';
+        $data['contentSlotHasData'] = $this->slotHasData('content');
+        $data['background'] = $customHeroData['background'] ? 'background: ' . $customHeroData['background'] . ';' : ($customHeroData['image'] ? 'background-image:url(' . $customHeroData['image'] . ')' . ';' : '');
+        return $data;
+    }
+
 }

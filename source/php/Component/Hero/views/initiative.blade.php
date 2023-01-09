@@ -1,7 +1,7 @@
 
 {{-- Add modifier --overflow to get two different looks. --}}
 {{-- $background does not exist at the moment. Can be of any value accepted by the background property --}}
-    <div class="{{$baseClass}}__background" style="{{$background}}">
+    <div class="{{$baseClass}}__background" style="{{$initiative['background']}}">
     </div>
         <div class="o-container ">
               @group([
@@ -10,7 +10,7 @@
             ])
                 <div class="{{$baseClass}}__group">
                     @image([
-                        'src' => $imageSrc,
+                        'src' => $initiative['image'],
                         'classList' => ['u-margin__bottom--0', $baseClass . '__group-image']
                     ])
                     @endimage
@@ -22,7 +22,7 @@
                     'classList' => [$baseClass . '__group-content']
                 ])
 
-                    @if($contentSlotHasData)
+                    @if($initiative['contentSlotHasData'])
                         {!! $content !!}
                     @endif
                 @endgroup
