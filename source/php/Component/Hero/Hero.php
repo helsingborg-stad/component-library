@@ -91,7 +91,7 @@ class Hero extends \ComponentLibrary\Component\BaseController
             return $this->initiative($customHeroData);
         } 
         
-        return;
+        return false;
     }
 
     private function initiative($customHeroData) {
