@@ -69,7 +69,7 @@ class Hero extends \ComponentLibrary\Component\BaseController
 
         $this->data['customHeroData'] = $this->handleCustomDataFunc($heroView, $customHeroData);
 
-        if($customHeroData['modifiers']) {
+        if ($customHeroData['modifiers']) {
             if(!is_array($customHeroData['modifiers'])) {
                 trigger_error(
                     sprintf(
@@ -80,14 +80,14 @@ class Hero extends \ComponentLibrary\Component\BaseController
                 );
                 return;
             } 
-            foreach($customHeroData['modifiers'] as $modifier) {
+            foreach ($customHeroData['modifiers'] as $modifier) {
                 $this->data['classList'][] = $this->getBaseClass() . '--' . $modifier;
             }
         } 
     }
 
     private function handleCustomDataFunc($heroView, $customHeroData) {
-        if(method_exists($this, $heroView)) {
+        if (method_exists($this, $heroView)) {
             return $this->initiative($customHeroData);
         } 
         
