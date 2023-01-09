@@ -69,7 +69,7 @@ class Hero extends \ComponentLibrary\Component\BaseController
 
         $this->data['customHeroData'] = $this->handleCustomDataFunc($heroView, $customHeroData);
 
-        if ($this->data['customHeroData'] && $this->data['customHeroData']['modifiers']) {
+        if ($this->data['customHeroData'] && array_key_exists('modifiers', $this->data['customHeroData'])) {
             if (!is_array($customHeroData['modifiers'])) {
                 trigger_error(
                     sprintf(
