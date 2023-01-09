@@ -11,7 +11,7 @@
         "stretch": false,
         "animation": false,
         "ariaLabel": "Hero",
-        "type": false
+        "customHero": false
     },
     "description": {
         "image": "Background image",

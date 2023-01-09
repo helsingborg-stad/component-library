@@ -1,8 +1,8 @@
 <!-- hero.blade.php -->
 <section class="{{ $class }}" {!! $attribute !!}>
 
-@if($type)
-    @include($type)
+@if($customHero)
+    @include($customHero)
 @else
 <div class="{{$baseClass}}__image" style="{!! $imageStyleString !!}" data-js-toggle-item="toggle-animation" data-js-toggle-class="u-animation--pause">
     </div>

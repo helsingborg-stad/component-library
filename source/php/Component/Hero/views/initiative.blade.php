@@ -1,7 +1,7 @@
 
-{{-- Add modifier --two-column and alternativly --overflow to get two different looks. --}}
+{{-- Add modifier --overflow to get two different looks. --}}
 {{-- $background does not exist at the moment. Can be of any value accepted by the background property --}}
-    <div class="{{$baseClass}}__background" style="background:{{$background}};">
+    <div class="{{$baseClass}}__background" style="{{$background}}">
     </div>
         <div class="o-container ">
               @group([
