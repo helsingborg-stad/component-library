@@ -24,6 +24,8 @@ class Hero extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . "--image";
         }
 
+        $this->data['classList'][] = $this->getBaseClass() . '--' . $heroView;
+
         //Create image style tag
         $this->data['imageStyle'] = [];
 
@@ -66,26 +68,19 @@ class Hero extends \ComponentLibrary\Component\BaseController
         }
 
         /* Different custom hero */
-        if($customHero) {
+        if($heroView === 'initiative') {
             $this->data['contentSlotHasData'] = $this->slotHasData('content');
-            if(is_string($customHero)) {
-                $this->data['customHero'] = 'Hero.views.' . $customHero;
-                $this->data['classList'][] = $this->getBaseClass() . '--' . $customHero;
-            } else {
-                $this->data['customHero'] = 'Hero.views.' . $customHero['view'];
-                $this->data['classList'][] = $this->getBaseClass() . '--' . $customHero['view'];
-                $this->data['background'] = $customHero['background'] ? 'background: ' . $customHero['background'] . ';' : ($customHero['image'] ? 'background-image:url(' .$customHero['image'] . ')' . ';' : '');
-                $this->data['imageSrc'] = $customHero['image'] ? $customHero['image'] : '';
+            $this->data['background'] = $customHeroData['background'] ? 'background: ' . $customHeroData['background'] . ';' : ($customHeroData['image'] ? 'background-image:url(' .$customHeroData['image'] . ')' . ';' : '');
+            $this->data['imageSrc'] = $customHeroData['image'] ? $customHeroData['image'] : '';
 
-                if($customHero['modifiers']) {
-                    if(is_string($customHero['modifiers'])) {
-                        $customHero['modifiers'] = explode(" ", $customHero['modifiers']);
-                    }
-                    foreach($customHero['modifiers'] as $modifier) {
-                        $this->data['classList'][] = $this->getBaseClass() . '--' . $modifier;
-                    }
+            if($customHeroData['modifiers']) {
+                if(is_string($customHero['modifiers'])) {
+                    $customHeroData['modifiers'] = explode(" ", $customHeroData['modifiers']);
                 }
-            }  
+                foreach($customHeroData['modifiers'] as $modifier) {
+                    $this->data['classList'][] = $this->getBaseClass() . '--' . $modifier;
+                }
+            } 
         }
     }
 }
