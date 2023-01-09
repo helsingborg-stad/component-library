@@ -167,6 +167,13 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
                 false,
                 'login'
             ),
+            new Supplier(
+                'Twoday',
+                array('twoday.se'),
+                'https://twoday.se/privacy-policy',
+                false,
+                'login'
+            ),
         );
 
         if (function_exists('apply_filters')) {
