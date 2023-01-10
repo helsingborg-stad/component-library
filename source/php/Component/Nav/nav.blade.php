@@ -38,6 +38,14 @@
                         @endif
                         @if($item['label'])
                             <span class="{{$baseClass}}__text">{{$item['label']}}</span>
+                            @if($depth >= 1 && $item['children'])
+                            <template>
+                            @icon([
+                                'icon' => 'expand_more'
+                            ])
+                            @endicon
+                            </template>
+                            @endif
                         @endif
                     </a>
                 @endif
