@@ -1,5 +1,5 @@
 {
-    "slug": "progressbar",
+    "slug": "progressBar",
     "default": {
         "isCancelled": false,
         "value": 0
