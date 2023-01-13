@@ -69,21 +69,6 @@ class Hero extends \ComponentLibrary\Component\BaseController
 
         $this->data['customHeroData'] = $this->handleCustomDataFunc($heroView, $customHeroData);
 
-        if ($customHeroData && array_key_exists('modifiers', $customHeroData)) {
-            if (!is_array($customHeroData['modifiers'])) {
-                trigger_error(
-                    sprintf(
-                        'customHeroData["modifiers"] should be an array.',
-                        print_r($this, true)
-                    ),
-                    E_USER_WARNING
-                );
-                return;
-            } 
-            foreach ($customHeroData['modifiers'] as $modifier) {
-                $this->data['classList'][] = $this->getBaseClass() . '--' . $modifier;
-            }
-        } 
     }
 
     private function handleCustomDataFunc($heroView, $customHeroData) {
