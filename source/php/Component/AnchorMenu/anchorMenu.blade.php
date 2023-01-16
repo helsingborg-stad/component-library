@@ -8,7 +8,7 @@
         @foreach($menuItems as $item)
             @link([
                 'href' => $item['anchor'],
-                'classList' => ['scroll-spy__item', 'u-color__text--dark']
+                'classList' => ['scroll-spy__item']
             ])
                 @if($item['icon'] && !empty($item['icon']))
                     @icon([
