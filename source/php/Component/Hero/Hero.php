@@ -24,6 +24,8 @@ class Hero extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . "--image";
         }
 
+        $this->data['classList'][] = $this->getBaseClass() . '--' . $heroView;
+
         //Create image style tag
         $this->data['imageStyle'] = [];
 
@@ -64,5 +66,40 @@ class Hero extends \ComponentLibrary\Component\BaseController
         } else {
             $this->data['hasAnimation'] = false;
         }
+
+        $this->data['customHeroData'] = $this->handleCustomDataFunc($heroView, $customHeroData);
+
+        if ($customHeroData && array_key_exists('modifiers', $customHeroData)) {
+            if (!is_array($customHeroData['modifiers'])) {
+                trigger_error(
+                    sprintf(
+                        'customHeroData["modifiers"] should be an array.',
+                        print_r($this, true)
+                    ),
+                    E_USER_WARNING
+                );
+                return;
+            } 
+            foreach ($customHeroData['modifiers'] as $modifier) {
+                $this->data['classList'][] = $this->getBaseClass() . '--' . $modifier;
+            }
+        } 
     }
+
+    private function handleCustomDataFunc($heroView, $customHeroData) {
+        if (method_exists($this, $heroView)) {
+            return $this->$heroView($customHeroData);
+        } 
+        
+        return false;
+    }
+
+    private function initiative($customHeroData) {
+        $data['image'] = $customHeroData['image'] ? $customHeroData['image'] : '';
+        $data['contentSlotHasData'] = $this->slotHasData('content');
+        $data['background'] = $customHeroData['background'] ? 'background: ' . $customHeroData['background'] . ';' : ($customHeroData['image'] ? 'background-image:url(' . $customHeroData['image'] . ')' . ';' : '');
+
+        return $data;
+    }
+
 }

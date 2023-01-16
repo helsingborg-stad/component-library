@@ -10,7 +10,9 @@
         "paragraph": "",
         "stretch": false,
         "animation": false,
-        "ariaLabel": "Hero"
+        "ariaLabel": "Hero",
+        "heroView": "default",
+        "customHeroData": false
     },
     "description": {
         "image": "Background image",
@@ -22,14 +24,18 @@
         "paragraph": "The body text.",
         "stretch": "Always stretch the hero vertically. Makes the hero the width of the viewport. Requires a centered container.",
         "animation": "Name of the animation",
-        "ariaLabel": "Label provided for accessibility tools such as screen readers"
+        "ariaLabel": "Label provided for accessibility tools such as screen readers",
+        "heroView": "Select which view to display",
+        "customHeroData": "An array containing the custom data for the selected view (heroView)."
     },
     "view": "hero.blade.php",
     "dependency": {
         "sass": {
             "components": [
                 "hero",
-                "typography"
+                "typography",
+                "group",
+                "image"
             ]
         }
     }
