@@ -3,20 +3,21 @@
     <div class="{{$class}}" id="scroll-spy" {!! $attribute !!}>
         @group([
             'wrap' => 'wrap',
-            'classList' => ['scroll-spy__container']
+            'classList' => [$baseClass . '__container']
         ])
         @foreach($menuItems as $item)
             @link([
                 'href' => $item['anchor'],
-                'classList' => ['scroll-spy__item']
+                'classList' => [$baseClass . '__item']
             ])
-                @if($item['icon'] && !empty($item['icon']))
+                {{-- @if($item['icon'] && !empty($item['icon'])) --}}
                     @icon([
-                        'icon' => $item['icon'],
+                        'icon' => 'info',
                         'size' => 'md',
+                        'classList' => [$baseClass . '__icon']
                     ])
                     @endicon
-                @endif
+                {{-- @endif --}}
                 {{$item['label']}}
             @endlink
         @endforeach
