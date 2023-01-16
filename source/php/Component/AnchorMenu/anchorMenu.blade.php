@@ -10,14 +10,14 @@
                 'href' => $item['anchor'],
                 'classList' => [$baseClass . '__item']
             ])
-                {{-- @if($item['icon'] && !empty($item['icon'])) --}}
+                @if($item['icon'] && !empty($item['icon']))
                     @icon([
-                        'icon' => 'info',
+                        'icon' => $item['icon'],
                         'size' => 'md',
                         'classList' => [$baseClass . '__icon']
                     ])
                     @endicon
-                {{-- @endif --}}
+                @endif
                 {{$item['label']}}
             @endlink
         @endforeach
