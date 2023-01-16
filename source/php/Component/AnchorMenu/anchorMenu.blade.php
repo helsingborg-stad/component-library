@@ -1,5 +1,6 @@
+<!-- anchorMenu.blade.php -->
 @if(!empty($menuItems) && count($menuItems) > 1)
-    <div class="o-container u-position--sticky u-level-5 u-margin__bottom--2 u-margin__top--3" id="scroll-spy">
+    <div class="{{$class}}" id="scroll-spy" {!! $attribute !!}>
         @group([
             'wrap' => 'wrap',
             'classList' => ['scroll-spy__container']
