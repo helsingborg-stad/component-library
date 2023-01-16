@@ -12,7 +12,7 @@ class AnchorMenu extends \ComponentLibrary\Component\BaseController
 
         //Extract array for eazy access (fetch only)
         extract($this->data);
-        var_dump($menuItems);
+        
         $this->data['menuItems'] = $menuItems;
     }
 }
