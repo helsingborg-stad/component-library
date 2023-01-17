@@ -10,7 +10,7 @@
                 'href' => $item['anchor'],
                 'classList' => [$baseClass . '__item']
             ])
-                @if($item['icon'] && !empty($item['icon']))
+                @if(!empty($item['icon']))
                     @icon([
                         'icon' => $item['icon'],
                         'size' => 'md',
