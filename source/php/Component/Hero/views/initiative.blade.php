@@ -6,7 +6,7 @@
         <div class="o-container ">
               @group([
                 'wrap' => 'wrap',
-                'classList' => [$baseClass . '__content', 'o-grid', 'u-flex-direction--row--reverse']
+                'classList' => [$baseClass . '__content', 'o-grid', 'u-flex-direction--row--reverse'],
             ])
                 <div class="{{$baseClass}}__group">
                     @image([
@@ -19,7 +19,7 @@
                 @group([
                     'justifyContent' => 'center',
                     'direction' => 'vertical',
-                    'classList' => [$baseClass . '__group-content']
+                    'classList' => [$baseClass . '__group-content', 'u-height--100']
                 ])
 
                     @if($customHeroData['contentSlotHasData'])
