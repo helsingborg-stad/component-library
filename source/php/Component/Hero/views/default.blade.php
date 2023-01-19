@@ -7,15 +7,20 @@
     @includeWhen($video || $hasAnimation, 'Hero.partials.controls')
 
     @if ($title || $paragraph || $byline)
+
         <div class="o-container {{ $baseClass }}__container">
             @if($video)
                 <video autoplay muted loop playsinline class="c-hero__video">
                     <source src="{{$video}}" type="video/mp4">
                 </video>
             @endif
-
+            
             <div class="{{ $baseClass }}__content">
-
+                @if ($meta)
+                    @typography([])
+                        {!! $meta !!}
+                    @endtypography
+                @endif
                 @if ($title)
                     @typography(['variant' => 'h1', 'element' => 'h1', 'classList' => [$baseClass . '__title']])
                         {!! $title !!}
