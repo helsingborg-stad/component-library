@@ -12,7 +12,9 @@
         "animation": false,
         "ariaLabel": "Hero",
         "heroView": "default",
-        "customHeroData": false
+        "customHeroData": false,
+        "meta": false,
+        "backgroundColor": false
     },
     "description": {
         "image": "Background image",
