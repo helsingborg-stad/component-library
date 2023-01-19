@@ -17,7 +17,7 @@
             
             <div class="{{ $baseClass }}__content">
                 @if ($meta)
-                    @typography([])
+                    @typography(['classList' => [$baseClass . '__meta']])
                         {!! $meta !!}
                     @endtypography
                 @endif
