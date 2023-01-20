@@ -14,7 +14,7 @@
         "heroView": "default",
         "customHeroData": false,
         "meta": false,
-        "backgroundColor": false
+        "background": false
     },
     "description": {
         "image": "Background image",
