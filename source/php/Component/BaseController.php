@@ -208,7 +208,7 @@ class BaseController
     private function getClass($implode = true)
     {
         if (!$this->validClassList($this->data['classList'])) {
-            /* trigger_error(
+            trigger_error(
                 sprintf(
                     'The parameter classList is not allowed to contain spaces or include empty strings. 
                     Multiple classes may be separated by entering a array of items.
@@ -216,7 +216,7 @@ class BaseController
                     print_r($this, true)
                 ),
                 E_USER_WARNING
-            ); */
+            );
         }
 
         //Store locally
