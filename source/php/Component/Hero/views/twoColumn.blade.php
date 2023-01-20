@@ -1,4 +1,4 @@
-    <div class="{{$baseClass}}__background" style="{{$customHeroData['background'] ? $customHeroData['background'] : $background}}">
+    <div class="{{$baseClass}}__background" style="{{$background}}">
     </div>
         <div class="o-container">
               @group([
@@ -7,7 +7,7 @@
             ])
                 <div class="{{$baseClass}}__group">
                     @image([
-                        'src' => $customHeroData['image'] ? $customHeroData['image'] : $image,
+                        'src' => $image,
                         'classList' => ['u-margin__bottom--0', $baseClass . '__group-image']
                     ])
                     @endimage
