@@ -1,5 +1,11 @@
 <div class="{{$class}} c-field">
-    @if($label)
+    @if($label && $hideLabel)
+         <label for="select_{{ $id }}" class="u-sr__only">
+            {{$label}}
+        </label>    
+    @endif
+    
+    @if($label && !$hideLabel)
         <label for="select_{{ $id }}" class="c-field__label">{{$label}}
             @if($required)
                 <span class="u-color__text--danger">*</span>

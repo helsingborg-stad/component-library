@@ -233,6 +233,16 @@ class Field extends \ComponentLibrary\Component\Form\Form
             $this->data['fieldAttributeList']['autocomplete']  = "off";
         }
 
+        /* Customizer */ 
+        if (function_exists('get_theme_mod')) {
+            if(get_theme_mod('field_style_settings') === "rounded") {
+                $this->data['hideLabel'] = true;
+                if(empty($placeholder) && !empty($label)) {
+                    $this->data['fieldAttributeList']['placeholder'] = $label;
+                }
+            }
+        }
+
         //Create field attributes
         $this->data['fieldAttribute'] = self::buildAttributes(
             $this->data['fieldAttributeList']
