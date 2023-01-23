@@ -38,7 +38,7 @@
                         @endif
                         @if($item['label'])
                             <span class="{{$baseClass}}__text">{{$item['label']}}</span>
-                            @if($depth >= 1 && $item['children'])
+                            @if($item['children'])
                             <template>
                             @icon([
                                 'icon' => 'expand_more'
