@@ -16,7 +16,8 @@
         "heroStyle": false,
         "focusPoint": {"top": 30, "left": 50},
         "textAlignment": "",
-        "overlay": "none"
+        "overlay": "none",
+        "key": ""
     },
     "description": {
         "title": "A title for predefined layout",

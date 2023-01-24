@@ -33,6 +33,10 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['style'] = "background-image: url('".$desktop_image."');";
         }
 
+        if(!empty($key)) {
+            $this->data['attributeList']['style'] = 'z-index: ' . strval(999-$key) . ';';
+        }
+
         $this->data['showContainer'] = false;
         if (!empty($title) || !empty($sub_title) ||!empty($text) || !empty($bottom)) {
             $this->data['showContainer'] = true;
@@ -71,6 +75,10 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
             //Add background position to image styles
             if(array_filter($focusPoint)) {
                 $this->data['imageStyle']['background-position'] = $focusPoint['left'] . "% " . $focusPoint['top'] . "%"; 
+            }
+
+            if(!empty($key)) {
+                $this->data['imageStyle']['z-index'] = 999 - $key;
             }
 
             //Stringify image styles
