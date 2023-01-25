@@ -31,7 +31,7 @@ class Hero extends \ComponentLibrary\Component\BaseController
 
         //Add image to image styles
         if ($image) {
-            $this->data['image'] = $image; 
+            $this->data['image'] = $image;
 
             $this->data['imageStyle']['background-image'] = "url('" . $image . "')";
 
@@ -70,7 +70,7 @@ class Hero extends \ComponentLibrary\Component\BaseController
         }
 
         if ($background) {
-            $this->data['background'] = 'background:' . $background . ';';   
+            $this->data['background'] = 'background:' . $background . ';';
         }
 
         $this->data['customHeroData'] = $this->handleCustomDataFunc($heroView, $customHeroData);
@@ -89,9 +89,9 @@ class Hero extends \ComponentLibrary\Component\BaseController
             foreach ($customHeroData['modifiers'] as $modifier) {
                 $this->data['classList'][] = $this->getBaseClass() . '--' . $modifier;
 
-                if($modifier === "overflow") {
-                    $this->data['background'] = $background ? 'background: ' . $background . ';' : ($image ? 'background-image:url(' . $image . ')' . ';' : '');
-                    var_dump($this->data['background']);
+                if ($modifier === "overflow") {
+                    $this->data['background'] = $background ? 'background: ' . $background . ';' : 
+                    ($image ? 'background-image:url(' . $image . ')' . ';' : '');
                 }
             }
         } 
