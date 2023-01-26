@@ -31,6 +31,8 @@ class Hero extends \ComponentLibrary\Component\BaseController
 
         //Add image to image styles
         if ($image) {
+            $this->data['image'] = $image;
+
             $this->data['imageStyle']['background-image'] = "url('" . $image . "')";
 
             //Add background position to image styles
@@ -72,6 +74,10 @@ class Hero extends \ComponentLibrary\Component\BaseController
             $this->data['hasAnimation'] = false;
         }
 
+        if ($background) {
+            $this->data['background'] = 'background:' . $background . ';';
+        }
+
         $this->data['customHeroData'] = $this->handleCustomDataFunc($heroView, $customHeroData);
 
         if ($customHeroData && array_key_exists('modifiers', $customHeroData)) {
@@ -87,8 +93,14 @@ class Hero extends \ComponentLibrary\Component\BaseController
             } 
             foreach ($customHeroData['modifiers'] as $modifier) {
                 $this->data['classList'][] = $this->getBaseClass() . '--' . $modifier;
+
+                if ($modifier === "overflow") {
+                    $this->data['background'] = $background ? 'background: ' . $background . ';' : 
+                    ($image ? 'background-image:url(' . $image . ')' . ';' : '');
+                }
             }
         } 
+
     }
 
     private function handleCustomDataFunc($heroView, $customHeroData) {
@@ -99,12 +111,9 @@ class Hero extends \ComponentLibrary\Component\BaseController
         return false;
     }
 
-    private function initiative($customHeroData) {
-        $data['image'] = $customHeroData['image'] ? $customHeroData['image'] : '';
+    private function twoColumn($customHeroData) {
         $data['contentSlotHasData'] = $this->slotHasData('content');
-        $data['background'] = $customHeroData['background'] ? 'background: ' . $customHeroData['background'] . ';' : ($customHeroData['image'] ? 'background-image:url(' . $customHeroData['image'] . ')' . ';' : '');
 
         return $data;
     }
-
 }

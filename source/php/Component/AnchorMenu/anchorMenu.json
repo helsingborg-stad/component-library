@@ -1,0 +1,20 @@
+{
+    "slug": "anchorMenu",
+    "default": {
+        "menuItems": [],
+        "displayNoneSizes": ""
+    },
+    "description": {
+        "menuItems": "An array containing arrays of items. An item should contain a label, link (anchor) and if wanted an icon as well."
+    },
+    "view": "alert.blade.php",
+    "dependency": {
+        "sass": {
+            "components": [
+                "link",
+                "group",
+                "icon"
+            ]
+        }
+    }
+}
