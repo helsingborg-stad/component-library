@@ -38,11 +38,19 @@
                         @endif
                         @if($item['label'])
                             <span class="{{$baseClass}}__text">{{$item['label']}}</span>
+                            @if($item['children'])
+                            <template>
+                            @icon([
+                                'icon' => 'expand_more'
+                            ])
+                            @endicon
+                            </template>
+                            @endif
                         @endif
                     </a>
                 @endif
                 
-                @if ($item['children'])
+                @if (!empty($item['children']))
                     @if($includeToggle)
                         @button([
                             'classList' => [ $baseClass . '__toggle', 'js-toggle-children'],
