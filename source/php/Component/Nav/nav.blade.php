@@ -50,7 +50,7 @@
                     </a>
                 @endif
                 
-                @if ($item['children'])
+                @if (!empty($item['children']))
                     @if($includeToggle)
                         @button([
                             'classList' => [ $baseClass . '__toggle', 'js-toggle-children'],
