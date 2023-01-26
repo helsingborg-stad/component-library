@@ -16,10 +16,12 @@
         @endicon
     @endif
             <div class="{{$baseClass}}__container" aria-hidden="true" role="tooltip" id="{{$id}}">
+            @if($slotHasData) 
             <div class="{{$baseClass}}__content">
                 {!! $slot !!}
             </div>
             <span class="{{$baseClass}}__arrow"></span>
+            @endif
         </div>
     </div>
 </div>
