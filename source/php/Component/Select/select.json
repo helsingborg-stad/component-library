@@ -8,7 +8,8 @@
         "errorMessage": false,
         "preselected": false,
         "multiple": false,
-        "name": false
+        "name": false,
+        "hideLabel": false
     },
     "description": {
         "label": "The placeholder of the dropdown",
@@ -17,7 +18,8 @@
         "options": "The options which can be selected. The key if the item will be used as value of the option and the value will be used as a label",
         "preselected": "Key of option to be preselected",
         "multiple": "Sets the select box to a multiple select",
-        "name": "The name attribute for the select component"
+        "name": "The name attribute for the select component",
+        "hideLabel": "Hides the label"
     },
     "view": "select.blade.php",
     "dependency": {
