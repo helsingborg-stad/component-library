@@ -32,10 +32,8 @@ class Select extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['data-required'] = '1';
         }
 
-        if (function_exists('get_theme_mod')) {
-            if(get_theme_mod('field_style_settings') === "rounded") {
-                $this->data['hideLabel'] = true;
-            }
+        if (function_exists('get_theme_mod') && get_theme_mod('field_style_settings') === "rounded") {
+            $this->data['hideLabel'] = true;
         }
 
         //Handle size

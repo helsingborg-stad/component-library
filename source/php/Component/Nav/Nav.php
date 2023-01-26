@@ -48,6 +48,10 @@ class Nav extends \ComponentLibrary\Component\BaseController
         if ($direction == "horizontal") {
             $this->data['attributeList']['js-keep-in-viewport-after-resize'] = "1";
         }
+
+        if (function_exists('get_theme_mod')) {
+            $navAlignment = $this->getBaseClass() . '--' . get_theme_mod('header_alignment');
+        }
     }
 
     public function itemAttributeList($items, $data)
