@@ -41,7 +41,8 @@
                             @if($item['children'])
                             <template>
                             @icon([
-                                'icon' => 'expand_more'
+                                'icon' => 'expand_more',
+                                'classList' => ['u-margin__left--auto']
                             ])
                             @endicon
                             </template>
