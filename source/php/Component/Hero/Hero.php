@@ -24,6 +24,10 @@ class Hero extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . "--image";
         }
 
+        if ($textColor) {
+            $this->data['classList'][] = $this->getBaseClass() . "--color-" . $textColor;
+        }
+
         $this->data['classList'][] = $this->getBaseClass() . '--' . $heroView;
 
         //Create image style tag
