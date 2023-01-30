@@ -27,19 +27,28 @@
                                 @endtypography
                             @endif
                             @if ($title)
-                                @typography(['variant' => 'h1', 'element' => 'h1'])
+                                @typography([
+                                    'variant' => 'h1', 'element' => 'h1', 
+                                    'classList' => [$baseClass . '__title']
+                                    ])
                                     {!! $title !!}
                                 @endtypography
                             @endif
 
                             @if ($byline)
-                                @typography(['variant' => 'h2', 'element' => 'span'])
+                                @typography([
+                                    'variant' => 'h2', 'element' => 'span',
+                                    'classList' => [$baseClass . '__byline']
+                                    ])
                                     {!! $byline !!}
                                 @endtypography
                             @endif
 
                             @if ($paragraph)
-                                @typography(['variant' => 'p', 'element' => 'p'])
+                                @typography([
+                                    'variant' => 'p', 'element' => 'p',
+                                    'classList' => [$baseClass . '__body']
+                                ])
                                     {!! $paragraph !!}
                                 @endtypography
                             @endif

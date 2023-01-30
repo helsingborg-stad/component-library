@@ -14,7 +14,8 @@
         "heroView": "default",
         "customHeroData": false,
         "meta": false,
-        "background": false
+        "background": false,
+        "textColor": "white"
     },
     "description": {
         "image": "Background image",
@@ -23,12 +24,15 @@
         "size": "Ratio (normal, large)",
         "title": "The title text",
         "byline": "The byline text",
+        "meta": "The meta text",
         "paragraph": "The body text.",
         "stretch": "Always stretch the hero vertically. Makes the hero the width of the viewport. Requires a centered container.",
         "animation": "Name of the animation",
         "ariaLabel": "Label provided for accessibility tools such as screen readers",
         "heroView": "Select which view to display",
-        "customHeroData": "An array containing the custom data for the selected view (heroView)."
+        "customHeroData": "An array containing the custom data for the selected view (heroView).",
+        "background": "Image or a color",
+        "textColor": "The color of the text (black or white)"
     },
     "view": "hero.blade.php",
     "dependency": {
