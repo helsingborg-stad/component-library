@@ -32,7 +32,7 @@
         "heroView": "Select which view to display",
         "customHeroData": "An array containing the custom data for the selected view (heroView).",
         "background": "Image or a color",
-        "textColor": "The color of the text"
+        "textColor": "The color of the text (black or white)"
     },
     "view": "hero.blade.php",
     "dependency": {
