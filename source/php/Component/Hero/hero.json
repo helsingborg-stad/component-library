@@ -15,7 +15,7 @@
         "customHeroData": false,
         "meta": false,
         "background": false,
-        "textColor": "white"
+        "textColor": false
     },
     "description": {
         "image": "Background image",
