@@ -4,13 +4,15 @@
         "componentElement": "div",
         "beforeLabel": "#",
         "afterLabel": "",
-        "format": true
+        "format": true,
+        "compress": false
     },
     "description": {
         "componentElement": "",
         "beforeLabel": "",
         "afterLabel": "",
-        "format": "If the component should format the input text."
+        "format": "If the component should format the input text.",
+        "compress": "Show [N] amount of items, hide the rest of them behind a expand button."
     },
     "view": "tags.blade.php",
     "dependency": {

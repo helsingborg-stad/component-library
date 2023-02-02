@@ -11,9 +11,20 @@ class Tags extends \ComponentLibrary\Component\BaseController
 
         $this->data['tags'] = $this->arrayCleanUp($tags);
 
+        $this->data['tagCount'] = count($tags); 
+
         if ($format) {
             $this->data['classList'][] = $this->getBaseClass() . "--format";
         }
+
+        $this->data['isHidden'] = function ($loopIteration) use($compress) {
+            if($compress !== false) {
+                if($loopIteration >= $compress) {
+                    return "is-hidden"; 
+                }
+            }
+            return ""; 
+        };
     }
 
     /**
