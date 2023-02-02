@@ -8,7 +8,7 @@
     @endif
     
     @if($tags)
-        @tags(['tags' => $tags, 'classList' => ($buttons) ? ['u-margin__top--2'] : []])
+        @tags(['compress' => 4, 'tags' => $tags, 'classList' => ($buttons) ? ['u-margin__top--2'] : []])
         @endtags
     @endif
 </div>
