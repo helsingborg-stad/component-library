@@ -1,4 +1,3 @@
-{{-- NOT IN USE --}}
 <div class="{{$baseClass}}__footer" js-toggle-class="u-display--none" js-toggle-item="{{$collpaseID}}">
     @if($buttons)
         @foreach($buttons as $button)
