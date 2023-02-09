@@ -21,20 +21,14 @@
             @endif
 
             @if($meta)
-                @typography(['variant' => 'meta', 'element' => 'span', 'classList' => [$baseClass."__meta"]])
-                    @if (is_array($meta))
-                        @if (array_filter($meta, 'is_string') !== [])
-                            {{ implode(', ', $meta) }}
-                        @else
-                            @foreach ($meta as $value)
-                                {!! $value['label'] !!}
-                                {{ !$loop->last ? ', ' : '' }}
-                            @endforeach
-                        @endif
-                    @else
-                        {!! $meta !!}
-                    @endif
-                @endtypography
+                <div class="{{$baseClass}}__meta">
+                    @tags([
+                        'tags' => $meta,
+                        'beforeLabel' => '',
+                        'format' => false
+                    ])
+                    @endtags
+                </div>
             @endif
 
             @if($heading)
