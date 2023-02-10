@@ -21,14 +21,19 @@
             @endif
 
             @if($meta)
-                <div class="{{$baseClass}}__meta">
+                @if(is_string($meta))
+                    @typography(['variant' => 'meta', 'element' => 'span', 'classList' => [$baseClass."__meta"]])
+                        {{ $meta }}
+                    @endtypography
+                @elseif(is_array($meta))
                     @tags([
                         'tags' => $meta,
                         'beforeLabel' => '',
-                        'format' => false
+                        'format' => false,
+                        'classList' => [$baseClass."__meta"]
                     ])
                     @endtags
-                </div>
+                @endif
             @endif
 
             @if($heading)
