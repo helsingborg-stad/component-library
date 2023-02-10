@@ -37,7 +37,7 @@ class Tags extends \ComponentLibrary\Component\BaseController
     {
         $filteredTags = [];
 
-        if (!empty($arr)) {
+        if (!empty($arr) && is_countable($arr)) {
             foreach ($arr as $tag) {
                 if (!array_key_exists('href', $tag)) {
                     $tag['href'] = "";
