@@ -11,7 +11,7 @@ class Tags extends \ComponentLibrary\Component\BaseController
 
         $this->data['tags'] = $this->arrayCleanUp($tags);
 
-        $this->data['tagCount'] = count($tags); 
+        $this->data['tagCount'] = is_countable($tags) ? count($tags) : 0; 
 
         if ($format) {
             $this->data['classList'][] = $this->getBaseClass() . "--format";
