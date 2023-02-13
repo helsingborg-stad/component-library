@@ -3,8 +3,8 @@
     @slot('title')
         {{ $tooltipDate }}
     @endslot
-    <time class="{{ $metaDate }}" {!! $attribute !!}>{{ $refinedDate }}</time>
+    <time class="{{ $metaDate }} {{ $class }}" {!! $attribute !!}>{{ $refinedDate }}</time>
   @endtooltip
 @else
-  <time class="{{ $metaDate }}" {!! $attribute !!}>{{ $refinedDate }}</time>
+  <time class="{{ $metaDate }} {{$class}} " {!! $attribute !!}>{{ $refinedDate }}</time>
 @endif
