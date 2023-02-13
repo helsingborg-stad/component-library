@@ -10,7 +10,7 @@
                 {!! !empty($item['attributeList']) ? $buildAttributes($item['attributeList']) : '' !!}
             >
 
-                @if($allowStyle && $item['style'] == 'button')
+                @if($allowStyle && !empty($item['style']) && $item['style'] == 'button')
                     @button([
                         'id' => $id . " - " . $item['id'] ."-" . $loop->index . "__label",
                         'icon' => isset($item['icon']['icon']) ? $item['icon']['icon'] : false,
