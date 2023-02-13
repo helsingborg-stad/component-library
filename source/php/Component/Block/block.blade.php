@@ -10,14 +10,12 @@
         <div class="{{$baseClass}}__body">
 
             @if($date && !$dateBadge)
-                @tags([
-                    'tags' => [
-                        ['label' => $date]
-                    ],
-                    'beforeLabel' => '',
-                    'format' => false
+                @date([
+                    'action' => false,
+                    'timestamp' => $date,
+                    'classList' => [$baseClass."__date"]
                 ])
-                @endtags
+                @enddate
             @endif
 
             @if($meta)
