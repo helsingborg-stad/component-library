@@ -285,7 +285,7 @@ class BaseController
      *
      * @return string A single css class
      */
-    protected function getBaseClass()
+    protected function getBaseClass($className = "")
     {
         //If base class is specified from component controller then use that
         if ($this->data['baseClass']) {
@@ -294,7 +294,19 @@ class BaseController
 
         //Create string
         $namespaceParts = $this->getNamespaceParts();
-        return strtolower("c-" . end($namespaceParts));
+
+        //Create array of items
+        return strtolower(
+            implode(
+                "",
+                [
+                    "c-",
+                    end($namespaceParts),
+                    ($className ? '__' : ''),
+                    $className
+                ]
+            )
+        );
     }
 
     private function getAttribute($implode = true)
