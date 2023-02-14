@@ -10,6 +10,14 @@
             @endicon
         </div>
     @endif
+    
+    @if($image)
+        @image([
+            "src" => $image,
+            "alt" => $alt,
+        ])
+        @endimage
+    @endif
 
     @if($slotHasData)
         <div class="c-collection__content">
