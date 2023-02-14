@@ -27,7 +27,7 @@
                         ]
                     ])
                     @endbutton
-                @else
+                @elseif($item['label'])
                     <a  id="{{$id}}-{{$item['id']}}-{{$loop->index}}__label"
                         class="{{$baseClass}}__link {{$item['class']}}" 
                         href="{{$item['href']}}" 
@@ -37,16 +37,18 @@
                             @icon($item['icon'])
                             @endicon
                         @endif
+                        
                         @if($item['label'])
                             <span class="{{$baseClass}}__text">{{$item['label']}}</span>
+
                             @if($item['children'])
-                            <template>
-                            @icon([
-                                'icon' => 'expand_more',
-                                'classList' => ['u-margin__left--auto']
-                            ])
-                            @endicon
-                            </template>
+                                <template>
+                                    @icon([
+                                        'icon' => 'expand_more',
+                                        'classList' => ['u-margin__left--auto']
+                                    ])
+                                    @endicon
+                                </template>
                             @endif
                         @endif
                     </a>
