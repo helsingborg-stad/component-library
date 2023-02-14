@@ -79,7 +79,7 @@ class Nav extends \ComponentLibrary\Component\BaseController
             foreach ($items as $key => $item) {
                 //Add defaults
                 $item = array_merge([
-                    'ID' => rand(1, PHP_INT_MAX),
+                    'id' => rand(1, PHP_INT_MAX),
                     'label' => "Unknown",
                     'ancestor' => false,
                     'active' => false,
