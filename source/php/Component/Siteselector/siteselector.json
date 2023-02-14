@@ -1,0 +1,23 @@
+{
+    "slug": "siteselector",
+    "default": {
+        "element": "div",
+        "items": [],
+        "maxItems": false,
+        "showMoreLabel": ""
+    },
+    "description": {
+        "element": "What element the markup will use."
+    },
+    "view": "siteselector.blade.php",
+    "dependency": {
+        "sass": {
+            "components": [
+                "siteselector",
+                "nav",
+                "icon",
+                "button"
+            ]
+        }
+    }
+}
