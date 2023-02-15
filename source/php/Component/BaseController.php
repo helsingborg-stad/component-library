@@ -285,7 +285,7 @@ class BaseController
      *
      * @return string A single css class
      */
-    protected function getBaseClass($className = "")
+    protected function getBaseClass(string $className = "", bool $isModifier = false): string
     {
         //If base class is specified from component controller then use that
         if ($this->data['baseClass']) {
@@ -295,6 +295,9 @@ class BaseController
         //Create string
         $namespaceParts = $this->getNamespaceParts();
 
+        //Separator notation
+        $separator = ($isModifier ? '--' : '__'); 
+
         //Create array of items
         return strtolower(
             implode(
@@ -302,7 +305,7 @@ class BaseController
                 [
                     "c-",
                     end($namespaceParts),
-                    ($className ? '__' : ''),
+                    ($className ? $separator : ''),
                     $className
                 ]
             )
