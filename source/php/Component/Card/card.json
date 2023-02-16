@@ -23,7 +23,10 @@
         "date": false,
         "dateBadge": false,
         "hasFooter": false,
-        "hasPlaceholder": false
+        "hasPlaceholder": false,
+        "postId": false,
+        "postType": "",
+        "icons": []
     },
     "description": {
         "image": "A url to a image.",
@@ -38,7 +41,6 @@
         "bottom": "Empty slot placed in the bottom of card.",
         "hasRipple": "Enable / disable ripple fx",
         "buttons": "Array with buttons that has parameters like href, text and attributeList.",
-        "icons": "Array with icons that has parameters like name, size, attributeList, classList.",
         "avatar": "Array with the avatar data such as image and name.",
         "dropdown": "Array with the dropdown parameters as items as an array, direction: top, right, bottom, left, position: top, bottom ",
         "accordion": "Array with the accordion parameters such as heading and content data",
@@ -47,7 +49,9 @@
         "ratio": "The ratio of the image",
         "date": "Preformatted date",
         "dateBadge": "Display date as a badge. Requires image to be set.",
-        "hasFooter": "Inidcate if the card has a footer section."
+        "hasFooter": "Inidcate if the card has a footer section.",
+        "postId": "ID of a post",
+        "icons": "An array of icons (array of arrays) containing icon, size, filled and attributes"
     },
     "view": "card.blade.php",
     "dependency": {
