@@ -1,18 +1,20 @@
 <!-- modal.blade.php -->
-<dialog class="{{ $class }}" aria-modal="true" aria-labelledby="modal__label__{{ $id }}" {!! $attribute !!}>
+<dialog class="{{ $class }}" aria-modal="true" aria-labelledby="modal__label__{{ $id }}"
+    {!! $attribute !!}>
 
-    <div class="{{ $baseClass }}__header">
-        @if ($heading)
-            @typography([
-                "id" => "modal__label__".$id,
-                "variant" => "h2",
-                "element" => "h2",
-                'attributeList' => ['tabindex' => '1'],
-                'classList' => [$baseClass . '__heading']
-            ])
-                {{ $heading }}
-            @endtypography
-        @endif
+    @if ($heading)
+        <div class="{{ $baseClass }}__header">
+            @if ($heading)
+                @typography([
+                    'id' => 'modal__label__' . $id,
+                    'variant' => 'h2',
+                    'element' => 'h2',
+                    'attributeList' => ['tabindex' => '1'],
+                    'classList' => [$baseClass . '__heading']
+                ])
+                    {{ $heading }}
+                @endtypography
+            @endif
             @button([
                 'text' => '',
                 'icon' => 'close',
@@ -23,8 +25,8 @@
                 'size' => 'lg',
             ])
             @endbutton
-    </div>
-
+        </div>
+    @endif
     <section class="{{ $baseClass }}__content" tabindex="2">
 
         {{-- Previous button --}}
@@ -38,6 +40,19 @@
                 'attributeList' => ['data-prev' => ''],
                 'classList' => [$baseClass . '__prev'],
                 'label' => 'Slide to previous',
+                'size' => 'lg',
+            ])
+            @endbutton
+        @endif
+
+        @if (!$heading)
+            @button([
+                'text' => '',
+                'icon' => 'close',
+                'color' => 'default',
+                'style' => 'basic',
+                'attributeList' => ['data-close' => '', 'style' => 'right:10px;top:10px;'],
+                'classList' => [$baseClass . '__close', 'u-position--absolute'],
                 'size' => 'lg',
             ])
             @endbutton
@@ -69,9 +84,8 @@
     @endif
 
     @if ($navigation)
-        @steppers(
-        [
-        'type' => 'dots'
+        @steppers([
+            'type' => 'dots'
         ])
         @endsteppers
     @endif
