@@ -1,11 +1,12 @@
 
 @foreach($icons as $icon)
+{{-- @php var_dump($icon) @endphp --}}
     @icon([
         'icon' => $icon['icon'],
         'size' => $icon['size'] ?? 'md',
         'filled' => $icon['filled'] ?? false,
-        'attributeList' => $icon['attributes'] ?? ['data-like-icon' => '', 'data-post-id' => $postId, 'data-post-type' => $postType],
-        'classList' => ['c-card__icon'],
+        'attributeList' => $icon['iconAttributes'],
+        'classList' => $icon['iconClasses'],
     ])
     @endicon
 @endforeach
