@@ -4,13 +4,15 @@
         "items": [],
         "direction": "vertical",
         "includeToggle": false,
-        "allowStyle": true
+        "allowStyle": true,
+        "expandLabel": "Expand"
     },
     "description":{
         "items": "An nested array of items containing: id, label, active, ancestor, children(bool = async loading, or array), href, style, class.",
         "direction": "Modifier for basic direction. Accept values: 'vertical', 'horizontal.'",
         "includeToggle": "Tells wheter to include toggle button to expand childs or not. Accept values: true, false.",
-        "allowStyle": "Allow the use of style parameter in this menu (item.style = 'button')"
+        "allowStyle": "Allow the use of style parameter in this menu (item.style = 'button')",
+        "expandLabel": "Prefix for labels on expand arrow. Will result in Expand: Link label, or if label is missing, just Expand."
     },
     "view":"nav.blade.php",
     "dependency": {
