@@ -73,15 +73,5 @@ class Card extends \ComponentLibrary\Component\BaseController
         }
 
         $this->data['postType'] = $postType ? $postType : "";
-
-        if ($icons) {
-            foreach ($icons as $icon) {
-                if (in_array($this->data['postType'], $icon['postTypes'])) {
-                    $this->data['icons'] = $icons;
-                } else {
-                    $this->data['icons'] = false;
-                }
-            }
-        }
     }
 }

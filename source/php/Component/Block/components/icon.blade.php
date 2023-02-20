@@ -1,4 +1,3 @@
-
 @foreach($icons as $icon)
     @icon([
         'icon' => $icon['icon'],

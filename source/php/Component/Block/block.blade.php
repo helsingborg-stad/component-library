@@ -1,6 +1,8 @@
 <!-- block.blade.php -->
 <{{ $componentElement }} class="{{$class}}" @if($image && isset($image['src']))style="background-image:url('{{$image['src']}}');" @endif{!! $attribute !!}>
 
+    @includeWhen(!empty($icons), 'Block.components.icon')
+
     @if($date && $dateBadge)
         @datebadge(['date' => $date, 'classList' => ['u-position--absolute', 'u-margin--3', 'u-fixed--top-left']])
         @enddatebadge
