@@ -3,9 +3,6 @@
   'classList' => [$baseClass . '__link'],
   'href' => $item['href'],
 ])
-  @if(!empty($item['icon']))
-    @icon($item['icon'])
-    @endicon
-  @endif
+  @icon($item['icon'])@endicon
   <span class="{{$baseClass}}__text">{{$item['label']}}</span>
 @endlink

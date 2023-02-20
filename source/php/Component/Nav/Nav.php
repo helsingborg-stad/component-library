@@ -210,7 +210,8 @@ class Nav extends \ComponentLibrary\Component\BaseController
                     'children' => false,
                     'href' => "#",
                     'classList' => [],
-                    'style' => "default"
+                    'style' => "default",
+                    'icon' => []
                 ], $item);
 
                 //Recurse for children
