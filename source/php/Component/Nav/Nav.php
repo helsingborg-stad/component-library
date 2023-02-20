@@ -21,6 +21,9 @@ class Nav extends \ComponentLibrary\Component\BaseController
      */
     public function init()
     {
+        //Declarations
+        $this->data['depth'] = 0;  
+
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
@@ -121,10 +124,25 @@ class Nav extends \ComponentLibrary\Component\BaseController
                 $item = $this->setRoleAttributes($item); 
                 $item = $this->setToggleAttributes($item);
                 $item = $this->setDepthAttributes($item);
+                $item = $this->setAriaLabelAttributes($item);
             }
         }
 
         return $items;
+    }
+
+    /**
+     * Append aria-label attribute
+     */
+    private function setAriaLabelAttributes($item) {
+        $item['attributeList'] = array_merge(
+            $item['attributeList'],
+            [
+                'aria-label' => $item['label'] ?? ''
+            ]
+            );
+
+        return $item;
     }
 
     /**
@@ -191,7 +209,7 @@ class Nav extends \ComponentLibrary\Component\BaseController
                     'active' => false,
                     'children' => false,
                     'href' => "#",
-                    'class' => "",
+                    'classList' => [],
                     'style' => "default"
                 ], $item);
 
