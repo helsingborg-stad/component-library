@@ -95,6 +95,7 @@ class Siteselector extends \ComponentLibrary\Component\BaseController
                 ],
                 $item
             );
+            
         }
 
         return $items;

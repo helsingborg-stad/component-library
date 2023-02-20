@@ -4,7 +4,7 @@
         "items": [],
         "direction": "vertical",
         "includeToggle": false,
-        "allowStyle": false,
+        "allowStyle": true,
         "depth": 0
     },
     "description":{
