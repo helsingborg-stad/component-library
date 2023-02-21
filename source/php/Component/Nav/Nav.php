@@ -73,6 +73,7 @@ class Nav extends \ComponentLibrary\Component\BaseController
             //Base class list
             $classList[] = $this->getBaseClass('item'); 
             $classList[] = $this->getBaseClass('item') . '--' . $item['style'];
+            $classList[] = $this->getBaseClass('item') . '--depth-' . ($item['depth'] ?? '1');
 
             //Active state
             if($item['active']) {
@@ -121,7 +122,6 @@ class Nav extends \ComponentLibrary\Component\BaseController
                 }
 
                 $item = $this->setRoleAttributes($item); 
-                $item = $this->setToggleAttributes($item);
                 $item = $this->setDepthAttributes($item);
                 $item = $this->setAriaLabelAttributes($item);
             }
@@ -152,7 +152,7 @@ class Nav extends \ComponentLibrary\Component\BaseController
         $item['attributeList'] = array_merge(
             $item['attributeList'],
             [
-                'depth' => $item['depth'] ?? '0'
+                'depth' => $item['depth'] ?? '1'
             ]
             );
 
@@ -168,23 +168,6 @@ class Nav extends \ComponentLibrary\Component\BaseController
             $item['attributeList'],
             [
                 'role' => 'menuitem'
-            ]
-        );
-
-        return $item;
-    }
-
-    /**
-     * Append toggling attributes
-     */
-    private function setToggleAttributes(array $item): array
-    {
-        $item['attributeList'] = array_merge(
-            $item['attributeList'],
-            [
-                'data-js-toggle-item' => $this->getUid(),
-                'data-js-toggle-trigger' => $this->getUid(),
-                'data-js-toggle-class' => "is-active"
             ]
         );
 
