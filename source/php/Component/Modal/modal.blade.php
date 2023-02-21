@@ -1,20 +1,18 @@
 <!-- modal.blade.php -->
 <dialog class="{{ $class }}" aria-modal="true" aria-labelledby="modal__label__{{ $id }}"
     {!! $attribute !!}>
+    <div class="{{ $baseClass }}__header">
+        @if ($heading)
+            @typography([
+                'id' => 'modal__label__' . $id,
+                'variant' => 'h2',
+                'element' => 'h2',
+                'attributeList' => ['tabindex' => '1'],
+                'classList' => [$baseClass . '__heading']
+            ])
+                {{ $heading }}
+            @endtypography
 
-    @if ($heading)
-        <div class="{{ $baseClass }}__header">
-            @if ($heading)
-                @typography([
-                    'id' => 'modal__label__' . $id,
-                    'variant' => 'h2',
-                    'element' => 'h2',
-                    'attributeList' => ['tabindex' => '1'],
-                    'classList' => [$baseClass . '__heading']
-                ])
-                    {{ $heading }}
-                @endtypography
-            @endif
             @button([
                 'text' => '',
                 'icon' => 'close',
@@ -25,8 +23,22 @@
                 'size' => 'lg',
             ])
             @endbutton
-        </div>
-    @endif
+        @else
+            @button([
+                'text' => '',
+                'icon' => 'close',
+                'color' => 'default',
+                'style' => 'basic',
+                'attributeList' => [
+                    'data-close' => '',
+                    'style' => 'right:10px;top:10px;z-index:999;',
+                ],
+                'classList' => [$baseClass . '__close', 'u-position--absolute'],
+                'size' => 'lg',
+            ])
+            @endbutton
+        @endif
+    </div>
     <section class="{{ $baseClass }}__content" tabindex="2">
 
         {{-- Previous button --}}
@@ -45,18 +57,6 @@
             @endbutton
         @endif
 
-        @if (!$heading)
-            @button([
-                'text' => '',
-                'icon' => 'close',
-                'color' => 'default',
-                'style' => 'basic',
-                'attributeList' => ['data-close' => '', 'style' => 'right:10px;top:10px;'],
-                'classList' => [$baseClass . '__close', 'u-position--absolute'],
-                'size' => 'lg',
-            ])
-            @endbutton
-        @endif
 
         {!! $slot !!}
 
