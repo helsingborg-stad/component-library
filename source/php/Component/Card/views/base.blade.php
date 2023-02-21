@@ -1,4 +1,4 @@
-@includeWhen(!empty($icons), 'Card.components.icon')
+@includeWhen(!empty($icon), 'Card.components.icon')
 @includeWhen($image && !empty($image['src']), 'Card.components.image')
 @includeWhen($image && !empty($image['src']) && $dateBadge && $date, 'Card.components.datebadge')
 @includeWhen($collapsible || $heading || $subHeading || $meta || ($date && !$dateBadge) || $content, 'Card.partials.body')

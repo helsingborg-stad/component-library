@@ -74,15 +74,15 @@ class Card extends \ComponentLibrary\Component\BaseController
 
         $this->data['postType'] = $postType ? $postType : "";
 
-
-        if ($icons) {
-            foreach ($icons as &$icon) {
-                $icon['iconAttributes']['data-post-type'] = $postType;
-                $icon['iconAttributes']['data-post-id'] = strval($postId);
-                
-                $icon['iconClasses'][] = 'c-card__icon';
-                $this->data['icons'] = $icons;
+        if ($icon) {
+            if (!isset($icon['attributes']['data-post-type']) || empty($icon['attributes']['data-post-type'])) {
+                $icon['attributes']['data-post-type'] = $postType;
             }
+            if (!empty($postId)) {
+                $icon['attributes']['data-post-id'] = strval($postId);
+            }
+            $icon['classes'][] = 'c-card__icon';
+            $this->data['icon'] = $icon;
         }
     }
 }
