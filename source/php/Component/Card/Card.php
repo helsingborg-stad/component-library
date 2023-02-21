@@ -72,8 +72,6 @@ class Card extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . '--ratio-' . str_replace(":", "-", $ratio);
         }
 
-        $this->data['postType'] = $postType ? $postType : "";
-
         if ($icon) {
             if (!isset($icon['attributes']['data-post-type']) || empty($icon['attributes']['data-post-type'])) {
                 $icon['attributes']['data-post-type'] = $postType;

@@ -11,7 +11,7 @@
         "dateBadge": false,
         "postId": false,
         "postType": "",
-        "icons": []
+        "icon": []
     },
     "description": {
         "heading": "The heading of the block",
