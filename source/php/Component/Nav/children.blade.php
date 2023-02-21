@@ -10,7 +10,7 @@
   @endbutton
 @endif
 
-@if(is_array($item['children'])) 
+@if(is_array($item['children']))
   @nav([
     'items' => $item['children'],
     'isExpanded' => ((isset($item['active']) && boolval($item['active'])) || (isset($item['ancestor']) &&  boolval($item['ancestor']) )) ? true : false,
