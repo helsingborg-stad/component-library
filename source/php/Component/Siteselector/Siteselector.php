@@ -31,13 +31,13 @@ class Siteselector extends \ComponentLibrary\Component\BaseController
 
         //Normalize
         $this->data['items']        = $items = $this->normalizeItems($this->data['items']); 
-        $this->data['hiddenItems']  = $hiddenItems = $this->normalizeItems($this->data['hiddenItems']); 
+        $this->data['hiddenItems']  = $hiddenItems = $this->normalizeItems($this->data['hiddenItems'], 1); 
 
         //Hightlight current site
         $this->data['items']        = $items = $this->hightlightItems($this->data['items']); 
         $this->data['hiddenItems']  = $hiddenItems = $this->hightlightItems($this->data['hiddenItems']); 
  
-        //Combine (make hidden items appear as a dropdown
+        //Combine (make hidden items appear as a dropdown)
         if($hiddenItems) {
             $this->data['items'][] = [
                 'id' => 'expand',
@@ -45,7 +45,9 @@ class Siteselector extends \ComponentLibrary\Component\BaseController
                 'href' => '#expand',
                 'ancestor' => 0,
                 'children' => $hiddenItems,
-                'class' => $this->getBaseClass('item') . ' ' . $this->getBaseClass('more'),
+                'classList' => [
+                    $this->getBaseClass('more')
+                ],
                 'active' => false,
                 'style' => 'default'
             ];
@@ -75,7 +77,7 @@ class Siteselector extends \ComponentLibrary\Component\BaseController
      * @param array $items
      * @return array
      */
-    private function normalizeItems($items): array
+    private function normalizeItems($items, $depth = null): array
     {
         if(!is_countable($items)) {
             return []; 
@@ -90,12 +92,17 @@ class Siteselector extends \ComponentLibrary\Component\BaseController
                     'active' => false,
                     'children' => false,
                     'href' => "#",
-                    'class' => $this->getBaseClass('item'),
+                    'classList' => [
+                        $this->getBaseClass('item')
+                    ],
                     'style' => "default",
                 ],
                 $item
             );
-            
+
+            if(is_numeric($depth)) {
+                $item['depth'] = $depth;
+            }
         }
 
         return $items;
