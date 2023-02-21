@@ -68,12 +68,11 @@ class Nav extends \ComponentLibrary\Component\BaseController
 
         //Create item class (view func)
         $this->data['itemClass'] = function($item) {
-            
+            $classList = $item['classList']; 
+
             //Base class list
-            $classList = [
-                $this->getBaseClass('item'),
-                $this->getBaseClass('item') . '--' . $item['style'],
-            ];
+            $classList[] = $this->getBaseClass('item'); 
+            $classList[] = $this->getBaseClass('item') . '--' . $item['style'];
 
             //Active state
             if($item['active']) {
@@ -126,6 +125,7 @@ class Nav extends \ComponentLibrary\Component\BaseController
                 $item = $this->setDepthAttributes($item);
                 $item = $this->setAriaLabelAttributes($item);
             }
+
         }
 
         return $items;
