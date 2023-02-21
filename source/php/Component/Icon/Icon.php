@@ -9,7 +9,7 @@ namespace ComponentLibrary\Component\Icon;
 class Icon extends \ComponentLibrary\Component\BaseController {
     private $altTextPrefix = "Icon: ";
     private $altText = [
-        'key'  => "Label",
+        'key'  => "Label"
     ];
     private $altTextUndefined = "Undefined";
 
@@ -41,7 +41,7 @@ class Icon extends \ComponentLibrary\Component\BaseController {
         $this->data['attributeList']['alt'] = $this->getAltText($icon);
 
         //Add modifier
-        $this->data['classList'][] = $this->createIconModifier($icon); 
+        $this->data['classList'][] = $this->createIconModifier($icon);
     }
 
     /**
