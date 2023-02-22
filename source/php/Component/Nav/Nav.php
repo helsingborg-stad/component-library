@@ -123,6 +123,7 @@ class Nav extends \ComponentLibrary\Component\BaseController
                 }
 
                 $item = $this->setRoleAttributes($item); 
+                $item = $this->setDepthAttributes($item);
                 $item = $this->setAriaLabelAttributes($item);
             }
 
@@ -146,6 +147,19 @@ class Nav extends \ComponentLibrary\Component\BaseController
     }
 
     /**
+     * Append depth attribute
+     */
+    private function setDepthAttributes($item) {
+        $item['attributeList'] = array_merge(
+            $item['attributeList'],
+            [
+                'depth' => $this->data['depth']
+            ]
+        );
+        return $item;
+    }
+
+    /**
      * Append the correct role attributes
      */
     private function setRoleAttributes(array $item): array
@@ -156,7 +170,6 @@ class Nav extends \ComponentLibrary\Component\BaseController
                 'role' => 'menuitem'
             ]
         );
-
         return $item;
     }
 
