@@ -22,7 +22,9 @@ class Nav extends \ComponentLibrary\Component\BaseController
     public function init()
     {
         //Declarations
-        $this->data['depth'] = 0;  
+        if(!isset($this->data['depth'])) {
+            $this->data['depth'] = 1;  
+        }
 
         //Extract array for eazy access (fetch only)
         extract($this->data);
@@ -33,9 +35,8 @@ class Nav extends \ComponentLibrary\Component\BaseController
         }
 
         //Classes
-        $this->data['depth'] + 1;
         $this->data['classList'][] = $this->getBaseClass(
-            "depth-" . ($this->data['depth'] + 1),
+            "depth-" . $this->data['depth'],
             true
         );
         $this->data['classList'][] = "unlist";
@@ -73,7 +74,7 @@ class Nav extends \ComponentLibrary\Component\BaseController
             //Base class list
             $classList[] = $this->getBaseClass('item'); 
             $classList[] = $this->getBaseClass('item') . '--' . $item['style'];
-            $classList[] = $this->getBaseClass('item') . '--depth-' . ($item['depth'] ?? '1');
+            $classList[] = $this->getBaseClass('item') . '--depth-' . $this->data['depth'];
 
             //Active state
             if($item['active']) {
@@ -122,7 +123,6 @@ class Nav extends \ComponentLibrary\Component\BaseController
                 }
 
                 $item = $this->setRoleAttributes($item); 
-                $item = $this->setDepthAttributes($item);
                 $item = $this->setAriaLabelAttributes($item);
             }
 
@@ -139,20 +139,6 @@ class Nav extends \ComponentLibrary\Component\BaseController
             $item['attributeList'],
             [
                 'aria-label' => $item['label'] ?? ''
-            ]
-            );
-
-        return $item;
-    }
-
-    /**
-     * Append depth attribute
-     */
-    private function setDepthAttributes($item) {
-        $item['attributeList'] = array_merge(
-            $item['attributeList'],
-            [
-                'depth' => $item['depth'] ?? '1'
             ]
             );
 
