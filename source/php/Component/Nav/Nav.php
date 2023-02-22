@@ -153,7 +153,7 @@ class Nav extends \ComponentLibrary\Component\BaseController
         $item['attributeList'] = array_merge(
             $item['attributeList'],
             [
-                'depth' => $this->data['depth']
+                'data-depth' => $this->data['depth']
             ]
         );
         return $item;
