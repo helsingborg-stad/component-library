@@ -17,7 +17,9 @@
         "reverseColumns": false,
         "overlay": false,
         "stretch": false,
-        "buttons": false
+        "buttons": false,
+        "contentBackground": "",
+        "contentAlignment": ""
     },
     "description": {
         "layout": "Which layout to use",
@@ -43,7 +45,8 @@
         "sass": {
             "components": [
                 "segment",
-                "typography"
+                "typography",
+                "button"
             ]
         }
     }
