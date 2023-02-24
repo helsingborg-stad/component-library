@@ -1,6 +1,7 @@
 {
     "slug": "tags",
     "default": {
+        "style": "default",
         "componentElement": "div",
         "beforeLabel": "#",
         "afterLabel": "",

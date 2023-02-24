@@ -17,6 +17,17 @@ class Tags extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . "--format";
         }
 
+        
+        if (function_exists('get_theme_mod')) {
+            if (!empty(get_theme_mod('tags_style_settings'))) {
+                $this->data['classList'][] = $this->getBaseClass() . '--' . get_theme_mod('tags_style_settings');
+            }
+
+            if (!empty(get_theme_mod('tags_markings_style'))) {
+                $this->data['classList'][] = $this->getBaseClass() . '--' . get_theme_mod('tags_markings_style');
+            }
+        }
+
         $this->data['isHidden'] = function ($loopIteration) use($compress) {
             if($compress !== false) {
                 if($loopIteration >= $compress) {
