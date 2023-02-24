@@ -25,7 +25,13 @@ class Tags extends \ComponentLibrary\Component\BaseController
 
             if (!empty(get_theme_mod('tags_markings_style'))) {
                 $this->data['classList'][] = $this->getBaseClass() . '--' . get_theme_mod('tags_markings_style');
+
+                $this->data['beforeIcon'] = ['icon' => 'circle', 'size' => 'xs', 'customColor' => '#ffffff'];
+
             }
+        }
+        if (!empty($this->data['beforeIcon'])) {
+            $this->data['beforeLabel'] = "";
         }
 
         $this->data['isHidden'] = function ($loopIteration) use($compress) {

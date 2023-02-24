@@ -4,6 +4,7 @@
         "style": "default",
         "componentElement": "div",
         "beforeLabel": "#",
+        "beforeIcon": [],
         "afterLabel": "",
         "format": true,
         "compress": false
@@ -13,7 +14,8 @@
         "beforeLabel": "",
         "afterLabel": "",
         "format": "If the component should format the input text.",
-        "compress": "Show [N] amount of items, hide the rest of them behind a expand button."
+        "compress": "Show [N] amount of items, hide the rest of them behind a expand button.",
+        "beforeIcon": "Same specification as Icon, replaces the beforeLabel"
     },
     "view": "tags.blade.php",
     "dependency": {

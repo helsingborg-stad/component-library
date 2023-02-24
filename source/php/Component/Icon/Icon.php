@@ -39,6 +39,10 @@ class Icon extends \ComponentLibrary\Component\BaseController {
         $this->data['attributeList']['role'] = "img";
         $this->data['attributeList']['aria-label'] = $this->getAltText($icon);
         $this->data['attributeList']['alt'] = $this->getAltText($icon);
+        
+        if (!empty($customColor)) {
+            $this->data['attributeList']['style'] .= 'color:' . $customColor . ';';
+        }
     }
 
     /**

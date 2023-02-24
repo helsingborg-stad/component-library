@@ -12,8 +12,18 @@
                     {{ $beforeLabel }}{{ $tag['label'] ?? 'Undefined label' }}{{ $afterLabel }}
                 @endlink
             @else 
+
                 <span class="c-tags__tag {{ $isHidden($loop->index) }}">
-                    {{ $beforeLabel }}{{ $tag['label'] ?? 'Undefined label' }}{{ $afterLabel }}
+                    @if (!empty($beforeIcon))
+                    @icon([
+                        'icon' => $beforeIcon['icon'],
+                        'size' => $beforeIcon['size'],
+                    ])
+                    @endicon
+                    @else
+                    {{ $beforeLabel }}
+                    @endif
+                    {{ $tag['label'] ?? 'Undefined label' }}{{ $afterLabel }}
                 </span>
             @endif
         @endforeach
