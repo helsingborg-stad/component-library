@@ -15,13 +15,13 @@
 
                 <span class="c-tags__tag {{ $isHidden($loop->index) }}">
                     @if (!empty($beforeIcon))
-                    @icon([
-                        'icon' => $beforeIcon['icon'],
-                        'size' => $beforeIcon['size'],
-                    ])
-                    @endicon
+                        @icon([
+                            'icon' => $beforeIcon['icon'],
+                            'size' => $beforeIcon['size'],
+                        ])
+                        @endicon
                     @else
-                    {{ $beforeLabel }}
+                        {{ $beforeLabel }}
                     @endif
                     {{ $tag['label'] ?? 'Undefined label' }}{{ $afterLabel }}
                 </span>
