@@ -62,14 +62,9 @@ class Nav extends \ComponentLibrary\Component\BaseController
         $this->data['attributeList']['role'] = 'menu';
         $this->data['attributeList']['js-keep-in-viewport-after-resize'] = "1";
 
-        //Children (view func)
-        $this->data['hasChildren'] = function($children) {
-            !empty($children);
-        };
-
         //Create item class (view func)
         $this->data['itemClass'] = function($item) {
-            $classList = $item['classList']; 
+            $classList = $item['classList'];
 
             //Base class list
             $classList[] = $this->getBaseClass('item'); 
@@ -92,17 +87,29 @@ class Nav extends \ComponentLibrary\Component\BaseController
             }
 
             //Has children
-            if(!empty($item['children'])) {
+            if($this->hasToggle($item['children'])) {
                 $classList[] = "has-children";
             }
 
             //If item has a toggle
-            if(!empty($item['children']) && $this->data['includeToggle'] && $item['style'] == 'default') {
+            if($this->hasToggle($item['children'])) {
                 $classList[] = "has-toggle"; 
             }
 
             return implode(" ", $classList); 
         };
+    }
+
+    /** Check if have children in current mode (async or not) */
+    private function hasChildren($children) {
+        if(empty($this->data['endpoint'])) {
+            return (bool) (is_array($children) && !empty($children)); 
+        }
+        return (bool) $children;
+    }
+
+    private function hasToggle($children) {
+        return (bool) ($this->data['includeToggle'] && $this->hasChildren($children)); 
     }
 
     /**
@@ -141,7 +148,7 @@ class Nav extends \ComponentLibrary\Component\BaseController
             [
                 'aria-label' => $item['label'] ?? ''
             ]
-            );
+        );
 
         return $item;
     }
@@ -193,8 +200,11 @@ class Nav extends \ComponentLibrary\Component\BaseController
                     'href' => "#",
                     'classList' => [],
                     'style' => "default",
-                    'icon' => []
+                    'icon' => [],
                 ], $item);
+
+                $item['hasToggle']      = $this->hasToggle($item['children']);
+                $item['hasChildren']    = $this->hasChildren($item['children']);
 
                 //Recurse for children
                 if (is_countable($item['children'])) {
