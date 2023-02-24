@@ -19,19 +19,20 @@
             @endif
 
             @if($meta)
-                @if(is_string($meta))
-                    @typography(['variant' => 'meta', 'element' => 'span', 'classList' => [$baseClass."__meta"]])
-                        {{ $meta }}
-                    @endtypography
-                @elseif(is_array($meta))
-                    @tags([
-                        'tags' => $meta,
-                        'beforeLabel' => '',
-                        'format' => false,
-                        'classList' => [$baseClass."__meta"]
-                    ])
-                    @endtags
-                @endif
+                @typography(['variant' => 'meta', 'element' => 'span', 'classList' => [$baseClass."__meta"]])
+                    @if (is_array($meta))
+                        @if (array_filter($meta, 'is_string') !== [])
+                            {{ implode(', ', $meta) }}
+                        @else
+                            @foreach ($meta as $value)
+                                {!! $value['label'] !!}
+                                {{ !$loop->last ? ', ' : '' }}
+                            @endforeach
+                        @endif
+                    @else
+                        {!! $meta !!}
+                    @endif
+                @endtypography
             @endif
 
             @if($heading)
