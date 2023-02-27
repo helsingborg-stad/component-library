@@ -17,8 +17,7 @@
         "reverseColumns": false,
         "overlay": false,
         "stretch": false,
-        "buttons": false,
-        "contentAlignment": ""
+        "buttons": false
     },
     "description": {
         "layout": "Which layout to use",
