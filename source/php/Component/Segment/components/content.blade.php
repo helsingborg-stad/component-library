@@ -1,7 +1,7 @@
 @if($title)
     @typography([
         "element" => "h2",
-        "variant" => ($layout == 'full-width' || $layout == 'card') ? 'h1' : 'h2',
+        "variant" => ($layout == 'full-width') ? 'h1' : 'h2',
         "classList" => [$baseClass . '__title'],
         "autopromote" => true
     ])
@@ -17,6 +17,16 @@
     {!! $meta !!}
     @endtypography
 @endif
+
+@if($date)
+    @date([
+        'action' => false,
+        'timestamp' => $date,
+        'classList' => [$baseClass."__date"]
+    ])
+    @enddate
+@endif
+
 @if($tags) 
     @tags([
         'tags' => $tags,
