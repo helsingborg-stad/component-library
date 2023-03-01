@@ -5,12 +5,14 @@
         "label": "",
         "icon": "",
         "color": "",
-        "componentElement": "span"
+        "componentElement": "span",
+        "customColor": ""
     },
     "description": {
         "size": "Sizes: xs, sm, md, lg, xl, xxl",
         "label": "A label on the icon",
         "color": "The color of the icon",
+        "customColor": "A custom HEX color",
         "icon": "The icon name",
         "componentElement": "Icon HTML tag"
     },
