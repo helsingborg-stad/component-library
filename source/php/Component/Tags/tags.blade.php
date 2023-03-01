@@ -14,10 +14,10 @@
             @else 
 
                 <span class="c-tags__tag {{ $isHidden($loop->index) }}">
-                    @if (!empty($beforeIcon))
+                    @if (!empty($icon))
                         @icon([
-                            'icon' => $beforeIcon['icon'],
-                            'size' => $beforeIcon['size'],
+                            'icon' => $icon['icon'],
+                            'size' => $icon['size'],
                         ])
                         @endicon
                     @else
