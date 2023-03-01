@@ -15,7 +15,7 @@
         "icon": "Same specification as Icon, adds an icon ",
         "afterLabel": "",
         "format": "If the component should format the input text.",
-        "compress": "Show [N] amount of items, hide the rest of them behind a expand indicator.",
+        "compress": "Show [N] amount of items, hide the rest of them behind a expand indicator."
     },
     "view": "tags.blade.php",
     "dependency": {
