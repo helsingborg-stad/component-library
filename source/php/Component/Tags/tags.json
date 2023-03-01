@@ -14,7 +14,7 @@
         "beforeLabel": "",
         "afterLabel": "",
         "format": "If the component should format the input text.",
-        "compress": "Show [N] amount of items, hide the rest of them behind a expand button.",
+        "compress": "Show [N] amount of items, hide the rest of them behind a expand indicator.",
         "beforeIcon": "Same specification as Icon, replaces the beforeLabel"
     },
     "view": "tags.blade.php",
