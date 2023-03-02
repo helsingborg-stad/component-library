@@ -21,6 +21,7 @@ class Nav extends \ComponentLibrary\Component\BaseController
      */
     public function init()
     {
+
         //Declarations
         if(!isset($this->data['depth'])) {
             $this->data['depth'] = 1;  
@@ -43,8 +44,11 @@ class Nav extends \ComponentLibrary\Component\BaseController
         $this->data['classList'][] = $this->getBaseClass($direction, true);
 
         //Set default values to items array
-        $this->data['items'] = $items = $this->normalizeItems($items);
+        if(is_array($items)) {
+            $this->data['items'] = $items = $this->normalizeItems($items);
 
+        }
+        
         //Set item attribute list
         $this->data['items'] = $this->itemAttributeList(
             $items, 
