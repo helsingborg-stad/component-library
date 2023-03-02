@@ -16,7 +16,7 @@
       "pressed": "false",
       "toggle": false,
       "icon": false,
-      "attributeList": {"js-toggle-trigger": "", "js-toggle-item": ""},
+      "attributeList": [],
       "reversePositions": false,
       "fullWidth": false,
       "classListIcon": [],
