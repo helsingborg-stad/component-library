@@ -37,7 +37,7 @@
             @if ($secondaryMeta)
                 @if (is_string($secondaryMeta))
                     @typography(['variant' => 'secondarymeta', 'element' => 'span', 'classList' => [$baseClass . '__secondarymeta']])
-                        {{ $meta }}
+                        {{ $secondaryMeta }}
                     @endtypography
                 @elseif(is_array($secondaryMeta))
                     @tags([
