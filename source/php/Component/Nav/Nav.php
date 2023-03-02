@@ -53,12 +53,6 @@ class Nav extends \ComponentLibrary\Component\BaseController
             $this->data
         );
 
-        //Endpoint for async fetching
-        if (isset($endpoint)) {
-            $this->data['classList'][] = "has-async";
-            $this->data['attributeList']['data-endpoint'] = $endpoint;
-        }
-
         //General Attributes
         $this->data['attributeList']['aria-orientation'] = $direction;
         $this->data['attributeList']['role'] = 'menu';
@@ -98,30 +92,26 @@ class Nav extends \ComponentLibrary\Component\BaseController
                 $classList[] = "has-toggle"; 
             }
 
+            //If item has async method
+            if($this->hasAsyncUrl($item)) {
+                $classList[] = "has-async"; 
+            }
+
             return implode(" ", $classList); 
         };
     }
 
     /** Check if have children in current mode (async or not) */
-    private function hasChildren($children, $item) {
-
-        if($this->hasAsyncUrl($item)) {
-            return true; 
-        }
-
-        if(empty($this->data['endpoint'])) {
-            return (bool) (is_array($children) && !empty($children)); 
-        }
-
+    private function hasChildren($children) {
         return (bool) $children;
     }
 
-    private function hasToggle($children, $item) {
-        return (bool) ($this->data['includeToggle'] && $this->hasChildren($children, $item)); 
+    private function hasToggle($children) {
+        return (bool) ($this->data['includeToggle'] && $this->hasChildren($children)); 
     }
 
     private function hasAsyncUrl($item) {
-        if(is_array($item['attributeList'])) {
+        if(isset($item['attributeList']) && is_array($item['attributeList'])) {
             if(array_key_exists('data-fetch-url', $item['attributeList'])) {
                 return !empty($item['attributeList']['data-fetch-url']); 
             }
