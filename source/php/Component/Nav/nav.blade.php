@@ -1,83 +1,27 @@
 <!-- nav.blade.php -->
 @if ($items) 
-    <ul class="{{$class}}" {!! $attribute !!}>
-        @foreach ($items as $item)
-            <li 
-                id="{{$id}}-{{$item['id']}}-{{$loop->index}}__item" 
-                class="{{$baseClass}}__item {{$item['style'] ? $baseClass . '__item--' . $item['style'] : ''}} {{$item['active'] ? 'is-current' : ''}} {{$item['active'] && $item['children'] || $item['ancestor'] ? ' is-open has-fetched' : ''}} {{!$item['active'] && is_array($item['children']) ? ' has-fetched' : ''}} {{$item['isSearch'] ? 'c-nav__item--search' : ''}}"
-                depth="{{$depth}}"
-                {{-- Append dynamic attributes --}}
-                {!! !empty($item['attributeList']) ? $buildAttributes($item['attributeList']) : '' !!}
-            >
+  <ul class="{{$class}}" {!! $attribute !!}>
+    @foreach ($items as $item)
+      
+      <li id="{{$id}}-{{$item['id']}}-{{$loop->index}}__item" class="{{ $itemClass($item) }}" {!! $buildAttributes($item['attributeList']) !!}>
+        
+        <div class="{{$baseClass}}__item-wrapper">
+          {{-- Nav item --}}
+          @if($allowStyle)
+            @includeIf('Nav.style.' . $item['style'])
+          @else
+            @includeIf('Nav.style.default')
+          @endif
 
-                @if($allowStyle && !empty($item['style']) && $item['style'] == 'button')
-                    @button([
-                        'id' => $id . " - " . $item['id'] ."-" . $loop->index . "__label",
-                        'icon' => isset($item['icon']['icon']) ? $item['icon']['icon'] : false,
-                        'reversePositions' => true,
-                        'text' => $item['label'],
-                        'style' => 'filled',
-                        'color' => 'primary',
-                        'href' => $item['href'],
-                        'classList' => [
-                            $baseClass . '__button',
-                        ],
-                        'attributeList' => [
-                            'aria-label' => $item['label']
-                        ]
-                    ])
-                    @endbutton
-                @else
-                    <a  id="{{$id}}-{{$item['id']}}-{{$loop->index}}__label"
-                        class="{{$baseClass}}__link {{$item['class']}}" 
-                        href="{{$item['href']}}" 
-                        @if($item['label']) aria-label="{{$item['label']}}" @endif
-                    >
-                        @if(isset($item['icon']))
-                            @icon($item['icon'])
-                            @endicon
-                        @endif
-                        @if($item['label'])
-                            <span class="{{$baseClass}}__text">{{$item['label']}}</span>
-                            @if($item['children'])
-                            <template>
-                            @icon([
-                                'icon' => 'expand_more',
-                                'classList' => ['u-margin__left--auto']
-                            ])
-                            @endicon
-                            </template>
-                            @endif
-                        @endif
-                    </a>
-                @endif
-                
-                @if (!empty($item['children']))
-                    @if($includeToggle)
-                        @button([
-                            'classList' => [ $baseClass . '__toggle', 'js-toggle-children'],
-                            'style' => 'basic',
-                            'icon' => 'expand_more',
-                            'size' => 'md',
-                            'pressed' =>  $item['active'] ? 'true' : 'false',
-                        ])
-                            @loader(['size' => 'sm'])
-                            @endloader
-                        @endbutton
-                    @endif
+          {{-- Children list --}}
+          @includeWhen($item['hasToggle'], 'Nav.toggle')
+        </div>
 
-                    @if(is_array($item['children'])) 
-                        @nav([
-                            'items' => $item['children'],
-                            'isExpanded' => (boolval($item['active']) || boolval($item['ancestor']) ) ? true : false,
-                            'includeToggle' => $includeToggle,
-                            'depth' =>  $depth + 1,
-                            'direction' => $direction
-                        ])
-                        @endnav
-                    @endif
-                @endif
-            </li>
-        @endforeach
-    </ul>
+        {{-- Children list --}}
+        @includeWhen($item['hasChildren'], 'Nav.children')
+
+      </li>
+
+    @endforeach
+  </ul>
 @endif
