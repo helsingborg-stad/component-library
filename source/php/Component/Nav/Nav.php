@@ -21,7 +21,6 @@ class Nav extends \ComponentLibrary\Component\BaseController
      */
     public function init()
     {
-
         //Declarations
         if(!isset($this->data['depth'])) {
             $this->data['depth'] = 1;  
@@ -46,7 +45,6 @@ class Nav extends \ComponentLibrary\Component\BaseController
         //Set default values to items array
         if(is_array($items)) {
             $this->data['items'] = $items = $this->normalizeItems($items);
-
         }
         
         //Set item attribute list
@@ -91,12 +89,12 @@ class Nav extends \ComponentLibrary\Component\BaseController
             }
 
             //Has children
-            if($this->hasToggle($item['children'])) {
+            if($this->hasToggle($item['children'], $item)) {
                 $classList[] = "has-children";
             }
 
             //If item has a toggle
-            if($this->hasToggle($item['children'])) {
+            if($this->hasToggle($item['children'], $item)) {
                 $classList[] = "has-toggle"; 
             }
 
@@ -105,15 +103,30 @@ class Nav extends \ComponentLibrary\Component\BaseController
     }
 
     /** Check if have children in current mode (async or not) */
-    private function hasChildren($children) {
+    private function hasChildren($children, $item) {
+
+        if($this->hasAsyncUrl($item)) {
+            return true; 
+        }
+
         if(empty($this->data['endpoint'])) {
             return (bool) (is_array($children) && !empty($children)); 
         }
+
         return (bool) $children;
     }
 
-    private function hasToggle($children) {
-        return (bool) ($this->data['includeToggle'] && $this->hasChildren($children)); 
+    private function hasToggle($children, $item) {
+        return (bool) ($this->data['includeToggle'] && $this->hasChildren($children, $item)); 
+    }
+
+    private function hasAsyncUrl($item) {
+        if(is_array($item['attributeList'])) {
+            if(array_key_exists('data-fetch-url', $item['attributeList'])) {
+                return !empty($item['attributeList']['data-fetch-url']); 
+            }
+        }
+        return false;
     }
 
     /**
@@ -207,8 +220,8 @@ class Nav extends \ComponentLibrary\Component\BaseController
                     'icon' => [],
                 ], $item);
 
-                $item['hasToggle']      = $this->hasToggle($item['children']);
-                $item['hasChildren']    = $this->hasChildren($item['children']);
+                $item['hasToggle']      = $this->hasToggle($item['children'], $item);
+                $item['hasChildren']    = $this->hasChildren($item['children'], $item);
 
                 //Recurse for children
                 if (is_countable($item['children'])) {
