@@ -95,7 +95,6 @@ class Nav extends \ComponentLibrary\Component\BaseController
             //If item has async method
             if($this->hasAsyncUrl($item)) {
                 $classList[] = "has-async"; 
-                $classList[] = "js-toggle-children";
             }
 
             return implode(" ", $classList); 
