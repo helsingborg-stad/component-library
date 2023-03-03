@@ -83,12 +83,12 @@ class Nav extends \ComponentLibrary\Component\BaseController
             }
 
             //Has children
-            if($this->hasToggle($item['children'], $item)) {
+            if($this->hasToggle($item['children'])) {
                 $classList[] = "has-children";
             }
 
             //If item has a toggle
-            if($this->hasToggle($item['children'], $item)) {
+            if($this->hasToggle($item['children'])) {
                 $classList[] = "has-toggle"; 
             }
 
@@ -100,8 +100,7 @@ class Nav extends \ComponentLibrary\Component\BaseController
             return implode(" ", $classList); 
         };
     }
-
-    /** Check if have children in current mode (async or not) */
+    
     private function hasChildren($children) {
         return (bool) $children;
     }
