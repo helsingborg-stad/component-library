@@ -102,7 +102,16 @@ class Nav extends \ComponentLibrary\Component\BaseController
     }
     
     private function hasChildren($children) {
-        return (bool) $children;
+
+        if(is_array($children) && !empty($children)) {
+            return true;
+        }
+
+        if(is_bool($children)) {
+            return $children;
+        }
+        
+        return false;
     }
 
     private function hasToggle($children) {
