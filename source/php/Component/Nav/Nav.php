@@ -29,6 +29,11 @@ class Nav extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
+        //Height modifiers
+        if($height) {
+            $this->data['classList'][] = $this->getBaseClass("height-" . $height);
+        }
+
         //Add id if missing, prevents duploicate references
         if (empty($id)) {
             $this->data['id'] = $this->getUid();
@@ -95,6 +100,7 @@ class Nav extends \ComponentLibrary\Component\BaseController
             //If item has async method
             if($this->hasAsyncUrl($item)) {
                 $classList[] = "has-async"; 
+                $classList[] = "js-async-children-data";
             }
 
             return implode(" ", $classList); 
