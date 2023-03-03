@@ -31,7 +31,7 @@ class Nav extends \ComponentLibrary\Component\BaseController
 
         //Height modifiers
         if($height) {
-            $this->data['classList'][] = $this->getBaseClass("height-" . $height);
+            $this->data['classList'][] = $this->getBaseClass("height-" . $height, true);
         }
 
         //Add id if missing, prevents duploicate references
