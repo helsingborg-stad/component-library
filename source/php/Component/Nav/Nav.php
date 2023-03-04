@@ -63,6 +63,14 @@ class Nav extends \ComponentLibrary\Component\BaseController
         $this->data['attributeList']['role'] = 'menu';
         $this->data['attributeList']['js-keep-in-viewport-after-resize'] = "1";
 
+        //Get Expand label
+        $this->data['getExpandLabel'] = function ($itemLable, $expandLabel) {
+            if(!empty($itemLable)) {
+                return $expandLabel . ": ". $itemLable;
+            }
+            return $expandLabel;
+        }; 
+
         //Create item class (view func)
         $this->data['itemClass'] = function($item) {
             $classList = $item['classList'];

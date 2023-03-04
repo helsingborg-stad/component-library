@@ -8,7 +8,9 @@
       'icon' => 'expand_more',
       'size' => 'md',
       'pressed' => $item['active'] ? 'true' : 'false',
-      'aria-label' => ($item['label'] ? ($expandLabel . ': ' . $item['label']) : $expandLabel)
+      'attributeList' => [
+        'aria-label' => $getExpandLabel($item['label'], $expandLabel)
+      ]
   ])
   @endbutton
 @endif
