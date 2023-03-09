@@ -58,6 +58,14 @@ class Hero extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . '--' . $size;
         }
 
+        if ($contentAlignment && $contentAlignment["horizontal"] !== "left") {
+            $this->data['classList'][] = $this->getBaseClass() . '--content-horizontal__' . $contentAlignment["horizontal"];
+        }
+
+        if ($contentAlignment && $contentAlignment["vertical"] !== "bottom") {
+            $this->data['classList'][] = $this->getBaseClass() . '--content-vertical__' . $contentAlignment["vertical"];
+        }
+        
         if (!empty($contentBackgroundColor) &&  ($title || $paragraph || $byline || $meta)) {
             $this->data['overlay'] = false;
             $this->data['classList'][] = $this->getBaseClass() . '--has-content-background-color';

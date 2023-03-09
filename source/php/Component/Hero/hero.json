@@ -16,7 +16,8 @@
         "meta": false,
         "background": false,
         "textColor": false,
-        "contentBackgroundColor": ""
+        "contentBackgroundColor": "",
+        "contentAlignment": {"horizontal": "left", "vertical": "bottom"}
     },
     "description": {
         "image": "Background image",
@@ -34,7 +35,8 @@
         "customHeroData": "An array containing the custom data for the selected view (heroView).",
         "background": "Image or a color",
         "textColor": "The color of the text (black or white)",
-        "contentBackgroundColor": "The background color for texts in the content area."
+        "contentBackgroundColor": "The background color for texts in the content area.",
+        "contentAlignment": "Place the conten by assigning horizontal: \"left\"|\"center\"|\"right\" and vertical: \"top\"|\"center\"|\"bottom\"."
     },
     "view": "hero.blade.php",
     "dependency": {
