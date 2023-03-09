@@ -8,6 +8,16 @@ class Siteselector extends \ComponentLibrary\Component\BaseController
         //Extract array for easy access (fetch only)
         extract($this->data);
 
+        //Border radius
+        if($radius) {
+            $this->data['classList'][] = $this->getBaseClass('radius-' . $radius, true); 
+        }
+
+        //Color scheme
+        if($color) {
+            $this->data['classList'][] = $this->getBaseClass($color, true); 
+        }
+
         //Disable max items 
         if(!is_numeric($maxItems)) {
             $this->data['maxItems'] = $maxItems = false;
