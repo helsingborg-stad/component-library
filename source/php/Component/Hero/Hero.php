@@ -58,18 +58,14 @@ class Hero extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . '--' . $size;
         }
 
-        if ($contentAlignment && $contentAlignment["horizontal"] !== "left") {
-            $this->data['classList'][] = $this->getBaseClass() . '--content-horizontal__' . $contentAlignment["horizontal"];
+        if (!empty($contentAlignmentClasses = $this->getContentAlignmentClasses($contentAlignment))) {
+            $this->data['classList'] = array_merge($this->data['classList'], $contentAlignmentClasses);
         }
 
-        if ($contentAlignment && $contentAlignment["vertical"] !== "bottom") {
-            $this->data['classList'][] = $this->getBaseClass() . '--content-vertical__' . $contentAlignment["vertical"];
+        if (($textAlignmentClass = $this->getTextAlignmentClass($textAlignment))) {
+            $this->data['classList'][] = $textAlignmentClass;
         }
 
-        if ($textAlignment && in_array($textAlignment, ["center", "right"])) {
-            $this->data['classList'][] = $this->getBaseClass() . '--text-align__' . $textAlignment;
-        }
-        
         if (!empty($contentBackgroundColor) &&  ($title || $paragraph || $byline || $meta)) {
             $this->data['overlay'] = false;
             $this->data['classList'][] = $this->getBaseClass() . '--has-content-background-color';
@@ -126,6 +122,31 @@ class Hero extends \ComponentLibrary\Component\BaseController
 
         $this->data['contentStyles'] = $this->sanitizeInlineCss($this->data['contentStyles']);
 
+    }
+
+    private function getContentAlignmentClasses(array $contentAlignment): array
+    {
+        $modifierPrefix = "content";
+        $contentAlignmentClasses = [];
+
+        if (in_array($contentAlignment["horizontal"], ["center", "right"])) {
+            $contentAlignmentClasses[] = $this->getBaseClass() . "--$modifierPrefix-horizontal__" . $contentAlignment["horizontal"];
+        }
+
+        if (in_array($contentAlignment["vertical"], ["top", "center"])) {
+            $contentAlignmentClasses[] = $this->getBaseClass() . "--$modifierPrefix-vertical__" . $contentAlignment["vertical"];
+        }
+
+        return $contentAlignmentClasses;
+    }
+    
+    private function getTextAlignmentClass(string $textAlignment)
+    {
+        if (!in_array($textAlignment, ["center", "right"])) {
+            return false;
+        }
+
+        return $this->getBaseClass() . '--text-align__' . $textAlignment;
     }
 
     private function handleCustomDataFunc($heroView, $customHeroData) {
