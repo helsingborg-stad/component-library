@@ -15,7 +15,8 @@
         "customHeroData": false,
         "meta": false,
         "background": false,
-        "textColor": false
+        "textColor": false,
+        "contentBackgroundColor": ""
     },
     "description": {
         "image": "Background image",
@@ -32,7 +33,8 @@
         "heroView": "Select which view to display",
         "customHeroData": "An array containing the custom data for the selected view (heroView).",
         "background": "Image or a color",
-        "textColor": "The color of the text (black or white)"
+        "textColor": "The color of the text (black or white)",
+        "contentBackgroundColor": "The background color for texts in the content area."
     },
     "view": "hero.blade.php",
     "dependency": {

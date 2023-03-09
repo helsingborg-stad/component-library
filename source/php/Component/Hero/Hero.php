@@ -9,6 +9,7 @@ class Hero extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
         
+        $this->data['contentStyles'] = "";
         $this->data['attributeList']['role'] = 'region';
         $this->data['attributeList']['aria-label'] = $ariaLabel;
 
@@ -57,8 +58,14 @@ class Hero extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . '--' . $size;
         }
 
+        if (!empty($contentBackgroundColor) &&  ($title || $paragraph || $byline || $meta)) {
+            $this->data['overlay'] = false;
+            $this->data['classList'][] = $this->getBaseClass() . '--has-content-background-color';
+            $this->data['contentStyles'] .= "background-color: ${contentBackgroundColor};";
+        }
+
         //Overlay
-        if ($title || $paragraph || $byline || $meta) {
+        if (empty($contentBackgroundColor) && ($title || $paragraph || $byline || $meta)) {
             $this->data['classList'][] = $this->getBaseClass() . '--overlay';
             $this->data['overlay'] = true;
         } else {
@@ -103,7 +110,9 @@ class Hero extends \ComponentLibrary\Component\BaseController
                     ($image ? 'background-image:url(' . $image . ')' . ';' : '');
                 }
             }
-        } 
+        }
+
+        $this->data['contentStyles'] = $this->sanitizeInlineCss($this->data['contentStyles']);
 
     }
 

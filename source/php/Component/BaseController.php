@@ -377,7 +377,7 @@ class BaseController
      * @param string $inlineCss
      * @return string $inlineCss
      */
-    private function sanitizeInlineCss($inlineCss)
+    public function sanitizeInlineCss($inlineCss)
     {
         return preg_replace('/.*:\s*;/i', '', $inlineCss);
     }

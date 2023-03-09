@@ -15,7 +15,7 @@
                 </video>
             @endif
             
-            <div class="{{ $baseClass }}__content">
+            <div class="{{ $baseClass }}__content" style="{{ $contentStyles }}">
                 @if ($meta)
                     @typography(['classList' => [$baseClass . '__meta']])
                         {!! $meta !!}
