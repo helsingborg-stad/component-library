@@ -16,6 +16,7 @@
         "meta": false,
         "background": false,
         "textColor": false,
+        "textAlignment": "left",
         "contentBackgroundColor": "",
         "contentAlignment": {"horizontal": "left", "vertical": "bottom"}
     },
@@ -35,6 +36,7 @@
         "customHeroData": "An array containing the custom data for the selected view (heroView).",
         "background": "Image or a color",
         "textColor": "The color of the text (black or white)",
+        "textAlignment": "Alignment texts. Supports \"left\", \"center\" and \"right\".",
         "contentBackgroundColor": "The background color for texts in the content area.",
         "contentAlignment": "Place the conten by assigning horizontal: \"left\"|\"center\"|\"right\" and vertical: \"top\"|\"center\"|\"bottom\"."
     },

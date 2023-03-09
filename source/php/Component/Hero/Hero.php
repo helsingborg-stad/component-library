@@ -65,6 +65,10 @@ class Hero extends \ComponentLibrary\Component\BaseController
         if ($contentAlignment && $contentAlignment["vertical"] !== "bottom") {
             $this->data['classList'][] = $this->getBaseClass() . '--content-vertical__' . $contentAlignment["vertical"];
         }
+
+        if ($textAlignment && in_array($textAlignment, ["center", "right"])) {
+            $this->data['classList'][] = $this->getBaseClass() . '--text-align__' . $textAlignment;
+        }
         
         if (!empty($contentBackgroundColor) &&  ($title || $paragraph || $byline || $meta)) {
             $this->data['overlay'] = false;
