@@ -124,7 +124,7 @@ class Siteselector extends \ComponentLibrary\Component\BaseController
      */
     private function getDomainFromUrl(string $url): string
     {
-        return parse_url($url)['host'];
+        return parse_url($url)['host'] ?? '';
     }
 
     /**
