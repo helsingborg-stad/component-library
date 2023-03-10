@@ -19,7 +19,9 @@
         "textAlignment": "left",
         "contentBackgroundColor": "",
         "contentAlignmentVertical": "bottom",
-        "contentAlignmentHorizontal": "left"
+        "contentAlignmentHorizontal": "left",
+        "contentApplyRoundedCorners": true,
+        "contentApplyShadows": true
     },
     "description": {
         "image": "Background image",
@@ -39,8 +41,10 @@
         "textColor": "The color of the text.",
         "textAlignment": "Alignment texts. Supports \"left\", \"center\" and \"right\".",
         "contentBackgroundColor": "The background color for texts in the content area.",
-        "contentAlignmentVertical": "Vertical placement of the content: top|center|bottom",
-        "contentAlignmentHoriontal": "Horizontal placement of the content: left|center|right"
+        "contentAlignmentVertical": "Vertical placement of the content: top|center|bottom.",
+        "contentAlignmentHoriontal": "Horizontal placement of the content: left|center|right.",
+        "contentApplyRoundedCorners": "Apply rounded corners to content if contentBackgroundColor is set.",
+        "contentApplyShadows": "Apply shadows to content if contentBackgroundColor is set."
     },
     "view": "hero.blade.php",
     "dependency": {

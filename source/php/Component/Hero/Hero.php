@@ -66,16 +66,12 @@ class Hero extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $textAlignmentClass;
         }
 
-        if ($contentApplyRoundedCorners) {
+        if (isset($contentApplyRoundedCorners) && $contentApplyRoundedCorners === true) {
             $this->data['classList'][] = $this->getBaseClass() . '--apply-rounded-corners';
         }
         
-        if ($contentApplyShadows) {
+        if (isset($contentApplyShadows) && $contentApplyShadows === true) {
             $this->data['classList'][] = $this->getBaseClass() . '--apply-shadows';
-        }
-        
-        if ($contentApplyRoundedCorners) {
-            $this->data['classList'][] = $this->getBaseClass() . '--apply-rounded-corners';
         }
 
         if (!empty($contentBackgroundColor) &&  ($title || $paragraph || $byline || $meta)) {
