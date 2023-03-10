@@ -25,10 +25,6 @@ class Hero extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . "--image";
         }
 
-        if ($textColor) {
-            $this->data['classList'][] = $this->getBaseClass() . "--color-" . $textColor;
-        }
-
         $this->data['classList'][] = $this->getBaseClass() . '--' . $heroView;
 
         //Create image style tag
@@ -58,18 +54,39 @@ class Hero extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . '--' . $size;
         }
 
-        if (!empty($contentAlignmentClasses = $this->getContentAlignmentClasses($contentAlignment))) {
-            $this->data['classList'] = array_merge($this->data['classList'], $contentAlignmentClasses);
+        if (in_array($contentAlignmentVertical, ["top", "center"])) {
+            $this->data['classList'][] = $this->getBaseClass() . "--content-vertical__" . $contentAlignmentVertical;
+        }
+        
+        if (in_array($contentAlignmentHorizontal, ["center", "right"])) {
+            $this->data['classList'][] = $this->getBaseClass() . "--content-horizontal__" . $contentAlignmentHorizontal;
         }
 
         if (($textAlignmentClass = $this->getTextAlignmentClass($textAlignment))) {
             $this->data['classList'][] = $textAlignmentClass;
         }
 
+        if ($contentApplyRoundedCorners) {
+            $this->data['classList'][] = $this->getBaseClass() . '--apply-rounded-corners';
+        }
+        
+        if ($contentApplyShadows) {
+            $this->data['classList'][] = $this->getBaseClass() . '--apply-shadows';
+        }
+        
+        if ($contentApplyRoundedCorners) {
+            $this->data['classList'][] = $this->getBaseClass() . '--apply-rounded-corners';
+        }
+
         if (!empty($contentBackgroundColor) &&  ($title || $paragraph || $byline || $meta)) {
             $this->data['overlay'] = false;
             $this->data['classList'][] = $this->getBaseClass() . '--has-content-background-color';
-            $this->data['contentStyles'] .= "background-color: ${contentBackgroundColor};";
+            $this->data['contentStyles'] .= "background-color: $contentBackgroundColor;";
+        }
+
+        if (!empty($textColor)) {
+            $this->data['classList'][] = $this->getBaseClass() . "--has-contrast-color";
+            $this->data['contentStyles'] .= "color: $textColor;";
         }
 
         //Overlay
@@ -122,22 +139,6 @@ class Hero extends \ComponentLibrary\Component\BaseController
 
         $this->data['contentStyles'] = $this->sanitizeInlineCss($this->data['contentStyles']);
 
-    }
-
-    private function getContentAlignmentClasses(array $contentAlignment): array
-    {
-        $modifierPrefix = "content";
-        $contentAlignmentClasses = [];
-
-        if (in_array($contentAlignment["horizontal"], ["center", "right"])) {
-            $contentAlignmentClasses[] = $this->getBaseClass() . "--$modifierPrefix-horizontal__" . $contentAlignment["horizontal"];
-        }
-
-        if (in_array($contentAlignment["vertical"], ["top", "center"])) {
-            $contentAlignmentClasses[] = $this->getBaseClass() . "--$modifierPrefix-vertical__" . $contentAlignment["vertical"];
-        }
-
-        return $contentAlignmentClasses;
     }
     
     private function getTextAlignmentClass(string $textAlignment)
