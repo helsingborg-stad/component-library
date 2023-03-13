@@ -1,9 +1,10 @@
 <div class="{{$class}}" {!! $attribute !!}>
-    <select class="c-filterselect__select" multiple>
-        @foreach($options as $option)
-            <option value="{{$option['value']}}">{{$option['label']}}</option>
-        @endforeach
-    <select>
+    @select([
+        'multiple' => true,
+        'options' => $options,
+        'classList' => ["c-filterselect__select"]
+    ])
+    @endselect
     <div class="c-filterselect__dropdown">
         <div class="c-filterselect__expand-button">
             <div class="c-filterselect__checked-items">
@@ -34,8 +35,8 @@
         </div>
         <div class="c-filterselect__options">
             @foreach($options as $option)
-                <div class="c-filterselect__option" js-select-value="{{$option['value']}}">
-                    <span class="c-filterselect__option-label">{{$option['label']}}</span>
+                <div class="c-filterselect__option" js-select-value="{{$option}}">
+                    <span class="c-filterselect__option-label">{{$option}}</span>
                     @icon([
                         'icon' => 'check_box_outline_blank',
                         'size' => 'md',
