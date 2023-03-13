@@ -110,6 +110,24 @@ class Hero extends \ComponentLibrary\Component\BaseController
             $this->data['background'] = 'background:' . $background . ';';
         }
 
+        if (!empty($buttonArgs)) {
+            
+            if (!empty($buttonArgs['href']) && isset($buttonArgs['text']) && !empty($buttonArgs['text'])) {
+                $this->data['buttonArgs'] = $buttonArgs;
+            } else {
+                $this->data['buttonArgs'] = null;
+            }
+
+            if (!empty($buttonArgs['href']) && (!isset($buttonArgs['text']) || empty($buttonArgs['text']) )) {
+                $this->data['linkArgs'] = array(
+                    'href' => $buttonArgs['href'],
+                    'classList' => ["{$this->getBaseClass()}__content--link"]
+                );
+            } else {
+                $this->data['linkArgs'] = null;
+            }
+        }
+
         $this->data['customHeroData'] = $this->handleCustomDataFunc($heroView, $customHeroData);
 
         if ($customHeroData && array_key_exists('modifiers', $customHeroData)) {

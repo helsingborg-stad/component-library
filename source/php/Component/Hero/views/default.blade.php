@@ -16,6 +16,11 @@
             @endif
             
             <div class="{{ $baseClass }}__content" style="{{ $contentStyles }}">
+                
+                @if( $linkArgs )
+                    @link($linkArgs)
+                @endif
+
                 @if ($meta)
                     @typography(['classList' => [$baseClass . '__meta']])
                         {!! $meta !!}
@@ -37,6 +42,14 @@
                     @typography(['variant' => 'p', 'element' => 'p', 'classList' => [$baseClass . '__body']])
                         {!! $paragraph !!}
                     @endtypography
+                @endif
+
+                @if( $linkArgs )
+                    @endlink
+                @endif
+
+                @if( $buttonArgs )
+                    @button($buttonArgs)@endbutton
                 @endif
 
                 {{-- Oneline to enable the use of css:empty() function --}}

@@ -21,7 +21,8 @@
         "contentAlignmentVertical": "bottom",
         "contentAlignmentHorizontal": "left",
         "contentApplyRoundedCorners": true,
-        "contentApplyShadows": true
+        "contentApplyShadows": true,
+        "buttonArgs": []
     },
     "description": {
         "image": "Background image",
@@ -44,7 +45,8 @@
         "contentAlignmentVertical": "Vertical placement of the content: top|center|bottom.",
         "contentAlignmentHoriontal": "Horizontal placement of the content: left|center|right.",
         "contentApplyRoundedCorners": "Apply rounded corners to content if contentBackgroundColor is set.",
-        "contentApplyShadows": "Apply shadows to content if contentBackgroundColor is set."
+        "contentApplyShadows": "Apply shadows to content if contentBackgroundColor is set.",
+        "buttonArgs": "Add a @button by passing @button component arguments. If button is treated as a link, all te text elements in the content gets wrapped with this link."
     },
     "view": "hero.blade.php",
     "dependency": {
