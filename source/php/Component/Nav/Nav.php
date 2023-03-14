@@ -127,7 +127,7 @@ class Nav extends \ComponentLibrary\Component\BaseController
     }
 
     private function isOpen($isActive, $hasChildren, $isAncestor, $direction) {
-        if($isActive && $hasChildren) {
+        if($isActive && $hasChildren && $direction == 'vertical') {
             return true; 
         }
 
