@@ -85,7 +85,7 @@ class Nav extends \ComponentLibrary\Component\BaseController
                 $classList[] = "is-current"; 
             }
 
-            if($item['ancestor']) {
+            if($this->isAncestor($item['ancestor'])) {
                 $classList[] = "is-ancestor"; 
             }
 
