@@ -2,7 +2,7 @@
 @if($list)
 <{{$componentElement}} class="{{ $class }}" aria-label="{{$label}}" {!! $attribute !!}>
   @if($prefixLabel)
-    <span class="{{$baseClass}}__prefix">
+    <span class="{{$baseClass}}__prefix u-sr__only">
       {{$prefixLabel}}
     </span>
   @endif
