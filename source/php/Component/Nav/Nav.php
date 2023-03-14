@@ -72,7 +72,7 @@ class Nav extends \ComponentLibrary\Component\BaseController
         }; 
 
         //Create item class (view func)
-        $this->data['itemClass'] = function($item) {
+        $this->data['itemClass'] = function($item, $direction) {
             $classList = $item['classList'];
 
             //Base class list
@@ -85,8 +85,19 @@ class Nav extends \ComponentLibrary\Component\BaseController
                 $classList[] = "is-current"; 
             }
 
+            if($item['ancestor']) {
+                $classList[] = "is-ancestor"; 
+            }
+
             //Open state
-            if($item['active'] && $item['children'] || $item['ancestor']) {
+            $openState = [
+                $item['active'], 
+                $this->hasChildren($item['children']), 
+                $item['ancestor'],
+                $direction
+            ];
+
+            if($this->isOpen(...$openState)) {
                 $classList[] = "is-open";
             }
 
@@ -113,6 +124,22 @@ class Nav extends \ComponentLibrary\Component\BaseController
 
             return implode(" ", $classList); 
         };
+    }
+
+    private function isOpen($isActive, $hasChildren, $isAncestor, $direction) {
+        if($isActive && $hasChildren) {
+            return true; 
+        }
+
+        if($isAncestor && $direction == 'vertical') {
+            return true; 
+        }
+
+        return false; 
+    }
+
+    private function isAncestor($ancestor) {
+        return (bool) $ancestor;
     }
     
     private function hasChildren($children) {

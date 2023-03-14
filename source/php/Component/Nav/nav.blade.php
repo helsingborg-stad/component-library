@@ -3,7 +3,7 @@
   <ul class="{{$class}}" {!! $attribute !!}>
     @foreach ($items as $item)
       
-      <li id="{{$id}}-{{$item['id']}}-{{$loop->index}}__item" class="{{ $itemClass($item) }}" {!! $buildAttributes($item['attributeList']) !!}>
+      <li id="{{$id}}-{{$item['id']}}-{{$loop->index}}__item" class="{{ $itemClass($item, $direction) }}" {!! $buildAttributes($item['attributeList']) !!}>
         
         <div class="{{$baseClass}}__item-wrapper">
           {{-- Nav item --}}
