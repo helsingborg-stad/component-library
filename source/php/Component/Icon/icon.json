@@ -6,6 +6,7 @@
         "icon": "",
         "color": "",
         "componentElement": "span",
+        "filled": true
         "customColor": ""
     },
     "description": {
@@ -14,7 +15,8 @@
         "color": "The color of the icon",
         "customColor": "A custom HEX color",
         "icon": "The icon name",
-        "componentElement": "Icon HTML tag"
+        "componentElement": "Icon HTML tag",
+        "filled": "If the icons should be filled or not"
     },
     "view": "icon.blade.php",
     "dependency": {
