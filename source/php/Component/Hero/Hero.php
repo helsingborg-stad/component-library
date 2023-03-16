@@ -9,6 +9,7 @@ class Hero extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
         
+        $this->data['contentStyles'] = "";
         $this->data['attributeList']['role'] = 'region';
         $this->data['attributeList']['aria-label'] = $ariaLabel;
 
@@ -22,10 +23,6 @@ class Hero extends \ComponentLibrary\Component\BaseController
 
         if (!$video) {
             $this->data['classList'][] = $this->getBaseClass() . "--image";
-        }
-
-        if ($textColor) {
-            $this->data['classList'][] = $this->getBaseClass() . "--color-" . $textColor;
         }
 
         $this->data['classList'][] = $this->getBaseClass() . '--' . $heroView;
@@ -57,8 +54,39 @@ class Hero extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . '--' . $size;
         }
 
+        if (in_array($contentAlignmentVertical, ["top", "center"])) {
+            $this->data['classList'][] = $this->getBaseClass() . "--content-vertical__" . $contentAlignmentVertical;
+        }
+        
+        if (in_array($contentAlignmentHorizontal, ["center", "right"])) {
+            $this->data['classList'][] = $this->getBaseClass() . "--content-horizontal__" . $contentAlignmentHorizontal;
+        }
+
+        if (($textAlignmentClass = $this->getTextAlignmentClass($textAlignment))) {
+            $this->data['classList'][] = $textAlignmentClass;
+        }
+
+        if (isset($contentApplyRoundedCorners) && $contentApplyRoundedCorners === true) {
+            $this->data['classList'][] = $this->getBaseClass() . '--apply-rounded-corners';
+        }
+        
+        if (isset($contentApplyShadows) && $contentApplyShadows === true) {
+            $this->data['classList'][] = $this->getBaseClass() . '--apply-shadows';
+        }
+
+        if (!empty($contentBackgroundColor) &&  ($title || $paragraph || $byline || $meta)) {
+            $this->data['overlay'] = false;
+            $this->data['classList'][] = $this->getBaseClass() . '--has-content-background-color';
+            $this->data['contentStyles'] .= "background-color: $contentBackgroundColor;";
+        }
+
+        if (!empty($textColor)) {
+            $this->data['classList'][] = $this->getBaseClass() . "--has-contrast-color";
+            $this->data['contentStyles'] .= "color: $textColor;";
+        }
+
         //Overlay
-        if ($title || $paragraph || $byline || $meta) {
+        if (empty($contentBackgroundColor) && ($title || $paragraph || $byline || $meta)) {
             $this->data['classList'][] = $this->getBaseClass() . '--overlay';
             $this->data['overlay'] = true;
         } else {
@@ -82,6 +110,24 @@ class Hero extends \ComponentLibrary\Component\BaseController
             $this->data['background'] = 'background:' . $background . ';';
         }
 
+        if (!empty($buttonArgs)) {
+            
+            if (!empty($buttonArgs['href']) && isset($buttonArgs['text']) && !empty($buttonArgs['text'])) {
+                $this->data['buttonArgs'] = $buttonArgs;
+            } else {
+                $this->data['buttonArgs'] = null;
+            }
+
+            if (!empty($buttonArgs['href']) && (!isset($buttonArgs['text']) || empty($buttonArgs['text']) )) {
+                $this->data['linkArgs'] = array(
+                    'href' => $buttonArgs['href'],
+                    'classList' => ["{$this->getBaseClass()}__content--link"]
+                );
+            } else {
+                $this->data['linkArgs'] = null;
+            }
+        }
+
         $this->data['customHeroData'] = $this->handleCustomDataFunc($heroView, $customHeroData);
 
         if ($customHeroData && array_key_exists('modifiers', $customHeroData)) {
@@ -103,8 +149,19 @@ class Hero extends \ComponentLibrary\Component\BaseController
                     ($image ? 'background-image:url(' . $image . ')' . ';' : '');
                 }
             }
-        } 
+        }
 
+        $this->data['contentStyles'] = $this->sanitizeInlineCss($this->data['contentStyles']);
+
+    }
+    
+    private function getTextAlignmentClass(string $textAlignment)
+    {
+        if (!in_array($textAlignment, ["center", "right"])) {
+            return false;
+        }
+
+        return $this->getBaseClass() . '--text-align__' . $textAlignment;
     }
 
     private function handleCustomDataFunc($heroView, $customHeroData) {
