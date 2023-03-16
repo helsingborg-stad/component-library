@@ -15,7 +15,14 @@
         "customHeroData": false,
         "meta": false,
         "background": false,
-        "textColor": false
+        "textColor": "",
+        "textAlignment": "left",
+        "contentBackgroundColor": "",
+        "contentAlignmentVertical": "bottom",
+        "contentAlignmentHorizontal": "left",
+        "contentApplyRoundedCorners": true,
+        "contentApplyShadows": true,
+        "buttonArgs": []
     },
     "description": {
         "image": "Background image",
@@ -32,7 +39,14 @@
         "heroView": "Select which view to display",
         "customHeroData": "An array containing the custom data for the selected view (heroView).",
         "background": "Image or a color",
-        "textColor": "The color of the text (black or white)"
+        "textColor": "The color of the text.",
+        "textAlignment": "Alignment texts. Supports \"left\", \"center\" and \"right\".",
+        "contentBackgroundColor": "The background color for texts in the content area.",
+        "contentAlignmentVertical": "Vertical placement of the content: top|center|bottom.",
+        "contentAlignmentHoriontal": "Horizontal placement of the content: left|center|right.",
+        "contentApplyRoundedCorners": "Apply rounded corners to content if contentBackgroundColor is set.",
+        "contentApplyShadows": "Apply shadows to content if contentBackgroundColor is set.",
+        "buttonArgs": "Add a @button by passing @button component arguments. If button is treated as a link, all te text elements in the content gets wrapped with this link."
     },
     "view": "hero.blade.php",
     "dependency": {

@@ -14,7 +14,10 @@ class Slider extends \ComponentLibrary\Component\BaseController
         $this->data['attributeList']['js-slider'] = 0;
         $this->data['attributeList']['js-slider-index'] = 0;
         $this->data['attributeList']['js-slider-index'] = 0;
-        $this->data['attributeList']['js-slider-repeat'] = $repeatSlide;
+
+        if (!empty($repeatSlide)) {
+            $this->data['attributeList']['data-slider-loop'] = true;
+        }
         
         $ratio = preg_replace('/:/i', '-', $ratio);
         $this->data['classList'][] = 'c-slider--' . $ratio;
@@ -53,14 +56,13 @@ class Slider extends \ComponentLibrary\Component\BaseController
         if ($heroStyle) {
             $this->data['classList'][] = $this->getBaseClass() . "--hero";
         }
-
         if (isset($isPost)) {
             $this->data['isPost'] = $isPost;
         } else {
             $this->data['isPost'] = false;
         }
 
-        if(isset($customButtons)) {
+        if(!empty($customButtons)) {
             $this->data['attributeList']['data-custom-buttons'] = $customButtons;
         }
     }

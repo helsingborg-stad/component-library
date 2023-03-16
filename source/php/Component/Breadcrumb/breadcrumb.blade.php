@@ -1,6 +1,11 @@
 <!-- breadcrumb.blade.php -->
 @if($list)
 <{{$componentElement}} class="{{ $class }}" aria-label="{{$label}}" {!! $attribute !!}>
+  @if($prefixLabel)
+    <span class="{{$baseClass}}__prefix u-sr__only">
+      {{$prefixLabel}}
+    </span>
+  @endif
   <{{$listType}} class="{{$baseClass}}__list unlist">
     @foreach($list as $item) 
       <{{$listItemType}} data-level="{{ $loop->depth }}" class="{{$baseClass}}__item {{$baseClass}}__item_{{ $loop->index }} {{$baseClass}}__item_depth-{{ $loop->depth }}">

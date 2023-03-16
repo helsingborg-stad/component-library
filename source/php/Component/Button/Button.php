@@ -106,7 +106,7 @@ class Button extends \ComponentLibrary\Component\BaseController
         if (!empty($icon) && empty($text)) {
             $this->data['classList'][] = $this->getBaseClass() . '--icon-only';
             
-            if(!$this->data['ariaLabel']) {
+            if(!$this->data['ariaLabel'] && !isset($this->data['attributeList']['aria-label'])) {
                 $this->data['attributeList']['aria-label'] = $icon;
             }
         }

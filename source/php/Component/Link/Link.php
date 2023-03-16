@@ -10,9 +10,14 @@ class Link extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
-        //Default link
-        if(!$href) {
-            $this->data['href'] = "";
+        //Link
+        if($href) {
+            $this->data['attributeList']['href'] = $href;
+        }
+
+        //Target
+        if($target) {
+            $this->data['attributeList']['target'] = $target;
         }
     }
 }
