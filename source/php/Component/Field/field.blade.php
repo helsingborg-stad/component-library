@@ -9,6 +9,13 @@
             @endif
         </label>
     @endif
+    @if(!empty($description))
+        @typography([
+            'classList' => [$baseClass . '__description']
+        ])
+        {{$description}}
+        @endtypography
+    @endif
     
     <div class="{{$baseClass}}__inner {{$baseClass}}__inner--{{$type}}">
         

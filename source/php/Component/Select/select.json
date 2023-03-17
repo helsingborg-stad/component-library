@@ -26,7 +26,8 @@
         "sass": {
             "components": [
                 "select",
-                "icon"
+                "icon",
+                "filterSelect"
             ]
         }
     }

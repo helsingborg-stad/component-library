@@ -5,7 +5,16 @@
         "label": "Breadcrumb",
         "componentElement": "nav",
         "listType": "ol",
-        "listItemType": "li"
+        "listItemType": "li",
+        "prefixLabel": ""
+    },
+    "description": {
+        "list": "Array of breadcrumb items.",
+        "label": "The aria-label of the component",
+        "componentElement": "What element to wrap this component with.",
+        "listType": "The list type ol/ul",
+        "listItemType": "The item type: li",
+        "prefixLabel": "The label before the breadcrumb items (screen reader only)."
     },
     "view": "breadcrumb.blade.php",
     "dependency": {

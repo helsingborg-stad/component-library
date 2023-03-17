@@ -4,21 +4,25 @@
         "items": [],
         "direction": "vertical",
         "includeToggle": false,
-        "allowStyle": false,
-        "depth": 0
+        "allowStyle": true,
+        "expandLabel": "Expand",
+        "height": ""
     },
     "description":{
-        "items": "An nested array of items containing: id, label, active, ancestor, children(bool = async loading, or array), href, style, class.",
+        "items": "An nested array of items containing: id, label, active, ancestor, children(bool = async loading, or array), href, style, class. Attribute list may also contain 'data-fetch-url' to enable asyncrounous fetching.",
         "direction": "Modifier for basic direction. Accept values: 'vertical', 'horizontal.'",
         "includeToggle": "Tells wheter to include toggle button to expand childs or not. Accept values: true, false.",
         "allowStyle": "Allow the use of style parameter in this menu (item.style = 'button')",
-        "depth": "Internal depth indicator, should not be used."
+        "expandLabel": "Prefix for labels on expand arrow. Will result in Expand: Link label, or if label is missing, just Expand.",
+        "height": "The default height of the menu (only supports horizontal navigation). Values: sm, md, lg."
     },
     "view":"nav.blade.php",
     "dependency": {
         "sass": {
             "components": [
-                "nav"
+                "nav",
+                "icon",
+                "link"
             ]
         }
     }

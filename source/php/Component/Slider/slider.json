@@ -6,9 +6,10 @@
         "peekSlides": false,
         "navigationHover": true,
         "ratio": "16:9",
-        "repeatSlide": false,
+        "repeatSlide": true,
         "heroStyle": false,
         "shadow": true,
+        "customButtons": false,
         "arrowButtons": {
             "color": "primary",
             "style": "filled"

@@ -22,7 +22,10 @@ class Dropdown extends \ComponentLibrary\Component\BaseController
                         array_merge(
                             $i['attributeList'] ?? [],
                             [
-                                'class' => implode(' ', $i['classList'] ?? [])
+                                'class' => implode(' ', [
+                                    'c-dropdown__item',
+                                    ...$i['classList'] ?? []
+                                ])
                             ]
                         )
                     ),
@@ -31,7 +34,9 @@ class Dropdown extends \ComponentLibrary\Component\BaseController
             ),
             $this->data['items'] ?? []
         );
-
+        
+        $this->data['classList'][] = 'js-dropdown';
+        
         if (isset($direction)) {
             $this->data['direction'] = $direction;
             $this->data['classList'][] = $this->getBaseClass() . '-button--' . $direction;

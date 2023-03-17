@@ -5,21 +5,31 @@
                 @link([
                     'href' => $tag['href'], 
                     'classList' => [
-                        'c-tag', 
+                        'c-tags__tag', 
                         $isHidden($loop->index)
                     ]
                 ])
                     {{ $beforeLabel }}{{ $tag['label'] ?? 'Undefined label' }}{{ $afterLabel }}
                 @endlink
             @else 
-                <span class="c-tag {{ $isHidden($loop->index) }}">
-                    {{ $beforeLabel }}{{ $tag['label'] ?? 'Undefined label' }}{{ $afterLabel }}
+
+                <span class="c-tags__tag {{ $isHidden($loop->index) }}">
+                    @if (!empty($icon))
+                        @icon([
+                            'icon' => $icon['icon'],
+                            'size' => $icon['size'],
+                        ])
+                        @endicon
+                    @else
+                        {{ $beforeLabel }}
+                    @endif
+                    {{ $tag['label'] ?? 'Undefined label' }}{{ $afterLabel }}
                 </span>
             @endif
         @endforeach
 
         @if($compress && $compress < $tagCount)
-            <span class="c-tag c-tag--{{ $tag['color'] }} c-tag--more">
+            <span class="c-tags__tag c-tags__tag-more">
                 {{ "..." }}
             </span>
         @endif
