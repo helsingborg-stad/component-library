@@ -1,5 +1,7 @@
 @if($floatingSlotHasData)
-{!! $floating !!}
+<div class="{{$baseClass}}__floating">
+    {!! $floating !!}
+</div>
 @endif
 @includeWhen($image && !empty($image['src']), 'Card.components.image')
 @includeWhen($image && !empty($image['src']) && $dateBadge && $date, 'Card.components.datebadge')
