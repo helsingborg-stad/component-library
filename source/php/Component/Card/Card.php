@@ -19,6 +19,8 @@ class Card extends \ComponentLibrary\Component\BaseController
 
         $this->data['afterContentSlotHasData'] = $this->slotHasData('afterContent');
 
+        $this->data['floatingSlotHasData'] = $this->slotHasData('floating');
+
         if (isset($image['padded']) && $image['padded']) {
             $this->data['paddedImage'] = $this->getBaseClass() . '__image-background--padded';
         }
@@ -70,17 +72,6 @@ class Card extends \ComponentLibrary\Component\BaseController
 
         if ($ratio) {
             $this->data['classList'][] = $this->getBaseClass() . '--ratio-' . str_replace(":", "-", $ratio);
-        }
-
-        if ($icon) {
-            if (!isset($icon['attributeList']['data-post-type']) || empty($icon['attributeList']['data-post-type'])) {
-                $icon['attributeList']['data-post-type'] = $postType;
-            }
-            if (!empty($postId)) {
-                $icon['attributeList']['data-post-id'] = strval($postId);
-            }
-            $icon['classList'][] = 'c-card__icon';
-            $this->data['icon'] = $icon;
         }
     }
 }
