@@ -38,13 +38,13 @@ class Block extends \ComponentLibrary\Component\BaseController
 
         $this->data['classList'][] = $this->getBaseClass() . '--ratio-' . str_replace(":", "-", $ratio);
         if ($icon) {
-            if (!isset($icon['attributes']['data-post-type']) || empty($icon['attributes']['data-post-type'])) {
-                $icon['attributes']['data-post-type'] = $postType;
+            if (!isset($icon['attributeList']['data-post-type']) || empty($icon['attributeList']['data-post-type'])) {
+                $icon['attributeList']['data-post-type'] = $postType;
             }
             if (!empty($postId)) {
-                $icon['attributes']['data-post-id'] = strval($postId);
+                $icon['attributeList']['data-post-id'] = strval($postId);
             }
-            $icon['classes'][] = 'c-card__icon';
+            $icon['classList'][] = 'c-card__icon';
             $this->data['icon'] = $icon;
         }
     }
