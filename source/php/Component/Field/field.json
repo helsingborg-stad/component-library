@@ -17,7 +17,8 @@
         "helperText": "",
         "multiline": false,
         "borderless": false,
-        "fieldAttributeList": []
+        "fieldAttributeList": [],
+        "description": ""
     },
     "description": {
         "label": "Label for the field.",

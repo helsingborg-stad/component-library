@@ -8,6 +8,13 @@ class Segment extends \ComponentLibrary\Component\BaseController
     {
         //Extract array for eazy access (fetch only)
         extract($this->data);
+        
+        $file_path = __DIR__ . "/partials/" . $layout . '.blade.php';
+
+        if (!file_exists($file_path)) {
+            $layout = 'full-width';
+            $this->data['layout'] = $layout;
+        };
 
         // Set the layout
         if ($layout) {
@@ -83,6 +90,14 @@ class Segment extends \ComponentLibrary\Component\BaseController
         //Add image to image styles
         if ($image) {
             $this->data['imageStyle']['background-image'] = "url('" . $image . "')";
+        }
+
+        if (!empty($contentAlignment)) {
+            $this->data['classList'][] =  $this->getBaseClass() . '--content-' . $contentAlignment;
+        }
+
+        if (!empty($contentBackground)) {
+            $this->data['classList'][] = $this->getBaseClass() . '--content-background-' . $contentBackground;
         }
 
         //Add background position to image styles

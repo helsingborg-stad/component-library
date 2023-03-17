@@ -1,9 +1,9 @@
 @if($href)
-    <a class="{{ $class }}" target="{{ $target }}" href="{{ $href }}" {!! $attribute !!}>
+    <a id="{{$id}}" class="{{ $class }}" {!! $attribute !!}>
         {!! $slot !!}
     </a>
 @elseif(!$href && $keepContent)
-    <{{$componentElement}} class="{{ $class }}" {!! $attribute !!}>    
+    <{{$componentElement}} id="{{$id}}" class="{{ $class }}" {!! $attribute !!}>    
         {!! $slot !!}
     </{{$componentElement}}>
 @endif

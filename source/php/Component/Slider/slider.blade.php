@@ -1,6 +1,6 @@
 <div class="{{ $class }}" {!! $attribute !!}>
 
-    @if(!$isPost)
+    @if(!$isPost || !$customButtons)
         <div class="splide__arrows c-slider__arrows">
             @button([
                 'color' => $arrowButtons['color'],

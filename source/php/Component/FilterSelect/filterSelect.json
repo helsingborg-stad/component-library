@@ -1,0 +1,20 @@
+{
+    "slug": "filterSelect",
+    "default": {
+        "options": [],
+        "placeholder": ""
+    },
+    "description": {
+        "options": "An array containing items with a label and a value."
+    },
+    "view": "filterSelect.blade.php",
+    "dependency": {
+        "sass": {
+            "components": [
+                "filterSelect",
+                "icon",
+                "select"
+            ]
+        }
+    }
+}

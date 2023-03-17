@@ -11,19 +11,33 @@ class Tags extends \ComponentLibrary\Component\BaseController
 
         $this->data['tags'] = $this->arrayCleanUp($tags);
 
-        $this->data['tagCount'] = is_countable($tags) ? count($tags) : 0; 
+        $this->data['tagCount'] = is_countable($tags) ? count($tags) : 0;
 
         if ($format) {
             $this->data['classList'][] = $this->getBaseClass() . "--format";
         }
 
-        $this->data['isHidden'] = function ($loopIteration) use($compress) {
-            if($compress !== false) {
-                if($loopIteration >= $compress) {
-                    return "is-hidden"; 
+
+        if (!empty($this->data['tagsMarker'])) {
+            /* TODO: add functionality to get and set the icon color based on taxonomy color */
+            $this->data['icon'] = ['icon' => 'circle', 'size' => 'xs', 'customColor' => '#ffffff'];
+
+            if (!empty($this->data['icon'])) {
+                $this->data['beforeLabel'] = "";
+            }
+        }
+
+        if (!empty($this->data['tagsStyle'])) {
+            $this->data['classList'][] = $this->getBaseClass() . '--' . $this->data['tagsStyle'];
+        }
+
+        $this->data['isHidden'] = function ($loopIteration) use ($compress) {
+            if ($compress !== false) {
+                if ($loopIteration >= $compress) {
+                    return "is-hidden";
                 }
             }
-            return ""; 
+            return "";
         };
     }
 
@@ -40,7 +54,7 @@ class Tags extends \ComponentLibrary\Component\BaseController
         if (!empty($arr) && is_countable($arr)) {
             foreach ($arr as $tag) {
 
-                if(!is_array($tag)) {
+                if (!is_array($tag)) {
                     $tag = [];
                 }
 
