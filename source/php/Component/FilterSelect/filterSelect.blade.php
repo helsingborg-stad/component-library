@@ -35,8 +35,8 @@
         </div>
         <div class="c-filterselect__options">
             @foreach($options as $option)
-                <div class="c-filterselect__option" js-select-value="{{$option}}">
-                    <span class="c-filterselect__option-label">{{$option}}</span>
+                <div class="c-filterselect__option" js-select-value="{{$option['value']}}">
+                    <span class="c-filterselect__option-label">{{$option['label']}}</span>
                     @icon([
                         'icon' => 'check_box_outline_blank',
                         'size' => 'md',
