@@ -2,10 +2,13 @@
     "slug": "filterSelect",
     "default": {
         "options": [],
+        "name": "",
         "placeholder": ""
     },
     "description": {
-        "options": "An array with select items"
+        "options": "An array with options",
+        "name": "The name attribute of the <select> form element",
+        "placeholder": "The placeholder text for the select element"
     },
     "view": "filterSelect.blade.php",
     "dependency": {
