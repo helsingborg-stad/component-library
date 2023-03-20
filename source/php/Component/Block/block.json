@@ -9,7 +9,8 @@
         "link": "",
         "ratio": "4:3",
         "date": false,
-        "dateBadge": false
+        "dateBadge": false,
+        "icon": false
     },
     "description": {
         "heading": "The heading of the block",
@@ -20,7 +21,8 @@
         "link": "Simple href link",
         "ratio": "Ratio of the block",
         "date": "Preformatted date",
-        "dateBadge": "Display date as a badge."
+        "dateBadge": "Display date as a badge.",
+        "icon": "An array with the same specification as the icon component"
     },
     "view": "block.blade.php",
     "dependency": {

@@ -50,14 +50,24 @@
                 @endif
             @endif
 
-            @if ($heading)
-                @typography([
-                    'element' => 'h2',
-                    'variant' => 'h2',
-                    'classList' => [$baseClass . '__heading']
-                ])
-                    {!! $heading !!}
-                @endtypography
+            @if ($heading || $icon)
+            @group([
+                'justifyContent' => 'space-between'
+            ])
+                @if ($heading)
+                    @typography([
+                        'element' => 'h2',
+                        'variant' => 'h2',
+                        'classList' => [$baseClass . '__heading']
+                    ])
+                        {!! $heading !!}
+                    @endtypography
+                @endif
+                @if ($icon)
+                    @icon($icon)
+                    @endicon
+                @endif
+            @endgroup
             @endif
 
             @if ($content)
