@@ -15,6 +15,8 @@ class Select extends \ComponentLibrary\Component\BaseController
             $id = $this->data['id'] = uniqid();
         }
 
+        $this->data['classList'][] = $this->getBaseClass($size, true);
+
         if ($multiple) {
             $this->data['attributeList']['multiple'] = 'multiple';
         }
@@ -35,11 +37,5 @@ class Select extends \ComponentLibrary\Component\BaseController
         if (function_exists('get_theme_mod') && get_theme_mod('field_style_settings') === "rounded") {
             $this->data['hideLabel'] = true;
         }
-
-        //Handle size
-        if (!in_array($size, ['sm', 'md', 'lg'])) {
-            $size = "md";
-        }
-        $this->data['classList'][] = $this->getBaseClass() . "--" . $size;
     }
 }
