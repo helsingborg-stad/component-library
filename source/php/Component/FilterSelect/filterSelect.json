@@ -5,7 +5,7 @@
         "placeholder": ""
     },
     "description": {
-        "options": "An array containing items with a label and a value."
+        "options": "An array with select items"
     },
     "view": "filterSelect.blade.php",
     "dependency": {
