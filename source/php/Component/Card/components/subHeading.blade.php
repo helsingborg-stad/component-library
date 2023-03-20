@@ -1,3 +1,3 @@
-@typography(['element' => 'h4', 'variant' => 'h4'])
+@typography(['element' => 'h3', 'variant' => 'h4'])
     {!! $subHeading !!}
 @endtypography

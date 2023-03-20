@@ -1,9 +1,21 @@
-@typography([
-    'element'   => 'h2',
-    'variant'   => 'h3',
-    'classList' => [
-        $baseClass."__heading"
-    ]
+@group([
+    'justifyContent' => 'space-between',
+    'alignItems' => 'start',
 ])
-    {!! $heading !!}
-@endtypography
+    @group([
+        'direction' => 'vertical'
+    ])
+        @typography([
+            'element'   => 'h2',
+            'variant'   => 'h3',
+            'classList' => [
+                $baseClass."__heading"
+            ]
+        ])
+            {!! $heading !!}
+        @endtypography
+
+        @includeWhen($meta && !$metaFirst, 'Card.components.meta')
+    @endgroup
+    @includeWhen($icon, 'Card.components.icon')
+@endgroup

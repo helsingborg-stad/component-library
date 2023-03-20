@@ -23,7 +23,8 @@
         "date": false,
         "dateBadge": false,
         "hasFooter": false,
-        "hasPlaceholder": false
+        "hasPlaceholder": false,
+        "icon": false
     },
     "description": {
         "image": "A url to a image.",
@@ -38,7 +39,6 @@
         "bottom": "Empty slot placed in the bottom of card.",
         "hasRipple": "Enable / disable ripple fx",
         "buttons": "Array with buttons that has parameters like href, text and attributeList.",
-        "icons": "Array with icons that has parameters like name, size, attributeList, classList.",
         "avatar": "Array with the avatar data such as image and name.",
         "dropdown": "Array with the dropdown parameters as items as an array, direction: top, right, bottom, left, position: top, bottom ",
         "accordion": "Array with the accordion parameters such as heading and content data",
@@ -47,7 +47,8 @@
         "ratio": "The ratio of the image",
         "date": "Preformatted date",
         "dateBadge": "Display date as a badge. Requires image to be set.",
-        "hasFooter": "Inidcate if the card has a footer section."
+        "hasFooter": "Inidcate if the card has a footer section.",
+        "icon": "An array with the same specification as the icon component"
     },
     "view": "card.blade.php",
     "dependency": {
@@ -60,7 +61,8 @@
                 "accordion",
                 "image",
                 "typography",
-                "avatar"
+                "avatar",
+                "group"
             ]
         }
     }
