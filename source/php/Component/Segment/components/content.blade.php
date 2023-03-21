@@ -1,21 +1,37 @@
-@if($title)
-    @typography([
-        "element" => "h2",
-        "variant" => ($layout == 'full-width') ? 'h1' : 'h2',
-        "classList" => [$baseClass . '__title'],
-        "autopromote" => true
+@if($title || $icon || $meta)
+@group([
+    'justifyContent' => 'space-between',
+    'alignItems' => 'start',
+])
+    @group([
+        'direction' => 'vertical'
     ])
-        {!! $title !!}
-    @endtypography
+    @if($title)
+        @typography([
+            "element" => "h2",
+            "variant" => ($layout == 'full-width') ? 'h1' : 'h2',
+            "classList" => [$baseClass . '__title'],
+            "autopromote" => true
+        ])
+            {!! $title !!}
+        @endtypography
+        @endif
+        
+    @if($meta)
+        @typography([
+            'element' => "h3",
+            'classList' => [$baseClass . '__meta'],
+        ])
+        {!! $meta !!}
+        @endtypography
     @endif
-    
-@if($meta)
-    @typography([
-        'element' => "h3",
-        'classList' => [$baseClass . '__meta'],
-    ])
-    {!! $meta !!}
-    @endtypography
+    @endgroup
+
+    @if($icon)
+        @icon($icon)
+        @endicon
+    @endif
+@endgroup
 @endif
 
 @if($date)
