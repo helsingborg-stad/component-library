@@ -3,7 +3,8 @@
     "default": {
         "options": [],
         "name": "",
-        "placeholder": ""
+        "placeholder": "",
+        "preselected": ""
     },
     "description": {
         "options": "An array with options",

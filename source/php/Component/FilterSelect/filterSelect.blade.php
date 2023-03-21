@@ -1,8 +1,10 @@
 <div class="{{ $class }}" {!! $attribute !!}>
+
     @select([
         'multiple' => true,
         'options' => $options,
         'name' => $name,
+        'preselected' => $preselected,
         'classList' => ['c-filterselect__select']
     ])
     @endselect
