@@ -2,11 +2,13 @@
     "slug": "listing",
     "default": {
         "list": [],
-        "elementType": "ul"
+        "elementType": "ul",
+        "icon": true
     },
     "description": {
-        "list": "List of arrays containing at least 'label' but can also contain 'href'.",
-        "elementType": "The type of list, ul, ol."
+        "list": "List of arrays containing at least 'label' but can also contain 'href' and or 'icon' according to the Icon component.",
+        "elementType": "The type of list, ul, ol.",
+        "icon": "Can be true/false or an array according to the Icon component. Displays an icon at the end of links"
     },
     "view": "listing.blade.php",
     "dependency": {
