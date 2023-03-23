@@ -7,25 +7,22 @@
         @if(!empty($item['href']))
         <li class="{{$baseClass}}__item {{$baseClass}}__item-{{ $loop->index }}">
           <a href="{{ $item['href'] }}" aria-label="{{ $item['label'] }}" class="{{$baseClass}}__link">
-            @group([])
               @if (!empty($item['icon']))
-              @icon($item['icon'])
-              @endicon
+                @icon($item['icon'])
+                @endicon
               @endif
               <span class="{{$baseClass}}__label">
                   {{ $item['label'] }}
                 @if($icon)
-                  @icon(['icon' => $icon['icon'] ?? 'arrow_forward', $icon['size'] ?? 'size' => 'lg'])
+                  @icon(['icon' => 'chevron_right', 'size' => 'md'])
                   @endicon
                 @endif
               </span>
-            @endgroup
           </a>
           @include('Listing.sub') {{--- Recursive action ---}}
         </li>
         @else
         <li class="{{$baseClass}}__item {{$baseClass}}__item-{{ $loop->index }}">
-          @group([])
             @if (!empty($item['icon']))
               @icon($item['icon'])
               @endicon
@@ -35,7 +32,6 @@
                 {!! $item['label'] !!}
               @endif
             </span>
-          @endgroup
           @include('Listing.sub') {{--- Recursive action ---}}
         </li>
         @endif
