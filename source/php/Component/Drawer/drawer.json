@@ -1,10 +1,12 @@
 {
     "slug": "drawer",
     "default": {
-        "label": "Close"
+        "label": "Close",
+        "screenSizes": ["xs", "sm", "md", "lg", "xl"],
     },
     "description": {
-        "label": "What to say in the label of the close drawer button."
+        "label": "What to say in the label of the close drawer button.",
+        "screenSizes": "Show on selected screen sizes. xs,sm,md,lg,xl.",
     },
     "view": "drawer.blade.php",
     "dependency": {

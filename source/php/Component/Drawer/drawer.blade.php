@@ -11,8 +11,7 @@
                 'js-toggle-trigger' => 'js-drawer'
             ],
             'classList' => [
-                'c-drawer__close',
-                'u-display--none@lg'
+                'c-drawer__close'
             ],
             'size' => 'md',
             'text' => $label
@@ -33,4 +32,4 @@
 
     </div>
 </nav>
-<div class="drawer-overlay js-close-drawer u-display--none@lg" js-toggle-trigger="js-drawer"></div>
+<div class="drawer-overlay js-close-drawer {{$screenSizeClassNames}}" js-toggle-trigger="js-drawer"></div>
