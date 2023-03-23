@@ -25,7 +25,7 @@
     @endif
 
     <div class="u-position--relative">
-        <select id="select_{{ $id }}" {!! $attribute !!}>
+        <select {!! $attribute !!}>
             @if ($label)
                 <option class="c-select__option" value="" {{ $preselected === '' ? 'selected' : '' }}>
                     {!! $label !!}</option>
