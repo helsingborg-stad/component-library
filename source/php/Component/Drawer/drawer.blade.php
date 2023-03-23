@@ -1,4 +1,8 @@
 <!-- drawer.blade.php -->
+@if($toggleButtonData)
+    @button($toggleButtonData)@endbutton
+@endif
+
 <nav class="c-drawer c-drawer--right c-drawer--primary js-drawer {{$class}}" js-toggle-class="is-open" js-toggle-item="js-drawer" {!! $attribute !!}>
     <div class="c-drawer__header">
         

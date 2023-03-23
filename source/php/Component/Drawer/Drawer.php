@@ -8,12 +8,14 @@ class Drawer extends \ComponentLibrary\Component\BaseController
 
     public function init()
     {
-     //Extract array for eazy access (fetch only)
+        //Extract array for eazy access (fetch only)
         extract($this->data);
 
         $this->data['searchSlotHasData'] = $this->slotHasData('search');
         $this->data['menuSlotHasData'] = $this->slotHasData('menu');
         $this->data['screenSizeClassNames'] = $this->getScreenSizeClassNames($screenSizes);
+        $this->data['toggleButtonData'] = $this->getToggleButtonData($toggleButtonData, $this->data['screenSizeClassNames']);
+    }
 
     /**
      * Get screen size class names
@@ -34,5 +36,15 @@ class Drawer extends \ComponentLibrary\Component\BaseController
 
         return implode(' ', $classNames);
     }
+
+    private function getToggleButtonData($toggleButtonData, string $screenSizeClassNames) {
+        
+        if( empty($toggleButtonData) ) return null;
+
+        $toggleButtonData['attributeList']['js-toggle-trigger'] = 'drawer';
+        $toggleButtonData['attributeList']['aria-controls'] = 'navigation';
+        $toggleButtonData['classList'] = explode(' ', $screenSizeClassNames);
+
+        return $toggleButtonData;
     }
 }
