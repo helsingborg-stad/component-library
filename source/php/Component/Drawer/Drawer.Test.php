@@ -2,12 +2,15 @@
 
 use ComponentLibrary\Component\Drawer\Drawer;
 
-class DrawerTest extends PHPUnit\Framework\TestCase {
-    public function testIsDefined() {
+class DrawerTest extends PHPUnit\Framework\TestCase
+{
+    public function testIsDefined()
+    {
         $this->assertTrue(class_exists(Drawer::class));
     }
 
-    public function testAcceptsToggleButtonArgs() {
+    public function testAcceptsToggleButtonArgs()
+    {
         // Arrange
         $label = 'Test label';
         $data = ['toggleButtonData' => ['text' => $label]];
@@ -20,7 +23,8 @@ class DrawerTest extends PHPUnit\Framework\TestCase {
         $this->assertEquals($label, $componentData['toggleButtonData']['text']);
     }
 
-    public function testToggleButtonGetsJSToggleTriggerDataAttribute() {
+    public function testToggleButtonGetsJSToggleTriggerDataAttribute()
+    {
         // Arrange
         $label = 'Test label';
         $data = ['toggleButtonData' => ['text' => $label]];
@@ -32,8 +36,9 @@ class DrawerTest extends PHPUnit\Framework\TestCase {
         // Assert
         $this->assertArrayHasKey('js-toggle-trigger', $componentData['toggleButtonData']['attributeList']);
     }
-    
-    public function testSetsScreenSizesClass() {
+
+    public function testSetsScreenSizesClass()
+    {
         // Arrange
         $screenSizes = ['md', 'lg', 'xl'];
         $expectedClassNames = 'u-display--none@xs u-display--none@sm';
@@ -44,12 +49,13 @@ class DrawerTest extends PHPUnit\Framework\TestCase {
         // Assert
         $this->assertEquals($expectedClassNames, $component->getData()['screenSizeClassNames']);
     }
-    
-    public function testDefaultScreenSizesShowsOnXsAndSmOnly() {
+
+    public function testDefaultScreenSizesShowsOnXsAndSmOnly()
+    {
         // Arrange
         $data = [];
         $expectedClassNames = 'u-display--none@md u-display--none@lg u-display--none@xl';
-        
+
         // Act
         $component = new Drawer($data);
 
