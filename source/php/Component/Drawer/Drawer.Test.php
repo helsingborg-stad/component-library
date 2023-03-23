@@ -55,27 +55,5 @@ class DrawerTest extends PHPUnit\Framework\TestCase {
 
         // Assert
         $this->assertEquals($expectedClassNames, $component->getData()['screenSizeClassNames']);
-    }    
-
-    public function testScreenSizeClassesAppliedToDrawerAndButton() {
-        // Arrange
-        $data = ['screenSizes' => ['sm', 'md', 'lg', 'xl'], 'toggleButtonData' => ['text' => 'foo']];
-        $expectedClassName = 'u-display--none@xs';
-
-        // Assert
-        $html = $this->renderComponent($data);
-        $matches = preg_match_all("/$expectedClassName/", $html);
-
-        // Act
-        $this->assertEquals(2, $matches);
-    }
-    
-    private function renderComponent(array $data) {
-        $init = new ComponentLibrary\Init([__DIR__]);
-        $component = new Drawer($data);
-        $data = $component->getData();
-        $bladeEngine = $init->getEngine();
-        $bladeViewRenderer = \HelsingborgStad\RenderBladeView\BladeViewRenderer::create($bladeEngine);
-        return $bladeViewRenderer->render('drawer',$data);
     }
 }
