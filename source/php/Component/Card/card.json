@@ -24,7 +24,10 @@
         "dateBadge": false,
         "hasFooter": false,
         "hasPlaceholder": false,
+        "postId": false,
+        "postType": "",
         "icon": false
+
     },
     "description": {
         "image": "A url to a image.",
@@ -48,6 +51,7 @@
         "date": "Preformatted date",
         "dateBadge": "Display date as a badge. Requires image to be set.",
         "hasFooter": "Inidcate if the card has a footer section.",
+        "postId": "ID of a post",
         "icon": "An array with the same specification as the icon component"
     },
     "view": "card.blade.php",

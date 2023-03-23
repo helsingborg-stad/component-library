@@ -9,7 +9,10 @@
         "link": "",
         "ratio": "4:3",
         "date": false,
-        "dateBadge": false
+        "dateBadge": false,
+        "postId": false,
+        "postType": "",
+        "icon": []
     },
     "description": {
         "heading": "The heading of the block",
