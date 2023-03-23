@@ -12,8 +12,9 @@ class Select extends \ComponentLibrary\Component\BaseController
 
         // Must include a id.
         if (!$id) {
-            $id = $this->data['id'] = uniqid();
+            $id = uniqid();
         }
+        $this->data['attributeList']['id'] = "select_{$id}";
 
         $this->data['classList'][] = $this->getBaseClass($size, true);
 
