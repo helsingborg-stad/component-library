@@ -1,25 +1,28 @@
-<div class="{{$class}}" {!! $attribute !!}>
+<div class="{{ $class }}" {!! $attribute !!}>
+
     @select([
         'multiple' => true,
         'options' => $options,
-        'classList' => ["c-filterselect__select"]
+        'name' => $name,
+        'preselected' => $preselected,
+        'classList' => ['c-filterselect__select']
     ])
     @endselect
     <div class="c-filterselect__dropdown">
         <div class="c-filterselect__expand-button">
             <div class="c-filterselect__checked-items">
-            <span class="c-filterselect__placeholder">{{$placeholder}}</span>
-            <template>
-                <div class="c-filterselect__checked-item">
-                    {OPTION_LABEL}
-                    @icon([
-                        'size' => 'sm',
-                        'icon' => 'close',
-                    ])
-                    @endicon
-                </div>
-            </template>
-        </div>
+                <span class="c-filterselect__placeholder">{{ $placeholder }}</span>
+                <template>
+                    <div class="c-filterselect__checked-item">
+                        {OPTION_LABEL}
+                        @icon([
+                            'size' => 'sm',
+                            'icon' => 'close'
+                        ])
+                        @endicon
+                    </div>
+                </template>
+            </div>
             @icon([
                 'icon' => 'expand_less',
                 'size' => 'md',
@@ -34,9 +37,9 @@
             @endicon
         </div>
         <div class="c-filterselect__options">
-            @foreach($options as $option)
-                <div class="c-filterselect__option" js-select-value="{{$option['value']}}">
-                    <span class="c-filterselect__option-label">{{$option['label']}}</span>
+            @foreach ($options as $value => $name)
+                <div class="c-filterselect__option" js-select-value="{{ $value }}">
+                    <span class="c-filterselect__option-label">{{ $name }}</span>
                     @icon([
                         'icon' => 'check_box_outline_blank',
                         'size' => 'md',

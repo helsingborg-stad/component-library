@@ -4,8 +4,8 @@ namespace ComponentLibrary\Component\Select;
 
 class Select extends \ComponentLibrary\Component\BaseController
 {
-
-    public function init() {
+    public function init()
+    {
 
         //Extract array for eazy access (fetch only)
         extract($this->data);
@@ -15,8 +15,19 @@ class Select extends \ComponentLibrary\Component\BaseController
             $id = $this->data['id'] = uniqid();
         }
 
+        $this->data['classList'][] = $this->getBaseClass($size, true);
+
         if ($multiple) {
             $this->data['attributeList']['multiple'] = 'multiple';
+        }
+
+        $this->data['intersection'] = [];
+        if (is_array($preselected) && !empty($options)) {
+            // Create an associative array from $preselected with keys same as values
+            $preselectedKeys = array_flip($preselected);
+
+            // Check if $options contains any items that have the key of a $preselected value
+            $this->data['intersection'] = array_intersect_key($options, $preselectedKeys);
         }
 
         if ($name) {
@@ -35,11 +46,5 @@ class Select extends \ComponentLibrary\Component\BaseController
         if (function_exists('get_theme_mod') && get_theme_mod('field_style_settings') === "rounded") {
             $this->data['hideLabel'] = true;
         }
-
-        //Handle size
-        if (!in_array($size, ['sm', 'md', 'lg'])) {
-            $size = "md";
-        }
-        $this->data['classList'][] = $this->getBaseClass() . "--" . $size;
     }
 }

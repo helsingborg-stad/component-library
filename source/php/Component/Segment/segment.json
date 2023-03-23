@@ -18,7 +18,9 @@
         "overlay": false,
         "stretch": false,
         "buttons": false,
-        "date": false
+        "date": false,
+        "meta": false,
+        "tags": false
     },
     "description": {
         "layout": "Which layout to use",
@@ -38,7 +40,9 @@
         "overlay": "Add an overlay over an image to make text more legible",
         "stretch": "Always stretch the section vertically. Makes the section the width of the viewport. Requires a centered container.",
         "buttons": "Array of buttons according to the @button specification. Do not use more than two buttons, one primary and on secondary.",
-        "date": "The date"
+        "date": "The date",
+        "tags": "Array of tags according to the tags component",
+        "meta": "The meta text"
     },
     "view": "segment.blade.php",
     "dependency": {

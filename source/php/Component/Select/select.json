@@ -9,7 +9,8 @@
         "preselected": false,
         "multiple": false,
         "name": false,
-        "hideLabel": false
+        "hideLabel": false,
+        "size": "md"
     },
     "description": {
         "label": "The placeholder of the dropdown",
@@ -19,7 +20,8 @@
         "preselected": "Key of option to be preselected",
         "multiple": "Sets the select box to a multiple select",
         "name": "The name attribute for the select component",
-        "hideLabel": "Hides the label"
+        "hideLabel": "Hides the label",
+        "size": "The size of the select component (sm, md, lg)"
     },
     "view": "select.blade.php",
     "dependency": {

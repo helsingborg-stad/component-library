@@ -90,6 +90,8 @@ class Segment extends \ComponentLibrary\Component\BaseController
         //Add image to image styles
         if ($image) {
             $this->data['imageStyle']['background-image'] = "url('" . $image . "')";
+        } else {
+            $this->data['classList'][] = $this->getBaseClass('no-image', true);
         }
 
         if (!empty($contentAlignment)) {
