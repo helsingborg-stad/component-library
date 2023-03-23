@@ -1,13 +1,26 @@
 {
     "name": "helsingborg-stad/component-library",
-    "type": "wordpress-muplugin", 
+    "type": "wordpress-muplugin",
     "authors": [
         {
             "name": "Eric Rosenborg",
             "email": "eric.rosenborg@hiq.se"
         }
     ],
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test:coverage": "XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-html .coverage/html --coverage-clover .coverage/clover.xml"
+    },
     "require": {
         "helsingborg-stad/blade-engine-wrapper": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.6",
+        "helsingborg-stad/render-blade-view": "^0.0.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "ComponentLibrary\\": "source/php/"
+        }
     }
 }
