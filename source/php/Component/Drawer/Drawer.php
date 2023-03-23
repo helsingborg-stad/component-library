@@ -13,8 +13,8 @@ class Drawer extends \ComponentLibrary\Component\BaseController
 
         $this->data['searchSlotHasData'] = $this->slotHasData('search');
         $this->data['menuSlotHasData'] = $this->slotHasData('menu');
-        $this->data['screenSizeClassNames'] = $this->getScreenSizeClassNames($screenSizes);
-        $this->data['toggleButtonData'] = $this->getToggleButtonData($toggleButtonData, $this->data['screenSizeClassNames']);
+        $this->data['screenSizeClassNames'] = $this->getScreenSizeClassNames($screenSizes ?? $this->defaultScreenSizes);
+        $this->data['toggleButtonData'] = $this->getToggleButtonData($toggleButtonData ?? [], $this->data['screenSizeClassNames']);
     }
 
     /**
@@ -25,7 +25,6 @@ class Drawer extends \ComponentLibrary\Component\BaseController
      */
     private function getScreenSizeClassNames($screenSizes):string {
         $classNames = [];
-        $screenSizes = $screenSizes ?? $this->defaultScreenSizes;
         $availableScreenSizes = ['xs', 'sm', 'md', 'lg', 'xl'];
 
         foreach($availableScreenSizes as $availableScreenSize) {
