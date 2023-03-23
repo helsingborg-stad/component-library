@@ -4,36 +4,38 @@
      
       @foreach($list as $item)
         {{--- List item ---}}
-        @if(!empty($item['href']))
-        <li class="{{$baseClass}}__item {{$baseClass}}__item-{{ $loop->index }}">
-          <a href="{{ $item['href'] }}" aria-label="{{ $item['label'] }}" class="{{$baseClass}}__link">
+        @if (!empty($item))
+          @if(!empty($item['href']))
+          <li class="{{$baseClass}}__item {{$baseClass}}__item-{{ $loop->index }}">
+            <a href="{{ $item['href'] }}" aria-label="{{ $item['label'] }}" class="{{$baseClass}}__link">
+                @if (!empty($item['icon']))
+                  @icon($item['icon'])
+                  @endicon
+                @endif
+                <span class="{{$baseClass}}__label">
+                    {{ $item['label'] }}
+                  @if($icon)
+                    @icon(['icon' => 'chevron_right', 'size' => 'md'])
+                    @endicon
+                  @endif
+                </span>
+            </a>
+            @include('Listing.sub') {{--- Recursive action ---}}
+          </li>
+          @else
+          <li class="{{$baseClass}}__item {{$baseClass}}__item-{{ $loop->index }}">
               @if (!empty($item['icon']))
                 @icon($item['icon'])
                 @endicon
               @endif
               <span class="{{$baseClass}}__label">
-                  {{ $item['label'] }}
-                @if($icon)
-                  @icon(['icon' => 'chevron_right', 'size' => 'md'])
-                  @endicon
+                @if(isset($item['label']) && !empty($item['label']))
+                  {!! $item['label'] !!}
                 @endif
               </span>
-          </a>
-          @include('Listing.sub') {{--- Recursive action ---}}
-        </li>
-        @else
-        <li class="{{$baseClass}}__item {{$baseClass}}__item-{{ $loop->index }}">
-            @if (!empty($item['icon']))
-              @icon($item['icon'])
-              @endicon
-            @endif
-            <span class="{{$baseClass}}__label">
-              @if(isset($item['label']) && !empty($item['label']))
-                {!! $item['label'] !!}
-              @endif
-            </span>
-          @include('Listing.sub') {{--- Recursive action ---}}
-        </li>
+            @include('Listing.sub') {{--- Recursive action ---}}
+          </li>
+          @endif
         @endif
       @endforeach
 
