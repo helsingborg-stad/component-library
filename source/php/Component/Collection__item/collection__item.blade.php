@@ -11,6 +11,15 @@
         </div>
     @endif
 
+    @if($image)
+        @image([
+            'src' => $image,
+            'alt' => $alt,
+            'classList' => [$baseClass . '__image']
+        ])
+        @endimage
+    @endif
+
     @if($slotHasData)
         <div class="c-collection__content">
             {!!$slot!!}
