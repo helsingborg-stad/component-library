@@ -58,7 +58,7 @@
 
             @if ($heading || $icon)
             @group([
-                'justifyContent' => 'space-between'
+                'justifyContent' => 'space-between',
                 'alignItems' => 'start',
             ])
                 @if ($heading)
