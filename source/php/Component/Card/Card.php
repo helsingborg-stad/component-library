@@ -19,30 +19,32 @@ class Card extends \ComponentLibrary\Component\BaseController
 
         $this->data['afterContentSlotHasData'] = $this->slotHasData('afterContent');
 
+        $this->data['floatingSlotHasData'] = $this->slotHasData('floating');
+
         if (isset($image['padded']) && $image['padded']) {
-                $this->data['paddedImage'] = $this->getBaseClass() . '__image-background--padded';
+            $this->data['paddedImage'] = $this->getBaseClass() . '__image-background--padded';
         }
 
-        if($imageFirst || !$image) {
-                $this->data['classList'][] = $this->getBaseClass() . '--image-first';
-        }     
-        
+        if ($imageFirst || !$image) {
+            $this->data['classList'][] = $this->getBaseClass() . '--image-first';
+        }
+
         if ($hasFooter || $tags || $buttons) {
-                $this->data['classList'][] = $this->getBaseClass() . '--has-footer';
+            $this->data['classList'][] = $this->getBaseClass() . '--has-footer';
         }
 
-        if($metaFirst) {
-                $this->data['classList'][] = $this->getBaseClass() . '--meta-first';
+        if ($metaFirst) {
+            $this->data['classList'][] = $this->getBaseClass() . '--meta-first';
         }
 
         if ($collapsible && $content) {
-                $this->data['collapsible'] = $this->getBaseClass() . '--collapse';
+            $this->data['collapsible'] = $this->getBaseClass() . '--collapse';
         }
 
         if (!empty($image) && is_string($image)) {
-                $image = $this->data['image'] = [
-                        'src' => $image
-                ];
+            $image = $this->data['image'] = [
+                    'src' => $image
+            ];
         }
 
         if (!empty($icon)) {
@@ -54,26 +56,26 @@ class Card extends \ComponentLibrary\Component\BaseController
         }
 
         if ($image && !isset($image['src']) || (isset($image['src']) && empty($image['src']))) {
-                $this->data['image'] = false;
+            $this->data['image'] = false;
         }
 
         if (is_array($image) && !isset($image['backgroundColor'])) {
-                $this->data['image']['backgroundColor'] = 'primary';
+            $this->data['image']['backgroundColor'] = 'primary';
         }
 
         if ($link) {
-                $this->data['componentElement'] = "a";
-                $this->data['attributeList']['href'] = $link;
+            $this->data['componentElement'] = "a";
+            $this->data['attributeList']['href'] = $link;
         } else {
-                $this->data['componentElement'] = "div";
+            $this->data['componentElement'] = "div";
         }
 
         if ($link) {
-                $this->data['classList'][] = $this->getBaseClass() . '--action';
+            $this->data['classList'][] = $this->getBaseClass() . '--action';
         }
 
         if ($ratio) {
-                $this->data['classList'][] = $this->getBaseClass() . '--ratio-' . str_replace(":", "-", $ratio);
+            $this->data['classList'][] = $this->getBaseClass() . '--ratio-' . str_replace(":", "-", $ratio);
         }
     }
 }

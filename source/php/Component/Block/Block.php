@@ -12,6 +12,8 @@ class Block extends \ComponentLibrary\Component\BaseController
     {
         // Extract array for easy access (fetch only)
         extract($this->data);
+        
+        $this->data['floatingSlotHasData'] = $this->slotHasData('floating');
 
         if ($image && !isset($image['backgroundColor'])) {
             $this->data['image']['backgroundColor'] = 'primary';

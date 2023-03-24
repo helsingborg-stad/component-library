@@ -4,21 +4,31 @@ namespace ComponentLibrary\Component\Select;
 
 class Select extends \ComponentLibrary\Component\BaseController
 {
-
-    public function init() {
+    public function init()
+    {
 
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
         // Must include a id.
         if (!$id) {
-            $id = $this->data['id'] = uniqid();
+            $id = uniqid();
         }
+        $this->data['attributeList']['id'] = "select_{$id}";
 
         $this->data['classList'][] = $this->getBaseClass($size, true);
 
         if ($multiple) {
             $this->data['attributeList']['multiple'] = 'multiple';
+        }
+
+        $this->data['intersection'] = [];
+        if (is_array($preselected) && !empty($options)) {
+            // Create an associative array from $preselected with keys same as values
+            $preselectedKeys = array_flip($preselected);
+
+            // Check if $options contains any items that have the key of a $preselected value
+            $this->data['intersection'] = array_intersect_key($options, $preselectedKeys);
         }
 
         if ($name) {
