@@ -30,7 +30,8 @@
             "components": [
                 "block",
                 "image",
-                "typography"
+                "typography",
+                "group"
             ]
         }
     }
