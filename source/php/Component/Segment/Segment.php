@@ -21,6 +21,10 @@ class Segment extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = 'c-segment--' . $layout;
         }
 
+        if (!empty($icon)) {
+                $this->data['icon']['classList'][] = $this->getBaseClass('icon');
+        }
+
         $this->data['imageClassList'] = [];
 
         if ($this->data['content'] == strip_tags($this->data['content'], [])) {

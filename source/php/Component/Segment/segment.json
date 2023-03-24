@@ -20,7 +20,8 @@
         "buttons": false,
         "date": false,
         "meta": false,
-        "tags": false
+        "tags": false,
+        "icon": false
     },
     "description": {
         "layout": "Which layout to use",
@@ -42,7 +43,8 @@
         "buttons": "Array of buttons according to the @button specification. Do not use more than two buttons, one primary and on secondary.",
         "date": "The date",
         "tags": "Array of tags according to the tags component",
-        "meta": "The meta text"
+        "meta": "The meta text",
+        "icon": "An array with the same specification as the icon component"
     },
     "view": "segment.blade.php",
     "dependency": {
@@ -50,7 +52,8 @@
             "components": [
                 "segment",
                 "typography",
-                "button"
+                "button",
+                "group"
             ]
         }
     }
