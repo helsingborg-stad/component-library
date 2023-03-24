@@ -19,7 +19,8 @@
         
     @if($meta)
         @typography([
-            'element' => "h3",
+            'element' => 'span',
+            'variant' => 'h3',
             'classList' => [$baseClass . '__meta'],
         ])
         {!! $meta !!}
