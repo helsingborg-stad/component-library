@@ -9,6 +9,8 @@ class Collection__item extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
+        $this->data['beforeSlotHasData'] = $this->slotHasData('before');
+
         //Link handling
         if($link) {
             $this->data['componentElement'] = "a"; 

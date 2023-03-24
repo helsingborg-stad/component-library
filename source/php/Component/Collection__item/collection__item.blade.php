@@ -11,13 +11,10 @@
         </div>
     @endif
 
-    @if($image)
-        @image([
-            'src' => $image,
-            'alt' => $alt,
-            'classList' => [$baseClass . '__image']
-        ])
-        @endimage
+     @if($beforeSlotHasData)
+     <div class="{{$baseClass}}__before">
+        {!! $before !!}
+    </div>
     @endif
 
     @if($slotHasData)

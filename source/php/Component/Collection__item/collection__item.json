@@ -6,9 +6,7 @@
         "icon": false,
         "action": false,
         "secondary": "",
-        "link": "",
-        "image": false,
-        "alt": ""
+        "link": ""
     },
     "description": {
         "elementType": "The type of list item. Default: li",
