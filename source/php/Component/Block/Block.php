@@ -38,6 +38,10 @@ class Block extends \ComponentLibrary\Component\BaseController
             $this->data['content'] = strip_tags($content);
         }
 
+        if (!empty($icon)) {
+            $this->data['icon']['classList'][] = $this->getBaseClass('icon');
+        }
+
         $this->data['classList'][] = $this->getBaseClass() . '--ratio-' . str_replace(":", "-", $ratio);
     }
 }
