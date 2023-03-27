@@ -2,7 +2,6 @@
     "slug": "collection__item",
     "default": {
         "componentElement": "div",
-
         "prefix": "",
         "icon": false,
         "action": false,

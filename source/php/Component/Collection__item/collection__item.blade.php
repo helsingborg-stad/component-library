@@ -11,6 +11,12 @@
         </div>
     @endif
 
+     @if($beforeSlotHasData)
+     <div class="{{$baseClass}}__before">
+        {!! $before !!}
+    </div>
+    @endif
+
     @if($slotHasData)
         <div class="c-collection__content">
             {!!$slot!!}
