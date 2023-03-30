@@ -8,8 +8,8 @@
         "display": "",
         "wrap": "",
         "flexGrow": false,
-        "flexShrink": true
-
+        "flexShrink": true,
+        "gap": ""
     },
     "description": {
         "direction": "What direction to group (horizontal or vertical)",
@@ -19,7 +19,8 @@
         "flex": "Type of flex (ex. inline-flex)",
         "wrap": "Wrap the content (ex. nowrap, wrap, wrap-reverse)",
         "flexGrow": "Allow to grow the content within the group",
-        "flexShrink": "Allow to shrink the content within the group"
+        "flexShrink": "Allow to shrink the content within the group",
+        "gap": "A number between 1-10 that sets the gap between flexed elements."
     },
     "view": "group.blade.php",
     "dependency": {

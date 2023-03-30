@@ -23,6 +23,10 @@ class Group extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . "--justify-content-" . $justifyContent;      
         }
         
+        if(!empty($gap)) {
+            $this->data['classList'][] = $this->getBaseClass('gap-' . $gap, true);      
+        }
+        
         if(!empty($alignItems)) {
             $this->data['classList'][] = $this->getBaseClass() . "--align-items-" . $alignItems;      
         }
