@@ -6,7 +6,8 @@ namespace ComponentLibrary\Component\Icon;
  * Class Icon
  * @package ComponentLibrary\Component\Icon
  */
-class Icon extends \ComponentLibrary\Component\BaseController {
+class Icon extends \ComponentLibrary\Component\BaseController
+{
     private $altTextPrefix = "Icon: ";
     private $altText = [
         'key'  => "Label"
@@ -25,7 +26,12 @@ class Icon extends \ComponentLibrary\Component\BaseController {
             'size'      => $size
         ];
 
-        $this->setColor();
+
+        if (!empty($customColor)) {
+            $this->data['attributeList']['style'] = 'color:' . $customColor . ';';
+        } else {
+            $this->setColor();
+        }
         $this->appendSpace();
         $this->setSize();
 
@@ -46,16 +52,17 @@ class Icon extends \ComponentLibrary\Component\BaseController {
 
     /**
      * Creates a modifier based on the icon name.
-     * 
+     *
      * @param string $icon
-     * 
+     *
      * @return string
      */
-    private function createIconModifier($icon) {
+    private function createIconModifier($icon)
+    {
         return $this->getBaseClass(
             str_replace("_", "-", $icon),
             true
-        ); 
+        );
     }
 
     /**
@@ -128,7 +135,8 @@ class Icon extends \ComponentLibrary\Component\BaseController {
      * Build class for color
      * @return array
      */
-    public function setColor() {
+    public function setColor()
+    {
         // Set color based on provided name
         if (isset($this->compParams['color']) && !empty($this->compParams['color'])) {
             $this->data['classList'][] = $this->getBaseClass() . "--color-" . strtolower($this->compParams['color']);
@@ -142,7 +150,8 @@ class Icon extends \ComponentLibrary\Component\BaseController {
      * Build class for size
      * @return array
      */
-    public function setSize() {
+    public function setSize()
+    {
         //Available sizes
         $sizes = [
             'xs' => '16',
