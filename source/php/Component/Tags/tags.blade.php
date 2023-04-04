@@ -16,7 +16,8 @@
                         @icon([
                             'icon' => $icon['icon'],
                             'size' => $icon['size'],
-                            'customColor' => $tag['color']
+                            'customColor' => $tag['color'],
+                            'classList' => ['u-margin__right--05']
                         ])
                         @endicon
                     @else

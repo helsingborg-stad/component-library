@@ -19,7 +19,6 @@ class Tags extends \ComponentLibrary\Component\BaseController
 
 
         if (!empty($this->data['tagsMarker'])) {
-            /* TODO: add functionality to get and set the icon color based on taxonomy color */
             $this->data['icon'] = ['icon' => 'circle', 'size' => 'xs'];
 
             if (!empty($this->data['icon'])) {
