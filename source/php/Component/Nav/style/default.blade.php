@@ -5,8 +5,8 @@
     'href' => $item['href'],
   ])
     @icon([
-      'icon' => $item['icon']['icon'],
-      'size' => $item['icon']['size'],
+      'icon' => 'all_out',
+      'size' => 'md',
       'classList' => $item['icon']['classList'],
       'attributeList' => ['style' => $item['color'] ? 'background-color:' . $item['color'] . ';' : '']
     ])
