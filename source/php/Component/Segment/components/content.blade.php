@@ -2,6 +2,7 @@
 @group([
     'justifyContent' => 'space-between',
     'alignItems' => 'start',
+    'gap' => 2,
 ])
     @group([
         'direction' => 'vertical'
@@ -9,7 +10,7 @@
     @if($title)
         @typography([
             "element" => "h2",
-            "variant" => ($layout == 'full-width') ? 'h1' : 'h2',
+            "variant" => ($layout == 'full-width') ? 'h1' : ($layout == 'card' ? 'h3' : 'h2'),
             "classList" => [$baseClass . '__title'],
             "autopromote" => true
         ])
@@ -20,10 +21,10 @@
     @if($meta)
         @typography([
             'element' => 'span',
-            'variant' => 'h3',
+            'variant' => 'h4',
             'classList' => [$baseClass . '__meta'],
         ])
-        {!! $meta !!}
+            {!! $meta !!}
         @endtypography
     @endif
     @endgroup
