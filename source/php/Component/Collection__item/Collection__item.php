@@ -11,6 +11,10 @@ class Collection__item extends \ComponentLibrary\Component\BaseController
 
         $this->data['beforeSlotHasData'] = $this->slotHasData('before');
 
+        if (!empty($displayIcon)) {
+            $this->data['classList'][] = $this->getBaseClass('show-icon', true);
+        }
+
         //Link handling
         if($link) {
             $this->data['componentElement'] = "a"; 
