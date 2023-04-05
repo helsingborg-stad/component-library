@@ -1,0 +1,18 @@
+{
+    "slug": "inlineCssWrapper",
+    "default": {
+        "componentElement": "div",
+        "styles": []
+    },
+    "description": {
+       
+    },
+    "view": "inlineCssWrapper.blade.php",
+    "dependency": {
+        "sass": {
+            "components": [
+                "inlineCssWrapper"
+            ]
+        }
+    }
+}
