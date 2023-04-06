@@ -30,7 +30,8 @@
         "perPage": "How many items per page",
         "maxPages": "Maximum amount of pages",
         "buttonStyle": "The style of button to display",
-        "buttonSize": "Size of the buttons"
+        "buttonSize": "Size of the buttons",
+        "pagesToShow": false
     },
     "view": "pagination.blade.php",
     "dependency": {
