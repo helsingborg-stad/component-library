@@ -6,7 +6,7 @@
         "beforeLabel": "#",
         "icon": [],
         "afterLabel": "",
-        "format": true,
+        "format": false,
         "compress": false
     },
     "description": {
