@@ -14,6 +14,10 @@ class Button extends \ComponentLibrary\Component\BaseController
         $this->data['classList'][] = $this->getBaseClass() . '__' . $style . '--' . $color;
         $this->data['classList'][] = $this->getBaseClass() . '--' . $size;
 
+        if($shape == 'pill') {
+            $this->data['classList'][] = $this->getBaseClass('pill', true);
+        }
+
         if ($toggle) {
             $this->setToggleAttributes();
         }
@@ -103,8 +107,9 @@ class Button extends \ComponentLibrary\Component\BaseController
      */
     private function setIconOnly($text, $icon)
     {
+
         if (!empty($icon) && empty($text)) {
-            $this->data['classList'][] = $this->getBaseClass() . '--icon-only';
+            $this->data['classList'][] = $this->getBaseClass('icon-only', true);
             
             if(!$this->data['ariaLabel'] && !isset($this->data['attributeList']['aria-label'])) {
                 $this->data['attributeList']['aria-label'] = $icon;
