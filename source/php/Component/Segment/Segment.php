@@ -22,7 +22,11 @@ class Segment extends \ComponentLibrary\Component\BaseController
         }
 
         if (!empty($icon)) {
-                $this->data['icon']['classList'][] = $this->getBaseClass('icon');
+            $this->data['icon']['classList'][] = $this->getBaseClass('icon');
+        }
+        
+        if (!isset($this->data['displayIcon'])) {
+            $this->data['displayIcon'] = true;
         }
 
         $this->data['imageClassList'] = [];
