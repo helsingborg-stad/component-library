@@ -40,7 +40,7 @@ class DrawerTest extends PHPUnit\Framework\TestCase
     public function testSetsScreenSizesClass()
     {
         // Arrange
-        $screenSizes = ['md', 'lg', 'xl'];
+        $screenSizes = ['md', 'lg'];
         $expectedClassNames = 'u-display--none@xs u-display--none@sm';
 
         // Act
@@ -54,7 +54,7 @@ class DrawerTest extends PHPUnit\Framework\TestCase
     {
         // Arrange
         $data = [];
-        $expectedClassNames = 'u-display--none@md u-display--none@lg u-display--none@xl';
+        $expectedClassNames = 'u-display--none@md u-display--none@lg';
 
         // Act
         $component = new Drawer($data);
