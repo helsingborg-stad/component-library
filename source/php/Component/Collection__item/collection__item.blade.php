@@ -4,6 +4,12 @@
         {!! $prefix !!}
     @endif
 
+    @if($floatingSlotHasData)
+        <div class="{{$baseClass}}__floating">
+            {!! $floating !!}
+        </div>
+    @endif
+
     @if($icon) 
         <div class="c-collection__icon">
             @icon(['icon' => $icon, 'size' => 'md'])

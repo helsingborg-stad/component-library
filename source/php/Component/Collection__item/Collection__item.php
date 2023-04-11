@@ -10,6 +10,7 @@ class Collection__item extends \ComponentLibrary\Component\BaseController
         extract($this->data);
 
         $this->data['beforeSlotHasData'] = $this->slotHasData('before');
+        $this->data['floatingSlotHasData'] = $this->slotHasData('floating');
 
         if (!empty($displayIcon)) {
             $this->data['classList'][] = $this->getBaseClass('show-icon', true);
