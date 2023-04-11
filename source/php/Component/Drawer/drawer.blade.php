@@ -1,4 +1,8 @@
 <!-- drawer.blade.php -->
+@if($toggleButtonData)
+    @button($toggleButtonData)@endbutton
+@endif
+
 <nav class="c-drawer c-drawer--right c-drawer--primary js-drawer {{$class}}" js-toggle-class="is-open" js-toggle-item="js-drawer" {!! $attribute !!}>
     <div class="c-drawer__header">
         
@@ -11,8 +15,7 @@
                 'js-toggle-trigger' => 'js-drawer'
             ],
             'classList' => [
-                'c-drawer__close',
-                'u-display--none@lg'
+                'c-drawer__close'
             ],
             'size' => 'md',
             'text' => $label
@@ -33,4 +36,4 @@
 
     </div>
 </nav>
-<div class="drawer-overlay js-close-drawer u-display--none@lg" js-toggle-trigger="js-drawer"></div>
+<div class="drawer-overlay js-close-drawer {{$screenSizeClassNames}}" js-toggle-trigger="js-drawer"></div>

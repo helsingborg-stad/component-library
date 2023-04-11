@@ -81,7 +81,7 @@ class BaseController
         $data['uid'] = $this->getUid(); //"random" id
 
         //Key for if slot contains any data
-        $data['slotHasData'] = !empty($this->accessProtected($this->data['slot'], "html"));
+        $data['slotHasData'] = isset($this->data['slot']) && !empty($this->accessProtected($this->data['slot'], "html"));
 
         //Public methods accesible within views
         $data['buildAttributes'] = function ($attributes = array()) {
