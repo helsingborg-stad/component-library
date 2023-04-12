@@ -15,7 +15,8 @@
         "perPage": 10,
         "maxPages": false,
         "buttonStyle": "filled",
-        "buttonSize": "sm"
+        "buttonSize": "sm",
+        "pagesToShow": false
     },
     "description": {
         "list": "Array with pages",
@@ -30,7 +31,8 @@
         "perPage": "How many items per page",
         "maxPages": "Maximum amount of pages",
         "buttonStyle": "The style of button to display",
-        "buttonSize": "Size of the buttons"
+        "buttonSize": "Size of the buttons",
+        "pagesToShow": "Amount of pages that is shown to the user at one time."
     },
     "view": "pagination.blade.php",
     "dependency": {
