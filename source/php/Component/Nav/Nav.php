@@ -202,7 +202,7 @@ class Nav extends \ComponentLibrary\Component\BaseController
         $item['attributeList'] = array_merge(
             $item['attributeList'],
             [
-                'aria-label' => $item['label'] ?? ''
+                'aria-label' => $item['attributeList']['aria-label'] ? $item['attributeList']['aria-label'] : ($item['label'] ?? '')
             ]
         );
 
