@@ -5,6 +5,8 @@
         "direction": "vertical",
         "includeToggle": false,
         "allowStyle": true,
+        "buttonStyle": "filled",
+        "buttonColor": "primary",
         "expandLabel": "Expand",
         "height": ""
     },
@@ -13,6 +15,8 @@
         "direction": "Modifier for basic direction. Accept values: 'vertical', 'horizontal.'",
         "includeToggle": "Tells wheter to include toggle button to expand childs or not. Accept values: true, false.",
         "allowStyle": "Allow the use of style parameter in this menu (item.style = 'button')",
+        "buttonStyle": "If the nav is presenting buttons, what style they should be in.",
+        "buttonColor": "If the nav is presenting buttons, what color they should be in.",
         "expandLabel": "Prefix for labels on expand arrow. Will result in Expand: Link label, or if label is missing, just Expand.",
         "height": "The default height of the menu (only supports horizontal navigation). Values: sm, md, lg."
     },

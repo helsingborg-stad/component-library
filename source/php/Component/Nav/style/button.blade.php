@@ -3,8 +3,8 @@
     'icon' => isset($item['icon']['icon']) ? $item['icon']['icon'] : false,
     'reversePositions' => true,
     'text' => $item['label'],
-    'style' => 'filled',
-    'color' => 'primary',
+    'style' => $buttonStyle,
+    'color' => $buttonColor,
     'href' => $item['href'],
     'classList' => [
         $baseClass . '__button',
@@ -14,6 +14,7 @@
     ],
     'context' => [
         'component.nav.button'
-    ]
+    ],
+    'size' => $height
 ])
 @endbutton
