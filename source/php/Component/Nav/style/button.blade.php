@@ -11,6 +11,9 @@
     ],
     'attributeList' => [
         'aria-label' => $item['label']
+    ],
+    'context' => [
+        'component.nav.button'
     ]
 ])
 @endbutton
