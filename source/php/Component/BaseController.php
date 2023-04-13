@@ -97,7 +97,11 @@ class BaseController
             if (is_array($data) && !empty($data)) {
                 foreach ($data as $key => $item) {
                     if (!in_array($key, array("data", "classes", 'class'))) {
-                        $data[$key] = apply_filters($this->createFilterName($this) . DIRECTORY_SEPARATOR . ucfirst($key), $data[$key]);
+                        $data[$key] = apply_filters(
+                            $this->createFilterName($this) . DIRECTORY_SEPARATOR . ucfirst($key), 
+                            $data[$key],
+                            $data['context'] ?? []
+                        );
                     }
                 }
             }
