@@ -31,6 +31,10 @@ class OpenStreetMap extends \ComponentLibrary\Component\BaseController
             $this->data['title'] = $title;
         }
 
+        if (!empty($fullWidth)) {
+            $this->data['classList'][] = $this->getBaseClass('full-width', true);
+        }
+
         if ($this->data['sidebarContentHasData']) {
             $this->data['classList'][] = $this->getBaseClass('sidebar', true);
         }

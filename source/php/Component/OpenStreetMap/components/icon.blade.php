@@ -3,6 +3,6 @@
     'size' => 'md',
     'color' => 'white',
     'attributeList' => ['style' => 'background-color:{ICON_BACKGROUND_COLOR}; font-size:20px;'],
-    'classList' => ['openstreetmap__marker']
+    'classList' => [$baseClass . '__marker']
 ])
 @endicon
