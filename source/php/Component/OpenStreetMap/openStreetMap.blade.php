@@ -1,5 +1,6 @@
 <div class="{{$class}}" {!! $attribute !!}>
     <div style="height:{{$height}};" id="openstreetmap__map">
+        @if ($sidebarContentHasData)
         @icon([
             'icon' => 'map',
             'size' => 'lg',
@@ -7,7 +8,7 @@
             'attributeList' => ['data-js-toggle-trigger' => 'expand']
         ])
         @endicon
+        @endif
     </div>
-    {!! $slot !!}
     @includeWhen($sidebarContentHasData, 'OpenStreetMap.partials.sidebar')
 </div>

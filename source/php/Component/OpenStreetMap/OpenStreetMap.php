@@ -31,6 +31,10 @@ class OpenStreetMap extends \ComponentLibrary\Component\BaseController
             $this->data['title'] = $title;
         }
 
+        if ($this->data['sidebarContentHasData']) {
+            $this->data['classList'][] = $this->getBaseClass('sidebar', true);
+        }
+
         $this->data['attributeList']['data-js-toggle-item'] = "expand";
         $this->data['attributeList']['data-js-toggle-class'] = "is-expanded";
         $this->data['attributeList']['id'] = "openstreetmap";
