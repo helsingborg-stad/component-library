@@ -18,9 +18,7 @@
         "sass": {
             "components": [
                 "openStreetMap",
-                "icon",
-                "collection",
-                "collection__item"
+                "icon"
             ]
         }
     }
