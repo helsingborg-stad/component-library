@@ -47,5 +47,33 @@ class Block extends \ComponentLibrary\Component\BaseController
         }
 
         $this->data['classList'][] = $this->getBaseClass() . '--ratio-' . str_replace(":", "-", $ratio);
+
+        if(!$this->hasContent($this->data)) {
+            $this->data['classList'][] = $this->getBaseClass("no-content", true);
+        }
+
+        $this->data['hasContent'] = $this->hasContent($this->data); 
+    }
+
+    private function hasContent($data) {
+        $stack = [];
+        $keysToCheck = [
+            'date', 
+            'meta', 
+            'secondaryMeta', 
+            'heading', 
+            'icon', 
+            'content'
+        ];
+        
+        if(is_array($keysToCheck) && !empty($keysToCheck)) {
+            foreach($keysToCheck as $key) {
+                if(array_key_exists($key, $data)) {
+                    $stack[] = $data[$key]; 
+                }
+            }
+        }
+        
+        return (bool) array_filter($stack);
     }
 }
