@@ -12,6 +12,5 @@
         @endif
         <div class="openstreetmap__inner-blocks u-hide-empty">{!! '<InnerBlocks />' !!}</div>
         {!! $sidebarContent !!}
-        @include('OpenStreetMap.partials.pagination')
     </div>
 </div>
