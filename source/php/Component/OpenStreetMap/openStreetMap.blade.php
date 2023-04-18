@@ -11,4 +11,5 @@
         @endif
     </div>
     @includeWhen($sidebarContentHasData, 'OpenStreetMap.partials.sidebar')
+    @include('OpenStreetMap.partials.template')
 </div>

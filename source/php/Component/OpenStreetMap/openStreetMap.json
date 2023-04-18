@@ -18,7 +18,10 @@
         "sass": {
             "components": [
                 "openStreetMap",
-                "icon"
+                "icon",
+                "typography",
+                "group",
+                "link"
             ]
         }
     }
