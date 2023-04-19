@@ -13,7 +13,7 @@
         @enddatebadge
     @endif
 
-    @if (!$slotHasData)
+    @if (!$slotHasData || $hasContent)
         <div class="{{ $baseClass }}__body">
 
             @if ($date && !$dateBadge)
