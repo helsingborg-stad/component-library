@@ -8,7 +8,11 @@
                 @if (!empty($item['href']))
                     <li class="{{ $baseClass }}__item {{ $baseClass }}__item-{{ $loop->index }}">
                         <a class="{{ $baseClass }}__link" href="{{ $item['href'] }}" aria-label="{{ $item['label'] }}">
-                            @includeWhen(!empty($item['icon']), 'Listing.item-icon', ['item' => $item])
+                            @icon([
+                                'icon' => $item['icon']['src'],
+                                'size' => $item['size'] ?? 'md'
+                            ])
+                            @endicon
                             <span class="{{ $baseClass }}__label">
                                 {{ $item['label'] }}
                                 @if ($icon)
@@ -21,7 +25,11 @@
                     </li>
                 @else
                     <li class="{{ $baseClass }}__item {{ $baseClass }}__item-{{ $loop->index }}">
-                        @includeWhen(!empty($item['icon']), 'Listing.item-icon', ['item' => $item])
+                        @icon([
+                            'icon' => $item['icon']['src'],
+                            'size' => $item['size'] ?? 'md'
+                        ])
+                        @endicon
                         <span class="{{ $baseClass }}__label">
                             @if (isset($item['label']) && !empty($item['label']))
                                 {!! $item['label'] !!}
