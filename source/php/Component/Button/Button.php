@@ -89,9 +89,11 @@ class Button extends \ComponentLibrary\Component\BaseController
     {
         $toggleId = uniqid('', true);
 
-        if (!array_key_exists('js-toggle-trigger', $this->data['attributeList'])) {
-            $this->data['attributeList']['js-toggle-trigger'] = $toggleId;
-            $this->data['attributeList']['js-toggle-item'] = $toggleId;
+        if (!array_key_exists('data-js-toggle-trigger', $this->data['attributeList'])) {
+            $this->data['attributeList']['data-js-toggle-trigger']   = $toggleId;
+            $this->data['attributeList']['data-js-toggle-item']      = $toggleId;
+            $this->data['attributeList']['data-js-toggle-class']     = "is-pressed";
+            $this->data['attributeList']['aria-pressed']             = "false";
         }
 
         $this->data['classList'][] = $this->getBaseClass() . '__toggle';
