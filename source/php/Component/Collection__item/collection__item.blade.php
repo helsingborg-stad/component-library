@@ -10,7 +10,7 @@
         </div>
     @endif
 
-    @if($icon) 
+    @if($icon && !empty($displayIcon)) 
         <div class="c-collection__icon">
             @icon(['icon' => $icon, 'size' => 'md'])
             @endicon

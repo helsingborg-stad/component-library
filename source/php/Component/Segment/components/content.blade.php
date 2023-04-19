@@ -29,7 +29,7 @@
     @endif
     @endgroup
 
-       @if ($icon)
+       @if ($icon && !empty($displayIcon))
         @inlineCssWrapper([
             'styles' => ['background-color' => $icon['backgroundColor'], 'display' => 'flex'],
             'classList' => [$icon['backgroundColor'] ? '' : 'u-color__bg--primary', 'u-rounded--full', 'u-detail-shadow-3']

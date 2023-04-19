@@ -17,5 +17,5 @@
 
         @includeWhen($meta && !$metaFirst, 'Card.components.meta')
     @endgroup
-    @includeWhen($icon, 'Card.components.icon')
+    @includeWhen($icon && !empty($displayIcon), 'Card.components.icon')
 @endgroup
