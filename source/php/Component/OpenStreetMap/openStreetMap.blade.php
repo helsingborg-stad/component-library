@@ -1,5 +1,7 @@
 <div class="{{$class}}" {!! $attribute !!}>
+    <div class="{{$baseClass}}__map-container">
     <div style="height:{{$height}};" id="openstreetmap__map">
+    </div>
         @if ($sidebarContentHasData)
         @icon([
             'icon' => 'map',
