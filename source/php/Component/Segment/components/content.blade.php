@@ -1,76 +1,84 @@
-@if($title || $icon || $meta)
-@group([
-    'justifyContent' => 'space-between',
-    'alignItems' => 'start',
-    'gap' => 2,
-])
+@if ($title || $icon || $meta)
     @group([
-        'direction' => 'vertical'
+        'justifyContent' => 'space-between',
+        'alignItems' => 'start',
+        'gap' => 2
     ])
-    @if($title)
-        @typography([
-            "element" => "h2",
-            "variant" => ($layout == 'full-width') ? 'h1' : ($layout == 'card' ? 'h3' : 'h2'),
-            "classList" => [$baseClass . '__title'],
-            "autopromote" => true
+        @group([
+            'direction' => 'vertical'
         ])
-            {!! $title !!}
-        @endtypography
-        @endif
-        
-    @if($meta)
-        @typography([
-            'element' => 'span',
-            'variant' => 'h4',
-            'classList' => [$baseClass . '__meta'],
-        ])
-            {!! $meta !!}
-        @endtypography
-    @endif
-    @endgroup
+            @if ($title)
+                @if ($link)
+                    @link([
+                        'href' => $link
+                    ])
+                    @endif
+                    @typography([
+                        'element' => 'h2',
+                        'variant' => $layout == 'full-width' ? 'h1' : ($layout == 'card' ? 'h3' : 'h2'),
+                        'classList' => [$baseClass . '__title', 'u-margin__bottom--1'],
+                        'autopromote' => true
+                    ])
+                        {!! $title !!}
+                    @endtypography
+                    @if ($link)
+                    @endlink
+                @endif
+            @endif
 
-       @if ($icon && !empty($displayIcon))
-        @inlineCssWrapper([
-            'styles' => ['background-color' => $icon['backgroundColor'], 'display' => 'flex'],
-            'classList' => [$icon['backgroundColor'] ? '' : 'u-color__bg--primary', 'u-rounded--full', 'u-detail-shadow-3']
-        ])
-            @icon($icon)
-            @endicon
-        @endinlineCssWrapper
-    @endif
-@endgroup
+            @if ($meta)
+                @typography([
+                    'element' => 'span',
+                    'variant' => 'h4',
+                    'classList' => [$baseClass . '__meta']
+                ])
+                    {!! $meta !!}
+                @endtypography
+            @endif
+        @endgroup
+
+        @if ($icon && !empty($displayIcon))
+            @inlineCssWrapper([
+                'styles' => ['background-color' => $icon['backgroundColor'], 'display' => 'flex'],
+                'classList' => [$icon['backgroundColor'] ? '' : 'u-color__bg--primary', 'u-rounded--full', 'u-detail-shadow-3']
+            ])
+                @icon($icon)
+                @endicon
+            @endinlineCssWrapper
+        @endif
+    @endgroup
 @endif
 
-@if($date)
+@if ($date)
     @date([
         'action' => false,
         'timestamp' => $date,
-        'classList' => [$baseClass."__date"]
+        'classList' => [$baseClass . '__date']
     ])
     @enddate
 @endif
 
-@if($tags) 
+@if ($tags)
     @tags([
         'tags' => $tags,
-        'classList' => [$baseClass . '__tags', 'u-margin__top--1'],
+        'classList' => [$baseClass . '__tags', 'u-margin__top--1']
     ])
     @endtags
 @endif
 
-@if($content)
+@if ($content)
     @typography([
-        "variant" => "p",
-        "element" => "div",
-        "classList" => [$baseClass . '__text'],
+        'variant' => 'p',
+        'element' => 'div',
+        'classList' => [$baseClass . '__text']
     ])
         {!! $content !!}
     @endtypography
 @endif
 
-@if($buttons)
-    <div class="{{$baseClass}}__buttons">
-        @foreach($buttons as $button) 
+@if ($buttons)
+    <div class="{{ $baseClass }}__buttons">
+        @foreach ($buttons as $button)
             @button($button)
             @endbutton
         @endforeach

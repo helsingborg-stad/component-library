@@ -8,7 +8,7 @@ class Segment extends \ComponentLibrary\Component\BaseController
     {
         //Extract array for eazy access (fetch only)
         extract($this->data);
-        
+
         $file_path = __DIR__ . "/partials/" . $layout . '.blade.php';
 
         $this->data['floatingSlotHasData'] = $this->slotHasData('floating');
@@ -26,9 +26,14 @@ class Segment extends \ComponentLibrary\Component\BaseController
         if (!empty($icon)) {
             $this->data['icon']['classList'][] = $this->getBaseClass('icon');
         }
-        
+
         if (!isset($this->data['displayIcon'])) {
             $this->data['displayIcon'] = true;
+        }
+
+        // If no link and exactly one button, use that button as link
+        if (!$link && ($buttons && count($buttons) === 1)) {
+            $this->data['link'] = $buttons[0]['href'];
         }
 
         $this->data['imageClassList'] = [];
@@ -37,7 +42,7 @@ class Segment extends \ComponentLibrary\Component\BaseController
             // Create paragraphs
             $paragraphs = preg_split("/\r\n|\n|\r/", $this->data['content']);
             foreach ($paragraphs as &$part) {
-                if(empty($part)) {
+                if (empty($part)) {
                     continue;
                 }
                 $part = "<p>{$part}</p>";
@@ -87,7 +92,7 @@ class Segment extends \ComponentLibrary\Component\BaseController
         }
 
         // Add overlay class
-        if ($layout === 'full-width' && ($title||$content) && !empty($image)) {
+        if ($layout === 'full-width' && ($title || $content) && !empty($image)) {
             $this->data['classList'][] = 'c-segment' . '--has-overlay';
         }
 

@@ -6,7 +6,10 @@
         "content": false,
         "textSize": "default",
         "image": false,
-        "imageFocus": {"top": 30, "left": 50},
+        "imageFocus": {
+            "top": 30,
+            "left": 50
+        },
         "background": false,
         "backgroundOverlay": false,
         "textColor": "dark",
@@ -41,6 +44,7 @@
         "overlay": "Add an overlay over an image to make text more legible",
         "stretch": "Always stretch the section vertically. Makes the section the width of the viewport. Requires a centered container.",
         "buttons": "Array of buttons according to the @button specification. Do not use more than two buttons, one primary and on secondary.",
+        "link": "Link will be applied to the title and the image (if any). If there is one (1) button defined and no link is defined, the button will be used as the link.",
         "date": "The date",
         "tags": "Array of tags according to the tags component",
         "meta": "The meta text",
