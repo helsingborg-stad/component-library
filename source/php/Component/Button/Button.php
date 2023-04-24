@@ -81,7 +81,9 @@ class Button extends \ComponentLibrary\Component\BaseController
     }
 
     /**
-     * Set attributes
+     * Set attributes, if not found in attributes list.
+     * Attributes may be overridden with attributes from
+     * the attributeList input. 
      *
      * @return void
      */
@@ -89,11 +91,17 @@ class Button extends \ComponentLibrary\Component\BaseController
     {
         $toggleId = uniqid('', true);
 
-        if (!array_key_exists('data-js-toggle-trigger', $this->data['attributeList'])) {
-            $this->data['attributeList']['data-js-toggle-trigger']   = $toggleId;
-            $this->data['attributeList']['data-js-toggle-item']      = $toggleId;
-            $this->data['attributeList']['data-js-toggle-class']     = "is-pressed";
-            $this->data['attributeList']['aria-pressed']             = "false";
+        $attributeMap = [
+            'data-js-toggle-trigger' => $toggleId,
+            'data-js-toggle-item' => $toggleId,
+            'data-js-toggle-class' => "is-pressed", 
+            'aria-pressed' => "false"
+        ];
+
+        foreach($attributeMap as $attribute => $data) {
+            if (!array_key_exists($attribute, $this->data['attributeList']) || empty($this->data['attributeList'])) {
+                $this->data['attributeList'][$attribute] = $data;
+            }
         }
 
         $this->data['classList'][] = $this->getBaseClass() . '__toggle';
