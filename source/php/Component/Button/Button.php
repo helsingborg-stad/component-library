@@ -92,9 +92,9 @@ class Button extends \ComponentLibrary\Component\BaseController
         $toggleId = uniqid('', true);
 
         $attributeMap = [
-            'data-js-toggle-trigger' => $toggleId,
-            'data-js-toggle-item' => $toggleId,
-            'data-js-toggle-class' => "is-pressed", 
+            //'data-js-toggle-trigger' => $toggleId,
+            //'data-js-toggle-item' => $toggleId,
+            //'data-js-toggle-class' => "is-pressed", 
             'aria-pressed' => "false"
         ];
 
