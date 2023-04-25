@@ -7,10 +7,10 @@ class HeroTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(class_exists(\ComponentLibrary\Component\Hero\Hero::class));
     }
 
-    public function testHasContentIsFalseIfNoContent() {
-        $component = new \ComponentLibrary\Component\Hero\Hero(array(
-            'textAlignment' => '',
-        ));
+    public function testHasContentIsFalseIfNoContent()
+    {
+        $data = $this->getComponentData([]);
+        $component = new \ComponentLibrary\Component\Hero\Hero($data);
         $component->init();
         $data = $component->getData();
 
@@ -19,28 +19,29 @@ class HeroTest extends \PHPUnit\Framework\TestCase
 
     public function testHasContentIsFalseIfContentContainsSpaces()
     {
-        $component = new \ComponentLibrary\Component\Hero\Hero(array(
-            'textAlignment' => '',
-            'meta' => ' ',
-            'title' => ' ',
-            'byline' => ' ',
-            'paragraph' => ' ',
-        ));
+        $data = $this->getComponentData(['meta' => ' ', 'title' => ' ', 'byline' => ' ', 'paragraph' => ' ']);
+        $component = new \ComponentLibrary\Component\Hero\Hero($data);
         $component->init();
         $data = $component->getData();
 
         $this->assertFalse($data['hasContent']);
     }
-    
+
     public function testHasContentIsTrueIfHasContent()
     {
-        $component = new \ComponentLibrary\Component\Hero\Hero(array(
-            'textAlignment' => '',
-            'title' => 'foo'
-        ));
+        $data = $this->getComponentData(['title' => 'foo']);
+        $component = new \ComponentLibrary\Component\Hero\Hero($data);
         $component->init();
         $data = $component->getData();
 
         $this->assertTrue($data['hasContent']);
+    }
+
+    private function getComponentData(array $data)
+    {
+        $jsonFile = file_get_contents(__DIR__ . '/Hero.json');
+        $json = json_decode($jsonFile, true);
+        $default = $json['default'];
+        return array_merge($default, $data);
     }
 }
