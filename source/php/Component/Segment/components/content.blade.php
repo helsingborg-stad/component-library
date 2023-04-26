@@ -8,11 +8,10 @@
             'direction' => 'vertical'
         ])
             @if ($title)
-                @if ($link)
-                    @link([
-                        'href' => $link
-                    ])
-                    @endif
+                @link([
+                    'href' => $link,
+                    'keepContent' => true
+                ])
                     @typography([
                         'element' => 'h2',
                         'variant' => $layout == 'full-width' ? 'h1' : ($layout == 'card' ? 'h3' : 'h2'),
@@ -21,9 +20,7 @@
                     ])
                         {!! $title !!}
                     @endtypography
-                    @if ($link)
-                    @endlink
-                @endif
+                @endlink
             @endif
 
             @if ($meta)
