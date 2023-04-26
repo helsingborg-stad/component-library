@@ -78,6 +78,10 @@ class Button extends \ComponentLibrary\Component\BaseController
         if(!empty($this->data['ariaLabel'])) {
             $this->data['attributeList']['aria-label'] = $this->data['ariaLabel'];
         }
+
+        if (empty($disableColor)) {
+            $this->data['classList'][] = $this->getBaseClass('no-disabled-color', true);
+        }
     }
 
     /**
