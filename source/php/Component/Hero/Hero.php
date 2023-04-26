@@ -12,6 +12,8 @@ class Hero extends \ComponentLibrary\Component\BaseController
         $this->data['contentStyles'] = "";
         $this->data['attributeList']['role'] = 'region';
         $this->data['attributeList']['aria-label'] = $ariaLabel;
+        $this->data['linkArgs'] = null;
+        $this->data['buttonArgs'] = null;
 
         if ($stretch) {
             $this->data['classList'][] = $this->getBaseClass() . "--stretch";
@@ -114,8 +116,6 @@ class Hero extends \ComponentLibrary\Component\BaseController
             
             if (!empty($buttonArgs['href']) && isset($buttonArgs['text']) && !empty($buttonArgs['text'])) {
                 $this->data['buttonArgs'] = $buttonArgs;
-            } else {
-                $this->data['buttonArgs'] = null;
             }
 
             if (!empty($buttonArgs['href']) && (!isset($buttonArgs['text']) || empty($buttonArgs['text']) )) {
@@ -123,8 +123,6 @@ class Hero extends \ComponentLibrary\Component\BaseController
                     'href' => $buttonArgs['href'],
                     'classList' => ["{$this->getBaseClass()}__content--link"]
                 );
-            } else {
-                $this->data['linkArgs'] = null;
             }
         }
 
@@ -151,6 +149,7 @@ class Hero extends \ComponentLibrary\Component\BaseController
             }
         }
 
+        $this->data['hasContent'] = $this->hasContent();
         $this->data['contentStyles'] = $this->sanitizeInlineCss($this->data['contentStyles']);
 
     }
@@ -176,5 +175,18 @@ class Hero extends \ComponentLibrary\Component\BaseController
         $data['contentSlotHasData'] = $this->slotHasData('content');
 
         return $data;
+    }
+
+    private function hasContent(): bool
+    {
+        $stringEmpty = fn ($value): bool => empty(trim($value));
+
+        if (!$stringEmpty($this->data['meta'])) return true;
+        if (!$stringEmpty($this->data['title'])) return true;
+        if (!$stringEmpty($this->data['byline'])) return true;
+        if (!$stringEmpty($this->data['paragraph'])) return true;
+        if (!empty($this->data['buttonArgs'])) return true;
+
+        return false;
     }
 }

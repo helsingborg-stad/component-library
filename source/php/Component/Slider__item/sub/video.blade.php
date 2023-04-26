@@ -13,7 +13,7 @@
     ]
 ])
 @endvideo
-
+@if($showPauseButton)
 @button([
     'style'         => 'filled',
     'icon'          => 'play_arrow',
@@ -27,3 +27,4 @@
     ]
 ])
 @endbutton
+@endif
