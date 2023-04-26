@@ -7,7 +7,8 @@
         "color": "",
         "customColor": "",
         "componentElement": "span",
-        "filled": true
+        "filled": true,
+        "isSvg": false
     },
     "description": {
         "size": "Sizes: xs, sm, md, lg, xl, xxl",
