@@ -31,7 +31,7 @@ class Icon extends \ComponentLibrary\Component\BaseController
         if ($this->data['isSvg']) {
             $this->data['classList'][] = $this->getBaseClass() . "--svg";
         } else {
-            $this->data['classList'] = array_merge(!empty($this->data['classList']) ? $this->data['classList'] : [], [
+            $this->data['classList'] = array_merge($this->data['classList'] ?? [], [
                 $this->createIconModifier($icon),
                 $this->getBaseClass() . "--material",
                 $this->getBaseClass() . "--material-" . $icon,
