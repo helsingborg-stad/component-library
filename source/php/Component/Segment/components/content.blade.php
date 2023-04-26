@@ -10,7 +10,8 @@
             @if ($title)
                 @link([
                     'href' => $link,
-                    'keepContent' => true
+                    'keepContent' => true,
+                    'keepWrapper' => false
                 ])
                     @typography([
                         'element' => 'h2',
