@@ -24,7 +24,8 @@
         "date": false,
         "meta": false,
         "tags": false,
-        "icon": false
+        "icon": false,
+        "link": false,
     },
     "description": {
         "layout": "Which layout to use",
