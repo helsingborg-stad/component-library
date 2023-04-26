@@ -1,9 +1,11 @@
-@if($href)
-    <a id="{{$id}}" class="{{ $class }}" {!! $attribute !!}>
+@if ($href)
+    <a class="{{ $class }}" id="{{ $id }}" {!! $attribute !!}>
         {!! $slot !!}
     </a>
-@elseif(!$href && $keepContent)
-    <{{$componentElement}} id="{{$id}}" class="{{ $class }}" {!! $attribute !!}>    
+@elseif(!$href && $keepContent && $keepWrapper)
+    <{{ $componentElement }} class="{{ $class }}" id="{{ $id }}" {!! $attribute !!}>
         {!! $slot !!}
-    </{{$componentElement}}>
+        </{{ $componentElement }}>
+    @elseif(!$href && $keepContent && !$keepWrapper)
+        {!! $slot !!}
 @endif

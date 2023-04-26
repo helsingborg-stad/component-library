@@ -1,19 +1,21 @@
 {
-    "slug":"link",
-    "default":{
-       "componentElement": "span",
-       "slot":"Undefined label",
-       "href":"",
-       "target":"_top",
-       "keepContent": true
+    "slug": "link",
+    "default": {
+        "componentElement": "span",
+        "slot": "Undefined label",
+        "href": "",
+        "target": "_top",
+        "keepContent": true,
+        "keepWrapper": true
     },
-    "description":{
-      "slot":"The label/content of the link",
-      "href":"Where should the link go to?",
-      "target":"Open a new tab or not?",
-      "keepContent": "If link is empty, should we show content anyways? Prints in a span."
+    "description": {
+        "slot": "The content of the link",
+        "href": "Where should the link go to?",
+        "target": "Link target attribute. Default is _top. Allowed values are _blank, _self, _parent or _top.",
+        "keepContent": "If link is empty, should we show content anyways? Prints the content wrazpped by a span element.",
+        "keepWrapper": "If link is empty and keepContent is true, should we keep the span added by keepContent? If false, it will print the content without any wrapping element."
     },
-    "view":"link.blade.php",
+    "view": "link.blade.php",
     "dependency": {
         "sass": {
             "components": [
@@ -21,4 +23,4 @@
             ]
         }
     }
- }
+}
