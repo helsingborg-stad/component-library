@@ -7,9 +7,12 @@ class HeroTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(class_exists(\ComponentLibrary\Component\Hero\Hero::class));
     }
 
-    public function testHasContentIsFalseIfNoContent()
+    /**
+     * @dataProvider hasNoContentProvider
+     */
+    public function testHasContentIsFalseIfHasNoContent($meta, $title, $byline, $paragraph)
     {
-        $data = $this->getComponentData([]);
+        $data = $this->getComponentData(['meta' => $meta, 'title' => $title, 'byline' => $byline, 'paragraph' => $paragraph]);
         $component = new \ComponentLibrary\Component\Hero\Hero($data);
         $component->init();
         $data = $component->getData();
@@ -17,24 +20,37 @@ class HeroTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($data['hasContent']);
     }
 
-    public function testHasContentIsFalseIfContentContainsSpaces()
-    {
-        $data = $this->getComponentData(['meta' => ' ', 'title' => ' ', 'byline' => ' ', 'paragraph' => ' ']);
-        $component = new \ComponentLibrary\Component\Hero\Hero($data);
-        $component->init();
-        $data = $component->getData();
-
-        $this->assertFalse($data['hasContent']);
+    public function hasNoContentProvider() {
+        return [
+            ['', '', '', ''],
+            [' ', '', '', ''],
+            ['', ' ', '', ''],
+            ['', '', ' ', ''],
+            ['', '', ' ', ' '],
+        ];
     }
 
-    public function testHasContentIsTrueIfHasContent()
+    /**
+     * @dataProvider hasContentProvider
+     */
+    public function testHasContentIsTrueIfHasContent($meta, $title, $byline, $paragraph)
     {
-        $data = $this->getComponentData(['title' => 'foo']);
+        $data = $this->getComponentData(['meta' => $meta, 'title' => $title, 'byline' => $byline, 'paragraph' => $paragraph]);
         $component = new \ComponentLibrary\Component\Hero\Hero($data);
         $component->init();
         $data = $component->getData();
 
         $this->assertTrue($data['hasContent']);
+    }
+
+    public function hasContentProvider() {
+        return [
+            ['foo', 'foo', 'foo', 'foo'],
+            ['foo', '', '', ''],
+            ['', 'foo', '', ''],
+            ['', '', 'foo', ''],
+            ['', '', '', 'foo'],
+        ];
     }
 
     private function getComponentData(array $data)
