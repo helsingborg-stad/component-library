@@ -8,20 +8,20 @@
             'direction' => 'vertical'
         ])
             @if ($title)
-                @link([
-                    'href' => $link,
-                    'keepContent' => true,
-                    'keepWrapper' => false
+                @typography([
+                    'element' => 'h2',
+                    'variant' => $layout == 'full-width' ? 'h1' : ($layout == 'card' ? 'h3' : 'h2'),
+                    'classList' => [$baseClass . '__title', 'u-margin__bottom--1'],
+                    'autopromote' => true
                 ])
-                    @typography([
-                        'element' => 'h2',
-                        'variant' => $layout == 'full-width' ? 'h1' : ($layout == 'card' ? 'h3' : 'h2'),
-                        'classList' => [$baseClass . '__title', 'u-margin__bottom--1'],
-                        'autopromote' => true
+                    @link([
+                        'href' => $link,
+                        'keepContent' => true,
+                        'keepWrapper' => false
                     ])
                         {!! $title !!}
-                    @endtypography
-                @endlink
+                    @endlink
+                @endtypography
             @endif
 
             @if ($meta)
