@@ -4,30 +4,34 @@
 @endif
 
 <nav class="c-drawer c-drawer--right c-drawer--primary js-drawer {{$class}}" js-toggle-class="is-open" js-toggle-item="js-drawer" {!! $attribute !!}>
-    <div class="c-drawer__header">
+   
+    @if($toggleButtonData || $searchSlotHasData) 
+        <div class="c-drawer__header">
+            @if($toggleButtonData)
+                @button([
+                    'style' => 'basic',
+                    'icon' => 'close',
+                    'attributeList' => [
+                        'aria-controls' => 'navigation',
+                        'data-simulate-click' => '#' . $toggleButtonData['id'] ?? 'drawer-close'
+                    ],
+                    'classList' => [
+                        'c-drawer__close'
+                    ],
+                    'size' => 'md',
+                    'text' => $label
+                ])
+                @endbutton
+            @endif
         
-        @button([
-            'id' => 'mobile-menu-trigger-close',
-            'style' => 'basic',
-            'icon' => 'close',
-            'attributeList' => [
-                'aria-controls' => 'navigation',
-                'js-toggle-trigger' => 'js-drawer'
-            ],
-            'classList' => [
-                'c-drawer__close'
-            ],
-            'size' => 'md',
-            'text' => $label
-        ])
-        @endbutton
-    
-        @if($searchSlotHasData)
-            {!! $search !!}
-        @endif
-    </div>
+            @if($searchSlotHasData)
+                {!! $search !!}
+            @endif
+        </div>
 
-     <div class="c-drawer__body">  
+    @endif
+
+    <div class="c-drawer__body">  
         {{-- Placed in another file, due to ajax loading --}}
 
         @if($menuSlotHasData)
