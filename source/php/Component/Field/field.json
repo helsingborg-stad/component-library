@@ -17,6 +17,7 @@
         "helperText": "",
         "multiline": false,
         "borderless": false,
+        "shadow": true,
         "fieldAttributeList": [],
         "description": ""
     },
@@ -36,6 +37,7 @@
         "helperText": "Text displayed below the field.",
         "multiline": "Render textarea instead of input. Boolean or number of rows to render.",
         "borderless": "Removes the border around the input field",
+        "shadow": "If the current theme applies shadows to element, append shadow here too.",
         "fieldAttributeList": "Attributes for field element. Valid input attributes are casted to here from attributesList."
     },
     "view": "field.blade.php",
