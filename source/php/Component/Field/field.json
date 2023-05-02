@@ -17,7 +17,7 @@
         "helperText": "",
         "multiline": false,
         "borderless": false,
-        "shadow": true,
+        "shadow": false,
         "fieldAttributeList": [],
         "description": ""
     },
