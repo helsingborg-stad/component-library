@@ -15,13 +15,19 @@ class OpenStreetMap extends \ComponentLibrary\Component\BaseController
 
         $this->data['sidebarContentHasData'] = $this->slotHasData('sidebarContent');
 
+        $this->data['id'] = $this->getUid();
+
         if (!empty($pins)) {
-            $this->data['attributeList']['js-map-pin-data'] = $pins;
+            $this->data['attributeList']['js-map-pin-data'] = json_encode($pins, JSON_UNESCAPED_UNICODE);
         }
 
-        if (!empty($startPosition)) {
-            $this->data['attributeList']['js-map-start-position'] = $startPosition;
-        }
+        $this->data['attributeList']['js-map-start-position'] = 
+        json_encode(
+            !empty($startPosition) ? $startPosition : [ 
+                'lat'  => '56.046029',
+                'lng'  => '12.693904',
+                'zoom' => 14
+        ]);
 
         if (!empty($mapStyle)) {
             $this->data['attributeList']['js-map-style'] = $mapStyle;
@@ -45,6 +51,6 @@ class OpenStreetMap extends \ComponentLibrary\Component\BaseController
 
         $this->data['attributeList']['data-js-toggle-item'] = "expand";
         $this->data['attributeList']['data-js-toggle-class'] = "is-expanded";
-        $this->data['attributeList']['id'] = "openstreetmap";
+        $this->data['attributeList']['data-js-map-id'] = $this->data['id'];
     }
 }
