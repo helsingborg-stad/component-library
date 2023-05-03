@@ -13,8 +13,6 @@
         </label>
     @endif
 
-
-
     @if (!empty($description))
         @typography([
             'element' => 'div',
@@ -28,13 +26,15 @@
         <select {!! $attribute !!}>
             @if ($label)
                 <option class="c-select__option" value="" {{ $preselected === '' ? 'selected' : '' }}>
-                    {!! $label !!}</option>
+                    {!! $label !!}
+                </option>
             @endif
 
             @foreach ($options as $key => $name)
                 <option class="c-select__option" value="{!! $key !!}"
                     {{ $preselected === $key || isset($intersection[$key]) ? 'selected' : '' }}>
-                    {!! $name !!}</option>
+                    {!! $name !!}
+                </option>
             @endforeach
 
             {!! $slot !!}
@@ -56,6 +56,7 @@
         @endicon
         <span class="errorText"></span>
     </div>
+    
     @if ($helperText)
         <small class="c-field__helper">{{ $helperText }}</small>
     @endif
