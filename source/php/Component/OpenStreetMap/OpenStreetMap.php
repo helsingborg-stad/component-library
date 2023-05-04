@@ -21,13 +21,18 @@ class OpenStreetMap extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['js-map-pin-data'] = json_encode($pins, JSON_UNESCAPED_UNICODE);
         }
 
-        $this->data['attributeList']['js-map-start-position'] = 
-        json_encode(
-            !empty($startPosition) ? $startPosition : [ 
-                'lat'  => '56.046029',
-                'lng'  => '12.693904',
-                'zoom' => 14
-        ]);
+        if (
+            ($startPosition['lat'] == 0 || $startPosition['lng'] == 0)
+            && !empty($mapStartZoom) && ( is_string($mapStartLatLng) && !empty($mapStartLatLng))
+        ) {
+            $mapStartLatLng = explode(',', $mapStartLatLng);
+            $startPosition = [
+                'lat'  => trim($mapStartLatLng[0]),
+                'lng'  => trim($mapStartLatLng[1]),
+                'zoom' => (int) $mapStartZoom
+            ];
+        }
+        $this->data['attributeList']['js-map-start-position'] = json_encode($startPosition);
 
         if (!empty($mapStyle)) {
             $this->data['attributeList']['js-map-style'] = $mapStyle;

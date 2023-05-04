@@ -1,19 +1,22 @@
 {
     "slug": "openStreetMap",
     "default": {
-       "pins": [],
-       "startPosition": "",
-       "mapStyle": "",
-       "height": "100vh",
-       "fullWidth": false
+        "pins": [],
+        "startPosition": {
+            "lat": 0,
+            "lng": 0,
+            "zoom": 14
+        },
+        "mapStyle": "default",
+        "height": "100vh",
+        "fullWidth": false
     },
     "description": {
-       "pins": "An array with arrays for each location. Can contain lat, lng, a tooltip and an icon.",
-       "startPosition": "Sets the start location of the map. Can contain lat, lng and a zoom value between 5-20",
-       "mapStyle": "Style of the map (pale, dark, color, default)",
-       "height": "Needs to have a css height value",
-       "fullWidth": "True or false, sets the width of the element"
-
+        "pins": "An array containing one array for each location marked on the map. Must contain latitude (lat) and longitude (lng). Can contain a tooltip and an icon.",
+        "startPosition": "Sets the start location of the map. Must contain latitude (lat), longitude (lng) and a zoom value between 5-20",
+        "mapStyle": "Theming of the map (pale, dark, color, default)",
+        "height": "A css height value including unit (px, vh, %)",
+        "fullWidth": "True or false, sets the width of the element."
     },
     "view": "openStreetMap.blade.php",
     "dependency": {
