@@ -7,12 +7,11 @@
     <div class="c-drawer__header">
         
         @button([
-            'id' => 'mobile-menu-trigger-close',
             'style' => 'basic',
             'icon' => 'close',
             'attributeList' => [
                 'aria-controls' => 'navigation',
-                'data-simulate-click' => '#' . $toggleButtonData['id'] ?? 'drawer-close'
+                'data-simulate-click' => $simulateClickSelector
             ],
             'classList' => [
                 'c-drawer__close'
@@ -37,4 +36,4 @@
     </div>
 </nav>
 
-<div class="drawer-overlay js-close-drawer {{$screenSizeClassNames}}" data-simulate-click="{!! '#' . $toggleButtonData['id'] ?? 'drawer-close' !!}" {!! $moveTo !!}></div>
+<div class="drawer-overlay js-close-drawer {{$screenSizeClassNames}}" data-simulate-click="{{$simulateClickSelector}}" {!! $moveTo !!}></div>

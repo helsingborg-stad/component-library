@@ -18,6 +18,7 @@ class Drawer extends \ComponentLibrary\Component\BaseController
         $this->data['attributeList']['data-js-toggle-item'] = 'drawer-' . $this->getUid();
         $this->data['attributeList']['data-js-toggle-class'] = 'is-open';
         $this->data['moveTo'] = $this->getMoveToAttribute($this->data['attributeList']);
+        $this->data['simulateClickSelector'] = "[data-js-toggle-trigger=drawer-" . $this->getUid() . "]";
     }
 
     private function getMoveToAttribute(array $attributeList): string

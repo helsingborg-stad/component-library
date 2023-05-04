@@ -74,7 +74,19 @@ class DrawerTest extends PHPUnit\Framework\TestCase
         // Assert
         $this->assertStringContainsString($expectedAttribute, $component->getData()['attribute']);
     }
-    
+
+    public function testSimulateClickPointsToToggleButtonElement()
+    {
+        // Arrange
+        $data = [];
+        $component = new Drawer($data);
+        $uid = $component->getUid();
+        $simulateClickValue = "[data-js-toggle-trigger=drawer-$uid]";
+
+        // Assert
+        $this->assertStringContainsString($simulateClickValue, $component->getData()['simulateClickSelector']);
+    }
+
     public function testMoveToAttributeIsMovedFromAttributesToVariableIfSupplied()
     {
         // Arrange
