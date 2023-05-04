@@ -15,6 +15,18 @@ class Drawer extends \ComponentLibrary\Component\BaseController
         $this->data['menuSlotHasData'] = $this->slotHasData('menu');
         $this->data['screenSizeClassNames'] = $this->getScreenSizeClassNames($screenSizes ?? $this->defaultScreenSizes);
         $this->data['toggleButtonData'] = $this->getToggleButtonData($toggleButtonData ?? [], $this->data['screenSizeClassNames']);
+        $this->data['attributeList']['data-js-toggle-item'] = 'drawer-' . $this->getUid();
+        $this->data['attributeList']['data-js-toggle-class'] = 'is-open';
+        $this->data['moveTo'] = $this->getMoveToAttribute($this->data['attributeList']);
+    }
+
+    private function getMoveToAttribute(array $attributeList): string
+    {
+        $moveToValue = $attributeList['data-move-to'] ?? '';
+
+        if (empty($attributeList['data-move-to'])) return '';
+
+        return "data-move-to=\"$moveToValue\"";
     }
 
     /**
@@ -42,7 +54,7 @@ class Drawer extends \ComponentLibrary\Component\BaseController
 
         if (empty($toggleButtonData)) return null;
 
-        $toggleButtonData['attributeList']['js-toggle-trigger'] = 'drawer';
+        $toggleButtonData['attributeList']['data-js-toggle-trigger'] = 'drawer-' . $this->getUid();
         $toggleButtonData['attributeList']['aria-controls'] = 'navigation';
         $toggleButtonData['classList'] = explode(' ', $screenSizeClassNames);
 

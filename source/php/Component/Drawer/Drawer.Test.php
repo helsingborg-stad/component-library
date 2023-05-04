@@ -34,7 +34,7 @@ class DrawerTest extends PHPUnit\Framework\TestCase
         $componentData = $component->getData();
 
         // Assert
-        $this->assertArrayHasKey('js-toggle-trigger', $componentData['toggleButtonData']['attributeList']);
+        $this->assertArrayHasKey('data-js-toggle-trigger', $componentData['toggleButtonData']['attributeList']);
     }
 
     public function testSetsScreenSizesClass()
@@ -61,5 +61,28 @@ class DrawerTest extends PHPUnit\Framework\TestCase
 
         // Assert
         $this->assertEquals($expectedClassNames, $component->getData()['screenSizeClassNames']);
+    }
+
+    public function testAttributeContainsToggleItem()
+    {
+        // Arrange
+        $data = [];
+        $component = new Drawer($data);
+        $uid = $component->getUid();
+        $expectedAttribute = "data-js-toggle-item=\"drawer-$uid\"";
+
+        // Assert
+        $this->assertStringContainsString($expectedAttribute, $component->getData()['attribute']);
+    }
+    
+    public function testMoveToAttributeIsMovedFromAttributesToVariableIfSupplied()
+    {
+        // Arrange
+        $data = ['attributeList' => ['data-move-to' => 'foo']];
+        $expectedMoveToAttribute = 'data-move-to="foo"';
+        $component = new Drawer($data);
+
+        // Assert
+        $this->assertEquals($expectedMoveToAttribute, $component->getData()['moveTo']);
     }
 }

@@ -3,7 +3,7 @@
     @button($toggleButtonData)@endbutton
 @endif
 
-<nav class="c-drawer c-drawer--right c-drawer--primary js-drawer {{$class}}" js-toggle-class="is-open" js-toggle-item="js-drawer" {!! $attribute !!}>
+<nav class="c-drawer c-drawer--right c-drawer--primary js-drawer {{$class}}" {!! $attribute !!} {!! $moveTo !!}>
     <div class="c-drawer__header">
         
         @button([
@@ -12,7 +12,7 @@
             'icon' => 'close',
             'attributeList' => [
                 'aria-controls' => 'navigation',
-                'js-toggle-trigger' => 'js-drawer'
+                'data-js-toggle-trigger' => $attributeList['data-js-toggle-item']
             ],
             'classList' => [
                 'c-drawer__close'
@@ -36,4 +36,5 @@
 
     </div>
 </nav>
-<div class="drawer-overlay js-close-drawer {{$screenSizeClassNames}}" js-toggle-trigger="js-drawer"></div>
+
+<div class="drawer-overlay js-close-drawer {{$screenSizeClassNames}}" data-js-toggle-trigger="{!! $attributeList['data-js-toggle-item'] !!}" {!! $moveTo !!}></div>
