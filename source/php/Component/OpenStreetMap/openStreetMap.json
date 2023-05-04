@@ -2,11 +2,7 @@
     "slug": "openStreetMap",
     "default": {
         "pins": [],
-        "startPosition": {
-            "lat": 0,
-            "lng": 0,
-            "zoom": 14
-        },
+        "startPosition": [],
         "mapStyle": "default",
         "height": "100vh",
         "fullWidth": false
