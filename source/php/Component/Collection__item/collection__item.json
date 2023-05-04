@@ -6,13 +6,15 @@
         "icon": false,
         "action": false,
         "secondary": "",
-        "link": ""
+        "link": "",
+        "bordered": false
     },
     "description": {
         "elementType": "The type of list item. Default: li",
         "isCurrent": "Mark this as current",
         "isAligned": "Do not flow around elements placed either side of content.",
-        "subItem": "Slot for providing subitems (automatically wrapped in new collection, with subcollection flag. )"
+        "subItem": "Slot for providing subitems (automatically wrapped in new collection, with subcollection flag. )",
+        "bordered": "Shows a border around the item."
     },
     "view": "collection__item.blade.php",
     "dependency": {
