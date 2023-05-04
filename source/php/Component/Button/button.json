@@ -20,7 +20,8 @@
       "fullWidth": false,
       "classListIcon": [],
       "classListText": [],
-      "ariaLabel": false
+      "ariaLabel": false,
+      "disableColor": true
    },
    "description":{
       "label":"The label of the button.",
@@ -41,7 +42,8 @@
       "fullWidth": "Makes button full width.",
       "classListIcon": "Array of classes placed on the icon",
       "classListText": "Array of classes placed on the text",
-      "ariaLabel": "Aria label text for the button"
+      "ariaLabel": "Aria label text for the button",
+      "disableColor": "To use or not to use the disabled color even if the button is disabled"
    },
    "view":"button.blade.php",
    "dependency": {

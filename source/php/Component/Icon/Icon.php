@@ -26,6 +26,18 @@ class Icon extends \ComponentLibrary\Component\BaseController
             'size'      => $size
         ];
 
+        $this->data['isSvg'] = $this->iconIsSvg($icon);
+
+        if ($this->data['isSvg']) {
+            $this->data['classList'][] = $this->getBaseClass() . "--svg";
+        } else {
+            $this->data['classList'] = array_merge($this->data['classList'] ?? [], [
+                $this->createIconModifier($icon),
+                $this->getBaseClass() . "--material",
+                $this->getBaseClass() . "--material-" . $icon,
+                "material-icons"
+            ]);
+        }
 
         if (!empty($customColor)) {
             $this->data['attributeList']['style'] = 'color:' . $customColor . ';';
@@ -35,9 +47,6 @@ class Icon extends \ComponentLibrary\Component\BaseController
         $this->appendSpace();
         $this->setSize();
 
-        //Set material icon class
-        $this->data['classList'][] = "material-icons";
-
         //Do not translate the icon
         $this->data['attributeList']['translate'] = "no";
 
@@ -45,9 +54,11 @@ class Icon extends \ComponentLibrary\Component\BaseController
         $this->data['attributeList']['role'] = "img";
         $this->data['attributeList']['aria-label'] = $this->getAltText($icon);
         $this->data['attributeList']['alt'] = $this->getAltText($icon);
+    }
 
-        //Add modifier
-        $this->data['classList'][] = $this->createIconModifier($icon);
+    private function iconIsSvg($icon)
+    {
+        return str_ends_with($icon, '.svg') !== false;
     }
 
     /**

@@ -130,14 +130,14 @@ class Field extends \ComponentLibrary\Component\Form\Form
         //Handle icon
         $this->data['icon'] = $this->getIcon($icon, $size);
         if ($this->data['icon']) {
-            $this->data['classList'][] = $this->getBaseClass() . "--icon";
+            $this->data['classList'][] = $this->getBaseClass("icon", true);
         }
 
         //Normalize size
         if (!in_array($size, ['sm', 'md', 'lg'])) {
             $size = "md";
         }
-        $this->data['classList'][] = $this->getBaseClass() . "--" . $size;
+        $this->data['classList'][] = $this->getBaseClass($size, true);
 
         // Is valid indicator
         if (isset($isValid) && $isValid === true) {
@@ -148,7 +148,12 @@ class Field extends \ComponentLibrary\Component\Form\Form
 
         //Borderless
         if ($borderless) {
-            $this->data['classList'][] = $this->getBaseClass() . "--borderless";
+            $this->data['classList'][] = $this->getBaseClass("borderless", true);
+        }
+
+        //Borderless
+        if ($shadow) {
+            $this->data['classList'][] = $this->getBaseClass("shadow", true);
         }
 
         //Handle radius
