@@ -2,6 +2,7 @@
     "slug": "select",
     "default": {
         "label": "",
+        "placeholder": "",
         "id": false,
         "description": "",
         "required": false,
@@ -16,6 +17,7 @@
     },
     "description": {
         "label": "The placeholder of the dropdown",
+        "placeholder": "Supported if multiple select is enabled.",
         "id": "The id attribute for the select component. Will be prefixed with \"select_\"",
         "description": "Additional description or instructions.",
         "required": "If the element should be required",

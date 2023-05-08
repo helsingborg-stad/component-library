@@ -1,0 +1,1 @@
+<div class="{{ $baseClass }}__action-overlay" data-js-toggle-trigger="{{$id}}-open-dropdown"></div>
