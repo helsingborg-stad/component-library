@@ -1,4 +1,8 @@
 <div class="c-openstreetmap__tooltip">
+@link([
+    'href' => '{TOOLTIP_LINK}',
+    'classList' => ['c-openstreetmap__tooltip-link']
+])
 @typography([
     'classList' => ['c-openstreetmap__tooltip-title'],
     'element' => 'h2',
@@ -6,6 +10,7 @@
 ])
     {TOOLTIP_HEADING}
 @endtypography
+@endlink
 @typography([
     'classList' => ['u-margin__y--1', 'c-openstreetmap__tooltip-excerpt'],
     
