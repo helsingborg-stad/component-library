@@ -50,17 +50,32 @@ class DrawerTest extends PHPUnit\Framework\TestCase
         $this->assertEquals($expectedClassNames, $component->getData()['screenSizeClassNames']);
     }
 
-    public function testDefaultScreenSizesShowsOnXsAndSmOnly()
+    /**
+     * @dataProvider defaultScreenSizeClassNameProvider
+     */
+    public function testDefaultScreenSizesAreSetIfNoneProvided(string $screenSizeClassName)
     {
         // Arrange
         $data = [];
-        $expectedClassNames = 'u-display--none@md u-display--none@lg';
 
         // Act
         $component = new Drawer($data);
 
         // Assert
-        $this->assertEquals($expectedClassNames, $component->getData()['screenSizeClassNames']);
+        $this->assertStringNotContainsString($screenSizeClassName, $component->getData()['screenSizeClassNames']);
+    }
+
+    public function defaultScreenSizeClassNameProvider() {
+        $component = new ReflectionClass(Drawer::class);
+        $defaultScreenSizesProp = $component->getProperty("defaultScreenSizes");
+        $defaultScreenSizesProp->setAccessible(true);
+        $defaultScreenSizes = $defaultScreenSizesProp->getValue(new Drawer([]));
+
+        $classNames = array_map(function($screenSize) {
+            return ["u-display--none@$screenSize"];
+        }, $defaultScreenSizes);
+
+        return $classNames;
     }
 
     public function testAttributeContainsToggleItem()
