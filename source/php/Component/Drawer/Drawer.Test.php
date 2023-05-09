@@ -65,17 +65,16 @@ class DrawerTest extends PHPUnit\Framework\TestCase
         $this->assertStringNotContainsString($screenSizeClassName, $component->getData()['screenSizeClassNames']);
     }
 
-    public function defaultScreenSizeClassNameProvider() {
+    public function defaultScreenSizeClassNameProvider()
+    {
         $component = new ReflectionClass(Drawer::class);
         $defaultScreenSizesProp = $component->getProperty("defaultScreenSizes");
         $defaultScreenSizesProp->setAccessible(true);
         $defaultScreenSizes = $defaultScreenSizesProp->getValue(new Drawer([]));
 
-        $classNames = array_map(function($screenSize) {
+        return array_map(function ($screenSize) {
             return ["u-display--none@$screenSize"];
         }, $defaultScreenSizes);
-
-        return $classNames;
     }
 
     public function testAttributeContainsToggleItem()
