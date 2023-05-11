@@ -77,10 +77,11 @@ class Block extends \ComponentLibrary\Component\BaseController
 
     private function contentElementIsEmpty($value): bool
     {
-
         if (is_array($value) || is_object($value)) {
             foreach ((array)$value as $item) {
-                if (!$this->contentElementIsEmpty($item)) return false;
+                if (!$this->contentElementIsEmpty($item)) {
+                    return false;
+                }
             }
         }
 
