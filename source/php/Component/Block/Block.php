@@ -68,7 +68,7 @@ class Block extends \ComponentLibrary\Component\BaseController
         
         if(is_array($keysToCheck) && !empty($keysToCheck)) {
             foreach($keysToCheck as $key) {
-                if(array_key_exists($key, $data)) {
+                if (array_key_exists($key, $data) && is_string($data[$key])) {
                     $stack[] = trim($data[$key]); 
                 }
             }
