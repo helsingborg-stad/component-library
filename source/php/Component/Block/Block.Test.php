@@ -11,7 +11,7 @@ class BlockTest extends PHPUnit\Framework\TestCase
         $hasContentMethod = $block->getMethod('hasContent');
         $hasContentMethod->setAccessible(true);
 
-        $block = new \ComponentLibrary\Component\Block\Block($data);
+        $block = new \ComponentLibrary\Component\Block\Block($this->getComponentDefaultData());
         $this->assertTrue($hasContentMethod->invokeArgs($block, [$data]));
     }
 
@@ -24,7 +24,7 @@ class BlockTest extends PHPUnit\Framework\TestCase
         $hasContentMethod = $block->getMethod('hasContent');
         $hasContentMethod->setAccessible(true);
 
-        $block = new \ComponentLibrary\Component\Block\Block($data);
+        $block = new \ComponentLibrary\Component\Block\Block($this->getComponentDefaultData());
         $this->assertFalse($hasContentMethod->invokeArgs($block, [$data]));
     }
 
@@ -49,5 +49,12 @@ class BlockTest extends PHPUnit\Framework\TestCase
             [['meta' => new stdClass()]],
             [['meta' => (object)['']]],
         ];
+    }
+
+    private function getComponentDefaultData()
+    {
+        $jsonFile = file_get_contents('source/php/Component/Hero/hero.json', true);
+        $json = json_decode($jsonFile, true);
+        return $json['default'];
     }
 }
