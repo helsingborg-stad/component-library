@@ -8,6 +8,8 @@ namespace ComponentLibrary\Component\Block;
  */
 class Block extends \ComponentLibrary\Component\BaseController
 {
+    private $contentKeys = ['date', 'meta', 'secondaryMeta', 'heading', 'icon', 'content'];
+
     public function init()
     {
         // Extract array for easy access (fetch only)
@@ -55,25 +57,36 @@ class Block extends \ComponentLibrary\Component\BaseController
         $this->data['hasContent'] = $this->hasContent($this->data); 
     }
 
-    private function hasContent($data) {
-        $stack = [];
-        $keysToCheck = [
-            'date', 
-            'meta', 
-            'secondaryMeta', 
-            'heading', 
-            'icon', 
-            'content'
-        ];
-        
-        if(is_array($keysToCheck) && !empty($keysToCheck)) {
-            foreach($keysToCheck as $key) {
-                if (array_key_exists($key, $data) && is_string($data[$key])) {
-                    $stack[] = trim($data[$key]); 
-                }
+    private function hasContent($data): bool
+    {
+        $existingKeys = array_filter($this->contentKeys, function ($key) use ($data) {
+            return array_key_exists($key, $data);
+        });
+
+        foreach ($existingKeys as $key) {
+
+            $keyValue = $data[$key];
+
+            if (!$this->contentElementIsEmpty($keyValue)) {
+                return true;
             }
         }
-        
-        return (bool) array_filter($stack);
+
+        return false;
+    }
+
+    private function contentElementIsEmpty($value): bool
+    {
+
+        if (is_array($value) || is_object($value)) {
+            foreach ((array)$value as $item) {
+                if (!$this->contentElementIsEmpty($item)) return false;
+            }
+        }
+
+        if (is_numeric($value)) return false;
+        if (is_string($value)) return empty(trim($value));
+
+        return true;
     }
 }
