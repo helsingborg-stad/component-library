@@ -53,7 +53,7 @@ class BlockTest extends PHPUnit\Framework\TestCase
 
     private function getComponentDefaultData()
     {
-        $jsonFile = file_get_contents('source/php/Component/Hero/hero.json', true);
+        $jsonFile = file_get_contents('source/php/Component/Block/block.json', true);
         $json = json_decode($jsonFile, true);
         return $json['default'];
     }
