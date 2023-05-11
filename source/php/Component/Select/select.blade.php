@@ -1,19 +1,11 @@
 <div class="{{ $class }} c-field">
-    @if ($label && $hideLabel)
-        <label class="u-sr__only" for="select_{{ $id }}">
-            {{ $label }}
-        </label>
-    @endif
-
-    @if ($label && !$hideLabel)
-        <label class="c-field__label" for="select_{{ $id }}">{{ $label }}
+    @if ($label)
+        <label class="c-field__label {{$hideLabel ? 'u-sr__only' : ''}}" for="select_{{ $id }}">{{ $label }}
             @if ($required)
                 <span class="u-color__text--danger">*</span>
             @endif
         </label>
     @endif
-
-
 
     @if (!empty($description))
         @typography([
