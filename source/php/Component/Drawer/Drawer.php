@@ -34,30 +34,30 @@ class Drawer extends \ComponentLibrary\Component\BaseController
      * Get screen size class names
      * 
      * @param array|null $screenSizes
-     * @return string
+     * @return array
      */
-    private function getScreenSizeClassNames($screenSizes): string
+    private function getScreenSizeClassNames($screenSizes): array
     {
         $classNames = [];
         $availableScreenSizes = ['xs', 'sm', 'md', 'lg'];
 
+        
         foreach ($availableScreenSizes as $availableScreenSize) {
             if (!in_array($availableScreenSize, $screenSizes)) {
                 $classNames[] = 'u-display--none@' . $availableScreenSize;
             }
         }
 
-        return implode(' ', $classNames);
+        return $classNames;
     }
 
-    private function getToggleButtonData($toggleButtonData, string $screenSizeClassNames)
+    private function getToggleButtonData($toggleButtonData, array $screenSizeClassNames)
     {
 
         if (empty($toggleButtonData)) return null;
-
         $toggleButtonData['attributeList']['data-js-toggle-trigger'] = 'drawer-' . $this->getUid();
         $toggleButtonData['attributeList']['aria-controls'] = 'navigation';
-        $toggleButtonData['classList'] = explode(' ', $screenSizeClassNames);
+        $toggleButtonData['classList'] = array_merge($screenSizeClassNames, $toggleButtonData['classList']);
 
         return $toggleButtonData;
     }
