@@ -12,6 +12,9 @@ class Select extends \ComponentLibrary\Component\BaseController
         //Create an random id if not assigned to the component.
         $this->data['id'] = $id = $id ? $id : uniqid();
 
+        //Set icon size
+        $this->data['iconSize'] = $this->getIconSize($size); 
+
         //Declare select attribute list, use id predefined. 
         $this->data['selectAttributeList'] = [
             'id' => 'select_' . $this->data['id'],
@@ -94,5 +97,13 @@ class Select extends \ComponentLibrary\Component\BaseController
             }
             return $boolean ? false : '';
         };
+    }
+
+    private function getIconSize($fieldSize = 'md'): string
+    {
+        if($fieldSize == 'lg') {
+            return 'md'; 
+        }
+        return $fieldSize; 
     }
 }

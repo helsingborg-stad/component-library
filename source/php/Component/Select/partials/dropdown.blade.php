@@ -5,8 +5,11 @@
           <li class="{{$baseClass}}__option {{ $isSelected($value, true) ? 'is-selected' : '' }}" data-js-dropdown-option="{{$value}}" role="option" aria-selected="{{ $isSelected($value, true) ? 'true' : 'false' }}">
               @icon([
                   'icon' => $itemStateIcons->inactive,
-                  'size' => 'md',
-                  'classList' => [$baseClass . '__unchecked-icon'],
+                  'size' => $iconSize,
+                  'classList' => [
+                    $baseClass . '__option-icon',
+                    $baseClass . '__unchecked-icon'
+                  ],
                   'attributeList' => [
                     'aria-hidden' => $isSelected($value, true) ? 'true' : 'false'
                   ]
@@ -14,8 +17,11 @@
               @endicon
               @icon([
                   'icon' => $itemStateIcons->active,
-                  'size' => 'md',
-                  'classList' => [$baseClass . '__checked-icon'],
+                  'size' => $iconSize,
+                  'classList' => [
+                    $baseClass . '__option-icon',
+                    $baseClass . '__checked-icon'
+                  ],
                   'attributeList' => [
                     'aria-hidden' => $isSelected($value, true) ? 'false' : 'true'
                   ]
