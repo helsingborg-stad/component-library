@@ -28,6 +28,7 @@ class Select extends \ComponentLibrary\Component\BaseController
         $this->data['attributeList']['data-js-select-component'] = 'true';
         $this->data['attributeList']['data-js-click-away'] = 'is-open';
         $this->data['attributeList']['data-js-is-empty-select'] = 'true'; 
+        $this->data['attributeList']['data-js-device-detect'] = 'true';
         
         //Set general classes
         $this->data['classList'][] = $this->getBaseClass($size, true);
