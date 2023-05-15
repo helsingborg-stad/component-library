@@ -5,7 +5,8 @@
         'gap' => 2
     ])
         @group([
-            'direction' => 'vertical'
+            'direction' => 'vertical',
+            'classList' => ['u-width--100']
         ])
             @if ($title)
                 @typography([
