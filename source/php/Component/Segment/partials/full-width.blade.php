@@ -11,4 +11,4 @@
 @endif
 
 {{-- Oneline to enable the use of css:empty() function --}}
-<div class="{{$baseClass}}__inner-blocks o-container o-container--content u-margin__x--auto u-hide-empty">{!! '<InnerBlocks />' !!}</div>
+<div class="{{$baseClass}}__inner-blocks o-container u-margin__x--auto u-hide-empty">{!! '<InnerBlocks />' !!}</div>
