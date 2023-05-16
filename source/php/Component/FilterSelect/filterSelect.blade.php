@@ -39,7 +39,7 @@
         <div class="{{$baseClass}}__options">
             @foreach ($options as $value => $name)
                 <div class="{{$baseClass}}__option" js-select-value="{{ $value }}">
-                    <span class="{{$baseClass}}__option-label">{{ $name }}</span>
+                    <span class="{{$baseClass}}__option-label">{!! $name !!}</span>
                     @icon([
                         'icon' => 'check_box_outline_blank',
                         'size' => 'md',
