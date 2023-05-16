@@ -4,7 +4,8 @@
         "options": [],
         "name": "",
         "placeholder": "",
-        "preselected": ""
+        "preselected": "",
+        "shadow": false
     },
     "description": {
         "options": "An array with options",
