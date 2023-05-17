@@ -17,7 +17,8 @@
                 'c-drawer__close'
             ],
             'size' => 'md',
-            'text' => $label
+            'text' => $label,
+            'context' => 'drawer.closeButton'
         ])
         @endbutton
     
