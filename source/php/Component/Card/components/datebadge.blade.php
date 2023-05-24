@@ -1,2 +1,2 @@
-@datebadge(['date' => $date, 'classList' => ['u-position--absolute', 'u-margin--2']])
+@datebadge(['date' => $date, 'classList' => $datebadgeClasses ?? ['u-position--absolute', 'u-margin--2']])
 @enddatebadge

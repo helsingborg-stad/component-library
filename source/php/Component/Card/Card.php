@@ -25,6 +25,14 @@ class Card extends \ComponentLibrary\Component\BaseController
             $this->data['paddedImage'] = $this->getBaseClass() . '__image-background--padded';
         }
 
+        if ($image && !empty($image['src'])) {
+            $this->data['classList'][] = $this->getBaseClass('has-image', true);
+        }
+
+        if ($dateBadge && $date) {
+            $this->data['classList'][] = $this->getBaseClass('has-datebadge', true);
+        }
+
         if ($imageFirst || !$image) {
             $this->data['classList'][] = $this->getBaseClass() . '--image-first';
         }
