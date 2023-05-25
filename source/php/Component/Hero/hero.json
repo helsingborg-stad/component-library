@@ -22,7 +22,8 @@
         "contentAlignmentHorizontal": "left",
         "contentApplyRoundedCorners": true,
         "contentApplyShadows": true,
-        "buttonArgs": []
+        "buttonArgs": [],
+        "poster": false
     },
     "description": {
         "image": "Background image",
@@ -46,7 +47,8 @@
         "contentAlignmentHoriontal": "Horizontal placement of the content: left|center|right.",
         "contentApplyRoundedCorners": "Apply rounded corners to content if contentBackgroundColor is set.",
         "contentApplyShadows": "Apply shadows to content if contentBackgroundColor is set.",
-        "buttonArgs": "Add a @button by passing @button component arguments. If button is treated as a link, all te text elements in the content gets wrapped with this link."
+        "buttonArgs": "Add a @button by passing @button component arguments. If button is treated as a link, all te text elements in the content gets wrapped with this link.",
+        "poster": "Poster image for the video"
     },
     "view": "hero.blade.php",
     "dependency": {
