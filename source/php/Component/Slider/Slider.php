@@ -27,6 +27,14 @@ class Slider extends \ComponentLibrary\Component\BaseController
             $flatUiDesign = get_theme_mod('flat_ui_design');
         }
 
+        if (!empty($padding)) {
+            $this->data['attributeList']['data-slider-padding'] = $padding;
+        }
+
+        if (!empty($gap)) {
+            $this->data['attributeList']['data-slider-gap'] = $gap;
+        }
+
         if ($peekSlides) {
             $this->data['classList'][] = 'c-slider__peek';
         }
