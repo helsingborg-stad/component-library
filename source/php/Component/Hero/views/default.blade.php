@@ -11,7 +11,7 @@
         <div class="o-container {{ $baseClass }}__container">
             
             @if($video)
-                <video autoplay muted loop playsinline class="c-hero__video">
+                <video autoplay muted loop playsinline poster="{{$poster}}" class="c-hero__video">
                     <source src="{{$video}}" type="video/mp4">
                 </video>
             @endif
