@@ -31,7 +31,7 @@ class Tags extends \ComponentLibrary\Component\BaseController
         }
 
         $this->data['isHidden'] = function ($loopIteration) use ($compress) {
-            if ($compress !== false) {
+            if (!empty($compress)) {
                 if ($loopIteration >= $compress) {
                     return "is-hidden";
                 }
