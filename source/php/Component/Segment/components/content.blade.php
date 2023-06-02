@@ -1,6 +1,9 @@
 @if ($title || $icon || $meta)
     @group([
-        'justifyContent' => 'space-between',
+        'justifyContent' => $icon ? 'space-between' : 
+        ($textAlignment == 'center' ? 'center' : 
+        ($textAlignment == 'right' ? 'flex-end' : 
+        'space-between')),
         'alignItems' => 'start',
         'gap' => 2
     ])
