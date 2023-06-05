@@ -18,7 +18,12 @@ class OpenStreetMap extends \ComponentLibrary\Component\BaseController
         $this->data['id'] = $this->getUid();
 
         if (!empty($pins)) {
+         foreach ($pins as &$pin) {
+            $pin['lat'] = strval($pin['lat']);
+            $pin['lng'] = strval($pin['lng']);
+        }
             $this->data['attributeList']['js-map-pin-data'] = json_encode($pins, JSON_UNESCAPED_UNICODE);
+
         }
 
         if (
