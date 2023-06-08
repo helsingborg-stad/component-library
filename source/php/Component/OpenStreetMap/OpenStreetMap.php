@@ -22,7 +22,7 @@ class OpenStreetMap extends \ComponentLibrary\Component\BaseController
             $pin['lat'] = strval($pin['lat']);
             $pin['lng'] = strval($pin['lng']);
         }
-            $this->data['attributeList']['js-map-pin-data'] = json_encode($pins, JSON_UNESCAPED_UNICODE);
+            $this->data['attributeList']['data-js-map-pin-data'] = json_encode($pins, JSON_UNESCAPED_UNICODE);
 
         }
 
@@ -44,10 +44,10 @@ class OpenStreetMap extends \ComponentLibrary\Component\BaseController
                 'zoom' => '14',
             ];
         }
-        $this->data['attributeList']['js-map-start-position'] = json_encode($startPosition);
+        $this->data['attributeList']['data-js-map-start-position'] = json_encode($startPosition);
 
         if (!empty($mapStyle)) {
-            $this->data['attributeList']['js-map-style'] = $mapStyle;
+            $this->data['attributeList']['data-js-map-style'] = $mapStyle;
         }
 
         if (!empty($title)) {
