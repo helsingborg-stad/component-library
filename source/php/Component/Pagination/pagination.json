@@ -17,7 +17,8 @@
         "maxPages": false,
         "buttonStyle": "filled",
         "buttonSize": "sm",
-        "pagesToShow": false
+        "pagesToShow": false,
+        "keepDOM": false
     },
     "description": {
         "list": "Array with pages",
