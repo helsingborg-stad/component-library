@@ -15,6 +15,6 @@
     'context' => [
         'component.nav.button'
     ],
-    'size' => $height
+    'size' => 'md'
 ])
 @endbutton
