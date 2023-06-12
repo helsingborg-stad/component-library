@@ -3,6 +3,7 @@
     "default": {
         "menuItems": [],
         "parentStyle": false,
+        "parentStyleColor": "primary",
         "mobile": false
     },
     "description": {

@@ -9,11 +9,11 @@
         @foreach ($menuItems as $item)
             <li id="{{$id}}-main-item-{{$item['id']}}"
                 class="{{$baseClass}}__item {{$baseClass}}__item--parent o-grid-12 o-grid-6@md o-grid-4@lg u-mb-6 u-margin__top--1 {{$item['classNames']}}">
-                @if($parentStyle)
+                @if(!empty($parentStyle))
                     @button([
                         'text' => $item['label'],
                         'style' => $parentStyle,
-                        'color' => 'primary',
+                        'color' => $parentStyleColor ?? 'primary',
                         'icon' => $item['icon']['icon'] !== "" ? $item['icon']['icon'] : 'chevron_right',
                         'href' => $item['href'],
                         'classList' => [
