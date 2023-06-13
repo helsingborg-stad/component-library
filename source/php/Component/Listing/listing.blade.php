@@ -14,12 +14,12 @@
                             ])
                             @endicon
                             <span class="{{ $baseClass }}__label">
-                                {{ $item['label'] }}
-                                @if ($icon)
-                                    @icon(['icon' => 'chevron_right', 'size' => 'md'])
-                                    @endicon
-                                @endif
+                              {{ $item['label'] }}
                             </span>
+                            @if ($icon)
+                                @icon(['icon' => 'chevron_right', 'size' => 'md'])
+                                @endicon
+                            @endif
                         </a>
                         @include('Listing.sub') {{-- - Recursive action - --}}
                     </li>

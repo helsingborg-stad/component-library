@@ -33,14 +33,10 @@
                 @listing([
                     'list' => $bulletPoints,
                     'classList' => [$baseClass . '__listing', $baseClass . '__listing--' . $backgroundColor],
-                    'icon' => [
-                        'icon' => '',
-                        'size' => ''
-                    ]
                 ])
                 @endlisting
             @endif
         </div>
-        @includeWhen($button, 'Product.components.button')
+        @includeWhen(!empty($button), 'Product.components.button')
     @endcard
 </div>
