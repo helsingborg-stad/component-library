@@ -34,8 +34,8 @@ class Nav extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass("height-" . $height, true);
         }
 
-        //Add id if missing, prevents duploicate references
-        if (empty($id)) {
+        //Add id if missing, prevents duplicated references
+        if (empty($id) || $this->data['depth'] > 1) {
             $this->data['id'] = $this->getUid();
         }
 
