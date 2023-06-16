@@ -30,8 +30,8 @@
         @endforeach
 
         @if ($compress && $compress < $tagCount)
-            <span class="c-tags__tag c-tags__tag-more">
-                {{ '...' }}
+            <span class="c-tags__tag c-tags__tag-more" data-js-compressed="{{$compress}}" data-js-compressed-class="is-hidden">
+                ...({{$tagCount - $compress}})
             </span>
         @endif
 

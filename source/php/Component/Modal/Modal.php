@@ -17,7 +17,7 @@ class Modal extends \ComponentLibrary\Component\BaseController
         }
 
         //The size
-        if ($size && in_array($size, ['sm','md','lg'])) {
+        if ($size && in_array($size, ['sm', 'md', 'lg'])) {
             $this->data['classList'][] = $this->getBaseClass() . "--size-" . $size;
         }
 
@@ -27,15 +27,15 @@ class Modal extends \ComponentLibrary\Component\BaseController
         }
 
         //Border radius
-        if ($borderRadius && in_array($borderRadius, ['sm','md','lg'])) {
+        if ($borderRadius && in_array($borderRadius, ['sm', 'md', 'lg'])) {
             $this->data['classList'][] = $this->getBaseClass() . "--border-radius-" . $borderRadius;
         }
 
-        if(isset($ariaLabels)) {
+        if (isset($ariaLabels)) {
             $this->data['ariaLabels'] = $ariaLabels;
         }
 
-        if($transparent) {
+        if ($transparent) {
             $this->data['classList'][] = $this->getBaseClass() . "--transparent";
         }
 

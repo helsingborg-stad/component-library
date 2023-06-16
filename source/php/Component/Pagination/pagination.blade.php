@@ -11,7 +11,7 @@
             'icon' => 'chevron_left',
             'attributeList' => [
                 'disabled' => $previousDisabled,
-                'js-pagination-prev' => ''
+                'data-js-pagination-prev' => ''
             ],
             'href' => $previous,
             ])
@@ -23,7 +23,7 @@
         <{{$listItem}} class="{{$baseClass}}__page-wrapper">
             <{{$listElement}} class="{{$baseClass}}__pages" js-table-pagination--links>
                 @foreach($list as $key => $item)
-                    <{{$listItem}} class="{{$baseClass}}__item" js-pagination-index="{{$key + 1}}">
+                    <{{$listItem}} class="{{$baseClass}}__item" data-js-pagination-index="{{$key + 1}}">
                         @button([
                             'style' => $buttonStyle,
                             'size' => $buttonSize,
@@ -51,7 +51,7 @@
                 'icon' => 'chevron_right',
                 'attributeList' => [
                     'disabled' => $nextDisabled,
-                    'js-pagination-next' => ''
+                    'data-js-pagination-next' => ''
                 ],
                 'href' => $next
             ])

@@ -2,7 +2,7 @@
   @nav([
     'items' => $item['children'],
     'includeToggle' => $includeToggle,
-    'depth' =>  $depth + 1,
+    'depth' =>  $depth ? $depth + 1 : 2,
     'direction' => 'vertical',
     'height' => 'sm',
     'classList' => [

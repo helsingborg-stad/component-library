@@ -14,7 +14,7 @@
             @endtypography
         @endif
             @button([
-                'text' => '',
+                'text' => $closeButtonText,
                 'icon' => 'close',
                 'color' => 'default',
                 'style' => 'basic',

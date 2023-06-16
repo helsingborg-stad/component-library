@@ -16,6 +16,10 @@ class Collection__item extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass('show-icon', true);
         }
 
+        if (!empty($bordered)) {
+            $this->data['classList'][] = $this->getBaseClass('bordered', true);
+        }
+
         //Link handling
         if($link) {
             $this->data['componentElement'] = "a"; 

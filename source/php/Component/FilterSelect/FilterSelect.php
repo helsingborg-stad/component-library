@@ -8,5 +8,8 @@ class FilterSelect extends \ComponentLibrary\Component\BaseController
     {
         //Extract array for easy access (fetch only)
         extract($this->data);
+        if ($shadow) {
+            $this->data['classList'][] = $this->getBaseClass('shadow', true);
+        }
     }
 }

@@ -1,11 +1,15 @@
 @if ($title || $icon || $meta)
     @group([
-        'justifyContent' => 'space-between',
+        'justifyContent' => $icon ? 'space-between' : 
+        ($textAlignment == 'center' ? 'center' : 
+        ($textAlignment == 'right' ? 'flex-end' : 
+        'space-between')),
         'alignItems' => 'start',
         'gap' => 2
     ])
         @group([
-            'direction' => 'vertical'
+            'direction' => 'vertical',
+            'classList' => ['u-width--100']
         ])
             @if ($title)
                 @typography([

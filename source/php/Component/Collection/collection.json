@@ -3,7 +3,6 @@
     "default": {
         "componentElement": "div",
         "list": false,
-        
         "bordered": false,
         "compact": false,
         "sharp": false,
