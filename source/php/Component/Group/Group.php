@@ -13,6 +13,11 @@ class Group extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
+        if (!empty($fluidGrid)) {
+            $this->data['containerAware'] = true;
+            $this->data['classList'][] = $this->getBaseClass('fluid-grid', true);
+        }
+
         if ($direction == "vertical") {
             $this->data['classList'][] = $this->getBaseClass() . "--vertical";
         } else {
