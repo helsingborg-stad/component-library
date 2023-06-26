@@ -5,14 +5,16 @@
         "startPosition": [],
         "mapStyle": "default",
         "height": "100vh",
-        "fullWidth": false
+        "fullWidth": false,
+        "expanded": false
     },
     "description": {
         "pins": "An array containing one array for each location marked on the map. Must contain latitude (lat) and longitude (lng). Can contain a tooltip and an icon.",
         "startPosition": "Sets the start location of the map. Must contain latitude (lat), longitude (lng) and a zoom value between 5-20",
         "mapStyle": "Theming of the map (pale, dark, color, default)",
         "height": "A css height value including unit (px, vh, %)",
-        "fullWidth": "True or false, sets the width of the element."
+        "fullWidth": "True or false, sets the width of the element.",
+        "expanded": "True or false, sets the default expanded value of the sidebar."
     },
     "view": "openStreetMap.blade.php",
     "dependency": {
