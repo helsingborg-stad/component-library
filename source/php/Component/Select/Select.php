@@ -37,6 +37,7 @@ class Select extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass('multiselect', true);
 
             $this->data['selectAttributeList']['multiple'] = 'multiple';
+            $this->data['selectAttributeList']['data-js-select-max'] = $maxSelections && is_numeric($maxSelections) ? $maxSelections : -1;
             $this->data['attributeList']['data-js-select-type'] = 'multiple';
 
             $this->data['itemStateIcons'] = (object) [

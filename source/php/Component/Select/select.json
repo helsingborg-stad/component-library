@@ -13,7 +13,8 @@
         "name": false,
         "hideLabel": false,
         "helperText": "",
-        "size": "md"
+        "size": "md",
+        "maxSelections": false
     },
     "description": {
         "label": "The placeholder of the dropdown",
@@ -27,7 +28,8 @@
         "name": "The name attribute for the select component",
         "hideLabel": "Hides the label",
         "helperText": "Adds a helping text, below the element.",
-        "size": "The size of the select component (sm, md, lg)"
+        "size": "The size of the select component (sm, md, lg)",
+        "maxSelections": "The maximum number of selections allowed. Will only be applied if \"multiple\" is true."
     },
     "view": "select.blade.php",
     "dependency": {

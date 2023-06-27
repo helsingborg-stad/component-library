@@ -45,7 +45,9 @@
                 </option>
             @endforeach
 
-            {!! $slot !!}
+            @if(!empty($slot))
+                {!! $slot !!}
+            @endif
         </select>
         @include('Select.partials.placeholder')
         @include('Select.partials.focus')
@@ -57,7 +59,7 @@
 
     @include('Select.partials.error')
 
-    @if ($helperText)
+    @if (!empty($helperText))
         <small class="c-field__helper">{{ $helperText }}</small>
     @endif
 </div>
