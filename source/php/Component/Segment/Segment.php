@@ -103,8 +103,10 @@ class Segment extends \ComponentLibrary\Component\BaseController
         $this->data['imageStyle'] = [];
 
         //Add image to image styles
-        if ($image) {
-            $this->data['imageStyle']['background-image'] = "url('" . $image . "')";
+        if (!empty($image) && !empty($image['src'])) {
+            $this->data['imageStyle']['background-image'] = "url('" . $image['src'] . "')";
+            $this->data['imageAlt'] = $image['alt'];
+
         } else {
             $this->data['classList'][] = $this->getBaseClass('no-image', true);
         }

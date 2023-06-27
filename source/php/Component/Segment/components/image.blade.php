@@ -4,5 +4,5 @@
     'keepContent' => true,
     'keepWrapper' => false
 ])
-    <div class="{{ $baseClass }}__image {{ $imageClass }}" style="{{ $imageStyleString }}"></div>
+    <div role="img" aria-label="{{$imageAlt}}" class="{{ $baseClass }}__image {{ $imageClass }}" style="{{ $imageStyleString }}"></div>
 @endlink
