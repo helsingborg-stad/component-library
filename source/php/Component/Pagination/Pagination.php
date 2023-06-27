@@ -45,6 +45,7 @@ class Pagination extends \ComponentLibrary\Component\BaseController
         $this->data['lastItem'] = $this->lastItem();
 
         if($this->data['useJS']) {
+            $this->data['list'] = [['href' => '']];
             $this->data['attributeList']['data-js-pagination'] = '';
             $this->data['attributeList']['data-js-pagination-per-page'] = $this->data['perPage'];
             $this->data['attributeList']['data-js-pagination-max-pages'] = $this->data['maxPages'];
