@@ -39,11 +39,7 @@ class Pagination extends \ComponentLibrary\Component\BaseController
             $this->data['nextDisabled'] = 'true'; 
         }
 
-        $this->tmpList = $this->data['list'];
-        $this->data['list'] = $this->overflow();
-        $this->data['firstItem'] = $this->firstItem();
-        $this->data['lastItem'] = $this->lastItem();
-
+        //JS pagination
         if($this->data['useJS']) {
             $this->data['list'] = [['href' => '']];
             $this->data['attributeList']['data-js-pagination'] = '';
@@ -58,6 +54,10 @@ class Pagination extends \ComponentLibrary\Component\BaseController
             }
         }
 
+        $this->tmpList = $this->data['list'];
+        $this->data['list'] = $this->overflow();
+        $this->data['firstItem'] = $this->firstItem();
+        $this->data['lastItem'] = $this->lastItem();
     }
 
     public function overflow()
