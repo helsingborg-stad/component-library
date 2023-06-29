@@ -52,11 +52,10 @@
         @include('Select.partials.placeholder')
         @include('Select.partials.focus')
         @include('Select.partials.expand')
+        @includeWhen($clearButtonEnabled, 'Select.partials.clear')
         @include('Select.partials.action')
     </div>
-
     @include('Select.partials.dropdown')
-
     @include('Select.partials.error')
 
     @if (!empty($helperText))

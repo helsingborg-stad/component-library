@@ -90,6 +90,8 @@ class Select extends \ComponentLibrary\Component\BaseController
             $this->data['selectAttributeList']
         );
 
+        $this->data['clearButtonEnabled'] = !$multiple && !$required;
+
         //Determine if this is selected
         $this->data['isSelected'] = function($key, $boolean = true)
         {
