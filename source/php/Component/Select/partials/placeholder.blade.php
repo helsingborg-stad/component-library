@@ -1,3 +1,3 @@
 @if($placeholder)
-  <span class="{{$baseClass}}__placeholder">{{ $placeholder }}</span>
+  <span data-js-placeholder class="{{$baseClass}}__placeholder">{{ $placeholder }}</span>
 @endif

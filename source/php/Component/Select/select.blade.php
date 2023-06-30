@@ -32,11 +32,9 @@
     @endif
 
     <div class="{{ $baseClass }}__field-container">
-        <select {!! $selectAttributes !!} class="{{ $baseClass }}__select-element">
-            @if ($label)
-                <option class="c-select__select-option" value="" {{ $preselected === '' ? 'selected' : '' }}>
-                    {!! $label !!}
-                </option>
+        <select {!! $selectAttributes !!} class="{{ $baseClass }}__select-element" tabindex="-1">
+            @if ($preselected !== '')
+                <option class="c-select__select-option" value=""></option>
             @endif
 
             @foreach ($options as $key => $name)

@@ -27,7 +27,7 @@ class Select extends \ComponentLibrary\Component\BaseController
         $this->data['attributeList']['data-js-toggle-class'] = 'is-open';
         $this->data['attributeList']['data-js-select-component'] = 'true';
         $this->data['attributeList']['data-js-click-away'] = 'is-open';
-        $this->data['attributeList']['data-js-is-empty-select'] = 'true'; 
+        $this->data['attributeList']['data-js-is-empty-select'] = 'true';
         $this->data['attributeList']['data-js-device-detect'] = 'true';
         
         //Set general classes
@@ -37,7 +37,7 @@ class Select extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass('multiselect', true);
 
             $this->data['selectAttributeList']['multiple'] = 'multiple';
-            $this->data['selectAttributeList']['data-js-select-max'] = $maxSelections && is_numeric($maxSelections) ? $maxSelections : -1;
+            $this->data['selectAttributeList']['data-js-select-max'] = !empty($maxSelections) && is_numeric($maxSelections) ? $maxSelections : -1;
             $this->data['attributeList']['data-js-select-type'] = 'multiple';
 
             $this->data['itemStateIcons'] = (object) [
