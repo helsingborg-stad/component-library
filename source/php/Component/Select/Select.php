@@ -30,10 +30,12 @@ class Select extends \ComponentLibrary\Component\BaseController
         $this->data['attributeList']['data-js-is-empty-select'] = 'true';
         $this->data['attributeList']['data-js-device-detect'] = 'true';
         
+        
         //Set general classes
         $this->data['classList'][] = $this->getBaseClass($size, true);
 
         if ($multiple) {
+            $this->data['isMultiSelect'] = true;
             $this->data['classList'][] = $this->getBaseClass('multiselect', true);
 
             $this->data['selectAttributeList']['multiple'] = 'multiple';
@@ -47,6 +49,7 @@ class Select extends \ComponentLibrary\Component\BaseController
         }
 
         if(!$multiple) {
+            $this->data['isMultiSelect'] = false;
             $this->data['classList'][] = $this->getBaseClass('singleselect', true);
 
             $this->data['attributeList']['data-js-select-type'] = 'single';

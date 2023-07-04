@@ -32,9 +32,11 @@
     @endif
 
     <div class="{{ $baseClass }}__field-container">
+        
         <select {!! $selectAttributes !!} class="{{ $baseClass }}__select-element" tabindex="-1">
-            @if ($preselected !== '')
-                <option class="c-select__select-option" value=""></option>
+    
+            @if ($preselected !== '' && !$isMultiSelect)
+                <option class="c-select__select-option" value="">{{$placeholder ? $placeholder : ""}}</option>
             @endif
 
             @foreach ($options as $key => $name)
@@ -47,7 +49,6 @@
                 {!! $slot !!}
             @endif
         </select>
-        @include('Select.partials.placeholder')
         @include('Select.partials.focus')
         @include('Select.partials.expand')
         @includeWhen($clearButtonEnabled, 'Select.partials.clear')
