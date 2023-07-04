@@ -1,5 +1,5 @@
 <!-- Visual dropdown list -->
-<div class="{{$baseClass}}__dropdown" data-js-dropdown-element="true">
+<div class="{{$baseClass}}__dropdown" data-js-dropdown-element="true" aria-hidden="true">
   <ul class="{{$baseClass}}__options u-unlist u-padding--0 u-margin--0" role="listbox">
       @foreach ($options as $value => $name)
           <li class="{{$baseClass}}__option {{ $isSelected($value, true) ? 'is-selected' : '' }}" data-js-dropdown-option="{{$value}}" role="option" aria-selected="{{ $isSelected($value, true) ? 'true' : 'false' }}" tabindex="0">
