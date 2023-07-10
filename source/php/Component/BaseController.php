@@ -395,9 +395,11 @@ class BaseController
     public static function buildAttributes(array $attributes): string
     {
         $attributeStrings = [];
-        $filteredAttributes = array_filter($attributes, 'is_string');
-
-        foreach ($filteredAttributes as $key => $value) {
+        
+        foreach ($attributes as $key => $value) {
+            if (!is_string($value)) {
+                $value = strval($value);
+            }
             $escapedValue = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
             $attributeStrings[] = "$key=\"$escapedValue\"";
         }
