@@ -17,7 +17,9 @@
             ])
                 {{ $label }}
             @endtypography
-            @includeWhen($prices, 'Product.components.price')
+            <div class="{{$baseClass}}__prices">
+                @includeWhen($prices, 'Product.components.price')
+            </div>
         </div>
         <div class="c-card__body c-product__body">
             @if ($meta)
