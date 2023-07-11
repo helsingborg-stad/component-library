@@ -17,9 +17,6 @@
             ])
                 {{ $label }}
             @endtypography
-            <div class="{{$baseClass}}__prices">
-                @includeWhen($prices, 'Product.components.price')
-            </div>
         </div>
         <div class="c-card__body c-product__body">
             @if ($meta)
@@ -39,6 +36,9 @@
                 @endlisting
             @endif
         </div>
-        @includeWhen(!empty($button), 'Product.components.button')
+        <div class="c-card__footer {{$baseClass}}__footer">
+                @includeWhen($prices, 'Product.components.price')
+                @includeWhen(!empty($button), 'Product.components.button')
+        </div>
     @endcard
 </div>
