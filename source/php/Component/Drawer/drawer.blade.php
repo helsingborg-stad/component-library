@@ -37,4 +37,4 @@
     </div>
 </nav>
 
-<div class="drawer-overlay js-close-drawer {{$screenSizeClassNames}}" data-simulate-click="{{$simulateClickSelector}}" {!! $moveTo !!}></div>
+<div class="drawer-overlay js-close-drawer {{ implode(' ', $screenSizeClassNames) }}" data-simulate-click="{{$simulateClickSelector}}" {!! $moveTo !!}></div>
