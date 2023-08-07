@@ -11,6 +11,7 @@
         "multiple": false,
         "name": false,
         "hideLabel": false,
+        "hidePlaceholder": false,
         "size": "md"
     },
     "description": {
@@ -23,6 +24,7 @@
         "multiple": "Sets the select box to a multiple select",
         "name": "The name attribute for the select component",
         "hideLabel": "Hides the label",
+        "hidePlaceholder": "Hides the placeholder but keeps the label",
         "size": "The size of the select component (sm, md, lg)"
     },
     "view": "select.blade.php",

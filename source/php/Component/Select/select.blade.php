@@ -18,7 +18,7 @@
 
     <div class="u-position--relative">
         <select {!! $attribute !!}>
-            @if ($label)
+            @if ($label && empty($hidePlaceholder))
                 <option class="c-select__option" value="" {{ $preselected === '' ? 'selected' : '' }}>
                     {!! $label !!}</option>
             @endif
