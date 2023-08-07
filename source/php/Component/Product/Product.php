@@ -25,6 +25,7 @@ class Product extends \ComponentLibrary\Component\BaseController
             if (!isset($button['color'])) {
                 $this->data['button']['color'] = $backgroundColor;
             }
+            $this->data['button']['classList'][] = 'c-product__button';
         }
     }
 }
