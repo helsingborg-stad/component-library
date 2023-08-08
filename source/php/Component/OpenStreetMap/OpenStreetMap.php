@@ -21,6 +21,19 @@ class OpenStreetMap extends \ComponentLibrary\Component\BaseController
          foreach ($pins as &$pin) {
             $pin['lat'] = strval($pin['lat']);
             $pin['lng'] = strval($pin['lng']);
+            
+            if (isset($pin['tooltip']) && is_array($pin['tooltip'])) {
+                $pin['tooltip'] = array_filter($pin['tooltip'], function($x) {
+                    if (is_array($x)) {
+                        return !empty(array_filter($x));
+                    }
+                    return !empty($x);
+                });
+
+                if (empty($pin['tooltip'])) {
+                    unset($pin['tooltip']);
+                }
+            }
         }
             $this->data['attributeList']['data-js-map-pin-data'] = json_encode($pins, JSON_UNESCAPED_UNICODE);
 
