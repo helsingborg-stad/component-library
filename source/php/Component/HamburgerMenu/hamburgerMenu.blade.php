@@ -53,7 +53,7 @@
                                         $baseClass . '__link--child'
                                     ]
                                 ])
-                                @if(isset($child['icon']) && !empty($child['icon']['icon']))
+                                @if(isset($child['icon']) && !array_diff(['icon', 'size', 'classList'], array_keys($child['icon'])))
                                     @icon([
                                         'icon' => $child['icon']['icon'],
                                         'size' => $child['icon']['size'],
