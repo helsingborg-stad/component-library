@@ -14,7 +14,8 @@
                 'data-simulate-click' => $simulateClickSelector
             ],
             'classList' => [
-                'c-drawer__close'
+                'c-drawer__close',
+                's-drawer__close-button'
             ],
             'size' => 'md',
             'text' => $label,
