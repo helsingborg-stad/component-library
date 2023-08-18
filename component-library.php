@@ -39,6 +39,3 @@ $loader = new ComponentLibrary\Vendor\Psr4ClassLoader();
 $loader->addPrefix('ComponentLibrary', COMPONENTLIBRARY_PATH);
 $loader->addPrefix('ComponentLibrary', COMPONENTLIBRARY_PATH . 'source/php/');
 $loader->register();
-
-// Start application
-new ComponentLibrary\App();
