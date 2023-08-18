@@ -5,8 +5,9 @@ namespace ComponentLibrary;
 class Register
 {
     private static $cache = [
-        'configJson' => [],
-        'fileExists' => []
+        'configJson'        => [],
+        'fileExists'        => [],
+        'fileGetContents'   => [],
     ]; 
 
     public $data;
@@ -281,12 +282,10 @@ class Register
      */
     public function getNamespace($classPath)
     {
-        $src = file_get_contents($classPath);
-
+        $src = $this->cachedFileGetContents($classPath);
         if (preg_match('/namespace\s+(.+?);/', $src, $m)) {
             return $m[1];
         }
-
         return null;
     }
 
@@ -311,7 +310,7 @@ class Register
      * @throws \Exception If no configuration file is found in the specified path.
      */
     private function getConfigFilePath($path) {
-        $configFile = $path . DIRECTORY_SEPARATOR . strtolower(basename($path)) .".json"; 
+        $configFile = $path . DIRECTORY_SEPARATOR . lcfirst(basename($path)) .".json"; 
         if($this->cachedFileExists($configFile)) {
             return $configFile; 
         }
@@ -338,7 +337,7 @@ class Register
         }
 
         //Read config
-        if (!$json = file_get_contents($path)) {
+        if (!$json = $this->cachedFileGetContents($path)) {
             throw new \Exception("Configuration file unreadable at " . $path);
         }
 
@@ -395,6 +394,30 @@ class Register
         if(file_exists($path)) {
             self::$cache['fileExists'][$id] = true; 
             return true;
+        }
+
+        return false;
+    }
+
+
+    /**
+     * Check if a file exists using cached results.
+     *
+     * This function checks for the existence of a file using cached results to improve performance.
+     * It first looks in the cache for a previous check result and returns true if the file is found.
+     * If not found in the cache, it checks the file system, updates the cache if found, and returns the result.
+     *
+     * @param string $path The path to the file to check.
+     * @return bool Returns true if the file exists, false otherwise.
+     */
+    private function cachedFileGetContents($path) {
+        $id = md5($path);
+        if(isset(self::$cache['fileGetContents'][$id])) {
+            return self::$cache['fileGetContents'][$id];
+        }
+
+        if($content = file_get_contents($path)) {
+            return self::$cache['fileGetContents'][$id] = $content; 
         }
 
         return false;
