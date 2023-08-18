@@ -104,9 +104,9 @@ class Register
                 }
 
                 //Locate config file
-                $config =   $this->readConfigFile(
-                                $this->getConfigFilePath($path)
-                            );
+                $config = $this->readConfigFile(
+                    $this->getConfigFilePath($path)
+                );
 
                 //Register the component
                 $this->add(
@@ -255,17 +255,12 @@ class Register
      */
     public function locateController($controller)
     {
-
         if (is_array($this->controllerPaths) && !empty($this->controllerPaths)) {
-
             foreach ($this->controllerPaths as $path) {
-
                 $file = $path . DIRECTORY_SEPARATOR . $controller . DIRECTORY_SEPARATOR . $controller . '.php';
-
-                if (!file_exists($file)) {
+                if (!$this->cachedFileExists($file)) {
                     continue;
                 }
-
                 return $file;
             }
         }
@@ -398,7 +393,6 @@ class Register
 
         return false;
     }
-
 
     /**
      * Check if a file exists using cached results.
