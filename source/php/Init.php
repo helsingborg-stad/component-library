@@ -30,7 +30,7 @@ class Init {
         
         if (function_exists('apply_filters')) {
             $viewPaths = apply_filters(
-                'helsingborg-stad/blade/viewPaths',
+                'ComponentLibrary/ViewPaths',
                 $viewPaths
             );
         }

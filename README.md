@@ -63,6 +63,20 @@ ComponentLibrary/Component/ComponentName/Class - Takes $class
 
 Each data attribute also has a corresponding filter eg. ComponentLibrary/Component/ComponentName/dataVar 
 
+### Additional paths (WordPress Specific)
+
+You may ask the component library to render more view paths by using the ComponentLibrary/ViewPaths filter. Simply add 
+another path to the component library by doing the following:
+
+```
+add_filter('ComponentLibrary/ViewPaths', function($viewPaths) (
+  if(is_array($viewPaths)) {
+    $viewPaths = [];
+  }
+  $viewPaths[] = "/path/to/plugin/views";
+  return $viewPaths; 
+));
+```
 
 ### Iframe
 #### ComponentLibrary/Component/Iframe/GetSuppliers
