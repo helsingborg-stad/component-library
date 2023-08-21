@@ -8,6 +8,7 @@ class Register
         'configJson'        => [],
         'fileExists'        => [],
         'fileGetContents'   => [],
+        'glob'              => [],
     ]; 
 
     public $data;
@@ -23,6 +24,14 @@ class Register
         $this->blade = $engine;
     }
 
+    /**
+     * Add a new component to the system.
+     *
+     * @param string $slug The unique identifier for the component.
+     * @param array $defaultArgs The default arguments for the component.
+     * @param string|null $view The optional view name for the component.
+     * @throws \Exception if the provided slug is reserved or invalid.
+     */
     public function add($slug, $defaultArgs, $view = null)
     {
         //Create utility data object
@@ -92,16 +101,11 @@ class Register
         $basePath = rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "*";
 
         //Glob
-        $locations = glob($basePath);
+        $locations = $this->cachedGlob($basePath);
 
         //Loop over each path
         if (is_array($locations) && !empty($locations)) {
             foreach ($locations as $path) {
-
-                //Check if folder
-                if (!is_dir($path)) {
-                    continue;
-                }
 
                 //Locate config file
                 $config = $this->readConfigFile(
@@ -412,6 +416,29 @@ class Register
 
         if($content = file_get_contents($path)) {
             return self::$cache['fileGetContents'][$id] = $content; 
+        }
+
+        return false;
+    }
+
+    /**
+     * Check if a file exists using cached results.
+     *
+     * This function checks for the existence of a file using cached results to improve performance.
+     * It first looks in the cache for a previous check result and returns true if the file is found.
+     * If not found in the cache, it checks the file system, updates the cache if found, and returns the result.
+     *
+     * @param string $path The path to the file to check.
+     * @return bool Returns true if the file exists, false otherwise.
+     */
+    private function cachedGlob($path) {
+        $id = md5($path);
+        if(isset(self::$cache['glob'][$id])) {
+            return self::$cache['glob'][$id];
+        }
+
+        if($list = glob($path, GLOB_ONLYDIR)) {
+            return self::$cache['glob'][$id] = $list; 
         }
 
         return false;

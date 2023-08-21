@@ -68,13 +68,12 @@ class Init {
                 $internalComponentsPath
             );
         }
+
         foreach ($internalComponentsPath as $path) {
             $this->register->registerInternalComponents(
                 rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR
             );
         }
-        
-       
     }
 
     public function getEngine()
