@@ -30,7 +30,6 @@
             {{ $description }}
         @endtypography
     @endif
-
     <div class="{{ $baseClass }}__field-container">
         
         <select {!! $selectAttributes !!} class="{{ $baseClass }}__select-element" tabindex="-1">

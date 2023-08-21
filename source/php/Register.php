@@ -4,6 +4,13 @@ namespace ComponentLibrary;
 
 class Register
 {
+    private static $cache = [
+        'configJson'        => [],
+        'fileExists'        => [],
+        'fileGetContents'   => [],
+        'glob'              => [],
+    ]; 
+
     public $data;
     public $cachePath = ""; 
     public $viewPaths = [];
@@ -17,6 +24,14 @@ class Register
         $this->blade = $engine;
     }
 
+    /**
+     * Add a new component to the system.
+     *
+     * @param string $slug The unique identifier for the component.
+     * @param array $defaultArgs The default arguments for the component.
+     * @param string|null $view The optional view name for the component.
+     * @throws \Exception if the provided slug is reserved or invalid.
+     */
     public function add($slug, $defaultArgs, $view = null)
     {
         //Create utility data object
@@ -86,46 +101,26 @@ class Register
         $basePath = rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "*";
 
         //Glob
-        $locations = glob($basePath);
+        $locations = $this->cachedGlob($basePath);
 
         //Loop over each path
         if (is_array($locations) && !empty($locations)) {
             foreach ($locations as $path) {
 
-                //Check if folder
-                if (!is_dir($path)) {
-                    continue;
-                }
-
                 //Locate config file
-                $configFile = glob($path . DIRECTORY_SEPARATOR . "*.json"); 
-
-                //Get first occurance of config
-                if (is_array($configFile) && !empty($configFile)) {
-                    $configFile = array_pop($configFile);
-                } else {
-                    throw new \Exception("No config file found in " . $path);
-                }
-
-                //Read config
-                if (!$configJson = file_get_contents($configFile)) {
-                    throw new \Exception("Configuration file unreadable at " . $configFile);
-                }
-
-                //Check if valid json
-                if (!$configJson = json_decode($configJson, true)) {
-                    throw new \Exception("Invalid formatting of configuration file in " . $configFile);
-                }
+                $config = $this->readConfigFile(
+                    $this->getConfigFilePath($path)
+                );
 
                 //Register the component
                 $this->add(
-                    $configJson['slug'],
-                    $configJson['default'],
-                    $configJson['view'] ? $configJson['view'] : $configJson['slug'] . "blade.php"
+                    $config['slug'],
+                    $config['default'],
+                    $config['view'] ? $config['view'] : $config['slug'] . "blade.php"
                 );
 
                 //Log
-                $result[] = $configJson['slug'];
+                $result[] = $config['slug'];
             }
         }
 
@@ -264,17 +259,12 @@ class Register
      */
     public function locateController($controller)
     {
-
         if (is_array($this->controllerPaths) && !empty($this->controllerPaths)) {
-
             foreach ($this->controllerPaths as $path) {
-
                 $file = $path . DIRECTORY_SEPARATOR . $controller . DIRECTORY_SEPARATOR . $controller . '.php';
-
-                if (!file_exists($file)) {
+                if (!$this->cachedFileExists($file)) {
                     continue;
                 }
-
                 return $file;
             }
         }
@@ -291,12 +281,10 @@ class Register
      */
     public function getNamespace($classPath)
     {
-        $src = file_get_contents($classPath);
-
+        $src = $this->cachedFileGetContents($classPath);
         if (preg_match('/namespace\s+(.+?);/', $src, $m)) {
             return $m[1];
         }
-
         return null;
     }
 
@@ -309,4 +297,151 @@ class Register
     {
         return (string) str_replace('.blade.php', '', $viewName);
     }
+
+    /**
+     * Get the file path for the configuration file.
+     *
+     * This function constructs the path to the configuration file based on the provided directory path.
+     * The configuration file is expected to be named after the directory with a '.json' extension.
+     *
+     * @param string $path The directory path to generate the configuration file path from.
+     * @return string The complete path to the configuration file.
+     * @throws \Exception If no configuration file is found in the specified path.
+     */
+    private function getConfigFilePath($path) {
+        $configFile = $path . DIRECTORY_SEPARATOR . lcfirst(basename($path)) .".json"; 
+        if($this->cachedFileExists($configFile)) {
+            return $configFile; 
+        }
+
+        throw new \Exception("No config file found in " . $path);
+    }
+
+    /**
+     * Read and parse a configuration file.
+     *
+     * This function reads a configuration file from the specified path and parses it as JSON.
+     * It also provides caching for the parsed JSON data.
+     *
+     * @param string $path The path to the configuration file.
+     * @return array|false An array representing the parsed JSON data if successful, or false if parsing fails.
+     * @throws \Exception If the configuration file is unreadable or contains invalid JSON.
+     */
+    private function readConfigFile(string $path) {
+        $id = md5($path);
+
+        //Fetch cached value
+        if(isset(self::$cache['configJson'][$id])) {
+            return self::$cache['configJson'][$id]; 
+        }
+
+        //Read config
+        if (!$json = $this->cachedFileGetContents($path)) {
+            throw new \Exception("Configuration file unreadable at " . $path);
+        }
+
+        //Check if valid json & return
+        if($this->validateJson($json, $path)) {
+            return self::$cache['configJson'][$id] = (array) json_decode($json); //Return & store in cache.
+        }
+        
+        return false;
+    }
+
+    /**
+     * Validate the format of a JSON string.
+     *
+     * This function validates the format of a JSON string by attempting to parse it as JSON.
+     * It utilizes the built-in `json_validate` function in PHP 8.3 and later, or falls back to
+     * decoding the JSON string and checking if the decoding was successful in earlier PHP versions.
+     *
+     * @param string $json The JSON string to validate.
+     * @param string $path The path to the JSON file (used for error reporting).
+     * @return bool Returns true if the JSON string is valid, false otherwise.
+     * @throws \Exception If the JSON string is not valid according to its format.
+     */
+    private function validateJson(string $json, string $path) {
+        if(function_exists('json_validate')) {
+            $validJson = json_validate($json); //Introduced in PHP 8.3
+        } else {
+            $validJson = (bool) json_decode($json, true); //Before PHP 8.3
+        }
+
+        if(!$validJson) {
+            throw new \Exception("Invalid formatting of configuration file in " . $path);
+        }
+
+        return true;
+    }
+    
+    /**
+     * Check if a file exists using cached results.
+     *
+     * This function checks for the existence of a file using cached results to improve performance.
+     * It first looks in the cache for a previous check result and returns true if the file is found.
+     * If not found in the cache, it checks the file system, updates the cache if found, and returns the result.
+     *
+     * @param string $path The path to the file to check.
+     * @return bool Returns true if the file exists, false otherwise.
+     */
+    private function cachedFileExists($path) {
+        $id = md5($path);
+        if(isset(self::$cache['fileExists'][$id])) {
+            return true; 
+        }
+
+        if(file_exists($path)) {
+            self::$cache['fileExists'][$id] = true; 
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Check if a file exists using cached results.
+     *
+     * This function checks for the existence of a file using cached results to improve performance.
+     * It first looks in the cache for a previous check result and returns true if the file is found.
+     * If not found in the cache, it checks the file system, updates the cache if found, and returns the result.
+     *
+     * @param string $path The path to the file to check.
+     * @return bool Returns true if the file exists, false otherwise.
+     */
+    private function cachedFileGetContents($path) {
+        $id = md5($path);
+        if(isset(self::$cache['fileGetContents'][$id])) {
+            return self::$cache['fileGetContents'][$id];
+        }
+
+        if($content = file_get_contents($path)) {
+            return self::$cache['fileGetContents'][$id] = $content; 
+        }
+
+        return false;
+    }
+
+    /**
+     * Check if a file exists using cached results.
+     *
+     * This function checks for the existence of a file using cached results to improve performance.
+     * It first looks in the cache for a previous check result and returns true if the file is found.
+     * If not found in the cache, it checks the file system, updates the cache if found, and returns the result.
+     *
+     * @param string $path The path to the file to check.
+     * @return bool Returns true if the file exists, false otherwise.
+     */
+    private function cachedGlob($path) {
+        $id = md5($path);
+        if(isset(self::$cache['glob'][$id])) {
+            return self::$cache['glob'][$id];
+        }
+
+        if($list = glob($path, GLOB_ONLYDIR)) {
+            return self::$cache['glob'][$id] = $list; 
+        }
+
+        return false;
+    }
+
 }

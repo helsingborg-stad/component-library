@@ -22,8 +22,6 @@
                     "element" => "h2",
                     'classList' => [$baseClass.'__heading'],
                     'autopromote' => true,
-                    'id' => $uid . '__heading',
-
                 ])
                     {{ $title }}
                 @endtypography

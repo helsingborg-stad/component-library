@@ -14,7 +14,8 @@
         "hideLabel": false,
         "helperText": "",
         "size": "md",
-        "maxSelections": false
+        "maxSelections": false,
+        "hidePlaceholder": false
     },
     "description": {
         "label": "The placeholder of the dropdown",
@@ -29,7 +30,8 @@
         "hideLabel": "Hides the label",
         "helperText": "Adds a helping text, below the element.",
         "size": "The size of the select component (sm, md, lg)",
-        "maxSelections": "The maximum number of selections allowed. Will only be applied if \"multiple\" is true."
+        "maxSelections": "The maximum number of selections allowed. Will only be applied if \"multiple\" is true.",
+        "hidePlaceholder": "Hides the placeholder but keeps the label"
     },
     "view": "select.blade.php",
     "dependency": {

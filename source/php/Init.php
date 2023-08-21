@@ -30,12 +30,17 @@ class Init {
         
         if (function_exists('apply_filters')) {
             $viewPaths = apply_filters(
-                'helsingborg-stad/blade/viewPaths',
+                'ComponentLibrary/ViewPaths',
                 $viewPaths
             );
         }
-        foreach ($viewPaths as $path) {
-            $blade->addViewPath(rtrim($path, DIRECTORY_SEPARATOR));
+
+        if(is_array($viewPaths) && !empty($viewPaths)) {
+            foreach ($viewPaths as $path) {
+                $blade->addViewPath(rtrim($path, DIRECTORY_SEPARATOR));
+            }
+        } else {
+            throw new \Exception("View paths not defined.");
         }
 
         $bladeInstance = $blade->instance();
@@ -68,13 +73,12 @@ class Init {
                 $internalComponentsPath
             );
         }
+
         foreach ($internalComponentsPath as $path) {
             $this->register->registerInternalComponents(
                 rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR
             );
         }
-        
-       
     }
 
     public function getEngine()
