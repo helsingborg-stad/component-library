@@ -39,8 +39,10 @@ class Slider extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = 'c-slider__peek';
         }
 
-        if ($arrowButtons && is_array($arrowButtons)) {
-            $this->data['arrowButtons'] = $arrowButtons;
+        if ($arrowButtons && (is_array($arrowButtons) || is_object($arrowButtons))) {
+            $this->data['arrowButtons'] = (array) $arrowButtons;
+        } else {
+            $this->data['arrowButtons'] = false;
         }
 
         if ($navigationHover) {
