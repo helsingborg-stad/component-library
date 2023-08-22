@@ -118,6 +118,10 @@ class Segment extends \ComponentLibrary\Component\BaseController
         }
 
         //Add background position to image styles
+        if (is_object($imageFocus)) {
+            $imageFocus = (array) $imageFocus;
+        }
+        
         if (array_filter($imageFocus)) {
             $this->data['imageStyle']['background-position'] = $imageFocus['left'] . "% " . $imageFocus['top'] . "%";
         }
