@@ -15,11 +15,9 @@
             ],
             'classList' => [
                 'c-drawer__close',
-                's-drawer__close-button'
             ],
             'size' => 'md',
             'text' => $label,
-            'context' => 'drawer.closeButton'
         ])
         @endbutton
     
