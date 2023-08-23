@@ -11,19 +11,19 @@ class Select extends \ComponentLibrary\Component\BaseController
         extract($this->data);
 
         // Must include a id.
-        if (!$id) {
-            $id = uniqid();
+        if (empty($id)) {
+            $this->data['id'] = uniqid();
         }
         $this->data['attributeList']['id'] = "select_{$id}";
 
         $this->data['classList'][] = $this->getBaseClass($size, true);
 
-        if ($multiple) {
+        if (!empty($multiple)) {
             $this->data['attributeList']['multiple'] = 'multiple';
         }
 
         $this->data['intersection'] = [];
-        if (is_array($preselected) && !empty($options)) {
+        if (!empty($options) && is_array($preselected)) {
             // Create an associative array from $preselected with keys same as values
             $preselectedKeys = array_flip($preselected);
 
@@ -31,15 +31,15 @@ class Select extends \ComponentLibrary\Component\BaseController
             $this->data['intersection'] = array_intersect_key($options, $preselectedKeys);
         }
 
-        if ($name) {
-            $this->data['attributeList']['name'] = $name;
+        if (!empty($name)) {
+            $this->data['attributeList']['name'] = $name . (!empty($multiple) ? '[]' : '');
         }
 
-        if ($errorMessage) {
+        if (!empty($errorMessage)) {
             $this->data['data-invalid-message'] = $errorMessage;
         }
 
-        if ($required) {
+        if (!empty($required)) {
             $this->data['attributeList']['required'] = 'required';
             $this->data['attributeList']['data-required'] = '1';
         }
