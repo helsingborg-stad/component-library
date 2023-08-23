@@ -1,4 +1,4 @@
-<div class="c-card__body c-product__body">
+<div class="c-card__body {{ $baseClass }}__body">
     @if (!empty($meta))
         @typography([
             'element' => 'p',

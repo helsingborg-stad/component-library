@@ -1,4 +1,4 @@
-<div class="c-card__header c-product__header">
+<div class="c-card__header {{ $baseClass }}__header">
     @typography([
         'element' => 'h2',
         'variant' => 'h3',
@@ -9,7 +9,7 @@
     @typography([
         'element' => 'p',
         'variant' => 'p',
-        'classList' => ['c-product__label']
+        'classList' => [$baseClass . '__label']
     ])
         {{ $label }}
     @endtypography
