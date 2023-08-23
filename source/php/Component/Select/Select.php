@@ -34,7 +34,7 @@ class Select extends \ComponentLibrary\Component\BaseController
         //Set general classes
         $this->data['classList'][] = $this->getBaseClass($size, true);
 
-        if ($multiple) {
+        if (!empty($multiple)) {
             $this->data['isMultiSelect'] = true;
             $this->data['classList'][] = $this->getBaseClass('multiselect', true);
 
@@ -48,7 +48,7 @@ class Select extends \ComponentLibrary\Component\BaseController
             ]; 
         }
 
-        if(!$multiple) {
+        if(empty($multiple)) {
             $this->data['isMultiSelect'] = false;
             $this->data['classList'][] = $this->getBaseClass('singleselect', true);
 
@@ -69,16 +69,16 @@ class Select extends \ComponentLibrary\Component\BaseController
             $this->data['intersection'] = array_intersect_key($options, $preselectedKeys);
         }
 
-        if ($name) {
-            $this->data['selectAttributeList']['name'] = $name;
+        if (!empty($name)) {
+            $this->data['selectAttributeList']['name'] = $name . (!empty($multiple) ? '[]' : '');
         }
 
-        if ($errorMessage) {
+        if (!empty($errorMessage)) {
             $this->data['data-invalid-message'] = $errorMessage;
             $this->data['classList'][] = "has-invalid-message";  
         }
 
-        if ($required) {
+        if (!empty($required)) {
             $this->data['selectAttributeList']['required'] = 'required';
             $this->data['selectAttributeList']['aria-hidden'] = 'true';
             $this->data['selectAttributeList']['data-required'] = '1';
@@ -93,7 +93,7 @@ class Select extends \ComponentLibrary\Component\BaseController
             $this->data['selectAttributeList']
         );
 
-        $this->data['clearButtonEnabled'] = !$multiple && !$required;
+        $this->data['clearButtonEnabled'] = empty($multiple) && empty($required);
 
         //Determine if this is selected
         $this->data['isSelected'] = function($key, $boolean = true)
