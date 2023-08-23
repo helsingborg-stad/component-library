@@ -2,6 +2,7 @@
     "slug": "select",
     "default": {
         "label": "",
+        "placeholder": "",
         "id": false,
         "description": "",
         "required": false,
@@ -11,11 +12,14 @@
         "multiple": false,
         "name": false,
         "hideLabel": false,
-        "hidePlaceholder": false,
-        "size": "md"
+        "helperText": "",
+        "size": "md",
+        "maxSelections": false,
+        "hidePlaceholder": false
     },
     "description": {
         "label": "The placeholder of the dropdown",
+        "placeholder": "Supported if multiple select is enabled.",
         "id": "The id attribute for the select component. Will be prefixed with \"select_\"",
         "description": "Additional description or instructions.",
         "required": "If the element should be required",
@@ -24,8 +28,10 @@
         "multiple": "Sets the select box to a multiple select",
         "name": "The name attribute for the select component",
         "hideLabel": "Hides the label",
-        "hidePlaceholder": "Hides the placeholder but keeps the label",
-        "size": "The size of the select component (sm, md, lg)"
+        "helperText": "Adds a helping text, below the element.",
+        "size": "The size of the select component (sm, md, lg)",
+        "maxSelections": "The maximum number of selections allowed. Will only be applied if \"multiple\" is true.",
+        "hidePlaceholder": "Hides the placeholder but keeps the label"
     },
     "view": "select.blade.php",
     "dependency": {
