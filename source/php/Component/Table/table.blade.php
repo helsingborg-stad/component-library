@@ -26,10 +26,9 @@
 
             @if($filterable)
                 @field([
-                    'type' => 'text',
+                    'type' => 'search',
+                    'name' => 'search',
                     'attributeList' => [
-                        'type' => 'search',
-                        'name' => 'search',
                         'js-table-filter-input' => ''
                     ],
                     'classList' => ($fullscreen||$title) ? ['u-margin__top--2'] : [],
