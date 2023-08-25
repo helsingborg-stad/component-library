@@ -1,14 +1,14 @@
 <div class="c-field {{ $class }}" {!! $attribute !!}>
-    @if ($label && $hideLabel)
+    @if (!empty($label) && !empty($hideLabel))
         <label class="u-sr__only" for="select_{{ $id }}">
             {{ $label }}
         </label>
     @endif
 
-    @if ($label && !$hideLabel)
+    @if (!empty($label) && empty($hideLabel))
         <label class="c-field__label" for="select_{{ $id }}">
             {{ $label }}
-            @if ($required)
+            @if (!empty($required))
                 {{--
                     Field has aria attribute required, this will be read as required.
                     Aria hidden in place here, to avoid duplicate notations in screenreader.
@@ -34,7 +34,7 @@
         
         <select {!! $selectAttributes !!} class="{{ $baseClass }}__select-element" tabindex="-1">
     
-            @if ($preselected !== '' && !$isMultiSelect)
+            @if ($preselected !== '' && empty($isMultiSelect))
                 <option class="c-select__select-option" value="">{{$placeholder ? $placeholder : ""}}</option>
             @endif
 
