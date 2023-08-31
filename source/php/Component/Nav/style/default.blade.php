@@ -13,11 +13,13 @@
       ]
     ])
     @endicon
+    @if ($item['label'])
     <span 
       class="{{$baseClass}}__text" 
       style="{{isset($item['color']) ? 'color:' . $item['color'] . ';' : ''}}">
       {{$item['label']}}
     </span>
+    @endif
   @endlink
 @else
   <!-- Hidden link: Both label and icon is missing -->
