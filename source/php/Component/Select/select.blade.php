@@ -59,4 +59,34 @@
     @if (!empty($helperText))
         <small class="c-field__helper">{{ $helperText }}</small>
     @endif
+    <template>
+        <li class="{{$baseClass}}__option" data-js-dropdown-option="{OPTION_VALUE}" role="option" aria-selected="false" tabindex="0">
+            @icon([
+                'icon' => $itemStateIcons->inactive,
+                'size' => $iconSize,
+                'classList' => [
+                  $baseClass . '__option-icon',
+                  $baseClass . '__unchecked-icon'
+                ],
+                'attributeList' => [
+                  'aria-hidden' => 'false'
+                ]
+            ])
+            @endicon
+            @icon([
+                'icon' => $itemStateIcons->active,
+                'size' => $iconSize,
+                'classList' => [
+                  $baseClass . '__option-icon',
+                  $baseClass . '__checked-icon'
+                ],
+                'attributeList' => [
+                  'aria-hidden' => 'true'
+                ]
+            ])
+            @endicon
+            <span class="{{$baseClass}}__option-label">{OPTION_NAME}</span>
+        </li>
+    </template>
 </div>
+

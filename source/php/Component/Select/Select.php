@@ -16,10 +16,8 @@ class Select extends \ComponentLibrary\Component\BaseController
         $this->data['iconSize'] = $this->getIconSize($size); 
 
         //Declare select attribute list, use id predefined. 
-        $this->data['selectAttributeList'] = [
-            'id' => 'select_' . $this->data['id'],
-            'data-js-select-element' => true
-        ];
+        $this->data['selectAttributeList']['id'] = 'select_' . $this->data['id'];
+        $this->data['selectAttributeList']['data-js-select-element'] = true;
 
         //Assign id
         $this->data['attributeList']['id'] = "{$id}";
