@@ -75,7 +75,7 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
             }
         }
         
-        if (is_iterable($this->data['attributeList']['style'])) {
+        if (!empty($this->data['attributeList']['style']) && is_iterable($this->data['attributeList']['style'])) {
             $this->data['attributeList']['style'] = implode(';', $this->data['attributeList']['style']);
         }
     }
