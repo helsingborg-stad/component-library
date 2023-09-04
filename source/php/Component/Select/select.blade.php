@@ -59,4 +59,11 @@
     @if (!empty($helperText))
         <small class="c-field__helper">{{ $helperText }}</small>
     @endif
+    <template>
+        @include('Select.partials.dropdown_item', [
+            'value' => 'false', 
+            'name' => '{OPTION_NAME}'
+        ])
+    </template>
 </div>
+
