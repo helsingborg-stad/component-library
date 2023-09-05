@@ -2,9 +2,10 @@
 @if($list)
 @card([])
     <div class="{{ $class }}" {!! $attribute !!}>
+        @if(!empty($title) || !empty($fullscreen) || !empty($filterable))
         <div class="{{ $baseClass}}__header">
+            @if(!empty($title))
             
-            @if($title)
                 @typography([
                     "variant" => "h4",
                     "element" => "h2",
@@ -14,7 +15,7 @@
                 @endtypography
             @endif
 
-            @if($fullscreen)
+            @if(!empty($fullscreen))
                 @icon([
                     'icon'          => 'fullscreen',
                     'size'          => 'md',
@@ -24,7 +25,7 @@
                 @endicon
             @endif
 
-            @if($filterable)
+            @if(!empty($filterable))
                 @field([
                     'type' => 'search',
                     'name' => 'search',
@@ -39,10 +40,11 @@
             @endif
 
         </div>
+        @endif
 
         <div class="{{$baseClass}}__inner">
             <table class="{{$baseClass}}__table">
-                @if($showCaption)
+                @if(!empty($showCaption) && !empty($caption))
                     <caption>{{ $caption }}</caption>
                 @endif
 
@@ -61,7 +63,7 @@
                                             </span>
 
                                             <!-- Collapse button -->
-                                            @if($isMultidimensional && $loop->index === 0)
+                                            @if(!empty($isMultidimensional) && $loop->index === 0)
                                                 @icon([
                                                     'icon' => 'chevron_left',
                                                     'size' => 'md',
@@ -71,8 +73,8 @@
                                             @endif
 
                                             <!-- Sort button -->
-                                            @if($sortable)
-                                                @if(($isMultidimensional && $loop->index !== 0) || !$isMultidimensional )                                        
+                                            @if(!empty($sortable))
+                                                @if((!empty($isMultidimensional) && $loop->index !== 0) || empty($isMultidimensional))                                        
                                                     @icon(['icon' => 'swap_vert', 'size' => 'md', 'classList' => [$baseClass . '__sort-button']])
                                                     @endicon
                                                 @endif
@@ -123,7 +125,9 @@
                 <div class="{{$baseClass}}__scroll-indicator u-display--none">
                 </div>
             </div>
+            @if (!empty($caption))
             <p class="c-table__caption"> {{$caption}} </p>
+            @endif
         </div>
 
     </div>
@@ -132,6 +136,6 @@
   <!-- No table list data -->
 @endif
 
-@if($fullscreen)
+@if(!empty($fullscreen))
     @include('Table.sub.modal')
 @endif
