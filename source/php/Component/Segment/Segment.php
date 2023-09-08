@@ -36,6 +36,10 @@ class Segment extends \ComponentLibrary\Component\BaseController
             $this->data['link'] = $buttons[0]['href'];
         }
 
+        if (!empty($hasPlaceholderImage)) {
+            $this->data['classList'][] = $this->getBaseClass('svg-background', true);
+        }
+
         $this->data['imageClassList'] = [];
 
         if ($this->data['content'] == strip_tags($this->data['content'], [])) {
