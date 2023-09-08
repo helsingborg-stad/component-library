@@ -7,7 +7,7 @@
         "textSize": "default",
         "image": false,
         "imageFocus": {
-            "top": 30,
+            "top": 50,
             "left": 50
         },
         "background": false,
@@ -25,7 +25,8 @@
         "meta": false,
         "tags": false,
         "icon": false,
-        "link": false
+        "link": false,
+        "hasPlaceholderImage": false
     },
     "description": {
         "layout": "Which layout to use",
@@ -49,7 +50,8 @@
         "date": "The date",
         "tags": "Array of tags according to the tags component",
         "meta": "The meta text",
-        "icon": "An array with the same specification as the icon component"
+        "icon": "An array with the same specification as the icon component",
+        "hasPlaceholderImage": "Sets image specific styling based on the image being a placholder image."
     },
     "view": "segment.blade.php",
     "dependency": {
