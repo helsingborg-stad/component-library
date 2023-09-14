@@ -27,7 +27,6 @@
         "theme": "The color palette to be used",
         "image": "An url or path to an image to use as background for the segment",
         "background_video": "A video background for the segment",
-        "mobile_image": "URL to mobile image",
         "link": "Where the slide should link to",
         "containerColor": "Determines what color the container and text should be",
         "alt": "Alternative text",

@@ -31,6 +31,8 @@ class Image extends \ComponentLibrary\Component\BaseController
         //Inherit the caption text
         if (empty($heading) && $caption) {
             $this->data['heading'] = $caption;
+        } else {
+            $this->data['heading'] = "";
         }
         
         if (empty($isPanel)) {

@@ -11,6 +11,11 @@ class Table extends \ComponentLibrary\Component\BaseController
 
         $this->padCells();
 
+        //Typecast labels
+        if(is_object($labels)) {
+           $this->data['labels'] = (array) $labels; 
+        }
+
         if ($filterable) {
             $this->data['attributeList']['js-table-filter'] = '';
         }

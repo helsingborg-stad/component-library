@@ -36,6 +36,10 @@ class Segment extends \ComponentLibrary\Component\BaseController
             $this->data['link'] = $buttons[0]['href'];
         }
 
+        if (!empty($hasPlaceholderImage)) {
+            $this->data['classList'][] = $this->getBaseClass('svg-background', true);
+        }
+
         $this->data['imageClassList'] = [];
 
         if ($this->data['content'] == strip_tags($this->data['content'], [])) {
@@ -117,8 +121,12 @@ class Segment extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . '--content-background-' . $contentBackground;
         }
 
+        if(is_object($imageFocus)) {
+            $imageFocus = (array) $imageFocus;
+        }
+
         //Add background position to image styles
-        if (array_filter($imageFocus)) {
+        if (is_array($imageFocus) && array_filter((array) $imageFocus)) {
             $this->data['imageStyle']['background-position'] = $imageFocus['left'] . "% " . $imageFocus['top'] . "%";
         }
 

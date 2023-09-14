@@ -58,7 +58,7 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['aria-labeledby'] = $this->getUid() . '__heading';
         }
 
-        if($focusPoint) {
+        if(!empty($focusPoint)) {
 
             //Create image style tag
             $this->data['imageStyle'] = []; 
@@ -69,7 +69,7 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
             }
 
             //Add background position to image styles
-            if(array_filter($focusPoint)) {
+            if(is_array($focusPoint) && array_filter($focusPoint)) {
                 $this->data['imageStyle']['background-position'] = $focusPoint['left'] . "% " . $focusPoint['top'] . "%"; 
             }
 

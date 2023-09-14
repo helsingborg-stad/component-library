@@ -3,10 +3,11 @@
     define('BCL_BASEPATH', dirname(__FILE__) . '/');
 
     //Autload controllers etc
-    require_once BCL_BASEPATH . 'vendor/autoload.php';
+    if(file_exists(BCL_BASEPATH . 'vendor/autoload.php')) {
+        require_once BCL_BASEPATH . 'vendor/autoload.php';
+    }
 
-    //Include base classes
-    include BCL_BASEPATH . 'source/php/Init.php';
-    include BCL_BASEPATH . 'source/php/Register.php';
-    
-    require_once BASEPATH . "source/library/component-library.php";
+    //Include base classes (TODO: Use autoload instead)
+    require_once BCL_BASEPATH . 'source/php/Init.php';
+    require_once BCL_BASEPATH . 'source/php/Register.php';
+    require_once BCL_BASEPATH . 'source/library/component-library.php';

@@ -1,4 +1,4 @@
-<div class="{{$baseClass}}__prices {{!empty($button) ? 'has-button' : ''}}">
+<div class="{{ $baseClass }}__prices {{!empty($button) ? 'has-button' : ''}}">
 @foreach ($prices as $price)
     <div class="{{ $baseClass }}__price {{ $baseClass }}__price--{{ $price['color'] ?? $backgroundColor ?? 'primary' }}">
         @typography([

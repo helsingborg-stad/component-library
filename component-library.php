@@ -31,14 +31,4 @@ if(function_exists('plugin_basename')) {
     load_plugin_textdomain('component-library', false, plugin_basename(dirname(__FILE__)) . '/languages');
 }
 
-require_once COMPONENTLIBRARY_PATH . 'source/php/Vendor/Psr4ClassLoader.php';
 require_once COMPONENTLIBRARY_PATH . 'Public.php';
-
-// Instantiate and register the autoloader
-$loader = new ComponentLibrary\Vendor\Psr4ClassLoader();
-$loader->addPrefix('ComponentLibrary', COMPONENTLIBRARY_PATH);
-$loader->addPrefix('ComponentLibrary', COMPONENTLIBRARY_PATH . 'source/php/');
-$loader->register();
-
-// Start application
-new ComponentLibrary\App();
