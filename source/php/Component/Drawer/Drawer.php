@@ -39,7 +39,7 @@ class Drawer extends \ComponentLibrary\Component\BaseController
     private function getScreenSizeClassNames($screenSizes): array
     {
         $classNames = [];
-        $availableScreenSizes = ['xs', 'sm', 'md', 'lg'];
+        $availableScreenSizes = ['xs', 'sm', 'md', 'lg', 'xl'];
 
         
         foreach ($availableScreenSizes as $availableScreenSize) {
