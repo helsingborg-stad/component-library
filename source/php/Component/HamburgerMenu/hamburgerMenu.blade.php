@@ -41,6 +41,17 @@
                         {{ $item['label'] }}
                     @endlink
                 @endif
+                @if (!empty($item['description']))
+                    @typography([
+                        'classList' => [
+                            $baseClass . '__description',
+                            'u-margin__top--0',
+                            'u-padding__top--1'
+                        ]
+                    ])
+                        {{ $item['description'] }}
+                    @endtypography
+                @endif
                 {{-- Children --}}
                 @if (!empty($item['children']))
                     <ul class="{{$baseClass}}__sublist unlist u-margin__top--2">
