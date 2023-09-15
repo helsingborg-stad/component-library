@@ -10,4 +10,3 @@
     //Include base classes (TODO: Use autoload instead)
     require_once BCL_BASEPATH . 'source/php/Init.php';
     require_once BCL_BASEPATH . 'source/php/Register.php';
-    require_once BCL_BASEPATH . 'source/library/component-library.php';
