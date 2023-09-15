@@ -1,8 +1,8 @@
 <?php
 
-namespace ComponentLibrary\Component\HamburgerMenu;
+namespace ComponentLibrary\Component\MegaMenu;
 
-class HamburgerMenu extends \ComponentLibrary\Component\BaseController  
+class MegaMenu extends \ComponentLibrary\Component\BaseController  
 {
     
     public function init() {
