@@ -11,14 +11,27 @@ class Drawer extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
+        //Get default if undefined
+        $screenSizes = $screenSizes ?? $this->defaultScreenSizes;
+
+        //Define has data
         $this->data['searchSlotHasData'] = $this->slotHasData('search');
         $this->data['menuSlotHasData'] = $this->slotHasData('menu');
-        $this->data['screenSizeClassNames'] = $this->getScreenSizeClassNames($screenSizes ?? $this->defaultScreenSizes);
-        $this->data['toggleButtonData'] = $this->getToggleButtonData($toggleButtonData ?? [], $this->data['screenSizeClassNames']);
+
+        //Create screen sizes parameters
+        $this->data['screenSizeClassNames'] = $this->getScreenSizeClassNamesAsString(
+            $screenSizes
+        ); 
+        $this->data['toggleButtonData'] = $this->getToggleButtonData(
+            $toggleButtonData ?? [],
+            $this->getScreenSizeClassNames($screenSizes)
+        );
+
         $this->data['attributeList']['data-js-toggle-item'] = 'drawer-' . $this->getUid();
         $this->data['attributeList']['data-js-toggle-class'] = 'is-open';
         $this->data['moveTo'] = $this->getMoveToAttribute($this->data['attributeList']);
         $this->data['simulateClickSelector'] = "[data-js-toggle-trigger=drawer-" . $this->getUid() . "]";
+    
     }
 
     private function getMoveToAttribute(array $attributeList): string
@@ -31,7 +44,7 @@ class Drawer extends \ComponentLibrary\Component\BaseController
     }
 
     /**
-     * Get screen size class names
+     * Get screen size class names as array
      * 
      * @param array|null $screenSizes
      * @return array
@@ -41,20 +54,39 @@ class Drawer extends \ComponentLibrary\Component\BaseController
         $classNames = [];
         $availableScreenSizes = ['xs', 'sm', 'md', 'lg'];
 
-        
         foreach ($availableScreenSizes as $availableScreenSize) {
             if (!in_array($availableScreenSize, $screenSizes)) {
                 $classNames[] = 'u-display--none@' . $availableScreenSize;
             }
         }
-
+        
         return $classNames;
+    }
+
+
+    /**
+     * Get screen size class names as string
+     * 
+     * @param array|null $screenSizes
+     * @return string
+     */
+    private function getScreenSizeClassNamesAsString($screenSizes): string {
+
+        $classNames = $this->getScreenSizeClassNames($screenSizes); 
+
+        if(!empty($classNames) && is_array($classNames)) {
+            return implode(" ", $classNames); 
+        }
+        return "";
     }
 
     private function getToggleButtonData($toggleButtonData, array $screenSizeClassNames)
     {
+        //Nothing to process
+        if (empty($toggleButtonData)) {
+            return null;
+        } 
 
-        if (empty($toggleButtonData)) return null;
         $toggleButtonData['attributeList']['data-js-toggle-trigger'] = 'drawer-' . $this->getUid();
         $toggleButtonData['attributeList']['aria-controls'] = 'navigation';
         $toggleButtonData['classList'] = array_merge($screenSizeClassNames, $toggleButtonData['classList']);
