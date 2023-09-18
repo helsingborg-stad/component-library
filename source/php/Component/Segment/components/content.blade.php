@@ -19,7 +19,7 @@
                     'autopromote' => true
                 ])
                     @link([
-                        'href' => $link,
+                        'href' => $link['url'],
                         'keepContent' => true,
                         'keepWrapper' => false
                     ])

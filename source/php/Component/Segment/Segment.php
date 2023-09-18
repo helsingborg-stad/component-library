@@ -33,7 +33,8 @@ class Segment extends \ComponentLibrary\Component\BaseController
 
         // If no link and exactly one button, use that button as link
         if (!$link && ($buttons && count($buttons) === 1)) {
-            $this->data['link'] = $buttons[0]['href'];
+            $this->data['link']['url'] = $buttons[0]['href'];
+            $this->data['link']['ariaLabel'] = $buttons[0]['text'];
         }
 
         if (!empty($hasPlaceholderImage)) {
