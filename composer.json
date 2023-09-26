@@ -24,5 +24,6 @@
         "psr-4": {
             "ComponentLibrary\\": "source/php/"
         }
-    }
+    },
+    "version": "2.0.0"
 }
