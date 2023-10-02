@@ -8,7 +8,7 @@
     <ul class="{{$baseClass}}__list o-grid unlist o-grid-12">
         @foreach ($menuItems as $item)
             <li id="{{$id}}-main-item-{{$item['id']}}"
-                class="{{$baseClass}}__item {{$baseClass}}__item--parent o-grid-12 o-grid-6@md o-grid-4@lg u-mb-6 u-margin__top--1 {{$item['classNames']}}">
+                class="{{$baseClass}}__item {{$baseClass}}__item--parent o-grid-12 o-grid-6@md o-grid-4@lg o-grid-3@xl u-mb-6 u-margin__top--1 {{$item['classNames']}}">
                 @if(!empty($parentStyle))
                     @button([
                         'text' => $item['label'],
@@ -40,6 +40,15 @@
                     @endif
                         {{ $item['label'] }}
                     @endlink
+                @endif
+                @if (!empty($item['description']))
+                    @typography([
+                        'classList' => [
+                            $baseClass . '__description',
+                        ]
+                    ])
+                        {{ $item['description'] }}
+                    @endtypography
                 @endif
                 {{-- Children --}}
                 @if (!empty($item['children']))

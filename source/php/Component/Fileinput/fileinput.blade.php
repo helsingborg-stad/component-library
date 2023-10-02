@@ -17,6 +17,7 @@
         id="fs_{{ $id }}"
         accept="{{ $accept }}"
         {{ $multiple ? 'multiple' : '' }}
+        {!! !empty($required) ? 'required="true"' : '' !!}
     />
 
     @button([

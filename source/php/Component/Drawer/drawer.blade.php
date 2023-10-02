@@ -1,11 +1,11 @@
 <!-- drawer.blade.php -->
 @if($toggleButtonData)
-    @button($toggleButtonData)@endbutton
+    @button($toggleButtonData)
+    @endbutton
 @endif
 
 <nav class="c-drawer c-drawer--right c-drawer--primary js-drawer {{$class}}" {!! $attribute !!}>
     <div class="c-drawer__header">
-        
         @button([
             'style' => 'basic',
             'icon' => 'close',
