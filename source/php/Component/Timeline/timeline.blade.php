@@ -5,7 +5,7 @@
                 {!! $event['timelineDate'] !!}
             </div>
             <div class="{{ $baseClass }}__marker">
-                <div class="{{ $baseClass }}__date u-visibility--hidden@md u-visibility--hidden@lg">
+                <div class="{{ $baseClass }}__date u-visibility--hidden@md u-visibility--hidden@lg u-visibility--hidden@xl">
                     {!! $event['timelineDate'] !!}
                 </div>
             </div>
