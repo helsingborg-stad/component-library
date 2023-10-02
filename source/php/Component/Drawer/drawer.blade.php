@@ -14,11 +14,10 @@
                 'data-simulate-click' => $simulateClickSelector
             ],
             'classList' => [
-                'c-drawer__close'
+                'c-drawer__close',
             ],
             'size' => 'md',
             'text' => $label,
-            'context' => 'drawer.closeButton'
         ])
         @endbutton
     
