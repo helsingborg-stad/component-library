@@ -1,5 +1,5 @@
-<!-- hamburgerMenu.blade.php -->
-<div class="{{$class}} hamburgermenu-container u-display--none" js-toggle-item="hamburger-menu" js-toggle-class="u-display--none"  {!! $attribute !!}>
+<!-- megaMenu.blade.php -->
+<div class="{{$class}} u-display--none" js-toggle-item="mega-menu" js-toggle-class="u-display--none"  {!! $attribute !!}>
     
 <nav class="{{$baseClass}}__menu o-container o-container--wide o-grid">
     

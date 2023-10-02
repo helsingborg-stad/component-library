@@ -1,5 +1,5 @@
 {
-    "slug": "hamburgerMenu",
+    "slug": "megaMenu",
     "default": {
         "menuItems": [],
         "parentStyle": false,
@@ -9,9 +9,9 @@
     "description": {
         "menuItems": "List of arrays containing at least 'label' and 'href' option 'icon' name as string.",
         "parentStyle": "Select the style of menu parents.",
-        "mobile": "If true, the hamburger menu will be visible on mobile as well."
+        "mobile": "If true, the mega menu will be visible on mobile as well."
     },
-    "view": "hamburgerMenu.blade.php",
+    "view": "megaMenu.blade.php",
     "dependency": {
         "sass": {
             "components": [
