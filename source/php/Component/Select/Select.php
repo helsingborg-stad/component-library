@@ -9,8 +9,11 @@ class Select extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
-        //Create an random id if not assigned to the component.
-        $this->data['id'] = $id = $id ? $id : uniqid();
+        // Must include a id.
+        if (empty($id)) {
+            $id = $this->data['id'] = uniqid();
+        }
+        $this->data['attributeList']['id'] = "select_{$id}";
 
         //Set icon size
         $this->data['iconSize'] = $this->getIconSize($size); 
@@ -59,7 +62,7 @@ class Select extends \ComponentLibrary\Component\BaseController
         }
 
         $this->data['intersection'] = [];
-        if (is_array($preselected) && !empty($options)) {
+        if (!empty($options) && is_array($preselected)) {
             // Create an associative array from $preselected with keys same as values
             $preselectedKeys = array_flip($preselected);
 
