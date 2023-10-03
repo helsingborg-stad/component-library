@@ -54,7 +54,7 @@ class DrawerTest extends PHPUnit\Framework\TestCase
     {
         // Arrange
         $data = [];
-        $expectedClassNames = 'u-display--none@md u-display--none@lg';
+        $expectedClassNames = 'u-display--none@md u-display--none@lg u-display--none@xl';
 
         // Act
         $component = new Drawer($data);
