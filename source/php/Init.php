@@ -37,7 +37,10 @@ class Init {
 
         if(is_array($viewPaths) && !empty($viewPaths)) {
             foreach ($viewPaths as $path) {
-                $blade->addViewPath(rtrim($path, DIRECTORY_SEPARATOR));
+                $directory = rtrim($path, DIRECTORY_SEPARATOR); 
+                if(is_dir($directory)) {
+                    $blade->addViewPath(rtrim($path, DIRECTORY_SEPARATOR));
+                }
             }
         } else {
             throw new \Exception("View paths not defined.");
