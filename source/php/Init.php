@@ -6,6 +6,8 @@ use ComponentLibrary\Register;
 use HelsingborgStad\BladeEngineWrapper as Blade;
 
 class Init {
+
+    private $register = null;
     
     public function __construct($externalViewPaths) {
         $blade = new Blade();
