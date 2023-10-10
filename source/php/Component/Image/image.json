@@ -4,7 +4,7 @@
         "src": false,
         "alt": "",
         "caption": "",
-        "photographer": false,
+        "byline": false,
         "fullWidth": false,
         "rounded": false,
         "openModal": false,
@@ -16,7 +16,7 @@
     "description": {
         "alt": "Alt text of the image",
         "caption": "Image caption",
-        "photographer": "placed under the caption",
+        "byline": "placed under the caption",
         "rounded": "Border radius of the image, false for no radius. Accepted values are xs, sm, md, lg, full",
         "openModal": "If the image should be able to open in a modal",
         "placeholderText": "Label to show if image is missing",

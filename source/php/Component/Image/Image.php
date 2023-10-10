@@ -29,10 +29,10 @@ class Image extends \ComponentLibrary\Component\BaseController
             $this->data['alt'] = $this->data['caption'];
         }
 
-        if (!empty($photographer)) {
-            $this->data['photographer'] = $photographer;
+        if (!empty($byline)) {
+            $this->data['byline'] = $byline;
         }
-        
+
         //Inherit the caption text
         if (empty($heading) && $caption) {
             $this->data['heading'] = $caption;

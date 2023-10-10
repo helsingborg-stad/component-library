@@ -2,13 +2,13 @@
 <figure class="{{ $class }}" {!! $attribute !!}>
     @if($src) 
         <img src="{{$src}}" alt="{{$alt}}" {!! $imgAttributes !!} />
-        @if($caption || $photographer)
+        @if($caption || $byline)
             <figcaption>
                 @if($caption)
                     <span class="{{$baseClass}}__caption">{{ $caption }}</span><br>
                 @endif
-                @if($photographer)
-                    <span class="{{$baseClass}}__photographer">{{ $photographer }}</span>
+                @if($byline)
+                    <span class="{{$baseClass}}__byline">{{ $byline }}</span>
                 @endif
             </figcaption>
         @endif
