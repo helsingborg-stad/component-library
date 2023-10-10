@@ -410,16 +410,39 @@ class Register
      */
     private function cachedFileGetContents($path) {
         $id = md5($path);
-        if(isset(self::$cache['fileGetContents'][$id])) {
+    
+        if (isset(self::$cache['fileGetContents'][$id])) {
+            // If the content is already in the static cache, return it.
             return self::$cache['fileGetContents'][$id];
         }
-
-        if($content = file_get_contents($path)) {
-            return self::$cache['fileGetContents'][$id] = $content; 
+    
+        if (function_exists('wp_cache_get')) {
+            // If the wp_cache_get function exists (i.e., running inside WordPress),
+            // attempt to retrieve the content from the cache.
+            $cachedContent = wp_cache_get($id, 'fileGetContents');
+            if ($cachedContent !== false) {
+                // Cache the content in the static variable for future use.
+                self::$cache['fileGetContents'][$id] = $cachedContent;
+                return $cachedContent;
+            }
         }
-
-        return false;
+    
+        // If not in cache, use file_get_contents
+        $content = file_get_contents($path);
+    
+        if (function_exists('wp_cache_set')) {
+            // If the wp_cache_set function exists (i.e., running inside WordPress),
+            // cache the content using WordPress's cache.
+            wp_cache_set($id, $content, 'fileGetContents');
+        }
+    
+        // Cache the content in the static variable for future use.
+        self::$cache['fileGetContents'][$id] = $content;
+    
+        return $content !== false ? $content : false;
     }
+    
+    
 
     /**
      * Check if a file exists using cached results.
