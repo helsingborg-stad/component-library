@@ -28,6 +28,11 @@ class Image extends \ComponentLibrary\Component\BaseController
         if (!$alt && $caption) {
             $this->data['alt'] = $this->data['caption'];
         }
+
+        if (!empty($photographer)) {
+            $this->data['photographer'] = $photographer;
+        }
+        
         //Inherit the caption text
         if (empty($heading) && $caption) {
             $this->data['heading'] = $caption;
@@ -43,33 +48,8 @@ class Image extends \ComponentLibrary\Component\BaseController
         }
 
         //Rounded corners all sides
-        if ($rounded) {
-            $this->data['classList'][] = $this->getBaseClass() . "--rounded ";
-        }
-
-        //Rounded corners top left
-        if ($roundedTopLeft) {
-            $this->data['classList'][] = $this->getBaseClass() . "--rounded-top-left ";
-        }
-
-        //Rounded corners top right
-        if ($roundedTopRight) {
-            $this->data['classList'][] = $this->getBaseClass() . "--rounded-top-right ";
-        }
-
-        //Rounded corners bottom left
-        if ($roundedBottomLeft) {
-            $this->data['classList'][] = $this->getBaseClass() . "--rounded-bottom-left ";
-        }
-
-        //Rounded corners bottom right
-        if ($roundedBottomRight) {
-            $this->data['classList'][] = $this->getBaseClass() . "--rounded-bottom-right ";
-        }
-
-        //Rounded corners radius
-        if ($roundedRadius) {
-            $this->data['classList'][] = $this->getBaseClass() . "--rounded-" . $roundedRadius;
+        if (!empty($rounded)) {
+            $this->data['classList'][] = $this->getBaseClass('radius-' . $rounded, true);
         }
 
         $this->data['imgAttributeList']['class'][] = $this->getBaseClass() . '__image';
