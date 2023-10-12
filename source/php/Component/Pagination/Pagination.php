@@ -14,6 +14,21 @@ class Pagination extends \ComponentLibrary\Component\BaseController
             $this->data['current'] = 1; 
         }
 
+        /* Javascrip pagination */
+        if($this->data['useJS']) {
+            $this->data['list'] = [['label' => '', 'href' => '']];
+            $this->data['attributeList']['data-js-pagination'] = '';
+            $this->data['attributeList']['data-js-pagination-per-page'] = $this->data['perPage'];
+            $this->data['attributeList']['data-js-pagination-max-pages'] = $this->data['maxPages'];
+            $this->data['attributeList']['data-js-pagination-pages-to-show'] = $this->data['pagesToShow'];
+            if ($keepDOM) {
+                $this->data['attributeList']['data-js-pagination-keep-dom'] = '';
+            }
+            if ($randomizeOrder) {
+                $this->data['attributeList']['data-js-pagination-randomize-order'] = '';
+            }
+        }
+    
         //Anchor
         if(isset($this->data['list']) && is_array($this->data['list']) && !empty($this->data['list'])) {
             foreach($this->data['list'] as &$item) {
@@ -43,20 +58,6 @@ class Pagination extends \ComponentLibrary\Component\BaseController
         $this->data['list'] = $this->overflow();
         $this->data['firstItem'] = $this->firstItem();
         $this->data['lastItem'] = $this->lastItem();
-
-        if($this->data['useJS']) {
-            $this->data['attributeList']['data-js-pagination'] = '';
-            $this->data['attributeList']['data-js-pagination-per-page'] = $this->data['perPage'];
-            $this->data['attributeList']['data-js-pagination-max-pages'] = $this->data['maxPages'];
-            $this->data['attributeList']['data-js-pagination-pages-to-show'] = $this->data['pagesToShow'];
-            if ($keepDOM) {
-                $this->data['attributeList']['data-js-pagination-keep-dom'] = '';
-            }
-            if ($randomizeOrder) {
-                $this->data['attributeList']['data-js-pagination-randomize-order'] = '';
-            }
-        }
-
     }
 
     public function overflow()
