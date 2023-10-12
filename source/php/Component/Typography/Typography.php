@@ -16,7 +16,7 @@ class Typography extends \ComponentLibrary\Component\BaseController
         $this->data['isPromotedHeading'] = false;
 
         //If this is the first heading of the page, promote it to h1
-        if ($element = 'h1') {
+        if ($element === 'h1') {
             if (!empty(self::$headingExists)) {
                 $this->data['element'] = 'h2';
             } else {
