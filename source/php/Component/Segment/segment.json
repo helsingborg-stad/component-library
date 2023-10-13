@@ -26,7 +26,7 @@
         "tags": false,
         "icon": false,
         "link": false,
-        "hasPlaceholderImage": false
+        "hasPlaceholder": false
     },
     "description": {
         "layout": "Which layout to use",
@@ -51,7 +51,7 @@
         "tags": "Array of tags according to the tags component",
         "meta": "The meta text",
         "icon": "An array with the same specification as the icon component",
-        "hasPlaceholderImage": "Sets image specific styling based on the image being a placholder image."
+        "hasPlaceholder": "Sets image specific styling based on the image being a placholder image."
     },
     "view": "segment.blade.php",
     "dependency": {
