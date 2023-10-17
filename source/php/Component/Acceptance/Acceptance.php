@@ -51,27 +51,28 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
         }
         
         if (!empty($this->data['labels'])) {
-            $json = json_decode($this->data['labels']);
+            $knownLabels = json_encode($this->data['labels']['knownLabels']);
+            $unknownLabels = json_encode($this->data['labels']['unknownLabels']);
 
-            if (isset($json->infoLabel)) {
-                $this->data['infoLabel'] = $json->infoLabel;
+            if (isset($this->data['labels']->infoLabel)) {
+                $this->data['infoLabel'] = $this->data['labels']->infoLabel;
             }
 
             if (!empty($this->data['supplierPolicy'])) {
-                $json->knownLabels->info = str_replace(
+                $knownLabels = str_replace(
                     array('{SUPPLIER_WEBSITE}', '{SUPPLIER_POLICY}'),
                     array($this->data['supplierName'], $this->data['supplierPolicy']),
-                    $json->knownLabels->info ?? ''
+                    $knownLabels
                 );
 
-                $this->data['labels'] = $json->knownLabels ?? '';
+                $this->data['labels'] = json_decode($knownLabels);
             } else {
-                $json->unknownLabels->info = str_replace(
+                $unknownLabels = str_replace(
                     '{SUPPLIER_WEBSITE}',
                     $this->data['supplierHost'],
-                    $json->unknownLabels->info ?? ''
+                    $unknownLabels
                 );
-                $this->data['labels'] = $json->unknownLabels;
+                $this->data['labels'] = json_decode($unknownLabels);
             }
         }
         
