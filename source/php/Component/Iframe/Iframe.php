@@ -31,15 +31,21 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         }
 
         if (isset($src)) {
-            $this->data['attributeList']['src'] = $this->buildEmbedUrl($src);
+            $url = $this->buildEmbedUrl($src);
+            $this->data['attributeList']['src'] = $url;
+
+            if (empty($poster)) {
+                $this->data['poster'] = apply_filters('ComponentLibrary/Iframe/Poster', $url);
+            }
         }
 
         if (isset($labels)) {
             $this->data['labels'] = json_encode($labels);
         }
         
-        if($poster) {
+        if(!empty($poster)) {
             $this->data['attributeList']['poster'] = $poster;
+            $this->data['poster'] = $poster;
         }
 
         $this->data['attributeList']['title'] = $title;
