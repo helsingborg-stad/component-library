@@ -30,7 +30,7 @@ class Typography extends \ComponentLibrary\Component\BaseController
                 self::$hasSeenH1 = true;
             }
         }
-        $this->data['attributeList']['niclas-har-fel-om-denna-visas'] = ''; 
+        
         //Variant
         $this->data['classList'][] = $this->getBaseClass() . "__variant--" . $variant;
     }
