@@ -13,21 +13,22 @@ class Typography extends \ComponentLibrary\Component\BaseController
 
         //Set default
         $this->data['isPromotedHeading'] = false;
-
-        //If this is the first heading of the page, promote it to h1
-        if (substr($element, 0, 2) == 'h1') {
-            self::$hasSeenH1 = true; 
-        } 
-
+        
         if (substr($element, 0, 1) == 'h') {
             $this->data['element'] = $this->setMaxHeading($element);
         }
+
+        //If this is the first heading of the page, promote it to h1
+        if (!self::$hasSeenH1 && substr($this->data['element'], 0, 2) == 'h1') {
+            self::$hasSeenH1 = true; 
+        } 
   
         if ($autopromote === true && !self::$hasSeenH1) {
             if (in_array($element, ['h1', 'h2', 'h3'])) {
                 $this->data['isPromotedHeading'] = true;
                 $this->data['element'] = 'h1';
                 self::$hasSeenH1 = true;
+                self::$headingsContext = 1;
             }
         }
         
@@ -38,11 +39,14 @@ class Typography extends \ComponentLibrary\Component\BaseController
     private function setMaxHeading($element) {
         $headingsLevel = intval(substr($element, 1, 2));
         if (self::$headingsContext === null) {
-            if ($element !== 'h2' && $element !== 'h1') {
+            if ($element !== 'h1') {
                 $headingsLevel = 2;
                 self::$headingsContext = 2;
                 return 'h2';
-            } 
+            } else {
+                self::$headingsContext = 1;
+                self::$hasSeenH1 = true;
+            }
         } else {
             if (self::$headingsContext == $headingsLevel && $headingsLevel != 1) {
                 self::$headingsContext = $headingsLevel;
