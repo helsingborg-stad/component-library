@@ -13,6 +13,7 @@ class Typography extends \ComponentLibrary\Component\BaseController
 
         //Set default
         $this->data['isPromotedHeading'] = false;
+        $this->data['originalElement'] = $element;
         
         if (substr($element, 0, 1) == 'h') {
             $this->data['element'] = $this->setMaxHeading($element);
@@ -31,6 +32,8 @@ class Typography extends \ComponentLibrary\Component\BaseController
                 self::$headingsContext = 1;
             }
         }
+
+        $this->data['hasSeenH1'] = self::$hasSeenH1;
         
         //Variant
         $this->data['classList'][] = $this->getBaseClass() . "__variant--" . $variant;
