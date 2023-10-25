@@ -81,8 +81,10 @@
 @if ($buttons)
     <div class="{{ $baseClass }}__buttons">
         @foreach ($buttons as $button)
-            @button($button)
-            @endbutton
+            @if (!empty($button['href']))
+                @button($button)
+                @endbutton
+            @endif
         @endforeach
     </div>
 @endif
