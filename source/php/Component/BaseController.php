@@ -55,7 +55,9 @@ class BaseController
         }
 
         if (function_exists('apply_filters')) {
-            $this->data['lang'] = apply_filters('ComponentLibrary/Component/Lang', []);
+            $this->data['lang'] = apply_filters('ComponentLibrary/Component/Lang', [
+                'visit' => 'Visit',
+            ]);
         }
 
         //Run
