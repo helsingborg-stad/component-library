@@ -15,7 +15,7 @@ class Register
     public $cachePath = ""; 
     public $viewPaths = [];
     public $controllerPaths = [];
-    private $reservedNames = ["data", "class", "list"];
+    private $reservedNames = ["data", "class", "list", "lang"];
     private $controllers = [];
     private $blade = null;
 

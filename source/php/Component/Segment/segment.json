@@ -26,7 +26,10 @@
         "tags": false,
         "icon": false,
         "link": false,
-        "hasPlaceholder": false
+        "hasPlaceholder": false,
+        "lang": {
+            "visit": "Visit"
+        }
     },
     "description": {
         "layout": "Which layout to use",
