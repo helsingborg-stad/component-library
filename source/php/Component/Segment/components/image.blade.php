@@ -1,8 +1,11 @@
 @link([
-    'href' => $link,
+    'href' => $link['url'],
     'classList' => ['c-segment__image'],
     'keepContent' => true,
-    'keepWrapper' => false
+    'keepWrapper' => false,
+    'attributeList' => [
+        'aria-label' => $link['ariaLabel'],
+    ]
 ])
     <div class="{{ $baseClass }}__image {{ $imageClass }}" style="{{ $imageStyleString }}"></div>
 @endlink
