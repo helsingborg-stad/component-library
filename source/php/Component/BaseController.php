@@ -54,6 +54,10 @@ class BaseController
             $this->data = apply_filters($this->createFilterName($this) . DIRECTORY_SEPARATOR . "Data", $this->data);
         }
 
+        if (function_exists('apply_filters')) {
+            $this->data['lang'] = apply_filters('ComponentLibrary/Component/Lang', $this->data['lang'] ?? []);
+        }
+
         //Run
         $this->init();
     }
