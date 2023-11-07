@@ -76,23 +76,20 @@ class Hero extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . '--apply-shadows';
         }
 
-        if (!empty($contentBackgroundColor) &&  ($title || $paragraph || $byline || $meta)) {
-            $this->data['overlay'] = false;
-            $this->data['classList'][] = $this->getBaseClass() . '--has-content-background-color';
-            $this->data['contentStyles'] .= "background-color: $contentBackgroundColor;";
+        $this->data['overlay'] = false;
+        if ($title || $paragraph || $byline || $meta) {
+            if (!empty($contentBackgroundColor) && $contentBackgroundColor != 'rgba(255, 255, 255, 0)') {
+                $this->data['classList'][] = $this->getBaseClass() . '--has-content-background-color';
+                $this->data['contentStyles'] .= "background-color: $contentBackgroundColor;"; 
+            } else {
+                $this->data['classList'][] = $this->getBaseClass() . '--overlay';
+                $this->data['overlay'] = true;
+            }
         }
 
         if (!empty($textColor)) {
             $this->data['classList'][] = $this->getBaseClass() . "--has-contrast-color";
             $this->data['contentStyles'] .= "color: $textColor;";
-        }
-
-        //Overlay
-        if (empty($contentBackgroundColor) && ($title || $paragraph || $byline || $meta)) {
-            $this->data['classList'][] = $this->getBaseClass() . '--overlay';
-            $this->data['overlay'] = true;
-        } else {
-            $this->data['overlay'] = false;
         }
 
         if($meta) {
