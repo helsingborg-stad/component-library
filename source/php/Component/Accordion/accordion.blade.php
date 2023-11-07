@@ -1,47 +1,50 @@
 <!-- accordion.blade.php -->
 @if($list)
     <{{$componentElement}} class="{{ $class }}" js-expand-container {!! $attribute !!}>
-    @foreach($list as $section)
-        <{{$sectionElement}} class="{{$baseClass}}__section">
+        @foreach($list as $section)
+            <{{$sectionElement}} class="{{$baseClass}}__section">
 
-        <{{$sectionHeadingElement}} class="{{$baseClass}}__button" role="button" aria-label="{{$section['heading']}}" aria-controls="{{ $baseClass }}__aria-{{ $id }}-{{ $loop->index }}" aria-expanded="false" js-expand-button>
-        <span class="{{$baseClass}}__button-wrapper" tabindex="-1">
-                {!!$beforeHeading!!}
+                <{{$sectionHeadingElement}} class="{{$baseClass}}__button" role="button" aria-label="{{$section['heading']}}" aria-controls="{{ $baseClass }}__aria-{{ $id }}-{{ $loop->index }}" aria-expanded="false" js-expand-button>
+                    <span class="{{$baseClass}}__button-wrapper" tabindex="-1">
+                        {!!$beforeHeading!!}
 
-            {!! $section['heading'] !!}
-            @if($taxonomyPosition === 'top' && $taxonomy > 0)
-                @tags([
-                    'tags' => $taxonomy
-                ])
-                @endtags
-            @endif
+                        {!! $section['heading'] !!}
+                        @if($taxonomyPosition === 'top' && $taxonomy > 0)
+                            @tags([
+                                'tags' => $taxonomy
+                            ])
+                            @endtags
+                        @endif
 
-            {!!$afterHeading!!}
+                        {!!$afterHeading!!}
 
-                @icon(['icon' => 'keyboard_arrow_down', 'size' => 'md', 'classList' => [$baseClass . '__icon']])
-                @endicon
-            </span>
-        </{{$sectionHeadingElement}}>
+                        @icon(['icon' => 'keyboard_arrow_down', 'size' => 'md', 'classList' => [$baseClass . '__icon']])
+                        @endicon
 
-        <{{$sectionContentElement}} class="{{$baseClass}}__content" id="{{ $baseClass }}__aria-{{ $id }}-{{ $loop->index }}" aria-hidden="true">
-        {!!$beforeContent!!}
+                    </span>
+                </{{$sectionHeadingElement}}>
 
-        {!! $section['content'] !!}
+                <{{$sectionContentElement}} class="{{$baseClass}}__content" id="{{ $baseClass }}__aria-{{ $id }}-{{ $loop->index }}" aria-hidden="true">
+                    
+                    {!!$beforeContent!!}
 
-        {!!$afterContent!!}
+                    {!! $section['content'] !!}
 
-        @if($taxonomyPosition === 'below' && $taxonomy > 0)
-            @tags([
-                'tags' => $taxonomy
-            ])
-            @endtags
-        @endif
+                    {!!$afterContent!!}
 
-        </{{$sectionContentElement}}>
+                    @if($taxonomyPosition === 'below' && $taxonomy > 0)
+                        @tags([
+                            'tags' => $taxonomy
+                        ])
+                        @endtags
+                    @endif
 
-        </{{$sectionElement}}>
-    @endforeach
+                </{{$sectionContentElement}}>
+
+            </{{$sectionElement}}>
+        @endforeach
     </{{$componentElement}}>
+
 @elseif($slotHasData)
     <{{$componentElement}} class="{{ $class }}" js-expand-container {!! $attribute !!}>
         {!! $slot !!}
