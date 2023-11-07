@@ -78,10 +78,11 @@ class Hero extends \ComponentLibrary\Component\BaseController
 
         $this->data['overlay'] = false;
         if ($title || $paragraph || $byline || $meta) {
-            if (!empty($contentBackgroundColor) && $contentBackgroundColor != 'rgba(255, 255, 255, 0)') {
+            if (!empty($contentBackgroundColor)) {
                 $this->data['classList'][] = $this->getBaseClass() . '--has-content-background-color';
                 $this->data['contentStyles'] .= "background-color: $contentBackgroundColor;"; 
             } else {
+                echo '<pre>' . var_dump( !empty($contentBackgroundColor),  $contentBackgroundColor) . '</pre>';
                 $this->data['classList'][] = $this->getBaseClass() . '--overlay';
                 $this->data['overlay'] = true;
             }
