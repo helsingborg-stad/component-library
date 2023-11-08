@@ -7,6 +7,7 @@
         'u-margin__bottom--1'
     ],
     'href' => $item['href'],
+    'xfn' => $item['xfn'],
   ])
     @icon($item['icon'])@endicon
     <span class="{{$baseClass}}__text">{{$item['label']}}</span>
