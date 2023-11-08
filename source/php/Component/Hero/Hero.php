@@ -82,7 +82,6 @@ class Hero extends \ComponentLibrary\Component\BaseController
                 $this->data['classList'][] = $this->getBaseClass() . '--has-content-background-color';
                 $this->data['contentStyles'] .= "background-color: $contentBackgroundColor;"; 
             } else {
-                echo '<pre>' . var_dump( !empty($contentBackgroundColor),  $contentBackgroundColor) . '</pre>';
                 $this->data['classList'][] = $this->getBaseClass() . '--overlay';
                 $this->data['overlay'] = true;
             }
