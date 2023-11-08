@@ -17,7 +17,7 @@
     <span 
       class="{{$baseClass}}__text" 
       style="{{isset($item['color']) ? 'color:' . $item['color'] . ';' : ''}}">
-      {{$item['label']}}
+      {!! $item['label'] !!}
     </span>
     @endif
   @endlink
