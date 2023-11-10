@@ -19,5 +19,10 @@ class Link extends \ComponentLibrary\Component\BaseController
         if ($target) {
             $this->data['attributeList']['target'] = $target;
         }
+
+        //XFN
+        if ($xfn) {
+            $this->data['attributeList']['rel'] = $xfn;
+        }
     }
 }
