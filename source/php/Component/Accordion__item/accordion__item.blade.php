@@ -6,7 +6,7 @@
             {!!$beforeHeading!!}
             
             @if (is_array($heading))
-                @foreach($heading as $index => $headingItem)
+                @foreach($heading as $headingItem)
                     <span class="{{$baseClass}}__button-column">{{$headingItem}}</span>
                 @endforeach
             @else
