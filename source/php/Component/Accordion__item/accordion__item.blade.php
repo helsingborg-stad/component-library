@@ -1,16 +1,21 @@
 {{-- Accordion Item --}}
 <{{$sectionElement}} class="{{$class}}" {!! $attribute !!}">
     <{{$sectionHeadingElement}} class="{{$baseClass}}__button" aria-label="{{$heading}}" aria-controls="{{ $baseClass }}__aria-{{ $id }}" aria-expanded="false" js-expand-button href="#{{$id}}">
-        <span class="{{$baseClass}}__button-wrapper {{$headingType}} " tabindex="-1">
+        <div class="{{$baseClass}}__button-wrapper {{$headingType}} " tabindex="-1">
             
             {!!$beforeHeading!!}
             
             @if (is_array($heading))
-                @foreach($heading as $headingItem)
+                @foreach($heading as $index => $headingItem)
                     <span class="{{$baseClass}}__button-column">{{$headingItem}}</span>
                 @endforeach
             @else
+            @typography([
+                'element' => 'h3',
+                'variant' => 'h4'
+            ])
                 {!! $heading !!}
+            @endtypography
             @endif
             
             @if($taxonomyPosition === 'top' && $taxonomy > 0)
@@ -24,7 +29,7 @@
 
             @icon(['icon' => $icon, 'size' => 'md', 'classList' => [$baseClass . '__icon', $baseClass . '__icon--' . $icon]])
             @endicon
-        </span>
+        </div>
 
         </{{$sectionHeadingElement}}>
 
