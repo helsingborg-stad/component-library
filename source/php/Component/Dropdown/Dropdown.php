@@ -14,6 +14,8 @@ class Dropdown extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
+        $this->data['listSlotHasContent'] = $this->slotHasData('list');
+
         $this->data['items'] = array_map(
             fn ($i) => array_merge(
                 $i,
