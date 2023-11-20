@@ -352,6 +352,10 @@ class BaseController
             $attribute = apply_filters("ComponentLibrary/Component/Attribute", $attribute);
         }
 
+        if (function_exists('apply_filters') && !empty($attribute['href'])) { 
+            $attribute = $attribute = apply_filters("ComponentLibrary/Component/Attribute/Href", $attribute, $attribute['href']);
+        }
+
         //Sanitize "broken" css.
         if (isset($attribute['style'])) {
             $attribute['style'] = trim($this->sanitizeInlineCss($attribute['style']));
