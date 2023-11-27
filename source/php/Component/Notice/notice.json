@@ -2,7 +2,7 @@
     "slug": "notice",
     "default": {
         "type": "info",
-        "message": {"title": false, "message": ""},
+        "message": {"title": false, "text": ""},
         "icon": false,
         "stretch": false
     },
