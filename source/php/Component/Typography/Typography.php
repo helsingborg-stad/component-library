@@ -14,17 +14,18 @@ class Typography extends \ComponentLibrary\Component\BaseController
         //Set default
         $this->data['isPromotedHeading'] = false;
         $this->data['originalElement'] = $element;
-        
-        if (substr($element, 0, 1) == 'h') {
+        $this->data['element'] = $element;
+
+        if ($useHeadingsContext && substr($element, 0, 1) == 'h') {
             $this->data['element'] = $this->setMaxHeading($element);
         }
 
         //If this is the first heading of the page, promote it to h1
-        if (!self::$hasSeenH1 && substr($this->data['element'], 0, 2) == 'h1') {
+        if ($useHeadingsContext && !self::$hasSeenH1 && substr($this->data['element'], 0, 2) == 'h1') {
             self::$hasSeenH1 = true; 
         } 
   
-        if ($autopromote === true && !self::$hasSeenH1) {
+        if ($useHeadingsContext && $autopromote === true && !self::$hasSeenH1) {
             if (in_array($element, ['h1', 'h2', 'h3'])) {
                 $this->data['isPromotedHeading'] = true;
                 $this->data['element'] = 'h1';
