@@ -19,6 +19,17 @@
        "host" : "host ex. youtube.com",
        "name" : "name of the host"
     },
+    "types": {
+        "labels": "string",
+        "height": "number",
+        "src": "string",
+        "policy": "string",
+        "host": "string",
+        "name": "string",
+    	"options": "boolean",
+        "icon": "string",
+        "cover": "boolean"
+    },
     "view": "acceptance.blade.php",
     "dependency": {
         "sass": {

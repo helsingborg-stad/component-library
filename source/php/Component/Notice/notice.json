@@ -12,6 +12,12 @@
         "icon": "The icon name as a string.",
         "stretch": "If true, the notice will stretch to the full width of the viewport."
     },
+    "types": {
+        "type": "string",
+        "message": "object",
+        "icon": "string",
+        "stretch": "boolean" 
+    },
     "view": "notice.blade.php",
     "dependency": {
         "sass": {

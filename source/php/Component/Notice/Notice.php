@@ -8,7 +8,7 @@ class Notice extends \ComponentLibrary\Component\BaseController
     {
         //Extract array for eazy access (fetch only)
         extract($this->data);
-
+        
         if (in_array($type, ['success', 'warning', 'danger', 'info'])) {
             $this->data['classList'][] = $this->getBaseClass() . "--" . $type;
         } else {
