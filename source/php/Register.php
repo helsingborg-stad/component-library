@@ -32,13 +32,13 @@ class Register
      * @param string|null $view The optional view name for the component.
      * @throws \Exception if the provided slug is reserved or invalid.
      */
-    public function add($slug, $defaultArgs, $view = null)
+    public function add($slug, $defaultArgs, $argsTypes = false, $view = null)
     {
         //Create utility data object
         if (is_null($this->data)) {
             $this->data = (object) array();
         }
-
+ 
         //Prohibit reserved names
         if (in_array($slug, $this->reservedNames)) {
             throw new \Exception("Invalid slug (" . $slug . ") provided, cannot be used as a view name since it is reserved for internal purposes.");
@@ -52,7 +52,8 @@ class Register
             'slug'       => (string) $slug,
             'args'       => (object) $defaultArgs,
             'view'       => (string) $slug . DIRECTORY_SEPARATOR . $view,
-            'controller' => (string) $slug
+            'controller' => (string) $slug,
+            'argsTypes'  => (object) $argsTypes
         );
 
         //Add include alias
@@ -90,7 +91,7 @@ class Register
     /**
      * Registers components directory
      * 
-     * @return string The sluts of all registered components
+     * @return string The slugs of all registered components
      */
     public function registerInternalComponents($path): array
     {
@@ -116,6 +117,7 @@ class Register
                 $this->add(
                     $config['slug'],
                     $config['default'],
+                    $config['types'] ?? false,
                     $config['view'] ? $config['view'] : $config['slug'] . "blade.php"
                 );
 
@@ -181,9 +183,11 @@ class Register
                     $controllerName = $this->camelCase(
                         $this->cleanViewName($component->slug)
                     );
-
+                    
+                    
                     $viewData = $this->accessProtected($view, 'data');
 
+                    $this->handleTypingsErrors($viewData, $component->argsTypes);
                     // Get controller data
                     $controllerArgs = (array) $this->getControllerArgs(
                         array_merge((array) $component->args, (array) $viewData),
@@ -196,6 +200,26 @@ class Register
         } catch (Throwable $e) {
             echo  '<pre>' . var_dump($e) . '<pre>';
         }
+    }
+
+    public function handleTypingsErrors($viewData, $argsTypes = false) {
+        if (!$argsTypes || (empty($viewData) && !is_array($viewData))) { 
+            return; 
+        }
+
+        foreach ($viewData as $key => $value) {
+            if (isset($argsTypes->{$key})) {
+                if (gettype($value) !== $argsTypes->{$key}) {
+                    $this->triggerError('The parameter ' . '"' . $key . '" should be of type "' . $argsTypes->{$key} . '" but was recieved as type "' . gettype($value) . '".');
+                }
+            } else {
+                // $this->triggerError('The parameter ' . '"' . $key . '" is not recognized in the component.'); 
+            }
+        }
+    }
+
+    private function triggerError($message = "") {
+        trigger_error($message, E_USER_WARNING);
     }
 
     /**
