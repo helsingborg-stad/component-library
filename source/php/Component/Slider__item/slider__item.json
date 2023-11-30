@@ -17,7 +17,8 @@
         "focusPoint": {"top": 30, "left": 50},
         "textAlignment": "",
         "overlay": "none",
-        "showPauseButton": true
+        "showPauseButton": true,
+        "isImage": false
     },
     "description": {
         "title": "A title for predefined layout",
@@ -33,7 +34,8 @@
         "cta": "Adds button with a link",
         "heroStyle": "Gives the slide a hero like appearance with larger text",
         "focusPoint": "Where the focus point should be of an image when container dosen't match image ratio.",
-        "showPauseButton": "To show or not to show a pause button on the slide when it is a video."
+        "showPauseButton": "To show or not to show a pause button on the slide when it is a video.",
+        "isImage": "Add roles to the slider if the slide is an image."
     },
     "view": "slider__item.blade.php",
     "dependency": {
