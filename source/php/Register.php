@@ -186,8 +186,8 @@ class Register
                     
                     
                     $viewData = $this->accessProtected($view, 'data');
+                    $this->handleTypingsErrors($viewData, $component->argsTypes, $component->slug);
 
-                    $this->handleTypingsErrors($viewData, $component->argsTypes);
                     // Get controller data
                     $controllerArgs = (array) $this->getControllerArgs(
                         array_merge((array) $component->args, (array) $viewData),
@@ -202,15 +202,17 @@ class Register
         }
     }
 
-    public function handleTypingsErrors($viewData, $argsTypes = false) {
+    public function handleTypingsErrors($viewData, $argsTypes = false, $componentSlug) {
         if (!$argsTypes || (empty($viewData) && !is_array($viewData))) { 
             return; 
         }
-
+        
         foreach ($viewData as $key => $value) {
             if (isset($argsTypes->{$key})) {
-                if (gettype($value) !== $argsTypes->{$key}) {
-                    $this->triggerError('The parameter ' . '"' . $key . '" should be of type "' . $argsTypes->{$key} . '" but was recieved as type "' . gettype($value) . '".');
+                $types = explode('|', $argsTypes->{$key});
+
+                if (!in_array(gettype($value), $types)) {
+                    $this->triggerError('The parameter <b>"' . $key . '"</b> in the <b>' . $componentSlug . '</b> component should be of type <b>"' . $argsTypes->{$key} . '"</b> but was recieved as type <b>"' . gettype($value) . '"</b>.');
                 }
             } else {
                 // $this->triggerError('The parameter ' . '"' . $key . '" is not recognized in the component.'); 
