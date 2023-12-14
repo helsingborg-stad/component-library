@@ -16,9 +16,13 @@
             const iframe        = acceptance?.querySelector('#{{$id}}');
             if(iframe) {
                 iframe.onload = function() {
-                    const targetHeight = iframe.contentWindow.document.body.scrollHeight + 'px' ?? 'auto';
-                    acceptance.style.height = targetHeight;
-                    iframe.style.height     = targetHeight;
+                    const iframeBody = iframe.contentWindow.document.body
+                    const iframeResizeObserver = new ResizeObserver(function() {
+                        const targetHeight = iframeBody.scrollHeight + 'px' || 'auto';
+                        acceptance.style.height = targetHeight;
+                        iframe.style.height = targetHeight;
+                    });
+                    iframeResizeObserver.observe(iframeBody);
                 }
             }
         </script>
