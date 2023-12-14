@@ -121,7 +121,7 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
             ),
             new Supplier(
                 'Helsingborg Stad',
-                array('helsingborg.se', 'www.helsingborg.se', 'driftinfo.helsingborg.se', 'it.helsingborg.se'),
+                array('helsingborg.se', 'www.helsingborg.se', 'driftinfo.helsingborg.se', 'it.helsingborg.se', 'ettbattre.helsingborg.se'),
                 'https://helsingborg.se/om-webbplatsen/sa-har-behandlar-vi-dina-personuppgifter/',
                 false,
                 'municipal'
@@ -174,7 +174,7 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
                 'https://twoday.se/privacy-policy',
                 false,
                 'login'
-            ),
+            )
         );
 
         if (function_exists('apply_filters')) {
