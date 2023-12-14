@@ -13,10 +13,10 @@
     @if($isSameTopDomain)
         <script>
             const acceptance    = document.querySelector('#acceptance-{{$id}}');
-            const iframe        = acceptance.querySelector('#{{$id}}');
+            const iframe        = acceptance?.querySelector('#{{$id}}');
             if(iframe) {
                 iframe.onload = function() {
-                    let targetHeight = iframe.contentWindow.document.body.scrollHeight + 'px' ?? 'auto';
+                    const targetHeight = iframe.contentWindow.document.body.scrollHeight + 'px' ?? 'auto';
                     acceptance.style.height = targetHeight;
                     iframe.style.height     = targetHeight;
                 }
