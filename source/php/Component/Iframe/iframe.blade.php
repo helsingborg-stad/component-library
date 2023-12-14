@@ -10,7 +10,7 @@
     ])
     <iframe id="{{ $id }}" class="{{$class}}" {!! $attribute !!}>
     </iframe>
-    @if($isSameTopDomain)
+    @if($isSameDomain)
         <script>
             const acceptance    = document.querySelector('#acceptance-{{$id}}');
             const iframe        = acceptance?.querySelector('#{{$id}}');

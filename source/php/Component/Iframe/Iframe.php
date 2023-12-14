@@ -55,7 +55,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         $this->data['attributeList']['title'] = $title;
         $this->data['attributeList']['aria-label'] = $title;
 
-        $this->data['isSameTopDomain'] = $this->isSameDomain(
+        $this->data['isSameDomain'] = $this->isSameDomain(
             $this->getDomainFromUrl($src), 
             $this->getCurrentDomain()
         );
@@ -141,7 +141,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
      */
     private function getCurrentDomain() {
         if(isset($_SERVER['SERVER_NAME'])) {
-            return $this->parseTopDomain($_SERVER['SERVER_NAME']);
+            return $this->parseDomain($_SERVER['SERVER_NAME']);
         }
         return false;
     }
@@ -153,7 +153,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
      * @return string|false The extracted domain or false if not available.
      */
     private function getDomainFromUrl($url) {
-        return $this->parseTopDomain(
+        return $this->parseDomain(
             parse_url($url)['host']
         ); 
     }
@@ -164,7 +164,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
      * @param string $domain The full domain.
      * @return string|false The top-level domain or false if not available.
      */
-    private function parseTopDomain($domain) {
+    private function parseDomain($domain) {
         return $domain
             ? implode('.', array_slice(explode('.', $domain), -2))
             : false;
