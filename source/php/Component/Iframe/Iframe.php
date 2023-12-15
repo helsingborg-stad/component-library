@@ -55,10 +55,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         $this->data['attributeList']['title'] = $title;
         $this->data['attributeList']['aria-label'] = $title;
 
-        $this->data['isSameDomain'] = $this->isSameDomain(
-            $this->getDomainFromUrl($src), 
-            $this->getCurrentDomain()
-        );
+        $this->data['embeddedDomain'] = $this->getDomainFromUrl($src);
     }
     /**
      * Build embed url
@@ -124,50 +121,12 @@ class Iframe extends \ComponentLibrary\Component\BaseController
     }
 
     /**
-     * Checks if two domains are the same.
-     *
-     * @param string $iframeDomain The domain of the iframe.
-     * @param string $currentDomain The current domain.
-     * @return bool True if the domains are the same, false otherwise.
-     */
-    private function isSameDomain($iframeDomain, $currentDomain) {
-        return ($currentDomain === $iframeDomain);
-    }
-
-    /**
-     * Gets the current domain based on the server name.
-     *
-     * @return string|false The current domain or false if not available.
-     */
-    private function getCurrentDomain() {
-        if(isset($_SERVER['SERVER_NAME'])) {
-            return $this->parseDomain($_SERVER['SERVER_NAME']);
-        }
-        return false;
-    }
-
-    /**
      * Gets the domain from a given URL.
      *
      * @param string $url The URL from which to extract the domain.
      * @return string|false The extracted domain or false if not available.
      */
     private function getDomainFromUrl($url) {
-        return $this->parseDomain(
-            parse_url($url)['host']
-        ); 
+        parse_url($url)['host'];
     }
-
-    /**
-     * Parses the top-level domain from a full domain.
-     *
-     * @param string $domain The full domain.
-     * @return string|false The top-level domain or false if not available.
-     */
-    private function parseDomain($domain) {
-        return $domain
-            ? implode('.', array_slice(explode('.', $domain), -2))
-            : false;
-    }
-
 }
