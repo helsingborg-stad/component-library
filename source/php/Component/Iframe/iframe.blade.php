@@ -14,14 +14,14 @@
         window.addEventListener(
             'message',
             function(e) {
-                if (!event.origin.match('{{$embeddedDomain}}')) {
+                if (!e.origin.match('{{$embeddedDomain}}')) {
                     return;
                 }
                 const acceptance    = document.querySelector('#acceptance-{{$id}}');
-                const iframe        = acceptance?.querySelector('#{{$id}}');
+                const iframe        = acceptance.querySelector('#{{$id}}');
                 let message         = e.data;
 
-                if(iframe && acceptance && message.height) {
+                if(iframe && acceptance && message && message.height) {
                     iframe.height           = message.height;
                     acceptance.style.height = message.height + 'px';
                 }
