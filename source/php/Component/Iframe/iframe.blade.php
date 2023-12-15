@@ -18,10 +18,10 @@
                     return;
                 }
                 const acceptance    = document.querySelector('#acceptance-{{$id}}');
-                const iframe        = acceptance.querySelector('#{{$id}}');
-                let message         = e.data;
+                const iframe        = acceptance?.querySelector('#{{$id}}');
+                const message         = e.data;
 
-                if(iframe && acceptance && message && message.height) {
+                if(iframe && message && message.height) {
                     iframe.height           = message.height;
                     acceptance.style.height = message.height + 'px';
                 }
