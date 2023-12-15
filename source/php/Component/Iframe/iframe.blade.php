@@ -21,8 +21,9 @@
                 const iframe        = acceptance?.querySelector('#{{$id}}');
                 let message         = e.data;
 
-                if(iframe && message.height) {
-                    iframe.height = message.height;
+                if(iframe && acceptance && message.height) {
+                    iframe.height           = message.height;
+                    acceptance.style.height = message.height + 'px';
                 }
             },
             false
