@@ -18,12 +18,14 @@
                     return;
                 }
                 const acceptance    = document.querySelector('#acceptance-{{$id}}');
-                const iframe        = acceptance?.querySelector('#{{$id}}');
+                const iframe        = document.querySelector('#{{$id}}');
                 const message       = e.data;
 
+                if(acceptance && message && message.height) {
+                    acceptance.style.height = message.height + 'px';
+                }
                 if(iframe && message && message.height) {
                     iframe.height           = message.height;
-                    acceptance.style.height = message.height + 'px';
                 }
             },
             false

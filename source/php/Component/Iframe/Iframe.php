@@ -127,6 +127,6 @@ class Iframe extends \ComponentLibrary\Component\BaseController
      * @return string|false The extracted domain or false if not available.
      */
     private function getDomainFromUrl($url) {
-        parse_url($url)['host'];
+        return parse_url($url)['host'];
     }
 }
