@@ -23,5 +23,5 @@
         ]
     ])
     @endicon
-    <span class="{{$baseClass}}__option-label">{{ $name }}</span>
+    <span class="{{$baseClass}}__option-label">{!! $name !!}</span>
 </li>

@@ -10,6 +10,10 @@ class Iframe extends \ComponentLibrary\Component\BaseController
 
         $this->data['attributeList']['allowfullscreen'] = true;
 
+        if (empty($id)) {
+            $this->data['id'] = "iframe-" . uniqid();
+        }
+
         if (isset($width)) {
             $this->data['attributeList']['width'] = $width;
         }
@@ -50,6 +54,8 @@ class Iframe extends \ComponentLibrary\Component\BaseController
 
         $this->data['attributeList']['title'] = $title;
         $this->data['attributeList']['aria-label'] = $title;
+
+        $this->data['embeddedDomain'] = $this->getDomainFromUrl($src);
     }
     /**
      * Build embed url
@@ -112,5 +118,15 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         }
 
         return $embedUrl;
+    }
+
+    /**
+     * Gets the domain from a given URL.
+     *
+     * @param string $url The URL from which to extract the domain.
+     * @return string|false The extracted domain or false if not available.
+     */
+    private function getDomainFromUrl($url) {
+        return parse_url($url)['host'];
     }
 }
