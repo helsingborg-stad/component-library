@@ -101,7 +101,7 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
             new Supplier(
                 'ArcGIS',
                 array('helsingborg.maps.arcgis.com', 'maps.arcgis.com'),
-                'https://trust.arcgis.com/en/privacy/gdpr.htm',
+                'https://www.esri.se/sv-se/integritet/gdpr',
                 true,
                 'map'
             ),
