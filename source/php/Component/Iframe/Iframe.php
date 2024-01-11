@@ -91,6 +91,13 @@ class Iframe extends \ComponentLibrary\Component\BaseController
                     $srcParsed['path'] = '/video' . $srcParsed['path'] . "?autoplay=1&autopause=0&muted=1";
                 }
                 break;
+            case 'spotify.com':
+            case 'www.spotify.com':
+            case 'open.spotify.com':
+                $srcParsed['host'] = 'open.spotify.com';
+                $srcParsed['path'] = '/embed' . $srcParsed['path'];
+                $srcParsed['query'] = 'utm_source=oembed';
+                break;
             default:
                 break;
         }
