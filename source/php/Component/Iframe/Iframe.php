@@ -35,7 +35,6 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         }
 
         if (isset($src)) {
-            // $url = $this->buildEmbedUrl($src);
             $this->data['attributeList']['src'] = $src;
 
             if (empty($poster) && function_exists('apply_filters')) {
