@@ -46,7 +46,7 @@
 
                             @if ($paragraph)
                                 @typography([
-                                    'variant' => 'p', 'element' => 'p',
+                                    'element' => 'p',
                                     'classList' => [$baseClass . '__body']
                                 ])
                                     {!! $paragraph !!}
