@@ -174,7 +174,21 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
                 'https://twoday.se/privacy-policy',
                 false,
                 'login'
-            )
+            ),
+            new Supplier(
+                'Spotify',
+                array('www.spotify.com', 'open.spotify.com', 'spotify.com'),
+                'https://www.spotify.com/se/legal/privacy-policy/',
+                true,
+                'music'
+            ),
+            new Supplier(
+                'Soundcloud',
+                array('www.soundcloud.com', 'w.soundcloud.com', 'soundcloud.com'),
+                'https://soundcloud.com/pages/privacy',
+                true,
+                'music'
+            ),
         );
 
         if (function_exists('apply_filters')) {
