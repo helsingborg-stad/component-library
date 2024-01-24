@@ -14,7 +14,7 @@
         "test:coverage": "XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-html .coverage/html --coverage-clover .coverage/clover.xml"
     },
     "require": {
-        "helsingborg-stad/blade-engine-wrapper": "dev-master"
+        "helsingborg-stad/blade-engine-wrapper": "^1.0.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.6",
