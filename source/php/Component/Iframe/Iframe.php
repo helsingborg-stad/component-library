@@ -38,7 +38,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['src'] = $src;
 
             if (empty($poster) && function_exists('apply_filters')) {
-                $this->data['poster'] = apply_filters('ComponentLibrary/Iframe/Poster', $url);
+                $this->data['poster'] = apply_filters('ComponentLibrary/Iframe/Poster', $src);
             }
         }
 
