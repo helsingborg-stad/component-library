@@ -12,7 +12,7 @@ class Notice extends \ComponentLibrary\Component\BaseController
         if (empty($id)) {
             $this->data['id'] = uniqid();
         }
-
+     
         if (in_array($type, ['success', 'warning', 'danger', 'info'])) {
             $this->data['classList'][] = $this->getBaseClass() . "--" . $type;
         } else {
