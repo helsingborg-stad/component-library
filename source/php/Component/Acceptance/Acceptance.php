@@ -101,7 +101,7 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
             new Supplier(
                 'ArcGIS',
                 array('helsingborg.maps.arcgis.com', 'maps.arcgis.com'),
-                'https://trust.arcgis.com/en/privacy/gdpr.htm',
+                'https://www.esri.se/sv-se/integritet/gdpr',
                 true,
                 'map'
             ),
@@ -121,7 +121,7 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
             ),
             new Supplier(
                 'Helsingborg Stad',
-                array('helsingborg.se', 'www.helsingborg.se', 'driftinfo.helsingborg.se', 'it.helsingborg.se'),
+                array('helsingborg.se', 'www.helsingborg.se', 'driftinfo.helsingborg.se', 'it.helsingborg.se', 'ettbattre.helsingborg.se'),
                 'https://helsingborg.se/om-webbplatsen/sa-har-behandlar-vi-dina-personuppgifter/',
                 false,
                 'municipal'
@@ -174,6 +174,20 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
                 'https://twoday.se/privacy-policy',
                 false,
                 'login'
+            ),
+            new Supplier(
+                'Spotify',
+                array('www.spotify.com', 'open.spotify.com', 'spotify.com'),
+                'https://www.spotify.com/se/legal/privacy-policy/',
+                true,
+                'music'
+            ),
+            new Supplier(
+                'Soundcloud',
+                array('www.soundcloud.com', 'w.soundcloud.com', 'soundcloud.com'),
+                'https://soundcloud.com/pages/privacy',
+                true,
+                'music'
             ),
         );
 

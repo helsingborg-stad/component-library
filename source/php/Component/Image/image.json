@@ -11,7 +11,8 @@
         "placeholderText": "Image missing",
         "placeholderIcon": "broken_image",
         "placeholderIconSize": "xl",
-        "imgAttributeList": []
+        "imgAttributeList": [],
+        "removeCaption": false
     },
     "description": {
         "alt": "Alt text of the image",
@@ -22,7 +23,8 @@
         "placeholderText": "Label to show if image is missing",
         "placeholderIcon": "Icon to display if image is missing / false to hide",
         "placeholderIconSize": "Icons size, please refer to image component for size.",
-        "imgAttributeList": "Attributes for the img element."
+        "imgAttributeList": "Attributes for the img element.",
+        "removeCaption": "Shows only the alt-text removing the image caption and byline"
 
     },
     "view": "image.blade.php",
