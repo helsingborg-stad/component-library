@@ -4,13 +4,15 @@
         "variant": "p",
         "element": "p",
         "slot": "",
-        "autopromote" : false
+        "autopromote" : false,
+        "useHeadingsContext": true
     },
     "description": {
         "variant": "What element the component should base its looks off of.",
         "element": "What element the markup will use.",
         "slot": "The content",
-        "autopromote" : "Upgrade element to h1 (from h3 and above), if seen first on page."
+        "autopromote" : "Upgrade element to h1 (from h3 and above), if seen first on page.",
+        "useHeadingsContext": "If a heading should be based off of the context its in."
     },
     "view": "typography.blade.php",
     "dependency": {
