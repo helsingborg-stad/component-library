@@ -24,6 +24,8 @@ class BaseController
      */
     private $uid = null;
 
+    protected array $compParams;
+
     /**
      * Run init
      */

@@ -2,6 +2,10 @@
 
 namespace ComponentLibrary;
 
+use HelsingborgStad\BladeService\BladeServiceInterface;
+use Illuminate\Support\Facades\Blade;
+use Throwable;
+
 class Register
 {
     private static $cache = [
@@ -17,11 +21,11 @@ class Register
     public $controllerPaths = [];
     private $reservedNames = ["data", "class", "list", "lang"];
     private $controllers = [];
-    private $blade = null;
+    private BladeServiceInterface $blade;
 
-    public function __construct($engine)
+    public function __construct(BladeServiceInterface $bladeService)
     {
-        $this->blade = $engine;
+        $this->blade = $bladeService;
     }
 
     /**
@@ -56,7 +60,9 @@ class Register
         );
 
         //Add include alias
-        $this->registerComponentAlias($slug);
+        $this->blade->registerComponentDirective(
+            ucfirst($slug) . '.' . $slug,
+            $slug);
 
         // Register view composer
         $this->registerViewComposer($this->data->{$slug});
@@ -145,36 +151,10 @@ class Register
         return $view;
     }
 
-    /**
-     * Santize string
-     * @return string The string to be sanitized
-     */
-    private function sanitizeSlug($string): string
-    {
-        return preg_replace(
-            "/[^a-z-]/i",
-            "",
-            str_replace(".blade.php", "", $string)
-        );
-    }
-
-    /**
-     * Registers all components as include aliases
-     *
-     * @return bool
-     */
-    private function registerComponentAlias($componentSlug)
-    {
-        $this->blade->component(
-            ucfirst($componentSlug)  . '.' . $componentSlug,
-            $componentSlug
-        );
-    }
-
     public function registerViewComposer($component)
     {
         try {
-            $this->blade->composer(
+            $this->blade->registerComponent(
                 ucfirst($component->slug) . '.' . $component->slug,
                 function ($view) use ($component) {
 

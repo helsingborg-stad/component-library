@@ -3,14 +3,13 @@
 namespace ComponentLibrary;
 
 use ComponentLibrary\Register;
-use HelsingborgStad\BladeEngineWrapper as Blade;
+use HelsingborgStad\GlobalBladeService\GlobalBladeService;
 
 class Init {
 
     private $register = null;
     
     public function __construct($externalViewPaths) {
-        $blade = new Blade();
         $paths = array(
             'viewPaths' => array(),
             'controllerPaths' => array(),
@@ -36,19 +35,20 @@ class Init {
                 $viewPaths
             );
         }
-
-        if(is_array($viewPaths) && !empty($viewPaths)) {
-            foreach ($viewPaths as $path) {
-                $directory = rtrim($path, DIRECTORY_SEPARATOR); 
-                if(is_dir($directory)) {
-                    $blade->addViewPath(rtrim($path, DIRECTORY_SEPARATOR));
-                }
-            }
-        } else {
+        
+        if(!is_array($viewPaths) || empty($viewPaths)) {  
             throw new \Exception("View paths not defined.");
+        } 
+        
+        $sanitizeViewPaths = array();
+        foreach ($viewPaths as $path) {
+            $directory = rtrim($path, DIRECTORY_SEPARATOR); 
+            if(is_dir($directory)) {
+                $sanitizeViewPaths[] = $directory;
+            }
         }
 
-        $bladeInstance = $blade->instance();
+        $bladeInstance = GlobalBladeService::getInstance($sanitizeViewPaths);
         
         $this->register = new Register($bladeInstance);
         
@@ -88,6 +88,6 @@ class Init {
 
     public function getEngine()
     {
-        return $this->register->getEngine();
+        return GlobalBladeService::getInstance();
     }
 }
