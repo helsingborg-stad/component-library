@@ -48,6 +48,14 @@ class Typography extends \ComponentLibrary\Component\BaseController
         }
 
         if (in_array($element, ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']) && !in_array($variant, ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'])) {
+            trigger_error(
+                sprintf(
+                    'Element "%s" and variant "%s" cannot be combined. Heading elements must use a heading variant.',
+                    $element,
+                    $variant
+                ),
+                E_USER_WARNING
+            );
             return $element;
         }
 
