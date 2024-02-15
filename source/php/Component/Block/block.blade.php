@@ -85,7 +85,6 @@
             @if ($content)
                 @typography([
                     'element' => 'p',
-                    'variant' => 'p',
                     'classList' => [$baseClass . '__content']
                 ])
                     {!! $content !!}

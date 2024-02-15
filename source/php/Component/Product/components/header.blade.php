@@ -8,7 +8,6 @@
     @endtypography
     @typography([
         'element' => 'p',
-        'variant' => 'p',
         'classList' => [$baseClass . '__label']
     ])
         {{ $label }}
