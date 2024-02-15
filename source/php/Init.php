@@ -8,6 +8,7 @@ use HelsingborgStad\GlobalBladeService\GlobalBladeService;
 class Init {
 
     private $register = null;
+    private static bool $internalViewPathsAdded = false;
     
     public function __construct($externalViewPaths) {
         $paths = array(
@@ -18,9 +19,12 @@ class Init {
         // Add view path to renderer
         // In this case all components, their controller and view path are located under the same folder structure.
         // This may differ in a Wordpress child implementation.
-        $internalPaths = array(
-            __DIR__ . DIRECTORY_SEPARATOR . 'Component' . DIRECTORY_SEPARATOR,
-        );
+        $internalPaths = array();
+
+        if( !self::$internalViewPathsAdded ) {
+            $internalPaths = array( __DIR__ . DIRECTORY_SEPARATOR . 'Component' . DIRECTORY_SEPARATOR );
+            self::$internalViewPathsAdded = true;
+        }
         
         // Initialize all view paths so that this library is last
         $viewPaths = array_unique(
@@ -40,15 +44,15 @@ class Init {
             throw new \Exception("View paths not defined.");
         } 
         
-        $sanitizeViewPaths = array();
+        $sanitizedViewPaths = array();
         foreach ($viewPaths as $path) {
             $directory = rtrim($path, DIRECTORY_SEPARATOR); 
             if(is_dir($directory)) {
-                $sanitizeViewPaths[] = $directory;
+                $sanitizedViewPaths[] = $directory;
             }
         }
 
-        $bladeInstance = GlobalBladeService::getInstance($sanitizeViewPaths);
+        $bladeInstance = GlobalBladeService::getInstance($sanitizedViewPaths);
         
         $this->register = new Register($bladeInstance);
         

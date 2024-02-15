@@ -59,12 +59,7 @@ class Register
             'controller' => (string) $slug
         );
 
-        //Add include alias
-        $this->blade->registerComponentDirective(
-            ucfirst($slug) . '.' . $slug,
-            $slug);
-
-        // Register view composer
+        $this->blade->registerComponentDirective( ucfirst($slug) . '.' . $slug, $slug);
         $this->registerViewComposer($this->data->{$slug});
     }
 
@@ -151,7 +146,7 @@ class Register
         return $view;
     }
 
-    public function registerViewComposer($component)
+    public function registerViewComposer(object $component)
     {
         try {
             $this->blade->registerComponent(
