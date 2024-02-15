@@ -1,7 +1,7 @@
 {
     "slug": "typography",
     "default": {
-        "variant": "p",
+        "variant": false,
         "element": "p",
         "slot": "",
         "autopromote" : false,
