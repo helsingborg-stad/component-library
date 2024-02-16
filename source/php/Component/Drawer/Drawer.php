@@ -4,7 +4,7 @@ namespace ComponentLibrary\Component\Drawer;
 
 class Drawer extends \ComponentLibrary\Component\BaseController
 {
-    private array $defaultScreenSizes = ['xs', 'sm'];
+    private array $defaultScreenSizes = ['xs', 'sm', 'md'];
 
     public function init()
     {
