@@ -46,7 +46,6 @@ class Typography extends \ComponentLibrary\Component\BaseController
             return $element;
         }
         
-        
         if (in_array($element, ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'])) {
             if (in_array($variant, ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'])) {
                 return $variant;
