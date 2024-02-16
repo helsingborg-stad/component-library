@@ -42,16 +42,13 @@ class Typography extends \ComponentLibrary\Component\BaseController
 
     private function getVariant($variant) {
         $element = $this->data['element'];
+        $headings = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+
         if (!$variant) {
             return $element;
         }
         
-        
-        if (in_array($element, ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'])) {
-            if (in_array($variant, ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'])) {
-                return $variant;
-            } 
-
+        if (in_array($element, $headings) && !in_array($variant, $headings)) {
             trigger_error(
                 sprintf(
                     'Element "%s" and variant "%s" cannot be combined. Heading elements must use a heading variant.',
@@ -64,7 +61,7 @@ class Typography extends \ComponentLibrary\Component\BaseController
             return $element;
         }
 
-        return 'p';
+        return $variant;
     }
 
     private function setMaxHeading($element) {
