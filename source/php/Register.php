@@ -197,7 +197,7 @@ class Register
                     $view->with($controllerArgs);
                 }
             );
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             echo  '<pre>' . var_dump($e) . '<pre>';
         }
     }
