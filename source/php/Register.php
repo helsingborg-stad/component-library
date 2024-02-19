@@ -202,13 +202,22 @@ class Register
         }
     }
 
+    /**
+     * Handle typing errors for the given view data and arguments types.
+     *
+     * @param array|object $viewData The view data to check for typing errors.
+     * @param array|object|false $argsTypes The expected argument types for each key in the view data.
+     * @param string $componentSlug The slug of the component being checked.
+     * @return void
+     */
     public function handleTypingsErrors($viewData, $argsTypes = false, $componentSlug) {
+        
         if (empty((array) $argsTypes) || (empty($viewData) && !is_array($viewData))) { 
             return; 
         }
 
         foreach ($viewData as $key => $value) {
-            if (isset($argsTypes->{$key})) {
+            if (is_object($argsTypes) && isset($argsTypes->{$key})) {
                 $types = explode('|', $argsTypes->{$key});
 
                 if (!in_array(gettype($value), $types)) {
@@ -220,6 +229,12 @@ class Register
         }
     }
 
+    /**
+     * Triggers a user warning error with the specified message.
+     *
+     * @param string $message The error message.
+     * @return void
+     */
     private function triggerError($message = "") {
         trigger_error($message, E_USER_WARNING);
     }
