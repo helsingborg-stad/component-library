@@ -25,10 +25,5 @@
             "ComponentLibrary\\": "source/php/"
         }
     },
-<<<<<<< HEAD
-    "version": "3.13.5"
-}
-=======
     "version": "3.17.5"
 }
->>>>>>> main
