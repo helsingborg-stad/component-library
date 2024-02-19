@@ -14,7 +14,7 @@
         "test:coverage": "XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-html .coverage/html --coverage-clover .coverage/clover.xml"
     },
     "require": {
-        "php": "^7.4|^8.0",
+        "php": "^8.0",
         "helsingborg-stad/blade": "^3.2"
     },
     "require-dev": {
