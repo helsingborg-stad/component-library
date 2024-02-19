@@ -31,7 +31,6 @@
 
     <div class="{{ $baseClass }}__quote">
         @typography([
-            "variant" => "p",
             "element" => "p",
             "classList" => ['u-color__text--darker']
         ])

@@ -22,7 +22,7 @@
     @endif
 
     @if ($paragraph)
-        @typography(['variant' => 'p', 'element' => 'p', 'classList' => [$baseClass . '__body']])
+        @typography(['element' => 'p', 'classList' => [$baseClass . '__body']])
             {!! $paragraph !!}
         @endtypography
     @endif

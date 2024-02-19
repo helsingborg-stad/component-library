@@ -14,17 +14,18 @@ class Typography extends \ComponentLibrary\Component\BaseController
         //Set default
         $this->data['isPromotedHeading'] = false;
         $this->data['originalElement'] = $element;
-        
-        if (substr($element, 0, 1) == 'h') {
+        $this->data['element'] = $element;
+
+        if ($useHeadingsContext && substr($element, 0, 1) == 'h') {
             $this->data['element'] = $this->setMaxHeading($element);
         }
 
         //If this is the first heading of the page, promote it to h1
-        if (!self::$hasSeenH1 && substr($this->data['element'], 0, 2) == 'h1') {
+        if ($useHeadingsContext && !self::$hasSeenH1 && substr($this->data['element'], 0, 2) == 'h1') {
             self::$hasSeenH1 = true; 
         } 
   
-        if ($autopromote === true && !self::$hasSeenH1) {
+        if ($useHeadingsContext && $autopromote === true && !self::$hasSeenH1) {
             if (in_array($element, ['h1', 'h2', 'h3'])) {
                 $this->data['isPromotedHeading'] = true;
                 $this->data['element'] = 'h1';
@@ -36,7 +37,31 @@ class Typography extends \ComponentLibrary\Component\BaseController
         $this->data['hasSeenH1'] = self::$hasSeenH1;
         
         //Variant
-        $this->data['classList'][] = $this->getBaseClass() . "__variant--" . $variant;
+        $this->data['classList'][] = $this->getBaseClass() . "__variant--" . $this->getVariant($variant);
+    }
+
+    private function getVariant($variant) {
+        $element = $this->data['element'];
+        $headings = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+
+        if (!$variant) {
+            return $element;
+        }
+        
+        if (in_array($element, $headings) && !in_array($variant, $headings)) {
+            trigger_error(
+                sprintf(
+                    'Element "%s" and variant "%s" cannot be combined. Heading elements must use a heading variant.',
+                    $element,
+                    $variant
+                ),
+                E_USER_WARNING
+            );
+
+            return $element;
+        }
+
+        return $variant;
     }
 
     private function setMaxHeading($element) {
