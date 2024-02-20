@@ -251,6 +251,21 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
 
 class Supplier
 {
+    public $name = null;
+    public $domain = null;
+    public $policy = '';
+    public $requiresAccept = true;
+    public $systemType = 'general';
+
+    /**
+     * Constructor.
+     *
+     * @param string $name The name of the supplier.
+     * @param array<string> $domain The domain(s) associated with the supplier.
+     * @param string $policy (Optional) The policy of the supplier.
+     * @param bool $requiresAccept (Optional) Whether the supplier requires acceptance.
+     * @param string $systemType (Optional) The system type of the supplier.
+     */
     public function __construct(
         string $name,
         array $domain,
