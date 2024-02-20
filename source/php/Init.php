@@ -3,14 +3,14 @@
 namespace ComponentLibrary;
 
 use ComponentLibrary\Register;
-use HelsingborgStad\BladeEngineWrapper as Blade;
+use HelsingborgStad\GlobalBladeService\GlobalBladeService;
 
 class Init {
 
     private $register = null;
+    private static bool $internalViewPathsAdded = false;
     
     public function __construct($externalViewPaths) {
-        $blade = new Blade();
         $paths = array(
             'viewPaths' => array(),
             'controllerPaths' => array(),
@@ -19,9 +19,12 @@ class Init {
         // Add view path to renderer
         // In this case all components, their controller and view path are located under the same folder structure.
         // This may differ in a Wordpress child implementation.
-        $internalPaths = array(
-            __DIR__ . DIRECTORY_SEPARATOR . 'Component' . DIRECTORY_SEPARATOR,
-        );
+        $internalPaths = array();
+
+        if( !self::$internalViewPathsAdded ) {
+            $internalPaths = array( __DIR__ . DIRECTORY_SEPARATOR . 'Component' . DIRECTORY_SEPARATOR );
+            self::$internalViewPathsAdded = true;
+        }
         
         // Initialize all view paths so that this library is last
         $viewPaths = array_unique(
@@ -36,19 +39,20 @@ class Init {
                 $viewPaths
             );
         }
-
-        if(is_array($viewPaths) && !empty($viewPaths)) {
-            foreach ($viewPaths as $path) {
-                $directory = rtrim($path, DIRECTORY_SEPARATOR); 
-                if(is_dir($directory)) {
-                    $blade->addViewPath(rtrim($path, DIRECTORY_SEPARATOR));
-                }
-            }
-        } else {
+        
+        if(!is_array($viewPaths) || empty($viewPaths)) {  
             throw new \Exception("View paths not defined.");
+        } 
+        
+        $sanitizedViewPaths = array();
+        foreach ($viewPaths as $path) {
+            $directory = rtrim($path, DIRECTORY_SEPARATOR); 
+            if(is_dir($directory)) {
+                $sanitizedViewPaths[] = $directory;
+            }
         }
 
-        $bladeInstance = $blade->instance();
+        $bladeInstance = GlobalBladeService::getInstance($sanitizedViewPaths);
         
         $this->register = new Register($bladeInstance);
         
@@ -88,6 +92,6 @@ class Init {
 
     public function getEngine()
     {
-        return $this->register->getEngine();
+        return GlobalBladeService::getInstance();
     }
 }

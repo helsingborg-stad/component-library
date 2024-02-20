@@ -13,6 +13,8 @@
  * Domain Path:       /languages
  */
 
+use ComponentLibrary\Init as ComponentLibraryInit;
+
  // Protect agains direct file access
 if (! defined('WPINC')) {
     //die;
@@ -29,6 +31,12 @@ define('COMPONENTLIBRARY_TEMPLATE_PATH', COMPONENTLIBRARY_PATH . 'templates/');
 
 if(function_exists('plugin_basename')) {
     load_plugin_textdomain('component-library', false, plugin_basename(dirname(__FILE__)) . '/languages');
+}
+
+if( function_exists('add_action') ) {
+    add_action('plugins_loaded', function() {
+        new ComponentLibraryInit([]);
+    });
 }
 
 require_once COMPONENTLIBRARY_PATH . 'Public.php';
