@@ -3,12 +3,14 @@
 namespace ComponentLibrary;
 
 use ComponentLibrary\Register;
-use HelsingborgStad\GlobalBladeService\GlobalBladeService;
+use HelsingborgStad\BladeService\BladeService;
+use HelsingborgStad\BladeService\BladeServiceInterface;
 
 class Init {
 
     private $register = null;
     private static bool $internalViewPathsAdded = false;
+    private BladeServiceInterface $bladeService;
     
     public function __construct($externalViewPaths) {
         $paths = array(
@@ -52,9 +54,8 @@ class Init {
             }
         }
 
-        $bladeInstance = GlobalBladeService::getInstance($sanitizedViewPaths);
-        
-        $this->register = new Register($bladeInstance);
+        $this->bladeService = new BladeService($sanitizedViewPaths);
+        $this->register = new Register($this->bladeService);
         
         // Initialize all controller paths so that this library is last
         $controllerPaths = array_unique(
@@ -90,8 +91,8 @@ class Init {
         }
     }
 
-    public function getEngine()
+    public function getEngine():BladeServiceInterface
     {
-        return GlobalBladeService::getInstance();
+        return $this->bladeService;
     }
 }
