@@ -4,6 +4,9 @@ namespace ComponentLibrary\Component\Pagination;
 
 class Pagination extends \ComponentLibrary\Component\BaseController  
 {
+
+    //Handles temporary working list of items
+    private $tmpList = [];
     
     public function init() {
         //Extract array for eazy access (fetch only)
