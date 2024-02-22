@@ -17,7 +17,7 @@
     
     @typography([
         "element" => "h2",
-        "variant" => "marketing",
+        "variant" => "h2",
         "classList" => [
             "u-margin__top--8"
         ]
