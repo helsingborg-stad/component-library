@@ -55,7 +55,11 @@ class Icon extends \ComponentLibrary\Component\BaseController
     }
 
     private function iconIsSvg($icon)
-    {
+    {   
+        if( !is_string($icon) ) {
+            return false;
+        }
+
         return str_ends_with($icon, '.svg') !== false;
     }
 
@@ -68,6 +72,10 @@ class Icon extends \ComponentLibrary\Component\BaseController
      */
     private function createIconModifier($icon)
     {
+        if( is_null($icon) ) {
+            return "";
+        }
+
         return $this->getBaseClass(
             str_replace("_", "-", $icon),
             true

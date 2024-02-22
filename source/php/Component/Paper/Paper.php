@@ -4,8 +4,6 @@ namespace ComponentLibrary\Component\Paper;
 
 class Paper extends \ComponentLibrary\Component\BaseController 
 {
-    private $compParams = []; 
-
     public function init() {
         //Extract array for eazy access (fetch only)
         extract($this->data);
