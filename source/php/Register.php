@@ -185,7 +185,7 @@ class Register
      * @param string $componentSlug The slug of the component being checked.
      * @return void
      */
-    public function handleTypingsErrors($viewData, $argsTypes = false, $componentSlug) {
+    public function handleTypingsErrors($viewData, $argsTypes, $componentSlug) {
         
         if (empty((array) $argsTypes) || (empty($viewData) && !is_array($viewData))) { 
             return; 

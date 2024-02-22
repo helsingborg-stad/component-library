@@ -156,7 +156,8 @@ class BaseController
         if (!array_key_exists($slotKey, $this->data)) {
             return false;
         }
-        if (empty($this->accessProtected($this->data[$slotKey], "html"))) {
+
+        if (empty($this->accessProtected($this->data[$slotKey], "contents"))) {
             return false;
         }
         return true;
