@@ -9,7 +9,6 @@ use HelsingborgStad\BladeService\BladeServiceInterface;
 class Init {
 
     private $register = null;
-    private static bool $internalViewPathsAdded = false;
     private BladeServiceInterface $bladeService;
     
     public function __construct($externalViewPaths) {
@@ -21,13 +20,8 @@ class Init {
         // Add view path to renderer
         // In this case all components, their controller and view path are located under the same folder structure.
         // This may differ in a Wordpress child implementation.
-        $internalPaths = array();
+        $internalPaths = array( __DIR__ . DIRECTORY_SEPARATOR . 'Component' . DIRECTORY_SEPARATOR );
 
-        if( !self::$internalViewPathsAdded ) {
-            $internalPaths = array( __DIR__ . DIRECTORY_SEPARATOR . 'Component' . DIRECTORY_SEPARATOR );
-            self::$internalViewPathsAdded = true;
-        }
-        
         // Initialize all view paths so that this library is last
         $viewPaths = array_unique(
             array_merge($paths['viewPaths'], $internalPaths)
