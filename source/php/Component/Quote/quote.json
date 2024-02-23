@@ -1,0 +1,22 @@
+{
+    "slug": "quote",
+    "default": {
+        "image": {},
+        "content": "",
+        "footer": ""
+    },
+    "description": {
+        "image": "The image as an object where the src key is the image url.",
+        "content": "Main content of the quote.",
+        "footer": "Can contain the author of the quote or any other information."
+    },
+    "view": "quote.blade.php",
+    "dependency": {
+        "sass": {
+            "components": [
+                "typography",
+                "image"
+            ]
+        }
+    }
+}
