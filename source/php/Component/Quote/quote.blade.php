@@ -1,10 +1,18 @@
 <div class="{{ $class }}" {!! $attribute !!}>
-    @image($image)
-    @endimage
-    @typography([])
-        {{ $content }}
-    @endtypography
-    @typography([])
-        {{ $footer }}
-    @endtypography
+    @if($content)
+        @typography([
+        ])
+            {{$content}}
+        @endtypography
+    @endif
+    @if($footer)
+        @typography([
+        ])
+            {{$footer}}
+        @endtypography
+    @endif
+    @if($image)
+        @image((array) $image)
+        @endimage
+    @endif
 </div>

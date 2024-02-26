@@ -10,6 +10,13 @@
         "content": "Main content of the quote.",
         "footer": "Can contain the author of the quote or any other information."
     },
+    "types": {
+        "content": "string|false",
+        "footer": "string|false",
+        "image": "object|false",
+        "slot": "object",
+        "__laravel_slots": "array"
+    },
     "view": "quote.blade.php",
     "dependency": {
         "sass": {
