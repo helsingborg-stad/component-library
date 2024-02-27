@@ -26,12 +26,12 @@ class Imageinput extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = 'c-imageinput--area';
         }
 
-        if($filesMax) {
+        if(!empty($filesMax)) {
             $this->data['attributeList']['filesMax'] = $filesMax;
         }
         
         // Aspect ratio for preview image
-        $this->data['aspectRatio'] = in_array($aspectRatio, self::ALLOWED_ASPECT_RATIOS) ? $aspectRatio : self::DEFAULT_ASPECT_RATIO;
+        $this->data['aspectRatio'] = !empty($aspectRatio) && in_array($aspectRatio, self::ALLOWED_ASPECT_RATIOS) ? $aspectRatio : self::DEFAULT_ASPECT_RATIO;
         $this->data['aspectRatioClass'] = 'u-ratio-' . str_replace(':', '-', $this->data['aspectRatio']);
     }
 }
