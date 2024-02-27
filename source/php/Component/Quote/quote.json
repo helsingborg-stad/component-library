@@ -13,9 +13,7 @@
     "types": {
         "content": "string|false",
         "footer": "string|false",
-        "image": "object|false",
-        "slot": "object",
-        "__laravel_slots": "array"
+        "image": "object|false"
     },
     "view": "quote.blade.php",
     "dependency": {
