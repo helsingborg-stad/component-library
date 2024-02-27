@@ -198,7 +198,7 @@ class Register
                 if (!in_array(gettype($value), $types)) {
                     $this->triggerError('The parameter <b>"' . $key . '"</b> in the <b>' . $componentSlug . '</b> component should be of type <b>"' . $argsTypes->{$key} . '"</b> but was recieved as type <b>"' . gettype($value) . '"</b>.');
                 }
-            } else {
+            } elseif(!in_array($key, ['__laravel_slots', 'slot'])) {
                 $this->triggerError('The parameter ' . '<b>"' . $key . '"</b> is not recognized in the component <b>"' . $componentSlug .'"</b>'); 
             }
         }
