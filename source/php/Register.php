@@ -186,7 +186,10 @@ class Register
      * @return void
      */
     public function handleTypingsErrors($viewData, $argsTypes, $componentSlug) {
-        
+        if (defined('WP_CLI')) {
+            return;
+        }
+
         if (empty((array) $argsTypes) || (empty($viewData) && !is_array($viewData))) { 
             return; 
         }
