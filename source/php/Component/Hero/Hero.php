@@ -31,6 +31,7 @@ class Hero extends \ComponentLibrary\Component\BaseController
 
         //Create image style tag
         $this->data['imageStyle'] = [];
+        $this->data['imageStyleString'] = "";
 
         //Add image to image styles
         if ($image) {
