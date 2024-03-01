@@ -186,7 +186,8 @@ class Register
      * @return void
      */
     public function handleTypingsErrors($viewData, $argsTypes, $componentSlug) {
-        if (defined('WP_CLI')) {
+
+        if ($this->shouldHideTypingsErrors()) {
             return;
         }
 
@@ -205,6 +206,16 @@ class Register
                 $this->triggerError('The parameter ' . '<b>"' . $key . '"</b> is not recognized in the component <b>"' . $componentSlug .'"</b>'); 
             }
         }
+    }
+
+    /**
+     * Determines whether typing errors should be hidden.
+     *
+     * @return bool Returns true if typing errors should be hidden, false otherwise.
+     */
+    private function shouldHideTypingsErrors() 
+    {
+        return (defined('WP_ENVIRONMENT_TYPE') && WP_ENVIRONMENT_TYPE === 'production') || defined('WP_CLI');
     }
 
     /**
