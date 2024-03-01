@@ -190,6 +190,10 @@ class Register
             return;
         }
 
+        if (defined('WP_ENVIRONMENT_TYPE') && WP_ENVIRONMENT_TYPE === 'production') {
+            return;
+        }
+
         if (empty((array) $argsTypes) || (empty($viewData) && !is_array($viewData))) { 
             return; 
         }
