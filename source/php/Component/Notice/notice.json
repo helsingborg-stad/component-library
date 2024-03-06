@@ -14,7 +14,7 @@
     },
     "types": {
         "type": "string",
-        "message": "object",
+        "message": "array|object",
         "icon": "array|object",
         "stretch": "boolean" 
     },
