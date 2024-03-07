@@ -9,7 +9,8 @@
         "name": false,
     	"options": false,
         "icon": "info",
-        "cover": false
+        "cover": false,
+		"modifier": ""
     },
     "description": {
        "labels" : "JSON string of an object containing button, title and info labels",
@@ -18,6 +19,18 @@
        "policy" : "URL to third party website policy",
        "host" : "host ex. youtube.com",
        "name" : "name of the host"
+    },
+    "types": {
+        "labels": "array|boolean",
+        "height": "boolean|string",
+        "src": "boolean|array",
+        "policy": "boolean",
+        "host": "boolean",
+        "name": "boolean",
+    	"options": "boolean",
+        "icon": "string",
+        "cover": "boolean",
+        "modifier": "string"
     },
     "view": "acceptance.blade.php",
     "dependency": {
