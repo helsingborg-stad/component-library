@@ -27,6 +27,20 @@
         "removeCaption": "Shows only the alt-text removing the image caption and byline"
 
     },
+    "types": {
+        "src": "boolean|string",
+        "alt": "string",
+        "caption": "string",
+        "byline": "boolean",
+        "fullWidth": "boolean",
+        "rounded": "boolean",
+        "openModal": "boolean",
+        "placeholderText": "string",
+        "placeholderIcon": "string",
+        "placeholderIconSize": "string",
+        "imgAttributeList": "array",
+        "removeCaption": "boolean"
+    },
     "view": "image.blade.php",
     "dependency": {
         "sass": {
