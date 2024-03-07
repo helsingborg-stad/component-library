@@ -35,7 +35,7 @@ class Icon extends \ComponentLibrary\Component\BaseController
                 $this->createIconModifier($icon),
                 $this->getBaseClass() . "--material",
                 $this->getBaseClass() . "--material-" . $icon,
-                "material-icons"
+                "material-symbols-outlined"
             ]);
         }
 
