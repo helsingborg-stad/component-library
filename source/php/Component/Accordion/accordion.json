@@ -28,6 +28,20 @@
         "taxonomy": "Array of taxonomies such as tags",
         "taxonomyPosition":  "Taxonomy position like top or below"
     },
+    "types": {
+        "id": "string",
+        "list": "array",
+        "beforeHeading": "string",
+        "afterHeading": "string",
+        "beforeContent": "string",
+        "afterContent": "string",
+        "componentElement": "string",
+        "sectionElement": "string",
+        "sectionHeadingElement": "string",
+        "sectionContentElement": "string",
+        "taxonomy": "array",
+        "taxonomyPosition": "string"
+    },
     "view": "accordion.blade.php",
     "dependency": {
         "sass": {
