@@ -1,12 +1,9 @@
 <!-- icon.blade.php -->
 @if ($icon)
     <{{ $componentElement }} class="{{ $class }}" {!! $attribute !!}>
-        <span data-nosnippet translate="no" aria-hidden="true">
-            @if ($isSvg)
-                <img src="{{ $icon }}" alt="{{ $label }}" />
-            @else
-                {{ $icon }}
-            @endif
-        </span>
-        </{{ $componentElement }}>
+        @if ($isSvg)
+            <img src="{{ $icon }}" alt="{{ $label }}" />
+        @endif
+        {{ $icon }}
+    </{{ $componentElement }}>
 @endif
