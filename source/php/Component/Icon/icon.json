@@ -9,7 +9,7 @@
         "componentElement": "span",
         "filled": true,
         "isSvg": false
-    },
+        },
     "description": {
         "size": "Sizes: xs, sm, md, lg, xl, xxl",
         "label": "A label on the icon",
@@ -19,6 +19,16 @@
         "componentElement": "Icon HTML tag",
         "filled": "If the icons should be filled or not"
     },
+    "types": {
+        "size": "string",
+        "label": "string",
+        "icon": "string",
+        "color": "string",
+        "customColor": "string",
+        "componentElement": "string",
+        "filled": "boolean",
+        "isSvg": "boolean"
+        },
     "view": "icon.blade.php",
     "dependency": {
         "sass": {
