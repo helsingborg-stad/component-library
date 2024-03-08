@@ -39,6 +39,10 @@ class Icon extends \ComponentLibrary\Component\BaseController
             ]);
         }
 
+        if (!empty($filled)) {
+            $this->data['classList'][] = 'material-symbols-outlined--filled';
+        }
+
         if (!empty($customColor)) {
             $this->data['attributeList']['style'] = 'color:' . $customColor . ';';
         } else {

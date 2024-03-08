@@ -5,7 +5,7 @@
             @if ($isSvg)
                 <img src="{{ $icon }}" alt="{{ $label }}" />
             @else
-                {{ $icon }}{{ $filled ? '' : '_outline' }}
+                {{ $icon }}
             @endif
         </span>
         </{{ $componentElement }}>
