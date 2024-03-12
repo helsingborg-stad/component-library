@@ -24,8 +24,8 @@
         "time_since_cap": "string",
         "format": "string",
         "action": "string",
-        "labels": "array",
-        "labelsPlural": "array"
+        "labels": "object|array",
+        "labelsPlural": "object|array"
     },
     "view": "date.blade.php",
     "dependency": {
