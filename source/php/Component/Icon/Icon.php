@@ -13,6 +13,7 @@ class Icon extends \ComponentLibrary\Component\BaseController
         'key'  => "Label"
     ];
     private $altTextUndefined = "Undefined";
+    private $compParams = [];
 
     public function init()
     {
