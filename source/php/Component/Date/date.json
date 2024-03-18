@@ -14,7 +14,7 @@
         "time_since": "Will return the date since.",
         "time_since_cap": "How long back to spell out time since",
         "format": "Present date's in this format. Default: D d M Y",
-        "action": "What to do with the inputted date: formatDate, timesince, timeuntil",
+        "action": "What to do with the inputted date: formatDate, timesince, timeuntil. Can be false to just output the timestamp.",
         "labels": "Array containing translations valid keys: year, month, week, day, hour, minute, second",
         "labelsPlural": "Array containing translations valid keys: year, month, week, day, hour, minute, second"
     },
@@ -23,7 +23,7 @@
         "time_since": "boolean",
         "time_since_cap": "string",
         "format": "string",
-        "action": "string",
+        "action": "string|boolean",
         "labels": "object|array",
         "labelsPlural": "object|array"
     },
