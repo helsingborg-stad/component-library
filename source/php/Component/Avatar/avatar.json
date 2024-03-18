@@ -12,6 +12,12 @@
         "name": "Persons full name",
         "size": "sm,md,lg,full"
     },
+    "types": {
+        "image": "string",
+        "icon": "array",
+        "name": "string",
+        "size": "string"
+    },
     "view": "avatar.blade.php",
     "dependency": {
         "sass": {
