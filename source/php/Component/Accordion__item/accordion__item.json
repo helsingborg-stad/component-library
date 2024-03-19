@@ -28,6 +28,21 @@
         "taxonomyPosition":  "Taxonomy position like top or below",
         "icon": "Icon to show for expand functionality."
     },
+    "types":
+    {
+        "id": "string",
+        "heading": "string",
+        "beforeHeading": "string",
+        "afterHeading": "string",
+        "beforeContent": "string",
+        "afterContent": "string",
+        "sectionElement": "string",
+        "sectionHeadingElement": "string",
+        "sectionContentElement": "string",
+        "taxonomy": "array",
+        "taxonomyPosition":  "string",
+        "icon": "string"
+    },
     "view": "accordion__item.blade.php",
     "dependency": {
         "sass": {
