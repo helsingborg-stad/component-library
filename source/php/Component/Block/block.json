@@ -26,6 +26,20 @@
         "dateBadge": "Display date as a badge.",
         "icon": "An array with the same specification as the icon component"
     },
+    "types": {
+        "heading": "string",
+        "content": "string|array",
+        "meta": "string",
+        "secondaryMeta": "string|array",
+        "image": "array|boolean",
+        "link": "string",
+        "ratio": "string",
+        "date": "string|boolean",
+        "dateBadge": "boolean",
+        "icon": "boolean",
+        "postId": "boolean",
+        "postType": "string"
+    },
     "view": "block.blade.php",
     "dependency": {
         "sass": {
