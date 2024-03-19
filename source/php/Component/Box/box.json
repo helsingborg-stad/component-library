@@ -22,6 +22,17 @@
         "image": "Image object (see image component), svg or raster image.",
         "icon": "Icon name as a string."
     },
+    "types":{
+        "heading": "string",
+        "content": "string",
+        "meta": "string|array",
+        "secondaryMeta": "string|array",
+        "link": "string",
+        "ratio": "string",
+        "date": "boolean",
+        "image": "array|object|boolean",
+        "icon": "boolean|string"
+    },
     "view": "box.blade.php",
     "dependency": {
         "sass": {
