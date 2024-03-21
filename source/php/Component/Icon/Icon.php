@@ -36,8 +36,14 @@ class Icon extends \ComponentLibrary\Component\BaseController
                 $this->createIconModifier($icon),
                 $this->getBaseClass() . "--material",
                 $this->getBaseClass() . "--material-" . $icon,
-                "material-icons"
+                "material-symbols-outlined"
             ]);
+
+            $this->data['attributeList']['material-symbol'] = $icon;
+        }
+
+        if (!empty($filled)) {
+            $this->data['classList'][] = 'material-symbols-outlined--filled';
         }
 
         if (!empty($customColor)) {
@@ -53,6 +59,9 @@ class Icon extends \ComponentLibrary\Component\BaseController
         $this->data['attributeList']['aria-label'] = $this->getAltText($icon);
         $this->data['attributeList']['alt'] = $this->getAltText($icon);
         $this->data['attributeList']['data-nosnippet'] = "";
+        $this->data['attributeList']['translate'] = "no";
+        $this->data['attributeList']['aria-hidden'] = "true";
+
     }
 
     private function iconIsSvg($icon)
