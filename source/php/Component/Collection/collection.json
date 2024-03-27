@@ -20,6 +20,16 @@
         "sharpTop": "Makes the top really sharp. Yep.",
         "unbox": "Removes the border."
     },
+    "types":{
+        "componentElement": "string",
+        "list": "array|boolean",
+        "bordered": "boolean",
+        "compact": "boolean",
+        "sharp": "boolean",
+        "sharpBottom": "boolean",
+        "sharpTop": "boolean",
+        "unbox": "boolean"
+    },
     "view": "collection.blade.php",
     "dependency": {
         "sass": {
