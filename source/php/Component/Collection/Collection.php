@@ -35,7 +35,7 @@ class Collection extends \ComponentLibrary\Component\BaseController
         }
 
         //Input list handling
-        if($list) {
+        if(!empty($list) && is_array($list)) {
             foreach($this->data['list'] as &$item) {
                 
                 //Handle non multidimensional input
