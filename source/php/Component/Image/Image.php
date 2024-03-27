@@ -25,10 +25,10 @@ class Image extends \ComponentLibrary\Component\BaseController
         }
 
         //Inherit the alt text
-        if (!$alt && $caption) {
-            $this->data['alt'] = $this->data['caption'];
+        if (!$alt) {
+            $this->data['alt'] = !empty($caption) ? $caption : "";
         }
-
+        
         if (!empty($byline)) {
             $this->data['byline'] = $byline;
         }
@@ -39,7 +39,7 @@ class Image extends \ComponentLibrary\Component\BaseController
         } else {
             $this->data['heading'] = "";
         }
-        
+
         if (empty($isPanel)) {
             $this->data['isPanel'] = false;
         }
@@ -53,15 +53,15 @@ class Image extends \ComponentLibrary\Component\BaseController
         }
 
         $this->data['imgAttributeList']['class'][] = $this->getBaseClass() . '__image';
-        
+
         if ($openModal) {
             $this->data['modalId'] = uniqid();
             $this->data['imgAttributeList']['data-open'] = $this->data['modalId'];
             $this->data['imgAttributeList']['class'][] = $this->getBaseClass() . '__modal';
         }
-        
+
         $this->data['imgAttributeList']['class'] = implode(' ', $this->data['imgAttributeList']['class']);
-        
+
         $this->data['imgAttributes'] = self::buildAttributes(
             $this->data['imgAttributeList']
         );
