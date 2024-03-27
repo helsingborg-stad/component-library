@@ -29,9 +29,9 @@
     },
     "types": {
         "src": "boolean|string",
-        "alt": "string|null",
-        "caption": "string",
-        "byline": "string",
+        "alt": "string|NULL",
+        "caption": "string|boolean",
+        "byline": "string|NULL",
         "fullWidth": "boolean",
         "rounded": "boolean",
         "openModal": "boolean",
