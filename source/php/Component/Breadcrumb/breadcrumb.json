@@ -16,6 +16,14 @@
         "listItemType": "The item type: li",
         "prefixLabel": "The label before the breadcrumb items (screen reader only)."
     },
+    "types": {
+        "list": "array",
+        "label": "string",
+        "componentElement": "string",
+        "listType": "string",
+        "listItemType": "string",
+        "prefixLabel": "string"
+    },
     "view": "breadcrumb.blade.php",
     "dependency": {
         "sass": {
