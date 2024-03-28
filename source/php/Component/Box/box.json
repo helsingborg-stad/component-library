@@ -7,9 +7,9 @@
         "secondaryMeta": "",
         "link": "",
         "ratio": "1:1",
-        "date": false,
-        "image": false,
-        "icon": false
+        "date": "",
+        "image": [],
+        "icon": ""
     },
     "description": {
         "heading": "The heading of the block",
@@ -21,6 +21,17 @@
         "date": "Preformatted date",
         "image": "Image object (see image component), svg or raster image.",
         "icon": "Icon name as a string."
+    },
+    "types":{
+        "heading": "string",
+        "content": "string",
+        "meta": "string|array",
+        "secondaryMeta": "string|array",
+        "link": "string",
+        "ratio": "string",
+        "date": "string",
+        "image": "array|object",
+        "icon": "string"
     },
     "view": "box.blade.php",
     "dependency": {
