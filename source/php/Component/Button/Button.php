@@ -41,8 +41,8 @@ class Button extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['href'] = $href;
         }
 
-        if ($text) {
-            $this->data['attributeList']['aria-label'] = $text;
+        if ($ariaLabel || $text) {
+            $this->data['attributeList']['aria-label'] = $ariaLabel ? $ariaLabel : $text;
         }
 
         if ($fullWidth) {
@@ -73,10 +73,6 @@ class Button extends \ComponentLibrary\Component\BaseController
             $this->data['classListText'] = implode(" ", $classListText);
         } else {
             $this->data['classListText'] = "";
-        }
-
-        if(!empty($this->data['ariaLabel'])) {
-            $this->data['attributeList']['aria-label'] = $this->data['ariaLabel'];
         }
 
         if (empty($disableColor)) {

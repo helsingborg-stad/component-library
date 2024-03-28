@@ -9,9 +9,9 @@
       'icon' => $item['icon']['icon'] ?? null,
       'size' => $item['icon']['size'] ?? null,
       'classList' => $item['icon']['classList'] ?? [],
-      'attributeList' => [
+      'attributeList' => array_merge($item['icon']['attributeList'] ?? [], [
         'style' => 'background-color:' . ($item['color'] ?? '') . ';'
-      ]
+      ])
     ])
     @endicon
     @if ($item['label'])

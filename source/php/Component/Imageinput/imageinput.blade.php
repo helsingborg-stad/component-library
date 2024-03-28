@@ -1,5 +1,5 @@
 <div class="{{$baseClass}} c-field">
-    @if(!empty($label) && !$hideLabel)
+    @if(!empty($label) && empty($hideLabel))
         <label class="{{$baseClass}}__label c-field__label" for="{{ $id }}-input" id="label_{{ $id }}">
             {{$label}}
             @if($required)
