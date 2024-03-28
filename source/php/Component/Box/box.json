@@ -7,9 +7,9 @@
         "secondaryMeta": "",
         "link": "",
         "ratio": "1:1",
-        "date": false,
-        "image": false,
-        "icon": false
+        "date": "",
+        "image": [],
+        "icon": ""
     },
     "description": {
         "heading": "The heading of the block",
@@ -29,9 +29,9 @@
         "secondaryMeta": "string|array",
         "link": "string",
         "ratio": "string",
-        "date": "boolean",
-        "image": "array|object|boolean",
-        "icon": "boolean|string"
+        "date": "string",
+        "image": "array|object",
+        "icon": "string"
     },
     "view": "box.blade.php",
     "dependency": {
