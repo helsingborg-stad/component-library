@@ -17,7 +17,7 @@
         "prefixLabel": "The label before the breadcrumb items (screen reader only)."
     },
     "types": {
-        "list": "array|object",
+        "list": "array",
         "label": "string",
         "componentElement": "string",
         "listType": "string",
