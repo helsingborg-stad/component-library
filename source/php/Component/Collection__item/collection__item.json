@@ -16,6 +16,15 @@
         "subItem": "Slot for providing subitems (automatically wrapped in new collection, with subcollection flag. )",
         "bordered": "Shows a border around the item."
     },
+    "types": {
+        "componentElement": "string",
+        "prefix": "object",
+        "icon": "string",
+        "action": "array",
+        "secondary": "object",
+        "link": "string",
+        "bordered": "boolean"
+    },
     "view": "collection__item.blade.php",
     "dependency": {
         "sass": {
