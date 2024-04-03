@@ -18,7 +18,6 @@
 
             @link(['href' => $author_url, 'classList' => ['c-comment__link']])
                 @typography([
-                    "variant" => "title",
                     "element" => "h6",
                     "classList" => [$baseClass.'__author']
                 ])
