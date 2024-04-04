@@ -10,6 +10,11 @@
         "includeTime": "Will add a box with timestamp below the date.",
         "size": "The size of the datebadge. Can be either 'sm' or 'md'."
     },
+    "types": {
+        "date": "string",
+        "includeTime": "boolean",
+        "size": "string"
+    },
     "view": "datebadge.blade.php",
     "dependency": {
         "sass": {
