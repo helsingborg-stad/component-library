@@ -5,7 +5,10 @@
         "styles": []
     },
     "description": {
-       
+    },
+    "types":{
+        "componentElement": "string",
+        "styles": "array"
     },
     "view": "inlineCssWrapper.blade.php",
     "dependency": {
