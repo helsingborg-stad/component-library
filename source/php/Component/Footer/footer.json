@@ -6,7 +6,7 @@
         "id": null,
         "logotype": "/",
         "logotypeHref": "",
-        "links": {},
+        "links": [],
         "subfooterLogotype": "",
         "prefooter": null,
         "postfooter": null
@@ -27,7 +27,7 @@
         "id": "string",
         "logotype": "string",
         "logotypeHref": "string",
-        "links": "object|array",
+        "links": "array",
         "subfooterLogotype": "string",
         "prefooter": "string",
         "postfooter": "string"
