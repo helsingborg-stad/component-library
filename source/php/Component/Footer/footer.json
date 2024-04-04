@@ -9,7 +9,8 @@
         "links": [],
         "subfooterLogotype": "",
         "prefooter": null,
-        "postfooter": null
+        "postfooter": null,
+        "footerareas": {}
     },
     "descriptions": {
         "componentElement": "The element tag to render",
@@ -30,7 +31,8 @@
         "links": "array",
         "subfooterLogotype": "string",
         "prefooter": "string",
-        "postfooter": "string"
+        "postfooter": "string",
+        "footerareas": "object"
     },
     "view": "footer.blade.php",
     "dependency": {
