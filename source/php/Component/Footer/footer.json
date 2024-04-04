@@ -8,8 +8,8 @@
         "logotypeHref": "",
         "links": {},
         "subfooterLogotype": "",
-        "prefooter": false,
-        "postfooter": false
+        "prefooter": null,
+        "postfooter": null
     },
     "descriptions": {
         "componentElement": "The element tag to render",
@@ -20,6 +20,17 @@
         "subfooterLogotype": "Subfooter logotype url.",
         "prefooter": "Arbitrary HTML placed before the main footer content. Wrapped in container and 12col grid.",
         "postfooter": "Arbitrary HTML placed after the main footer content. Wrapped in container and 12col grid."
+    },
+    "types": {
+        "componentElement": "string",
+        "slotOnly": "boolean",
+        "id": "string",
+        "logotype": "string",
+        "logotypeHref": "string",
+        "links": "object|array",
+        "subfooterLogotype": "string",
+        "prefooter": "string",
+        "postfooter": "string"
     },
     "view": "footer.blade.php",
     "dependency": {
