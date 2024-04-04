@@ -30,14 +30,13 @@
         {{-- Previous button --}}
         @if ($navigation)
             @button([
-                'text' => '',
                 'icon' => 'chevron_left',
                 'color' => 'default',
                 'style' => 'basic',
                 'ariaLabel' => $ariaLabels->prev,
                 'attributeList' => ['data-prev' => ''],
                 'classList' => [$baseClass . '__prev'],
-                'label' => 'Slide to previous',
+                'text' => 'Slide to previous',
                 'size' => 'lg',
             ])
             @endbutton
@@ -48,14 +47,13 @@
         {{-- Next button --}}
         @if ($navigation)
             @button([
-                'text' => '',
                 'icon' => 'chevron_right',
                 'color' => 'default',
                 'style' => 'basic',
                 'ariaLabel' => $ariaLabels->next,
                 'attributeList' => ['data-next' => ''],
                 'classList' => [$baseClass . '__next'],
-                'label' => 'Slide to next',
+                'text' => 'Slide to next',
                 'size' => 'lg',
             ])
             @endbutton
