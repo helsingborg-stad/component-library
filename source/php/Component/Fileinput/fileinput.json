@@ -27,6 +27,20 @@
         "required": "If field is required",
         "filesMax": "Maximum number of files (false, int)"
     },
+    "types": {
+        "display": "string",
+        "decription": "string",
+        "name": "string",
+        "accept": "string",
+        "multiple": "boolean",
+        "beforeLabel": "string",
+        "afterLabel": "string",
+        "label": "string",
+        "buttonLabel": "string",
+        "icon": "string",
+        "required": "boolean",
+        "filesMax": "integer|boolean"
+    },
     "view": "fileinput.blade.php",
     "dependency": {
         "sass": {
