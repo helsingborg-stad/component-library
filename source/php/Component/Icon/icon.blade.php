@@ -4,6 +4,5 @@
         @if ($isSvg)
             <img src="{{ $icon }}" alt="{{ $label }}" />
         @endif
-        {{ $icon }}
     </{{ $componentElement }}>
 @endif
