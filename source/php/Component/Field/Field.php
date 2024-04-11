@@ -212,6 +212,7 @@ class Field extends \ComponentLibrary\Component\Form\Form
         // Handle required, as attribute and var
         if ($required) {
             $this->data['fieldAttributeList']['required']       = "required";
+            $this->data['fieldAttributeList']['js-required']    = "";
             $this->data['fieldAttributeList']['data-required']  = "1";
             $this->data['fieldAttributeList']['aria-required']  = "true";
         }
