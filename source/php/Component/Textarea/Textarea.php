@@ -35,6 +35,7 @@ class Textarea extends \ComponentLibrary\Component\BaseController
         if ($required) {
             $this->data['attributeList']['required'] = "required";
             $this->data['attributeList']['data-required'] = "1";
+            $this->data['attributeList']['data-js-required'] = "";
             $this->data['attributeList']['aria-required'] = "true";
         }
     }

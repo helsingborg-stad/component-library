@@ -7,10 +7,11 @@
         ],
         $attributeList ?? []
     ),
-    'label' => $label,
-    'helperText' => $helperText ?? $invalidMessage ?? '',
-    'placeholder' => $placeholder ?? '',
-    'isValid' => !empty($invalidMessage) ? false : null,
-    'multiline'      => true,
+    'label'         => $label,
+    'helperText'    => $helperText ?? $invalidMessage ?? '',
+    'placeholder'   => $placeholder ?? '',
+    'isValid'       => !empty($invalidMessage) ? false : null,
+    'multiline'     => true,
+    'required'      => $required ?? false,
 ])
 @endfield

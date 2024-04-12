@@ -8,6 +8,7 @@
             required
             data-required="1"
             aria-required="true"
+            data-js-required
         @endif
         @if($checked !== false) checked @endif
         aria-checked="{{$checked ? 'true' : 'false'}}"
