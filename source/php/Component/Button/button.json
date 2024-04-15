@@ -56,7 +56,7 @@
     "componentElement":"string",
     "labelElement":"string",
     "ripple": "boolean",
-    "pressed": "boolean",
+    "pressed": "string",
     "toggle": "boolean",
     "icon": "string",
     "reversePositions": "boolean",
