@@ -9,7 +9,7 @@
     @endif
 
     @if($date && $dateBadge)
-        @datebadge(['date' => $date, 'classList' => ['u-margin--3']])
+        @datebadge(['date' => $date, 'classList' => ['u-margin--3', 'u-position--absolute@md', 'u-absolute--top-left@md']])
         @enddatebadge
     @endif
 
