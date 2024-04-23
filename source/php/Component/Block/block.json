@@ -29,7 +29,7 @@
     "types": {
         "heading": "string",
         "content": "string|array",
-        "meta": "string",
+        "meta": "string|array",
         "secondaryMeta": "string|array",
         "image": "array",
         "link": "string",
