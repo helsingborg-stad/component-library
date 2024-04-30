@@ -10,6 +10,7 @@
         "background_video": false,
         "desktop_image": "",
         "link": false,
+        "linkDescription": false,
         "containerColor": "",
         "alt": "",
         "cta": [],
