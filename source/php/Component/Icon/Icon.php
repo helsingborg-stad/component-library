@@ -56,12 +56,13 @@ class Icon extends \ComponentLibrary\Component\BaseController
 
         //Identify as an image
         $this->data['attributeList']['role'] = "img";
-        $this->data['attributeList']['aria-label'] = $this->getAltText($icon);
-        $this->data['attributeList']['alt'] = $this->getAltText($icon);
         $this->data['attributeList']['data-nosnippet'] = "";
         $this->data['attributeList']['translate'] = "no";
         $this->data['attributeList']['aria-hidden'] = "true";
 
+        if (empty($this->data['attributeList']['aria-label'])) {
+            $this->data['attributeList']['aria-label'] = $this->getAltText($icon);
+        }
     }
 
     private function iconIsSvg($icon)
