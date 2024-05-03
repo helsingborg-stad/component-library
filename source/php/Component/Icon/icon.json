@@ -29,7 +29,8 @@
         "customColor": "string",
         "componentElement": "string",
         "filled": "boolean",
-        "isSvg": "boolean"
+        "isSvg": "boolean",
+        "decorative": "boolean"
     },
     "view": "icon.blade.php",
     "dependency": {
