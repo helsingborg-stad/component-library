@@ -5,7 +5,7 @@
     'text' => $item['label'],
     'style' => $item['buttonStyle'] ?? $buttonStyle,
     'color' => $item['buttonColor'] ?? $buttonColor,
-    'href' => strlen($item['href']) <= 1 ? null : $item['href'],
+    'href' => $item['href'],
     'classList' => [
         $baseClass . '__button',
     ],
