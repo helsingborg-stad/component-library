@@ -60,7 +60,7 @@ class Icon extends \ComponentLibrary\Component\BaseController
         $this->data['attributeList']['alt'] = $this->getAltText($icon);
         $this->data['attributeList']['data-nosnippet'] = "";
         $this->data['attributeList']['translate'] = "no";
-        $this->data['attributeList']['aria-hidden'] = "true";
+        $this->data['attributeList']['aria-hidden'] = $decorative ? "true" : "false";
 
     }
 
