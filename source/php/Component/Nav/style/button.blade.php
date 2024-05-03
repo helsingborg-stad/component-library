@@ -3,9 +3,9 @@
     'icon' => isset($item['icon']['icon']) ? $item['icon']['icon'] : false,
     'reversePositions' => true,
     'text' => $item['label'],
-    'style' => $buttonStyle,
-    'color' => $buttonColor,
-    'href' => $item['href'],
+    'style' => $item['buttonStyle'] ?? $buttonStyle,
+    'color' => $item['buttonColor'] ?? $buttonColor,
+    'href' => strlen($item['href']) <= 1 ? null : $item['href'],
     'classList' => [
         $baseClass . '__button',
     ],
