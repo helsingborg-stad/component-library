@@ -2,8 +2,6 @@
 
 namespace ComponentLibrary\Component\Icon;
 
-use ComponentLibrary\Component\Icon\Svg\SocialMedia;
-
 /**
  * Class Icon
  * @package ComponentLibrary\Component\Icon
@@ -15,14 +13,21 @@ class Icon extends \ComponentLibrary\Component\BaseController
         'key'  => "Label"
     ];
     private $altTextUndefined = "Undefined";
+    private $customIconsId = 'customIcons';
+    private $customIconsContentId = 'customIconsContent';
     protected array $compParams = [];
+
+    private static $iconsCache = [
+        'customIconsContent' => [],
+        'customIcons' => []
+    ];
 
     public function init()
     {
         //Extract array for easy access (fetch only)
         extract($this->data);
-
-        $socialMediaInstance = new SocialMedia($icon . ($filled ? '_filled' : ''));
+        self::$iconsCache[$this->customIconsId] = [];
+        $customSvgIcons = $this->getCustomSvgIcons();
 
         // Make data accessible
         $this->compParams = [
@@ -32,12 +37,12 @@ class Icon extends \ComponentLibrary\Component\BaseController
         ];
 
         $this->data['isSvgLink'] =  $this->iconIsSvg($icon);
-        $this->data['svgPath'] = $socialMediaInstance->getSvg();
 
         if ($this->data['isSvgLink']) {
             $this->data['classList'][] = $this->getBaseClass() . "--svg-link";
         } 
-        elseif ($this->data['svgPath']) {
+        elseif (array_key_exists($icon, $customSvgIcons)) {
+            $this->data['customIcon'] = $this->getCustomIconPath($customSvgIcons[$icon], $icon);
             $this->data['classList'][] = $this->getBaseClass() . "--svg-path";
         }
         else {
@@ -101,6 +106,74 @@ class Icon extends \ComponentLibrary\Component\BaseController
             str_replace("_", "-", $icon),
             true
         );
+    }
+
+    private function getCustomIconPath($path, $icon)
+    {
+        if (!empty(self::$iconsCache[$this->customIconsContentId][$icon])) {
+            return self::$iconsCache[$this->customIconsContentId][$icon];
+        }
+
+        $useWpCache = function_exists('wp_cache_get') && function_exists('wp_cache_set');
+
+        if ($useWpCache) {
+            $cachedIconContent = wp_cache_get($icon, 'customIconsContent');
+            if ($cachedIconContent !== false) {
+                self::$iconsCache[$this->customIconsContentId][$icon] = $cachedIconContent;
+                return $cachedIconContent;
+            }
+        }
+        
+        if (file_exists($path) && is_readable($path)) {
+            $contents = file_get_contents($path);
+            self::$iconsCache[$this->customIconsContentId][$icon] = $contents;
+        }
+
+        if ($useWpCache) {
+            wp_cache_set($icon, self::$iconsCache[$this->customIconsContentId][$icon], 'customIconsContent');
+        }
+
+        return $path;
+    }
+
+    private function getCustomSvgIcons() {
+        if (!empty(self::$iconsCache[$this->customIconsId])) {
+            return self::$iconsCache[$this->customIconsId];
+        }
+
+        $useWpCache = function_exists('wp_cache_get') && function_exists('wp_cache_set');
+
+        if ($useWpCache) {
+            $cachedIconList = wp_cache_get($this->customIconsId, 'customIcons');
+            if ($cachedIconList !== false) {
+                self::$iconsCache[$this->customIconsId] = $cachedIconList;
+                return $cachedIconList;
+            }
+        }
+  
+        if (function_exists('apply_filters')) {
+            $svgIcons = apply_filters(
+                'ComponentLibrary\Component\Icon\CustomSvgIcons',
+                glob(__DIR__ . '/Svg/*.svg')
+            );
+        } else {
+            $svgIcons = glob(__DIR__ . '/Svg/*.svg');
+        }
+
+        if (empty($svgIcons)) {
+            return [];
+        }
+
+        foreach ($svgIcons as $svgIcon) {
+            $iconName = pathinfo($svgIcon, PATHINFO_FILENAME);
+            self::$iconsCache['icons'][$iconName] = $svgIcon;
+        }
+    
+        if ($useWpCache) {
+            wp_cache_set($this->customIconsId, self::$iconsCache['icons'], 'customIcons');
+        }
+
+        return self::$iconsCache[$this->customIconsId];
     }
 
     /**
