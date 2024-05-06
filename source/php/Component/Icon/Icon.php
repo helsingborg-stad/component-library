@@ -2,6 +2,8 @@
 
 namespace ComponentLibrary\Component\Icon;
 
+use ComponentLibrary\Component\Icon\Svg\SocialMedia;
+
 /**
  * Class Icon
  * @package ComponentLibrary\Component\Icon
@@ -20,6 +22,8 @@ class Icon extends \ComponentLibrary\Component\BaseController
         //Extract array for easy access (fetch only)
         extract($this->data);
 
+        $socialMediaInstance = new SocialMedia($icon . ($filled ? '_filled' : ''));
+
         // Make data accessible
         $this->compParams = [
             'label'     => $label,
@@ -27,11 +31,16 @@ class Icon extends \ComponentLibrary\Component\BaseController
             'size'      => $size
         ];
 
-        $this->data['isSvg'] = $this->iconIsSvg($icon);
+        $this->data['isSvgLink'] =  $this->iconIsSvg($icon);
+        $this->data['svgPath'] = $socialMediaInstance->getSvg();
 
-        if ($this->data['isSvg']) {
-            $this->data['classList'][] = $this->getBaseClass() . "--svg";
-        } else {
+        if ($this->data['isSvgLink']) {
+            $this->data['classList'][] = $this->getBaseClass() . "--svg-link";
+        } 
+        elseif ($this->data['svgPath']) {
+            $this->data['classList'][] = $this->getBaseClass() . "--svg-path";
+        }
+        else {
             $this->data['classList'] = array_merge($this->data['classList'] ?? [], [
                 $this->createIconModifier($icon),
                 $this->getBaseClass() . "--material",
@@ -47,10 +56,13 @@ class Icon extends \ComponentLibrary\Component\BaseController
         }
 
         if (!empty($customColor)) {
-            $this->data['attributeList']['style'] = 'color:' . $customColor . ';';
+            $this->data['attributeList']['style'] = 
+                'color:' . $customColor . ';' . 
+                'stroke:' . $customColor . ';';
         } else {
             $this->setColor();
         }
+
         $this->appendSpace();
         $this->setSize();
 
