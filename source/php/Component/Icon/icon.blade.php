@@ -4,8 +4,8 @@
         @if ($isSvgLink)
             <img src="{{ $icon }}" alt="{{ $label }}" />
         @endif
-        @if ($svgPath) 
-            {!! $svgPath !!}
+        @if (!empty($customSvg)) 
+            {!! $customSvg !!}
         @endif
     </{{ $componentElement }}>
 @endif

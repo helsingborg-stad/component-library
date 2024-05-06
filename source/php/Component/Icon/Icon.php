@@ -26,8 +26,8 @@ class Icon extends \ComponentLibrary\Component\BaseController
     {
         //Extract array for easy access (fetch only)
         extract($this->data);
-        self::$iconsCache[$this->customIconsId] = [];
         $customSvgIcons = $this->getCustomSvgIcons();
+        $customIconName = $filled ? $icon . 'Filled' : $icon;
 
         // Make data accessible
         $this->compParams = [
@@ -41,8 +41,8 @@ class Icon extends \ComponentLibrary\Component\BaseController
         if ($this->data['isSvgLink']) {
             $this->data['classList'][] = $this->getBaseClass() . "--svg-link";
         } 
-        elseif (array_key_exists($icon, $customSvgIcons)) {
-            $this->data['customIcon'] = $this->getCustomIconPath($customSvgIcons[$icon], $icon);
+        elseif (array_key_exists($customIconName, $customSvgIcons)) {
+            $this->data['customSvg'] = $this->getCustomIconPath($customSvgIcons[$customIconName], $customIconName);
             $this->data['classList'][] = $this->getBaseClass() . "--svg-path";
         }
         else {
@@ -133,7 +133,7 @@ class Icon extends \ComponentLibrary\Component\BaseController
             wp_cache_set($icon, self::$iconsCache[$this->customIconsContentId][$icon], 'customIconsContent');
         }
 
-        return $path;
+        return self::$iconsCache[$this->customIconsContentId][$icon] ?? null;
     }
 
     private function getCustomSvgIcons() {
