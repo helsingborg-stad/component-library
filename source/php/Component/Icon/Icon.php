@@ -145,15 +145,8 @@ class Icon extends \ComponentLibrary\Component\BaseController
                 return $cachedIconList;
             }
         }
-  
-        if (function_exists('apply_filters')) {
-            $svgIcons = apply_filters(
-                'ComponentLibrary\Component\Icon\CustomSvgIcons',
-                glob(__DIR__ . '/Svg/*.svg')
-            );
-        } else {
-            $svgIcons = glob(__DIR__ . '/Svg/*.svg');
-        }
+
+        $svgIcons = $this->getSvgIconsFromPath();
 
         if (empty($svgIcons)) {
             return [];
@@ -169,6 +162,20 @@ class Icon extends \ComponentLibrary\Component\BaseController
         }
 
         return self::$iconsCache[$this->customIconsSvgPathList];
+    }
+
+    private function getSvgIconsFromPath() 
+    {
+        if (function_exists('apply_filters')) {
+            $svgIcons = apply_filters(
+                'ComponentLibrary\Component\Icon\CustomSvgIcons',
+                glob(__DIR__ . '/Svg/*.svg')
+            );
+        } else {
+            $svgIcons = glob(__DIR__ . '/Svg/*.svg');
+        }
+
+        return $svgIcons;
     }
 
     /**
