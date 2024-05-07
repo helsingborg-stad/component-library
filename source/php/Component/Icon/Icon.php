@@ -13,13 +13,12 @@ class Icon extends \ComponentLibrary\Component\BaseController
         'key'  => "Label"
     ];
     private $altTextUndefined = "Undefined";
-    private $customIconsId = 'customIcons';
-    private $customIconsContentId = 'customIconsContent';
-    protected array $compParams = [];
-
+    
+    private $customIconsSvgPathList = 'customIconsSvgPathList';
+    private $customIconsSvgContentList = 'customIconsSvgContentList';
     private static $iconsCache = [
-        'customIconsContent' => [],
-        'customIcons' => []
+        'customIconsSvgContentList' => [],
+        'customIconsSvgPathList' => []
     ];
 
     public function init()
@@ -28,13 +27,6 @@ class Icon extends \ComponentLibrary\Component\BaseController
         extract($this->data);
         $customSvgIcons = $this->getCustomSvgIcons();
         $customIconName = $filled ? $icon . 'Filled' : $icon;
-
-        // Make data accessible
-        $this->compParams = [
-            'label'     => $label,
-            'color'     => $color,
-            'size'      => $size
-        ];
 
         $this->data['isSvgLink'] =  $this->iconIsSvg($icon);
 
@@ -65,11 +57,12 @@ class Icon extends \ComponentLibrary\Component\BaseController
                 'color:' . $customColor . ';' . 
                 'stroke:' . $customColor . ';';
         } else {
-            $this->setColor();
+            $this->data['classList'][] = $this->setIconColorCssClass($color);
         }
 
-        $this->appendSpace();
-        $this->setSize();
+
+        $this->data['label'] = $this->getSpacedLabel($label);
+        $this->data['classList'][] = $this->setIconSizeCssClass($size);
 
         //Identify as an image
         $this->data['attributeList']['role'] = "img";
@@ -110,43 +103,43 @@ class Icon extends \ComponentLibrary\Component\BaseController
 
     private function getCustomIconPath($path, $icon)
     {
-        if (!empty(self::$iconsCache[$this->customIconsContentId][$icon])) {
-            return self::$iconsCache[$this->customIconsContentId][$icon];
+        if (!empty(self::$iconsCache[$this->customIconsSvgContentList][$icon])) {
+            return self::$iconsCache[$this->customIconsSvgContentList][$icon];
         }
 
         $useWpCache = function_exists('wp_cache_get') && function_exists('wp_cache_set');
 
         if ($useWpCache) {
-            $cachedIconContent = wp_cache_get($icon, 'customIconsContent');
+            $cachedIconContent = wp_cache_get($icon, 'customIconsSvgContentList');
             if ($cachedIconContent !== false) {
-                self::$iconsCache[$this->customIconsContentId][$icon] = $cachedIconContent;
+                self::$iconsCache[$this->customIconsSvgContentList][$icon] = $cachedIconContent;
                 return $cachedIconContent;
             }
         }
         
         if (file_exists($path) && is_readable($path)) {
             $contents = file_get_contents($path);
-            self::$iconsCache[$this->customIconsContentId][$icon] = $contents;
+            self::$iconsCache[$this->customIconsSvgContentList][$icon] = $contents;
         }
 
         if ($useWpCache) {
-            wp_cache_set($icon, self::$iconsCache[$this->customIconsContentId][$icon], 'customIconsContent');
+            wp_cache_set($icon, self::$iconsCache[$this->customIconsSvgContentList][$icon], 'customIconsSvgContentList');
         }
 
-        return self::$iconsCache[$this->customIconsContentId][$icon] ?? null;
+        return self::$iconsCache[$this->customIconsSvgContentList][$icon] ?? null;
     }
 
     private function getCustomSvgIcons() {
-        if (!empty(self::$iconsCache[$this->customIconsId])) {
-            return self::$iconsCache[$this->customIconsId];
+        if (!empty(self::$iconsCache[$this->customIconsSvgPathList])) {
+            return self::$iconsCache[$this->customIconsSvgPathList];
         }
 
         $useWpCache = function_exists('wp_cache_get') && function_exists('wp_cache_set');
 
         if ($useWpCache) {
-            $cachedIconList = wp_cache_get($this->customIconsId, 'customIcons');
+            $cachedIconList = wp_cache_get($this->customIconsSvgPathList, 'customIconsSvgPathList');
             if ($cachedIconList !== false) {
-                self::$iconsCache[$this->customIconsId] = $cachedIconList;
+                self::$iconsCache[$this->customIconsSvgPathList] = $cachedIconList;
                 return $cachedIconList;
             }
         }
@@ -170,10 +163,10 @@ class Icon extends \ComponentLibrary\Component\BaseController
         }
     
         if ($useWpCache) {
-            wp_cache_set($this->customIconsId, self::$iconsCache['icons'], 'customIcons');
+            wp_cache_set($this->customIconsSvgPathList, self::$iconsCache['icons'], 'customIconsSvgPathList');
         }
 
-        return self::$iconsCache[$this->customIconsId];
+        return self::$iconsCache[$this->customIconsSvgPathList];
     }
 
     /**
@@ -229,41 +222,19 @@ class Icon extends \ComponentLibrary\Component\BaseController
         return $this->altTextPrefix() . $this->altTextUndefined();
     }
 
-    /**
-     * Appends space before label
-     * @return array
-     */
-    public function appendSpace()
-    {
-        if ($this->compParams['label'] = trim($this->compParams['label'])) {
-            $this->data['label'] = " " . $this->compParams['label'];
+    private function getSpacedLabel($label) {
+        if ($label = trim($label)) {
+            $label = " " . $label;
         }
 
-        return $this->data;
+        return $label;
     }
 
-    /**
-     * Build class for color
-     * @return array
-     */
-    public function setColor()
-    {
-        // Set color based on provided name
-        if (isset($this->compParams['color']) && !empty($this->compParams['color'])) {
-            $this->data['classList'][] = $this->getBaseClass() . "--color-" . strtolower($this->compParams['color']);
-        }
-
-        return $this->data;
+    private function setIconColorCssClass($color) {
+        return !empty($color) ? $this->getBaseClass() . "--color-" . strtolower($color) : "";
     }
 
-
-    /**
-     * Build class for size
-     * @return array
-     */
-    public function setSize()
-    {
-        //Available sizes
+    private function setIconSizeCssClass($size) {
         $sizes = [
             'xs' => '16',
             'sm' => '24',
@@ -273,13 +244,6 @@ class Icon extends \ComponentLibrary\Component\BaseController
             'xxl' => '80',
         ];
 
-        //Size class
-        if (isset($sizes[$this->compParams['size']])) {
-            $this->data['classList'][] = $this->getBaseClass() . "--size-" . $this->compParams['size'];
-        } else {
-            $this->data['classList'][] = $this->getBaseClass() . "--size-inherit";
-        }
-
-        return $this->data;
+        return isset($sizes[$size]) ? $this->getBaseClass() . "--size-" . $size : $this->getBaseClass() . "--size-inherit";
     }
 }
