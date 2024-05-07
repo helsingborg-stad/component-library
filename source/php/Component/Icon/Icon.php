@@ -25,16 +25,18 @@ class Icon extends \ComponentLibrary\Component\BaseController
     {
         //Extract array for easy access (fetch only)
         extract($this->data);
+        
         $customSvgIcons = $this->getCustomSvgIcons();
         $customIconName = $filled ? $icon . 'Filled' : $icon;
 
-        $this->data['isSvgLink'] =  $this->iconIsSvg($icon);
+        $this->data['svgFromLink'] =  $this->iconIsSvg($icon);
 
-        if ($this->data['isSvgLink']) {
+        if ($this->data['svgFromLink']) {
             $this->data['classList'][] = $this->getBaseClass() . "--svg-link";
+
         } 
         elseif (array_key_exists($customIconName, $customSvgIcons)) {
-            $this->data['customSvg'] = $this->getCustomIconPath($customSvgIcons[$customIconName], $customIconName);
+            $this->data['svgElementFromFile'] = $this->getCustomIconPath($customSvgIcons[$customIconName], $customIconName);
             $this->data['classList'][] = $this->getBaseClass() . "--svg-path";
         }
         else {
