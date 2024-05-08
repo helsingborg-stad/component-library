@@ -2,6 +2,10 @@
 
 namespace ComponentLibrary\Component\Icon;
 
+use ComponentLibrary\Cache\CacheInterface;
+use \ComponentLibrary\Cache\StaticCache;
+use \ComponentLibrary\Cache\TrySetWpCache;
+
 /**
  * Class Icon
  * @package ComponentLibrary\Component\Icon
@@ -14,10 +18,12 @@ class Icon extends \ComponentLibrary\Component\BaseController
     ];
     private $altTextUndefined = "Undefined";
     
-    private $customIconsSvgPathList = 'customIconsSvgPathList';
-    private $customIconsSvgContentList = 'customIconsSvgContentList';
+    private $customIconsSvgPathListId = 'icons';
+    private $getCustomIconPathElementId = 'getCustomIconPathElement';
+    public CacheInterface $cache;
+
     private static $iconsCache = [
-        'customIconsSvgContentList' => [],
+        'icons' => [],
         'customIconsSvgPathList' => []
     ];
 
@@ -25,8 +31,11 @@ class Icon extends \ComponentLibrary\Component\BaseController
     {
         //Extract array for easy access (fetch only)
         extract($this->data);
+
+        $this->cache = new StaticCache();
+        $this->cache = new TrySetWpCache($this->cache);
         
-        $customSvgIcons = $this->getCustomSvgIcons();
+        $customSvgIcons = $this->getCustomSvgIconsList();
         $customIconName = $filled ? $icon . 'Filled' : $icon;
 
         $this->data['svgFromLink'] =  $this->iconIsSvg($icon);
@@ -36,7 +45,7 @@ class Icon extends \ComponentLibrary\Component\BaseController
 
         } 
         elseif (array_key_exists($customIconName, $customSvgIcons)) {
-            $this->data['svgElementFromFile'] = $this->getCustomIconPath($customSvgIcons[$customIconName], $customIconName);
+            $this->data['svgElementFromFile'] = $this->getCustomIconPathElement($customSvgIcons[$customIconName], $customIconName);
             $this->data['classList'][] = $this->getBaseClass() . "--svg-path";
         }
         else {
@@ -103,65 +112,38 @@ class Icon extends \ComponentLibrary\Component\BaseController
         );
     }
 
-    private function getCustomIconPath($path, $icon)
-    {
-        if (!empty(self::$iconsCache[$this->customIconsSvgContentList][$icon])) {
-            return self::$iconsCache[$this->customIconsSvgContentList][$icon];
+    private function getCustomIconPathElement($path, $icon)
+    {   
+        if ($this->cache->get($icon, $this->getCustomIconPathElementId)) {
+            return $this->cache->get($icon, $this->getCustomIconPathElementId);
         }
 
-        $useWpCache = function_exists('wp_cache_get') && function_exists('wp_cache_set');
-
-        if ($useWpCache) {
-            $cachedIconContent = wp_cache_get($icon, 'customIconsSvgContentList');
-            if ($cachedIconContent !== false) {
-                self::$iconsCache[$this->customIconsSvgContentList][$icon] = $cachedIconContent;
-                return $cachedIconContent;
-            }
-        }
-        
         if (file_exists($path) && is_readable($path)) {
             $contents = file_get_contents($path);
-            self::$iconsCache[$this->customIconsSvgContentList][$icon] = $contents;
+            $this->cache->set($icon, $contents, $this->getCustomIconPathElementId);
         }
 
-        if ($useWpCache) {
-            wp_cache_set($icon, self::$iconsCache[$this->customIconsSvgContentList][$icon], 'customIconsSvgContentList');
-        }
-
-        return self::$iconsCache[$this->customIconsSvgContentList][$icon] ?? null;
+        return $this->cache->get($icon, $this->getCustomIconPathElementId);
     }
 
-    private function getCustomSvgIcons() {
-        if (!empty(self::$iconsCache[$this->customIconsSvgPathList])) {
-            return self::$iconsCache[$this->customIconsSvgPathList];
-        }
-
-        $useWpCache = function_exists('wp_cache_get') && function_exists('wp_cache_set');
-
-        if ($useWpCache) {
-            $cachedIconList = wp_cache_get($this->customIconsSvgPathList, 'customIconsSvgPathList');
-            if ($cachedIconList !== false) {
-                self::$iconsCache[$this->customIconsSvgPathList] = $cachedIconList;
-                return $cachedIconList;
-            }
+    private function getCustomSvgIconsList() {
+        if (!empty($this->cache->get($this->customIconsSvgPathListId))) {
+            return $this->cache->get($this->customIconsSvgPathListId);
         }
 
         $svgIcons = $this->getSvgIconsFromPath();
-
         if (empty($svgIcons)) {
             return [];
         }
+        
+        $mappedArray = array_reduce($svgIcons, function($carry, $item) {
+            $carry += array(pathinfo($item, PATHINFO_FILENAME) => $item);
+            return $carry;
+        }, array());
 
-        foreach ($svgIcons as $svgIcon) {
-            $iconName = pathinfo($svgIcon, PATHINFO_FILENAME);
-            self::$iconsCache['icons'][$iconName] = $svgIcon;
-        }
+        $this->cache->set($this->customIconsSvgPathListId, $mappedArray);
     
-        if ($useWpCache) {
-            wp_cache_set($this->customIconsSvgPathList, self::$iconsCache['icons'], 'customIconsSvgPathList');
-        }
-
-        return self::$iconsCache[$this->customIconsSvgPathList];
+        return $this->cache->get($this->customIconsSvgPathListId);
     }
 
     private function getSvgIconsFromPath() 
