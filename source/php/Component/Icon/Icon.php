@@ -17,7 +17,7 @@ class Icon extends \ComponentLibrary\Component\BaseController
     private $altTextUndefined = "Undefined";
     
     private $customIconsSvgPathListId = 'icons';
-    private $getCustomIconPathElementId = 'getCustomIconPathElement';
+    private $getCustomIconPathElementId = 'iconsPathsElements';
 
     public function init()
     {
