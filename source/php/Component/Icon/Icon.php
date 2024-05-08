@@ -22,11 +22,6 @@ class Icon extends \ComponentLibrary\Component\BaseController
     private $getCustomIconPathElementId = 'getCustomIconPathElement';
     public CacheInterface $cache;
 
-    private static $iconsCache = [
-        'icons' => [],
-        'customIconsSvgPathList' => []
-    ];
-
     public function init()
     {
         //Extract array for easy access (fetch only)
