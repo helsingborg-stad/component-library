@@ -23,12 +23,12 @@ class Register
     private $reservedNames = ["data", "class", "list", "lang"];
     private $controllers = [];
     private BladeServiceInterface $blade;
-    private CacheInterface $componentCacheInstance;
+    private CacheInterface $componentCache;
 
-    public function __construct(BladeServiceInterface $bladeService, CacheInterface $componentCacheInstance)
+    public function __construct(BladeServiceInterface $bladeService, CacheInterface $componentCache)
     {
         $this->blade = $bladeService;
-        $this->componentCacheInstance = $componentCacheInstance;
+        $this->componentCache = $componentCache;
     }
 
     /**
@@ -259,7 +259,7 @@ class Register
                 $controller = $this->controllers[$controllerId];
             } else {
                 $controller = (string) ("\\" . $this->getNamespace($controllerLocation) . "\\" . $controllerName);
-                $controller = new $controller($data, $this->componentCacheInstance);
+                $controller = new $controller($data, $this->componentCache);
             }
 
             return $controller->getData();
