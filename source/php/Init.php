@@ -2,6 +2,9 @@
 
 namespace ComponentLibrary;
 
+use ComponentLibrary\Cache\CacheInterface;
+use ComponentLibrary\Cache\StaticCache;
+use ComponentLibrary\Cache\TrySetWpCache;
 use ComponentLibrary\Register;
 use HelsingborgStad\BladeService\BladeService;
 use HelsingborgStad\BladeService\BladeServiceInterface;
@@ -49,7 +52,7 @@ class Init {
         }
 
         $this->bladeService = new BladeService($sanitizedViewPaths);
-        $this->register = new Register($this->bladeService);
+        $this->register = new Register($this->bladeService, $this->getCache());
         
         // Initialize all controller paths so that this library is last
         $controllerPaths = array_unique(
@@ -83,6 +86,11 @@ class Init {
                 rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR
             );
         }
+    }
+
+    private function getCache(): CacheInterface
+    {
+        return new TrySetWpCache(new StaticCache());
     }
 
     public function getEngine():BladeServiceInterface

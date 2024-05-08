@@ -3,8 +3,6 @@
 namespace ComponentLibrary\Component\Icon;
 
 use ComponentLibrary\Cache\CacheInterface;
-use \ComponentLibrary\Cache\StaticCache;
-use \ComponentLibrary\Cache\TrySetWpCache;
 
 /**
  * Class Icon
@@ -20,15 +18,11 @@ class Icon extends \ComponentLibrary\Component\BaseController
     
     private $customIconsSvgPathListId = 'icons';
     private $getCustomIconPathElementId = 'getCustomIconPathElement';
-    public CacheInterface $cache;
 
     public function init()
     {
         //Extract array for easy access (fetch only)
         extract($this->data);
-
-        $this->cache = new StaticCache();
-        $this->cache = new TrySetWpCache($this->cache);
         
         $customSvgIcons = $this->getCustomSvgIconsList();
         $customIconName = $filled ? $icon . 'Filled' : $icon;

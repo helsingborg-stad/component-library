@@ -2,6 +2,7 @@
 
 namespace ComponentLibrary;
 
+use ComponentLibrary\Cache\CacheInterface;
 use HelsingborgStad\BladeService\BladeServiceInterface;
 use Illuminate\Support\Facades\Blade;
 use Throwable;
@@ -22,10 +23,12 @@ class Register
     private $reservedNames = ["data", "class", "list", "lang"];
     private $controllers = [];
     private BladeServiceInterface $blade;
+    private CacheInterface $componentCacheInstance;
 
-    public function __construct(BladeServiceInterface $bladeService)
+    public function __construct(BladeServiceInterface $bladeService, CacheInterface $componentCacheInstance)
     {
         $this->blade = $bladeService;
+        $this->componentCacheInstance = $componentCacheInstance;
     }
 
     /**
@@ -250,14 +253,13 @@ class Register
     {
         //Run controller & fetch data
         if ($controllerLocation = $this->locateController(ucfirst($controllerName))) {
-
             $controllerId = md5($controllerLocation);
 
             if (in_array($controllerId, $this->controllers)) {
                 $controller = $this->controllers[$controllerId];
             } else {
                 $controller = (string) ("\\" . $this->getNamespace($controllerLocation) . "\\" . $controllerName);
-                $controller = new $controller($data);
+                $controller = new $controller($data, $this->componentCacheInstance);
             }
 
             return $controller->getData();
