@@ -198,8 +198,8 @@ class Register
         foreach ($viewData as $key => $value) {
             if (is_object($argsTypes) && isset($argsTypes->{$key})) {
                 $types = explode('|', $argsTypes->{$key});
-
-                if (!in_array(gettype($value), $types)) {
+                $valueType = gettype($value);
+                if (!in_array($valueType, $types) && !$valueType === 'NULL') {
                     $this->triggerError('The parameter <b>"' . $key . '"</b> in the <b>' . $componentSlug . '</b> component should be of type <b>"' . $argsTypes->{$key} . '"</b> but was recieved as type <b>"' . gettype($value) . '"</b>.');
                 }
             } elseif(!in_array($key, ['__laravel_slots', 'slot', 'id', 'classList', 'context', 'attributeList'])) {
