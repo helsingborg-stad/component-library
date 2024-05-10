@@ -2,6 +2,8 @@
 
 namespace ComponentLibrary\Component\Icon;
 
+use ComponentLibrary\Cache\CacheInterface;
+
 /**
  * Class Icon
  * @package ComponentLibrary\Component\Icon
@@ -13,25 +15,29 @@ class Icon extends \ComponentLibrary\Component\BaseController
         'key'  => "Label"
     ];
     private $altTextUndefined = "Undefined";
-    protected array $compParams = [];
+    
+    private $customIconsSvgPathListId = 'icons';
+    private $getCustomIconPathElementId = 'iconsPathsElements';
 
     public function init()
     {
         //Extract array for easy access (fetch only)
         extract($this->data);
+        
+        $customSvgIcons = $this->getCustomSvgIconsList();
+        $customIconName = $filled ? $icon . 'Filled' : $icon;
 
-        // Make data accessible
-        $this->compParams = [
-            'label'     => $label,
-            'color'     => $color,
-            'size'      => $size
-        ];
+        $this->data['svgFromLink'] =  $this->iconIsSvg($icon);
 
-        $this->data['isSvg'] = $this->iconIsSvg($icon);
+        if ($this->data['svgFromLink']) {
+            $this->data['classList'][] = $this->getBaseClass() . "--svg-link";
 
-        if ($this->data['isSvg']) {
-            $this->data['classList'][] = $this->getBaseClass() . "--svg";
-        } else {
+        } 
+        elseif (array_key_exists($customIconName, $customSvgIcons)) {
+            $this->data['svgElementFromFile'] = $this->getCustomIconPathElement($customSvgIcons[$customIconName], $customIconName);
+            $this->data['classList'][] = $this->getBaseClass() . "--svg-path";
+        }
+        else {
             $this->data['classList'] = array_merge($this->data['classList'] ?? [], [
                 $this->createIconModifier($icon),
                 $this->getBaseClass() . "--material",
@@ -47,12 +53,16 @@ class Icon extends \ComponentLibrary\Component\BaseController
         }
 
         if (!empty($customColor)) {
-            $this->data['attributeList']['style'] = 'color:' . $customColor . ';';
+            $this->data['attributeList']['style'] = 
+                'color:' . $customColor . ';' . 
+                'stroke:' . $customColor . ';';
         } else {
-            $this->setColor();
+            $this->data['classList'][] = $this->setIconColorCssClass($color);
         }
-        $this->appendSpace();
-        $this->setSize();
+
+
+        $this->data['label'] = $this->getSpacedLabel($label);
+        $this->data['classList'][] = $this->setIconSizeCssClass($size);
 
         //Identify as an image
         $this->data['attributeList']['role'] = "img";
@@ -89,6 +99,54 @@ class Icon extends \ComponentLibrary\Component\BaseController
             str_replace("_", "-", $icon),
             true
         );
+    }
+
+    private function getCustomIconPathElement($path, $icon)
+    {   
+        if ($this->cache->get($icon, $this->getCustomIconPathElementId)) {
+            return $this->cache->get($icon, $this->getCustomIconPathElementId);
+        }
+
+        if (file_exists($path) && is_readable($path)) {
+            $contents = file_get_contents($path);
+            $this->cache->set($icon, $contents, $this->getCustomIconPathElementId);
+        }
+
+        return $this->cache->get($icon, $this->getCustomIconPathElementId);
+    }
+
+    private function getCustomSvgIconsList() {
+        if (!empty($this->cache->get($this->customIconsSvgPathListId))) {
+            return $this->cache->get($this->customIconsSvgPathListId);
+        }
+
+        $svgIcons = $this->getSvgIconsFromPath();
+        if (empty($svgIcons)) {
+            return [];
+        }
+        
+        $mappedArray = array_reduce($svgIcons, function($carry, $item) {
+            $carry += array(pathinfo($item, PATHINFO_FILENAME) => $item);
+            return $carry;
+        }, array());
+
+        $this->cache->set($this->customIconsSvgPathListId, $mappedArray);
+    
+        return $this->cache->get($this->customIconsSvgPathListId);
+    }
+
+    private function getSvgIconsFromPath() 
+    {
+        if (function_exists('apply_filters')) {
+            $svgIcons = apply_filters(
+                'ComponentLibrary\Component\Icon\CustomSvgIcons',
+                glob(__DIR__ . '/Svg/*.svg')
+            );
+        } else {
+            $svgIcons = glob(__DIR__ . '/Svg/*.svg');
+        }
+
+        return $svgIcons;
     }
 
     /**
@@ -144,41 +202,19 @@ class Icon extends \ComponentLibrary\Component\BaseController
         return $this->altTextPrefix() . $this->altTextUndefined();
     }
 
-    /**
-     * Appends space before label
-     * @return array
-     */
-    public function appendSpace()
-    {
-        if ($this->compParams['label'] = trim($this->compParams['label'])) {
-            $this->data['label'] = " " . $this->compParams['label'];
+    private function getSpacedLabel($label) {
+        if ($label = trim($label)) {
+            $label = " " . $label;
         }
 
-        return $this->data;
+        return $label;
     }
 
-    /**
-     * Build class for color
-     * @return array
-     */
-    public function setColor()
-    {
-        // Set color based on provided name
-        if (isset($this->compParams['color']) && !empty($this->compParams['color'])) {
-            $this->data['classList'][] = $this->getBaseClass() . "--color-" . strtolower($this->compParams['color']);
-        }
-
-        return $this->data;
+    private function setIconColorCssClass($color) {
+        return !empty($color) ? $this->getBaseClass() . "--color-" . strtolower($color) : "";
     }
 
-
-    /**
-     * Build class for size
-     * @return array
-     */
-    public function setSize()
-    {
-        //Available sizes
+    private function setIconSizeCssClass($size) {
         $sizes = [
             'xs' => '16',
             'sm' => '24',
@@ -188,13 +224,6 @@ class Icon extends \ComponentLibrary\Component\BaseController
             'xxl' => '80',
         ];
 
-        //Size class
-        if (isset($sizes[$this->compParams['size']])) {
-            $this->data['classList'][] = $this->getBaseClass() . "--size-" . $this->compParams['size'];
-        } else {
-            $this->data['classList'][] = $this->getBaseClass() . "--size-inherit";
-        }
-
-        return $this->data;
+        return isset($sizes[$size]) ? $this->getBaseClass() . "--size-" . $size : $this->getBaseClass() . "--size-inherit";
     }
 }
