@@ -8,8 +8,8 @@
         "customColor": "",
         "componentElement": "span",
         "filled": true,
-        "isSvg": false
-        },
+        "decorative": false
+    },
     "description": {
         "size": "Sizes: xs, sm, md, lg, xl, xxl",
         "label": "A label on the icon",
@@ -17,7 +17,8 @@
         "color": "The color of the icon",
         "customColor": "A custom HEX color",
         "componentElement": "Icon HTML tag",
-        "filled": "If the icons should be filled or not"
+        "filled": "If the icons should be filled or not",
+        "decorative": "If the icon is decorative only or serves a purpose."
     },
     "types": {
         "size": "string",
@@ -27,8 +28,9 @@
         "customColor": "string",
         "componentElement": "string",
         "filled": "boolean",
-        "isSvg": "boolean"
-        },
+        "isSvg": "boolean",
+        "decorative": "boolean"
+    },
     "view": "icon.blade.php",
     "dependency": {
         "sass": {

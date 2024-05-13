@@ -12,7 +12,11 @@
 
     @if($icon && !empty($displayIcon)) 
         <div class="c-collection__icon">
-            @icon(['icon' => $icon, 'size' => 'md'])
+            @icon([
+                'icon' => $icon, 
+                'size' => 'md',
+                'decorative' => true
+            ])
             @endicon
         </div>
     @endif

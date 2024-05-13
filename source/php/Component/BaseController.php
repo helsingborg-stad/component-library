@@ -2,6 +2,8 @@
 
 namespace ComponentLibrary\Component;
 
+use ComponentLibrary\Cache\CacheInterface;
+
 class BaseController
 {
     /**
@@ -29,7 +31,7 @@ class BaseController
     /**
      * Run init
      */
-    public function __construct($data)
+    public function __construct($data, protected CacheInterface $cache)
     {
         //Load input data
         if (!is_null($data) && is_array($data)) {

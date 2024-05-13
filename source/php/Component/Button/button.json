@@ -51,7 +51,7 @@
     "type": "string",
     "style": "string",
     "shape": "string",
-    "href": "string",
+    "href": "string|NULL",
     "target": "string",
     "componentElement":"string",
     "labelElement":"string",
