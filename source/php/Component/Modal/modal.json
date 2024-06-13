@@ -3,6 +3,7 @@
     "default": {
         "heading": "",
         "slot": "",
+        "top": "",
         "bottom": "",
         "overlay": "light",
         "isPanel": false,
@@ -13,8 +14,9 @@
         "padding": 3,
         "borderRadius": false,
         "transparent": false,
-        "closeButtonText": ""
-    },
+        "closeButtonText": "",
+        "ariaLabels": {"prev": "previous", "next": "next"}
+        },
     "description": {
         "heading": "The title of the modal",
         "slot": "The main content of the modal",
@@ -29,6 +31,23 @@
         "borderRadius": "Rounded edges. Value: sm, md, lg",
         "transparent": "Transparent wrapper around the content",
         "closeButtonText": "Text for the close button. Default is empty"
+    },
+    "types":{
+        "heading": "string",
+        "slot": "object",
+        "top": "object",
+        "bottom": "object",
+        "overlay": "string",
+        "isPanel": "boolean",
+        "id": "string",
+        "animation": "string",
+        "navigation": "boolean",
+        "size": "string",
+        "padding": "integer",
+        "borderRadius": "string",
+        "transparent": "boolean",
+        "closeButtonText": "string",
+        "ariaLabels": "object"
     },
     "view": "modal.blade.php",
     "dependency": {
