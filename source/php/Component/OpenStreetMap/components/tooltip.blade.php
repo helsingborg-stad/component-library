@@ -1,19 +1,14 @@
 <div class="c-openstreetmap__tooltip">
-    @link([
-        'href' => '{TOOLTIP_LINK}',
-        'classList' => ['c-openstreetmap__tooltip-link'],
-        'attributeList' => [
-            'rel' => 'nofollow'
-        ]
-    ])
     @typography([
         'classList' => ['c-openstreetmap__tooltip-title'],
         'element' => 'h2',
         'variant' => 'h5',
+        'attributeList' => [
+            'data-open' => '{TOOLTIP_MODAL_ID}'
+        ]
     ])
         {TOOLTIP_HEADING}
     @endtypography
-    @endlink
     @typography([
         'classList' => ['u-margin__y--1', 'c-openstreetmap__tooltip-excerpt'],
         
