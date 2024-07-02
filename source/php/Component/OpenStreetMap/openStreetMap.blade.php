@@ -5,7 +5,6 @@
             'icon' => 'map',
             'size' => 'lg',
             'classList' => [$baseClass . '__expand-icon', 'u-level-1'],
-            'attributeList' => ['data-js-toggle-trigger' => 'expand']
         ])
         @endicon
         @endif
