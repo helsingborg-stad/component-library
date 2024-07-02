@@ -4,7 +4,7 @@
         'element' => 'h2',
         'variant' => 'h5',
         'attributeList' => [
-            'data-open' => '{TOOLTIP_MODAL_ID}'
+            'data-js-osm-id' => '{TOOLTIP_ID}'
         ]
     ])
         {TOOLTIP_HEADING}
