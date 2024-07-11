@@ -1,9 +1,7 @@
 <!-- icon.blade.php -->
 @if ($icon)
     <{{ $componentElement }} class="{{ $class }}" {!! $attribute !!}>
-        @if ($isSvg)
-            <img src="{{ $icon }}" alt="{{ $label }}" />
-        @endif
-        {{ $icon }}
+        @includeWhen(!empty($svgFromLink), 'Icon.partials.svgImage')
+        @includeWhen(!empty($svgElementFromFile), 'Icon.partials.svgElement')
     </{{ $componentElement }}>
 @endif

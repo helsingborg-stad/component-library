@@ -20,11 +20,20 @@
             {!! $item['label']  !!}
           </span>
         @else 
-          <a class="{{$baseClass}}__link" href="{{ $item['href'] }}">
-            <span class="{{$baseClass}}__label">
-               {!! $item['label']  !!}
+
+          @if($item['href'])
+            <a class="{{$baseClass}}__link" href="{{ $item['href'] }}">
+              <span class="{{$baseClass}}__label">
+                {!! $item['label']  !!}
+              </span>
+            </a>
+          @else
+            <span class="{{$baseClass}}__link {{$baseClass}}__link--unclickable">
+              <span class="{{$baseClass}}__label">
+                {!! $item['label']  !!}
+              </span>
             </span>
-          </a>
+          @endif
         @endif
 
       </{{$listItemType}}>
