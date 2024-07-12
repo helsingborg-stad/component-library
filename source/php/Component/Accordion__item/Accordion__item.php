@@ -29,7 +29,7 @@ class Accordion__item extends \ComponentLibrary\Component\BaseController
         }
     }
 
-    private function headingType() {
-        return isset($this->heading) && is_array($this->heading);
+    private function headingType($heading) {
+        return !empty($heading) && is_array($heading);
     }
 }
