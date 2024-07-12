@@ -4,7 +4,7 @@
  * Plugin Name:       component-library
  * Plugin URI:        (#plugin_url#)
  * Description:       A library of blade components
- * Version: 3.16.1
+ * Version: 4.13.3
  * Author:            Eric Rosenborg
  * Author URI:        (#plugin_author_url#)
  * License:           MIT
@@ -12,6 +12,8 @@
  * Text Domain:       component-library
  * Domain Path:       /languages
  */
+
+use ComponentLibrary\Init as ComponentLibraryInit;
 
  // Protect agains direct file access
 if (! defined('WPINC')) {
@@ -31,4 +33,5 @@ if(function_exists('plugin_basename')) {
     load_plugin_textdomain('component-library', false, plugin_basename(dirname(__FILE__)) . '/languages');
 }
 
+require_once COMPONENTLIBRARY_PATH . 'load.php';
 require_once COMPONENTLIBRARY_PATH . 'Public.php';

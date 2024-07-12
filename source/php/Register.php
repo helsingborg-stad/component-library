@@ -2,6 +2,11 @@
 
 namespace ComponentLibrary;
 
+use ComponentLibrary\Cache\CacheInterface;
+use HelsingborgStad\BladeService\BladeServiceInterface;
+use Illuminate\Support\Facades\Blade;
+use Throwable;
+
 class Register
 {
     private static $cache = [
@@ -17,11 +22,13 @@ class Register
     public $controllerPaths = [];
     private $reservedNames = ["data", "class", "list", "lang"];
     private $controllers = [];
-    private $blade = null;
+    private BladeServiceInterface $blade;
+    private CacheInterface $componentCache;
 
-    public function __construct($engine)
+    public function __construct(BladeServiceInterface $bladeService, CacheInterface $componentCache)
     {
-        $this->blade = $engine;
+        $this->blade = $bladeService;
+        $this->componentCache = $componentCache;
     }
 
     /**
@@ -56,10 +63,7 @@ class Register
             'argsTypes'  => (object) $argsTypes
         );
 
-        //Add include alias
-        $this->registerComponentAlias($slug);
-
-        // Register view composer
+        $this->blade->registerComponentDirective( ucfirst($slug) . '.' . $slug, $slug);
         $this->registerViewComposer($this->data->{$slug});
     }
 
@@ -147,36 +151,10 @@ class Register
         return $view;
     }
 
-    /**
-     * Santize string
-     * @return string The string to be sanitized
-     */
-    private function sanitizeSlug($string): string
-    {
-        return preg_replace(
-            "/[^a-z-]/i",
-            "",
-            str_replace(".blade.php", "", $string)
-        );
-    }
-
-    /**
-     * Registers all components as include aliases
-     *
-     * @return bool
-     */
-    private function registerComponentAlias($componentSlug)
-    {
-        $this->blade->component(
-            ucfirst($componentSlug)  . '.' . $componentSlug,
-            $componentSlug
-        );
-    }
-
-    public function registerViewComposer($component)
+    public function registerViewComposer(object $component)
     {
         try {
-            $this->blade->composer(
+            $this->blade->registerComponent(
                 ucfirst($component->slug) . '.' . $component->slug,
                 function ($view) use ($component) {
 
@@ -197,29 +175,58 @@ class Register
                     $view->with($controllerArgs);
                 }
             );
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             echo  '<pre>' . var_dump($e) . '<pre>';
         }
     }
 
-    public function handleTypingsErrors($viewData, $argsTypes = false, $componentSlug) {
+    /**
+     * Handle typing errors for the given view data and arguments types.
+     *
+     * @param array|object $viewData The view data to check for typing errors.
+     * @param array|object|false $argsTypes The expected argument types for each key in the view data.
+     * @param string $componentSlug The slug of the component being checked.
+     * @return void
+     */
+    public function handleTypingsErrors($viewData, $argsTypes, $componentSlug) {
+
+        if ($this->shouldHideTypingsErrors()) {
+            return;
+        }
+
         if (empty((array) $argsTypes) || (empty($viewData) && !is_array($viewData))) { 
             return; 
         }
 
         foreach ($viewData as $key => $value) {
-            if (isset($argsTypes->{$key})) {
+            if (is_object($argsTypes) && isset($argsTypes->{$key})) {
                 $types = explode('|', $argsTypes->{$key});
-
-                if (!in_array(gettype($value), $types)) {
+                $valueType = gettype($value);
+                if (!in_array($valueType, $types) && !$valueType === 'NULL') {
                     $this->triggerError('The parameter <b>"' . $key . '"</b> in the <b>' . $componentSlug . '</b> component should be of type <b>"' . $argsTypes->{$key} . '"</b> but was recieved as type <b>"' . gettype($value) . '"</b>.');
                 }
-            } else {
+            } elseif(!in_array($key, ['__laravel_slots', 'slot', 'id', 'classList', 'context', 'attributeList'])) {
                 $this->triggerError('The parameter ' . '<b>"' . $key . '"</b> is not recognized in the component <b>"' . $componentSlug .'"</b>'); 
             }
         }
     }
 
+    /**
+     * Determines whether typing errors should be hidden.
+     *
+     * @return bool Returns true if typing errors should be hidden, false otherwise.
+     */
+    private function shouldHideTypingsErrors() 
+    {
+        return (defined('WP_ENVIRONMENT_TYPE') && WP_ENVIRONMENT_TYPE === 'production') || defined('WP_CLI');
+    }
+
+    /**
+     * Triggers a user warning error with the specified message.
+     *
+     * @param string $message The error message.
+     * @return void
+     */
     private function triggerError($message = "") {
         trigger_error($message, E_USER_WARNING);
     }
@@ -246,14 +253,13 @@ class Register
     {
         //Run controller & fetch data
         if ($controllerLocation = $this->locateController(ucfirst($controllerName))) {
-
             $controllerId = md5($controllerLocation);
 
             if (in_array($controllerId, $this->controllers)) {
                 $controller = $this->controllers[$controllerId];
             } else {
                 $controller = (string) ("\\" . $this->getNamespace($controllerLocation) . "\\" . $controllerName);
-                $controller = new $controller($data);
+                $controller = new $controller($data, $this->componentCache);
             }
 
             return $controller->getData();

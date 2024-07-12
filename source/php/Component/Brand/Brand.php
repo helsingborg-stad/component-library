@@ -11,7 +11,7 @@ class Brand extends \ComponentLibrary\Component\BaseController
         extract($this->data);
 
         //Add class for logo
-        if(is_array($logotype)) {
+        if(!empty($logotype) && is_array($logotype)) {
             $this->data['logotype']['classList'][] = $this->getBaseClass("logotype"); 
         }
 

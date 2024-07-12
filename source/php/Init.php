@@ -2,15 +2,19 @@
 
 namespace ComponentLibrary;
 
+use ComponentLibrary\Cache\CacheInterface;
+use ComponentLibrary\Cache\StaticCache;
+use ComponentLibrary\Cache\TrySetWpCache;
 use ComponentLibrary\Register;
-use HelsingborgStad\BladeEngineWrapper as Blade;
+use HelsingborgStad\BladeService\BladeService;
+use HelsingborgStad\BladeService\BladeServiceInterface;
 
 class Init {
 
     private $register = null;
+    private BladeServiceInterface $bladeService;
     
     public function __construct($externalViewPaths) {
-        $blade = new Blade();
         $paths = array(
             'viewPaths' => array(),
             'controllerPaths' => array(),
@@ -19,10 +23,8 @@ class Init {
         // Add view path to renderer
         // In this case all components, their controller and view path are located under the same folder structure.
         // This may differ in a Wordpress child implementation.
-        $internalPaths = array(
-            __DIR__ . DIRECTORY_SEPARATOR . 'Component' . DIRECTORY_SEPARATOR,
-        );
-        
+        $internalPaths = array( __DIR__ . DIRECTORY_SEPARATOR . 'Component' . DIRECTORY_SEPARATOR );
+
         // Initialize all view paths so that this library is last
         $viewPaths = array_unique(
             array_merge($paths['viewPaths'], $internalPaths)
@@ -36,21 +38,21 @@ class Init {
                 $viewPaths
             );
         }
-
-        if(is_array($viewPaths) && !empty($viewPaths)) {
-            foreach ($viewPaths as $path) {
-                $directory = rtrim($path, DIRECTORY_SEPARATOR); 
-                if(is_dir($directory)) {
-                    $blade->addViewPath(rtrim($path, DIRECTORY_SEPARATOR));
-                }
-            }
-        } else {
+        
+        if(!is_array($viewPaths) || empty($viewPaths)) {  
             throw new \Exception("View paths not defined.");
+        } 
+        
+        $sanitizedViewPaths = array();
+        foreach ($viewPaths as $path) {
+            $directory = rtrim($path, DIRECTORY_SEPARATOR); 
+            if(is_dir($directory)) {
+                $sanitizedViewPaths[] = $directory;
+            }
         }
 
-        $bladeInstance = $blade->instance();
-        
-        $this->register = new Register($bladeInstance);
+        $this->bladeService = new BladeService($sanitizedViewPaths);
+        $this->register = new Register($this->bladeService, $this->getCache());
         
         // Initialize all controller paths so that this library is last
         $controllerPaths = array_unique(
@@ -86,8 +88,13 @@ class Init {
         }
     }
 
-    public function getEngine()
+    private function getCache(): CacheInterface
     {
-        return $this->register->getEngine();
+        return new TrySetWpCache(new StaticCache());
+    }
+
+    public function getEngine():BladeServiceInterface
+    {
+        return $this->bladeService;
     }
 }

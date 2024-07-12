@@ -4,7 +4,8 @@
         "src": false,
         "alt": "",
         "caption": "",
-        "byline": false,
+        "byline": "",
+        "title": null,
         "fullWidth": false,
         "rounded": false,
         "openModal": false,
@@ -18,6 +19,8 @@
         "alt": "Alt text of the image",
         "caption": "Image caption",
         "byline": "placed under the caption",
+        "title": "Title of the image",
+        "description": "Description of the image",
         "rounded": "Border radius of the image, false for no radius. Accepted values are xs, sm, md, lg, full",
         "openModal": "If the image should be able to open in a modal",
         "placeholderText": "Label to show if image is missing",
@@ -26,6 +29,22 @@
         "imgAttributeList": "Attributes for the img element.",
         "removeCaption": "Shows only the alt-text removing the image caption and byline"
 
+    },
+    "types": {
+        "src": "boolean|string",
+        "alt": "string|NULL",
+        "caption": "string|boolean",
+        "byline": "string|NULL",
+        "title": "string|NULL",
+        "description": "string|NULL",
+        "fullWidth": "boolean",
+        "rounded": "boolean",
+        "openModal": "boolean",
+        "placeholderText": "string",
+        "placeholderIcon": "string",
+        "placeholderIconSize": "string",
+        "imgAttributeList": "array",
+        "removeCaption": "boolean"
     },
     "view": "image.blade.php",
     "dependency": {

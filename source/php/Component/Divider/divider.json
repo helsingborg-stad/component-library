@@ -14,10 +14,20 @@
         "componentElement": "The tag to use for this component.",
         "style": "Either dashed, solid or dotted.",
         "size": "The length of the divider. Either sm, md or lg.",
-        "title": "Title to be displayed in the devider.",
+        "title": "Title to be displayed in the divider.",
         "align": "Alignment of text in the divider. left, center or right.",
         "frame": "If set to true, the title will be wrapped in a frame.",
         "customFont": "Enable if font color should be customized. Default: false"
+    },
+    "types":{
+        "componentElement": "string",
+        "style": "string",
+        "size": "string",
+        "title": "string",
+        "titleVariant": "string",
+        "align": "string",
+        "frame": "boolean",
+        "customFont": "boolean"
     },
     "view": "dropdown.blade.php",
     "dependency": {

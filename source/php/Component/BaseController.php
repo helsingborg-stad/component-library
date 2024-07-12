@@ -2,6 +2,8 @@
 
 namespace ComponentLibrary\Component;
 
+use ComponentLibrary\Cache\CacheInterface;
+
 class BaseController
 {
     /**
@@ -24,10 +26,12 @@ class BaseController
      */
     private $uid = null;
 
+    protected array $compParams;
+
     /**
      * Run init
      */
-    public function __construct($data)
+    public function __construct($data, protected CacheInterface $cache)
     {
         //Load input data
         if (!is_null($data) && is_array($data)) {
@@ -154,7 +158,8 @@ class BaseController
         if (!array_key_exists($slotKey, $this->data)) {
             return false;
         }
-        if (empty($this->accessProtected($this->data[$slotKey], "html"))) {
+
+        if (empty($this->accessProtected($this->data[$slotKey], "contents"))) {
             return false;
         }
         return true;
@@ -216,7 +221,7 @@ class BaseController
     private function getClass($implode = true)
     {
         if (!$this->validClassList($this->data['classList'])) {
-            /* trigger_error(
+            trigger_error(
                 sprintf(
                     'The parameter classList is not allowed to contain spaces or include empty strings. 
                     Multiple classes may be separated by entering a array of items.
@@ -224,7 +229,7 @@ class BaseController
                     print_r($this, true)
                 ),
                 E_USER_WARNING
-            ); */
+            );
         }
 
         //Store locally
@@ -267,7 +272,6 @@ class BaseController
         if ($implode === false) {
             return (array) $class;
         }
-
 
         //Return manipulated data array as string
         return (string) implode(" ", (array) $class);

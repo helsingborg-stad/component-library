@@ -29,6 +29,8 @@
     </svg>
 </div>
 @else 
-    @logotype($logotype)
-    @endlogotype
+    @if($logotype)
+        @logotype($logotype)
+        @endlogotype
+    @endif
 @endif

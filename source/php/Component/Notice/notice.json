@@ -2,7 +2,7 @@
     "slug": "notice",
     "default": {
         "type": "info",
-        "message": {"title": false, "text": ""},
+        "message": {"title": false, "text": false},
         "icon": false,
         "stretch": false
     },
@@ -14,8 +14,8 @@
     },
     "types": {
         "type": "string",
-        "message": "object",
-        "icon": "string",
+        "message": "array|object",
+        "icon": "array|object",
         "stretch": "boolean" 
     },
     "view": "notice.blade.php",

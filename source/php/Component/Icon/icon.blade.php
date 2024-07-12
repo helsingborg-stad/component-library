@@ -1,12 +1,7 @@
 <!-- icon.blade.php -->
 @if ($icon)
     <{{ $componentElement }} class="{{ $class }}" {!! $attribute !!}>
-        <span data-nosnippet translate="no" aria-hidden="true">
-            @if ($isSvg)
-                <img src="{{ $icon }}" alt="{{ $label }}" />
-            @else
-                {{ $icon }}{{ $filled ? '' : '_outline' }}
-            @endif
-        </span>
-        </{{ $componentElement }}>
+        @includeWhen(!empty($svgFromLink), 'Icon.partials.svgImage')
+        @includeWhen(!empty($svgElementFromFile), 'Icon.partials.svgElement')
+    </{{ $componentElement }}>
 @endif

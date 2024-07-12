@@ -8,7 +8,7 @@
         "image": false,
         "link": "",
         "ratio": "4:3",
-        "date": false,
+        "date": "",
         "dateBadge": false,
         "icon": false,
         "postId": false,
@@ -25,6 +25,20 @@
         "date": "Preformatted date",
         "dateBadge": "Display date as a badge.",
         "icon": "An array with the same specification as the icon component"
+    },
+    "types": {
+        "heading": "string",
+        "content": "string|array",
+        "meta": "string|array",
+        "secondaryMeta": "string|array",
+        "image": "array",
+        "link": "string",
+        "ratio": "string",
+        "date": "string",
+        "dateBadge": "boolean",
+        "icon": "boolean",
+        "postId": "boolean",
+        "postType": "string"
     },
     "view": "block.blade.php",
     "dependency": {

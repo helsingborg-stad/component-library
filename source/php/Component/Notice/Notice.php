@@ -23,7 +23,6 @@ class Notice extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . "--stretch";
         }
 
-        //Avoid empty array items
-        $this->data['message'] = array_merge(['title' => null, 'message' => null], $message);
+        $this->data['message'] = array_merge(['title' => null, 'message' => null], (array) $message);
     }
 }

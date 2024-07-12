@@ -31,6 +31,7 @@ class Hero extends \ComponentLibrary\Component\BaseController
 
         //Create image style tag
         $this->data['imageStyle'] = [];
+        $this->data['imageStyleString'] = "";
 
         //Add image to image styles
         if ($image) {
@@ -179,7 +180,7 @@ class Hero extends \ComponentLibrary\Component\BaseController
 
     private function hasContent(): bool
     {
-        $stringEmpty = fn ($value): bool => empty(trim($value));
+        $stringEmpty = fn ($value): bool => empty(trim($value ?? ""));
 
         if (!$stringEmpty($this->data['meta'])) return true;
         if (!$stringEmpty($this->data['title'])) return true;

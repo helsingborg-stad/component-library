@@ -49,7 +49,7 @@
                     $baseClass.'__published'
                 ]
             ])
-                {{$label->publish}}: @date(['action' => null,'timestamp' => $published])@enddate
+                {{$label->publish}}: @date(['action' => false,'timestamp' => $published])@enddate
             @endtypography
             
             @if ($updated)
@@ -60,7 +60,7 @@
                         $baseClass.'__updated'
                     ]
                 ])
-                    {{$label->updated}}: @date(['action' => null,'timestamp' => $updated])@enddate
+                    {{$label->updated}}: @date(['action' => false,'timestamp' => $updated])@enddate
                 @endtypography
             @endif
             

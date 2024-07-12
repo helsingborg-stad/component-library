@@ -84,8 +84,7 @@ class Select extends \ComponentLibrary\Component\BaseController
             $this->data['selectAttributeList']['aria-hidden'] = 'true';
             $this->data['selectAttributeList']['data-required'] = '1';
             $this->data['selectAttributeList']['aria-required'] = '1';
-            
-            $this->data['attributeList']['data-js-required'] = 'true';
+            $this->data['selectAttributeList']['data-js-required'] = '';
             
             $this->data['classList'][] = "is-required";
         }
