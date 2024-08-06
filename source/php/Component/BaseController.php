@@ -415,9 +415,14 @@ class BaseController
 
             if (!is_string($value) && !empty($value)) {
                 return "";
-            };
+            }
+
+            if(is_null($value) || empty($value)) {
+                $escapedValue = "";
+            } else {
+                $escapedValue = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+            }
             
-            $escapedValue = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
             $attributeStrings[] = "$key=\"$escapedValue\"";
         }
 
