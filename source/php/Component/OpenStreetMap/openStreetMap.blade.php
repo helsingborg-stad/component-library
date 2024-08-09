@@ -2,10 +2,9 @@
     <div class="{{$baseClass}}__map" style="height:{{$height}};" id="openstreetmap__map-{{$id}}" tabindex="0">
         @if ($sidebarContentHasData)
         @icon([
-            'icon' => 'map',
+            'icon' => 'keyboard_arrow_up',
             'size' => 'lg',
-            'classList' => [$baseClass . '__expand-icon', 'u-level-1'],
-            'attributeList' => ['data-js-toggle-trigger' => 'expand']
+            'classList' => [$baseClass . '__expand-icon-desktop'],
         ])
         @endicon
         @endif

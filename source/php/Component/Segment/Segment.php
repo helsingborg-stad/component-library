@@ -43,9 +43,9 @@ class Segment extends \ComponentLibrary\Component\BaseController
 
         $this->data['imageClassList'] = [];
 
-        if ($this->data['content'] == strip_tags($this->data['content'], [])) {
+        if ($this->data['content'] == strip_tags($this->data['content'] ?? "", [])) {
             // Create paragraphs
-            $paragraphs = preg_split("/\r\n|\n|\r/", $this->data['content']);
+            $paragraphs = preg_split("/\r\n|\n|\r/", $this->data['content'] ?? "");
             foreach ($paragraphs as &$part) {
                 if (empty($part)) {
                     continue;

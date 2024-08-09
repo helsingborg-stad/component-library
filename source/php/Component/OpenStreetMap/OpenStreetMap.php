@@ -83,8 +83,6 @@ class OpenStreetMap extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = 'is-expanded';
         }
 
-        $this->data['attributeList']['data-js-toggle-item'] = "expand";
-        $this->data['attributeList']['data-js-toggle-class'] = "is-expanded";
         $this->data['attributeList']['data-js-map-id'] = $this->data['id'];
     }
 }

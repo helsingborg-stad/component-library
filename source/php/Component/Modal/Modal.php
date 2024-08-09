@@ -16,6 +16,10 @@ class Modal extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . "--is-modal";
         }
 
+        if ($animation) {
+            $this->data['classList'][] = $this->getBaseClass($animation, true);
+        }
+
         //The size
         if ($size && in_array($size, ['sm', 'md', 'lg'])) {
             $this->data['classList'][] = $this->getBaseClass() . "--size-" . $size;
