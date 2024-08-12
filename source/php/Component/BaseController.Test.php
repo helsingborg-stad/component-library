@@ -27,4 +27,16 @@ class BaseControllerTest extends PHPUnit\Framework\TestCase
         $attributes = ['Zero' => 0];
         $this->assertEquals('Zero="0"', BaseController::buildAttributes($attributes));
     }
+
+    public function testDisallowsNull()
+    {
+        $attributes = ['Null' => null];
+        $this->assertEquals('Null=""', BaseController::buildAttributes($attributes));
+    }
+
+    public function testDisallowsNullAsString()
+    {
+        $attributes = ['Null' => 'null'];
+        $this->assertEquals('Null=""', BaseController::buildAttributes($attributes));
+    }
 }
