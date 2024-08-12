@@ -417,7 +417,7 @@ class BaseController
                 return "";
             }
 
-            if(is_null($value) || empty($value)) {
+            if((is_null($value) || empty($value)) && $value !== "0") {
                 $escapedValue = "";
             } else {
                 $escapedValue = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
