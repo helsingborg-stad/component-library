@@ -39,15 +39,19 @@ class Icon extends \ComponentLibrary\Component\BaseController
                 $this->createIconModifier($icon),
                 $this->getBaseClass() . "--material",
                 $this->getBaseClass() . "--material-" . $icon,
-                "material-symbols-outlined"
+                "material-symbols",
+                "material-symbols-rounded", //All classes added, to support all icon types
+                "material-symbols-sharp", //All classes added, to support all icon types
+                "material-symbols-outlined" //All classes added, to support all icon types
             ]);
 
             $this->data['attributeList']['material-symbol'] = $icon;
         }
 
         if (!empty($filled)) {
-            $this->data['classList'][] = 'material-symbols-outlined--filled';
+            $this->data['classList'][] = 'material-symbols--filled';
         }
+
 
         if (!empty($customColor)) {
             $this->data['attributeList']['style'] = 
