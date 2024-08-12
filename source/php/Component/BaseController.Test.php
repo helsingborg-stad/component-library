@@ -10,9 +10,33 @@ class BaseControllerTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('One="one" Two="two"', BaseController::buildAttributes($attributes));
     }
 
-    public function testBuildAttributesOnlyHandlesAttributeStringValues()
+    public function testBuildAttributesAllowsArrayAsValue()
     {
         $attributes = ['One' => ['foo']];
-        $this->assertEquals('', BaseController::buildAttributes($attributes));
+        $this->assertEquals('One="[&quot;foo&quot;]"', BaseController::buildAttributes($attributes));
+    }
+ 
+    public function testAllowsZeroAsString()
+    {
+        $attributes = ['Zero' => '0'];
+        $this->assertEquals('Zero="0"', BaseController::buildAttributes($attributes));
+    }
+    
+    public function testAllowZeroAsInteger()
+    {
+        $attributes = ['Zero' => 0];
+        $this->assertEquals('Zero="0"', BaseController::buildAttributes($attributes));
+    }
+
+    public function testDisallowsNull()
+    {
+        $attributes = ['Null' => null];
+        $this->assertEquals('Null=""', BaseController::buildAttributes($attributes));
+    }
+
+    public function testDisallowsNullAsString()
+    {
+        $attributes = ['Null' => 'null'];
+        $this->assertEquals('Null=""', BaseController::buildAttributes($attributes));
     }
 }
