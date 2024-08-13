@@ -5,7 +5,7 @@
         <div class="{{$baseClass}}__modal-description js-suppressed-content-description">
             @if($supplierSystemType == 'video')
                 @button([
-                    'text' => !empty($infoLabel) ? $infoLabel : false,
+                    'text' => !empty($infoLabel) ? $infoLabel : '',
                     'color' => 'default',
                     'style' => 'basic',
                     'icon' => $icon,
