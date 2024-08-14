@@ -15,7 +15,7 @@ class Icon extends \ComponentLibrary\Component\BaseController
         'key'  => "Label"
     ];
     private $altTextUndefined = "Undefined";
-    private $runtimeCache = [
+    private static $runtimeCache = [
         'svgFromFile' => []
     ];
 
@@ -25,12 +25,12 @@ class Icon extends \ComponentLibrary\Component\BaseController
         extract($this->data);
 
         //Use a runtime cache to store the custom icons
-        if(!$runtimeCache['svgFromFile']) {
-            $customSvgIcons = $runtimeCache['svgFromFile'] = (
+        if(!self::$runtimeCache['svgFromFile']) {
+            $customSvgIcons = self::$runtimeCache['svgFromFile'] = (
                 new Icons($this->cache)
             )->getIcons();
         } else {
-            $customSvgIcons = $runtimeCache['svgFromFile'];
+            $customSvgIcons = self::$runtimeCache['svgFromFile'];
         }
         
         //Support for filled icons 
