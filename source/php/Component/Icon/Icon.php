@@ -15,26 +15,35 @@ class Icon extends \ComponentLibrary\Component\BaseController
         'key'  => "Label"
     ];
     private $altTextUndefined = "Undefined";
+    private $runtimeCache = [
+        'svgFromFile' => []
+    ];
 
     public function init()
     {
         //Extract array for easy access (fetch only)
         extract($this->data);
 
-        $customSvgIcons = (new Icons($this->cache))->getIcons();
+        //Use a runtime cache to store the custom icons
+        if(!$runtimeCache['svgFromFile']) {
+            $customSvgIcons = $runtimeCache['svgFromFile'] = (
+                new Icons($this->cache)
+            )->getIcons();
+        } else {
+            $customSvgIcons = $runtimeCache['svgFromFile'];
+        }
+        
+        //Support for filled icons 
         $customIconName = $filled ? $icon . 'Filled' : $icon;
 
         $this->data['svgFromLink'] =  $this->iconIsSvg($icon);
 
         if ($this->data['svgFromLink']) {
             $this->data['classList'][] = $this->getBaseClass() . "--svg-link";
-
-        } 
-        elseif (array_key_exists($customIconName, $customSvgIcons)) {
+        } elseif (array_key_exists($customIconName, $customSvgIcons)) {
             $this->data['svgElementFromFile'] = $customSvgIcons[$customIconName];
             $this->data['classList'][] = $this->getBaseClass() . "--svg-path";
-        }
-        else {
+        } else {
             $this->data['classList'] = array_merge($this->data['classList'] ?? [], [
                 $this->createIconModifier($icon),
                 $this->getBaseClass() . "--material",
@@ -44,14 +53,12 @@ class Icon extends \ComponentLibrary\Component\BaseController
                 "material-symbols-sharp", //All classes added, to support all icon types
                 "material-symbols-outlined" //All classes added, to support all icon types
             ]);
-
             $this->data['attributeList']['material-symbol'] = $icon;
         }
 
         if (!empty($filled)) {
             $this->data['classList'][] = 'material-symbols--filled';
         }
-
 
         if (!empty($customColor)) {
             $this->data['attributeList']['style'] = 
@@ -60,7 +67,6 @@ class Icon extends \ComponentLibrary\Component\BaseController
         } else {
             $this->data['classList'][] = $this->setIconColorCssClass($color);
         }
-
 
         $this->data['label'] = $this->getSpacedLabel($label);
         $this->data['classList'][] = $this->setIconSizeCssClass($size);
