@@ -8,6 +8,7 @@
     @icon([
       'icon' => $item['icon']['icon'] ?? null,
       'size' => $item['icon']['size'] ?? null,
+      'filled' => $item['icon']['filled'] ?? false,
       'classList' => $item['icon']['classList'] ?? [],
       'attributeList' => array_merge($item['icon']['attributeList'] ?? [], [
         'style' => 'background-color:' . ($item['color'] ?? '') . ';'

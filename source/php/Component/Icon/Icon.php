@@ -32,7 +32,18 @@ class Icon extends \ComponentLibrary\Component\BaseController
         } else {
             $customSvgIcons = self::$runtimeCache['svgFromFile'];
         }
-        
+
+
+        // The two checks below handles a default hidden value.
+        // Allows for the default value to be overwritten.
+        if ($defaultFilled && !$filled) {
+            $this->data['filled'] = $defaultFilled;
+        }
+
+        if (!isset($this->data['filled'])) {
+            $this->data['filled'] = true;
+        }
+
         //Support for filled icons 
         $customIconName = $filled ? $icon . 'Filled' : $icon;
 
