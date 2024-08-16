@@ -34,12 +34,12 @@ class Icon extends \ComponentLibrary\Component\BaseController
         }
 
 
-        // The two checks below handles a default hidden value.
+        // The check below handles a default hidden value.
         // Allows for the default value to be overwritten.
         if (is_null($filled)) {
             $this->data['filled'] = $defaultFilled ?? true;
         }
-        
+
         //Support for filled icons 
         $customIconName = $filled ? $icon . 'Filled' : $icon;
 
