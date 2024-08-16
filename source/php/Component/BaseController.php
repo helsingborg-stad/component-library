@@ -405,8 +405,7 @@ class BaseController
         $attributeStrings = [];
 
         foreach ($attributes as $key => $value) {
-
-            if(is_resource($value) || is_callable($value)) {
+            if(is_resource($value) || (!is_string($value) && is_callable($value))) {
                 continue;
             }
 
