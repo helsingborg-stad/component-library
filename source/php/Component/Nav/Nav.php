@@ -39,6 +39,10 @@ class Nav extends \ComponentLibrary\Component\BaseController
             $this->data['id'] = $this->getUid();
         }
 
+        if ($compressed) {
+            $this->data['classList'][] = $this->getBaseClass('compressed', true);
+        }
+
         //Classes
         $this->data['classList'][] = $this->getBaseClass(
             "depth-" . $this->data['depth'],
