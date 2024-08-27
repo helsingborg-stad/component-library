@@ -17,7 +17,8 @@
                             'icon' => $icon['icon'],
                             'size' => $icon['size'],
                             'customColor' => $tag['color'],
-                            'classList' => ['u-margin__right--05']
+                            'classList' => ['u-margin__right--05'],
+                            'filled' => true
                         ])
                         @endicon
                     @else
