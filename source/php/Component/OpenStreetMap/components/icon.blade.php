@@ -3,7 +3,7 @@
     'size' => 'md',
     'color' => 'white',
     'attributeList' => [
-        'style' => 'background-color:{ICON_BACKGROUND_COLOR}; font-size:20px;',
+        'style' => 'background-color:{ICON_BACKGROUND_COLOR};',
         'tabindex' => '-1'
     ],
     'classList' => [$baseClass . '__marker']
