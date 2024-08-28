@@ -6,7 +6,8 @@
         "componentElement": "nav",
         "listType": "ol",
         "listItemType": "li",
-        "prefixLabel": ""
+        "prefixLabel": "",
+        "truncate": null
     },
     "description": {
         "list": "Array of breadcrumb items.",
@@ -14,7 +15,8 @@
         "componentElement": "What element to wrap this component with.",
         "listType": "The list type ol/ul",
         "listItemType": "The item type: li",
-        "prefixLabel": "The label before the breadcrumb items (screen reader only)."
+        "prefixLabel": "The label before the breadcrumb items (screen reader only).",
+        "truncate": "The number of letters until item is truncated."
     },
     "types": {
         "list": "array",
@@ -22,7 +24,8 @@
         "componentElement": "string",
         "listType": "string",
         "listItemType": "string",
-        "prefixLabel": "string"
+        "prefixLabel": "string",
+        "truncate": "int|boolean"
     },
     "view": "breadcrumb.blade.php",
     "dependency": {

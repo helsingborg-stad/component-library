@@ -1,12 +1,16 @@
 {
     "slug": "tooltip",
     "default": {
+        "componentElement": "div",
+        "typographyElement": "strong",
         "placement": "bottom",
         "icon": "info",
         "iconSize": "md",
         "label": false
     },
     "description": {
+        "componentElement": "What element to wrap this component with.",
+        "typographyElement": "What element to wrap the label with.",
         "placement": "Selects the placement of the tooltip",
         "icon": "Name of the icon, alternatively false",
         "iconSize": "Size of the icon",

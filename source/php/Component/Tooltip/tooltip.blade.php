@@ -1,8 +1,8 @@
-<div class="{{$class}}" {!! $attribute !!}>
+<{{$componentElement}} class="{{$class}}" {!! $attribute !!}>
     <div class="{{$baseClass}}__wrapper" tabindex="1" aria-describedby="{{$id}}">
     @if($label)
     @typography([
-        'element' => 'strong',
+        'element' => $typographyElement,
         'classList' => ['u-margin__right--1']
     ])
         {{$label}}
@@ -24,5 +24,5 @@
             @endif
         </div>
     </div>
-</div>
+</{{$componentElement}}>
 
