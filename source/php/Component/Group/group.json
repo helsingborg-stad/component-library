@@ -10,7 +10,7 @@
         "flexGrow": false,
         "flexShrink": true,
         "gap": "",
-        "fluidGrid": false,
+        "fluidGrid": null,
         "columns": null
     },
     "description": {
@@ -23,7 +23,7 @@
         "flexGrow": "Allow to grow the content within the group",
         "flexShrink": "Allow to shrink the content within the group",
         "gap": "A number between 1-10 that sets the gap between flexed elements.",
-        "fluidGrid": "Uses flexbox and media queries to determine amount of items per row.",
+        "fluidGrid": "Uses flexbox and media queries to determine amount of items per row. Can be a number between 1-4 which will determine the maximum amount of items per row.",
         "columns": "Number of items per row. (number between 1-12)"
     },
     "view": "group.blade.php",
