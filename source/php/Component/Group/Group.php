@@ -14,8 +14,10 @@ class Group extends \ComponentLibrary\Component\BaseController
         extract($this->data);
 
         if (!empty($fluidGrid)) {
+            $fluidGrid = is_numeric($fluidGrid) ? $fluidGrid : 3;
             $this->data['containerAware'] = true;
             $this->data['classList'][] = $this->getBaseClass('fluid-grid', true);
+            $this->data['classList'][] = $this->getBaseClass('fluid-grid-' . $fluidGrid, true);
         }
 
         if ($direction == "vertical") {
@@ -29,7 +31,7 @@ class Group extends \ComponentLibrary\Component\BaseController
         }
         
         if (!empty($gap)) {
-            $this->data['classList'][] = $this->getBaseClass('gap-' . $gap, true);      
+            $this->data['classList'][] = $this->getBaseClass('gap-' . $gap, true);
         }
         
         if (!empty($alignItems)) {
