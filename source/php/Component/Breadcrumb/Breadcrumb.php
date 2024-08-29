@@ -15,7 +15,7 @@ class Breadcrumb extends \ComponentLibrary\Component\BaseController
 
 
 		if (is_null($truncate)) {
-			$this->data['truncate'] = $this->data['defaultTruncate'] ?? 20;
+			$this->data['truncate'] = $this->data['defaultTruncate'] ?? 30;
 		}
 		
 		$this->data['list'] = $this->structureBreadcrumbs();
