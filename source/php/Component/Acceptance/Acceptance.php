@@ -121,7 +121,7 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
             ),
             new Supplier(
                 'Helsingborg Stad',
-                array('helsingborg.se', 'www.helsingborg.se', 'driftinfo.helsingborg.se', 'it.helsingborg.se', 'ettbattre.helsingborg.se'),
+                array('helsingborg.se', 'www.helsingborg.se', 'driftinfo.helsingborg.se', 'it.helsingborg.se', 'ettbattre.helsingborg.se', 'media.helsingborg.se'),
                 'https://helsingborg.se/om-webbplatsen/sa-har-behandlar-vi-dina-personuppgifter/',
                 false,
                 'municipal'
