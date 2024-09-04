@@ -25,14 +25,21 @@ class Icon extends \ComponentLibrary\Component\BaseController
         extract($this->data);
 
         //Use a runtime cache to store the custom icons
-        if(!$runtimeCache['svgFromFile']) {
+        if(!self::$runtimeCache['svgFromFile']) {
             $customSvgIcons = self::$runtimeCache['svgFromFile'] = (
                 new Icons($this->cache)
             )->getIcons();
         } else {
             $customSvgIcons = self::$runtimeCache['svgFromFile'];
         }
-        
+
+
+        // The check below handles a default hidden value.
+        // Allows for the default value to be overwritten.
+        if (is_null($filled)) {
+            $this->data['filled'] = $defaultFilled ?? true;
+        }
+
         //Support for filled icons 
         $customIconName = $filled ? $icon . 'Filled' : $icon;
 

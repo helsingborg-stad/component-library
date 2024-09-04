@@ -7,7 +7,7 @@
         "color": "",
         "customColor": "",
         "componentElement": "span",
-        "filled": true,
+        "filled": null,
         "decorative": false
     },
     "description": {
