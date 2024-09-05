@@ -7,7 +7,10 @@
         "format": "D d M Y",
         "action": "formatDate",
         "labels": [],
-        "labelsPlural": []
+        "labelsPlural": [],
+        "timeSinceSuffix": "ago",
+        "nowLabel": "just now",
+        "timeNowCap": 60
     },
     "description": {
         "timestamp": "The date",
@@ -16,7 +19,10 @@
         "format": "Present date's in this format. Default: D d M Y",
         "action": "What to do with the inputted date: formatDate, timesince, timeuntil. Can be false to just output the timestamp.",
         "labels": "Array containing translations valid keys: year, month, week, day, hour, minute, second",
-        "labelsPlural": "Array containing translations valid keys: year, month, week, day, hour, minute, second"
+        "labelsPlural": "Array containing translations valid keys: year, month, week, day, hour, minute, second",
+        "timeSinceSuffix": "Suffix for the time since label",
+        "nowLabel": "What to show when the date is considered to be in the present",
+        "timeNowCap": "How many seconds back to show 'nowLabel'"
     },
     "types": {
         "timestamp": "string",
@@ -25,7 +31,10 @@
         "format": "string",
         "action": "string|boolean",
         "labels": "object|array",
-        "labelsPlural": "object|array"
+        "labelsPlural": "object|array",
+        "timeSinceSuffix": "string",
+        "nowLabel": "string",
+        "timeNowCap": "integer"
     },
     "view": "date.blade.php",
     "dependency": {
