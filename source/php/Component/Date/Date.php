@@ -36,7 +36,7 @@ class Date extends \ComponentLibrary\Component\BaseController
                 break;
 
             default:
-                $this->data['refinedDate'] = $timestamp;
+                $this->data['refinedDate'] = $this->formatDate($timestamp, $format);
                 break;
         }
 
