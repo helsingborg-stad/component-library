@@ -3,90 +3,73 @@
 namespace ComponentLibrary\Component\Date;
 
 /**
- * Class Dropdown
+ * Class Date
  * @package ComponentLibrary\Component\Date
  */
 class Date extends \ComponentLibrary\Component\BaseController
 {
-
     public function init()
     {
-        //Extract array for eazy access (fetch only)
+        // Extract data for easy access
         extract($this->data);
 
-        if ($action == "formatDate") {
-            $this->data['refinedDate'] = $this->formatDate(strtotime($timestamp), $format);
-        } else if ($action == "timesince") {
-            $this->data['refinedDate'] = $this->convertToHumanReadableUnit(strtotime($timestamp), true, $labels, $labelsPlural);
-        } else if ($action == "timeuntil") {
-            $this->data['refinedDate'] = $this->convertToHumanReadableUnit(strtotime($timestamp), false, $labels, $labelsPlural);
-        } else {
-            $this->data['refinedDate'] = $timestamp;
+        $timestamp = strtotime($timestamp);
+        $this->data['timeSinceSuffix'] = "";
+
+        switch ($action) {
+            case "formatDate":
+                $this->data['refinedDate'] = $this->formatDate($timestamp, $format);
+                break;
+
+            case "timesince":
+                $timeDiff = time() - $timestamp;
+                if ($timeDiff < $timeNowCap) {
+                    $this->data['refinedDate'] = $this->data['nowLabel'];
+                } else {
+                    $this->data['refinedDate'] = $this->convertToHumanReadableUnit($timestamp, true, $labels, $labelsPlural);
+                    $this->data['timeSinceSuffix'] = $timeSinceSuffix;
+                }
+                break;
+
+            case "timeuntil":
+                $this->data['refinedDate'] = $this->convertToHumanReadableUnit($timestamp, false, $labels, $labelsPlural);
+                break;
+
+            default:
+                $this->data['refinedDate'] = $timestamp;
+                break;
         }
 
-        //Display tipbox with exact time, if relative shown.
-        if (in_array($action, ['timesince', 'timeuntil'])) {
-            $this->data['tooltipDate'] = $this->formatDate(strtotime($timestamp), $format);
-        } else {
-            $this->data['tooltipDate'] = false;
-        }
+        // Tooltip for relative time (timesince/timeuntil)
+        $this->data['tooltipDate'] = in_array($action, ['timesince', 'timeuntil'])
+            ? $this->formatDate($timestamp, $format)
+            : false;
 
-        //Add excact date as metadata
-        $this->data['metaDate'] = $this->formatDate(
-            strtotime($timestamp),
-            \ComponentLibrary\Helper\Date::getDateFormat('date-time')
-        );
+        // Add exact date as metadata
+        $this->data['metaDate'] = $this->formatDate($timestamp, \ComponentLibrary\Helper\Date::getDateFormat('date-time'));
     }
 
     private function formatDate($timestamp, $format)
     {
-        $format = $format ? $format : 'D d M Y';
-
-        if (function_exists('date_i18n')) {
-            $date = date_i18n($format, $timestamp);
-        } else {
-            $date = date($format, $timestamp);
-        }
-
-        return $date;
+        return function_exists('date_i18n') ? date_i18n($format ?? 'D d M Y', $timestamp) : date($format ?? 'D d M Y', $timestamp);
     }
 
-    /**
-     * Get time since a specified date
-     * @param Date A timestamp of which date to count since
-     * @return String Time since in words
-     */
     private function convertToHumanReadableUnit($time, $timeSince = false, $labels = [], $labelsPlural = [])
     {
-        $time = $timeSince ? time() - $time : $time - time();
-        $time = ($time < 1) ? 1 : $time;
-        $tokens = array(
-            31536000 => 'year',
-            2592000 => 'month',
-            604800 => 'week',
-            86400 => 'day',
-            3600 => 'hour',
-            60 => 'minute',
-            1 => 'second',
-        );
+        $timeDiff = $timeSince ? time() - $time : $time - time();
+        $timeDiff = max($timeDiff, 1);
 
-        foreach ($tokens as $unit => $text) {
-            $numberOfUnits = (int) floor($time / $unit);
+        $units = [
+            31536000 => 'year', 2592000 => 'month', 604800 => 'week',
+            86400 => 'day', 3600 => 'hour', 60 => 'minute', 1 => 'second'
+        ];
 
-            if ($numberOfUnits > 1) {
-                if (array_key_exists($text, $labelsPlural)) {
-                    $text = $labelsPlural[$text];
-                }
-            } else {
-                if (array_key_exists($text, $labels)) {
-                    $text = $labels[$text];
-                }
-            }
-
-            if ($time >= $unit) {
-                return $numberOfUnits . ' ' . $text;
+        foreach ($units as $unit => $label) {
+            $numUnits = floor($timeDiff / $unit);
+            if ($numUnits >= 1) {
+                $label = ($numUnits > 1 && isset($labelsPlural[$label])) ? $labelsPlural[$label] : ($labels[$label] ?? $label);
+                return $numUnits . ' ' . $label;
             }
         }
-
     }
 }
