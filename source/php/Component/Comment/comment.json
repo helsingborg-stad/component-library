@@ -8,7 +8,7 @@
         "icon": "",
         "bubble_color": "dark",
         "date": "01/02/2019",
-        "date_suffix": "",
+        "date_suffix": "ago",
         "dateLabels": [],
         "dateLabelsPlural": [],
         "componentElement": "div",

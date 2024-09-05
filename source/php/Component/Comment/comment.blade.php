@@ -35,11 +35,11 @@
                         'action' => 'timesince',
                         'timestamp' => $date,
                         'labels' => $dateLabels,
-                        'labelsPlural' => $dateLabelsPlural
+                        'labelsPlural' => $dateLabelsPlural,
+                        'timeSinceSuffix' => $date_suffix
                     ])
                     @enddate
-    
-                    @if ($date_suffix) {{$date_suffix}} @endif
+
                 @endtypography
             @endif
         </div>
