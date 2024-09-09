@@ -4,7 +4,7 @@
  * Plugin Name:       component-library
  * Plugin URI:        (#plugin_url#)
  * Description:       A library of blade components
- * Version: 4.20.3
+ * Version: 4.20.4
  * Author:            Eric Rosenborg
  * Author URI:        (#plugin_author_url#)
  * License:           MIT
