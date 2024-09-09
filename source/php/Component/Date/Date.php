@@ -20,7 +20,6 @@ class Date extends \ComponentLibrary\Component\BaseController
             case "formatDate":
                 $this->data['refinedDate'] = $this->formatDate($timestamp, $format);
                 break;
-
             case "timesince":
                 $timeDiff = time() - $timestamp;
                 if ($timeDiff < $timeNowCap) {
@@ -30,13 +29,11 @@ class Date extends \ComponentLibrary\Component\BaseController
                     $this->data['timeSinceSuffix'] = $timeSinceSuffix;
                 }
                 break;
-
             case "timeuntil":
                 $this->data['refinedDate'] = $this->convertToHumanReadableUnit($timestamp, false, $labels, $labelsPlural);
                 break;
-
             default:
-                $this->data['refinedDate'] = $this->formatDate($timestamp, $format);
+                $this->data['refinedDate'] = is_numeric($timestamp) ? $this->formatDate($timestamp, $format) : $timestamp;
                 break;
         }
 
