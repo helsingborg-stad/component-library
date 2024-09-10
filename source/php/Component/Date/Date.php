@@ -2,59 +2,118 @@
 
 namespace ComponentLibrary\Component\Date;
 
+use ComponentLibrary\Helper\Date as DateHelper;
+
 /**
  * Class Date
- * @package ComponentLibrary\Component\Date
+ * Handles various date-related actions like formatting, calculating time since/until, and tooltip generation.
  */
 class Date extends \ComponentLibrary\Component\BaseController
 {
     public function init()
     {
-        // Extract data for easy access
-        extract($this->data);
-
-        $timestamp = strtotime($timestamp);
-        $this->data['timeSinceSuffix'] = "";
+        $timestamp  = strtotime($this->sanitizeTime($this->data['timestamp']));
+        $action     = $this->data['action'];
+        $format     = $this->data['format'] ?? 'D d M Y';
 
         switch ($action) {
-            case "formatDate":
-                $this->data['refinedDate'] = $this->formatDate($timestamp, $format);
-                break;
             case "timesince":
-                $timeDiff = time() - $timestamp;
-                if ($timeDiff < $timeNowCap) {
-                    $this->data['refinedDate'] = $this->data['nowLabel'];
-                } else {
-                    $this->data['refinedDate'] = $this->convertToHumanReadableUnit($timestamp, true, $labels, $labelsPlural);
-                    $this->data['timeSinceSuffix'] = $timeSinceSuffix;
-                }
+                $this->handleTimeSince($timestamp);
                 break;
-            case "timeuntil":
-                $this->data['refinedDate'] = $this->convertToHumanReadableUnit($timestamp, false, $labels, $labelsPlural);
+
+            case "formatDate":
+                $this->handleFormatDate($timestamp, $format);
                 break;
+
             default:
-                $this->data['refinedDate'] = is_numeric($timestamp) ? $this->formatDate($timestamp, $format) : $timestamp;
+                $this->handleFormatDate($timestamp, $format);
                 break;
         }
-
-        // Tooltip for relative time (timesince/timeuntil)
-        $this->data['tooltipDate'] = in_array($action, ['timesince', 'timeuntil'])
-            ? $this->formatDate($timestamp, $format)
-            : false;
-
-        // Add exact date as metadata
-        $this->data['metaDate'] = $this->formatDate($timestamp, \ComponentLibrary\Helper\Date::getDateFormat('date-time'));
+        $this->setTooltipDate($action, $timestamp, $format);
+        $this->setMetaDate($timestamp);
     }
 
+    /**
+     * Sanitizes the given time string.
+     * Removes any commas from the time string.
+     * 
+     * @param string $time  Readable time string
+     * @return string       Sanitized readable time string
+     */
+    private function sanitizeTime($time)
+    {
+        return str_replace(',', '', $time);
+    }
+
+    /**
+     * Handles the formatDate action.
+     */
+    private function handleFormatDate($timestamp, $format)
+    {
+        $this->data['refinedDate'] = $this->formatDate($timestamp, $format);
+    }
+
+    /**
+     * Handles the timesince action.
+     */
+    private function handleTimeSince($timestamp)
+    {
+        $timeDiff   = time() - $timestamp;
+        $timeNowCap = $this->data['timeNowCap'] ?? 3600;  // Default cap to 1 hour
+        $nowLabel   = $this->data['nowLabel'] ?? 'Just now';
+
+        if ($timeDiff < $timeNowCap) {
+            $this->data['refinedDate'] = $nowLabel;
+        } else {
+            $this->data['refinedDate'] = $this->convertToHumanReadableUnit(
+                $timestamp, true, $this->data['labels'] ?? [], $this->data['labelsPlural'] ?? []
+            );
+            $this->data['timeSinceSuffix'] = $this->data['timeSinceSuffix'] ?? '';
+        }
+    }
+
+    /**
+     * Sets the tooltip date if applicable.
+     */
+    private function setTooltipDate($action, $timestamp, $format)
+    {
+        if ($action === 'timesince') {
+            $this->data['tooltipDate'] = $this->formatDate($timestamp, $format);
+        } else {
+            $this->data['tooltipDate'] = false;
+        }
+    }
+
+    /**
+     * Sets the metaDate field for exact date metadata.
+     */
+    private function setMetaDate($timestamp)
+    {
+        //Create ISO 8601 date for meta
+        $this->data['metaDate'] = $this->formatDate(
+            $timestamp, 
+            'Y-m-d\TH:i:s'
+        );
+    }
+
+    /**
+     * Formats the given timestamp into the specified format.
+     */
     private function formatDate($timestamp, $format)
     {
-        return function_exists('date_i18n') ? date_i18n($format ?? 'D d M Y', $timestamp) : date($format ?? 'D d M Y', $timestamp);
+        $this->data['timeSinceSuffix'] = false;
+        return function_exists('date_i18n')
+            ? date_i18n($format, $timestamp)
+            : date($format, $timestamp);
     }
 
-    private function convertToHumanReadableUnit($time, $timeSince = false, $labels = [], $labelsPlural = [])
+    /**
+     * Converts a timestamp into a human-readable time unit (like "2 hours ago").
+     */
+    private function convertToHumanReadableUnit($timestamp, $timeSince = false, $labels = [], $labelsPlural = [])
     {
-        $timeDiff = $timeSince ? time() - $time : $time - time();
-        $timeDiff = max($timeDiff, 1);
+        $timeDiff = $timeSince ? time() - $timestamp : $timestamp - time();
+        $timeDiff = max($timeDiff, 1);  // Avoid negative or zero
 
         $units = [
             31536000 => 'year', 2592000 => 'month', 604800 => 'week',
@@ -64,9 +123,11 @@ class Date extends \ComponentLibrary\Component\BaseController
         foreach ($units as $unit => $label) {
             $numUnits = floor($timeDiff / $unit);
             if ($numUnits >= 1) {
-                $label = ($numUnits > 1 && isset($labelsPlural[$label])) ? $labelsPlural[$label] : ($labels[$label] ?? $label);
+                $label = $numUnits > 1 && isset($labelsPlural[$label]) ? $labelsPlural[$label] : ($labels[$label] ?? $label);
                 return $numUnits . ' ' . $label;
             }
         }
+
+        return 'just now';  // Default fallback
     }
 }
