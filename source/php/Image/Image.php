@@ -2,23 +2,37 @@
 
 namespace ComponentLibrary\Image;
 
-
 class Image implements ImageInterface {
-  private int $minimumDimension = 500; // Minimum width for the image
-  private int $minimumDifferance = 200; // Minimum differance between the sizes
-  private int $maxNumberOfSizes = 3; // Max number of sizes to generate for the srcset
+  private int $minimumDimension = 500; // Minimum width for the image, no sizes will be generated below this figure
+  private int $minimumDifferance = 200; // Minimum differance between the sizes, if difference is smaller, less sizes will be generated
+  private int $maxiumDifference = 400; // Maximum differance between the sizes, if difference is larger, more sizes will be generated
+  private array $numberOfSizes = [3, 6]; // Number of sizes to generate. [min, max]
 
   public function __construct(private int $imageId, private array $imageSize) {
       $this->imageId = $imageId;
       $this->imageSize = $imageSize;
   }
 
+  /**
+   * @inheritDoc
+   */
   public function getUrl(): string {
-    return ""; 
+    return $this->getWpImage($this->imageId, $this->imageSize)[0];
   }
 
-  public function getSrcSet(): string {
-    return ""; 
+  /**
+   * @inheritDoc
+   */
+  public function getSrcSet(): ?string {
+    $srcSet = $this->getImageSizes();
+
+    if(is_array($srcSet) && !empty($srcSet)) {
+      foreach($srcSet as $size) {
+        $srcSet[] = $this->getWpImage($this->imageId, $size);
+      }
+      return $this->getSrcSetString($srcSet);
+    }
+    return null;
   }
 
   /**
@@ -38,13 +52,12 @@ class Image implements ImageInterface {
       }
 
       if(!is_int($imageSize[0])) {
-        throw new \Exception('Image size must be an array width atleast a integer representing width.');
+        throw new \Exception('Image size must be an array width at least a integer representing width.');
       }
 
       return new self($imageId, $imageSize); 
     }
   }
-
 
   /**
    * Get the image srcset as a string
@@ -54,13 +67,52 @@ class Image implements ImageInterface {
    * @return string
    */
   private function getSrcSetString($srcSet): string {
-    return "";
+    return implode(', ', array_map(function($src) {
+      return $src[0] . ' ' . $src[1] . 'w';
+    }, $srcSet));
   }
 
-  private function getImageSizes() {
-
-    $imageSizeMax = $this->imageSize[0];
+  private function getImageSizes(): array {
+    $sizes = [];
     
+    // Minimum and maximum width
+    $minWidth = $this->minimumDimension;
+    $maxWidth = $this->imageSize[0]; // Provided image size width
+
+    // Calculate the total range between the minimum and maximum width
+    $range = $maxWidth - $minWidth;
+
+    // Determine the possible number of sizes to generate based on the range and allowed differences
+    // The step size must respect the minimum and maximum difference
+    $idealStepSize = $range / ($this->numberOfSizes[1] - 1); // Ideal step size for maximum number of sizes
+    $stepSize = max($this->minimumDifferance, min($idealStepSize, $this->maxiumDifference));
+
+    // Calculate how many sizes we can generate with this step size
+    $numSizes = floor($range / $stepSize) + 1;
+
+    // Ensure the number of sizes is within the allowed range (min/max)
+    $numSizes = min(max($numSizes, $this->numberOfSizes[0]), $this->numberOfSizes[1]);
+
+    // Add the minimum dimension as the first size
+    $sizes[] = [$minWidth, $minWidth . 'w'];
+
+    // Generate the intermediate sizes
+    for ($i = 1; $i < $numSizes - 1; $i++) {
+        $currentSize = $minWidth + round($i * $stepSize);
+
+        // Ensure the size is at least $minimumDifferance apart from the previous size
+        if (count($sizes) > 0 && ($currentSize - $sizes[count($sizes) - 1][0]) < $this->minimumDifferance) {
+            continue; // Skip this size if the difference is too small
+        }
+
+        // Add the size
+        $sizes[] = [$currentSize, $currentSize . 'w'];
+    }
+
+    // Add the maxWidth as the last size
+    $sizes[] = [$maxWidth, $maxWidth . 'w'];
+
+    return $sizes;
   }
 
   /**
