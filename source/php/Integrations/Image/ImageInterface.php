@@ -2,6 +2,8 @@
 
 namespace ComponentLibrary\Image;
 
+use ComponentLibrary\Image\ImageResolverInterface;
+
 interface ImageInterface {
 
     /**
@@ -22,10 +24,11 @@ interface ImageInterface {
     /**
      * Factory method to create an image object
      * 
-     * @param int $imageId      The WordPress ID of the image
-     * @param array $imageSize  Width and height of the image
+     * @param int $imageId                          The WordPress ID of the image
+     * @param array $imageSize                      Width and height of the image
+     * @param ImageResolverInterface $resolver      A interface that resolves the image in the native system
      * 
      * @return ImageInterface
      */
-    public function factory($imageId, $imageSize): ImageInterface;
+    public function factory($imageId, $imageSize, callable $resolver): ImageInterface;
 }

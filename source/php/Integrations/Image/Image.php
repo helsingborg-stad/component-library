@@ -8,16 +8,51 @@ class Image implements ImageInterface {
   private int $maxiumDifference = 400; // Maximum differance between the sizes, if difference is larger, more sizes will be generated
   private array $numberOfSizes = [3, 6]; // Number of sizes to generate. [min, max]
 
-  public function __construct(private int $imageId, private array $imageSize) {
-      $this->imageId = $imageId;
-      $this->imageSize = $imageSize;
+  private callable $resolver;
+
+  public function __construct(
+    private int $imageId, 
+    private array $imageSize, 
+    callable $resolver
+  ) {
+    $this->imageId = $imageId;
+    $this->imageSize = $imageSize;
+
+    if($this->verifyCallableSignature($resolver) === true) {
+      $this->resolver = $resolver;  
+    }
+  }
+  
+  /**
+   * Verify the signature of the callable
+   * 
+   * @param callable $resolver
+   * 
+   * @return void
+   */
+  private function verifyCallableSignature(callable $resolver): true
+  {
+      // Reflection can help to verify the signature of the callable
+      $reflection = new \ReflectionFunction($resolver);
+
+      // Check the number of parameters (we expect 2)
+      if ($reflection->getNumberOfParameters() !== 2) {
+         throw new \InvalidArgumentException('The callable must accept exactly 2 parameters (int $id, array $size = [{$width}, {$height}]).');
+      }
+
+      // Check the return type
+      if ($reflection->getReturnType() !== 'string') {
+        throw new \InvalidArgumentException('The callable must return an string with the url of the image asset.');
+      }
+
+      return true;
   }
 
   /**
    * @inheritDoc
    */
   public function getUrl(): string {
-    return $this->getWpImage($this->imageId, $this->imageSize)[0];
+    return call_user_func($this->resolver, $this->imageId, $this->imageSize);
   }
 
   /**
@@ -28,7 +63,7 @@ class Image implements ImageInterface {
 
     if(is_array($srcSet) && !empty($srcSet)) {
       foreach($srcSet as $size) {
-        $srcSet[] = $this->getWpImage($this->imageId, $size);
+        $srcSet[] = call_user_func($this->resolver, $this->imageId, $size);
       }
       return $this->getSrcSetString($srcSet);
     }
@@ -43,20 +78,17 @@ class Image implements ImageInterface {
    * 
    * @return ImageInterface
    */
-  public function factory($imageId, $imageSize): ImageInterface
+  public function factory($imageId, $imageSize, callable $resolver): ImageInterface
   {
-    if ($this->isWordPress()) {
-
-      if(!isset($imageSize[0]) || !isset($imageSize[1])) {
-        throw new \Exception('Image size must be an array with width and height.');
-      }
-
-      if(!is_int($imageSize[0])) {
-        throw new \Exception('Image size must be an array width at least a integer representing width.');
-      }
-
-      return new self($imageId, $imageSize); 
+    if(!isset($imageSize[0]) || !isset($imageSize[1])) {
+      throw new \Exception('Image size must be an array with width and height.');
     }
+
+    if(!is_int($imageSize[0])) {
+      throw new \Exception('Image size must be an array width at least a integer representing width.');
+    }
+
+    return new self($imageId, $imageSize, $resolver); 
   }
 
   /**
@@ -113,40 +145,5 @@ class Image implements ImageInterface {
     $sizes[] = [$maxWidth, $maxWidth . 'w'];
 
     return $sizes;
-  }
-
-  /**
-   * Get the image srcset
-   * 
-   * @return string
-   */
-  private function getWpImage($id, $imageSize): array
-  {
-    return wp_get_attachment_image_src(
-      $id, 
-      $imageSize
-    );
-  }
-
-  /**
-   * Get the image metadata
-   * 
-   * @return array
-   */
-  private function getWpImageMetaData($id): array
-  {
-    return wp_get_attachment_metadata($id);
-  }
-
-  /**
-   * Check that the environment is WordPress
-   * 
-   * @return bool
-   */
-  private function isWordPress(): bool {
-    if (defined('ABSPATH')) {
-      return true;
-    }
-    throw new \Exception('Can not detect WordPress environment.');
   }
 }
