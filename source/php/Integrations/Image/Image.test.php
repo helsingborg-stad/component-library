@@ -19,6 +19,19 @@ class ImageTest extends TestCase
         $this->assertEquals("https://example.com/image-1-800x600.jpg", $url);
     }
 
+    public function testGetSrcSetReturnsNullIfNoImageSizes() {
+        $imageId = 1;
+        $imageSize = [100, 100];
+        $resolver = function(int $id, array $size): string {
+            return (string) "https://example.com/image-{$id}-{$size[0]}x{$size[1]}.jpg";
+        };
+
+        $image = new Image($imageId, $imageSize, $resolver);
+        $srcSet = $image->getSrcSet();
+
+        $this->assertNull($srcSet);
+    }
+
     public function testgetImageSizesReturnsACorrectSizeArray() {
         $imageId = 1;
         $imageSize = [1450, 600];
