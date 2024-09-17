@@ -8,12 +8,12 @@ class Image implements ImageInterface {
   private int $maxiumDifference = 400; // Maximum differance between the sizes, if difference is larger, more sizes will be generated
   private array $numberOfSizes = [3, 6]; // Number of sizes to generate. [min, max]
 
-  private callable $resolver;
+  private mixed $resolver; // The callable that resolves the image in the native system
 
   public function __construct(
     private int $imageId, 
     private array $imageSize, 
-    callable $resolver
+    callable $resolver,
   ) {
     $this->imageId = $imageId;
     $this->imageSize = $imageSize;
@@ -28,7 +28,7 @@ class Image implements ImageInterface {
    * 
    * @param callable $resolver
    * 
-   * @return void
+   * @return bool   True if the signature is correct, otherwise an InvalidArgumentException is thrown
    */
   private function verifyCallableSignature(callable $resolver): true
   {
@@ -37,7 +37,7 @@ class Image implements ImageInterface {
 
       // Check the number of parameters (we expect 2)
       if ($reflection->getNumberOfParameters() !== 2) {
-         throw new \InvalidArgumentException('The callable must accept exactly 2 parameters (int $id, array $size = [{$width}, {$height}]).');
+        throw new \InvalidArgumentException('The callable must accept exactly 2 parameters (int $id, array $size = [{$width}, {$height}]).');
       }
 
       // Check the return type
@@ -60,10 +60,9 @@ class Image implements ImageInterface {
    */
   public function getSrcSet(): ?string {
     $srcSet = $this->getImageSizes();
-
     if(is_array($srcSet) && !empty($srcSet)) {
       foreach($srcSet as $size) {
-        $srcSet[] = call_user_func($this->resolver, $this->imageId, $size);
+        $srcSet[] = [$size, call_user_func($this->resolver, $this->imageId, $size)];
       }
       return $this->getSrcSetString($srcSet);
     }
@@ -78,16 +77,29 @@ class Image implements ImageInterface {
    * 
    * @return ImageInterface
    */
-  public function factory($imageId, $imageSize, callable $resolver): ImageInterface
+  public function factory(int $imageId, array $imageSize, callable $resolver): ImageInterface
   {
     if(!isset($imageSize[0]) || !isset($imageSize[1])) {
-      throw new \Exception('Image size must be an array with width and height.');
+      throw new \Exception('Image size must be an array with width and height (keys 0,1).');
     }
 
     if(!is_int($imageSize[0])) {
       throw new \Exception('Image size must be an array width at least a integer representing width.');
     }
 
+    if(count($imageSize) > 2) {
+      throw new \Exception('Image size must be an array with max two values.');
+    }
+
+    // Sanitize the image size, ensure the values are integers or false
+    $imageSize = array_map(function($value) {
+      if(is_numeric($value)) {
+        return (int) round($value);
+      }
+      return false; 
+    }, $imageSize);
+
+    //Factory
     return new self($imageId, $imageSize, $resolver); 
   }
 
@@ -104,6 +116,11 @@ class Image implements ImageInterface {
     }, $srcSet));
   }
 
+  /**
+   * Get the image sizes
+   * 
+   * @return array
+   */
   private function getImageSizes(): array {
     $sizes = [];
     

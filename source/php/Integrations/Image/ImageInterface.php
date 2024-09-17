@@ -30,5 +30,5 @@ interface ImageInterface {
      * 
      * @return ImageInterface
      */
-    public function factory($imageId, $imageSize, callable $resolver): ImageInterface;
+    public function factory(int $imageId, array $imageSize, callable $resolver): ImageInterface;
 }
