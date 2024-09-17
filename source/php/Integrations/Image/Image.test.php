@@ -47,7 +47,6 @@ class ImageTest extends TestCase
         $this->assertEquals([425, 768, 1024, 1450], $imageSizes);
     }
     
-    
     public function testGetSrcSetReturnsCorrectSrcSet()
     {
         $imageId = 1;
