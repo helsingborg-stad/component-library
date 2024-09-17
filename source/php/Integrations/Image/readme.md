@@ -6,7 +6,7 @@ The third argument to the factory, must be a resolver that resolves images based
 
 ## Example factory
 
-````
+```php
   $image = Image::factory(1, [1000, false], function($imageId, $size) {
     $image = wp_get_attachment_image_src($imageId, $size); 
     if($image !== false && isset($image[0])) {
@@ -21,4 +21,4 @@ The third argument to the factory, must be a resolver that resolves images based
   //Will return something like: https://example.com/image.jpg 425w, https://example.com/image.jpg 768w
   echo $image->getSrcSet();
 
-````
+```
