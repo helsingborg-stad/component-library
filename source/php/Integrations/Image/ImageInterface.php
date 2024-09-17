@@ -1,6 +1,6 @@
 <?php
 
-namespace ComponentLibrary\Image;
+namespace ComponentLibrary\Integrations\Image;
 
 use ComponentLibrary\Image\ImageResolverInterface;
 
@@ -30,5 +30,5 @@ interface ImageInterface {
      * 
      * @return ImageInterface
      */
-    public function factory(int $imageId, array $imageSize, callable $resolver): ImageInterface;
+    public static function factory(int $imageId, array $imageSize, callable $resolver): ImageInterface;
 }

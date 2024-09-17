@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use ComponentLibrary\Image\Image;
+use ComponentLibrary\Integrations\Image\Image;
 
 class ImageTest extends TestCase
 {
@@ -9,8 +9,8 @@ class ImageTest extends TestCase
     {
         $imageId = 1;
         $imageSize = [800, 600];
-        $resolver = function(int $id, array $size) {
-            return "https://example.com/image-{$id}-{$size[0]}x{$size[1]}.jpg";
+        $resolver = function(int $id, array $size): string {
+            return (string) "https://example.com/image-{$id}-{$size[0]}x{$size[1]}.jpg";
         };
 
         $image = new Image($imageId, $imageSize, $resolver);
@@ -19,18 +19,52 @@ class ImageTest extends TestCase
         $this->assertEquals("https://example.com/image-1-800x600.jpg", $url);
     }
 
-    public function testGetSrcSetReturnsCorrectSrcSet()
-    {
+    public function testgetImageSizesReturnsACorrectSizeArray() {
         $imageId = 1;
-        $imageSize = [1000, 800];
-        $resolver = function(int $id, array $size) {
-            return "https://example.com/image-{$id}-{$size[0]}x{$size[1]}.jpg";
+        $imageSize = [1450, 600];
+        $resolver = function(int $id, array $size): string {
+            return (string) "https://example.com/image-{$id}-{$size[0]}x{$size[1]}.jpg";
         };
 
         $image = new Image($imageId, $imageSize, $resolver);
+        $imageSizes = $image->getImageSizes(
+          $imageSize[0]
+        );
+
+        $this->assertEquals([425, 768, 1024], $imageSizes);
+    }
+    
+    
+    public function testGetSrcSetReturnsCorrectSrcSet()
+    {
+        $imageId = 1;
+        $imageSize = [1920, 800];
+        $resolver = function(int $id, array $size): string {
+            return "https://example.com/image.jpg";
+        };
+
+        $image = new Image($imageId, $imageSize, $resolver);
+
         $srcSet = $image->getSrcSet();
 
-        $expectedSrcSet = "500w 500w, 700w 700w, 1000w 1000w"; // Replace with expected srcSet
+        $expectedSrcSet = "https://example.com/image.jpg 425w, https://example.com/image.jpg 768w, https://example.com/image.jpg 1024w, https://example.com/image.jpg 1440w"; // Replace with expected srcSet
+
+        $this->assertEquals($expectedSrcSet, $srcSet);
+    }
+
+    public function testGetSrcSetReturnsScaledHeight()
+    {
+        $imageId = 1;
+        $imageSize = [1920, 800];
+        $resolver = function(int $id, array $size): string {
+            return "https://example.com/image-". $id ."-". implode("x", $size). ".jpg";
+        };
+
+        $image = new Image($imageId, $imageSize, $resolver);
+
+        $srcSet = $image->getSrcSet();
+
+        $expectedSrcSet = "https://example.com/image-1-425x177.jpg 425w, https://example.com/image-1-768x320.jpg 768w, https://example.com/image-1-1024x427.jpg 1024w, https://example.com/image-1-1440x600.jpg 1440w"; // Replace with expected srcSet
 
         $this->assertEquals($expectedSrcSet, $srcSet);
     }
@@ -44,7 +78,7 @@ class ImageTest extends TestCase
         $imageSize = [800, 600];
 
         // This resolver has an incorrect signature (only 1 parameter)
-        $resolver = function(int $id) {
+        $resolver = function(int $id): string {
             return "https://example.com/image-{$id}.jpg";
         };
 
@@ -56,7 +90,7 @@ class ImageTest extends TestCase
     {
         $imageId = 1;
         $imageSize = [800, 600];
-        $resolver = function(int $id, array $size) {
+        $resolver = function(int $id, array $size): string {
             return "https://example.com/image-{$id}-{$size[0]}x{$size[1]}.jpg";
         };
 
@@ -74,7 +108,7 @@ class ImageTest extends TestCase
         $imageId = 1;
         $imageSize = [800]; // Missing height
 
-        $resolver = function(int $id, array $size) {
+        $resolver = function(int $id, array $size): string {
             return "https://example.com/image-{$id}-{$size[0]}x{$size[1]}.jpg";
         };
 

@@ -1,12 +1,10 @@
 <?php 
 
-namespace ComponentLibrary\Image;
+namespace ComponentLibrary\Integrations\Image;
 
 class Image implements ImageInterface {
-  private int $minimumDimension = 500; // Minimum width for the image, no sizes will be generated below this figure
-  private int $minimumDifferance = 200; // Minimum differance between the sizes, if difference is smaller, less sizes will be generated
-  private int $maxiumDifference = 400; // Maximum differance between the sizes, if difference is larger, more sizes will be generated
-  private array $numberOfSizes = [3, 6]; // Number of sizes to generate. [min, max]
+
+  private array $commonScreenSizes = [425, 768, 1024, 1440]; // Common screen sizes (width only) to generate sizes for
 
   private mixed $resolver; // The callable that resolves the image in the native system
 
@@ -22,52 +20,6 @@ class Image implements ImageInterface {
       $this->resolver = $resolver;  
     }
   }
-  
-  /**
-   * Verify the signature of the callable
-   * 
-   * @param callable $resolver
-   * 
-   * @return bool   True if the signature is correct, otherwise an InvalidArgumentException is thrown
-   */
-  private function verifyCallableSignature(callable $resolver): true
-  {
-      // Reflection can help to verify the signature of the callable
-      $reflection = new \ReflectionFunction($resolver);
-
-      // Check the number of parameters (we expect 2)
-      if ($reflection->getNumberOfParameters() !== 2) {
-        throw new \InvalidArgumentException('The callable must accept exactly 2 parameters (int $id, array $size = [{$width}, {$height}]).');
-      }
-
-      // Check the return type
-      if ($reflection->getReturnType() !== 'string') {
-        throw new \InvalidArgumentException('The callable must return an string with the url of the image asset.');
-      }
-
-      return true;
-  }
-
-  /**
-   * @inheritDoc
-   */
-  public function getUrl(): string {
-    return call_user_func($this->resolver, $this->imageId, $this->imageSize);
-  }
-
-  /**
-   * @inheritDoc
-   */
-  public function getSrcSet(): ?string {
-    $srcSet = $this->getImageSizes();
-    if(is_array($srcSet) && !empty($srcSet)) {
-      foreach($srcSet as $size) {
-        $srcSet[] = [$size, call_user_func($this->resolver, $this->imageId, $size)];
-      }
-      return $this->getSrcSetString($srcSet);
-    }
-    return null;
-  }
 
   /**
    * Factory method to create an image object
@@ -77,7 +29,7 @@ class Image implements ImageInterface {
    * 
    * @return ImageInterface
    */
-  public function factory(int $imageId, array $imageSize, callable $resolver): ImageInterface
+  public static function factory(int $imageId, array $imageSize, callable $resolver): ImageInterface
   {
     if(!isset($imageSize[0]) || !isset($imageSize[1])) {
       throw new \Exception('Image size must be an array with width and height (keys 0,1).');
@@ -104,16 +56,72 @@ class Image implements ImageInterface {
   }
 
   /**
-   * Get the image srcset as a string
+   * Verify the signature of the callable
    * 
-   * @param array $srcSet The srcset array
+   * @param callable $resolver
    * 
-   * @return string
+   * @return bool   True if the signature is correct, otherwise an InvalidArgumentException is thrown
    */
-  private function getSrcSetString($srcSet): string {
-    return implode(', ', array_map(function($src) {
-      return $src[0] . ' ' . $src[1] . 'w';
-    }, $srcSet));
+  private function verifyCallableSignature(callable $resolver): true
+  {
+      // Reflection can help to verify the signature of the callable
+      $reflection = new \ReflectionFunction($resolver);
+
+      // Check the number of parameters (we expect 2)
+      if ($reflection->getNumberOfParameters() !== 2) {
+        throw new \InvalidArgumentException('The callable must accept exactly 2 parameters (int $id, array $size = [{$width}, {$height}]).');
+      }
+
+      // Check for a return type
+      if(!$reflection?->getReturnType()) {
+        throw new \InvalidArgumentException('The callable must have a return type, none defined.');
+      }
+
+      // Check the return type
+      if ($reflection->getReturnType()?->getName() !== 'string') {
+        throw new \InvalidArgumentException('The callable must return an string with the url of the image asset. Returned: ' . ($reflection->getReturnType()?->getName()) ?: 'unknown'); 
+      }
+
+      return true;
+  }
+
+  /**
+   * @inheritDoc
+   */
+  public function getUrl(): string {
+    return call_user_func($this->resolver, $this->imageId, $this->imageSize);
+  }
+
+  /**
+   * @inheritDoc
+   */
+  public function getSrcSet(): ?string {
+    $srcSet = $this->getImageSizes(
+      $this->imageSize[0] ?? null
+    );
+    if(is_array($srcSet) && !empty($srcSet)) {
+      foreach($srcSet as $size) {
+        $result[] = call_user_func(
+          $this->resolver, 
+          $this->imageId, 
+          [
+            $size, 
+            $this->scaledHeight($size)
+          ]) . ' ' . $size . 'w';
+      }
+      return implode(', ', $result);
+    }
+    return null;
+  }
+
+  /** 
+   * Get the scaled height of the image, if exists
+   */
+  public function scaledHeight(int $width): int {
+    if(!isset($this->imageSize[1]) || $this->imageSize[1] === false) {
+      return false; 
+    }
+    return (int) round($this->imageSize[1] * ($width / $this->imageSize[0]));
   }
 
   /**
@@ -121,46 +129,19 @@ class Image implements ImageInterface {
    * 
    * @return array
    */
-  private function getImageSizes(): array {
-    $sizes = [];
-    
-    // Minimum and maximum width
-    $minWidth = $this->minimumDimension;
-    $maxWidth = $this->imageSize[0]; // Provided image size width
-
-    // Calculate the total range between the minimum and maximum width
-    $range = $maxWidth - $minWidth;
-
-    // Determine the possible number of sizes to generate based on the range and allowed differences
-    // The step size must respect the minimum and maximum difference
-    $idealStepSize = $range / ($this->numberOfSizes[1] - 1); // Ideal step size for maximum number of sizes
-    $stepSize = max($this->minimumDifferance, min($idealStepSize, $this->maxiumDifference));
-
-    // Calculate how many sizes we can generate with this step size
-    $numSizes = floor($range / $stepSize) + 1;
-
-    // Ensure the number of sizes is within the allowed range (min/max)
-    $numSizes = min(max($numSizes, $this->numberOfSizes[0]), $this->numberOfSizes[1]);
-
-    // Add the minimum dimension as the first size
-    $sizes[] = [$minWidth, $minWidth . 'w'];
-
-    // Generate the intermediate sizes
-    for ($i = 1; $i < $numSizes - 1; $i++) {
-        $currentSize = $minWidth + round($i * $stepSize);
-
-        // Ensure the size is at least $minimumDifferance apart from the previous size
-        if (count($sizes) > 0 && ($currentSize - $sizes[count($sizes) - 1][0]) < $this->minimumDifferance) {
-            continue; // Skip this size if the difference is too small
-        }
-
-        // Add the size
-        $sizes[] = [$currentSize, $currentSize . 'w'];
-    }
-
-    // Add the maxWidth as the last size
-    $sizes[] = [$maxWidth, $maxWidth . 'w'];
-
-    return $sizes;
+   public function getImageSizes(?int $requestedImageSize): ?array
+  {
+      if ($requestedImageSize === null) {
+        return null;
+      }
+      $sizes = [];
+      foreach ($this->commonScreenSizes as $size) {
+          if ($size <= $requestedImageSize) {
+            if (abs($requestedImageSize - $size) > 100) {
+              $sizes[] = $size;
+            }
+          }
+      }
+      return $sizes ?: null;
   }
 }
