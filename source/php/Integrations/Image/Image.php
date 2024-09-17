@@ -142,6 +142,11 @@ class Image implements ImageInterface {
             }
           }
       }
+
+      if(!empty($sizes)) {
+        $sizes[] = $requestedImageSize;
+      }
+
       return $sizes ?: null;
   }
 }

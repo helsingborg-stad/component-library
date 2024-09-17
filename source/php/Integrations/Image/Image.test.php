@@ -44,7 +44,7 @@ class ImageTest extends TestCase
           $imageSize[0]
         );
 
-        $this->assertEquals([425, 768, 1024], $imageSizes);
+        $this->assertEquals([425, 768, 1024, 1450], $imageSizes);
     }
     
     
@@ -60,7 +60,7 @@ class ImageTest extends TestCase
 
         $srcSet = $image->getSrcSet();
 
-        $expectedSrcSet = "https://example.com/image.jpg 425w, https://example.com/image.jpg 768w, https://example.com/image.jpg 1024w, https://example.com/image.jpg 1440w"; // Replace with expected srcSet
+        $expectedSrcSet = "https://example.com/image.jpg 425w, https://example.com/image.jpg 768w, https://example.com/image.jpg 1024w, https://example.com/image.jpg 1440w, https://example.com/image.jpg 1920w"; // Replace with expected srcSet
 
         $this->assertEquals($expectedSrcSet, $srcSet);
     }
@@ -77,7 +77,7 @@ class ImageTest extends TestCase
 
         $srcSet = $image->getSrcSet();
 
-        $expectedSrcSet = "https://example.com/image-1-425x177.jpg 425w, https://example.com/image-1-768x320.jpg 768w, https://example.com/image-1-1024x427.jpg 1024w, https://example.com/image-1-1440x600.jpg 1440w"; // Replace with expected srcSet
+        $expectedSrcSet = "https://example.com/image-1-425x177.jpg 425w, https://example.com/image-1-768x320.jpg 768w, https://example.com/image-1-1024x427.jpg 1024w, https://example.com/image-1-1440x600.jpg 1440w, https://example.com/image-1-1920x800.jpg 1920w"; // Replace with expected srcSet
 
         $this->assertEquals($expectedSrcSet, $srcSet);
     }
