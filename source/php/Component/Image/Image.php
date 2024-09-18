@@ -19,7 +19,9 @@ class Image extends \ComponentLibrary\Component\BaseController
         // Hanle image
         if($src instanceof ImageInterface) {
             $this->data['src'] = $src->getUrl();
-            $this->data['attributeList']['srcset'] = $src->getSrcSet();
+            $this->data['imgAttributeList']['srcset'] = $src->getSrcSet();
+
+            $src = $this->data['src'];
         }
 
         //Filetype
