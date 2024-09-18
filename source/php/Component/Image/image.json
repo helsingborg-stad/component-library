@@ -31,7 +31,7 @@
 
     },
     "types": {
-        "src": "boolean|string",
+        "src": "boolean|string|ImageInterface",
         "alt": "string|NULL",
         "caption": "string|boolean",
         "byline": "string|NULL",
