@@ -13,9 +13,6 @@ class Image implements ImageInterface {
     private array $imageSize, 
     callable $resolver,
   ) {
-    $this->imageId = $imageId;
-    $this->imageSize = $imageSize;
-
     if($this->verifyCallableSignature($resolver) === true) {
       $this->resolver = $resolver;  
     }
