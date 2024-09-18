@@ -4,7 +4,11 @@ namespace ComponentLibrary\Integrations\Image;
 
 class Image implements ImageInterface {
 
+  const COMMON_SCREEN_SIZES = [425, 768, 1024, 1440]; // Common screen sizes (width only) to generate sizes for
+  const MIMIMUM_SIZE_DIFFERENCE = 150; // Minimum difference between the requested size and the common screen sizes, if in proximity, omit the common screen size
+
   private array $commonScreenSizes = [425, 768, 1024, 1440]; // Common screen sizes (width only) to generate sizes for
+  
 
   private mixed $resolver; // The callable that resolves the image in the native system
 
@@ -155,9 +159,9 @@ class Image implements ImageInterface {
         return null;
       }
       $sizes = [];
-      foreach ($this->commonScreenSizes as $size) {
+      foreach (self::COMMON_SCREEN_SIZES as $size) {
           if ($size <= $requestedImageSize) {
-            if (abs($requestedImageSize - $size) > 100) {
+            if (abs($requestedImageSize - $size) > self::MIMIMUM_SIZE_DIFFERENCE) {
               $sizes[] = $size;
             }
           }
