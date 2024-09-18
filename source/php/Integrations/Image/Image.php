@@ -3,6 +3,7 @@
 namespace ComponentLibrary\Integrations\Image;
 
 use ComponentLibrary\Integrations\Image\ImageResolverInterface;
+use ComponentLibrary\Integrations\Image\ImageInterface; 
 
 class Image implements ImageInterface {
 

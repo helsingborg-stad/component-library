@@ -2,6 +2,8 @@
 
 namespace ComponentLibrary\Component\Image;
 
+use ComponentLibrary\Integrations\Image\ImageInterface;
+
 class Image extends \ComponentLibrary\Component\BaseController
 {
     public function init()
@@ -14,8 +16,14 @@ class Image extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . "--is-placeholder";
         }
 
+        // Hanle image
+        if($src instanceof ImageInterface) {
+            $this->data['src'] = $src->getUrl();
+            $this->data['attributeList']['srcset'] = $src->getSrcSet();
+        }
+
         //Filetype
-        if ($src && $extension = pathinfo($src, PATHINFO_EXTENSION)) {
+        if ($extension = $this->getExtension($src)) {
             $this->data['classList'][] = $this->getBaseClass() . "--type-" . $extension;
         }
 
@@ -65,5 +73,12 @@ class Image extends \ComponentLibrary\Component\BaseController
         $this->data['imgAttributes'] = self::buildAttributes(
             $this->data['imgAttributeList']
         );
+    }
+
+    private function getExtension(?string $src): ?string {
+        if ($src && $extension = pathinfo($src, PATHINFO_EXTENSION)) {
+            return $extension;
+        }
+        return null;
     }
 }
