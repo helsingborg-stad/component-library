@@ -24,6 +24,10 @@ class Image implements ImageInterface {
    * @param int $imageId      The WordPress ID of the image
    * @param array $imageSize  Width and height of the image
    * 
+   * @throws Exception       If the image size is not an array with two values  
+   * @throws Exception       If the image size is not an array with at least a integer representing width  
+   * @throws Exception       If the image size is an array with more than two values  
+   * 
    * @return ImageInterface
    */
   public static function factory(int $imageId, array $imageSize, callable $resolver): ImageInterface
