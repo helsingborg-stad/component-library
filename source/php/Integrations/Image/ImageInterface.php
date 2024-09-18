@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Integrations\Image;
 
-use ComponentLibrary\Image\ImageResolverInterface;
+use ComponentLibrary\Integrations\Image\ImageResolverInterface;
 
 interface ImageInterface {
 
@@ -30,5 +30,5 @@ interface ImageInterface {
      * 
      * @return ImageInterface
      */
-    public static function factory(int $imageId, array $imageSize, callable $resolver): ImageInterface;
+    public static function factory(int $imageId, array $imageSize, ImageResolverInterface $resolver): ImageInterface;
 }

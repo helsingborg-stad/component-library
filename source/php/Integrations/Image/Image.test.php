@@ -2,6 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 use ComponentLibrary\Integrations\Image\Image;
+use ComponentLibrary\Integrations\Image\ImageResolverInterface;
 
 class ImageTest extends TestCase
 {
@@ -9,11 +10,8 @@ class ImageTest extends TestCase
     {
         $imageId = 1;
         $imageSize = [800, 600];
-        $resolver = function(int $id, array $size): string {
-            return (string) "https://example.com/image-{$id}-{$size[0]}x{$size[1]}.jpg";
-        };
 
-        $image = new Image($imageId, $imageSize, $resolver);
+        $image = new Image($imageId, $imageSize, $this->getResolver());
         $url = $image->getUrl();
 
         $this->assertEquals("https://example.com/image-1-800x600.jpg", $url);
@@ -22,11 +20,7 @@ class ImageTest extends TestCase
     public function testGetSrcSetReturnsNullIfNoImageSizes() {
         $imageId = 1;
         $imageSize = [100, 100];
-        $resolver = function(int $id, array $size): string {
-            return (string) "https://example.com/image-{$id}-{$size[0]}x{$size[1]}.jpg";
-        };
-
-        $image = new Image($imageId, $imageSize, $resolver);
+        $image = new Image($imageId, $imageSize, $this->getResolver());
         $srcSet = $image->getSrcSet();
 
         $this->assertNull($srcSet);
@@ -35,11 +29,7 @@ class ImageTest extends TestCase
     public function testgetImageSizesReturnsACorrectSizeArray() {
         $imageId = 1;
         $imageSize = [1450, 600];
-        $resolver = function(int $id, array $size): string {
-            return (string) "https://example.com/image-{$id}-{$size[0]}x{$size[1]}.jpg";
-        };
-
-        $image = new Image($imageId, $imageSize, $resolver);
+        $image = new Image($imageId, $imageSize, $this->getResolver());
         $imageSizes = $image->getImageSizes(
           $imageSize[0]
         );
@@ -51,15 +41,12 @@ class ImageTest extends TestCase
     {
         $imageId = 1;
         $imageSize = [1920, 800];
-        $resolver = function(int $id, array $size): string {
-            return "https://example.com/image.jpg";
-        };
 
-        $image = new Image($imageId, $imageSize, $resolver);
+        $image = new Image($imageId, $imageSize, $this->getResolver());
 
         $srcSet = $image->getSrcSet();
 
-        $expectedSrcSet = "https://example.com/image.jpg 425w, https://example.com/image.jpg 768w, https://example.com/image.jpg 1024w, https://example.com/image.jpg 1440w, https://example.com/image.jpg 1920w"; // Replace with expected srcSet
+        $expectedSrcSet = "https://example.com/image-1-425x177.jpg 425w, https://example.com/image-1-768x320.jpg 768w, https://example.com/image-1-1024x427.jpg 1024w, https://example.com/image-1-1440x600.jpg 1440w, https://example.com/image-1-1920x800.jpg 1920w";
 
         $this->assertEquals($expectedSrcSet, $srcSet);
     }
@@ -68,11 +55,8 @@ class ImageTest extends TestCase
     {
         $imageId = 1;
         $imageSize = [1920, 800];
-        $resolver = function(int $id, array $size): string {
-            return "https://example.com/image-". $id ."-". implode("x", $size). ".jpg";
-        };
 
-        $image = new Image($imageId, $imageSize, $resolver);
+        $image = new Image($imageId, $imageSize, $this->getResolver());
 
         $srcSet = $image->getSrcSet();
 
@@ -81,32 +65,12 @@ class ImageTest extends TestCase
         $this->assertEquals($expectedSrcSet, $srcSet);
     }
 
-    public function testVerifyCallableSignatureThrowsExceptionOnInvalidSignature()
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('The callable must accept exactly 2 parameters (int $id, array $size = [{$width}, {$height}]).');
-
-        $imageId = 1;
-        $imageSize = [800, 600];
-
-        // This resolver has an incorrect signature (only 1 parameter)
-        $resolver = function(int $id): string {
-            return "https://example.com/image-{$id}.jpg";
-        };
-
-        // This should throw an exception due to the incorrect signature
-        new Image($imageId, $imageSize, $resolver);
-    }
-
     public function testFactoryCreatesValidImageObject()
     {
         $imageId = 1;
         $imageSize = [800, 600];
-        $resolver = function(int $id, array $size): string {
-            return "https://example.com/image-{$id}-{$size[0]}x{$size[1]}.jpg";
-        };
 
-        $image = Image::factory($imageId, $imageSize, $resolver);
+        $image = Image::factory($imageId, $imageSize, $this->getResolver());
 
         $this->assertInstanceOf(Image::class, $image);
         $this->assertEquals("https://example.com/image-1-800x600.jpg", $image->getUrl());
@@ -116,15 +80,19 @@ class ImageTest extends TestCase
     {
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('Image size must be an array with width and height (keys 0,1).');
+        Image::factory(1, [800], $this->getResolver());
+    }
 
-        $imageId = 1;
-        $imageSize = [800]; // Missing height
-
-        $resolver = function(int $id, array $size): string {
-            return "https://example.com/image-{$id}-{$size[0]}x{$size[1]}.jpg";
+    /**
+     * Get a reusable resolver for testing
+     * 
+     * @return ImageResolverInterface
+     */
+    private function getResolver(): ImageResolverInterface {
+        return new class implements ImageResolverInterface {
+            public function getImageUrl(int $id, array $size): string {
+                return "https://example.com/image-{$id}-{$size[0]}x{$size[1]}.jpg";
+            }
         };
-
-        // This should throw an exception due to missing height in image size
-        Image::factory($imageId, $imageSize, $resolver);
     }
 }
