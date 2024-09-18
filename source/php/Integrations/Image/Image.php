@@ -61,6 +61,12 @@ class Image implements ImageInterface {
    * 
    * @param callable $resolver
    * 
+   * @throws InvalidArgumentException If the signature is incorrect (must include two parameters)
+   * @throws InvalidArgumentException If the first parameter is not of type int
+   * @throws InvalidArgumentException If the second parameter is not of type array
+   * @throws InvalidArgumentException If the callable does not have a return type
+   * @throws InvalidArgumentException If the return type is not a string
+   * 
    * @return bool   True if the signature is correct, otherwise an InvalidArgumentException is thrown
    */
   private function verifyCallableSignature(callable $resolver): true
@@ -71,6 +77,19 @@ class Image implements ImageInterface {
       // Check the number of parameters (we expect 2)
       if ($reflection->getNumberOfParameters() !== 2) {
         throw new \InvalidArgumentException('The callable must accept exactly 2 parameters (int $id, array $size = [{$width}, {$height}]).');
+      }
+
+      // Get parameters
+      $parameters = $reflection->getParameters();
+
+      // Check that the first parameter is of type int
+      if (!$parameters[0]->hasType() || $parameters[0]->getType()->getName() !== 'int') {
+          throw new \InvalidArgumentException('The first parameter must be of type int (representing the id).');
+      }
+
+      // Check that the second parameter is of type array
+      if (!$parameters[1]->hasType() || $parameters[1]->getType()->getName() !== 'array') {
+          throw new \InvalidArgumentException('The second parameter must be of type array (representing the size [{$width}, {$height}]).');
       }
 
       // Check for a return type

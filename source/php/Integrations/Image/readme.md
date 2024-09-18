@@ -7,13 +7,15 @@ The third argument to the factory, must be a resolver that resolves images based
 ## Example factory
 
 ```php
-  $image = Image::factory(1, [1000, false], function($imageId, $size) {
-    $image = wp_get_attachment_image_src($imageId, $size); 
-    if($image !== false && isset($image[0])) {
-      return $image[0]; 
-    } 
-    return null; 
-  }]);
+  $image = Image::factory(1, [1920, false],
+    function(int $id, array $size):string {
+      $image = wp_get_attachment_image_src($id, $size); 
+      if($image !== false && isset($image[0]) && filter_var($image[0], FILTER_VALIDATE_URL)) {
+        return $image[0]; 
+      }
+      return null; 
+    }
+  ); 
 
   //Will return something like: https://example.com/image-1000x1000.jpg
   echo $image->getUrl();
