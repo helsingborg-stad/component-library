@@ -1,5 +1,10 @@
-<div class="{{$baseClass}}__image" style="{!! $imageStyleString !!}" data-js-toggle-item="toggle-animation" data-js-toggle-class="u-animation--pause">
-    </div>
+<div class="{{$baseClass}}__image" data-js-toggle-item="toggle-animation" data-js-toggle-class="u-animation--pause">
+    @image([
+        'src'=> $image,
+        'fullWidth' => true
+    ])
+    @endimage
+</div>
     @if ($overlay)
         <div class="{{ $baseClass }}__overlay"></div>
     @endif

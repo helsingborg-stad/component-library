@@ -20,12 +20,11 @@ class Image extends \ComponentLibrary\Component\BaseController
         if($src instanceof ImageInterface) {
             $this->data['src'] = $src->getUrl();
             $this->data['imgAttributeList']['srcset'] = $src->getSrcSet();
-            $this->data['imgAttributeList']['style'] = array_map(function($key, $value) {
-                return "{$key}: {$value};";
+            $this->data['imgAttributeList']['style'] = "object-position: " . implode(" ", array_map(function($value) {
+                return "{$value}%";
             }, 
-                array_keys($src->getFocusPoint()), 
                 $src->getFocusPoint()
-            );
+            )) . ";";
 
             $src = $this->data['src'];
         }
