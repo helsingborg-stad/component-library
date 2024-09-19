@@ -127,7 +127,7 @@ class Image implements ImageInterface {
    */
   public function getFocusPoint(): array {
     if($this->focusResolver) {
-      $resolvedFocus = $this->focusResolver->getFocusPoint($this->imageId);
+      $resolvedFocus = $this->focusResolver->getFocusPoint();
 
       if(isset($resolvedFocus['left']) && isset($resolvedFocus['top'])) {
         return [

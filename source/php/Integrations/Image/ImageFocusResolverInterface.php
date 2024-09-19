@@ -14,18 +14,15 @@ interface ImageFocusResolverInterface
     /**
      * Constructor.
      * 
-     * @param string $key The key to use for the retrieval of the focus point.
+     * @param mixed $data The arbitrary data to resolve the focus point from.
      * 
      * @return void
      */
-    public function __construct(string $key);
+    public function __construct($data);
 
     /**
-     * Get the image URL by ID and size.
-     *
-     * @param int $id Image attachment ID.
-     * @param array $size Array containing image width and height.
-     * @return array|null Focus point of the image or null if not found. Format: ['left': 'N%', 'top': 'N%']
+     * Get the image URL by ID and size. 
+     * @return array Focus point of the image or null if not found. Format: ['left': 'N%', 'top': 'N%']
      */
-    public function getFocusPoint(int $id): array;
+    public function getFocusPoint(): array;
 }

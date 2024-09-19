@@ -22,7 +22,11 @@ class Image extends \ComponentLibrary\Component\BaseController
             $this->data['imgAttributeList']['srcset'] = $src->getSrcSet();
             $this->data['imgAttributeList']['style'] = array_map(function($key, $value) {
                 return "{$key}: {$value};";
-            }, array_keys($src->getImageFocus()), $src->getImageFocus());
+            }, 
+                array_keys($src->getFocusPoint()), 
+                $src->getFocusPoint()
+            );
+
             $src = $this->data['src'];
         }
 
