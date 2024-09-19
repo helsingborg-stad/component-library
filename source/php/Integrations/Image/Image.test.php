@@ -3,6 +3,7 @@
 use PHPUnit\Framework\TestCase;
 use ComponentLibrary\Integrations\Image\Image;
 use ComponentLibrary\Integrations\Image\ImageResolverInterface;
+use ComponentLibrary\Integrations\Image\ImageFocusResolverInterface;
 
 class ImageTest extends TestCase
 {
@@ -83,6 +84,28 @@ class ImageTest extends TestCase
         Image::factory(1, [800], $this->getResolver());
     }
 
+    public function testGetFocusPointReturnsCorrectFocusPoint()
+    {
+        $imageId = 1;
+        $imageSize = [800, 600];
+
+        $image = new Image($imageId, $imageSize, $this->getResolver(), $this->getFocusResolver());
+        $focusPoint = $image->getFocusPoint();
+
+        $this->assertEquals(['left' => '51', 'top' => '51'], $focusPoint);
+    }
+
+    public function testGetFocusPointReturnsCorrectFocusPointForDefault()
+    {
+        $imageId = 1;
+        $imageSize = [800, 600];
+
+        $image = new Image($imageId, $imageSize, $this->getResolver());
+        $focusPoint = $image->getFocusPoint();
+
+        $this->assertEquals($image::DEFAULT_FOCUS_POINT, $focusPoint);
+    }
+
     /**
      * Get a reusable resolver for testing
      * 
@@ -95,4 +118,19 @@ class ImageTest extends TestCase
             }
         };
     }
+
+    /**
+     * Get a reusable focus resolver for testing
+     * 
+     * @return ImageFocusResolverInterface
+     */
+    private function getFocusResolver(): ImageFocusResolverInterface {
+        return new class implements ImageFocusResolverInterface {
+            public function __construct(private string $key = "") {}
+            public function getFocusPoint(int $id): array {
+                return ['left' => '51', 'top' => '51'];
+            }
+        };
+    }
+    
 }
