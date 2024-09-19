@@ -22,6 +22,14 @@ interface ImageInterface {
     public function getSrcSet(): ?string;
 
     /**
+     * Get the focus point of the image
+     * Default is 50% 50%
+     * 
+     * @return array
+     */
+    public function getFocusPoint(): array;
+
+    /**
      * Factory method to create an image object
      * 
      * @param int $imageId                          The WordPress ID of the image
@@ -30,5 +38,5 @@ interface ImageInterface {
      * 
      * @return ImageInterface
      */
-    public static function factory(int $imageId, array $imageSize, ImageResolverInterface $resolver): ImageInterface;
+    public static function factory(int $imageId, array $imageSize, ImageResolverInterface $resolver, ?ImageFocusResolverInterface $focusResolver = null): ImageInterface;
 }

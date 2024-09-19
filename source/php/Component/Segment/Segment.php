@@ -109,8 +109,6 @@ class Segment extends \ComponentLibrary\Component\BaseController
 
         //Add image to image styles
         if ($image) {
-            $this->data['imageStyle']['background-image'] = "url('" . $image . "')";
-        } else {
             $this->data['classList'][] = $this->getBaseClass('no-image', true);
         }
 
@@ -128,11 +126,10 @@ class Segment extends \ComponentLibrary\Component\BaseController
 
         //Add background position to image styles
         if (is_array($imageFocus) && array_filter((array) $imageFocus)) {
+
+            //TODO: Change this to object position
             $this->data['imageStyle']['background-position'] = $imageFocus['left'] . "% " . $imageFocus['top'] . "%";
         }
-
-        //Stringify image styles
-        $this->data['imageStyleString'] = self::buildInlineStyle($this->data['imageStyle']);
 
         // Handle background data (wrapper)
         if ($background) {

@@ -9,11 +9,13 @@ class Image implements ImageInterface {
 
   const COMMON_SCREEN_SIZES = [425, 768, 1024, 1440]; // Common screen sizes (width only) to generate sizes for
   const MIMIMUM_SIZE_DIFFERENCE = 150; // Minimum difference between the requested size and the common screen sizes, if in proximity, omit the common screen size
+  const DEFAULT_FOCUS_POINT = ['left' => '50', 'top' => '50']; // Default focus point
 
   public function __construct(
     private int $imageId, 
     private array $imageSize, 
     private ImageResolverInterface $resolver,
+    private ?ImageFocusResolverInterface $focusResolver = null
   ) {}
 
   /**
@@ -28,7 +30,7 @@ class Image implements ImageInterface {
    * 
    * @return ImageInterface
    */
-  public static function factory(int $imageId, array $imageSize, ImageResolverInterface $resolver): ImageInterface
+  public static function factory(int $imageId, array $imageSize, ImageResolverInterface $resolver, ?ImageFocusResolverInterface $focusResolver = null): ImageInterface
   {
     if(!isset($imageSize[0]) || !isset($imageSize[1])) {
       throw new \Exception('Image size must be an array with width and height (keys 0,1).');
@@ -51,7 +53,7 @@ class Image implements ImageInterface {
     }, $imageSize);
 
     //Factory
-    return new self($imageId, $imageSize, $resolver); 
+    return new self($imageId, $imageSize, $resolver, $focusResolver); 
   }
 
   /**
@@ -116,5 +118,24 @@ class Image implements ImageInterface {
       }
 
       return $sizes ?: null;
+  }
+
+  /**
+   * Get the focus point of the image
+   * 
+   * @return array
+   */
+  public function getFocusPoint(): array {
+    if($this->focusResolver) {
+      $resolvedFocus = $this->focusResolver->getFocusPoint($this->imageId);
+
+      if(isset($resolvedFocus['left']) && isset($resolvedFocus['top'])) {
+        return [
+          'left' => $resolvedFocus['left'],
+          'top' => $resolvedFocus['top']
+        ];
+      }
+    }
+    return self::DEFAULT_FOCUS_POINT;
   }
 }
