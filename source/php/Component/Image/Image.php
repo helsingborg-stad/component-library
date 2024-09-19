@@ -39,6 +39,11 @@ class Image extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . "--full-width";
         }
 
+        //Make cover
+        if ($cover) {
+            $this->data['classList'][] = $this->getBaseClass('cover', true);
+        }
+
         //Inherit the alt text
         if (!$alt) {
             $this->data['alt'] = !empty($caption) ? $caption : "";
