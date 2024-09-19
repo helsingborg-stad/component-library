@@ -2,6 +2,7 @@
     "slug": "image",
     "default": {
         "src": false,
+        "srcset": false,
         "alt": "",
         "caption": "",
         "byline": "",
@@ -16,6 +17,8 @@
         "removeCaption": false
     },
     "description": {
+        "src": "A string containing a valid URL or an ImageInterface object. If the object is used, the srcset attribute is ignored.",
+        "srcset": false,
         "alt": "Alt text of the image",
         "caption": "Image caption",
         "byline": "placed under the caption",
@@ -32,6 +35,7 @@
     },
     "types": {
         "src": "boolean|string|ImageInterface",
+        "srcset": "boolean|string",
         "alt": "string|NULL",
         "caption": "string|boolean",
         "byline": "string|NULL",
