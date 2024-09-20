@@ -67,7 +67,7 @@ class Image implements ImageInterface {
    * @inheritDoc
    */
   public function getAltText(): ?string {
-    return $this->resolver->getAltText($this->imageId);
+    return $this->resolver->getImageAltText($this->imageId);
   }
 
   /**
