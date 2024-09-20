@@ -7,7 +7,7 @@ use ComponentLibrary\Integrations\Image\ImageInterface;
 
 class Image implements ImageInterface {
 
-  const COMMON_SCREEN_SIZES = [425, 768, 1024, 1440]; // Common screen sizes (width only) to generate sizes for
+  const COMMON_SCREEN_SIZES = [425, 768, 1024, 1440, 1680]; // Common screen sizes (width only) to generate sizes for
   const MIMIMUM_SIZE_DIFFERENCE = 150; // Minimum difference between the requested size and the common screen sizes, if in proximity, omit the common screen size
   const DEFAULT_FOCUS_POINT = ['left' => '50', 'top' => '50']; // Default focus point
 
