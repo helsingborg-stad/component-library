@@ -11,6 +11,8 @@ class Image extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
+        var_dump($this->data);
+
         //Add placeholder class
         if (!$src) {
             $this->data['classList'][] = $this->getBaseClass() . "--is-placeholder";
@@ -25,8 +27,10 @@ class Image extends \ComponentLibrary\Component\BaseController
             }, 
                 $src->getFocusPoint()
             )) . ";";
-            $alt = $this->data['alt'] = $src->getAltText();
 
+            if(empty($this->data['alt'])) {
+                $alt = $this->data['alt'] = $src->getAltText();
+            }
             $src = $this->data['src'];
         }
 

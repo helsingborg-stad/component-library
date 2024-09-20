@@ -7,10 +7,6 @@
         'aria-label' => $lang->visit . ': ' . $link,
     ]
 ])
-    @image([
-        'src' => $image,
-        'fullWidth' => true,
-        'classList' => ['c-segment__image'],
-    ])
+    @image(['src' => $image, 'cover' => true, 'classList' => ['c-segment__image']])
     @endimage
 @endlink
