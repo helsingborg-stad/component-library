@@ -20,10 +20,7 @@ class Segment extends \ComponentLibrary\Component\BaseController
 
         // Set the layout
         if ($layout) {
-            $this->data['classList'][] = $this->getBaseClass(
-                $layout,
-                true
-            );
+            $this->data['classList'][] = 'c-segment--' . $layout;
         }
 
         if (!empty($icon)) {
@@ -71,80 +68,67 @@ class Segment extends \ComponentLibrary\Component\BaseController
 
         // Set text color
         if ($stretch) {
-            $this->data['classList'][] = $this->getBaseClass(
-                'stretch',
-                true
-            );
+            $this->data['classList'][] = 'c-segment--stretch';
         }
 
         // Set text color
         if ($textColor) {
-            $this->data['classList'][] = $this->getBaseClass(
-                'text-' . $textColor,
-                true
-            );
+            $this->data['classList'][] = 'c-segment--text-' . $textColor;
         }
 
         // Height
         if ($height) {
-            $this->data['classList'][] = $this->getBaseClass(
-                'height-' . $height,
-                true
-            );
+            $this->data['classList'][] = 'c-segment--height-' . $height;
         }
 
         // Text Size
         if ($textSize) {
-            $this->data['classList'][] = $this->getBaseClass(
-                'text-' . $textSize,
-                true
-            );
+            $this->data['classList'][] = 'c-segment--text-' . $textSize;
         }
 
         // Text Alignment
         if ($textAlignment) {
-            $this->data['classList'][] = $this->getBaseClass(
-                'alignment-' . $textAlignment,
-                true
-            );
+            $this->data['classList'][] = 'c-segment--alignment-' . $textAlignment;
         }
 
         // Column reverse
         if ($reverseColumns) {
-            $this->data['classList'][] = $this->getBaseClass(
-                'reverse',
-                true
-            );
+            $this->data['classList'][] = 'c-segment--reverse';
         }
 
         // Add overlay class
         if ($layout === 'full-width' && ($title || $content) && !empty($image)) {
-            $this->data['classList'][] = $this->getBaseClass(
-                'has-overlay',
-                true
-            );
+            $this->data['classList'][] = 'c-segment' . '--has-overlay';
         }
+
+        //Stringify image classlist
+        $this->data['imageClass'] = implode("", $this->data['imageClassList']);
+
+        //Create image style tag
+        $this->data['imageStyle'] = [];
 
         //Add image to image styles
         if ($image) {
-            $this->data['classList'][] = $this->getBaseClass(
-                'no-image',
-                true
-            );
+            $this->data['classList'][] = $this->getBaseClass('no-image', true);
         }
 
         if (!empty($contentAlignment)) {
-            $this->data['classList'][] =  $this->getBaseClass(
-                'content-' . $contentAlignment,
-                true
-            );
+            $this->data['classList'][] =  $this->getBaseClass() . '--content-' . $contentAlignment;
         }
 
         if (!empty($contentBackground)) {
-            $this->data['classList'][] = $this->getBaseClass(
-                'content-background-' . $contentBackground, 
-                true
-            );
+            $this->data['classList'][] = $this->getBaseClass() . '--content-background-' . $contentBackground;
+        }
+
+        if(is_object($imageFocus)) {
+            $imageFocus = (array) $imageFocus;
+        }
+
+        //Add background position to image styles
+        if (is_array($imageFocus) && array_filter((array) $imageFocus)) {
+
+            //TODO: Change this to object position
+            $this->data['imageStyle']['background-position'] = $imageFocus['left'] . "% " . $imageFocus['top'] . "%";
         }
 
         // Handle background data (wrapper)
