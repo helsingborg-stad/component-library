@@ -20,7 +20,15 @@ class Image extends \ComponentLibrary\Component\BaseController
         if($src instanceof ImageInterface) {
             $this->data['src'] = $src->getUrl();
             $this->data['imgAttributeList']['srcset'] = $src->getSrcSet();
+            $this->data['imgAttributeList']['style'] = "object-position: " . implode(" ", array_map(function($value) {
+                return "{$value}%";
+            }, 
+                $src->getFocusPoint()
+            )) . ";";
 
+            if(empty($this->data['alt'])) {
+                $alt = $this->data['alt'] = $src->getAltText();
+            }
             $src = $this->data['src'];
         }
 
@@ -32,6 +40,11 @@ class Image extends \ComponentLibrary\Component\BaseController
         //Make full width
         if ($fullWidth) {
             $this->data['classList'][] = $this->getBaseClass() . "--full-width";
+        }
+
+        //Make cover
+        if ($cover) {
+            $this->data['classList'][] = $this->getBaseClass('cover', true);
         }
 
         //Inherit the alt text
