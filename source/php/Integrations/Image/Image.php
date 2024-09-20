@@ -66,6 +66,13 @@ class Image implements ImageInterface {
   /**
    * @inheritDoc
    */
+  public function getAltText(): ?string {
+    return $this->resolver->getAltText($this->imageId);
+  }
+
+  /**
+   * @inheritDoc
+   */
   public function getSrcSet(): ?string {
     $srcSet = $this->getImageSizes(
       $this->imageSize[0] ?? null

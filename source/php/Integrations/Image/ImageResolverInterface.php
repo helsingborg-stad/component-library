@@ -19,4 +19,13 @@ interface ImageResolverInterface
      * @return string|null URL of the image or null if not found.
      */
     public function getImageUrl(int $id, array $size): ?string;
+
+    /**
+     * Get the image alt text by ID.
+     * 
+     * @param int $id Image attachment ID.
+     * 
+     * @return null|string Alt text of the image or null if not found.
+     */
+    public function getAltText(int $id): ?string;
 }
