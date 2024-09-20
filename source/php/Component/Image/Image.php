@@ -11,8 +11,6 @@ class Image extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
-        var_dump($this->data);
-
         //Add placeholder class
         if (!$src) {
             $this->data['classList'][] = $this->getBaseClass() . "--is-placeholder";
