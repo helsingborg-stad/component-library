@@ -10,7 +10,6 @@
             "top": 50,
             "left": 50
         },
-        "imageAlt": "",
         "background": false,
         "backgroundOverlay": false,
         "textColor": "dark",
@@ -39,7 +38,6 @@
         "textSize": "The sizing of the font",
         "image": "Add a URL for an image",
         "imageFocus": "Where the focus point should be of an image when container dosen't match image ratio.",
-        "imageAlt": "Alt text of the image",
         "background": "The background color, can be an URL to an image, hex value or a color name (i.e. primary, secondary, etc)",
         "backgroundOverlay": "Which overlay to use",
         "textColor": "Color of the text",

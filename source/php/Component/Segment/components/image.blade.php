@@ -7,6 +7,5 @@
         'aria-label' => $lang->visit . ': ' . $link,
     ]
 ])
-    @image(['src' => $image, 'cover' => true, 'classList' => ['c-segment__image']])
-    @endimage
+    <div class="{{ $baseClass }}__image {{ $imageClass }}" style="{{ $imageStyleString }}"></div>
 @endlink
