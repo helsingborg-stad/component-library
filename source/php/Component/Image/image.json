@@ -15,7 +15,8 @@
         "placeholderIcon": "broken_image",
         "placeholderIconSize": "xl",
         "imgAttributeList": [],
-        "removeCaption": false
+        "removeCaption": false,
+        "lazy": true
     },
     "description": {
         "src": "A string containing a valid URL or an ImageInterface object. If the object is used, the srcset attribute is ignored.",
@@ -33,8 +34,8 @@
         "placeholderIcon": "Icon to display if image is missing / false to hide",
         "placeholderIconSize": "Icons size, please refer to image component for size.",
         "imgAttributeList": "Attributes for the img element.",
-        "removeCaption": "Shows only the alt-text removing the image caption and byline"
-
+        "removeCaption": "Shows only the alt-text removing the image caption and byline",
+        "lazy": "If the image should be lazy loaded"
     },
     "types": {
         "src": "boolean|string|ImageInterface",
@@ -52,7 +53,8 @@
         "placeholderIcon": "string",
         "placeholderIconSize": "string",
         "imgAttributeList": "array",
-        "removeCaption": "boolean"
+        "removeCaption": "boolean",
+        "lazy": "boolean"
     },
     "view": "image.blade.php",
     "dependency": {

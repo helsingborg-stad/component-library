@@ -1,7 +1,8 @@
 <div class="{{$baseClass}}__image" data-js-toggle-item="toggle-animation" data-js-toggle-class="u-animation--pause">
     @image([
         'src'=> $image,
-        'cover' => true
+        'cover' => true,
+        'lazy' => false
     ])
     @endimage
 </div>

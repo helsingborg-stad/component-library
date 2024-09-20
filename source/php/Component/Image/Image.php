@@ -32,6 +32,12 @@ class Image extends \ComponentLibrary\Component\BaseController
             $src = $this->data['src'];
         }
 
+        //Add lazy loading
+        if($lazy) {
+            $this->data['imgAttributeList']['loading'] = "lazy";
+            $this->data['classList'][] = $this->getBaseClass() . "--lazy";
+        }
+
         //Filetype
         if ($extension = $this->getExtension($src)) {
             $this->data['classList'][] = $this->getBaseClass() . "--type-" . $extension;
