@@ -25,6 +25,7 @@ class Image extends \ComponentLibrary\Component\BaseController
             }, 
                 $src->getFocusPoint()
             )) . ";";
+            $alt = $this->data['alt'] = $src->getAltText();
 
             $src = $this->data['src'];
         }

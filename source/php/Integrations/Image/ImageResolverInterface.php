@@ -27,5 +27,5 @@ interface ImageResolverInterface
      * 
      * @return null|string Alt text of the image or null if not found.
      */
-    public function getAltText(int $id): ?string;
+    public function getImageAltText(int $id): ?string;
 }
