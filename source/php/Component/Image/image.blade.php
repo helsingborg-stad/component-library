@@ -1,27 +1,6 @@
 <!-- image.blade.php -->
-@if($containerQueryData) 
-    <style>
-        @supports (container-type: inline-size) {
-            .c-image.c-image--container-query {
-                container-type: inline-size;
-                background-size: cover;
-            }
-            .c-image.c-image--container-query .c-image__image {
-                display: none;
-            }
-        }
-        @supports not (container-type: inline-size) {
-            .c-image.c-image--container-query .c-image__image:not(:last-of-type) {
-                display: none;
-            }
-        }
-    </style>
-@endif
-
 <figure class="{{ $class }}" {!! $attribute !!}>
     @if($src) 
-
-        <!-- Image-->
         @if($containerQueryData) 
             @foreach($containerQueryData as $item)
                 <img 
