@@ -29,6 +29,7 @@
                     class="{{$baseClass}}__image {{$baseClass}}--{{$item['uuid']}}" 
                     src="{{$item['url']}}"
                     alt="{{$alt}}"
+                    style="{{$focus}}"
                     {{$imgAttributes}}
                 />
                 <style>

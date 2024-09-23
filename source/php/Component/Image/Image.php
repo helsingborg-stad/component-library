@@ -27,11 +27,9 @@ class Image extends \ComponentLibrary\Component\BaseController
             $this->data['srcset']   = $src->getSrcSet();
 
             //Resolves a focus point for the image, if any.
-            $this->data['focus'] = "object-position: " . implode(" ", array_map(function($value) {
-                return "{$value}%";
-            }, 
-                $src->getFocusPoint()
-            )) . ";";
+            $this->data['focus'] = sprintf("object-position: %s;", 
+                $this->reduceFocusPoint($src->getFocusPoint())
+            );
 
             //Set an alt text, from resolver, if not one provided
             if(empty($alt)) {
@@ -42,12 +40,13 @@ class Image extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass('container-query', true);
 
             //Add a low resolution image placeholder
-            $this->data['attributeList']['style'] = "background-image: url({$src->getLqipUrl()}); background-position: " . implode(" ", array_map(function($value) {
-                return "{$value}%";
-            }, 
-                $src->getFocusPoint()
-            )) . ";"; 
+            $this->data['attributeList']['style'] = sprintf(
+                "background-image: url(%s); background-position: %s;", 
+                $src->getLqipUrl(),
+                $this->reduceFocusPoint($src->getFocusPoint())
+            ); 
 
+            //Assign $src
             $src = $this->data['src'];
         }
 
@@ -109,6 +108,26 @@ class Image extends \ComponentLibrary\Component\BaseController
         );
     }
 
+    /**
+     * Reduce focus point to a string
+     * 
+     * @param array $focusPoint
+     * 
+     * @return string
+     */
+    private function reduceFocusPoint(array $focusPoint): string {
+        return implode(" ", array_map(function($value) {
+            return "{$value}%";
+        }, $focusPoint));
+    }
+
+    /**
+     * Get the extension of a file
+     * 
+     * @param string $src
+     * 
+     * @return string
+     */
     private function getExtension(?string $src): ?string {
         if ($src && $extension = pathinfo($src, PATHINFO_EXTENSION)) {
             return $extension;
