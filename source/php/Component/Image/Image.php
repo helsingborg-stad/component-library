@@ -38,6 +38,16 @@ class Image extends \ComponentLibrary\Component\BaseController
                 $alt = $this->data['alt'] = $src->getAltText();
             }
 
+            //Indicate container query
+            $this->data['classList'][] = $this->getBaseClass('container-query', true);
+
+            //Add a low resolution image placeholder
+            $this->data['attributeList']['style'] = "background-image: url({$src->getLqipUrl()}); background-position: " . implode(" ", array_map(function($value) {
+                return "{$value}%";
+            }, 
+                $src->getFocusPoint()
+            )) . ";"; 
+
             $src = $this->data['src'];
         }
 

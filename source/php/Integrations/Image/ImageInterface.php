@@ -11,7 +11,12 @@ interface ImageInterface {
      * 
      * @return string
      */
-    public function getUrl(): string;
+    public function getUrl(): ?string;
+
+    /**
+     * Get a low resolution image
+     */
+    public function getLqipUrl(): ?string;
 
     /**
      * Get the srcset of the image.

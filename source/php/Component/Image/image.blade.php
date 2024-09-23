@@ -1,24 +1,22 @@
 <!-- image.blade.php -->
-
-<style>
-    .c-image {
+@if($containerQueryData) 
+    <style>
         @supports (container-type: inline-size) {
-            container-type: inline-size;
+            .c-image.c-image--container-query {
+                container-type: inline-size;
+                background-size: cover;
+            }
+            .c-image.c-image--container-query .c-image__image {
+                display: none;
+            }
         }
-    }
-
-    .c-image__image {
-        @supports (container-type: inline-size) {
-            display: none;
-        }
-    }
-
-    .c-image__image:last-of-type {
         @supports not (container-type: inline-size) {
-            display: block;
+            .c-image.c-image--container-query .c-image__image:not(:last-of-type) {
+                display: none;
+            }
         }
-    }
-</style>
+    </style>
+@endif
 
 <figure class="{{ $class }}" {!! $attribute !!}>
     @if($src) 
@@ -35,7 +33,7 @@
                 />
                 <style>
                     @container {{$item['media']}} {
-                        .{{$baseClass}}--{{$item['uuid']}} {display: block;}
+                        .{{$baseClass}}.{{$baseClass}}--container-query .{{$baseClass}}--{{$item['uuid']}} {display: block;}
                     }
                 </style>
             @endforeach

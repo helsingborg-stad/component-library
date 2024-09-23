@@ -59,8 +59,17 @@ class Image implements ImageInterface {
   /**
    * @inheritDoc
    */
-  public function getUrl(): string {
+  public function getUrl(): ?string {
     return $this->resolver->getImageUrl($this->imageId, $this->imageSize);
+  }
+
+  /**
+   * Get a low resolution image alternative
+   * 
+   * @return string
+   */
+  public function getLqipUrl(): ?string {
+    return $this->resolver->getImageUrl($this->imageId, [100, false]);
   }
 
   /**
