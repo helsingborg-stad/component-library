@@ -18,24 +18,32 @@ class Image extends \ComponentLibrary\Component\BaseController
 
         // Hanle image
         if($src instanceof ImageInterface) {
-            $this->data['src'] = $src->getUrl();
-            $this->data['imgAttributeList']['srcset'] = $src->getSrcSet();
-            $this->data['imgAttributeList']['style'] = "object-position: " . implode(" ", array_map(function($value) {
+
+            //Get image sizes with container query data
+            $this->data['containerQueryData'] = $src->getContainerQueryData();
+
+            //Get the image URL and srcset, for fallback purposes. 
+            $this->data['src']      = $src->getUrl();
+            $this->data['srcset']   = $src->getSrcSet();
+
+            //Resolves a focus point for the image, if any.
+            $this->data['focus'] = "object-position: " . implode(" ", array_map(function($value) {
                 return "{$value}%";
             }, 
                 $src->getFocusPoint()
             )) . ";";
 
-            if(empty($this->data['alt'])) {
-                $alt = $this->data['alt'] = $src->getAltText();
+            //Set an alt text, from resolver, if not one provided
+            if(empty($alt)) {
+                $alt = $src->getAltText();
             }
+
             $src = $this->data['src'];
         }
 
-        //Add lazy loading
-        if($lazy) {
-            $this->data['imgAttributeList']['loading'] = "lazy";
-            $this->data['classList'][] = $this->getBaseClass() . "--lazy";
+        //Custom image attributes
+        if($imgAttributeList) {
+            $imgAttributeList = $this->data['imgAttributeList'] = self::buildAttributes($imgAttributeList);
         }
 
         //Filetype
