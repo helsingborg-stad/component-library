@@ -2,12 +2,20 @@
 
 <style>
     .c-image {
-        container-type: inline-size;
+        @supports (container-type: inline-size) {
+            container-type: inline-size;
+        }
     }
 
     .c-image__image {
         @supports (container-type: inline-size) {
             display: none;
+        }
+    }
+
+    .c-image__image:last-of-type {
+        @supports not (container-type: inline-size) {
+            display: block;
         }
     }
 </style>
