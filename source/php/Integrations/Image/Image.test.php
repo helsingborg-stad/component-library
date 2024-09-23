@@ -47,7 +47,7 @@ class ImageTest extends TestCase
 
         $srcSet = $image->getSrcSet();
 
-        $expectedSrcSet = "https://example.com/image-1-425x177.jpg 425w, https://example.com/image-1-768x320.jpg 768w, https://example.com/image-1-1024x427.jpg 1024w, https://example.com/image-1-1440x600.jpg 1440w, https://example.com/image-1-1920x800.jpg 1920w";
+        $expectedSrcSet = "https://example.com/image-1-425x177.jpg 425w, https://example.com/image-1-768x320.jpg 768w, https://example.com/image-1-1024x427.jpg 1024w, https://example.com/image-1-1440x600.jpg 1440w, https://example.com/image-1-1680x700.jpg 1680w, https://example.com/image-1-1920x800.jpg 1920w";
 
         $this->assertEquals($expectedSrcSet, $srcSet);
     }
@@ -61,7 +61,7 @@ class ImageTest extends TestCase
 
         $srcSet = $image->getSrcSet();
 
-        $expectedSrcSet = "https://example.com/image-1-425x177.jpg 425w, https://example.com/image-1-768x320.jpg 768w, https://example.com/image-1-1024x427.jpg 1024w, https://example.com/image-1-1440x600.jpg 1440w, https://example.com/image-1-1920x800.jpg 1920w"; // Replace with expected srcSet
+        $expectedSrcSet = "https://example.com/image-1-425x177.jpg 425w, https://example.com/image-1-768x320.jpg 768w, https://example.com/image-1-1024x427.jpg 1024w, https://example.com/image-1-1440x600.jpg 1440w, https://example.com/image-1-1680x700.jpg 1680w, https://example.com/image-1-1920x800.jpg 1920w"; // Replace with expected srcSet
 
         $this->assertEquals($expectedSrcSet, $srcSet);
     }
@@ -116,6 +116,9 @@ class ImageTest extends TestCase
             public function getImageUrl(int $id, array $size): string {
                 return "https://example.com/image-{$id}-{$size[0]}x{$size[1]}.jpg";
             }
+            public function getImageAltText(int $id): string {
+                return "Image {$id}";
+            }
         };
     }
 
@@ -126,8 +129,8 @@ class ImageTest extends TestCase
      */
     private function getFocusResolver(): ImageFocusResolverInterface {
         return new class implements ImageFocusResolverInterface {
-            public function __construct(private string $key = "") {}
-            public function getFocusPoint(int $id): array {
+            public function __construct(private $data = null) {}
+            public function getFocusPoint(): array {
                 return ['left' => '51', 'top' => '51'];
             }
         };
