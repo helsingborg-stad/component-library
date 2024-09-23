@@ -156,7 +156,7 @@ class Image implements ImageInterface {
       $this->imageSize[0] ?? null
     );
 
-    $uniqueId = uniqid('image-');
+    $uniqueId = uniqid('item-');
 
     // Declare variables
     $previousSize = 0;

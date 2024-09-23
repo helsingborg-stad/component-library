@@ -24,22 +24,30 @@
     @if($src) 
 
         <!-- Image-->
-        @foreach($containerQueryData as $item)
-            <img 
-                style="display: none;" 
-                loading="lazy" 
-                class="{{$item['uuid']}} {{$baseClass}}__image {{$baseClass}}__image--no-container-query" 
-                src="{{$item['url']}}" alt="{{$alt}}"
-            />
-            <!-- Display the image, if the container query matches -->
-            <style>
-                @container {{$item['media']}} {
-                    .{{$item['uuid']}} {
-                        display: block !important;
+        @if($containerQueryData) 
+            @foreach($containerQueryData as $item)
+                <img 
+                    loading="lazy" 
+                    class="{{$baseClass}}__image {{$baseClass}}--{{$item['uuid']}}" 
+                    src="{{$item['url']}}"
+                    alt="{{$alt}}"
+                    {{$imgAttributes}}
+                />
+                <style>
+                    @container {{$item['media']}} {
+                        .{{$baseClass}}--{{$item['uuid']}} {display: block;}
                     }
-                }
-            </style>
-        @endforeach
+                </style>
+            @endforeach
+        @else
+            <img
+                loading="lazy" 
+                class="{{$baseClass}}__image" 
+                src="{{$src}}" 
+                alt="{{$alt}}"
+                {{$imgAttributes}}
+            />
+        @endif
 
         <!-- Caption and byline -->
         @if(($caption || $byline) && !$removeCaption)

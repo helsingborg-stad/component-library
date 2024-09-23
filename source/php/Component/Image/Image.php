@@ -35,25 +35,20 @@ class Image extends \ComponentLibrary\Component\BaseController
 
             //Set an alt text, from resolver, if not one provided
             if(empty($alt)) {
-                $alt = $src->getAltText();
+                $alt = $this->data['alt'] = $src->getAltText();
             }
 
             $src = $this->data['src'];
         }
 
-        //Custom image attributes
-        if($imgAttributeList) {
-            $imgAttributeList = $this->data['imgAttributeList'] = self::buildAttributes($imgAttributeList);
-        }
-
         //Filetype
         if ($extension = $this->getExtension($src)) {
-            $this->data['classList'][] = $this->getBaseClass() . "--type-" . $extension;
+            $this->data['classList'][] = $this->getBaseClass("type-" . $extension, true);
         }
 
         //Make full width
         if ($fullWidth) {
-            $this->data['classList'][] = $this->getBaseClass() . "--full-width";
+            $this->data['classList'][] = $this->getBaseClass('full-width', true);
         }
 
         //Make cover
@@ -77,9 +72,12 @@ class Image extends \ComponentLibrary\Component\BaseController
             $this->data['heading'] = "";
         }
 
+        //Modal in panel?
         if (empty($isPanel)) {
             $this->data['isPanel'] = false;
         }
+
+        //Transparent
         if (empty($isTransparent)) {
             $this->data['isTransparent'] = false;
         }
@@ -89,16 +87,13 @@ class Image extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass('radius-' . $rounded, true);
         }
 
-        $this->data['imgAttributeList']['class'][] = $this->getBaseClass() . '__image';
-
+        //Make modal
         if ($openModal) {
             $this->data['modalId'] = uniqid();
             $this->data['imgAttributeList']['data-open'] = $this->data['modalId'];
-            $this->data['imgAttributeList']['class'][] = $this->getBaseClass() . '__modal';
         }
 
-        $this->data['imgAttributeList']['class'] = implode(' ', $this->data['imgAttributeList']['class']);
-
+        //Build attributes
         $this->data['imgAttributes'] = self::buildAttributes(
             $this->data['imgAttributeList']
         );
