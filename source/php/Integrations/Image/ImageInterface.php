@@ -30,6 +30,18 @@ interface ImageInterface {
     public function getFocusPoint(): array;
 
     /**
+     * Get the alt text of the image
+     */
+    public function getAltText(): ?string;
+
+    /** 
+     * Get a container query supportive array
+     * 
+     * @return array
+     */
+    public function getContainerQueryData(): array;
+
+    /**
      * Factory method to create an image object
      * 
      * @param int $imageId                          The WordPress ID of the image
