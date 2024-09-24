@@ -2,7 +2,10 @@
     "slug": "hero",
     "default": {
         "image": false,
-        "imageFocus": {"top": 30, "left": 50},
+        "imageFocus": {
+            "top": 30,
+            "left": 50
+        },
         "video": false,
         "size": "normal",
         "title": "",
@@ -24,7 +27,8 @@
         "contentApplyShadows": true,
         "buttonArgs": [],
         "poster": false,
-        "overlay": ""
+        "overlay": "",
+        "content": false
     },
     "description": {
         "image": "Background image",
@@ -50,10 +54,11 @@
         "contentApplyShadows": "Apply shadows to content if contentBackgroundColor is set.",
         "buttonArgs": "Add a @button by passing @button component arguments. If button is treated as a link, all te text elements in the content gets wrapped with this link.",
         "poster": "Poster image for the video",
-        "overlay": "Add an overlay over an image to make text more legible"
+        "overlay": "Add an overlay over an image to make text more legible",
+        "content": "Content slot to be displayed in the hero"
     },
     "types": {
-        "image": "string|ImageContract",
+        "image": "string",
         "imageFocus": "object",
         "video": "string",
         "size": "string",
@@ -76,7 +81,8 @@
         "contentApplyShadows": "boolean",
         "buttonArgs": "array",
         "poster": "boolean",
-        "overlay": "string"
+        "overlay": "string",
+        "content": "string|boolean"
     },
     "view": "hero.blade.php",
     "dependency": {
