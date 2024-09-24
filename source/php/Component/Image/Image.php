@@ -48,6 +48,8 @@ class Image extends \ComponentLibrary\Component\BaseController
 
             //Assign $src
             $src = $this->data['src'];
+        } else {
+            $this->data['containerQueryData'] = null;
         }
 
         //Filetype
