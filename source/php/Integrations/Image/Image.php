@@ -59,8 +59,17 @@ class Image implements ImageInterface {
   /**
    * @inheritDoc
    */
-  public function getUrl(): string {
+  public function getUrl(): ?string {
     return $this->resolver->getImageUrl($this->imageId, $this->imageSize);
+  }
+
+  /**
+   * Get a low resolution image alternative
+   * 
+   * @return string
+   */
+  public function getLqipUrl(): ?string {
+    return $this->resolver->getImageUrl($this->imageId, [100, false]);
   }
 
   /**
@@ -144,5 +153,50 @@ class Image implements ImageInterface {
       }
     }
     return self::DEFAULT_FOCUS_POINT;
+  }
+
+  /** 
+   * Get the container query data
+   * 
+   * @return array
+   */
+  public function getContainerQueryData(): array {
+    $imageSizes = $this->getImageSizes(
+      $this->imageSize[0] ?? null
+    );
+
+    $uniqueId = uniqid('item-');
+
+    // Declare variables
+    $previousSize = 0;
+    $return = [];
+
+    // Get the total number of sizes for reference
+    $totalSizes = count($imageSizes);
+
+    // Loop through the image sizes
+    foreach($imageSizes as $index => $size) {
+        // For the last size, omit 'max-width'
+        if ($index === $totalSizes - 1) {
+            $mediaQuery = "(min-width: {$previousSize}px)";
+        } else {
+            $mediaQuery = "(min-width: {$previousSize}px) and (max-width: {$size}px)";
+        }
+
+        $return[] = [
+            'uuid' => $uniqueId . "-" . $size,
+            'url' => $this->resolver->getImageUrl(
+                $this->imageId,
+                [$size, $this->scaledHeight($size)]
+            ),
+            'media' => $mediaQuery,
+            'src' => $this->getUrl()
+        ];
+
+        // Update $previousSize for the next iteration
+        $previousSize = $size;
+    }
+
+    return $return;
   }
 }

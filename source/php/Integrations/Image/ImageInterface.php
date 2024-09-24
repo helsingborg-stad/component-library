@@ -11,7 +11,12 @@ interface ImageInterface {
      * 
      * @return string
      */
-    public function getUrl(): string;
+    public function getUrl(): ?string;
+
+    /**
+     * Get a low resolution image
+     */
+    public function getLqipUrl(): ?string;
 
     /**
      * Get the srcset of the image.
@@ -28,6 +33,18 @@ interface ImageInterface {
      * @return array
      */
     public function getFocusPoint(): array;
+
+    /**
+     * Get the alt text of the image
+     */
+    public function getAltText(): ?string;
+
+    /** 
+     * Get a container query supportive array
+     * 
+     * @return array
+     */
+    public function getContainerQueryData(): array;
 
     /**
      * Factory method to create an image object
