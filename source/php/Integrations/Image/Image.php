@@ -165,6 +165,10 @@ class Image implements ImageInterface {
       $this->imageSize[0] ?? null
     );
 
+    if(!is_array($imageSizes) || empty($imageSizes)) {
+      return [];
+    }
+
     $uniqueId = uniqid('item-');
 
     // Declare variables
