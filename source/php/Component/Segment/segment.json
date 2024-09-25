@@ -52,6 +52,32 @@
         "hasPlaceholder": "Sets image specific styling based on the image being a placholder image.",
         "lang": "An array with labels used in the component."
     },
+    "types": {
+        "layout": "string",
+        "title": "string|boolean",
+        "content": "string|boolean",
+        "textSize": "string",
+        "image": "string|ImageInterface",
+        "background": "string",
+        "backgroundOverlay": "string",
+        "textColor": "string",
+        "height": "string",
+        "paddingTop": "boolean",
+        "paddingBottom": "boolean",
+        "textAlignment": "string",
+        "reverseColumns": "boolean",
+        "overlay": "string",
+        "stretch": "boolean",
+        "buttons": "array",
+        "link": "string|boolean",
+        "date": "string|boolean",
+        "tags": "array|boolean",
+        "meta": "string|boolean",
+        "icon": "array|boolean",
+        "hasPlaceholder": "boolean",
+        "lang": "array|boolean",
+        "containerAware": "boolean"
+    },
     "view": "segment.blade.php",
     "dependency": {
         "sass": {

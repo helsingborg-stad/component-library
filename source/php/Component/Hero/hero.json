@@ -55,7 +55,7 @@
         "content": "Content slot to be displayed in the hero"
     },
     "types": {
-        "image": "string|ImageContract",
+        "image": "string|ImageInterface",
         "imageFocus": "object",
         "video": "string",
         "size": "string",
