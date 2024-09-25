@@ -1,60 +1,21 @@
 <!-- image.blade.php -->
-<figure class="{{ $class }}" {!! $attribute !!}>
-    @if($src) 
-        @if($containerQueryData) 
-            @foreach($containerQueryData as $item)
-                <img 
-                    loading="lazy" 
-                    class="{{$baseClass}}__image {{$baseClass}}--{{$item['uuid']}}" 
-                    src="{{$item['url']}}"
-                    alt="{{$alt}}"
-                    style="{{$focus}}"
-                    {{$imgAttributes}}
-                />
-                <style>
-                    @container {{$item['media']}} {
-                        .{{$baseClass}}.{{$baseClass}}--container-query .{{$baseClass}}--{{$item['uuid']}} {display: block;}
-                    }
-                </style>
-            @endforeach
+@if($src && $placeholderEnabled)
+    <figure class="{{ $class }}" {!! $attribute !!}>
+        @if($src) 
+            @include('Image.sub.image')
+            @include('Image.sub.caption')
         @else
-            <img
-                loading="lazy" 
-                class="{{$baseClass}}__image" 
-                src="{{$src}}" 
-                alt="{{$alt}}"
-                {{$imgAttributes}}
-            />
+            @include('Image.sub.placeholder')
         @endif
+    </figure>
+@elseif($src && !$placeholderEnabled)
+    <figure class="{{ $class }}" {!! $attribute !!}>
+        @include('Image.sub.image')
+        @include('Image.sub.caption')
+    </figure>
+@endif
 
-        {{-- Caption & Byline --}}
-        @if(($caption || $byline) && !$removeCaption)
-            <figcaption>
-                @if($caption)
-                    <span class="{{$baseClass}}__caption">{{ $caption }}</span><br>
-                @endif
-                @if($byline)
-                    <span class="{{$baseClass}}__byline">{{ $byline }}</span>
-                @endif
-            </figcaption>
-        @endif
-
-    @else
-        {{-- Placeholder --}}
-        <div class="{{$baseClass}}__placeholder" aria-label="{{$alt}}">
-            @if($placeholderIcon)
-                @icon(['icon' => $placeholderIcon, 'size' => $placeholderIconSize])
-                @endicon
-            @endif
-            @if($placeholderText)
-                <label class="{{$baseClass}}__placeholder-text">
-                    {{ $placeholderText }}
-                </label>
-            @endif
-        </div>
-    @endif
-</figure>
-
+{{-- Modal --}}
 @if ($openModal)
     @include('Image.sub.modal')
 @endif

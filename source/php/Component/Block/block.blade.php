@@ -1,6 +1,13 @@
 <!-- block.blade.php -->
-<{{ $componentElement }} class="{{ $class }}"
-    @if ($image && isset($image['src'])) style="background-image:url('{{ $image['src'] }}');" @endif{!! $attribute !!}>
+<{{ $componentElement }} class="{{ $class }}" {!! $attribute !!}>
+    
+    @image([
+        'src' => (is_array($image) && isset($image['src'])) ? $image['src'] : $image,
+        'alt' => $imageAlt ?? null,
+        'classList' => [$baseClass . '__image'],
+        'cover' => true
+    ])
+    @endimage
 
     @if($floatingSlotHasData)
     <div class="{{$baseClass}}__floating">

@@ -31,7 +31,7 @@
         "content": "string|array",
         "meta": "string|array",
         "secondaryMeta": "string|array",
-        "image": "array",
+        "image": "array|boolean|ImageInterface",
         "link": "string",
         "ratio": "string",
         "date": "string",
