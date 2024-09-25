@@ -1,11 +1,16 @@
 @link([
     'href' => $link,
-    'classList' => ['c-segment__image'],
+    'classList' => ['c-segment__image-container'],
     'keepContent' => true,
     'keepWrapper' => false,
     'attributeList' => [
         'aria-label' => $lang->visit . ': ' . $link,
     ]
 ])
-    <div class="{{ $baseClass }}__image {{ $imageClass }}" style="{{ $imageStyleString }}"></div>
+    @image([
+        'src' => $image,
+        'alt' => $imageAlt ?? null,
+        'classList' => $imageClassList ?? [],
+    ])
+    @endimage
 @endlink

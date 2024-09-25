@@ -42,6 +42,7 @@ class Segment extends \ComponentLibrary\Component\BaseController
         }
 
         $this->data['imageClassList'] = [];
+        $this->data['imageClassList'][] = $this->getBaseClass('image');
 
         if ($this->data['content'] == strip_tags($this->data['content'] ?? "", [])) {
             // Create paragraphs
@@ -101,38 +102,14 @@ class Segment extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = 'c-segment' . '--has-overlay';
         }
 
-        //Stringify image classlist
-        $this->data['imageClass'] = implode("", $this->data['imageClassList']);
-
-        //Create image style tag
-        $this->data['imageStyle'] = [];
-
         //Add image to image styles
-        if ($image) {
-            $this->data['imageStyle']['background-image'] = "url('" . $image . "')";
-        } else {
+        if (!$image) {
             $this->data['classList'][] = $this->getBaseClass('no-image', true);
         }
 
         if (!empty($contentAlignment)) {
             $this->data['classList'][] =  $this->getBaseClass() . '--content-' . $contentAlignment;
         }
-
-        if (!empty($contentBackground)) {
-            $this->data['classList'][] = $this->getBaseClass() . '--content-background-' . $contentBackground;
-        }
-
-        if(is_object($imageFocus)) {
-            $imageFocus = (array) $imageFocus;
-        }
-
-        //Add background position to image styles
-        if (is_array($imageFocus) && array_filter((array) $imageFocus)) {
-            $this->data['imageStyle']['background-position'] = $imageFocus['left'] . "% " . $imageFocus['top'] . "%";
-        }
-
-        //Stringify image styles
-        $this->data['imageStyleString'] = self::buildInlineStyle($this->data['imageStyle']);
 
         // Handle background data (wrapper)
         if ($background) {

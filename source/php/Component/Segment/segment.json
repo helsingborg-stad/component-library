@@ -6,10 +6,6 @@
         "content": false,
         "textSize": "default",
         "image": false,
-        "imageFocus": {
-            "top": 50,
-            "left": 50
-        },
         "background": false,
         "backgroundOverlay": false,
         "textColor": "dark",
@@ -37,8 +33,7 @@
         "content": "The content of the segment",
         "textSize": "The sizing of the font",
         "image": "Add a URL for an image",
-        "imageFocus": "Where the focus point should be of an image when container dosen't match image ratio.",
-        "background": "The background color, can be an URL to an image, hex value or a color name (i.e. primary, secondary, etc)",
+        "background": "The background color, hex value or a color name (i.e. primary, secondary, etc)",
         "backgroundOverlay": "Which overlay to use",
         "textColor": "Color of the text",
         "height": "Height behavior of the sections height",
