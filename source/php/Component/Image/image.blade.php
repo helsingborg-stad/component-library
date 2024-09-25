@@ -27,7 +27,7 @@
             />
         @endif
 
-        <!-- Caption and byline -->
+        {{-- Caption & Byline --}}
         @if(($caption || $byline) && !$removeCaption)
             <figcaption>
                 @if($caption)
@@ -40,7 +40,7 @@
         @endif
 
     @else
-        <!-- Placeholder -->
+        {{-- Placeholder --}}
         <div class="{{$baseClass}}__placeholder" aria-label="{{$alt}}">
             @if($placeholderIcon)
                 @icon(['icon' => $placeholderIcon, 'size' => $placeholderIconSize])
