@@ -69,6 +69,11 @@ class Image extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass('cover', true);
         }
 
+        //Mark as placeholder, if no src
+        if (!$src) {
+            $this->data['classList'][] = $this->getBaseClass('is-placeholder', true);
+        }
+
         //Inherit the alt text
         if (!$alt) {
             $this->data['alt'] = !empty($caption) ? $caption : "";
