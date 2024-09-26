@@ -14,8 +14,3 @@
         @include('Image.sub.caption')
     </figure>
 @endif
-
-{{-- Modal --}}
-@if ($openModal)
-    @include('Image.sub.modal')
-@endif

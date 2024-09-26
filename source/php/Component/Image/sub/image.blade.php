@@ -19,6 +19,7 @@
         loading="lazy" 
         class="{{$baseClass}}__image" 
         src="{{$src}}" 
+        srcset="{{$srcset}}"
         alt="{{$alt}}"
         {{$imgAttributes}}
     />

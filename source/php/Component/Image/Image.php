@@ -53,7 +53,7 @@ class Image extends \ComponentLibrary\Component\BaseController
         }
 
         //Filetype
-        if ($extension = $this->getExtension($src)) {
+        if (is_string($src) && $extension = $this->getExtension($src)) {
             $this->data['classList'][] = $this->getBaseClass("type-" . $extension, true);
         }
 
@@ -76,32 +76,9 @@ class Image extends \ComponentLibrary\Component\BaseController
             $this->data['byline'] = $byline;
         }
 
-        //Inherit the caption text
-        if (empty($heading) && $caption) {
-            $this->data['heading'] = $caption;
-        } else {
-            $this->data['heading'] = "";
-        }
-
-        //Modal in panel?
-        if (empty($isPanel)) {
-            $this->data['isPanel'] = false;
-        }
-
-        //Transparent
-        if (empty($isTransparent)) {
-            $this->data['isTransparent'] = false;
-        }
-
         //Rounded corners all sides
         if (!empty($rounded)) {
             $this->data['classList'][] = $this->getBaseClass('radius-' . $rounded, true);
-        }
-
-        //Make modal
-        if ($openModal) {
-            $this->data['modalId'] = uniqid();
-            $this->data['imgAttributeList']['data-open'] = $this->data['modalId'];
         }
 
         //Build attributes
