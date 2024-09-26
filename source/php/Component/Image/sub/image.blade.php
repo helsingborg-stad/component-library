@@ -6,7 +6,7 @@
             src="{{$item['url']}}"
             alt="{{$alt}}"
             style="{{$focus}}"
-            {{$imgAttributes}}
+            {!! $imgAttributes !!}
         />
         <style>
             @container {{$item['media']}} {
@@ -21,6 +21,6 @@
         src="{{$src}}" 
         srcset="{{$srcset}}"
         alt="{{$alt}}"
-        {{$imgAttributes}}
+        {!! $imgAttributes !!}
     />
 @endif
