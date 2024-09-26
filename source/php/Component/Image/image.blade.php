@@ -1,5 +1,5 @@
 <!-- image.blade.php -->
-@if($src && $placeholderEnabled)
+@if($placeholderEnabled)
     <figure class="{{ $class }}" {!! $attribute !!}>
         @if($src) 
             @include('Image.sub.image')
@@ -8,7 +8,7 @@
             @include('Image.sub.placeholder')
         @endif
     </figure>
-@elseif($src && !$placeholderEnabled)
+@else
     <figure class="{{ $class }}" {!! $attribute !!}>
         @include('Image.sub.image')
         @include('Image.sub.caption')
