@@ -40,11 +40,13 @@ class Image extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass('container-query', true);
 
             //Add a low resolution image placeholder
-            $this->data['attributeList']['style'] = sprintf(
-                "background-image: url(%s); background-position: %s;", 
-                $src->getLqipUrl(),
-                $this->reduceFocusPoint($src->getFocusPoint())
-            ); 
+            if($src->getLqipUrl()) {
+                $this->data['attributeList']['style'] = sprintf(
+                    "background-image: url(%s); background-position: %s;", 
+                    $src->getLqipUrl(),
+                    $this->reduceFocusPoint($src->getFocusPoint())
+                ); 
+            }
 
             //Assign $src
             $src = $this->data['src'];
