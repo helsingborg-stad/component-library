@@ -53,8 +53,6 @@
         "sass": {
             "components": [
                 "image",
-                "modal",
-                "button",
                 "icon"
             ]
         }
