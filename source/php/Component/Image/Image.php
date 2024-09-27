@@ -39,9 +39,6 @@ class Image extends \ComponentLibrary\Component\BaseController
             //Indicate container query
             $this->data['classList'][] = $this->getBaseClass('container-query', true);
 
-            //Check if we can enable LQIP
-            $lqipEnabled = ($caption||$byline) ? false : true;
-
             //Add a low resolution image placeholder
             if($lqipEnabled && $src->getLqipUrl()) {
                 if(!isset($this->data['attributeList']['style'])) {

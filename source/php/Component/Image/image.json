@@ -14,7 +14,8 @@
         "placeholderText": "Image missing",
         "placeholderIcon": "broken_image",
         "placeholderIconSize": "xl",
-        "imgAttributeList": []
+        "imgAttributeList": [],
+        "lqipEnabled": true
     },
     "description": {
         "src": "A string containing a valid URL or an ImageInterface object. If the object is used, the srcset attribute is ignored.",
@@ -30,7 +31,8 @@
         "placeholderText": "Label to show if image is missing",
         "placeholderIcon": "Icon to display if image is missing / false to hide",
         "placeholderIconSize": "Icons size, please refer to image component for size.",
-        "imgAttributeList": "Attributes for the img element."
+        "imgAttributeList": "Attributes for the img element.",
+        "lqipEnabled": "If the low quality image placeholder should be enabled."
     },
     "types": {
         "src": "boolean|string|ImageInterface",
@@ -46,7 +48,8 @@
         "placeholderText": "string",
         "placeholderIcon": "string",
         "placeholderIconSize": "string",
-        "imgAttributeList": "array"
+        "imgAttributeList": "array",
+        "lqipEnabled": "boolean"
     },
     "view": "image.blade.php",
     "dependency": {
