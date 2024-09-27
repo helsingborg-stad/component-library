@@ -41,7 +41,10 @@ class Image extends \ComponentLibrary\Component\BaseController
 
             //Add a low resolution image placeholder
             if($src->getLqipUrl()) {
-                $this->data['attributeList']['style'] = sprintf(
+                if(!isset($this->data['attributeList']['style'])) {
+                    $this->data['attributeList']['style'] = "";
+                }
+                $this->data['attributeList']['style'] .= sprintf(
                     "background-image: url(%s); background-position: %s;", 
                     $src->getLqipUrl(),
                     $this->reduceFocusPoint($src->getFocusPoint())
