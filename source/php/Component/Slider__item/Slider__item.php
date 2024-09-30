@@ -29,10 +29,6 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . "--layout-" . $layout;
         }
 
-        /*if (!empty($desktop_image)) {
-            $this->data['attributeList']['style'] = "background-image: url('".$desktop_image."');";
-        }*/ 
-
         $this->data['showContainer'] = false;
         if (!empty($title) || !empty($subTitle) ||!empty($text) || !empty($bottom)) {
             $this->data['showContainer'] = true;
@@ -43,37 +39,11 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
         }
 
         if (!empty($alt) && empty($altMobile)) {
-            $this->data['altMobile'] = $alt;
+            $this->data['alt'] = $alt;
         }
 
         if ($heroStyle) {
             $this->data['classList'][] = $this->getBaseClass() . "--hero";
         }
-
-        
-        //Recognize as an image
-        if(!$video) {
-            $this->data['attributeList']['aria-label'] = $alt ? $alt : '';
-            $this->data['attributeList']['aria-labeledby'] = $this->getUid() . '__heading';
-        }
-        /*
-        if(!empty($focusPoint)) {
-
-            //Create image style tag
-            $this->data['imageStyle'] = []; 
-
-            //Add image to image styles
-            if($image) {
-                $this->data['imageStyle']['background-image'] = "url('" . $desktop_image . "')"; 
-            }
-
-            //Add background position to image styles
-            if(is_array($focusPoint) && array_filter($focusPoint)) {
-                $this->data['imageStyle']['background-position'] = $focusPoint['left'] . "% " . $focusPoint['top'] . "%"; 
-            }
-
-            //Stringify image styles
-            $this->data['attributeList']['style'] = self::buildInlineStyle($this->data['imageStyle']); 
-        }*/ 
     }
 }

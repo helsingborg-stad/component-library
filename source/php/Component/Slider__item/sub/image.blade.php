@@ -1,7 +1,6 @@
 @image([
     'src' => $image,
-    'alt' => $alt,
-    //'classList' => $classListDesktop,
+    'alt' => $alt ?? false,
     'cover' => true,
     'context' => ['component.slider', 'component.slider.image']
 ])
