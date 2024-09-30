@@ -1,19 +1,17 @@
 <!-- slider__item.blade.php -->
 <section class="{{ $class }}" {!! $attribute !!}>
-    @if ($link)
-        <a class="{{ $baseClass }}__link" href="{{ $link }}" {{ $linkDescription ? 'aria-label="' . $linkDescription . '"' : "" }} tabindex="0">
-    @endif
+    
+    {{-- Link (open) --}}
+    {!! $link ? '<a class="' . $baseClass . '__link" href="' . $link . '" ' . ($linkDescription ? 'aria-label="' . $linkDescription . '"' : '') . ' tabindex="0">' : '' !!}
 
-    @if ($background_video)
-        @include('Slider__item.sub.video')
-    @endif
+    {{-- Assets --}}
+    @includeWhen($video, 'Slider__item.sub.video')
+    @includeWhen($image, 'Slider__item.sub.image')
 
-    @if ($desktop_image)
-        <img class="u-sr__only {{ $classListDesktop }}" src="{{ $desktop_image }}" alt="{{$alt}}"/>
-    @endif
-
+    {{-- Content --}}
     @if ($slotHasData || $showContainer)
         <div class="{{ $baseClass }}__container">
+           
             {{$slot}}
 
             @if($title)
@@ -62,8 +60,7 @@
         </div>
     @endif
 
+    {{-- Link (close) --}}
+    {!! $link ? '</a>' : '' !!}
 
-    @if ($link)
-        </a>
-    @endif
 </section>
