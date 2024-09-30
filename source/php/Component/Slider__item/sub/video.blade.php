@@ -9,11 +9,12 @@
         $baseClass."__background--video"
     ],
     'formats' => [
-        ['src' => $background_video, 'type' => "mp4"],
+        ['src' => $video, 'type' => "mp4"],
     ]
 ])
 @endvideo
-@if($showPauseButton)
+
+<!-- Play/pause button -->
 @button([
     'style'         => 'filled',
     'icon'          => 'play_arrow',
@@ -27,4 +28,3 @@
     ]
 ])
 @endbutton
-@endif

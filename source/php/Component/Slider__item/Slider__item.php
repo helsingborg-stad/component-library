@@ -29,9 +29,9 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . "--layout-" . $layout;
         }
 
-        if (!empty($desktop_image)) {
+        /*if (!empty($desktop_image)) {
             $this->data['attributeList']['style'] = "background-image: url('".$desktop_image."');";
-        }
+        }*/ 
 
         $this->data['showContainer'] = false;
         if (!empty($title) || !empty($sub_title) ||!empty($text) || !empty($bottom)) {
@@ -52,7 +52,7 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
 
         
         //Recognize as an image
-        if(!$background_video) {
+        if(!$video) {
             $this->data['attributeList']['aria-label'] = $alt ? $alt : '';
             $this->data['attributeList']['aria-labeledby'] = $this->getUid() . '__heading';
         }
@@ -63,7 +63,7 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
             $this->data['imageStyle'] = []; 
 
             //Add image to image styles
-            if($desktop_image) {
+            if($image) {
                 $this->data['imageStyle']['background-image'] = "url('" . $desktop_image . "')"; 
             }
 

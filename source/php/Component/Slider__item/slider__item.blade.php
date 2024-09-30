@@ -9,7 +9,15 @@
     @endif
 
     @if ($desktop_image)
-        <img class="u-sr__only {{ $classListDesktop }}" src="{{ $desktop_image }}" alt="{{$alt}}"/>
+            @image([
+                'src' => $desktop_image,
+                'alt' => $alt,
+                //'classList' => $classListDesktop,
+                'cover' => true,
+                'context' => ['component.slider', 'component.slider.image']
+            ])
+            @endimage
+        <!-- <img class="u-sr__only {{ $classListDesktop }}" src="{{ $desktop_image }}" alt="{{$alt}}"/> -->
     @endif
 
     @if ($slotHasData || $showContainer)
