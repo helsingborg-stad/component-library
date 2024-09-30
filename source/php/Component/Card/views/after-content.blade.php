@@ -1,3 +1,3 @@
-<div class="{{$baseClass . '__content-after'}}">
+<div class="{{$baseClass}}__content-after">
     {!! $afterContent !!}
 </div>
