@@ -1,5 +1,5 @@
 @image([
-  'classList' => [$baseClass.'__image']
+  'classList' => [$baseClass . '__image'],
   'src' => $image,
   'alt' => $alt ?? null,
   'cover' => true,
