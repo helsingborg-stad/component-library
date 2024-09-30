@@ -10,7 +10,8 @@
     ],
     'formats' => [
         ['src' => $video, 'type' => "mp4"],
-    ]
+    ],
+    'context' => ['component.slider', 'component.slider.video']
 ])
 @endvideo
 
@@ -25,6 +26,7 @@
     ],
     'attributeList' => [
         'js-video-control' => ''
-    ]
+    ],
+    'context' => ['component.slider', 'component.slider.video', 'component.slider.video.button']
 ])
 @endbutton

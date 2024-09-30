@@ -2,7 +2,6 @@
     "slug": "slider__item",
     "default": {
         "title": "",
-        "subTitle": "",
         "text": "",
         "cta": [],
         "image": false,
@@ -10,33 +9,37 @@
         "alt": "",
         "focusPoint": {"top": 30, "left": 50},
         "link": false,
+        "linkDescription": "",
         "layout": "bottom",
         "theme": "base",
         "containerColor": "",
         "heroStyle": false,
         "textAlignment": "",
-        "overlay": "none"
+        "overlay": "none",
+        "slot": false,
+        "bottom": false
     },
     "description": {
         "title": "A title for predefined layout",
-        "subTitle": "A sub-title for predefined layout",
         "text": "A text for predefined layout",
-        "cta": "Adds button with a link",
+        "cta": "Adds button with a link, should conform with the button component specification (title, href)",
         "image": "An url or path to an image to use as background for the segment",
         "video": "A video background for the segment",
         "alt": "Alternative text",
         "focusPoint": "Where the focus point should be of an image when container dosen't match image ratio.",
         "link": "Where the slide should link to",
+        "linkDescription": "A description of the link",
         "layout": "Which layouts to use",
         "theme": "The color palette to be used",
         "containerColor": "Determines what color the container and text should be",
         "heroStyle": "Gives the slide a hero like appearance with larger text",
         "textAlignment": "Aligns the text in the container",
-        "overlay": "Adds an overlay to the image"
+        "overlay": "Adds an overlay to the image",
+        "slot": "A slot for custom content, placed above the predefined layout",
+        "bottom": "A slot for custom content, placed below the predefined layout"
     },
     "types": {
         "title": "string|boolean",
-        "subTitle": "string|boolean",
         "text": "string|boolean",
         "cta": "array|boolean",
         "image": "boolean|string|ImageInterface",
@@ -44,12 +47,15 @@
         "alt": "string",
         "focusPoint": "array",
         "link": "string|boolean",
+        "linkDescription": "string",
         "layout": "string",
         "theme": "string",
         "containerColor": "string",
         "heroStyle": "string",
         "textAlignment": "string",
-        "overlay": "string"
+        "overlay": "string",
+        "slot": "boolean|string",
+        "bottom": "boolean|string"
     },
     "view": "slider__item.blade.php",
     "dependency": {

@@ -1,27 +1,17 @@
 <!-- slider__item.blade.php -->
 <section class="{{ $class }}" {!! $attribute !!}>
-    @if ($link)
-        <a class="{{ $baseClass }}__link" href="{{ $link }}" {{ $linkDescription ? 'aria-label="' . $linkDescription . '"' : "" }} tabindex="0">
-    @endif
+    
+    {{-- Link --}}
+    {!! $link ? '<a class="' . $baseClass . '__link" href="' . $link . '" ' . ($linkDescription ? 'aria-label="' . $linkDescription . '"' : '') . ' tabindex="0">' : '' !!}
 
-    @if ($background_video)
-        @include('Slider__item.sub.video')
-    @endif
+    {{-- Assets --}}
+    @includeWhen($video, 'Slider__item.sub.video')
+    @includeWhen($image, 'Slider__item.sub.image')
 
-    @if ($desktop_image)
-            @image([
-                'src' => $desktop_image,
-                'alt' => $alt,
-                //'classList' => $classListDesktop,
-                'cover' => true,
-                'context' => ['component.slider', 'component.slider.image']
-            ])
-            @endimage
-        <!-- <img class="u-sr__only {{ $classListDesktop }}" src="{{ $desktop_image }}" alt="{{$alt}}"/> -->
-    @endif
-
+    {{-- Content --}}
     @if ($slotHasData || $showContainer)
         <div class="{{ $baseClass }}__container">
+           
             {{$slot}}
 
             @if($title)
@@ -70,8 +60,6 @@
         </div>
     @endif
 
+    {{ $link ? '</a>' : '' }} {{-- Close link --}}
 
-    @if ($link)
-        </a>
-    @endif
 </section>

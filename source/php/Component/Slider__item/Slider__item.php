@@ -34,7 +34,7 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
         }*/ 
 
         $this->data['showContainer'] = false;
-        if (!empty($title) || !empty($sub_title) ||!empty($text) || !empty($bottom)) {
+        if (!empty($title) || !empty($subTitle) ||!empty($text) || !empty($bottom)) {
             $this->data['showContainer'] = true;
         }
 
@@ -56,7 +56,7 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['aria-label'] = $alt ? $alt : '';
             $this->data['attributeList']['aria-labeledby'] = $this->getUid() . '__heading';
         }
-        
+        /*
         if(!empty($focusPoint)) {
 
             //Create image style tag
@@ -74,6 +74,6 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
 
             //Stringify image styles
             $this->data['attributeList']['style'] = self::buildInlineStyle($this->data['imageStyle']); 
-        }
+        }*/ 
     }
 }
