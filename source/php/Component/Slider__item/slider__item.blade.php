@@ -61,6 +61,6 @@
     @endif
 
     {{-- Link (close) --}}
-    {{ $link ? '</a>' : '' }}
+    {!! $link ? '</a>' : '' !!}
 
 </section>
