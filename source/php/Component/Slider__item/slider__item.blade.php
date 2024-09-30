@@ -1,7 +1,7 @@
 <!-- slider__item.blade.php -->
 <section class="{{ $class }}" {!! $attribute !!}>
     
-    {{-- Link --}}
+    {{-- Link (open) --}}
     {!! $link ? '<a class="' . $baseClass . '__link" href="' . $link . '" ' . ($linkDescription ? 'aria-label="' . $linkDescription . '"' : '') . ' tabindex="0">' : '' !!}
 
     {{-- Assets --}}
@@ -60,6 +60,7 @@
         </div>
     @endif
 
-    {{ $link ? '</a>' : '' }} {{-- Close link --}}
+    {{-- Link (close) --}}
+    {{ $link ? '</a>' : '' }}
 
 </section>
