@@ -9,8 +9,10 @@
         @endif
     </figure>
 @else
-    <figure class="{{ $class }}" {!! $attribute !!}>
-        @include('Image.sub.image')
-        @include('Image.sub.caption')
-    </figure>
+    @if($src) 
+        <figure class="{{ $class }}" {!! $attribute !!}>
+            @include('Image.sub.image')
+            @include('Image.sub.caption')
+        </figure>
+    @endif
 @endif

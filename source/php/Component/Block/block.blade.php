@@ -5,7 +5,8 @@
         'src' => (is_array($image) && isset($image['src'])) ? $image['src'] : $image,
         'alt' => $imageAlt ?? null,
         'classList' => [$baseClass . '__image'],
-        'cover' => true
+        'cover' => true,
+        'placeholderEnabled' => false
     ])
     @endimage
 
