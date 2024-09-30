@@ -1,6 +1,6 @@
 @image([
     'src' => $image,
-    'alt' => $alt ?? false,
+    'alt' => $alt ?? null,
     'cover' => true,
     'context' => ['component.slider', 'component.slider.image']
 ])

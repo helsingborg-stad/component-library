@@ -38,7 +38,7 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . '--overlay-' . $overlay;
         }
 
-        if (!empty($alt) && empty($altMobile)) {
+        if (!empty($alt)) {
             $this->data['alt'] = $alt;
         }
 
