@@ -22,7 +22,7 @@ class Card extends \ComponentLibrary\Component\BaseController
         $this->data['floatingSlotHasData'] = $this->slotHasData('floating');
 
         if (isset($image['padded']) && $image['padded']) {
-            $this->data['paddedImage'] = $this->getBaseClass() . '__image-background--padded';
+            $this->getBaseClass('padded-image', true);
         }
 
         if ($image && !empty($image['src'])) {
