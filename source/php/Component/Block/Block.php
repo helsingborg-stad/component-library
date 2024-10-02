@@ -17,7 +17,7 @@ class Block extends \ComponentLibrary\Component\BaseController
         
         $this->data['floatingSlotHasData'] = $this->slotHasData('floating');
 
-        if ($image && !isset($image['backgroundColor'])) {
+        if ($image && is_array($image) && !isset($image['backgroundColor'])) {
             $this->data['image']['backgroundColor'] = 'primary';
         }
 
