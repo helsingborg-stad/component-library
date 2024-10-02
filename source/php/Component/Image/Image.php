@@ -57,6 +57,11 @@ class Image extends \ComponentLibrary\Component\BaseController
             $this->data['containerQueryData'] = null;
         }
 
+        //Add srcset to attribute list
+        if ($srcset) {
+            $this->data['attributeList']['srcset'] = $srcset;
+        }
+
         //Filetype
         if (is_string($src) && $extension = $this->getExtension($src)) {
             $this->data['classList'][] = $this->getBaseClass("type-" . $extension, true);

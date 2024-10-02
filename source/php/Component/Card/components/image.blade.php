@@ -5,7 +5,8 @@
         'cover' => true,
         'classList' => [
             $baseClass . '__image'
-        ]
+        ],
+        'placeholderEnabled' => $hasPlaceholder,
     ])
     @endimage
 </div>

@@ -22,7 +22,7 @@
         @if($subHeading)
             @typography([
                 'element' => 'span', 
-                'variant' => 'meta',
+                'variant' => 'h6',
                 'classList' => [
                     $baseClass . '__sub-heading',
                     'u-margin__y--0'

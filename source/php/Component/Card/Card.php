@@ -15,15 +15,9 @@ class Card extends \ComponentLibrary\Component\BaseController
 
         $this->data['collpaseID'] = uniqid();
 
-        $this->data['classList'][] = $this->getBaseClass() . '--' . $color;
-
+        //Detect if the slots have data
         $this->data['afterContentSlotHasData'] = $this->slotHasData('afterContent');
-
         $this->data['floatingSlotHasData'] = $this->slotHasData('floating');
-
-        if (isset($image['padded']) && $image['padded']) {
-            $this->getBaseClass('padded-image', true);
-        }
 
         if ($image && !empty($image['src'])) {
             $this->data['classList'][] = $this->getBaseClass('has-image', true);
@@ -33,25 +27,18 @@ class Card extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass('has-datebadge', true);
         }
 
-        if ($imageFirst || !$image) {
-            $this->data['classList'][] = $this->getBaseClass() . '--image-first';
-        }
-
-        if ($hasFooter || $tags || $buttons) {
-            $this->data['classList'][] = $this->getBaseClass() . '--has-footer';
-        }
-
-        if ($metaFirst) {
-            $this->data['classList'][] = $this->getBaseClass() . '--meta-first';
+        if ($tags || $buttons) {
+            $this->data['classList'][] = $this->getBaseClass('has-footer', true);
         }
 
         if ($collapsible && $content) {
             $this->data['collapsible'] = $this->getBaseClass() . '--collapse';
         }
 
+        //Cast image data to array structure
         if (!empty($image) && is_string($image)) {
             $image = $this->data['image'] = [
-                    'src' => $image
+                'src' => $image
             ];
         }
 

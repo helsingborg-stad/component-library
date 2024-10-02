@@ -4,4 +4,3 @@
     {!! $slot !!}
     @includeWhen($afterContentSlotHasData, 'Card.views.after-content')
 </{{ $componentElement }}>
-
