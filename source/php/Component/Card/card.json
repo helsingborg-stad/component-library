@@ -15,7 +15,8 @@
         "dateBadge": false,
         "hasPlaceholder": false,
         "icon": false,
-        "color": "default"
+        "color": "default",
+        "metaFirst": false
     },
     "description": {
         "heading": "The card heading",
@@ -32,7 +33,8 @@
         "dateBadge": "Display date as a badge. Requires image to be set.",
         "hasPlaceholder": "If the card should have a placeholder, if the image is missing.",
         "icon": "An array with the same specification as the icon component",
-        "color": "The background color of the image."
+        "color": "The background color of the image.",
+        "metaFirst": "If the meta should be displayed before the heading."
     },
     "types": {
         "heading": "string",
@@ -50,7 +52,8 @@
         "hasPlaceholder": "boolean",
         "icon": "boolean|array",
         "color": "string",
-        "containerAware": "boolean"
+        "containerAware": "boolean",
+        "metaFirst": "boolean"
     },
     "view": "card.blade.php",
     "dependency": {
