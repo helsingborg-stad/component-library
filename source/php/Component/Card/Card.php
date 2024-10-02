@@ -19,7 +19,7 @@ class Card extends \ComponentLibrary\Component\BaseController
         $this->data['afterContentSlotHasData'] = $this->slotHasData('afterContent');
         $this->data['floatingSlotHasData'] = $this->slotHasData('floating');
 
-        if ($image && !empty($image['src'])) {
+        if ($image) {
             $this->data['classList'][] = $this->getBaseClass('has-image', true);
         }
 
@@ -54,8 +54,10 @@ class Card extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . '--svg-background';
         }
 
-        if ($image && !isset($image['src']) || (isset($image['src']) && empty($image['src']))) {
-            $this->data['image'] = false;
+        if(is_array($image)) {
+            if ($image && !isset($image['src']) || (isset($image['src']) && empty($image['src']))) {
+                $this->data['image'] = false;
+            }
         }
 
         if (is_array($image) && !isset($image['backgroundColor'])) {

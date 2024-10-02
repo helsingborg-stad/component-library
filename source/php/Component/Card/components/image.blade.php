@@ -1,7 +1,7 @@
 <div class="{{$baseClass}}__image-container">
     @image([
-        'src' => is_array($image) ? $image['src'] : $image,
-        'alt' => isset($image['alt']) ? $image['alt'] : null,
+        'src' => is_array($image) ? ($image['src'] ?? null) : $image,
+        'alt' => is_array($image) ? ($image['alt'] ?? null) : null,
         'cover' => true,
         'classList' => [
             $baseClass . '__image'
