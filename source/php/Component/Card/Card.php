@@ -54,8 +54,6 @@ class Card extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . '--svg-background';
         }
 
-        
-
         if (is_array($image) && !isset($image['backgroundColor'])) {
             $this->data['image']['backgroundColor'] = 'primary';
         }
@@ -87,5 +85,20 @@ class Card extends \ComponentLibrary\Component\BaseController
             }
         }
 
+        $this->data['contentHtmlElement'] = $this->getContentHTMLElement($content);
+    }
+
+    /**
+     * Get the type of content wrapper that should be used
+     * 
+     * @param string $content
+     * 
+     * @return string
+     */
+    private function getContentHTMLElement($content) {
+        if (strpos($content, '<p>') !== false) {
+            return 'span';
+        }
+        return 'p';
     }
 }
