@@ -25,14 +25,15 @@ class MegaMenu extends \ComponentLibrary\Component\BaseController
 
     public function generateMenuItems(array $menuItems = []) {
         $result = [];
+
         foreach($menuItems as $key => $menuItem) {
             $menuItem['classList'] = $menuItem['classList'] ?? [];
 
-            if($menuItem['active'] ?? false) {
+            if ($menuItem['active'] ?? false) {
                 $menuItem['classList'][] = 'is-current';
             }
 
-            if($menuItem['children'] ?? false && is_array($menuItem['children']) && !empty($menuItem['children'])) {
+            if (isset($menuItem['children']) && is_array($menuItem['children']) && !empty($menuItem['children'])) {
                 $menuItem['classList'][] = $this->getBaseClass() . '__item--has-children';
                 $menuItem['children'] = $this->generateMenuItems($menuItem['children']);
             }
