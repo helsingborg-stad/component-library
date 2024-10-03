@@ -41,8 +41,7 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
             }
         }
         
-        if ($cover)
-        {
+        if ($cover && $this->isValidBackgroundAssetName($cover)) {
             $this->data['attributeList']['style'][] = "background-image:url(\"$cover\");background-size:cover";
         }
 
@@ -246,6 +245,22 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
         }
 
         return $this->data;
+    }
+
+    /**
+     * Check if image is a valid background asset name
+     * 
+     * @param string $name
+     * 
+     * @return bool
+     */
+    private function isValidBackgroundAssetName($name): bool
+    {
+        $name = pathinfo($name, PATHINFO_FILENAME);
+        if(empty($name)) {
+            return false;
+        }
+        return true; 
     }
 }
 
