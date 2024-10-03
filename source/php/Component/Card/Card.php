@@ -54,11 +54,7 @@ class Card extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . '--svg-background';
         }
 
-        if(is_array($image)) {
-            if ($image && !isset($image['src']) || (isset($image['src']) && empty($image['src']))) {
-                $this->data['image'] = false;
-            }
-        }
+        
 
         if (is_array($image) && !isset($image['backgroundColor'])) {
             $this->data['image']['backgroundColor'] = 'primary';
@@ -78,5 +74,18 @@ class Card extends \ComponentLibrary\Component\BaseController
         if ($ratio) {
             $this->data['classList'][] = $this->getBaseClass() . '--ratio-' . str_replace(":", "-", $ratio);
         }
+
+        //Determine if the card has an image
+        $this->data['imageExists'] = true;
+        if(is_a($image, 'ComponentLibrary\Integrations\Image\Image')) {
+            if(empty($image->getUrl())) {
+                $this->data['imageExists'] = false;
+            }
+        } elseif(is_array($image)) {
+            if ($image && !isset($image['src']) || (isset($image['src']) && empty($image['src']))) {
+                $this->data['imageExists'] = false;
+            }
+        }
+
     }
 }
