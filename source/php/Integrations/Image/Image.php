@@ -212,10 +212,21 @@ class Image implements ImageInterface {
    */
   private function createMediaQuery($mode, $previousSize, $size, $includeMaxWidth = true): string
   {
+    $queryRelativeSize = ($mode == 'landscape') ? 1 : 0.62; // If we are using 16/9 image ratio (which we do in most cases),the relative size is about half. 
     $queryDimension = ($mode == 'landscape') ? 'width' : 'height';
     if ($includeMaxWidth) {
-      return sprintf("(min-%s: %spx) and (max-%s: %spx)", $queryDimension, $previousSize, $queryDimension, $size);
+      return sprintf(
+        "(min-%s: %spx) and (max-%s: %spx)", 
+        $queryDimension, 
+        ceil($previousSize * $queryRelativeSize), 
+        $queryDimension, 
+        ceil($size * $queryRelativeSize)
+      );
     }
-    return sprintf("(min-%s: %spx)", $queryDimension, $previousSize);
+    return sprintf(
+      "(min-%s: %spx)", 
+      $queryDimension, 
+      ceil($previousSize * $queryRelativeSize)
+    );
   }
 }
