@@ -51,6 +51,8 @@ class Image extends \ComponentLibrary\Component\BaseController
                 ); 
             }
 
+            $this->data['attributeList']['style'] .= "container-type: size;"; 
+
             //Assign $src
             $src = $this->data['src'];
         } else {

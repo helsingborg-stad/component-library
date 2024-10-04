@@ -180,20 +180,16 @@ class Image implements ImageInterface {
 
     // Loop through the image sizes
     foreach($imageSizes as $index => $size) {
-        // For the last size, omit 'max-width'
-        if ($index === $totalSizes - 1) {
-            $mediaQuery = "(min-width: {$previousSize}px)";
-        } else {
-            $mediaQuery = "(min-width: {$previousSize}px) and (max-width: {$size}px)";
-        }
-
         $return[] = [
             'uuid' => $uniqueId . "-" . $size,
             'url' => $this->resolver->getImageUrl(
                 $this->imageId,
                 [$size, $this->scaledHeight($size)]
             ),
-            'media' => $mediaQuery,
+            'media' => [
+              'landscape' => $this->createMediaQuery('landscape', $previousSize, $size, (bool) !($index === $totalSizes - 1)),
+              'portrait'  => $this->createMediaQuery('portrait', $previousSize, $size, (bool) !($index === $totalSizes - 1)),
+            ],
             'src' => $this->getUrl()
         ];
 
@@ -202,5 +198,24 @@ class Image implements ImageInterface {
     }
 
     return $return;
+  }
+
+  /**
+   * Create a media query
+   * 
+   * @param string $mode            If the query is intended for landscape or portrait
+   * @param int $previousSize       The previous size
+   * @param int $size               The current size
+   * @param bool $includeMaxWidth   If the max-width should be included
+   * 
+   * @return string
+   */
+  private function createMediaQuery($mode, $previousSize, $size, $includeMaxWidth = true): string
+  {
+    $queryDimension = ($mode == 'landscape') ? 'width' : 'height';
+    if ($includeMaxWidth) {
+      return sprintf("(min-%s: %spx) and (max-%s: %spx)", $queryDimension, $previousSize, $queryDimension, $size);
+    }
+    return sprintf("(min-%s: %spx)", $queryDimension, $previousSize);
   }
 }
