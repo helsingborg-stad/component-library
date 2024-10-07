@@ -210,23 +210,18 @@ class Date extends \ComponentLibrary\Component\BaseController
         }
 
         if(is_null($this->dateRegion)) {
-            throw new \Exception(
-                'Date Component: Date region must be 
-                set to parse complex or native language date strings.'
-            );
+            error_log('Date Component: Date region must be set to parse complex or native language date strings.');
+            return $date;
         }
 
         if(is_null($this->dateTimeZone)) {
-            throw new \Exception(
-                'Date Component: Date timezone must be 
-                set to parse complex or native language date strings.'
-            );
+            error_log('Date Component: Date timezone must be set to parse complex or native language date strings.');
+            return $date;
         }
 
         if(class_exists('IntlDateFormatter') === false) {
-            throw new \Exception(
-                'Date Component: IntlDateFormatter class is not available. Parsing of localized dates is not possible.'
-            );
+            error_log('Date Component: IntlDateFormatter class is not available.');
+            return $date;
         }
 
         // Create the IntlDateFormatter to parse the date string
