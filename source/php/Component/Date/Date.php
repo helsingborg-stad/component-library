@@ -3,6 +3,10 @@
 namespace ComponentLibrary\Component\Date;
 
 use ComponentLibrary\Helper\Date as DateHelper;
+use IntlDateFormatter;
+use Locale;
+use DateTime;
+use ResourceBundle;
 
 /**
  * Class Date
@@ -10,39 +14,118 @@ use ComponentLibrary\Helper\Date as DateHelper;
  */
 class Date extends \ComponentLibrary\Component\BaseController
 {
+    private string $dateFormat = 'D d M Y';
+    private ?string $dateRegion = null; 
+    private ?string $dateTimeZone = null;
+    private ?int $currentTime = null;
+
     public function init()
     {
-        $timestamp  = strtotime($this->sanitizeTime($this->data['timestamp']));
-        $action     = $this->data['action'];
-        $format     = $this->data['format'] ?? 'D d M Y';
+        //Setters 
+        $this->setCurrentTime();
+        $this->setDateFormat($this->data['format']);
+        $this->setDateRegion($this->data['region']);
+        $this->setDateTimezone($this->data['timezone']); 
 
-        switch ($action) {
+        //Parse the timestamp, and return a unix timestamp
+        $timestamp  = $this->strToTime($this->data['timestamp']);
+
+        //Handle the action
+        switch ($this->data['action']) {
             case "timesince":
                 $this->handleTimeSince($timestamp);
                 break;
 
             case "formatDate":
-                $this->handleFormatDate($timestamp, $format);
+                $this->handleFormatDate($timestamp, $this->dateFormat);
                 break;
 
             default:
-                $this->handleFormatDate($timestamp, $format);
+                $this->handleFormatDate($timestamp, $this->dateFormat);
                 break;
         }
-        $this->setTooltipDate($action, $timestamp, $format);
+
+        //Set tooltip date
+        $this->setTooltipDate(
+            $this->data['action'], 
+            $timestamp, 
+            $this->dateFormat
+        );
+
+        //Set meta date
         $this->setMetaDate($timestamp);
     }
 
     /**
-     * Sanitizes the given time string.
-     * Removes any commas from the time string.
-     * 
-     * @param string $time  Readable time string
-     * @return string       Sanitized readable time string
+     * Sets the current time for the component.
      */
-    private function sanitizeTime($time)
+    private function setCurrentTime()
     {
-        return str_replace(',', '', $time);
+        $this->currentTime = time();
+    }
+
+    /**
+     * Sets the date format for formatting.
+     * 
+     * @param string $format  Date format
+     * @return bool           True if the format was set, false otherwise
+     */
+    private function setDateFormat($format)
+    {
+        if($format) {
+            $this->dateFormat = $format;
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Sets the date region for formatting.
+     * 
+     * @param string $region  Region code
+     * @return bool           True if the region was set, false otherwise
+     */
+    private function setDateRegion($region)
+    {
+        if($region && $this->isValidDateRegion($region)) {
+            $this->dateRegion = $region;
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Checks if the given region is a valid timezone region.
+     * 
+     * @param string $region  Region code
+     * @return bool           True if the region is valid, false otherwise
+     */
+    private function isValidDateRegion($region) : bool
+    {
+        $validRegion = in_array($region, ResourceBundle::getLocales('')) ? true : false;
+
+        if(!$validRegion) {
+            throw new \Exception(
+                'Date Component: The region code provided is not valid, please provide a valid region code.'
+            );
+        }
+
+        return $validRegion;
+    }
+
+    /**
+     * Sets the timezone for formatting.
+     * 
+     * @param string $timezone  Timezone
+     * @return bool             True if the timezone was set, false otherwise
+     */
+    private function setDateTimezone($timezone)
+    {
+        if($timezone) {
+            $this->dateTimeZone = $timezone;
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -58,7 +141,7 @@ class Date extends \ComponentLibrary\Component\BaseController
      */
     private function handleTimeSince($timestamp)
     {
-        $timeDiff   = time() - $timestamp;
+        $timeDiff   = $this->currentTime - $timestamp;
         $timeNowCap = $this->data['timeNowCap'] ?? 3600;  // Default cap to 1 hour
         $nowLabel   = $this->data['nowLabel'] ?? 'Just now';
 
@@ -112,7 +195,7 @@ class Date extends \ComponentLibrary\Component\BaseController
      */
     private function convertToHumanReadableUnit($timestamp, $timeSince = false, $labels = [], $labelsPlural = [])
     {
-        $timeDiff = $timeSince ? time() - $timestamp : $timestamp - time();
+        $timeDiff = $timeSince ? $this->currentTime - $timestamp : $timestamp - $this->currentTime;
         $timeDiff = max($timeDiff, 1);  // Avoid negative or zero
 
         $units = [
@@ -129,5 +212,46 @@ class Date extends \ComponentLibrary\Component\BaseController
         }
 
         return 'just now';  // Default fallback
+    }
+
+    /**
+     * Converts a date string into a timestamp.
+     * 
+     * @param string $date  Date string
+     * @return int|false    Timestamp if the date string was valid, false otherwise
+     * 
+     * @see https://www.php.net/manual/en/datetime.formats.date.php
+     */
+    private function strToTime($date)
+    {
+        // Try to parse the date string, in a simple way
+        $parsedDateTime = strtotime($date); 
+        if ($parsedDateTime !== false) {
+            return $parsedDateTime;
+        }
+
+        // Warning, required params
+        if(is_null($this->dateRegion) || is_null($this->dateTimeZone)) {
+            throw new \Exception(
+                'Date Component: Date region and timezone must be 
+                set to parse complex or native language date strings.'
+            );
+        }
+
+        // Create the IntlDateFormatter to parse the date string
+        $formatter = new IntlDateFormatter(
+            $this->dateRegion,
+            IntlDateFormatter::LONG,    // Full date format (includes month names)
+            IntlDateFormatter::NONE,    // Ignore time for now
+            $this->dateTimeZone,         // Timezone
+            IntlDateFormatter::GREGORIAN,
+            "d MMMM, yyyy H:mm"         // Format with day, month name, year, and time
+        );
+        $parsedDateTime = $formatter->parse($date);
+        if ($parsedDateTime !== false) {
+            return $parsedDateTime;
+        }
+
+        return false;
     }
 }
