@@ -6,6 +6,7 @@ use ComponentLibrary\Helper\Date as DateHelper;
 use IntlDateFormatter;
 use Locale;
 use DateTime;
+use ResourceBundle;
 
 /**
  * Class Date
@@ -76,11 +77,30 @@ class Date extends \ComponentLibrary\Component\BaseController
      */
     private function setDateRegion($region)
     {
-        if($region) {
+        if($region && $this->isValidDateRegion($region)) {
             $this->dateRegion = $region;
             return true;
         }
         return false;
+    }
+
+    /**
+     * Checks if the given region is a valid timezone region.
+     * 
+     * @param string $region  Region code
+     * @return bool           True if the region is valid, false otherwise
+     */
+    private function isValidDateRegion($region) : bool
+    {
+        $validRegion = in_array($region, ResourceBundle::getLocales('')) ? true : false;
+
+        if(!$validRegion) {
+            throw new \Exception(
+                'Date Component: The region code provided is not valid, please provide a valid region code.'
+            );
+        }
+
+        return $validRegion;
     }
 
     /**
