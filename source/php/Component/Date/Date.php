@@ -3,6 +3,8 @@
 namespace ComponentLibrary\Component\Date;
 
 use ComponentLibrary\Helper\Date as DateHelper;
+use IntlDateFormatter;
+use Locale;
 
 /**
  * Class Date
@@ -10,27 +12,71 @@ use ComponentLibrary\Helper\Date as DateHelper;
  */
 class Date extends \ComponentLibrary\Component\BaseController
 {
+    private string $dateFormat = 'D d M Y';
+    private ?string $dateRegion = null;
+
     public function init()
     {
-        $timestamp  = strtotime($this->sanitizeTime($this->data['timestamp']));
-        $action     = $this->data['action'];
-        $format     = $this->data['format'] ?? 'D d M Y';
+        $timestamp  = $this->strToTime($this->data['timestamp']);
 
-        switch ($action) {
+        //Setters 
+        $this->setDateFormat($this->data['format']);
+        $this->setDateRegion($this->data['region']);
+
+        //Handle the action
+        switch ($this->data['action']) {
             case "timesince":
                 $this->handleTimeSince($timestamp);
                 break;
 
             case "formatDate":
-                $this->handleFormatDate($timestamp, $format);
+                $this->handleFormatDate($timestamp, $this->dateFormat);
                 break;
 
             default:
-                $this->handleFormatDate($timestamp, $format);
+                $this->handleFormatDate($timestamp, $this->dateFormat);
                 break;
         }
-        $this->setTooltipDate($action, $timestamp, $format);
+
+        //Set tooltip date
+        $this->setTooltipDate(
+            $this->data['action'], 
+            $timestamp, 
+            $this->dateFormat
+        );
+
+        //Set meta date
         $this->setMetaDate($timestamp);
+    }
+
+    /**
+     * Sets the date format for formatting.
+     * 
+     * @param string $format  Date format
+     * @return bool           True if the format was set, false otherwise
+     */
+    private function setDateFormat($format)
+    {
+        if($format) {
+            $this->dateFormat = $format;
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Sets the date region for formatting.
+     * 
+     * @param string $region  Region code
+     * @return bool           True if the region was set, false otherwise
+     */
+    private function setDateRegion($region)
+    {
+        if($region) {
+            $this->dateRegion = $region;
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -129,5 +175,37 @@ class Date extends \ComponentLibrary\Component\BaseController
         }
 
         return 'just now';  // Default fallback
+    }
+
+    /**
+     * Converts a date string into a timestamp.
+     * 
+     * @param string $date  Date string
+     * @return int|false    Timestamp if the date string was valid, false otherwise
+     * 
+     * @see https://www.php.net/manual/en/datetime.formats.date.php
+     */
+    private function strToTime($date)
+    {
+        // Try to parse the date string, in a simple way
+        $parsedDateTime = strtotime($date); 
+        if ($parsedDateTime !== false) {
+            return $parsedDateTime;
+        }
+
+        // Try to parse the date string, in a more complex way
+        $formatter = new IntlDateFormatter(
+            $this->dateRegion ?? substr(Locale::getDefault(), 0, 5),
+            IntlDateFormatter::LONG, 
+            IntlDateFormatter::NONE
+        );
+        $formatter->setPattern($this->dateFormat);
+        $parsedDateTime = $formatter->parse($date);
+
+        if ($parsedDateTime !== false) {
+            return $parsedDateTime;
+        }
+
+        return false;
     }
 }
