@@ -17,6 +17,7 @@ class Date extends \ComponentLibrary\Component\BaseController
 
     public function init()
     {
+        //Parse the timestamp, and return a unix timestamp
         $timestamp  = $this->strToTime($this->data['timestamp']);
 
         //Setters 
