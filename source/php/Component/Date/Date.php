@@ -15,12 +15,14 @@ use ResourceBundle;
 class Date extends \ComponentLibrary\Component\BaseController
 {
     private string $dateFormat = 'D d M Y';
-    private ?string $dateRegion = null;
+    private ?string $dateRegion = null; 
     private ?string $dateTimeZone = null;
+    private ?int $currentTime = null;
 
     public function init()
     {
         //Setters 
+        $this->setCurrentTime();
         $this->setDateFormat($this->data['format']);
         $this->setDateRegion($this->data['region']);
         $this->setDateTimezone($this->data['timezone']); 
@@ -52,6 +54,14 @@ class Date extends \ComponentLibrary\Component\BaseController
 
         //Set meta date
         $this->setMetaDate($timestamp);
+    }
+
+    /**
+     * Sets the current time for the component.
+     */
+    private function setCurrentTime()
+    {
+        $this->currentTime = time();
     }
 
     /**
@@ -131,7 +141,7 @@ class Date extends \ComponentLibrary\Component\BaseController
      */
     private function handleTimeSince($timestamp)
     {
-        $timeDiff   = time() - $timestamp;
+        $timeDiff   = $this->currentTime - $timestamp;
         $timeNowCap = $this->data['timeNowCap'] ?? 3600;  // Default cap to 1 hour
         $nowLabel   = $this->data['nowLabel'] ?? 'Just now';
 
@@ -185,7 +195,7 @@ class Date extends \ComponentLibrary\Component\BaseController
      */
     private function convertToHumanReadableUnit($timestamp, $timeSince = false, $labels = [], $labelsPlural = [])
     {
-        $timeDiff = $timeSince ? time() - $timestamp : $timestamp - time();
+        $timeDiff = $timeSince ? $this->currentTime - $timestamp : $timestamp - $this->currentTime;
         $timeDiff = max($timeDiff, 1);  // Avoid negative or zero
 
         $units = [
