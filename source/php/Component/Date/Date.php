@@ -4,8 +4,6 @@ namespace ComponentLibrary\Component\Date;
 
 use ComponentLibrary\Helper\Date as DateHelper;
 use IntlDateFormatter;
-use Locale;
-use DateTime;
 use ResourceBundle;
 
 /**
@@ -87,30 +85,11 @@ class Date extends \ComponentLibrary\Component\BaseController
      */
     private function setDateRegion($region)
     {
-        if($region && $this->isValidDateRegion($region)) {
+        if($region) {
             $this->dateRegion = $region;
             return true;
         }
         return false;
-    }
-
-    /**
-     * Checks if the given region is a valid timezone region.
-     * 
-     * @param string $region  Region code
-     * @return bool           True if the region is valid, false otherwise
-     */
-    private function isValidDateRegion($region) : bool
-    {
-        $validRegion = in_array($region, ResourceBundle::getLocales('')) ? true : false;
-
-        if(!$validRegion) {
-            throw new \Exception(
-                'Date Component: The region code provided is not valid, please provide a valid region code.'
-            );
-        }
-
-        return $validRegion;
     }
 
     /**
@@ -230,11 +209,23 @@ class Date extends \ComponentLibrary\Component\BaseController
             return $parsedDateTime;
         }
 
-        // Warning, required params
-        if(is_null($this->dateRegion) || is_null($this->dateTimeZone)) {
+        if(is_null($this->dateRegion)) {
             throw new \Exception(
-                'Date Component: Date region and timezone must be 
+                'Date Component: Date region must be 
                 set to parse complex or native language date strings.'
+            );
+        }
+
+        if(is_null($this->dateTimeZone)) {
+            throw new \Exception(
+                'Date Component: Date timezone must be 
+                set to parse complex or native language date strings.'
+            );
+        }
+
+        if(class_exists('IntlDateFormatter') === false) {
+            throw new \Exception(
+                'Date Component: IntlDateFormatter class is not available. Parsing of localized dates is not possible.'
             );
         }
 
