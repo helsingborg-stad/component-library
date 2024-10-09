@@ -111,8 +111,8 @@ class Segment extends \ComponentLibrary\Component\BaseController
         }
 
         // Handle has image
-        $this->data['hasImage'] = $this->hasImage($image);
-        if(!$this->data['hasImage']) {
+        $this->data['hasImage'] = $hasImage = $this->hasImage($image);
+        if(!$hasImage && !$hasPlaceholder) {
             $this->data['classList'][] = $this->getBaseClass('no-image', true);
         }
     }
