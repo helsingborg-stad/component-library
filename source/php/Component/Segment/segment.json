@@ -22,7 +22,7 @@
         "tags": false,
         "icon": false,
         "link": false,
-        "hasPlaceholder": false,
+        "hasPlaceholder": true,
         "lang": {
             "visit": "Visit"
         }
