@@ -6,7 +6,7 @@
         </div>
     @endif
     @includeWhen(
-        $hasImage && $hasPlaceholder, 
+        $hasImage || ($hasPlaceholder && !$hasImage), 
         'Segment.components.image'
     )
     @include('Segment.partials.' . $layout)
