@@ -15,7 +15,7 @@
                 @typography([
                     'element' => 'h2',
                     'variant' => $layout == 'full-width' ? 'h1' : ($layout == 'card' ? 'h3' : 'h2'),
-                    'classList' => [$baseClass . '__title', 'u-margin__bottom--1'],
+                    'classList' => [$baseClass . '__title', 'u-margin__bottom--1', 'u-margin__top--0'],
                     'autopromote' => true
                 ])
                     @link([
