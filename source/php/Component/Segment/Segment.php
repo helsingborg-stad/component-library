@@ -102,11 +102,6 @@ class Segment extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = 'c-segment' . '--has-overlay';
         }
 
-        //Add image to image styles
-        if (!$image) {
-            $this->data['classList'][] = $this->getBaseClass('no-image', true);
-        }
-
         if (!empty($contentAlignment)) {
             $this->data['classList'][] =  $this->getBaseClass() . '--content-' . $contentAlignment;
         }
@@ -119,5 +114,28 @@ class Segment extends \ComponentLibrary\Component\BaseController
                 $this->data['classList'][] = 'u-color__bg--' . $background;
             }
         }
+
+        // Handle has image
+        $this->data['hasImage'] = $this->hasImage($image);
+        if(!$this->data['hasImage']) {
+            $this->data['classList'][] = $this->getBaseClass('no-image', true);
+        }
+    }
+
+    /**
+     * Check if the image is set
+     * 
+     * @param mixed $image
+     * 
+     * @return bool
+     */
+    private function hasImage($image)
+    {
+        if(is_a($image, 'ComponentLibrary\Integrations\Image\Image')) {
+            return !empty($image->getUrl());
+        }elseif(is_string($image)) {
+            return !empty($image);
+        }
+        return false;
     }
 }
