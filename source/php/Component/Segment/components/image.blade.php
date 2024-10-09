@@ -10,7 +10,7 @@
     @image([
         'src' => $image,
         'alt' => $imageAlt ?? null,
-        'classList' => $imageClassList ?? [],
+        'classList' => $imageClassList ?? []
     ])
     @endimage
 @endlink
