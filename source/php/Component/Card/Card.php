@@ -87,6 +87,7 @@ class Card extends \ComponentLibrary\Component\BaseController
 
         $this->data['contentHtmlElement'] = $this->getContentHTMLElement($content);
     }
+    
 
     /**
      * Get the type of content wrapper that should be used
