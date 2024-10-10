@@ -8,36 +8,41 @@ class Image extends \ComponentLibrary\Component\BaseController
 {
     public function init()
     {
-        // Extract array for easy access (fetch only)
-        extract($this->data);
-
-        // Handle placeholder class
-        $this->addPlaceholderClass($src);
-
         // Handle image processing
-        if ($src instanceof ImageInterface) {
-            $this->handleImageProcessing($src, $alt, $lqipEnabled);
+        if ($this->data['src'] instanceof ImageInterface) {
+            $this->handleImageProcessing(
+                $this->data['src'],
+                $this->data['alt'],
+                $this->data['lqipEnabled']
+            );
         } else {
             $this->data['containerQueryData'] = null;
         }
 
         // Add srcset to attribute list
-        $this->addSrcsetToAttributes($srcset);
+        $this->addSrcsetToAttributes($this->data['srcset']);
 
         // Handle filetype class
-        $this->handleFileTypeClass($src);
+        $this->handleFileTypeClass($this->data['src']);
 
         // Handle additional classes
-        $this->addAdditionalClasses($fullWidth, $cover, $src);
+        $this->addAdditionalClasses(
+            $this->data['fullWidth'],
+            $this->data['cover'],
+            $this->data['src']
+        );
 
         // Handle alt text
-        $this->setAltText($alt, $caption);
+        $this->setAltText($this->data['alt'], $this->data['caption']);
 
         // Set byline if available
-        $this->setByline($byline);
+        $this->setByline($this->data['byline']);
 
         // Add rounded corners class
-        $this->addRoundedClass($rounded);
+        $this->addRoundedClass($this->data['rounded']);
+
+        // Handle placeholder class
+        $this->addPlaceholderClass($this->data['src']);
 
         // Build img attributes
         $this->data['imgAttributes'] = self::buildAttributes($this->data['imgAttributeList']);
