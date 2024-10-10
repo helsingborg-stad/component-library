@@ -1,7 +1,11 @@
 @if($placeholderEnabled)
   <div class="{{$baseClass}}__placeholder" aria-label="{{$alt}}">
     @if($placeholderIcon)
-        @icon(['icon' => $placeholderIcon, 'size' => $placeholderIconSize])
+        @icon([
+          'icon' => $placeholderIcon, 
+          'size' => $placeholderIconSize,
+          'context' => ['component.image.placeholder.icon']
+        ])
         @endicon
     @endif
     @if($placeholderText)
