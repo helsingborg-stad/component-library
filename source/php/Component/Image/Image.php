@@ -46,6 +46,12 @@ class Image extends \ComponentLibrary\Component\BaseController
 
         // Build img attributes
         $this->data['imgAttributes'] = self::buildAttributes($this->data['imgAttributeList']);
+
+        // Add class if alt-text is missing
+        if (empty($this->data['alt'])) {
+            $this->data['classList'][] = "u-a11y-error";
+            $this->data['attributeList']['data-a11y-error'] = "Alt text is missing";
+        }
     }
 
     private function addPlaceholderClass($src)
