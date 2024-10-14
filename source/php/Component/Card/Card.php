@@ -73,21 +73,27 @@ class Card extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . '--ratio-' . str_replace(":", "-", $ratio);
         }
 
-        //Determine if the card has an image
-        $this->data['imageExists'] = true;
-        if(is_a($image, 'ComponentLibrary\Integrations\Image\Image')) {
-            if(empty($image->getUrl())) {
-                $this->data['imageExists'] = false;
-            }
-        } elseif(is_array($image)) {
-            if ($image && !isset($image['src']) || (isset($image['src']) && empty($image['src']))) {
-                $this->data['imageExists'] = false;
-            }
-        }
+        $this->data['imageExists'] = $this->hasImage($image);
 
         $this->data['contentHtmlElement'] = $this->getContentHTMLElement($content);
     }
     
+    /**
+     * Check if the image is set
+     * 
+     * @param mixed $image
+     * 
+     * @return bool
+     */
+    private function hasImage($image) {
+        if (is_a($image, 'ComponentLibrary\Integrations\Image\Image')) {
+            return !empty($image->getUrl());
+        }
+        if (is_array($image)) {
+            return !empty($image['src']);
+        }
+        return !empty($image);
+    }
 
     /**
      * Get the type of content wrapper that should be used
