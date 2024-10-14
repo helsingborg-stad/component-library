@@ -88,7 +88,7 @@ class Drawer extends \ComponentLibrary\Component\BaseController
         } 
 
         $toggleButtonData['attributeList']['data-js-toggle-trigger'] = 'drawer-' . $this->getUid();
-        $toggleButtonData['attributeList']['aria-controls'] = 'navigation';
+        $toggleButtonData['attributeList']['aria-controls'] = 'drawer';
         $toggleButtonData['classList'] = array_merge($screenSizeClassNames, $toggleButtonData['classList'] ?? []);
         $toggleButtonData['classList'][] = $this->getBaseClass('toggle');
 
