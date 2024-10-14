@@ -49,7 +49,6 @@ class Image extends \ComponentLibrary\Component\BaseController
 
         // Add class if alt-text is missing
         if (empty($this->data['alt'])) {
-            $this->data['classList'][] = "u-a11y-error";
             $this->data['attributeList']['data-a11y-error'] = "Alt text is missing";
         }
     }
