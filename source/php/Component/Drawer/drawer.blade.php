@@ -10,7 +10,7 @@
             'style' => 'basic',
             'icon' => 'close',
             'attributeList' => [
-                'aria-controls' => 'navigation',
+                'aria-controls' => 'drawer',
                 'data-simulate-click' => $simulateClickSelector
             ],
             'classList' => [
