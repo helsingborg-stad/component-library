@@ -81,9 +81,29 @@ class Image extends \ComponentLibrary\Component\BaseController
 
         $this->data['classList'][] = $this->getBaseClass('container-query', true);
 
+        $aspectRatio = $this->resolveAspectRatioFromContainerQueryData($this->data['containerQueryData']);
+        if($aspectRatio) {
+            if (!isset($this->data['attributeList']['style'])) {
+                $this->data['attributeList']['style'] = "";
+            }
+            $this->data['attributeList']['style'] .= "aspect-ratio: " . $aspectRatio . ";";
+        }
+
         if ($lqipEnabled && $src->getLqipUrl()) {
             $this->addLowResolutionPlaceholder($src);
         }
+    }
+
+    private function resolveAspectRatioFromContainerQueryData($containerQueryData): ?string
+    {
+        if (is_array($containerQueryData) && !empty($containerQueryData)) {
+            foreach ($containerQueryData as $data) {
+                if (isset($data['aspectRatio']) && !is_null($data['aspectRatio'])) {
+                    return $data['aspectRatio'];
+                }
+            }
+        }
+        return null;
     }
 
     private function addLowResolutionPlaceholder(ImageInterface $src)

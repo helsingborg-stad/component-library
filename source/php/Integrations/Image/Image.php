@@ -190,7 +190,9 @@ class Image implements ImageInterface {
               'landscape' => $this->createMediaQuery('landscape', $previousSize, $size, (bool) !($index === $totalSizes - 1)),
               'portrait'  => $this->createMediaQuery('portrait', $previousSize, $size, (bool) !($index === $totalSizes - 1)),
             ],
-            'src' => $this->getUrl()
+            'src' => $this->getUrl(),
+            'imageSize' => [$size, $this->scaledHeight($size)],
+            'aspectRatio' => $this->scaledHeight($size) == 0 ? null : implode('/', [$size, $this->scaledHeight($size)]),
         ];
 
         // Update $previousSize for the next iteration
