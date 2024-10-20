@@ -192,7 +192,13 @@ class Image implements ImageInterface {
             ],
             'src' => $this->getUrl(),
             'imageSize' => [$size, $this->scaledHeight($size)],
-            'aspectRatio' => $this->scaledHeight($size) == 0 ? null : implode('/', [$size, $this->scaledHeight($size)]),
+            'aspectRatio' => $this->getAspectRatioFromQuery(
+              $size, 
+              $this->resolver->getImageUrl(
+                $this->imageId,
+                [$size, $this->scaledHeight($size)]
+              )
+            ),
         ];
 
         // Update $previousSize for the next iteration
@@ -200,6 +206,35 @@ class Image implements ImageInterface {
     }
 
     return $return;
+  }
+
+  /**
+   * Get the aspect ratio from the query
+   * 
+   * @param int $size
+   * @param string $url
+   * 
+   * @return string
+   */
+  private function getAspectRatioFromQuery($size, $url): ?string {
+
+    //Get image size from size param
+    if($this->scaledHeight($size)) {
+      return implode('/', [$size, $this->scaledHeight($size)]);
+    }
+
+    // Get all image sizes from the URL
+    preg_match_all('/(\d{2,4})x(\d{2,4})/', $url, $matches);
+
+    // Ensure we have matches and use the last match found
+    if (!empty($matches) && count($matches[0]) > 0) {
+      $lastIndex = count($matches[1]) - 1; // Get the index of the last match
+      if(isset($matches[1][$lastIndex]) && isset($matches[2][$lastIndex])) {
+        return implode('/', [$matches[1][$lastIndex], $matches[2][$lastIndex]]);
+      }
+    }
+
+    return null;
   }
 
   /**
