@@ -81,12 +81,15 @@ class Image extends \ComponentLibrary\Component\BaseController
 
         $this->data['classList'][] = $this->getBaseClass('container-query', true);
 
-        $aspectRatio = $this->resolveAspectRatioFromContainerQueryData($this->data['containerQueryData']);
-        if($aspectRatio) {
-            if (!isset($this->data['attributeList']['style'])) {
-                $this->data['attributeList']['style'] = "";
+        //Add aspect ratio, if not in cover mode.
+        if(!$this->data['cover']) {
+            $aspectRatio = $this->resolveAspectRatioFromContainerQueryData($this->data['containerQueryData']);
+            if($aspectRatio) {
+                if (!isset($this->data['attributeList']['style'])) {
+                    $this->data['attributeList']['style'] = "";
+                }
+                $this->data['attributeList']['style'] .= "aspect-ratio: " . $aspectRatio . ";";
             }
-            $this->data['attributeList']['style'] .= "aspect-ratio: " . $aspectRatio . ";";
         }
 
         if ($lqipEnabled && $src->getLqipUrl()) {
