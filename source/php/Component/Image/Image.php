@@ -81,8 +81,8 @@ class Image extends \ComponentLibrary\Component\BaseController
 
         $this->data['classList'][] = $this->getBaseClass('container-query', true);
 
-        //Add aspect ratio, if not in cover mode.
-        if(!$this->data['cover']) {
+        //Add aspect ratio, if not in cover mode or calculateAspectRatio is false.
+        if(!$this->data['cover'] && $this->data['calculateAspectRatio']) {
             $aspectRatio = $this->resolveAspectRatioFromContainerQueryData($this->data['containerQueryData']);
             if($aspectRatio) {
                 if (!isset($this->data['attributeList']['style'])) {

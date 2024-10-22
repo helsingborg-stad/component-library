@@ -15,7 +15,8 @@
         "placeholderIcon": "broken_image",
         "placeholderIconSize": "xxl",
         "imgAttributeList": [],
-        "lqipEnabled": true
+        "lqipEnabled": true,
+        "calculateAspectRatio": true
     },
     "description": {
         "src": "A string containing a valid URL or an ImageInterface object. If the object is used, the srcset attribute is ignored.",
@@ -32,7 +33,8 @@
         "placeholderIcon": "Icon to display if image is missing / false to hide",
         "placeholderIconSize": "Icons size, please refer to image component for size.",
         "imgAttributeList": "Attributes for the img element.",
-        "lqipEnabled": "If the low quality image placeholder should be enabled."
+        "lqipEnabled": "If the low quality image placeholder should be enabled.",
+        "calculateAspectRatio": "If the aspect ratio should be calculated based on the image dimensions. This option will be ignored if cover is set to true."
     },
     "types": {
         "src": "boolean|string|ImageInterface",
@@ -49,7 +51,8 @@
         "placeholderIcon": "string",
         "placeholderIconSize": "string",
         "imgAttributeList": "array",
-        "lqipEnabled": "boolean"
+        "lqipEnabled": "boolean",
+        "calculateAspectRatio": "boolean"
     },
     "view": "image.blade.php",
     "dependency": {
