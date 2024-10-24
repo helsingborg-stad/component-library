@@ -1,3 +1,5 @@
-<{{ $componentElement }} class="{{ $class }}" {!! $attribute !!}>
-    {{ $slot }}
-</{{ $componentElement }}>
+@if ($slotHasData || !$hideIfNoContent)
+    <{{ $componentElement }} class="{{ $class }}" {!! $attribute !!}>
+        {{ $slot }}
+    </{{ $componentElement }}>
+@endif
