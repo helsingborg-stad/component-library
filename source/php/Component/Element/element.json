@@ -1,0 +1,20 @@
+{
+    "slug": "element",
+    "default": {
+        "componentElement": "div"
+    },
+    "description": {
+        "componentElement": "The tag to use for this component."
+    }, 
+    "types":{
+        "componentElement": "string"
+    },
+    "view": "element.blade.php",
+    "dependency": {
+        "sass": {
+            "components": [
+                "element"
+            ]
+        }
+    }
+}
