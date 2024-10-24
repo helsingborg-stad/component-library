@@ -1,3 +1,3 @@
-<{{ $componentElement }} id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
+<{{ $componentElement }} class="{{ $class }}" {!! $attribute !!}>
     {{ $slot }}
 </{{ $componentElement }}>
