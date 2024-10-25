@@ -20,8 +20,7 @@
       "classListIcon": [],
       "classListText": [],
       "ariaLabel": "",
-      "disableColor": true,
-      "loader": false
+      "disableColor": true
    },
    "description":{
       "label":"The label of the button.",
@@ -43,8 +42,7 @@
       "classListIcon": "Array of classes placed on the icon",
       "classListText": "Array of classes placed on the text",
       "ariaLabel": "Aria label text for the button",
-      "disableColor": "To use or not to use the disabled color even if the button is disabled",
-      "loader": "Adds a spinner to the button that can is triggered when button contains the is-working class."
+      "disableColor": "To use or not to use the disabled color even if the button is disabled"
    },
    "types": {
     "text": "string",

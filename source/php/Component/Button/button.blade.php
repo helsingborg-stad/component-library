@@ -1,6 +1,6 @@
 <{{$componentElement}} class="{{ $class }}" target="{{ $target }}" {!! $attribute !!}>   
     @if(!$isLabel) <{{$labelElement}} class="{{$baseClass}}__label"> @endif
-        @if ($loader)
+        @if ($type === 'submit' || $type === 'button')
             <span class="{{$baseClass}}__loader"></span>
         @endif
         @if($icon)
