@@ -1,6 +1,6 @@
 <{{$componentElement}} class="{{ $class }}" target="{{ $target }}" {!! $attribute !!}>   
     @if(!$isLabel) <{{$labelElement}} class="{{$baseClass}}__label"> @endif
-        
+        <span class="{{$baseClass}}__loader"></span>
         @if($icon)
             <span class="{{$baseClass}}__label-icon {{ $classListIcon }}">
                 @icon(['icon' => $icon, 'size' => $size, 'attributeList' => ['aria-hidden' => 'true']])
