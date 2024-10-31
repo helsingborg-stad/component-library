@@ -1,0 +1,52 @@
+{
+    "slug": "newsItem",
+    "default": {
+        "heading": null,
+        "subHeading": null,
+        "content": null,
+        "image": null,
+        "date": null,
+        "readTime": null,
+        "standing": false,
+        "floatingArea": null
+    },
+    "description":{
+        "heading": "Title of the item.",
+        "subHeading": "Subheading of the item.",
+        "content": "Content of the item.",
+        "image": "Image of the item, check @image for documentation.",
+        "date": "Date of the item.",
+        "readTime": "Read time of the item.",
+        "standing": "If the item will be appearing standing or laying down.",
+        "floatingArea": "Content that will be floating on the right side of the item."
+    },
+    "types": {
+        "heading": "string",
+        "subHeading": "string",
+        "content": "string",
+        "image": "array",
+        "date": "string",
+        "readTime": "string",
+        "standing": "boolean",
+        "headerRightArea": "mixed",
+        "headerLeftArea": "mixed",
+        "titleLeftArea": "mixed",
+        "titleRightArea": "mixed",
+        "contentLeftArea": "mixed",
+        "contentRightArea": "mixed"
+    },
+    "view": "newsItem.blade.php",
+    "dependency": {
+        "sass": {
+            "components": [
+                "element",
+                "image",
+                "group",
+                "button",
+                "icon",
+                "grid",
+                "typography"
+            ]
+        }
+    }
+}

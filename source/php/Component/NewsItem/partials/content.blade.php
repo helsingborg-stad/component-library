@@ -1,0 +1,4 @@
+@typography([
+])
+    {{ $content }}
+@endtypography
