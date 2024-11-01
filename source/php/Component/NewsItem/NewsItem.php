@@ -32,5 +32,12 @@ class NewsItem extends \ComponentLibrary\Component\BaseController
         if ($standing) {
             $this->data['classList'][] = $this->getBaseClass('standing', true);
         }
+
+        if ($link) {
+            $this->data['componentElement'] = "a";
+            $this->data['attributeList']['href'] = $link;
+        } else {
+            $this->data['componentElement'] = "div";
+        }
     }
 }

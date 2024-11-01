@@ -8,7 +8,8 @@
         "date": null,
         "readTime": null,
         "standing": false,
-        "floatingArea": null
+        "floatingArea": null,
+        "link": null
     },
     "description":{
         "heading": "Title of the item.",
@@ -18,7 +19,7 @@
         "date": "Date of the item.",
         "readTime": "Read time of the item.",
         "standing": "If the item will be appearing standing or laying down.",
-        "floatingArea": "Content that will be floating on the right side of the item."
+        "link": "Link to the item."
     },
     "types": {
         "heading": "string",
@@ -28,6 +29,7 @@
         "date": "string",
         "readTime": "string",
         "standing": "boolean",
+        "link": "string",
         "headerRightArea": "mixed",
         "headerLeftArea": "mixed",
         "titleLeftArea": "mixed",
