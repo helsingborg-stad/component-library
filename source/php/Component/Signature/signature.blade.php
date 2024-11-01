@@ -1,16 +1,17 @@
 <{{$componentElement}} class="{{$class}}" {!! $attribute !!}>
     
     @if($author)
-        @avatar([
-            'image' => ($avatar) ? $avatar : false,
-            'name' => $author,
-            'size' => $avatar_size,
-            "classList" => [
-                $baseClass.'__avatar'
-            ]
-        ])
-        @endavatar
-
+        @if ($avatar || $placeholderAvatar)
+            @avatar([
+                'image' => ($avatar) ? $avatar : false,
+                'name' => $author,
+                'size' => $avatar_size,
+                "classList" => [
+                    $baseClass.'__avatar'
+                ]
+            ])
+            @endavatar
+        @endif
         <div class="{{$baseClass}}__author-box">
             <div>
                 @typography([
