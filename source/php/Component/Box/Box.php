@@ -2,6 +2,8 @@
 
 namespace ComponentLibrary\Component\Box;
 
+use ComponentLibrary\Integrations\Image\ImageInterface;
+
 /**
  * Class Box
  * @package ComponentLibrary\Component\Box
@@ -42,13 +44,22 @@ class Box extends \ComponentLibrary\Component\BaseController
         $this->data['classList'][] = $this->getBaseClass() . '--ratio-' . str_replace(":", "-", $ratio);
     }
 
+    private function hasImage():bool
+    {
+        return match (true) {
+            $this->data['image'] instanceof ImageInterface => true,
+            is_array($this->data['image']) && empty($this->data['image']['src']) => true,
+            default => false,
+        };
+    }
+
     /**
      * renderMostImportant
      */
     public function renderMostImportant()
     {
         //Reset icon if image set
-        if ($this->data['image']['src'] ?? false) {
+        if($this->hasImage()) {
             $this->data['icon'] = null;
         } else {
             $this->data['image'] = null;

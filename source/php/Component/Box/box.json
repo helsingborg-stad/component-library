@@ -8,7 +8,7 @@
         "link": "",
         "ratio": "1:1",
         "date": "",
-        "image": [],
+        "image": false,
         "icon": ""
     },
     "description": {
@@ -22,7 +22,7 @@
         "image": "Image object (see image component), svg or raster image.",
         "icon": "Icon name as a string."
     },
-    "types":{
+    "types": {
         "heading": "string",
         "content": "string",
         "meta": "string|array",
@@ -30,7 +30,7 @@
         "link": "string",
         "ratio": "string",
         "date": "string",
-        "image": "array|object",
+        "image": "array|boolean|ImageInterface",
         "icon": "string"
     },
     "view": "box.blade.php",
