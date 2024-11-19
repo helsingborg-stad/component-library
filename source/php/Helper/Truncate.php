@@ -9,6 +9,10 @@ class Truncate {
             return $content;
         }
 
+        if (function_exists('mb_substr')) {
+            return mb_substr($content, 0, $length) . $suffix;
+        }
+
         return substr($content, 0, $length) . $suffix;
     }
 }
