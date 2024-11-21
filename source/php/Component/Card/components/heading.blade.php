@@ -1,4 +1,5 @@
 @group([
+    'classList' => [$baseClass."__heading-container"],
     'justifyContent' => 'space-between',
     'alignItems' => 'center',
 ])

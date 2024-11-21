@@ -1,4 +1,5 @@
 <div class="{{$baseClass}}__body">
+    @includeWhen($dateBadge && $date, 'Card.components.datebadge')
     @if($floatingSlotHasData)
         <div class="{{$baseClass}}__floating">
             {!! $floating !!}
