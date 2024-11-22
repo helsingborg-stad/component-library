@@ -4,7 +4,7 @@
     @endbutton
 @endif
 
-<nav class="c-drawer c-drawer--right c-drawer--primary js-drawer {{$class}}" {!! $attribute !!}>
+<nav class="c-drawer c-drawer--right js-drawer {{$class}}" {!! $attribute !!}>
     <div class="c-drawer__header">
         @button([
             'style' => 'basic',
