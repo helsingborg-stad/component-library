@@ -216,7 +216,7 @@ class Register
                         . $argsTypes->{$key} . '"</b> but was received as type <b>"' . $valueTypeDisplay . '"</b>.'
                     );
                 }
-            } elseif (!in_array($key, ['__laravel_slots', 'slot', 'id', 'classList', 'context', 'attributeList'])) {
+            } elseif (!in_array($key, ['__laravel_slots', 'slot', 'id', 'classList', 'context', 'attributeList', 'baseClass'])) {
                 $this->triggerError(
                     'The parameter <b>"' . $key . '"</b> is not recognized in the component <b>"' . $componentSlug . '"</b>'
                 );
