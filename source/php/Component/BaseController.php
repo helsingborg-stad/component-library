@@ -178,7 +178,7 @@ class BaseController
     {
         if (!empty($modifier)) {
             foreach ($modifier as &$value) {
-                if ($value) {
+                if ($value && is_string($value)) {
                     $class[] =  $this->getBaseClass() . '--' . $value;
                 }
             }
