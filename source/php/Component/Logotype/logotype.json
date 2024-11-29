@@ -5,16 +5,14 @@
         "alt": "",
         "caption": "",
         "title": "",
-        "placeholderText": "Image missing",
-        "hasRipple": true
+        "placeholderText": "Image missing"
     },
     "description": {
         "src": "A image source",
         "alt": "Alt text for the image",
         "caption": "A label below the logotype. eg company name",
         "title": "A title (not displayed)",
-        "placeholderText": "What to show if an invalid url is entered.",
-        "hasRipple": "Enable / disable ripple fx"
+        "placeholderText": "What to show if an invalid url is entered."
     },
     "view": "logotype.blade.php",
     "dependency": {
