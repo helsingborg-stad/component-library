@@ -19,5 +19,11 @@ class Logotype extends \ComponentLibrary\Component\BaseController
         if(!$alt && $caption) {
             $this->data['alt'] = $this->data['caption'];
         }
+
+        //Has ripple
+        if($hasRipple) {
+            $this->data['classList'][] = "ripple"; 
+            $this->data['classList'][] = "ripple--before"; 
+        }
     }
 }
