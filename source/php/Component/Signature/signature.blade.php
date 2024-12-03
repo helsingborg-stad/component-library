@@ -34,7 +34,9 @@
                     ])
                         {{$authorRole}}
                     @endtypography
+
                 @endif
+                    {!! $slot !!}
             </div>
         </div>
     @endif
