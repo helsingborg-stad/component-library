@@ -1,5 +1,5 @@
 @typography([
     'classList' => [$baseClass . '__content']
 ])
-    {{ $content }}
+    {!! $content !!}
 @endtypography
