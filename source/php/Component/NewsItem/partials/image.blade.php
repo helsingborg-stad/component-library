@@ -1,8 +1,15 @@
-@image([
-    'src' => is_array($image) ? ($image['src'] ?? null) : $image,
-    'alt' => is_array($image) ? ($image['alt'] ?? null) : null,
+@element([
     'classList' => [
-        $baseClass . '__image'
-    ]
+        $baseClass . '__image-container'
+    ],
 ])
-@endimage
+    @image([
+        'src' => is_array($image) ? ($image['src'] ?? null) : $image,
+        'alt' => is_array($image) ? ($image['alt'] ?? null) : null,
+        'classList' => [
+            $baseClass . '__image'
+        ],
+        'cover' => true
+    ])
+    @endimage
+@endelement
