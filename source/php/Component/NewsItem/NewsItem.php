@@ -25,10 +25,6 @@ class NewsItem extends \ComponentLibrary\Component\BaseController
         $this->data['titleLeftAreaSlotHasData'] = $this->slotHasData('titleLeftArea');
         $this->data['titleRightAreaSlotHasData'] = $this->slotHasData('titleRightArea');
 
-        if ($image) {
-            $this->data['image']['classList'][] = $this->getBaseClass('image');
-        }
-
         if ($standing) {
             $this->data['classList'][] = $this->getBaseClass('standing', true);
         }
