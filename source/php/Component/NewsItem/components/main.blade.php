@@ -1,14 +1,15 @@
-<div class="{{$baseClass}}__main">
-    <div class="{{$baseClass}}__main-left">
-        @includeWhen($content, 'NewsItem.partials.content')
-        @if($contentLeftAreaSlotHasData)
-            {!! $contentLeftArea !!}
-        @endif
-    </div>
+<div class="{{$baseClass}}__main-left {{!$image && !$hasPlaceholderImage && !$contentRightAreaSlotHasData ? 'cover' : ''}}">
+    @includeWhen($content, 'NewsItem.partials.content')
+    @if($contentLeftAreaSlotHasData)
+        {!! $contentLeftArea !!}
+    @endif
+</div>
+
+@if ($image || $hasPlaceholderImage || $contentRightAreaSlotHasData)
     <div class="{{$baseClass}}__main-right">
-        @includeWhen($image, 'NewsItem.partials.image')
+        @includeWhen($image || $hasPlaceholderImage, 'NewsItem.partials.image')
         @if($contentRightAreaSlotHasData)
             {!! $contentRightArea !!}
         @endif
     </div>
-</div>
+@endif

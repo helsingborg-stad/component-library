@@ -9,7 +9,8 @@
         'classList' => [
             $baseClass . '__image'
         ],
-        'cover' => true
+        'cover' => true,
+        'placeholderEnabled' => $hasPlaceholderImage,
     ])
     @endimage
 @endelement

@@ -8,7 +8,8 @@
         "date": null,
         "readTime": null,
         "standing": false,
-        "link": null
+        "link": null,
+        "hasPlaceholderImage": null
     },
     "description":{
         "heading": "Title of the item.",
@@ -18,7 +19,8 @@
         "date": "Date of the item.",
         "readTime": "Read time of the item.",
         "standing": "If the item will be appearing standing or laying down.",
-        "link": "Link to the item."
+        "link": "Link to the item.",
+        "hasPlaceholderImage": "If the item has a placeholder image."
     },
     "types": {
         "heading": "string",
@@ -34,7 +36,8 @@
         "titleLeftArea": "mixed",
         "titleRightArea": "mixed",
         "contentLeftArea": "mixed",
-        "contentRightArea": "mixed"
+        "contentRightArea": "mixed",
+        "footerLeftArea": "bool"
     },
     "view": "newsItem.blade.php",
     "dependency": {
