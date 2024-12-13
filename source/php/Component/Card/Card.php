@@ -17,7 +17,9 @@ class Card extends \ComponentLibrary\Component\BaseController
 
         //Detect if the slots have data
         $this->data['afterContentSlotHasData'] = $this->slotHasData('afterContent');
-        $this->data['floatingSlotHasData'] = $this->slotHasData('floating');
+        $this->data['floatingSlotHasData']     = $this->slotHasData('floating');
+        $this->data['aboveContentSlotHasData'] = $this->slotHasData('aboveContent');
+        $this->data['belowContentSlotHasData'] = $this->slotHasData('belowContent');
 
         if ($image || $hasPlaceholder) {
             $this->data['classList'][] = $this->getBaseClass('has-image', true);
