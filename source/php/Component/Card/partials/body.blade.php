@@ -8,5 +8,11 @@
     @includeWhen($meta && $metaFirst, 'Card.components.meta')
     @includeWhen($heading || $subHeading || ($meta && !$metaFirst) || $icon, 'Card.components.heading')
     @includeWhen($date && !$dateBadge, 'Card.components.date')
+    @if ($aboveContentSlotHasData)
+        {!! $aboveContent !!}
+    @endif
     @includeWhen($content, 'Card.components.content')
+    @if($belowContentSlotHasData)
+        {!! $belowContent !!}
+    @endif
  </div>
