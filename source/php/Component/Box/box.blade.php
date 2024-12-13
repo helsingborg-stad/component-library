@@ -71,6 +71,10 @@
                     @endif
                 @endtypography
             @endif
+            
+            @if ($metaAreaSlotHasData)
+                {!! $metaArea !!}
+            @endif
 
             @if ($heading)
                 @typography([
