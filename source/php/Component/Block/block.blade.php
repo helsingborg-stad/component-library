@@ -63,6 +63,9 @@
                     @endtags
                 @endif
             @endif
+            @if($metaAreaSlotHasData)
+                {!! $metaArea !!}
+            @endif
 
             @if ($heading || $icon)
             @group([
