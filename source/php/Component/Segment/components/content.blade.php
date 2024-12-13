@@ -1,4 +1,4 @@
-@if ($title || $icon || $meta)
+@if ($title || $icon || $meta || $metaAreaSlotHasData)
     @group([
         'justifyContent' => $icon ? 'space-between' : 
         ($textAlignment == 'center' ? 'center' : 
@@ -68,6 +68,14 @@
     @endtags
 @endif
 
+@if ($aboveContentSlotHasData)
+    @element([
+        'classList' => [$baseClass . '__above-content', 'u-margin__top--1']
+    ])
+        {!! $aboveContent !!}
+    @endelement
+@endif
+
 @if ($content)
     @typography([
         'element' => 'div',
@@ -75,6 +83,14 @@
     ])
         {!! $content !!}
     @endtypography
+@endif
+
+@if ($belowContentSlotHasData)
+    @element([
+        'classList' => [$baseClass . '__below-content', 'u-margin__top--1']
+    ])
+        {!! $belowContent !!}
+    @endelement
 @endif
 
 @if ($buttons)
