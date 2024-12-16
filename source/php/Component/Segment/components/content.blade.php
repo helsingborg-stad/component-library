@@ -1,4 +1,4 @@
-@if ($title || $icon || $meta || $metaAreaSlotHasData)
+@if ($title || $icon || $meta)
     @group([
         'justifyContent' => $icon ? 'space-between' : 
         ($textAlignment == 'center' ? 'center' : 
