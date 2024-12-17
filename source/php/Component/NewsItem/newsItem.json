@@ -36,7 +36,8 @@
         "titleLeftArea": "mixed",
         "titleRightArea": "mixed",
         "contentLeftArea": "mixed",
-        "contentRightArea": "mixed"
+        "contentRightArea": "mixed",
+        "hasPlaceholderImage": "boolean"
     },
     "view": "newsItem.blade.php",
     "dependency": {
