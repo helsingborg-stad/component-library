@@ -6,6 +6,7 @@
         "parentStyleColor": "primary",
         "childStyle": false,
         "childStyleColor": "primary",
+        "childStyleShape": "pill",
         "mobile": false
     },
     "types": {
@@ -14,11 +15,16 @@
         "parentStyleColor": "string",
         "childStyle": "boolean",
         "childStyleColor": "string",
+        "childStyleShape": "string",
         "mobile": "boolean"
     },
     "description": {
         "menuItems": "List of arrays containing at least 'label' and 'href' option 'icon' name as string.",
         "parentStyle": "Select the style of menu parents.",
+        "parentStyleColor": "Select the color of the parent style.",
+        "childStyle": "Select the style of menu children.",
+        "childStyleColor": "Select the color of the child style.",
+        "childStyleShape": "Select the shape of the child style.",
         "mobile": "If true, the mega menu will be visible on mobile as well."
     },
     "view": "megaMenu.blade.php",

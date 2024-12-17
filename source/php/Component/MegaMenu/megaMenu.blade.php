@@ -52,16 +52,17 @@
                 @endif
                 {{-- Children --}}
                 @if (!empty($item['children']))
-                    <ul class="{{$baseClass}}__sublist unlist u-margin__top--2">
+                    <ul class="{{$baseClass}}__sublist {{$baseClass}}__sublist--{{ ($childStyle ? 'flex' : 'list') }} unlist u-margin__top--2">
                         @foreach ($item['children'] as $child)
                             <li id="{{$id}}-item-{{$child['id']}}" class="{{$baseClass}}__item {{$baseClass}}__item--child {{ $child['classNames'] }}">
                                 @if(!empty($childStyle))
                                     @button([
-                                        'text' => $item['label'],
+                                        'text' => $child['label'],
                                         'style' => $childStyle,
                                         'color' => $childStyleColor ?? 'primary',
-                                        'icon' => $item['icon']['icon'] !== "" ? $item['icon']['icon'] : 'chevron_right',
-                                        'href' => $item['href'],
+                                        'shape' => $childStyleShape ?? 'pill',
+                                        'icon' => $child['icon']['icon'] !== "" ? $child['icon']['icon'] : 'chevron_right',
+                                        'href' => $child['href'],
                                         'size' => 'sm',
                                         'classList' => [
                                             $baseClass . '__link',
