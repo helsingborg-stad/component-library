@@ -68,7 +68,8 @@
                                         'classList' => [
                                             $baseClass . '__link',
                                             $baseClass . '__link--button',
-                                        ]
+                                        ],
+                                        'context' => ['component.megamenu.button.child']
                                     ])
                                     @endbutton
                                 @else
