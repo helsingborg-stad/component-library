@@ -4,7 +4,17 @@
         "menuItems": [],
         "parentStyle": false,
         "parentStyleColor": "primary",
+        "childStyle": false,
+        "childStyleColor": "primary",
         "mobile": false
+    },
+    "types": {
+        "menuItems": "array",
+        "parentStyle": "boolean",
+        "parentStyleColor": "string",
+        "childStyle": "boolean",
+        "childStyleColor": "string",
+        "mobile": "boolean"
     },
     "description": {
         "menuItems": "List of arrays containing at least 'label' and 'href' option 'icon' name as string.",

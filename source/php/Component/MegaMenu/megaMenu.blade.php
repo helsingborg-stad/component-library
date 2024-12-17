@@ -55,23 +55,39 @@
                     <ul class="{{$baseClass}}__sublist unlist u-margin__top--2">
                         @foreach ($item['children'] as $child)
                             <li id="{{$id}}-item-{{$child['id']}}" class="{{$baseClass}}__item {{$baseClass}}__item--child {{ $child['classNames'] }}">
-                                @link([
-                                    'href' => $child['href'],
-                                    'classList' => [
-                                        $baseClass . '__link', 
-                                        $baseClass . '__link--child'
-                                    ]
-                                ])
-                                @if(isset($child['icon']) && !array_diff(['icon', 'size', 'classList'], array_keys($child['icon'])))
-                                    @icon([
-                                        'icon' => $child['icon']['icon'],
-                                        'size' => $child['icon']['size'],
-                                        'classList' => $child['icon']['classList'],
+                                @if(!empty($childStyle))
+                                    @button([
+                                        'text' => $item['label'],
+                                        'style' => $childStyle,
+                                        'color' => $childStyleColor ?? 'primary',
+                                        'icon' => $item['icon']['icon'] !== "" ? $item['icon']['icon'] : 'chevron_right',
+                                        'href' => $item['href'],
+                                        'size' => 'sm',
+                                        'classList' => [
+                                            $baseClass . '__link',
+                                            $baseClass . '__link--button',
+                                        ]
                                     ])
-                                    @endicon
+                                    @endbutton
+                                @else
+                                    @link([
+                                        'href' => $child['href'],
+                                        'classList' => [
+                                            $baseClass . '__link', 
+                                            $baseClass . '__link--child'
+                                        ]
+                                    ])
+                                    @if(isset($child['icon']) && !array_diff(['icon', 'size', 'classList'], array_keys($child['icon'])))
+                                        @icon([
+                                            'icon' => $child['icon']['icon'],
+                                            'size' => $child['icon']['size'],
+                                            'classList' => $child['icon']['classList'],
+                                        ])
+                                        @endicon
+                                    @endif
+                                        {{ $child['label'] }}
+                                    @endlink
                                 @endif
-                                    {{ $child['label'] }}
-                                @endlink
                             </li>
                         @endforeach
                     </ul>
