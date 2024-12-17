@@ -9,7 +9,7 @@
         @foreach ($menuItems as $item)
             <li id="{{$id}}-main-item-{{$item['id']}}"
                 class="{{$baseClass}}__item {{$baseClass}}__item--parent o-grid-12 o-grid-6@md o-grid-4@lg o-grid-3@xl u-mb-6 u-margin__top--1 {{$item['classNames']}}">
-                @if(!empty($parentStyle))
+                @if($parentType === 'button')
                     @button([
                         'text' => $item['label'],
                         'style' => $parentStyle,
@@ -53,10 +53,10 @@
 
                 {{-- Children --}}
                 @if (!empty($item['children']))
-                    <ul class="{{$baseClass}}__sublist {{$baseClass}}__sublist--{{ ($childStyle ? 'flex' : 'list') }} unlist u-margin__top--2">
+                    <ul class="{{$baseClass}}__sublist {{$baseClass}}__sublist--{{ ($childType === 'button' ? 'flex' : 'list') }} unlist u-margin__top--2">
                         @foreach ($item['children'] as $child)
                             <li id="{{$id}}-item-{{$child['id']}}" class="{{$baseClass}}__item {{$baseClass}}__item--child {{ $child['classNames'] }}">
-                                @if(!empty($childStyle))
+                                @if($childType === 'button')
                                     @button([
                                         'text' => $child['label'],
                                         'style' => $childStyle,
