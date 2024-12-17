@@ -50,6 +50,7 @@
                         {{ $item['description'] }}
                     @endtypography
                 @endif
+
                 {{-- Children --}}
                 @if (!empty($item['children']))
                     <ul class="{{$baseClass}}__sublist {{$baseClass}}__sublist--{{ ($childStyle ? 'flex' : 'list') }} unlist u-margin__top--2">

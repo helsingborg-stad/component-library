@@ -11,9 +11,9 @@
     },
     "types": {
         "menuItems": "array",
-        "parentStyle": "boolean",
+        "parentStyle": "string|boolean",
         "parentStyleColor": "string",
-        "childStyle": "boolean",
+        "childStyle": "string|boolean",
         "childStyleColor": "string",
         "childStyleShape": "string",
         "mobile": "boolean"
