@@ -20,6 +20,10 @@ class Signature extends \ComponentLibrary\Component\BaseController
 			$this->data['componentElement'] = "div"; 
         }
 
+        if (empty($avatar) && empty($placeholderAvatar)) {
+            $this->data['classList'][] = $this->getBaseClass('no-avatar', true);
+        }
+
         //Labels
         $this->data['label'] = (object) [
             'publish' => $publishedLabel ?: false,
