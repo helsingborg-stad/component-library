@@ -61,7 +61,6 @@
                                         'text' => $child['label'],
                                         'style' => $childStyle,
                                         'color' => $childStyleColor ?? 'primary',
-                                        'shape' => $childStyleShape ?? 'pill',
                                         'icon' => $child['icon']['icon'] !== "" ? $child['icon']['icon'] : 'chevron_right',
                                         'href' => $child['href'],
                                         'size' => 'sm',

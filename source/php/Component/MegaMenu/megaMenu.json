@@ -8,7 +8,6 @@
         "childType": "default",
         "childStyle": false,
         "childStyleColor": "primary",
-        "childStyleShape": "pill",
         "mobile": false
     },
     "types": {
@@ -19,7 +18,6 @@
         "childType": "string",
         "childStyle": "string|boolean",
         "childStyleColor": "string",
-        "childStyleShape": "string",
         "mobile": "boolean"
     },
     "description": {
@@ -30,7 +28,6 @@
         "childType": "Select the type of menu children.",
         "childStyle": "Select the style of menu children. (only applies when type equals button).",
         "childStyleColor": "Select the color of the child style. (only applies when type equals button).",
-        "childStyleShape": "Select the shape of the child style.",
         "mobile": "If true, the mega menu will be visible on mobile as well."
     },
     "view": "megaMenu.blade.php",
