@@ -17,6 +17,7 @@ class Drawer extends \ComponentLibrary\Component\BaseController
         //Define has data
         $this->data['searchSlotHasData'] = $this->slotHasData('search');
         $this->data['menuSlotHasData'] = $this->slotHasData('menu');
+        $this->data['afterMenuSlotHasData'] = $this->slotHasData('afterMenu');
 
         //Create screen sizes parameters
         $this->data['screenSizeClassNames'] = $this->getScreenSizeClassNamesAsString(

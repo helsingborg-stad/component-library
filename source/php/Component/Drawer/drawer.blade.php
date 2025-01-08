@@ -34,6 +34,10 @@
         @endif
 
     </div>
+
+    @if ($afterMenuSlotHasData)
+        {!! $afterMenu !!}
+    @endif
 </nav>
 
 <div class="drawer-overlay js-close-drawer {{$screenSizeClassNames}}" data-simulate-click="{{$simulateClickSelector}}" {!! $moveTo !!}></div>
