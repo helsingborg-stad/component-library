@@ -55,8 +55,8 @@ class Notice extends \ComponentLibrary\Component\BaseController
     private function handleActionData($action): ?array
     {
         $action = array_merge(['label' => null, 'url' => null], (array) $action);
-        if (empty(array_filter($this->data['action']))) {
-            $action = false;
+        if (empty(array_filter($this->data['action'] ?: []))) {
+            $action = null;
         }
         return $action;
     }
