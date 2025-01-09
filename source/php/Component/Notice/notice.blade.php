@@ -41,7 +41,6 @@
                         'text' => $action['text'] ?? 'Undefined',
                         'href' => $action['url'] ?? '#',
                         'style' => 'basic',
-                        'color' => 'light',
                         'size' => 'sm',
                         'classList' => [
                             $baseClass . '__button'
@@ -58,7 +57,6 @@
                         'icon' => 'close',
                         'style' => 'basic',
                         'size' => 'sm',
-                        'color' => 'light',
                         'classList' => [
                             $baseClass . '__dismiss'
                         ],
