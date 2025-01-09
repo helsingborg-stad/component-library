@@ -42,7 +42,7 @@ class Notice extends \ComponentLibrary\Component\BaseController
             //Add dismussed time period to attribute list
             $timeout = in_array($dismissable, [
                 'imidiate', 'session', 'permanent'
-            ]) ? $dismissable : 'session';
+            ], true) ? $dismissable : 'session';
             $this->data['attributeList'][
                 'data-dismissable-notice-timeout'
             ] = $timeout ?? 0;
