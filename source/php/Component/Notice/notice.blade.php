@@ -34,9 +34,10 @@
     @if($action)
         <div class="{{$baseClass}}__action">
             @button([
-                'label' => $action['label'] ?? 'Undefined',
+                'text' => $action['label'] ?? 'Undefined',
                 'href' => $action['url'] ?? '#',
                 'style' => 'outlined',
+                'color' => 'default',
                 'size' => 'md',
                 'classList' => [
                     $baseClass . '__button'
@@ -53,6 +54,7 @@
                 'icon' => 'close',
                 'style' => 'basic',
                 'size' => 'md',
+                'color' => 'default',
                 'classList' => [
                     $baseClass . '__dismiss'
                 ],
