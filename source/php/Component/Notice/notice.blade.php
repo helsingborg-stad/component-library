@@ -1,7 +1,7 @@
 <!-- notice.blade.php -->
 <div class="{{ $class }}" {!! $attribute !!} aria-labelledby="notice__text__{{ $id }}">
     
-    <!-- notice__ico -->
+    {{-- notice__ico --}}
     @if($icon)
         <span class="{{$baseClass}}__icon">
             @icon(['icon' => $icon['name'], 'size' => 'md'])
@@ -9,7 +9,7 @@
         </span>
     @endif
     
-    <!-- notice__title -->
+    {{-- notice__title --}}
     @if($message['title'])
         @typography([
             "variant" => "h4",
@@ -22,7 +22,7 @@
         @endtypography
     @endif
 
-    <!-- notice__text -->
+    {{-- notice__text --}}
     <span id="notice__text__{{ $id }}" for="" class="{{$baseClass}}__message">
         @if(isset($message['text']))
             {!! $message['text'] !!}
@@ -30,4 +30,44 @@
         {!! $slot !!}
     </span>
 
+    {{-- notice__actions --}}
+    @if($action || $dismissable)
+        <div class="{{$baseClass}}__actions">
+
+            {{-- notice__action --}}
+            @if($action)
+                <div class="{{$baseClass}}__action">
+                    @button([
+                        'text' => $action['text'] ?? 'Undefined',
+                        'href' => $action['url'] ?? '#',
+                        'style' => 'basic',
+                        'size' => 'sm',
+                        'classList' => [
+                            $baseClass . '__button'
+                        ],
+                    ])
+                    @endbutton
+                </div>
+            @endif
+
+            {{-- notice__dismiss --}}
+            @if($dismissable)
+                <div class="{{$baseClass}}__dismiss">
+                    @button([
+                        'icon' => 'close',
+                        'style' => 'basic',
+                        'size' => 'sm',
+                        'classList' => [
+                            $baseClass . '__dismiss'
+                        ],
+                        'attributeList' => [
+                            'data-dismiss' => 'notice',
+                            'aria-label' => 'Close'
+                        ]
+                    ])
+                    @endbutton
+                </div>
+            @endif
+        </div>
+    @endif
 </div>
