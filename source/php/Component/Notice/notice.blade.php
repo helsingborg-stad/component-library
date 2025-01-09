@@ -61,7 +61,7 @@
                             $baseClass . '__dismiss'
                         ],
                         'attributeList' => [
-                            'data-dismiss' => 'notice',
+                            'data-dismissable-notice-trigger' => '1',
                             'aria-label' => 'Close'
                         ]
                     ])

@@ -55,8 +55,7 @@ class Notice extends \ComponentLibrary\Component\BaseController
     private function createDismissableSignature($data)
     {
         $hashBase = [
-            $data['message']['title'] ?? '',
-            $data['message']['message'] ?? '',
+            $data['message'] ?? '',
             $data['action']['label'] ?? '',
             $data['action']['url'] ?? '',
         ];
