@@ -30,6 +30,19 @@ class Notice extends \ComponentLibrary\Component\BaseController
 
         // Action
         $this->data['action']   = $this->handleActionData($action);
+
+        // Dismissable signature
+        if ($dismissable) {
+            $hashBase = [
+                $this->data['message']['title'] ?? '',
+                $this->data['message']['message'] ?? '',
+                $this->data['action']['label'] ?? '',
+                $this->data['action']['url'] ?? '',
+            ];
+            $this->data['attributeList'][
+                'data-dismissable-uid'
+            ] = md5(serialize($hashBase)); 
+        }
     }
 
     /**

@@ -30,40 +30,46 @@
         {!! $slot !!}
     </span>
 
-    {{-- notice__action --}}
-    @if($action)
-        <div class="{{$baseClass}}__action">
-            @button([
-                'text' => $action['label'] ?? 'Undefined',
-                'href' => $action['url'] ?? '#',
-                'style' => 'outlined',
-                'color' => 'default',
-                'size' => 'md',
-                'classList' => [
-                    $baseClass . '__button'
-                ],
-            ])
-            @endbutton
-        </div>
-    @endif
+    {{-- notice__actions --}}
+    @if($action || $dismissable)
+        <div class="{{$baseClass}}__actions">
 
-    {{-- notice__dismiss --}}
-    @if($dismissable)
-        <div class="{{$baseClass}}__dismiss">
-            @button([
-                'icon' => 'close',
-                'style' => 'basic',
-                'size' => 'md',
-                'color' => 'default',
-                'classList' => [
-                    $baseClass . '__dismiss'
-                ],
-                'attributeList' => [
-                    'data-dismiss' => 'notice',
-                    'aria-label' => 'Close'
-                ]
-            ])
-            @endbutton
+            {{-- notice__action --}}
+            @if($action)
+                <div class="{{$baseClass}}__action">
+                    @button([
+                        'text' => $action['text'] ?? 'Undefined',
+                        'href' => $action['url'] ?? '#',
+                        'style' => 'basic',
+                        'color' => 'light',
+                        'size' => 'sm',
+                        'classList' => [
+                            $baseClass . '__button'
+                        ],
+                    ])
+                    @endbutton
+                </div>
+            @endif
+
+            {{-- notice__dismiss --}}
+            @if($dismissable)
+                <div class="{{$baseClass}}__dismiss">
+                    @button([
+                        'icon' => 'close',
+                        'style' => 'basic',
+                        'size' => 'sm',
+                        'color' => 'light',
+                        'classList' => [
+                            $baseClass . '__dismiss'
+                        ],
+                        'attributeList' => [
+                            'data-dismiss' => 'notice',
+                            'aria-label' => 'Close'
+                        ]
+                    ])
+                    @endbutton
+                </div>
+            @endif
         </div>
     @endif
 </div>
