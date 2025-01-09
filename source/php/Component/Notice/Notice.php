@@ -33,6 +33,9 @@ class Notice extends \ComponentLibrary\Component\BaseController
 
         // Dismissable signature
         if ($dismissable) {
+            //Set a dismissable attribute
+            $this->data['attributeList']['data-dismissable-notice'] = true;
+
             //Add signature to attribute list
             $hashBase = $this->createDismissableSignature($this->data);
             $this->data['attributeList'][
