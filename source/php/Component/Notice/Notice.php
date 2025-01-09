@@ -33,16 +33,31 @@ class Notice extends \ComponentLibrary\Component\BaseController
 
         // Dismissable signature
         if ($dismissable) {
-            $hashBase = [
-                $this->data['message']['title'] ?? '',
-                $this->data['message']['message'] ?? '',
-                $this->data['action']['label'] ?? '',
-                $this->data['action']['url'] ?? '',
-            ];
+            //Add signature to attribute list
+            $hashBase = $this->createDismissableSignature($this->data);
             $this->data['attributeList'][
-                'data-dismissable-uid'
-            ] = md5(serialize($hashBase)); 
+                'data-dismissable-notice-uid'
+            ] = md5(serialize($hashBase));
+
+            //Add dismussed time period to attribute list
+            $timeout = in_array($dismissable, [
+                'imidiate', 'session', 'permanent'
+            ]) ? $dismissable : 'session';
+            $this->data['attributeList'][
+                'data-dismissable-notice-timeout'
+            ] = $timeout ?? 0;
         }
+    }
+
+    private function createDismissableSignature($data)
+    {
+        $hashBase = [
+            $data['message']['title'] ?? '',
+            $data['message']['message'] ?? '',
+            $data['action']['label'] ?? '',
+            $data['action']['url'] ?? '',
+        ];
+        return md5(serialize($hashBase));
     }
 
     /**
