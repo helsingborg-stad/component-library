@@ -5,6 +5,7 @@ namespace ComponentLibrary;
 use ComponentLibrary\Cache\CacheInterface;
 use HelsingborgStad\BladeService\BladeServiceInterface;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\View\ComponentSlot;
 use Throwable;
 
 class Register
@@ -216,7 +217,10 @@ class Register
                         . $argsTypes->{$key} . '"</b> but was received as type <b>"' . $valueTypeDisplay . '"</b>.'
                     );
                 }
-            } elseif (!in_array($key, ['__laravel_slots', 'slot', 'id', 'classList', 'context', 'attributeList', 'baseClass'])) {
+            } elseif (
+                !in_array($key, ['__laravel_slots', 'slot', 'id', 'classList', 'context', 'attributeList', 'baseClass']) && 
+                !(is_object($value) && $value instanceof ComponentSlot)
+            ) {
                 $this->triggerError(
                     'The parameter <b>"' . $key . '"</b> is not recognized in the component <b>"' . $componentSlug . '"</b>'
                 );
