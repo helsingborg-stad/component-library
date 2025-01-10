@@ -23,12 +23,14 @@
     @endif
 
     {{-- notice__text --}}
-    <span id="notice__text__{{ $id }}" for="" class="{{$baseClass}}__message">
-        @if(isset($message['text']))
-            {!! $message['text'] !!}
-        @endif
-        {!! $slot !!}
-    </span>
+    @if($slotHasData || $message['text'])
+        <span id="notice__text__{{ $id }}" for="" class="{{$baseClass}}__message">
+            @if(isset($message['text']))
+                {!! $message['text'] !!}
+            @endif
+            {!! $slot !!}
+        </span>
+    @endif
 
     {{-- notice__actions --}}
     @if($action || $dismissable)
