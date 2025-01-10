@@ -19,5 +19,15 @@ class Toast__item extends \ComponentLibrary\Component\BaseController
 
         //Add parent component class to classlist of child component
         $this->data['data']['classList'][] = $this->getBaseClass();
+
+        //Add dismissable class to classlist of child component
+        if($this->data['data']['dismissable'] ?? false) {
+            $this->data['data']['classList'][] = $this->getBaseClass('dismissable', true);
+        }
+
+        //Indicate that this item has an action
+        if($this->data['data']['action'] ?? false) {
+            $this->data['data']['classList'][] = $this->getBaseClass('has-action', true);
+        }
     }
 }
