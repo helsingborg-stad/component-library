@@ -1,4 +1,4 @@
 <!-- notice.blade.php -->
 <div class="{{ $class }}" {!! $attribute !!}>
-    {{!! $slot !!}}
+    {!! $slot !!}
 </div>

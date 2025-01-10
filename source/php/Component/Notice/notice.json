@@ -22,7 +22,7 @@
         "icon": "array|object",
         "stretch": "boolean",
         "dismissable": "boolean|string",
-        "action": "array|false"
+        "action": "array|boolean"
     },
     "view": "notice.blade.php",
     "dependency": {
