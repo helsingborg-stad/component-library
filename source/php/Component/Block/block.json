@@ -10,7 +10,8 @@
         "ratio": "4:3",
         "date": "",
         "dateBadge": false,
-        "icon": false
+        "icon": false,
+        "iconBackgroundColor": null
     },
     "description": {
         "heading": "The heading of the block",
@@ -34,7 +35,8 @@
         "ratio": "string",
         "date": "string|boolean",
         "dateBadge": "boolean",
-        "icon": "boolean|array"
+        "icon": "boolean|array",
+        "iconBackgroundColor": "string"
     },
     "view": "block.blade.php",
     "dependency": {
