@@ -45,10 +45,6 @@ class Block extends \ComponentLibrary\Component\BaseController
             $this->data['icon']['classList'][] = $this->getBaseClass('icon');
         }
 
-        if (!isset($this->data['displayIcon'])) {
-            $this->data['displayIcon'] = true;
-        }
-
         $this->data['classList'][] = $this->getBaseClass() . '--ratio-' . str_replace(":", "-", $ratio);
 
         if(!$this->hasContent($this->data)) {

@@ -81,7 +81,7 @@
                         {!! $heading !!}
                     @endtypography
                 @endif
-                @if ($icon && !empty($displayIcon))
+                @if ($icon)
                     @element([
                         'attributeList' => [
                             'style' => 'background-color: ' . ($iconBackgroundColor ?? 'transparent') . ';',
