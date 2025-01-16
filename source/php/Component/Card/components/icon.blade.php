@@ -1,6 +1,6 @@
 @element([
     'attributeList' => [
-        'style' => 'background-color: ' . $iconBackgroundColor ?? 'transparent' . ';',
+        'style' => 'background-color: ' . ($iconBackgroundColor ?? 'transparent') . ';',
     ],
     'classList' => [
         'u-display--flex',
