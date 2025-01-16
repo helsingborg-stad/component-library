@@ -12,15 +12,11 @@ class Collection__item extends \ComponentLibrary\Component\BaseController
         $this->data['beforeSlotHasData']   = $this->slotHasData('before');
         $this->data['floatingSlotHasData'] = $this->slotHasData('floating');
 
-        if (!empty($displayIcon)) {
-            $this->data['classList'][] = $this->getBaseClass('show-icon', true);
-        }
-
         if (!empty($bordered)) {
             $this->data['classList'][] = $this->getBaseClass('bordered', true);
         }
 
-        $this->data['icon'] = $this->getIcon($icon, $displayIcon);
+        $this->data['icon'] = $this->getIcon($icon);
 
         //Link handling
         if($link) {
@@ -33,9 +29,9 @@ class Collection__item extends \ComponentLibrary\Component\BaseController
         }
     }
 
-    private function getIcon(array|string|false $icon, bool $displayIcon): array|false
+    private function getIcon(array|string|false $icon): array|false
     {
-        if (!$displayIcon || !$icon) {
+        if (empty($icon)) {
             return false;
         } elseif (is_array($icon)) {
             return $icon;

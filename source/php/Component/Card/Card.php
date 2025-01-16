@@ -47,10 +47,6 @@ class Card extends \ComponentLibrary\Component\BaseController
         if (!empty($icon)) {
             $this->data['icon']['classList'][] = $this->getBaseClass('icon');
         }
-        
-        if (!isset($this->data['displayIcon'])) {
-            $this->data['displayIcon'] = true;
-        }
 
         if (!empty($hasPlaceholder)) {
             $this->data['classList'][] = $this->getBaseClass() . '--svg-background';

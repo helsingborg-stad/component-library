@@ -36,5 +36,5 @@
         @includeWhen($meta && !$metaFirst, 'Card.components.meta')
     @endgroup
     @includeWhen($collapsible, 'Card.components.collapsiableButton')
-    @includeWhen($icon && !empty($displayIcon), 'Card.components.icon')
+    @includeWhen($icon, 'Card.components.icon')
 @endgroup
