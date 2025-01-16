@@ -21,6 +21,7 @@
         "meta": false,
         "tags": false,
         "icon": false,
+        "iconBackgroundColor": null,
         "link": false,
         "hasPlaceholder": true,
         "lang": {
@@ -49,6 +50,7 @@
         "tags": "Array of tags according to the tags component",
         "meta": "The meta text",
         "icon": "An array with the same specification as the icon component",
+        "iconBackgroundColor": "The background color of the icon",
         "hasPlaceholder": "Sets image specific styling based on the image being a placholder image.",
         "lang": "An array with labels used in the component."
     },
@@ -74,6 +76,7 @@
         "tags": "array|boolean",
         "meta": "string|boolean",
         "icon": "array|boolean",
+        "iconBackgroundColor": "string",
         "hasPlaceholder": "boolean",
         "lang": "array|boolean",
         "containerAware": "boolean"

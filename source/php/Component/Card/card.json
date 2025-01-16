@@ -15,6 +15,7 @@
         "dateBadge": false,
         "hasPlaceholder": false,
         "icon": false,
+        "iconBackgroundColor": null,
         "color": "default",
         "metaFirst": false
     },
@@ -33,6 +34,7 @@
         "dateBadge": "Display date as a badge. Requires image to be set.",
         "hasPlaceholder": "If the card should have a placeholder, if the image is missing.",
         "icon": "An array with the same specification as the icon component",
+        "iconBackgroundColor": "The background color of the icon",
         "color": "The background color of the image.",
         "metaFirst": "If the meta should be displayed before the heading."
     },
@@ -51,6 +53,7 @@
         "dateBadge": "boolean",
         "hasPlaceholder": "boolean",
         "icon": "boolean|array",
+        "iconBackgroundColor": "string",
         "color": "string",
         "containerAware": "boolean",
         "metaFirst": "boolean"
