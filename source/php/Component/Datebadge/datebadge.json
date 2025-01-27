@@ -6,12 +6,12 @@
         "size": "md"
     },
     "description": {
-        "date": "A date string in any format.",
+        "date": "A date string in any format or a unix timestamp.",
         "includeTime": "Will add a box with timestamp below the date.",
         "size": "The size of the datebadge. Can be either 'sm' or 'md'."
     },
     "types": {
-        "date": "string",
+        "date": "string|integer",
         "includeTime": "boolean",
         "size": "string"
     },

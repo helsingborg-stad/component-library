@@ -2,8 +2,6 @@
 
 namespace ComponentLibrary\Component\Date;
 
-use IntlDateFormatter;
-
 /**
  * Class Date
  * Handles various date-related actions like formatting, calculating time since/until, and tooltip generation.
@@ -11,8 +9,6 @@ use IntlDateFormatter;
 class Date extends \ComponentLibrary\Component\BaseController
 {
     private string $dateFormat = 'D d M Y';
-    private ?string $dateRegion = null; 
-    private ?string $dateTimeZone = null;
     private ?int $currentTime = null;
 
     public function init()
@@ -20,13 +16,11 @@ class Date extends \ComponentLibrary\Component\BaseController
         //Setters 
         $this->setCurrentTime();
         $this->setDateFormat($this->data['format']);
-        $this->setDateRegion($this->data['region']);
-        $this->setDateTimezone($this->data['timezone']); 
 
-        if( $this->isValidtimestamp($this->data['timestamp']) ) {
+        if( is_int($this->data['timestamp']) ) {
             $timestamp  = $this->data['timestamp'];
         } else {
-            throw new \InvalidArgumentException('Invalid timestamp');
+            $timestamp  = $this->strToTime($this->data['timestamp']);
         }
 
         //Handle the action
@@ -52,11 +46,6 @@ class Date extends \ComponentLibrary\Component\BaseController
         $this->setMetaDate($timestamp);
     }
 
-    private function isValidtimestamp(mixed $timestamp):bool 
-    {
-        return is_int($timestamp);
-    }
-
     /**
      * Sets the current time for the component.
      */
@@ -75,36 +64,6 @@ class Date extends \ComponentLibrary\Component\BaseController
     {
         if($format) {
             $this->dateFormat = $format;
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Sets the date region for formatting.
-     * 
-     * @param string $region  Region code
-     * @return bool           True if the region was set, false otherwise
-     */
-    private function setDateRegion($region)
-    {
-        if($region) {
-            $this->dateRegion = $region;
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Sets the timezone for formatting.
-     * 
-     * @param string $timezone  Timezone
-     * @return bool             True if the timezone was set, false otherwise
-     */
-    private function setDateTimezone($timezone)
-    {
-        if($timezone) {
-            $this->dateTimeZone = $timezone;
             return true;
         }
         return false;
@@ -194,5 +153,26 @@ class Date extends \ComponentLibrary\Component\BaseController
         }
 
         return 'just now';  // Default fallback
+    }
+
+    /**
+     * Converts a date string into a timestamp.
+     * 
+     * @param string $date  Date string
+     * @return int|false    Timestamp if the date string was valid, false otherwise
+     * 
+     * @see https://www.php.net/manual/en/datetime.formats.date.php
+     */
+    private function strToTime($date)
+    {
+        // Try to parse the date string, in a simple way
+        $parsedDateTime = strtotime($date);
+
+        if ($parsedDateTime === false) {
+            error_log('Date Component: Failed to parse date string from "'.$date.'" in a simple way.', E_USER_WARNING);
+            return false;
+        }
+
+        return $parsedDateTime;
     }
 }

@@ -27,11 +27,33 @@ class DateTest extends TestCase {
         $data = $this->getDefaultData();
         $data['timestamp'] = '2021-01-01';
 
-        try {
-            new Date($data, $this->getCacheMock());
-        } catch (\InvalidArgumentException $e) {
-            $this->assertInstanceOf(\InvalidArgumentException::class, $e);
-        }
+        $instance = new Date($data, $this->getCacheMock());
+
+        $this->assertEquals('2021-01-01', $instance->getData()['refinedDate']);
+    }
+
+    /**
+     * @testdox can be instantiated with literal date
+     */
+    public function testCanBeCreatedWithLiteralDate() {
+        $data = $this->getDefaultData();
+        $data['timestamp'] = 'Monday, 27 January 2025';
+
+        $instance = new Date($data, $this->getCacheMock());
+
+        $this->assertEquals('2025-01-27', $instance->getData()['refinedDate']);
+    }
+
+    /**
+     * @testdox can not be instantiated with literal date in other language than English
+     */
+    public function testCanNotBeCreatedWithLiteralDateInOtherLanguageThanEnglish() {
+        $data = $this->getDefaultData();
+        $data['timestamp'] = 'Måndag, 27 Januari 2025';
+
+        $instance = new Date($data, $this->getCacheMock());
+
+        $this->assertEquals('1970-01-01', $instance->getData()['refinedDate']);
     }
 
     /**
@@ -86,7 +108,7 @@ class DateTest extends TestCase {
         $this->assertEquals($result, $instance->getData()['refinedDate']);
     }
 
-    private function formatProvider():array{
+    public function formatProvider():array{
         return [
             'F j, Y' => [
                 'timestamp' => strtotime('2021-01-01'),
