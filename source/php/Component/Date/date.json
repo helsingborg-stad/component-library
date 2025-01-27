@@ -15,7 +15,7 @@
         "timeNowCap": 60
     },
     "description": {
-        "timestamp": "The date",
+        "timestamp": "The date, in unix timestamp format.",
         "time_since": "Will return the date since.",
         "time_since_cap": "How long back to spell out time since",
         "format": "Present date's in this format. Default: D d M Y",
@@ -29,7 +29,7 @@
         "timeNowCap": "How many seconds back to show 'nowLabel'"
     },
     "types": {
-        "timestamp": "string",
+        "timestamp": "integer",
         "time_since": "boolean",
         "time_since_cap": "string",
         "format": "string",

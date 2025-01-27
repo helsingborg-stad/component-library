@@ -2,9 +2,7 @@
 
 namespace ComponentLibrary\Component\Date;
 
-use ComponentLibrary\Helper\Date as DateHelper;
 use IntlDateFormatter;
-use ResourceBundle;
 
 /**
  * Class Date
@@ -25,8 +23,11 @@ class Date extends \ComponentLibrary\Component\BaseController
         $this->setDateRegion($this->data['region']);
         $this->setDateTimezone($this->data['timezone']); 
 
-        //Parse the timestamp, and return a unix timestamp
-        $timestamp  = $this->strToTime($this->data['timestamp']);
+        if( $this->isValidtimestamp($this->data['timestamp']) ) {
+            $timestamp  = $this->data['timestamp'];
+        } else {
+            throw new \InvalidArgumentException('Invalid timestamp');
+        }
 
         //Handle the action
         switch ($this->data['action']) {
@@ -34,11 +35,8 @@ class Date extends \ComponentLibrary\Component\BaseController
                 $this->handleTimeSince($timestamp);
                 break;
 
-            case "formatDate":
-                $this->handleFormatDate($timestamp, $this->dateFormat);
-                break;
-
             default:
+                // Also handler case for "formatDate" action.
                 $this->handleFormatDate($timestamp, $this->dateFormat);
                 break;
         }
@@ -52,6 +50,11 @@ class Date extends \ComponentLibrary\Component\BaseController
 
         //Set meta date
         $this->setMetaDate($timestamp);
+    }
+
+    private function isValidtimestamp(mixed $timestamp):bool 
+    {
+        return is_int($timestamp);
     }
 
     /**
@@ -191,53 +194,5 @@ class Date extends \ComponentLibrary\Component\BaseController
         }
 
         return 'just now';  // Default fallback
-    }
-
-    /**
-     * Converts a date string into a timestamp.
-     * 
-     * @param string $date  Date string
-     * @return int|false    Timestamp if the date string was valid, false otherwise
-     * 
-     * @see https://www.php.net/manual/en/datetime.formats.date.php
-     */
-    private function strToTime($date)
-    {
-        // Try to parse the date string, in a simple way
-        $parsedDateTime = strtotime($date); 
-        if ($parsedDateTime !== false) {
-            return $parsedDateTime;
-        }
-
-        if(is_null($this->dateRegion)) {
-            error_log('Date Component: Date region must be set to parse complex or native language date strings.');
-            return $date;
-        }
-
-        if(is_null($this->dateTimeZone)) {
-            error_log('Date Component: Date timezone must be set to parse complex or native language date strings.');
-            return $date;
-        }
-
-        if(class_exists('IntlDateFormatter') === false) {
-            error_log('Date Component: IntlDateFormatter class is not available.');
-            return $date;
-        }
-
-        // Create the IntlDateFormatter to parse the date string
-        $formatter = new IntlDateFormatter(
-            $this->dateRegion,
-            IntlDateFormatter::LONG,    // Full date format (includes month names)
-            IntlDateFormatter::NONE,    // Ignore time for now
-            $this->dateTimeZone,         // Timezone
-            IntlDateFormatter::GREGORIAN,
-            "d MMMM, yyyy H:mm"         // Format with day, month name, year, and time
-        );
-        $parsedDateTime = $formatter->parse($date);
-        if ($parsedDateTime !== false) {
-            return $parsedDateTime;
-        }
-
-        return false;
     }
 }
