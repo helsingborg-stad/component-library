@@ -2,10 +2,6 @@
 
 namespace ComponentLibrary\Component\Date;
 
-use ComponentLibrary\Helper\Date as DateHelper;
-use IntlDateFormatter;
-use ResourceBundle;
-
 /**
  * Class Date
  * Handles various date-related actions like formatting, calculating time since/until, and tooltip generation.
@@ -13,8 +9,6 @@ use ResourceBundle;
 class Date extends \ComponentLibrary\Component\BaseController
 {
     private string $dateFormat = 'D d M Y';
-    private ?string $dateRegion = null; 
-    private ?string $dateTimeZone = null;
     private ?int $currentTime = null;
 
     public function init()
@@ -22,11 +16,12 @@ class Date extends \ComponentLibrary\Component\BaseController
         //Setters 
         $this->setCurrentTime();
         $this->setDateFormat($this->data['format']);
-        $this->setDateRegion($this->data['region']);
-        $this->setDateTimezone($this->data['timezone']); 
 
-        //Parse the timestamp, and return a unix timestamp
-        $timestamp  = $this->strToTime($this->data['timestamp']);
+        if( is_int($this->data['timestamp']) ) {
+            $timestamp  = $this->data['timestamp'];
+        } else {
+            $timestamp  = $this->strToTime($this->data['timestamp']);
+        }
 
         //Handle the action
         switch ($this->data['action']) {
@@ -34,11 +29,8 @@ class Date extends \ComponentLibrary\Component\BaseController
                 $this->handleTimeSince($timestamp);
                 break;
 
-            case "formatDate":
-                $this->handleFormatDate($timestamp, $this->dateFormat);
-                break;
-
             default:
+                // Also handler case for "formatDate" action.
                 $this->handleFormatDate($timestamp, $this->dateFormat);
                 break;
         }
@@ -72,36 +64,6 @@ class Date extends \ComponentLibrary\Component\BaseController
     {
         if($format) {
             $this->dateFormat = $format;
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Sets the date region for formatting.
-     * 
-     * @param string $region  Region code
-     * @return bool           True if the region was set, false otherwise
-     */
-    private function setDateRegion($region)
-    {
-        if($region) {
-            $this->dateRegion = $region;
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Sets the timezone for formatting.
-     * 
-     * @param string $timezone  Timezone
-     * @return bool             True if the timezone was set, false otherwise
-     */
-    private function setDateTimezone($timezone)
-    {
-        if($timezone) {
-            $this->dateTimeZone = $timezone;
             return true;
         }
         return false;
@@ -204,40 +166,13 @@ class Date extends \ComponentLibrary\Component\BaseController
     private function strToTime($date)
     {
         // Try to parse the date string, in a simple way
-        $parsedDateTime = strtotime($date); 
-        if ($parsedDateTime !== false) {
-            return $parsedDateTime;
+        $parsedDateTime = strtotime($date);
+
+        if ($parsedDateTime === false) {
+            error_log('Date Component: Failed to parse date string from "'.$date.'" in a simple way.', E_USER_WARNING);
+            return false;
         }
 
-        if(is_null($this->dateRegion)) {
-            error_log('Date Component: Date region must be set to parse complex or native language date strings.');
-            return $date;
-        }
-
-        if(is_null($this->dateTimeZone)) {
-            error_log('Date Component: Date timezone must be set to parse complex or native language date strings.');
-            return $date;
-        }
-
-        if(class_exists('IntlDateFormatter') === false) {
-            error_log('Date Component: IntlDateFormatter class is not available.');
-            return $date;
-        }
-
-        // Create the IntlDateFormatter to parse the date string
-        $formatter = new IntlDateFormatter(
-            $this->dateRegion,
-            IntlDateFormatter::LONG,    // Full date format (includes month names)
-            IntlDateFormatter::NONE,    // Ignore time for now
-            $this->dateTimeZone,         // Timezone
-            IntlDateFormatter::GREGORIAN,
-            "d MMMM, yyyy H:mm"         // Format with day, month name, year, and time
-        );
-        $parsedDateTime = $formatter->parse($date);
-        if ($parsedDateTime !== false) {
-            return $parsedDateTime;
-        }
-
-        return false;
+        return $parsedDateTime;
     }
 }
