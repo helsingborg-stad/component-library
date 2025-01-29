@@ -29,6 +29,9 @@ class Nav extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
+        $this->data['beforeItemsSlotHasData'] = $this->slotHasData('beforeItems');
+        $this->data['afterItemsSlotHasData'] = $this->slotHasData('afterItems');
+
         //Height modifiers
         if($height) {
             $this->data['classList'][] = $this->getBaseClass("height-" . $height, true);

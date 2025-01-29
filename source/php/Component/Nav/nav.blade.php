@@ -1,5 +1,8 @@
 <!-- nav.blade.php -->
-@if ($items) 
+@if ($beforeItemsSlotHasData)
+  {!! $beforeItems !!}
+@endif
+@if ($items)
   <ul class="{{$class}}" {!! $attribute !!}>
     @foreach ($items as $item)
       
@@ -24,4 +27,7 @@
 
     @endforeach
   </ul>
+@endif
+@if ($afterItemsSlotHasData)
+  {!! $afterItems !!}
 @endif
