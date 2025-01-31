@@ -26,7 +26,7 @@ class Card extends \ComponentLibrary\Component\BaseController
         }
 
         if ($date && !is_array($date)) {
-            $this->data['date'] = $dateBadge ? $date : [
+            $this->data['date'] = [
                 'timestamp' => $date,
                 'action' => 'formatDate'
             ];

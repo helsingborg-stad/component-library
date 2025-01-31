@@ -49,7 +49,7 @@
         "collapsible": "boolean",
         "tags": "array",
         "link": "string",
-        "date": "string|boolean",
+        "date": "string|array",
         "dateBadge": "boolean",
         "hasPlaceholder": "boolean",
         "icon": "boolean|array",
