@@ -1,2 +1,2 @@
-@datebadge(['date' => $date, 'classList' => [$baseClass . '__datebadge']])
+@datebadge(['date' => $date['timestamp'], 'classList' => [$baseClass . '__datebadge']])
 @enddatebadge

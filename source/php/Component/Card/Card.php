@@ -25,6 +25,13 @@ class Card extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass('has-image', true);
         }
 
+        if ($date && !is_array($date)) {
+            $this->data['date'] = $dateBadge ? $date : [
+                'timestamp' => $date,
+                'action' => 'formatDate'
+            ];
+        }
+
         if ($dateBadge && $date) {
             $this->data['classList'][] = $this->getBaseClass('has-datebadge', true);
         }
