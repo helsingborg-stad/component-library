@@ -1,12 +1,6 @@
-@if($tooltipDate)
-  @tooltip([
-    'componentElement' => 'span', 
-    'placement' => 'top', 
-    'label' => $refinedDate . ' ' . $timeSinceSuffix, 
-    'icon' => false
-  ])
-    <time class="{{ $metaDate }} {{ $class }}" {!! $attribute !!}>{{ $tooltipDate }}</time>
-  @endtooltip
-@else
-  <time class="{{ $metaDate }} {{$class}}" {!! $attribute !!}>{{ $refinedDate }} {{$timeSinceSuffix}}</time>
+<time class="{{ $class }}" {!! $attribute !!}>{{ $refinedDate }} {{$timeSinceSuffix}}</time>
+
+{{-- This will indicate that we have a formatting issue with the input date string or format. --}}
+@if($dateError) 
+  <!-- Date component: {!! $dateError !!} -->
 @endif
