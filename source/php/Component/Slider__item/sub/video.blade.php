@@ -9,11 +9,13 @@
         $baseClass."__background--video"
     ],
     'formats' => [
-        ['src' => $background_video, 'type' => "mp4"],
-    ]
+        ['src' => $video, 'type' => "mp4"],
+    ],
+    'context' => ['component.slider', 'component.slider.video']
 ])
 @endvideo
-@if($showPauseButton)
+
+<!-- Play/pause button -->
 @button([
     'style'         => 'filled',
     'icon'          => 'play_arrow',
@@ -24,7 +26,7 @@
     ],
     'attributeList' => [
         'js-video-control' => ''
-    ]
+    ],
+    'context' => ['component.slider', 'component.slider.video', 'component.slider.video.button']
 ])
 @endbutton
-@endif

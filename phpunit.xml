@@ -3,12 +3,14 @@
          xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.6/phpunit.xsd"
          cacheResultFile=".phpunit.cache/test-results"
          colors="true"
-         failOnRisky="true"
-         failOnWarning="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
          verbose="true">
     <testsuites>
         <testsuite name="default">
             <directory suffix=".Test.php">source/php</directory>
+            <directory suffix=".test.php">source/php</directory>
         </testsuite>
     </testsuites>
 
@@ -19,6 +21,11 @@
         </include>
         <exclude>
             <directory suffix=".Test.php">source/php</directory>
+            <directory suffix=".test.php">source/php</directory>
         </exclude>
     </coverage>
+
+  <php>
+    <ini name="error_reporting" value="E_ALL" />
+  </php>
 </phpunit>

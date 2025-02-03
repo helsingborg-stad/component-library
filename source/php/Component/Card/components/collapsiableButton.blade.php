@@ -1,7 +1,11 @@
 @button([
     'style' => 'basic',
     'size' => 'md',
-    "attributeList" => ['js-toggle-trigger' => $collpaseID],
+    'toggle' => true,
+    "attributeList" => [
+        'js-toggle-trigger' => $collpaseID,
+        'data-toggle-icon' => 'close'
+    ],
     'icon' => 'expand_more',
     'classList' => [$baseClass . '__title-expand-button']
 ])

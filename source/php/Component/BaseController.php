@@ -178,7 +178,7 @@ class BaseController
     {
         if (!empty($modifier)) {
             foreach ($modifier as &$value) {
-                if ($value) {
+                if ($value && is_string($value)) {
                     $class[] =  $this->getBaseClass() . '--' . $value;
                 }
             }
@@ -405,19 +405,28 @@ class BaseController
         $attributeStrings = [];
 
         foreach ($attributes as $key => $value) {
+            if(is_resource($value) || (!is_string($value) && is_callable($value))) {
+                continue;
+            }
+
             if (is_object($value) || is_array($value)) {
                 $value = json_encode($value);
             }
 
-            if (is_bool($value) || is_numeric($value)) {
-                $value = strval($value);
+            if (is_numeric($value)) {
+                $value = (string) $value;
             }
 
-            if (!is_string($value) && !empty($value)) {
-                return "";
-            };
+            if (is_bool($value)) {
+                $value = $value ? '1' : '0';
+            }
+
+            if($value === "null" || $value === null) {
+                $escapedValue = "";
+            } else {
+                $escapedValue = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+            }
             
-            $escapedValue = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
             $attributeStrings[] = "$key=\"$escapedValue\"";
         }
 

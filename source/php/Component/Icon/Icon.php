@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\Icon;
 
-use ComponentLibrary\Cache\CacheInterface;
+use ComponentLibrary\Helper\Icons;
 
 /**
  * Class Icon
@@ -15,41 +15,56 @@ class Icon extends \ComponentLibrary\Component\BaseController
         'key'  => "Label"
     ];
     private $altTextUndefined = "Undefined";
-    
-    private $customIconsSvgPathListId = 'icons';
-    private $getCustomIconPathElementId = 'iconsPathsElements';
+    private static $runtimeCache = [
+        'svgFromFile' => []
+    ];
 
     public function init()
     {
         //Extract array for easy access (fetch only)
         extract($this->data);
-        
-        $customSvgIcons = $this->getCustomSvgIconsList();
+
+        //Use a runtime cache to store the custom icons
+        if(!self::$runtimeCache['svgFromFile']) {
+            $customSvgIcons = self::$runtimeCache['svgFromFile'] = (
+                new Icons($this->cache)
+            )->getIcons();
+        } else {
+            $customSvgIcons = self::$runtimeCache['svgFromFile'];
+        }
+
+
+        // The check below handles a default hidden value.
+        // Allows for the default value to be overwritten.
+        if (is_null($filled)) {
+            $this->data['filled'] = $defaultFilled ?? true;
+        }
+
+        //Support for filled icons 
         $customIconName = $filled ? $icon . 'Filled' : $icon;
 
         $this->data['svgFromLink'] =  $this->iconIsSvg($icon);
 
         if ($this->data['svgFromLink']) {
             $this->data['classList'][] = $this->getBaseClass() . "--svg-link";
-
-        } 
-        elseif (array_key_exists($customIconName, $customSvgIcons)) {
-            $this->data['svgElementFromFile'] = $this->getCustomIconPathElement($customSvgIcons[$customIconName], $customIconName);
+        } elseif (array_key_exists($customIconName, $customSvgIcons)) {
+            $this->data['svgElementFromFile'] = $customSvgIcons[$customIconName];
             $this->data['classList'][] = $this->getBaseClass() . "--svg-path";
-        }
-        else {
+        } else {
             $this->data['classList'] = array_merge($this->data['classList'] ?? [], [
                 $this->createIconModifier($icon),
                 $this->getBaseClass() . "--material",
                 $this->getBaseClass() . "--material-" . $icon,
-                "material-symbols-outlined"
+                "material-symbols",
+                "material-symbols-rounded", //All classes added, to support all icon types
+                "material-symbols-sharp", //All classes added, to support all icon types
+                "material-symbols-outlined" //All classes added, to support all icon types
             ]);
-
             $this->data['attributeList']['material-symbol'] = $icon;
         }
 
         if (!empty($filled)) {
-            $this->data['classList'][] = 'material-symbols-outlined--filled';
+            $this->data['classList'][] = 'material-symbols--filled';
         }
 
         if (!empty($customColor)) {
@@ -60,7 +75,6 @@ class Icon extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->setIconColorCssClass($color);
         }
 
-
         $this->data['label'] = $this->getSpacedLabel($label);
         $this->data['classList'][] = $this->setIconSizeCssClass($size);
 
@@ -68,9 +82,11 @@ class Icon extends \ComponentLibrary\Component\BaseController
         $this->data['attributeList']['role'] = "img";
         $this->data['attributeList']['data-nosnippet'] = "";
         $this->data['attributeList']['translate'] = "no";
+
         $this->data['attributeList']['aria-label'] = $decorative ? "" : $this->getAltText($icon);
         $this->data['attributeList']['alt'] = $decorative ? "" : $this->getAltText($icon);
         $this->data['attributeList']['aria-hidden'] = $decorative ? "true" : "false";
+
     }
 
     private function iconIsSvg($icon)
@@ -99,54 +115,6 @@ class Icon extends \ComponentLibrary\Component\BaseController
             str_replace("_", "-", $icon),
             true
         );
-    }
-
-    private function getCustomIconPathElement($path, $icon)
-    {   
-        if ($this->cache->get($icon, $this->getCustomIconPathElementId)) {
-            return $this->cache->get($icon, $this->getCustomIconPathElementId);
-        }
-
-        if (file_exists($path) && is_readable($path)) {
-            $contents = file_get_contents($path);
-            $this->cache->set($icon, $contents, $this->getCustomIconPathElementId);
-        }
-
-        return $this->cache->get($icon, $this->getCustomIconPathElementId);
-    }
-
-    private function getCustomSvgIconsList() {
-        if (!empty($this->cache->get($this->customIconsSvgPathListId))) {
-            return $this->cache->get($this->customIconsSvgPathListId);
-        }
-
-        $svgIcons = $this->getSvgIconsFromPath();
-        if (empty($svgIcons)) {
-            return [];
-        }
-        
-        $mappedArray = array_reduce($svgIcons, function($carry, $item) {
-            $carry += array(pathinfo($item, PATHINFO_FILENAME) => $item);
-            return $carry;
-        }, array());
-
-        $this->cache->set($this->customIconsSvgPathListId, $mappedArray);
-    
-        return $this->cache->get($this->customIconsSvgPathListId);
-    }
-
-    private function getSvgIconsFromPath() 
-    {
-        if (function_exists('apply_filters')) {
-            $svgIcons = apply_filters(
-                'ComponentLibrary\Component\Icon\CustomSvgIcons',
-                glob(__DIR__ . '/Svg/*.svg')
-            );
-        } else {
-            $svgIcons = glob(__DIR__ . '/Svg/*.svg');
-        }
-
-        return $svgIcons;
     }
 
     /**

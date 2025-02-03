@@ -8,7 +8,8 @@
         "buttonStyle": "filled",
         "buttonColor": "primary",
         "expandLabel": "Expand",
-        "height": ""
+        "height": "",
+        "compressed": false
     },
     "description":{
         "items": "An nested array of items containing: id, label, active, ancestor, children(bool = async loading, or array), href, style, class, and color (which overrides the color settings). Attribute list may also contain 'data-fetch-url' to enable asyncrounous fetching.",
@@ -18,7 +19,8 @@
         "buttonStyle": "If the nav is presenting buttons, what style they should be in.",
         "buttonColor": "If the nav is presenting buttons, what color they should be in.",
         "expandLabel": "Prefix for labels on expand arrow. Will result in Expand: Link label, or if label is missing, just Expand.",
-        "height": "The default height of the menu (only supports horizontal navigation). Values: sm, md, lg."
+        "height": "The default height of the menu (only supports horizontal navigation). Values: sm, md, lg.",
+        "compressed": "Makes the spacing between items smaller and the overall navigation more compressed."
     },
     "view":"nav.blade.php",
     "dependency": {

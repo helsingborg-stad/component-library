@@ -7,13 +7,13 @@
         "color": "",
         "customColor": "",
         "componentElement": "span",
-        "filled": true,
+        "filled": null,
         "decorative": false
     },
     "description": {
         "size": "Sizes: xs, sm, md, lg, xl, xxl",
         "label": "A label on the icon",
-        "icon": "The icon name",
+        "icon": "The icon name or a url to a svg file",
         "color": "The color of the icon",
         "customColor": "A custom HEX color",
         "componentElement": "Icon HTML tag",

@@ -2,52 +2,63 @@
     "slug": "image",
     "default": {
         "src": false,
+        "srcset": false,
         "alt": "",
         "caption": "",
+        "removeCaption": false,
         "byline": "",
         "fullWidth": false,
+        "cover": false,
         "rounded": false,
-        "openModal": false,
-        "placeholderText": "Image missing",
+        "placeholderEnabled": true,
+        "placeholderText": false,
         "placeholderIcon": "broken_image",
-        "placeholderIconSize": "xl",
+        "placeholderIconSize": "xxl",
         "imgAttributeList": [],
-        "removeCaption": false
+        "lqipEnabled": true,
+        "calculateAspectRatio": true
     },
     "description": {
-        "alt": "Alt text of the image",
-        "caption": "Image caption",
-        "byline": "placed under the caption",
-        "rounded": "Border radius of the image, false for no radius. Accepted values are xs, sm, md, lg, full",
-        "openModal": "If the image should be able to open in a modal",
+        "src": "A string containing a valid URL or an ImageInterface object. If the object is used, the srcset attribute is ignored.",
+        "srcset": "A string containing a valid srcset attribute. Ignored if src is an ImageInterface object.",
+        "alt": "Alt text of the imag. May override the alt text of the ImageInterface object.",
+        "caption": "Image caption. That will be visible for the user. ",
+        "removeCaption": "Removes the visible caption. The caption may still be used as an alt-text for the image.",
+        "byline": "Byline for additional information, placed under the caption",
+        "fullWidth": "If the image should obtain the --full-width modifier.",
+        "cover": "If the image should obtain the --cover modifier.",
+        "rounded": "Border radius of the image, false for no radius. Accepted values are xs, sm, md, lg, full (circle)",
+        "placeholderEnabled": "If the placeholder should be enabled, if false, the component will not render at all if the src is empty",
         "placeholderText": "Label to show if image is missing",
         "placeholderIcon": "Icon to display if image is missing / false to hide",
         "placeholderIconSize": "Icons size, please refer to image component for size.",
         "imgAttributeList": "Attributes for the img element.",
-        "removeCaption": "Shows only the alt-text removing the image caption and byline"
-
+        "lqipEnabled": "If the low quality image placeholder should be enabled.",
+        "calculateAspectRatio": "If the aspect ratio should be calculated based on the image dimensions. This option will be ignored if cover is set to true."
     },
     "types": {
-        "src": "boolean|string",
+        "src": "boolean|string|ImageInterface",
+        "srcset": "boolean|string",
         "alt": "string|NULL",
         "caption": "string|boolean",
+        "removeCaption": "boolean",
         "byline": "string|NULL",
         "fullWidth": "boolean",
+        "cover": "boolean",
         "rounded": "boolean",
-        "openModal": "boolean",
-        "placeholderText": "string",
+        "placeholderEnabled": "boolean",
+        "placeholderText": "string|boolean",
         "placeholderIcon": "string",
         "placeholderIconSize": "string",
         "imgAttributeList": "array",
-        "removeCaption": "boolean"
+        "lqipEnabled": "boolean",
+        "calculateAspectRatio": "boolean"
     },
     "view": "image.blade.php",
     "dependency": {
         "sass": {
             "components": [
                 "image",
-                "modal",
-                "button",
                 "icon"
             ]
         }

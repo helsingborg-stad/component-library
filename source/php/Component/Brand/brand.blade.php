@@ -1,7 +1,7 @@
 <!-- brand.blade.php -->
 @if($text)
 <div class="{{ $class }}" {!! $attribute !!}>
-    <svg viewBox="0 0 500 100" preserveAspectRatio="xMinYMin meet" class="{{ $baseClass }}__viewbox">
+    <svg viewBox="0 0 500 100" preserveAspectRatio="xMinYMid meet" class="{{ $baseClass }}__viewbox">
         <foreignObject width="100%" height="100%" xmlns="http://www.w3.org/1999/xhtml">
             <div class="{{ $baseClass }}__container" xmlns="http://www.w3.org/1999/xhtml">
 

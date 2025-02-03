@@ -11,8 +11,7 @@
         "date": "",
         "dateBadge": false,
         "icon": false,
-        "postId": false,
-        "postType": ""
+        "iconBackgroundColor": null
     },
     "description": {
         "heading": "The heading of the block",
@@ -31,14 +30,13 @@
         "content": "string|array",
         "meta": "string|array",
         "secondaryMeta": "string|array",
-        "image": "array",
+        "image": "array|boolean|ImageInterface",
         "link": "string",
         "ratio": "string",
-        "date": "string",
+        "date": "array",
         "dateBadge": "boolean",
-        "icon": "boolean",
-        "postId": "boolean",
-        "postType": "string"
+        "icon": "boolean|array",
+        "iconBackgroundColor": "string"
     },
     "view": "block.blade.php",
     "dependency": {

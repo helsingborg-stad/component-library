@@ -23,7 +23,9 @@
         "contentApplyRoundedCorners": true,
         "contentApplyShadows": true,
         "buttonArgs": [],
-        "poster": false
+        "poster": false,
+        "overlay": "",
+        "content": false
     },
     "description": {
         "image": "Background image",
@@ -48,7 +50,36 @@
         "contentApplyRoundedCorners": "Apply rounded corners to content if contentBackgroundColor is set.",
         "contentApplyShadows": "Apply shadows to content if contentBackgroundColor is set.",
         "buttonArgs": "Add a @button by passing @button component arguments. If button is treated as a link, all te text elements in the content gets wrapped with this link.",
-        "poster": "Poster image for the video"
+        "poster": "Poster image for the video",
+        "overlay": "Add an overlay over an image to make text more legible",
+        "content": "Content slot to be displayed in the hero"
+    },
+    "types": {
+        "image": "string|ImageInterface",
+        "imageFocus": "object",
+        "video": "string",
+        "size": "string",
+        "title": "string",
+        "byline": "string",
+        "paragraph": "string",
+        "stretch": "boolean",
+        "animation": "string",
+        "ariaLabel": "string",
+        "heroView": "string",
+        "customHeroData": "array",
+        "meta": "string",
+        "background": "string",
+        "textColor": "string",
+        "textAlignment": "string",
+        "contentBackgroundColor": "string",
+        "contentAlignmentVertical": "string",
+        "contentAlignmentHorizontal": "string",
+        "contentApplyRoundedCorners": "boolean",
+        "contentApplyShadows": "boolean",
+        "buttonArgs": "array",
+        "poster": "boolean",
+        "overlay": "string",
+        "content": "string|boolean"
     },
     "view": "hero.blade.php",
     "dependency": {

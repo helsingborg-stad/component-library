@@ -5,14 +5,15 @@
                 'wrap' => 'wrap',
                 'classList' => [$baseClass . '__content', 'o-grid', 'u-flex-direction--row--reverse']
             ])
-                <div class="{{$baseClass}}__group">
+                <div class="{{$baseClass}}__group {{$baseClass}}__image-container">
                     @image([
                         'src' => $image,
-                        'classList' => ['u-margin__bottom--0', $baseClass . '__group-image']
+                        'classList' => ['u-margin__bottom--0', $baseClass . '__group-image'],
+                        'cover' => true
                     ])
                     @endimage
                 </div>
-                <div class="{{$baseClass}}__group">
+                <div class="{{$baseClass}}__group {{$baseClass}}__content-container">
                     @group([
                         'justifyContent' => 'center',
                         'direction' => 'vertical',

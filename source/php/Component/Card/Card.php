@@ -17,60 +17,48 @@ class Card extends \ComponentLibrary\Component\BaseController
 
         $this->data['collpaseID'] = uniqid();
 
-        $this->data['classList'][] = $this->getBaseClass() . '--' . $color;
-
+        //Detect if the slots have data
         $this->data['afterContentSlotHasData'] = $this->slotHasData('afterContent');
+        $this->data['floatingSlotHasData']     = $this->slotHasData('floating');
+        $this->data['aboveContentSlotHasData'] = $this->slotHasData('aboveContent');
+        $this->data['belowContentSlotHasData'] = $this->slotHasData('belowContent');
 
-        $this->data['floatingSlotHasData'] = $this->slotHasData('floating');
-
-        if (isset($image['padded']) && $image['padded']) {
-            $this->data['paddedImage'] = $this->getBaseClass() . '__image-background--padded';
+        if ($image || $hasPlaceholder) {
+            $this->data['classList'][] = $this->getBaseClass('has-image', true);
         }
 
-        if ($image && !empty($image['src'])) {
-            $this->data['classList'][] = $this->getBaseClass('has-image', true);
+        if ($date && !is_array($date)) {
+            $this->data['date'] = [
+                'timestamp' => $date,
+                'action' => 'formatDate'
+            ];
         }
 
         if ($dateBadge && $date) {
             $this->data['classList'][] = $this->getBaseClass('has-datebadge', true);
         }
 
-        if ($imageFirst || !$image) {
-            $this->data['classList'][] = $this->getBaseClass() . '--image-first';
-        }
-
-        if ($hasFooter || $tags || $buttons) {
-            $this->data['classList'][] = $this->getBaseClass() . '--has-footer';
-        }
-
-        if ($metaFirst) {
-            $this->data['classList'][] = $this->getBaseClass() . '--meta-first';
+        if ($tags || $buttons) {
+            $this->data['classList'][] = $this->getBaseClass('has-footer', true);
         }
 
         if ($collapsible && $content) {
             $this->data['collapsible'] = $this->getBaseClass() . '--collapse';
         }
 
+        //Cast image data to array structure
         if (!empty($image) && is_string($image)) {
             $image = $this->data['image'] = [
-                    'src' => $image
+                'src' => $image
             ];
         }
 
         if (!empty($icon)) {
             $this->data['icon']['classList'][] = $this->getBaseClass('icon');
         }
-        
-        if (!isset($this->data['displayIcon'])) {
-            $this->data['displayIcon'] = true;
-        }
 
         if (!empty($hasPlaceholder)) {
             $this->data['classList'][] = $this->getBaseClass() . '--svg-background';
-        }
-
-        if ($image && !isset($image['src']) || (isset($image['src']) && empty($image['src']))) {
-            $this->data['image'] = false;
         }
 
         if (is_array($image) && !isset($image['backgroundColor'])) {
@@ -98,5 +86,40 @@ class Card extends \ComponentLibrary\Component\BaseController
                 strip_tags($content)
             );
         }
+      
+        $this->data['imageExists'] = $this->hasImage($image);
+
+        $this->data['contentHtmlElement'] = $this->getContentHTMLElement($content);
+    }
+    
+    /**
+     * Check if the image is set
+     * 
+     * @param mixed $image
+     * 
+     * @return bool
+     */
+    private function hasImage($image) {
+        if (is_a($image, 'ComponentLibrary\Integrations\Image\Image')) {
+            return !empty($image->getUrl());
+        }
+        if (is_array($image)) {
+            return !empty($image['src']);
+        }
+        return !empty($image);
+    }
+
+    /**
+     * Get the type of content wrapper that should be used
+     * 
+     * @param string $content
+     * 
+     * @return string
+     */
+    private function getContentHTMLElement($content) {
+        if (strpos($content, '<p>') !== false) {
+            return 'span';
+        }
+        return 'p';
     }
 }

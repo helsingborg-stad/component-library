@@ -15,7 +15,7 @@
                 @typography([
                     'element' => 'h2',
                     'variant' => $layout == 'full-width' ? 'h1' : ($layout == 'card' ? 'h3' : 'h2'),
-                    'classList' => [$baseClass . '__title', 'u-margin__bottom--1'],
+                    'classList' => [$baseClass . '__title', 'u-margin__bottom--1', 'u-margin__top--0'],
                     'autopromote' => true
                 ])
                     @link([
@@ -39,14 +39,22 @@
             @endif
         @endgroup
 
-        @if ($icon && !empty($displayIcon))
-            @inlineCssWrapper([
-                'styles' => ['background-color' => $icon['backgroundColor'], 'display' => 'flex'],
-                'classList' => [$icon['backgroundColor'] ? '' : 'u-color__bg--primary', 'u-rounded--full', 'u-detail-shadow-3']
+        @if ($icon)
+            @element([
+                'attributeList' => [
+                    'style' => 'background-color: ' . ($iconBackgroundColor ?? 'transparent') . ';',
+                ],
+                'classList' => [
+                    'u-display--flex',
+                    $iconBackgroundColor ? 'u-padding__x--1' : '',
+                    $iconBackgroundColor ? 'u-padding__y--1' : '',
+                    'u-rounded--full',
+                    'u-detail-shadow-3'
+                ]
             ])
                 @icon($icon)
                 @endicon
-            @endinlineCssWrapper
+            @endelement
         @endif
     @endgroup
 @endif
@@ -68,6 +76,14 @@
     @endtags
 @endif
 
+@if ($aboveContentSlotHasData)
+    @element([
+        'classList' => [$baseClass . '__above-content', 'u-margin__top--1']
+    ])
+        {!! $aboveContent !!}
+    @endelement
+@endif
+
 @if ($content)
     @typography([
         'element' => 'div',
@@ -75,6 +91,14 @@
     ])
         {!! $content !!}
     @endtypography
+@endif
+
+@if ($belowContentSlotHasData)
+    @element([
+        'classList' => [$baseClass . '__below-content', 'u-margin__top--1']
+    ])
+        {!! $belowContent !!}
+    @endelement
 @endif
 
 @if ($buttons)

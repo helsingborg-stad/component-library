@@ -6,7 +6,7 @@ class ModalTest extends PHPUnit\Framework\TestCase
     public function testCloseButtonTextDefaultsToEmptyString()
     {
         $data = $this->getComponentData([]);
-        $modal = new \ComponentLibrary\Component\Modal\Modal($data);
+        $modal = new \ComponentLibrary\Component\Modal\Modal($data, new \ComponentLibrary\Cache\StaticCache());
 
         // Act
         $componentData = $modal->getData();
@@ -18,7 +18,7 @@ class ModalTest extends PHPUnit\Framework\TestCase
     public function testCloseButtonTextIsset()
     {
         $data = $this->getComponentData(['closeButtonText' => 'Close']);
-        $modal = new \ComponentLibrary\Component\Modal\Modal($data);
+        $modal = new \ComponentLibrary\Component\Modal\Modal($data, new \ComponentLibrary\Cache\StaticCache());
 
         // Act
         $componentData = $modal->getData();

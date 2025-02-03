@@ -2,13 +2,32 @@
     "slug": "megaMenu",
     "default": {
         "menuItems": [],
+        "parentType": "default",
         "parentStyle": false,
         "parentStyleColor": "primary",
+        "childType": "default",
+        "childStyle": false,
+        "childStyleColor": "primary",
         "mobile": false
+    },
+    "types": {
+        "menuItems": "array",
+        "parentType": "string",
+        "parentStyle": "string|boolean",
+        "parentStyleColor": "string",
+        "childType": "string",
+        "childStyle": "string|boolean",
+        "childStyleColor": "string",
+        "mobile": "boolean"
     },
     "description": {
         "menuItems": "List of arrays containing at least 'label' and 'href' option 'icon' name as string.",
-        "parentStyle": "Select the style of menu parents.",
+        "parentType": "Select the type of menu parents.",
+        "parentStyle": "Select the style of menu parents (only applies when type equals button).",
+        "parentStyleColor": "Select the color of the parent style. (only applies when type equals button).",
+        "childType": "Select the type of menu children.",
+        "childStyle": "Select the style of menu children. (only applies when type equals button).",
+        "childStyleColor": "Select the color of the child style. (only applies when type equals button).",
         "mobile": "If true, the mega menu will be visible on mobile as well."
     },
     "view": "megaMenu.blade.php",

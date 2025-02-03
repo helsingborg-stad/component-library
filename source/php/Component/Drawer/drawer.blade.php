@@ -4,13 +4,13 @@
     @endbutton
 @endif
 
-<nav class="c-drawer c-drawer--right c-drawer--primary js-drawer {{$class}}" {!! $attribute !!}>
+<nav class="c-drawer c-drawer--right js-drawer {{$class}}" {!! $attribute !!}>
     <div class="c-drawer__header">
         @button([
             'style' => 'basic',
             'icon' => 'close',
             'attributeList' => [
-                'aria-controls' => 'navigation',
+                'aria-controls' => 'drawer',
                 'data-simulate-click' => $simulateClickSelector
             ],
             'classList' => [
@@ -34,6 +34,10 @@
         @endif
 
     </div>
+
+    @if ($afterMenuSlotHasData)
+        {!! $afterMenu !!}
+    @endif
 </nav>
 
 <div class="drawer-overlay js-close-drawer {{$screenSizeClassNames}}" data-simulate-click="{{$simulateClickSelector}}" {!! $moveTo !!}></div>

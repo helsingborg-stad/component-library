@@ -14,8 +14,10 @@ class Group extends \ComponentLibrary\Component\BaseController
         extract($this->data);
 
         if (!empty($fluidGrid)) {
+            $fluidGrid = is_numeric($fluidGrid) ? $fluidGrid : 3;
             $this->data['containerAware'] = true;
             $this->data['classList'][] = $this->getBaseClass('fluid-grid', true);
+            $this->data['classList'][] = $this->getBaseClass('fluid-grid-' . $fluidGrid, true);
         }
 
         if ($direction == "vertical") {
@@ -24,38 +26,40 @@ class Group extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . "--horizontal";
         }
 
-        if(!empty($justifyContent)) {
+        if (!empty($justifyContent)) {
             $this->data['classList'][] = $this->getBaseClass() . "--justify-content-" . $justifyContent;      
         }
         
-        if(!empty($gap)) {
-            $this->data['classList'][] = $this->getBaseClass('gap-' . $gap, true);      
+        if (!empty($gap)) {
+            $this->data['classList'][] = $this->getBaseClass('gap-' . $gap, true);
         }
         
-        if(!empty($alignItems)) {
+        if (!empty($alignItems)) {
             $this->data['classList'][] = $this->getBaseClass() . "--align-items-" . $alignItems;      
         }
 
-        if(!empty($alignContent)) {
+        if (!empty($alignContent)) {
             $this->data['classList'][] = $this->getBaseClass() . "--align-content-" . $alignContent;      
         }
 
-        if(!empty($display)) {
+        if (!empty($display)) {
             $this->data['classList'][] = $this->getBaseClass() . "--display-" . $display;      
         }
 
-        if(!empty($wrap)) {
+        if (!empty($wrap)) {
             $this->data['classList'][] = $this->getBaseClass() . "--flex-wrap-" . $wrap;      
         }
 
-        if($flexGrow) {
+        if ($flexGrow) {
             $this->data['classList'][] = $this->getBaseClass() . "--flex-grow";
         }
 
-        if(!$flexShrink) {
+        if (!$flexShrink) {
             $this->data['classList'][] = $this->getBaseClass() . "--flex-shrink-none";
         }
 
+        if ($columns) {
+            $this->data['classList'][] = $this->getBaseClass() . "--columns-" . $columns;
+        }
     }
-
 }

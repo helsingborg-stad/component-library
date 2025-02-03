@@ -17,6 +17,7 @@ class Drawer extends \ComponentLibrary\Component\BaseController
         //Define has data
         $this->data['searchSlotHasData'] = $this->slotHasData('search');
         $this->data['menuSlotHasData'] = $this->slotHasData('menu');
+        $this->data['afterMenuSlotHasData'] = $this->slotHasData('afterMenu');
 
         //Create screen sizes parameters
         $this->data['screenSizeClassNames'] = $this->getScreenSizeClassNamesAsString(
@@ -88,7 +89,7 @@ class Drawer extends \ComponentLibrary\Component\BaseController
         } 
 
         $toggleButtonData['attributeList']['data-js-toggle-trigger'] = 'drawer-' . $this->getUid();
-        $toggleButtonData['attributeList']['aria-controls'] = 'navigation';
+        $toggleButtonData['attributeList']['aria-controls'] = 'drawer';
         $toggleButtonData['classList'] = array_merge($screenSizeClassNames, $toggleButtonData['classList'] ?? []);
         $toggleButtonData['classList'][] = $this->getBaseClass('toggle');
 

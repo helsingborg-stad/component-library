@@ -2,8 +2,5 @@
 <{{ $componentElement }} class="{{$class}}" {!! $attribute !!}>
     @includeWhen(!$slotHasData, 'Card.views.base')
     {!! $slot !!}
-    @if($afterContentSlotHasData)
-        {!! $afterContent !!}
-    @endif
+    @includeWhen($afterContentSlotHasData, 'Card.views.after-content')
 </{{ $componentElement }}>
-

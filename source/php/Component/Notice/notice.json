@@ -4,19 +4,25 @@
         "type": "info",
         "message": {"title": false, "text": false},
         "icon": false,
-        "stretch": false
+        "stretch": false,
+        "dismissable": false,
+        "action": false
     },
     "description": {
         "type": "Type of notice: success, warning, danger, info.",
         "message": "An array with two parameters: title and text",
         "icon": "The icon name as a string.",
-        "stretch": "If true, the notice will stretch to the full width of the viewport."
+        "stretch": "If true, the notice will stretch to the full width of the viewport.",
+        "dismissable": "If not false, the notice will have a close button. Allowed trueish values: immediate (show notice on reload), session (show notice at next visit, default), permanent (show notice when local storage is wiped).",
+        "action": "An array with two parameters: label and url."
     },
     "types": {
         "type": "string",
         "message": "array|object",
         "icon": "array|object",
-        "stretch": "boolean" 
+        "stretch": "boolean",
+        "dismissable": "boolean|string",
+        "action": "array|boolean"
     },
     "view": "notice.blade.php",
     "dependency": {
@@ -24,7 +30,8 @@
             "components": [
                 "notice",
                 "icon",
-                "typography"
+                "typography",
+                "button"
             ]
         }
     }

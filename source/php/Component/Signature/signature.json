@@ -9,7 +9,8 @@
         "updated": "",
         "link": "",
         "updatedLabel": "Updated", 
-        "publishedLabel": "Published"
+        "publishedLabel": "Published",
+        "placeholderAvatar": true
     },
     "description":{
         "author": "The name of the  author",
@@ -20,7 +21,8 @@
         "updated": "A formatted update date",
         "link": "Links the whole component to another place.",
         "updatedLabel": "Label text updated.", 
-        "publishedLabel": "Label text published."
+        "publishedLabel": "Label text published.",
+        "placeholderAvatar": "If there should be a placeholder avatar."
     },
     "view":"signature.blade.php"
  }

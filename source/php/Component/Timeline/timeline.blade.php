@@ -16,13 +16,13 @@
                 'link' => $event['link'],
                 'heading' => $event['title'],
                 'content' => $event['content'],
-                'image' => isset($event['imageSrc'])
+                'image' => is_array($event['imageSrc'])
                     ? [
-                        'src' => $event['imageSrc'][0],
+                        'src' => $event['imageSrc'][0] ?? null,
                         'alt' => $event['title'],
                         'backgroundColor' => 'none'
                     ]
-                    : []
+                    : ($event['imageSrc'] ?? null),
             ])
             @endcard
         </li>

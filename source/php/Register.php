@@ -5,6 +5,7 @@ namespace ComponentLibrary;
 use ComponentLibrary\Cache\CacheInterface;
 use HelsingborgStad\BladeService\BladeServiceInterface;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\View\ComponentSlot;
 use Throwable;
 
 class Register
@@ -202,11 +203,27 @@ class Register
             if (is_object($argsTypes) && isset($argsTypes->{$key})) {
                 $types = explode('|', $argsTypes->{$key});
                 $valueType = gettype($value);
-                if (!in_array($valueType, $types) && !$valueType === 'NULL') {
-                    $this->triggerError('The parameter <b>"' . $key . '"</b> in the <b>' . $componentSlug . '</b> component should be of type <b>"' . $argsTypes->{$key} . '"</b> but was recieved as type <b>"' . gettype($value) . '"</b>.');
+        
+                // Check if the value is an object, and get its class name without the namespace
+                if ($valueType === 'object') {
+                    $classNameWithoutNamespace = class_basename($value);
                 }
-            } elseif(!in_array($key, ['__laravel_slots', 'slot', 'id', 'classList', 'context', 'attributeList'])) {
-                $this->triggerError('The parameter ' . '<b>"' . $key . '"</b> is not recognized in the component <b>"' . $componentSlug .'"</b>'); 
+        
+                if (!in_array($valueType, $types) && !$valueType === 'NULL') {
+                    // Modify the error message to show object class name without namespace if applicable
+                    $valueTypeDisplay = $valueType === 'object' ? $classNameWithoutNamespace : $valueType;
+                    $this->triggerError(
+                        'The parameter <b>"' . $key . '"</b> in the <b>' . $componentSlug . '</b> component should be of type <b>"' 
+                        . $argsTypes->{$key} . '"</b> but was received as type <b>"' . $valueTypeDisplay . '"</b>.'
+                    );
+                }
+            } elseif (
+                !in_array($key, ['__laravel_slots', 'slot', 'id', 'classList', 'context', 'attributeList', 'baseClass', 'lang']) && 
+                !(is_object($value) && $value instanceof ComponentSlot)
+            ) {
+                $this->triggerError(
+                    'The parameter <b>"' . $key . '"</b> is not recognized in the component <b>"' . $componentSlug . '"</b>'
+                );
             }
         }
     }

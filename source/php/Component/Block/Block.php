@@ -16,8 +16,9 @@ class Block extends \ComponentLibrary\Component\BaseController
         extract($this->data);
         
         $this->data['floatingSlotHasData'] = $this->slotHasData('floating');
+        $this->data['metaAreaSlotHasData'] = $this->slotHasData('metaArea');
 
-        if ($image && !isset($image['backgroundColor'])) {
+        if ($image && is_array($image) && !isset($image['backgroundColor'])) {
             $this->data['image']['backgroundColor'] = 'primary';
         }
 
@@ -44,9 +45,18 @@ class Block extends \ComponentLibrary\Component\BaseController
             $this->data['icon']['classList'][] = $this->getBaseClass('icon');
         }
 
-        if (!isset($this->data['displayIcon'])) {
-            $this->data['displayIcon'] = true;
+        if ($date && !is_array($date)) {
+            $this->data['date'] = [
+                'timestamp' => $date,
+                'action' => 'formatDate'
+            ];
         }
+
+        if ($date) {
+            $this->data['date']['classList'] ??= [];
+            $this->data['date']['classList'][] = $this->getBaseClass('date');
+        }
+
 
         $this->data['classList'][] = $this->getBaseClass() . '--ratio-' . str_replace(":", "-", $ratio);
 

@@ -107,23 +107,26 @@ class Avatar extends \ComponentLibrary\Component\BaseController
 	 */
 	public function createInitials()
 	{
-		if (!empty($this->compParams['name']) && empty($this->compParams['image']) && empty($this->compParams['icon']['name'])) {
-			$nameParts = preg_split("/( |-|_)/", $this->compParams['name']);
+			if (!empty($this->compParams['name']) && empty($this->compParams['image']) && empty($this->compParams['icon']['name'])) {
+					$nameParts = preg_split("/( |-|_)/", $this->compParams['name']);
 
-			if (is_array($nameParts) && !empty($nameParts)) {
-				$initials = array();
-				foreach ($nameParts as $part) {
-					$initials[] = substr($part, 0, 1);
-				}
+					if (is_array($nameParts) && !empty($nameParts)) {
+							$initials = array();
 
-				$this->data['initials'] = strtoupper(implode("", $initials));
-				return $this->data['initials'];
+							foreach ($nameParts as $part) {
+									if (preg_match('/^[A-Z]/', $part)) { // Check if the word starts with an uppercase letter
+											$initials[] = substr($part, 0, 1);
+									}
+							}
+
+							$this->data['initials'] = strtoupper(implode("", $initials));
+							return $this->data['initials'];
+					}
+			} else {
+					$this->data['initials'] = null;
 			}
-		} else {
-			$this->data['initials'] = null;
-		}
 
-		return null;
+			return null;
 	}
 
 	/**

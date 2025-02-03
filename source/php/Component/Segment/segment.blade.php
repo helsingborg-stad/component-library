@@ -5,6 +5,9 @@
             {!! $floating !!}
         </div>
     @endif
-    @includeWhen($image, 'Segment.components.image')
+    @includeWhen(
+        $hasImage || ($hasPlaceholder && !$hasImage), 
+        'Segment.components.image'
+    )
     @include('Segment.partials.' . $layout)
 </section>

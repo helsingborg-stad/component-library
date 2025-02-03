@@ -6,10 +6,6 @@
         "content": false,
         "textSize": "default",
         "image": false,
-        "imageFocus": {
-            "top": 50,
-            "left": 50
-        },
         "background": false,
         "backgroundOverlay": false,
         "textColor": "dark",
@@ -25,8 +21,9 @@
         "meta": false,
         "tags": false,
         "icon": false,
+        "iconBackgroundColor": null,
         "link": false,
-        "hasPlaceholder": false,
+        "hasPlaceholder": true,
         "lang": {
             "visit": "Visit"
         }
@@ -37,8 +34,7 @@
         "content": "The content of the segment",
         "textSize": "The sizing of the font",
         "image": "Add a URL for an image",
-        "imageFocus": "Where the focus point should be of an image when container dosen't match image ratio.",
-        "background": "The background color, can be an URL to an image, hex value or a color name (i.e. primary, secondary, etc)",
+        "background": "The background color, hex value or a color name (i.e. primary, secondary, etc)",
         "backgroundOverlay": "Which overlay to use",
         "textColor": "Color of the text",
         "height": "Height behavior of the sections height",
@@ -54,8 +50,36 @@
         "tags": "Array of tags according to the tags component",
         "meta": "The meta text",
         "icon": "An array with the same specification as the icon component",
+        "iconBackgroundColor": "The background color of the icon",
         "hasPlaceholder": "Sets image specific styling based on the image being a placholder image.",
         "lang": "An array with labels used in the component."
+    },
+    "types": {
+        "layout": "string",
+        "title": "string|boolean",
+        "content": "string|boolean",
+        "textSize": "string",
+        "image": "string|ImageInterface",
+        "background": "string",
+        "backgroundOverlay": "string",
+        "textColor": "string",
+        "height": "string",
+        "paddingTop": "boolean",
+        "paddingBottom": "boolean",
+        "textAlignment": "string",
+        "reverseColumns": "boolean",
+        "overlay": "string",
+        "stretch": "boolean",
+        "buttons": "array",
+        "link": "string|boolean",
+        "date": "string|boolean",
+        "tags": "array|boolean",
+        "meta": "string|boolean",
+        "icon": "array|boolean",
+        "iconBackgroundColor": "string",
+        "hasPlaceholder": "boolean",
+        "lang": "array|boolean",
+        "containerAware": "boolean"
     },
     "view": "segment.blade.php",
     "dependency": {

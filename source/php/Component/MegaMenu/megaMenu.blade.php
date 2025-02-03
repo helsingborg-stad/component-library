@@ -1,5 +1,5 @@
 <!-- megaMenu.blade.php -->
-<div class="{{$class}} u-display--none" js-toggle-item="mega-menu" js-toggle-class="u-display--none"  {!! $attribute !!}>
+<div class="{{$class}} u-display--none" {!! $attribute !!}>
     
 <nav class="{{$baseClass}}__menu o-container o-container--wide o-grid">
     
@@ -9,7 +9,7 @@
         @foreach ($menuItems as $item)
             <li id="{{$id}}-main-item-{{$item['id']}}"
                 class="{{$baseClass}}__item {{$baseClass}}__item--parent o-grid-12 o-grid-6@md o-grid-4@lg o-grid-3@xl u-mb-6 u-margin__top--1 {{$item['classNames']}}">
-                @if(!empty($parentStyle))
+                @if($parentType === 'button')
                     @button([
                         'text' => $item['label'],
                         'style' => $parentStyle,
@@ -50,28 +50,46 @@
                         {{ $item['description'] }}
                     @endtypography
                 @endif
+
                 {{-- Children --}}
                 @if (!empty($item['children']))
-                    <ul class="{{$baseClass}}__sublist unlist u-margin__top--2">
+                    <ul class="{{$baseClass}}__sublist {{$baseClass}}__sublist--{{ ($childType === 'button' ? 'flex' : 'list') }} unlist u-margin__top--2">
                         @foreach ($item['children'] as $child)
                             <li id="{{$id}}-item-{{$child['id']}}" class="{{$baseClass}}__item {{$baseClass}}__item--child {{ $child['classNames'] }}">
-                                @link([
-                                    'href' => $child['href'],
-                                    'classList' => [
-                                        $baseClass . '__link', 
-                                        $baseClass . '__link--child'
-                                    ]
-                                ])
-                                @if(isset($child['icon']) && !array_diff(['icon', 'size', 'classList'], array_keys($child['icon'])))
-                                    @icon([
-                                        'icon' => $child['icon']['icon'],
-                                        'size' => $child['icon']['size'],
-                                        'classList' => $child['icon']['classList'],
+                                @if($childType === 'button')
+                                    @button([
+                                        'text' => $child['label'],
+                                        'style' => $childStyle,
+                                        'color' => $childStyleColor ?? 'primary',
+                                        'icon' => $child['icon']['icon'] !== "" ? $child['icon']['icon'] : 'chevron_right',
+                                        'href' => $child['href'],
+                                        'size' => 'sm',
+                                        'classList' => [
+                                            $baseClass . '__link',
+                                            $baseClass . '__link--button',
+                                        ],
+                                        'context' => ['component.megamenu.button.child']
                                     ])
-                                    @endicon
+                                    @endbutton
+                                @else
+                                    @link([
+                                        'href' => $child['href'],
+                                        'classList' => [
+                                            $baseClass . '__link', 
+                                            $baseClass . '__link--child'
+                                        ]
+                                    ])
+                                    @if(isset($child['icon']) && !array_diff(['icon', 'size', 'classList'], array_keys($child['icon'])))
+                                        @icon([
+                                            'icon' => $child['icon']['icon'],
+                                            'size' => $child['icon']['size'],
+                                            'classList' => $child['icon']['classList'],
+                                        ])
+                                        @endicon
+                                    @endif
+                                        {{ $child['label'] }}
+                                    @endlink
                                 @endif
-                                    {{ $child['label'] }}
-                                @endlink
                             </li>
                         @endforeach
                     </ul>

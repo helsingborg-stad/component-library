@@ -1,16 +1,17 @@
 <{{$componentElement}} class="{{$class}}" {!! $attribute !!}>
     
     @if($author)
-        @avatar([
-            'image' => ($avatar) ? $avatar : false,
-            'name' => $author,
-            'size' => $avatar_size,
-            "classList" => [
-                $baseClass.'__avatar'
-            ]
-        ])
-        @endavatar
-
+        @if ($avatar || $placeholderAvatar)
+            @avatar([
+                'image' => ($avatar) ? $avatar : false,
+                'name' => $author,
+                'size' => $avatar_size,
+                "classList" => [
+                    $baseClass.'__avatar'
+                ]
+            ])
+            @endavatar
+        @endif
         <div class="{{$baseClass}}__author-box">
             <div>
                 @typography([
@@ -33,24 +34,28 @@
                     ])
                         {{$authorRole}}
                     @endtypography
+
                 @endif
+                    {!! $slot !!}
             </div>
         </div>
     @endif
 
     
-    @if($published)
+    @if($published||$updated)
         <div class="{{$baseClass}}__dates {{$author ? $baseClass.'__dates--aligned' : ''}}">
 
-            @typography([
-                "element" => "span",
-                "variant" => "byline",
-                "classList" => [
-                    $baseClass.'__published'
-                ]
-            ])
-                {{$label->publish}}: @date(['action' => false,'timestamp' => $published])@enddate
-            @endtypography
+            @if ($published)
+                @typography([
+                    "element" => "span",
+                    "variant" => "byline",
+                    "classList" => [
+                        $baseClass.'__published'
+                    ]
+                ])
+                    {{$label->publish}}: @date(['action' => false,'timestamp' => $published])@enddate
+                @endtypography
+            @endif
             
             @if ($updated)
                 @typography([

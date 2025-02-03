@@ -14,17 +14,19 @@
           @icon(['icon' => $item['icon']])
           @endicon
         @endif
-  
         @if($loop->last) 
-          <span class="{{$baseClass}}__label" aria-current="page">
-            {!! $item['label']  !!}
-          </span>
+        @include ('Breadcrumb.partials.label', ['labelAttributes' => 'aria-current="page"'])
         @else 
-          <a class="{{$baseClass}}__link" href="{{ $item['href'] }}">
-            <span class="{{$baseClass}}__label">
-               {!! $item['label']  !!}
+
+          @if($item['href'])
+            <a class="{{$baseClass}}__link" href="{{ $item['href'] }}">
+              @include ('Breadcrumb.partials.label')
+            </a>
+          @else
+            <span class="{{$baseClass}}__link {{$baseClass}}__link--unclickable">
+              @include ('Breadcrumb.partials.label')
             </span>
-          </a>
+          @endif
         @endif
 
       </{{$listItemType}}>

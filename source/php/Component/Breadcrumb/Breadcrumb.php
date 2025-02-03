@@ -12,24 +12,36 @@ class Breadcrumb extends \ComponentLibrary\Component\BaseController
     public function init() {
         //Extract array for eazy access (fetch only)
         extract($this->data);
-		$this->compParams = ['list' => $list];
-        $this->iconDirectives();
+
+
+		if (is_null($truncate)) {
+			$this->data['truncate'] = $this->data['defaultTruncate'] ?? 30;
+		}
+		
+		$this->data['list'] = $this->structureBreadcrumbs();
     }
 
-	/**
-	 * iconDirectives
-	 * @return array
-	 */
-    public function iconDirectives(){
-		//Adds icon directives
-		if($this->compParams['list'] && is_array($this->compParams['list']) && !empty($this->compParams['list'])) {
-
-			foreach($this->compParams['list'] as $key => $item) {
-				if(!isset($this->data['list'][$key]['icon'])) {
-					$this->data['list'][$key]['icon'] = ($key) ? "chevron_right" : "bookmark";
-				}
-			}
-			return $this->data;
+	private function structureBreadcrumbs()
+	{
+		if (empty($this->data['list'])) {
+			return [];
 		}
+
+		$list = $this->data['list'];
+		foreach ($list as $key => &$item) {
+			if (empty($item['icon'])) {
+				$item['icon'] = $key ? 'chevron_right' : 'bookmark';
+			}
+
+			if (
+				$this->data['truncate'] && 
+				!empty($item['label']) && 
+				strlen($item['label']) > $this->data['truncate']
+			) {
+				$item['truncatedLabel'] = \ComponentLibrary\Helper\Truncate::truncate($item['label'], $this->data['truncate']);
+			}
+		}
+
+		return $list;
 	}
 }

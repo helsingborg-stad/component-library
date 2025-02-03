@@ -54,10 +54,13 @@ class Button extends \ComponentLibrary\Component\BaseController
             if (!is_array($classListIcon) && empty($classListIcon)) {
                 $classListIcon = [];
             }
+            
             $classListIcon[] = $this->getBaseClass() . '__label-icon--reverse';
+
             if (!is_array($classListText) && empty($classListText)) {
                 $classListText = [];
             }
+
             $classListText[] = $this->getBaseClass() . '__label-text--reverse';
         }
 

@@ -102,13 +102,13 @@ class Siteselector extends \ComponentLibrary\Component\BaseController
                     'active' => false,
                     'children' => false,
                     'href' => "#",
-                    'classList' => [
-                        $this->getBaseClass('item')
-                    ],
                     'style' => "default",
                 ],
                 $item
             );
+
+            $item['classList'] = isset($item['classList']) ? $item['classList'] : [];
+            $item['classList'][] = $this->getBaseClass('item');
 
             if(is_numeric($depth)) {
                 $item['depth'] = $depth;

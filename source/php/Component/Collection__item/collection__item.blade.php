@@ -10,21 +10,17 @@
         </div>
     @endif
 
-    @if($icon && !empty($displayIcon)) 
+    @if (!empty($icon))
         <div class="c-collection__icon">
-            @icon([
-                'icon' => $icon, 
-                'size' => 'md',
-                'decorative' => true
-            ])
+            @icon($icon)
             @endicon
         </div>
     @endif
 
-     @if($beforeSlotHasData)
-     <div class="{{$baseClass}}__before">
-        {!! $before !!}
-    </div>
+    @if($beforeSlotHasData)
+        <div class="{{$baseClass}}__before">
+            {!! $before !!}
+        </div>
     @endif
 
     @if($slotHasData)

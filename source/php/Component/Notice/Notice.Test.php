@@ -15,9 +15,9 @@ class NoticeTest extends \PHPUnit\Framework\TestCase
         $baseControllerMock = Mockery::mock(BaseController::class)->makePartial();
         $baseControllerMock->shouldReceive('__construct')->once();
         $message = (object) ['title' => 'Title', 'message' => 'Message'];
-        $data = ['type' => null, 'stretch' => null, 'message' => $message];
+        $data = ['type' => null, 'stretch' => null, 'message' => $message, 'action' => null, 'dismissable' => null];
 
-        $notice = new Notice($data);
+        $notice = new Notice($data, new \ComponentLibrary\Cache\StaticCache());
         $data = $notice->getData();
 
         $this->assertEquals($data['message']['title'], 'Title');
