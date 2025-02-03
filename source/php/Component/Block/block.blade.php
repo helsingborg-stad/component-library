@@ -17,7 +17,7 @@
     @endif
 
     @if($date && $dateBadge)
-        @datebadge(['date' => $date, 'classList' => ['u-margin--3', 'u-absolute--top-left@sm', 'u-absolute--top-left@md', 'u-absolute--top-left@lg', 'u-absolute--top-left@xl', 'u-level-1']])
+        @datebadge(['date' => $date['timestamp'], 'classList' => ['u-margin--3', 'u-absolute--top-left@sm', 'u-absolute--top-left@md', 'u-absolute--top-left@lg', 'u-absolute--top-left@xl', 'u-level-1']])
         @enddatebadge
     @endif
 
@@ -25,11 +25,7 @@
         <div class="{{ $baseClass }}__body">
 
             @if ($date && !$dateBadge)
-                @date([
-                    'action' => false,
-                    'timestamp' => $date,
-                    'classList' => [$baseClass . '__date']
-                ])
+                @date($date)
                 @enddate
             @endif
 

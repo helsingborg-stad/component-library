@@ -33,7 +33,7 @@
         "image": "array|boolean|ImageInterface",
         "link": "string",
         "ratio": "string",
-        "date": "string|boolean",
+        "date": "array",
         "dateBadge": "boolean",
         "icon": "boolean|array",
         "iconBackgroundColor": "string"

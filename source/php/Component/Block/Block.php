@@ -45,6 +45,19 @@ class Block extends \ComponentLibrary\Component\BaseController
             $this->data['icon']['classList'][] = $this->getBaseClass('icon');
         }
 
+        if ($date && !is_array($date)) {
+            $this->data['date'] = [
+                'timestamp' => $date,
+                'action' => 'formatDate'
+            ];
+        }
+
+        if ($date) {
+            $this->data['date']['classList'] ??= [];
+            $this->data['date']['classList'][] = $this->getBaseClass('date');
+        }
+
+
         $this->data['classList'][] = $this->getBaseClass() . '--ratio-' . str_replace(":", "-", $ratio);
 
         if(!$this->hasContent($this->data)) {
