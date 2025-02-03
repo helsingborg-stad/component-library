@@ -68,9 +68,13 @@ class Date extends \ComponentLibrary\Component\BaseController
         $isTimeSince = $this->data['action'] === "timesince";
 
         $this->data['refinedDate']      = $isTimeSince ? $this->handleTimeSince($timestamp) : $this->handleFormatDate($timestamp);
-        $this->data['timeSinceSuffix']  = $isTimeSince ? ($this->data['timeSinceSuffix'] ?? '') : '';
-        $this->data['tooltipDate']      = $this->getToolTipLabel($timestamp, $this->dateFormat, $this->data['action']);
+        $this->data['timeSinceSuffix']  = (function () use ($isTimeSince) {
+            return ($isTimeSince && $this->data['refinedDate'] !== ($this->data['nowLabel'] ?? '')) 
+                ? ($this->data['timeSinceSuffix'] ?? '') 
+                : '';
+        })();
 
+        $this->data['tooltipDate']      = $this->getToolTipLabel($timestamp, $this->dateFormat, $this->data['action']);
         $this->data['attributeList']['data-date'] = $this->getMetaDateFromTimestamp($timestamp);
         
         if ($isTimeSince) {
