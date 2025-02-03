@@ -7,5 +7,7 @@
         'size' => 'sm',
         'classList' => [$baseClass . '__date-icon']
     ]) 
-    @endicon {{ $date }}
+    @endicon 
+    @date($date)
+    @enddate
 @endtypography
