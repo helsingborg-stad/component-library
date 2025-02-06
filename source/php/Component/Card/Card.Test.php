@@ -41,6 +41,7 @@ class CardTest extends TestCase {
             'link' => false,
             'ratio' => false,
             'tags' => false,
+            'date' => null
         ];
 
         return new Card(array_merge($default, $data), $this->createMock(CacheInterface::class));

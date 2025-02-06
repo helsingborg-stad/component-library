@@ -53,7 +53,7 @@ class DateTest extends TestCase {
 
         $instance = new Date($data, $this->getCacheMock());
 
-        $this->assertEquals('1970-01-01', $instance->getData()['refinedDate']);
+        $this->assertEquals('-', $instance->getData()['refinedDate']);
     }
 
     /**
@@ -78,7 +78,7 @@ class DateTest extends TestCase {
         
         $instance = new Date($data, $this->getCacheMock());
         
-        $this->assertStringContainsString('Just now', $instance->getData()['refinedDate']);
+        $this->assertStringContainsString('just now', $instance->getData()['refinedDate']);
     }
 
     /**

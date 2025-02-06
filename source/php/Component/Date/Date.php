@@ -13,7 +13,6 @@ use Exception;
  */
 class Date extends \ComponentLibrary\Component\BaseController
 {
-    private string $dateFormat = 'D d M Y';
     private ?DateFormatter $dateFormatter = null;
     private ?TimeSinceFormatter $timeSinceFormatter = null;
     private ?DateConfig $config = null;
@@ -26,7 +25,7 @@ class Date extends \ComponentLibrary\Component\BaseController
         $this->config               = new DateConfig();
 
         // Set initial values if provided
-        $this->config->setDateFormat($this->data['dateFormat'] ?? null);
+        $this->config->setDateFormat($this->data['format'] ?? null);
 
         // Parse timestamp
         $timestamp = $this->inputDateToTimestamp($this->data['timestamp']);
@@ -67,15 +66,15 @@ class Date extends \ComponentLibrary\Component\BaseController
     private function setValidDate(int $timestamp): void
     {
         $isTimeSince = $this->data['action'] === "timesince";
-
         $this->data['refinedDate']      = $isTimeSince ? $this->handleTimeSince($timestamp) : $this->handleFormatDate($timestamp);
+
         $this->data['timeSinceSuffix']  = (function () use ($isTimeSince) {
             return ($isTimeSince && $this->data['refinedDate'] !== ($this->data['nowLabel'] ?? '')) 
                 ? ($this->data['timeSinceSuffix'] ?? '') 
                 : '';
         })();
 
-        $this->data['tooltipDate']      = $this->getToolTipLabel($timestamp, $this->dateFormat, $this->data['action']);
+        $this->data['tooltipDate']      = $this->getToolTipLabel($timestamp, $this->data['action']);
         $this->data['attributeList']['data-date'] = $this->getMetaDateFromTimestamp($timestamp);
         
         if ($isTimeSince) {
@@ -125,7 +124,7 @@ class Date extends \ComponentLibrary\Component\BaseController
      */
     private function handleFormatDate(int $timestamp): string
     {
-        return $this->dateFormatter->format($timestamp, $this->dateFormat);
+        return $this->dateFormatter->format($timestamp, $this->config->getDateFormat());
     }
 
     /**
@@ -154,12 +153,12 @@ class Date extends \ComponentLibrary\Component\BaseController
      * @param string $format
      * @param string $action
      * 
-     * @return string
+     * @return string|false
      */
-    private function getToolTipLabel(int $timestamp, string $format, string $action)
+    private function getToolTipLabel(int $timestamp, $action): string|false
     {
-        $this->data['action'] === 'timesince'
-            ? $this->dateFormatter->format($timestamp, $this->dateFormat)
+        return $action === 'timesince'
+            ? $this->dateFormatter->format($timestamp, $this->config->getDateFormat())
             : false;
     }
 
