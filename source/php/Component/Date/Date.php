@@ -74,7 +74,7 @@ class Date extends \ComponentLibrary\Component\BaseController
                 : '';
         })();
 
-        $this->data['tooltipDate']      = $this->getToolTipLabel($timestamp, $this->config->getDateFormat(), $this->data['action']);
+        $this->data['tooltipDate']      = $this->getToolTipLabel($timestamp, $this->data['action']);
         $this->data['attributeList']['data-date'] = $this->getMetaDateFromTimestamp($timestamp);
         
         if ($isTimeSince) {
@@ -153,11 +153,11 @@ class Date extends \ComponentLibrary\Component\BaseController
      * @param string $format
      * @param string $action
      * 
-     * @return string
+     * @return string|false
      */
-    private function getToolTipLabel(int $timestamp)
+    private function getToolTipLabel(int $timestamp, $action): string|false
     {
-        $this->data['action'] === 'timesince'
+        return $action === 'timesince'
             ? $this->dateFormatter->format($timestamp, $this->config->getDateFormat())
             : false;
     }
