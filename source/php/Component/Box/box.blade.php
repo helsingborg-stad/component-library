@@ -1,8 +1,8 @@
 <!-- block.blade.php -->
 <{{ $componentElement }} class="{{ $class }}" {!! $attribute !!}>
 
-    @if (!empty($date) && !empty($dateBadge))
-        @datebadge(['date' => $date, 'classList' => ['u-position--absolute', 'u-margin--3', 'u-fixed--top-left']])
+    @if (!empty($date) && $date['timestamp'] && !empty($dateBadge))
+        @datebadge(['date' => $date['timestamp'], 'classList' => ['u-position--absolute', 'u-margin--3', 'u-fixed--top-left']])
         @enddatebadge
     @endif
 
@@ -28,14 +28,9 @@
                 @endicon
             @endif
 
-            @if (!empty($date) && empty($dateBadge))
-                @tags([
-                    'tags' => [['label' => $date]],
-                    'beforeLabel' => '',
-                    'format' => false,
-                    'classList' => [$baseClass . '__tags']
-                ])
-                @endtags
+            @if (!empty($date) && $date['timestamp'] && empty($dateBadge))
+                @date($date)
+                @enddate
             @endif
 
             @if ($meta)
