@@ -35,6 +35,13 @@ class Box extends \ComponentLibrary\Component\BaseController
             );
         }
 
+        if ($date && !is_array($date)) {
+            $this->data['date'] = [
+                'timestamp' => $date,
+                'action' => 'formatDate'
+            ];
+        }
+
         //Make componet take string as ico param (backward compatibility)
         if (is_string($icon) && !empty($icon)) {
             $this->data['icon'] = ['name' => $icon];
