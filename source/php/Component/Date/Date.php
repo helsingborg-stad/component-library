@@ -5,6 +5,7 @@ namespace ComponentLibrary\Component\Date;
 use ComponentLibrary\Component\Date\Utilities\DateFormatter;
 use ComponentLibrary\Component\Date\Utilities\TimeSinceFormatter;
 use ComponentLibrary\Component\Date\Config\DateConfig;
+use Exception;
 
 /**
  * Class Date
@@ -104,11 +105,17 @@ class Date extends \ComponentLibrary\Component\BaseController
      * 
      * @return int
      */
-    private function inputDateToTimestamp(string|int $timestamp): int|\Exception
+    private function inputDateToTimestamp(null|string|int $timestamp): int|\Exception
     {
-        return is_int($timestamp)
-            ? $timestamp
-            : $this->strToTime($timestamp);
+        if (is_null($timestamp)) {
+            return new Exception('Date Component: No date provided.');
+        }
+
+        if(is_int($timestamp)) {
+            return $timestamp;
+        }
+
+        return $this->strToTime($timestamp);
     }
 
     /**
