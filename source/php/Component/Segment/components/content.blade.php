@@ -60,11 +60,7 @@
 @endif
 
 @if ($date)
-    @date([
-        'action' => false,
-        'timestamp' => $date,
-        'classList' => [$baseClass . '__date']
-    ])
+    @date($date)
     @enddate
 @endif
 
