@@ -113,6 +113,20 @@ class Segment extends \ComponentLibrary\Component\BaseController
         if(!$hasImage && !$hasPlaceholder) {
             $this->data['classList'][] = $this->getBaseClass('no-image', true);
         }
+
+        //Handle date data 
+        if ($date && !is_array($date)) {
+            $this->data['date'] = [
+                'timestamp' => $date,
+                'action' => 'formatDate'
+            ];
+        }
+
+        if ($date) {
+            $this->data['date']['classList'] ??= [];
+            $this->data['date']['classList'][] = $this->getBaseClass('date');
+        }
+
     }
 
     /**
