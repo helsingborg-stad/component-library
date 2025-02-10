@@ -62,8 +62,8 @@
 @if ($date)
     @date([
         'action' => false,
-        'timestamp' => $date,
-        'classList' => [$baseClass . '__date']
+        'classList' => [$baseClass . '__date'],
+        ...$date
     ])
     @enddate
 @endif
