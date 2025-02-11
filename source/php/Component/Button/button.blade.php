@@ -3,6 +3,11 @@
         @if ($type === 'submit' || $type === 'button')
             <span class="{{$baseClass}}__loader"></span>
         @endif
+
+        @if ($slotHasData)
+            {!! $slot !!}
+        @endif
+
         @if($icon)
             <span class="{{$baseClass}}__label-icon {{ $classListIcon }}">
                 @icon(['icon' => $icon, 'size' => $size, 'attributeList' => ['aria-hidden' => 'true']])
