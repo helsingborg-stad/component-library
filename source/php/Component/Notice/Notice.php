@@ -30,6 +30,9 @@ class Notice extends \ComponentLibrary\Component\BaseController
 
         // Action
         $this->data['action']   = $this->handleActionData($action);
+        if (isset($this->data['action']['position']) && $this->data['action']['position'] === 'below') {
+            $this->data['classList'][] = $this->getBaseClass() . "--action-below";
+        }
 
         // Dismissable signature
         if ($dismissable) {
@@ -56,8 +59,9 @@ class Notice extends \ComponentLibrary\Component\BaseController
     {
         $hashBase = [
             $data['message'] ?? '',
-            $data['action']['label'] ?? '',
+            $data['action']['text'] ?? '',
             $data['action']['url'] ?? '',
+            $data['action']['position'] ?? '',
         ];
         return md5(serialize($hashBase));
     }
@@ -84,7 +88,7 @@ class Notice extends \ComponentLibrary\Component\BaseController
      */
     private function handleActionData($action): ?array
     {
-        $action = array_merge(['label' => null, 'url' => null], (array) $action);
+        $action = array_merge(['text' => null, 'url' => null, 'position' => null], (array) $action);
         if (empty(array_filter($this->data['action'] ?: []))) {
             $action = null;
         }
