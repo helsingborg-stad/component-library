@@ -9,6 +9,9 @@ class Notice extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
+        // Backwards compatibility
+        $data['action']['text'] ??= ($data['action']['label'] ?? '');
+
         if (empty($id)) {
             $this->data['id'] = uniqid();
         }
