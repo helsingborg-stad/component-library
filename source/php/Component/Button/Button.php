@@ -24,8 +24,15 @@ class Button extends \ComponentLibrary\Component\BaseController
 
         $this->setIconOnly($text, $icon);
 
+
+        //Make linked buttons links
+        if ($href) {
+            $componentElement = $this->data['componentElement'] = "a";
+            $this->data['attributeList']['href'] = $href;
+        }
+
         //Set type (submit etc.)
-        if ($type) {
+        if ($type && in_array($type, ['button', 'submit', 'reset']) && in_array($componentElement, ['button', 'input'])) {
             $this->data['attributeList']['type'] = $type;
         }
 
@@ -33,12 +40,6 @@ class Button extends \ComponentLibrary\Component\BaseController
             $this->data['isLabel'] = true;
         } else {
             $this->data['isLabel'] = false;
-        }
-
-        //Make linked buttons links
-        if ($href) {
-            $this->data['componentElement'] = "a";
-            $this->data['attributeList']['href'] = $href;
         }
 
         if ($ariaLabel || $text) {
