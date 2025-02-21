@@ -7,16 +7,18 @@
     alt="{{$alt}}"
     style="{{$focus}}"
     {!! $imgAttributes !!}
-  />
+  >
 @endforeach
 
 <!-- Image styles -->
 <style>
-  @foreach($containerQueryData as $item)
-    @foreach(['landscape', 'portrait'] as $dimension)
-      @container {{$item['media'][$dimension]}} and (orientation: {{$dimension}}) {
-          .{{$baseClass}}.{{$baseClass}}--container-query .{{$baseClass}}--{{$item['uuid']}} {display: block;}
-      }
+  @supports (container-type: inline-size) {
+    @foreach($containerQueryData as $item)
+      @foreach(['landscape', 'portrait'] as $dimension)
+        @container {{$item['media'][$dimension]}} and (orientation: {{$dimension}}) {
+            .{{$baseClass}}.{{$baseClass}}--container-query .{{$baseClass}}--{{$item['uuid']}} {display: block;}
+        }
+      @endforeach
     @endforeach
-  @endforeach
+  }
 </style>

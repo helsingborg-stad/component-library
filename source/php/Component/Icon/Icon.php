@@ -60,7 +60,7 @@ class Icon extends \ComponentLibrary\Component\BaseController
                 "material-symbols-sharp", //All classes added, to support all icon types
                 "material-symbols-outlined" //All classes added, to support all icon types
             ]);
-            $this->data['attributeList']['material-symbol'] = $icon;
+            $this->data['attributeList']['data-material-symbol'] = $icon;
         }
 
         if (!empty($filled)) {
@@ -84,9 +84,7 @@ class Icon extends \ComponentLibrary\Component\BaseController
         $this->data['attributeList']['translate'] = "no";
 
         $this->data['attributeList']['aria-label'] = $decorative ? "" : $this->getAltText($icon);
-        $this->data['attributeList']['alt'] = $decorative ? "" : $this->getAltText($icon);
         $this->data['attributeList']['aria-hidden'] = $decorative ? "true" : "false";
-
     }
 
     private function iconIsSvg($icon)
