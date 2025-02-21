@@ -340,7 +340,7 @@ class BaseController
 
         //Add id if defined
         if (!empty($this->data['id'])) {
-            $attribute['id'] = $this->data['id'];
+            $attribute['id'] = $this->sanitizeIdAttribute($this->data['id']);
         }
 
         //Add unique id
@@ -381,6 +381,23 @@ class BaseController
 
         //Return manipulated data array as string
         return (string) self::buildAttributes($attribute);
+    }
+
+    /**
+     * Santitize the id attribute of a component
+     * 
+     * This will prevent invalid characters and ensure that the id 
+     * starts with a letter as required by the HTML spec.
+     * 
+     * @param string $id    The id to sanitize
+     * @return string       The sanitized id
+     */
+    public function sanitizeIdAttribute(string $id): string {
+        $id = preg_replace('/[^a-zA-Z0-9\-_\.]/', '', $id);
+        if (!preg_match('/^[a-zA-Z]/', $id)) {
+            $id = 'id_' . $id;
+        }
+        return $id;
     }
 
     /**
