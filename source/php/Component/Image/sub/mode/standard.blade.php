@@ -4,4 +4,4 @@
     src="{{$src}}" 
     alt="{{$alt}}"
     {!! $imgAttributes !!}
-/>
+>
