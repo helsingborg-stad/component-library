@@ -28,7 +28,7 @@ class Button extends \ComponentLibrary\Component\BaseController
         //Make linked buttons links
         if ($href) {
             $componentElement = $this->data['componentElement'] = "a";
-            $this->data['attributeList']['href'] = $href;
+            $this->data['attributeList']['href'] = $this->sanitizeHref($href);
         }
 
         //Set type (submit etc.)
@@ -82,6 +82,27 @@ class Button extends \ComponentLibrary\Component\BaseController
         if (empty($disableColor)) {
             $this->data['classList'][] = $this->getBaseClass('no-disabled-color', true);
         }
+    }
+
+    /**
+     * Sanitize the href attribute
+     * 
+     * This will format phone numbers and emails correctly
+     * 
+     * @param string $href  The href attribute
+     * 
+     * @return string       The sanitized href
+     */
+    private function sanitizeHref(?string $href): string
+    {
+        if(empty($href)) {
+            return '';
+        }
+        $scheme = parse_url($href, PHP_URL_SCHEME);
+        return match ($scheme) {
+            'tel', 'mailto' => $scheme . ':' . preg_replace('/\s+|-/', '', substr($href, strlen($scheme) + 1)),
+            default => $href,
+        };
     }
 
     /**
