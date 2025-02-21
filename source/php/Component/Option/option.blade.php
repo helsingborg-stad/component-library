@@ -15,7 +15,7 @@
         tabindex="0"
         label="{{$label}}"
         aria-labelledby="label_{{ $id }}"
-    />
+    >
     <label for="{{ $id }}" class="c-option__{{$type}}--label">
         <span class="c-option__{{$type}}--label-box"></span>
         <span id="label_{{ $id }}" class="c-option__{{$type}}--label-text">{!! $label !!}</span>

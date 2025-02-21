@@ -18,7 +18,7 @@
         accept="{{ $accept }}"
         {{ $multiple ? 'multiple' : '' }}
         {!! !empty($required) ? 'required="true" data-js-required' : '' !!}
-    />
+    >
 
     @button([
         'componentElement' => 'label',
