@@ -25,7 +25,7 @@
             @endbutton
     </div>
 
-    <section class="{{ $baseClass }}__content" tabindex="2">
+    <div class="{{ $baseClass }}__content" tabindex="2">
 
         {{-- Previous button --}}
         @if ($navigation)
@@ -60,7 +60,7 @@
             ])
             @endbutton
         @endif
-    </section>
+    </div>
 
     @if ($bottom)
         <div class="{{ $baseClass }}__footer">
