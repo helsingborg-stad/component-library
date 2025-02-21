@@ -17,10 +17,10 @@ class Image extends \ComponentLibrary\Component\BaseController
             );
         } else {
             $this->data['containerQueryData'] = null;
-        }
 
-        // Add srcset to attribute list
-        $this->addSrcsetToAttributes($this->data['srcset']);
+            // Add srcset to attribute list, on images
+            $this->addSrcsetToAttributes($this->data['srcset']);
+        }
 
         // Handle filetype class
         $this->handleFileTypeClass($this->data['src']);
