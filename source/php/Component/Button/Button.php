@@ -25,7 +25,7 @@ class Button extends \ComponentLibrary\Component\BaseController
         $this->setIconOnly($text, $icon);
 
         //Set type (submit etc.)
-        if ($type) {
+        if ($type && in_array($type, ['button', 'submit', 'reset']) && in_array($componentElement, ['button', 'input'])) {
             $this->data['attributeList']['type'] = $type;
         }
 
