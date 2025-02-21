@@ -127,7 +127,7 @@ class BaseController
     private function getId()
     {
         if (isset($this->data['id']) && !empty($this->data['id'])) {
-            return (string) strtolower($this->data['id']);
+            return (string) str_replace(" ", "", strtolower($this->data['id']));
         }
         return "";
     }
