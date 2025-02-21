@@ -1,4 +1,4 @@
-<{{ $componentElement }} id="{{ $id }}" class="{{ $class }}" {!! $attribute !!}>
+<{{ $componentElement }} class="{{ $class }}" {!! $attribute !!}>
     {{ $slot }}
     <ul class="{{ $baseClass }}__list">
         @if (!$listSlotHasContent)
