@@ -45,5 +45,9 @@ class Modal extends \ComponentLibrary\Component\BaseController
 
         //Overlay
         $this->data['classList'][] = $this->getBaseClass() . "--overlay-" . $overlay;
+
+        //Set dialog attributes
+        $this->data['attributeList']['role'] = 'dialog';
+        $this->data['attributeList']['aria-modal'] = 'true';
     }
 }
