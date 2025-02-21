@@ -10,7 +10,6 @@ class Hero extends \ComponentLibrary\Component\BaseController
         extract($this->data);
         
         $this->data['contentStyles'] = "";
-        $this->data['attributeList']['role'] = 'region';
         $this->data['attributeList']['aria-label'] = $ariaLabel;
         $this->data['linkArgs'] = null;
         $this->data['buttonArgs'] = null;
