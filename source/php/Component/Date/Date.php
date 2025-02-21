@@ -74,8 +74,9 @@ class Date extends \ComponentLibrary\Component\BaseController
                 : '';
         })();
 
-        $this->data['tooltipDate']      = $this->getToolTipLabel($timestamp, $this->data['action']);
-        $this->data['attributeList']['data-date'] = $this->getMetaDateFromTimestamp($timestamp);
+        $this->data['tooltipDate']                  = $this->getToolTipLabel($timestamp, $this->data['action']);
+        $this->data['attributeList']['data-date']   = $this->getMetaDateFromTimestamp($timestamp);
+        $this->data['attributeList']['datetime']    = $this->getMetaDateFromTimestamp($timestamp);
         
         if ($isTimeSince) {
             $this->data['attributeList']['data-tooltip'] = $this->handleFormatDate($timestamp);
@@ -163,7 +164,7 @@ class Date extends \ComponentLibrary\Component\BaseController
     }
 
     /**
-     * Get the meta date from a timestamp.
+     * Get the meta date from a timestamp in W3C-valid format (ISO 8601).
      * 
      * @param int $timestamp
      * 
