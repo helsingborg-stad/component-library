@@ -37,7 +37,7 @@ class Button extends \ComponentLibrary\Component\BaseController
         }
 
         //Only links can contain target attr
-        if (in_array($componentElement, ['a'])) {
+        if (in_array($componentElement, ['a']) && in_array($target, ['_self', '_blank', '_parent', '_top'])) {
             $this->data['attributeList']['target'] = $target;
         }
 
