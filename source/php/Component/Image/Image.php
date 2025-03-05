@@ -17,9 +17,6 @@ class Image extends \ComponentLibrary\Component\BaseController
             );
         } else {
             $this->data['containerQueryData'] = null;
-
-            // Add srcset to attribute list, on images
-            $this->addSrcsetToAttributes($this->data['srcset']);
         }
 
         // Handle filetype class
@@ -44,8 +41,14 @@ class Image extends \ComponentLibrary\Component\BaseController
         // Handle placeholder class
         $this->addPlaceholderClass($this->data['src']);
 
+        // Add srcset to attribute list
+        $this->addSrcsetToAttributes($this->data['srcset']);
+
         // Build img attributes
         $this->data['imgAttributes'] = self::buildAttributes($this->data['imgAttributeList']);
+
+        // Build wrapper attributes
+        $this->data['wrapperAttributes'] = self::buildAttributes($this->data['wrapperAttributes']);
 
         // Add class if alt-text is missing
         if (empty($this->data['alt'])) {
@@ -79,17 +82,13 @@ class Image extends \ComponentLibrary\Component\BaseController
             $alt = $this->data['alt'] = $src->getAltText();
         }
 
-        $this->data['classList'][] = $this->getBaseClass('container-query', true);
+        if (is_array($this->data['containerQueryData'])) {
+            $this->data['classList'][] = $this->getBaseClass('container-query', true);
+        }
 
         //Add aspect ratio, if not in cover mode or calculateAspectRatio is false.
         if(!$this->data['cover'] && $this->data['calculateAspectRatio']) {
-            $aspectRatio = $this->resolveAspectRatioFromContainerQueryData($this->data['containerQueryData']);
-            if($aspectRatio) {
-                if (!isset($this->data['attributeList']['style'])) {
-                    $this->data['attributeList']['style'] = "";
-                }
-                $this->data['attributeList']['style'] .= "aspect-ratio: " . $aspectRatio . ";";
-            }
+            $this->addWrapperAspectRatio();
         }
 
         if ($lqipEnabled && $src->getLqipUrl()) {
@@ -109,12 +108,23 @@ class Image extends \ComponentLibrary\Component\BaseController
         return null;
     }
 
+    private function addWrapperAspectRatio() 
+    {
+        if (!isset($this->data['wrapperAttributes']['style'])) {
+            $this->data['wrapperAttributes']['style'] = "";
+        }
+        $aspectRatio = $this->resolveAspectRatioFromContainerQueryData($this->data['containerQueryData']);
+        if($aspectRatio) {
+            $this->data['wrapperAttributes']['style'] .= "aspect-ratio:{$aspectRatio};";
+        }
+    }
+
     private function addLowResolutionPlaceholder(ImageInterface $src)
     {
-        if (!isset($this->data['attributeList']['style'])) {
-            $this->data['attributeList']['style'] = "";
+        if (!isset($this->data['wrapperAttributes']['style'])) {
+            $this->data['wrapperAttributes']['style'] = "";
         }
-        $this->data['attributeList']['style'] .= sprintf(
+        $this->data['wrapperAttributes']['style'] .= sprintf(
             "background-image: url(%s); background-position: %s;",
             $src->getLqipUrl(),
             $this->reduceFocusPoint($src->getFocusPoint())
@@ -123,8 +133,8 @@ class Image extends \ComponentLibrary\Component\BaseController
 
     private function addSrcsetToAttributes($srcset)
     {
-        if ($srcset) {
-            $this->data['attributeList']['srcset'] = $srcset;
+        if ($srcset && !isset($this->data['containerQueryData'])) {
+            $this->data['imgAttributeList']['srcset'] = $srcset;
         }
     }
 
