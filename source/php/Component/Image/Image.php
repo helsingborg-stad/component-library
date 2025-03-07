@@ -48,6 +48,9 @@ class Image extends \ComponentLibrary\Component\BaseController
         $this->data['imgAttributes'] = self::buildAttributes($this->data['imgAttributeList']);
 
         // Build wrapper attributes
+        if (!isset($this->data['wrapperAttributes'])) {
+            $this->data['wrapperAttributes'] = [];
+        }
         $this->data['wrapperAttributes'] = self::buildAttributes($this->data['wrapperAttributes']);
 
         // Add class if alt-text is missing
