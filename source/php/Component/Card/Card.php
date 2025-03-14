@@ -117,7 +117,7 @@ class Card extends \ComponentLibrary\Component\BaseController
      * @return string
      */
     private function getContentHTMLElement($content) {
-        if (strpos($content, '<p>') !== false) {
+        if (!is_string($content) || strpos($content, '<p>') !== false) {
             return 'div';
         }
         return 'p';
