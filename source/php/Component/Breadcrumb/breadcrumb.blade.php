@@ -14,8 +14,9 @@
           @icon(['icon' => $item['icon']])
           @endicon
         @endif
+        
         @if($loop->last) 
-        @include ('Breadcrumb.partials.label', ['labelAttributes' => 'aria-current="page"'])
+          @include ('Breadcrumb.partials.label', ['labelAttributes' => 'aria-current="page"'])
         @else 
 
           @if($item['href'])
