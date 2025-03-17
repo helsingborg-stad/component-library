@@ -9,6 +9,6 @@ class Tabs extends \ComponentLibrary\Component\BaseController
         extract($this->data);
 
         // Generate unique ID
-        $this->data['id'] = uniqid();
+        $this->data['id'] = $this->sanitizeIdAttribute(uniqid());
     }
 }

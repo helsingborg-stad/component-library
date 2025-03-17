@@ -13,7 +13,7 @@ class Notice extends \ComponentLibrary\Component\BaseController
         $data['action']['text'] ??= ($data['action']['label'] ?? '');
 
         if (empty($id)) {
-            $this->data['id'] = uniqid();
+            $this->data['id'] = $this->sanitizeIdAttribute(uniqid());
         }
      
         // State class

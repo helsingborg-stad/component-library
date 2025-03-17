@@ -10,7 +10,7 @@ class Product extends \ComponentLibrary\Component\BaseController
         extract($this->data);
 
         if (!$id) {
-            $this->data['id'] = uniqid();
+            $this->data['id'] = $this->sanitizeIdAttribute(uniqid());
         }
 
         if (isset($image['padded']) && $image['padded']) {
