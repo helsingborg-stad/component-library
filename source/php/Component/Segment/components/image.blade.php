@@ -11,7 +11,8 @@
         'src' => $image,
         'alt' => $imageAlt ?? null,
         'classList' => $imageClassList ?? [],
-        'calculateAspectRatio' => false
+        'calculateAspectRatio' => false,
+        'lqipEnabled' => $layout == 'featured' ? false : true,
     ])
     @endimage
 @endlink
