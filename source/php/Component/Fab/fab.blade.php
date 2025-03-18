@@ -1,5 +1,5 @@
 <div class="{{ $class }}" {!! $attribute !!}>
-    <div js-toggle-item="{{$panelId}}" js-toggle-class="{{$baseClass}}__panel--open" class="{{$baseClass}}__panel">
+    <div data-js-toggle-item="{{$panelId}}" data-js-toggle-class="{{$baseClass}}__panel--open" class="{{$baseClass}}__panel">
 
         @if($heading)
             @typography(["variant" => "h6", "classList" => [$baseClass . "__heading"]])

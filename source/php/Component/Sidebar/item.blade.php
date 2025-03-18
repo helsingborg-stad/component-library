@@ -2,8 +2,8 @@
     <div class="{{$baseClass}}__subcontainer--top">
 @else
     <div class="{{$baseClass}}__subcontainer {{ $isExpanded ? $baseClass . '__item--is-expanded' : '' }}"
-        js-toggle-item="{{$appendID}}"
-        js-toggle-class="{{$baseClass}}__item--is-expanded">
+        data-js-toggle-item="{{$appendID}}"
+        data-js-toggle-class="{{$baseClass}}__item--is-expanded">
 @endif
     
     @if(is_array($items) && !empty($items))
@@ -26,7 +26,7 @@
                     @php $rndId = uniqid(); @endphp
 
                     <div class="{{$baseClass}}__toggle"
-                        js-toggle-trigger="{{$rndId}}"
+                        data-js-toggle-trigger="{{$rndId}}"
                         aria-label="{{$item['id']}}"
                         aria-pressed="{{ ( $item['active'] || $item['ancestor'] ) ? 'true' : 'false' }}">
 
