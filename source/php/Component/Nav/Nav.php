@@ -65,7 +65,7 @@ class Nav extends \ComponentLibrary\Component\BaseController
         //General Attributes
         $this->data['attributeList']['aria-orientation'] = $direction;
         $this->data['attributeList']['role'] = 'menu';
-        $this->data['attributeList']['js-keep-in-viewport-after-resize'] = "1";
+        $this->data['attributeList']['data-js-keep-in-viewport-after-resize'] = "1";
 
         //Get Expand label
         $this->data['getExpandLabel'] = function ($itemLable, $expandLabel) {
