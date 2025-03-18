@@ -12,7 +12,7 @@
 
         )
         
-        <div class="{{$baseClass}}__event-list" js-toggle-item="1" js-toggle-class="">
+        <div class="{{$baseClass}}__event-list" data-js-toggle-item="1" data-js-toggle-class="">
 
             <div class="grid">
 
