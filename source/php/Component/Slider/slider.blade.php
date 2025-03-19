@@ -19,7 +19,7 @@
         </div>
     
         <div class="{{ $baseClass }}__container splide__track">
-            <div class="{{ $baseClass }}__inner splide__list" js-slider-inner>
+            <div class="{{ $baseClass }}__inner splide__list" data-js-slider-inner>
                 {{ $slot }}
             </div>
         </div>
@@ -46,7 +46,7 @@
         {{-- Slider when used in post module --}}
         @elseif($isPost)
             <div class="{{ $baseClass }}__container splide__track">
-                <div class="{{ $baseClass }}__inner splide__list" js-slider-inner>
+                <div class="{{ $baseClass }}__inner splide__list" data-js-slider-inner>
                     {{ $slot }}
                 </div>
             </div>
