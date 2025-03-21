@@ -12,7 +12,7 @@
     "description": {
         "slot": "The content of the link",
         "href": "Where should the link go to?",
-        "target": "Link target attribute. Default is _top. Allowed values are _blank, _self, _parent or _top.",
+        "target": "Link target attribute. Default is _top. Allowed values are _blank, _self, _parent or _top. This is only added if href is not empty.",
         "keepContent": "If link is empty, should we show content anyways? Prints the content wrazpped by a span element.",
         "keepWrapper": "If link is empty and keepContent is true, should we keep the span added by keepContent? If false, it will print the content without any wrapping element.",
         "xfn": "Relation to the link (ex. nofollow)"

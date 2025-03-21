@@ -1,4 +1,4 @@
-<div class="{{$baseClass}}__footer" js-toggle-class="u-display--none" js-toggle-item="{{$collpaseID}}">
+<div class="{{$baseClass}}__footer" data-js-toggle-class="u-display--none" data-js-toggle-item="{{$collpaseID}}">
     @if($buttons)
         @foreach($buttons as $button)
             @button($button)

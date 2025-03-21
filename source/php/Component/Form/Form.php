@@ -14,7 +14,7 @@ class Form extends \ComponentLibrary\Component\BaseController
 
         //Id always required
         if (!$id) {
-            $this->data['id'] = uniqid();
+            $this->data['id'] = $this->sanitizeIdAttribute(uniqid());
         }
 
         //Add validation class as default

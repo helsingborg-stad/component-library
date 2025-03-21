@@ -11,7 +11,7 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         $this->data['attributeList']['allowfullscreen'] = true;
 
         if (empty($id)) {
-            $this->data['id'] = "iframe-" . uniqid();
+            $this->data['id'] = $this->sanitizeIdAttribute("iframe-" . uniqid());
         }
 
         if (isset($width)) {

@@ -24,7 +24,7 @@
 
     {{-- notice__text --}}
     @if($slotHasData || $message['text'])
-        <span id="notice__text__{{ $id }}" for="" class="{{$baseClass}}__message">
+        <span id="notice__text__{{ $id }}" class="{{$baseClass}}__message">
             @if(isset($message['text']))
                 {!! $message['text'] !!}
             @endif

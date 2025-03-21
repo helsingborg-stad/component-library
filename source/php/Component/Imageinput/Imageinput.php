@@ -19,7 +19,7 @@ class Imageinput extends \ComponentLibrary\Component\BaseController
         extract($this->data);
 
         if(empty($this->data['id']) ) {
-            $this->data['id'] = uniqid();
+            $this->data['id'] = $this->sanitizeIdAttribute(uniqid());
         }
 
         if ($display === 'area') {

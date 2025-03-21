@@ -16,7 +16,7 @@ class Link extends \ComponentLibrary\Component\BaseController
         }
 
         //Target
-        if ($target) {
+        if ($target && $href) {
             $this->data['attributeList']['target'] = $target;
         }
 

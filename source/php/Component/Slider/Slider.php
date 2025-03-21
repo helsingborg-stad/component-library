@@ -9,11 +9,11 @@ class Slider extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
-        $this->data['id'] = uniqid("", true);
+        $this->data['id'] = $this->sanitizeIdAttribute(uniqid("", true));
         $this->data['attributeList']['data-step'] = 0;
-        $this->data['attributeList']['js-slider'] = 0;
-        $this->data['attributeList']['js-slider-index'] = 0;
-        $this->data['attributeList']['js-slider-index'] = 0;
+        $this->data['attributeList']['data-js-slider'] = 0;
+        $this->data['attributeList']['data-js-slider-index'] = 0;
+        $this->data['attributeList']['data-js-slider-index'] = 0;
 
         if (!empty($repeatSlide)) {
             $this->data['attributeList']['data-slider-loop'] = true;
@@ -51,7 +51,7 @@ class Slider extends \ComponentLibrary\Component\BaseController
 
         if ($autoSlide) {
             $delay = is_int($autoSlide) ? $autoSlide : 5;
-            $this->data['attributeList']['js-slider__autoslide'] = $delay;
+            $this->data['attributeList']['data-js-slider__autoslide'] = $delay;
             $this->data['autoSlide'] = true;
         }
 
