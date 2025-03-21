@@ -13,9 +13,7 @@ class Option extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
-        if (empty($this->data['id'])) {
-            $this->data['id'] = $this->sanitizeIdAttribute(uniqid());
-        }
+        $this->data['id'] = $this->sanitizeIdAttribute($this->data['id'] ?? uniqid());
 
         $this->compParams = [
             'label' => $label ?? '',
