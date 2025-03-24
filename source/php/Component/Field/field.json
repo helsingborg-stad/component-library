@@ -19,6 +19,7 @@
         "borderless": false,
         "shadow": false,
         "fieldAttributeList": [],
+        "moveAttributesListToFieldAttributes": true,
         "description": ""
     },
     "description": {
@@ -38,7 +39,9 @@
         "multiline": "Render textarea instead of input. Boolean or number of rows to render.",
         "borderless": "Removes the border around the input field",
         "shadow": "If the current theme applies shadows to element, append shadow here too.",
-        "fieldAttributeList": "Attributes for field element. Valid input attributes are casted to here from attributesList."
+        "fieldAttributeList": "Attributes for field element. Valid input attributes are casted to here from attributesList.",
+        "moveAttributesListToFieldAttributes": "If we should move attributesList to fieldAttributeList automatically",
+        "description": "Description for the field."
     },
     "view": "field.blade.php",
     "dependency": {
