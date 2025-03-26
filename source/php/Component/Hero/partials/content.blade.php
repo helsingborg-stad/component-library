@@ -36,6 +36,8 @@
     @endif
 
     {{-- Oneline to enable the use of css:empty() function --}}
-    <div class="{{ $baseClass }}__inner-blocks u-hide-empty">{!! '<InnerBlocks />' !!}</div>
+    @if ($isBlock)
+        <div class="{{ $baseClass }}__inner-blocks u-hide-empty">{!! '<InnerBlocks />' !!}</div>
+    @endif
 
 </div>

@@ -17,7 +17,8 @@ class BaseController
         'classList' => [], //An array of class names (push classes here),
         'attribute' => "",
         'attributeList' => [],
-        'context' => []
+        'context' => [],
+        'isBlock' => false
     );
 
     /**
