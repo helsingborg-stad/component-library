@@ -86,9 +86,7 @@ class Field extends \ComponentLibrary\Component\Form\Form
         }
 
         // Must include a id.
-        if (!$id) {
-            $id = $this->data['id'] = $this->sanitizeIdAttribute(uniqid());
-        }
+        $id = $this->data['id'] = $this->sanitizeIdAttribute(!empty($this->data['id']) ? $this->data['id'] : uniqid());
 
         //Prevent e from being entered into number field
         if ($type == 'number') {
