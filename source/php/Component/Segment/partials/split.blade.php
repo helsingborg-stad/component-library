@@ -6,6 +6,8 @@
                 {{ $slot }}
             </div>
         @endif
-        <div class="{{$baseClass}}__inner-blocks u-hide-empty">{!! '<InnerBlocks />' !!}</div>
+        @if ($isBlock)
+            <div class="{{$baseClass}}__inner-blocks u-hide-empty">{!! '<InnerBlocks />' !!}</div>
+        @endif
     </div>
 </div>
