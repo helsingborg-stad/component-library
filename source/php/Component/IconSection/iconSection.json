@@ -1,20 +1,19 @@
 {
 	"slug": "iconSection",
 	"default": {
-        "icon": null
+		"gap": 0
 	},
 	"description": {
-		"icon": "An array with the same specification as the icon component"
+		"gap": "The gap between the items in the icon section. Number between 0-12"
 	},
 	"types": {
-		"icon": "array"
+		"gap": "number"
 	},
 	"view": "iconSection.blade.php",
 	"dependency": {
 		"sass": {
 			"components": [
-				"element",
-				"icon"
+				"element"
 			]
 		}
 	}
