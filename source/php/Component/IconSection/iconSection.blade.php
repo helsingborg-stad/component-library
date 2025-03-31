@@ -6,6 +6,5 @@
         $classList ?? []
     )
 ])
-    @include('IconSection.partials.icon')
-    @include('IconSection.partials.content')
-@endpaper
+    {!! $slot !!}
+@endelement
