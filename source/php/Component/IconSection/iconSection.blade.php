@@ -4,7 +4,8 @@
             $baseClass
         ],
         $classList ?? []
-    )
+    ),
+    'attributeList' => $attributeList ?? []
 ])
     {!! $slot !!}
 @endelement
