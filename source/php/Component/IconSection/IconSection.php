@@ -8,6 +8,6 @@ class IconSection extends \ComponentLibrary\Component\BaseController
     {
         extract($this->data);
 
-        
+        $this->data['classList'][] =  $this->getBaseClass('gap-' . $gap, true);
     }
 }
