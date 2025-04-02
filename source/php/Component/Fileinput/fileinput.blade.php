@@ -31,23 +31,23 @@
     @endbutton
 
     <template id="rowinput_template_{{$id}}">
-        <![CDATA[
-        <li>
-            @icon([
-                'icon' => 'attach_file',
-                'size' => 'sm'
-            ])
-            @endicon
-            <span class="u-strong js-file-input-name"></span> 
-            <span class="js-file-input-size"></span>
-            @icon([
-                'icon' => 'delete',
-                'size' => 'md',
-                'classList' => ['c-fileinput__remove-file']
-            ])
-            @endicon
-        </li>
-        ]]>
+        <ul>
+            <li>
+                @icon([
+                    'icon' => 'attach_file',
+                    'size' => 'sm'
+                ])
+                @endicon
+                <span class="u-strong js-file-input-name"></span> 
+                <span class="js-file-input-size"></span>
+                @icon([
+                    'icon' => 'delete',
+                    'size' => 'md',
+                    'classList' => ['c-fileinput__remove-file']
+                ])
+                @endicon
+            </li>
+        </ul>
     </template>
 
     <ul class="{{ $baseClass }}__files js-form-file-input u-display--none" data-from-template-id="rowinput_template_{{$id}}">
