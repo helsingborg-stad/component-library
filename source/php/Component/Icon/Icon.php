@@ -85,6 +85,12 @@ class Icon extends \ComponentLibrary\Component\BaseController
 
         $this->data['attributeList']['aria-label'] = $decorative ? "" : $this->getAltText($icon);
         $this->data['attributeList']['aria-hidden'] = $decorative ? "true" : "false";
+
+        //If is placeholder, do not read. 
+        if($icon == "placeholder") {
+            $this->data['attributeList']['aria-hidden'] = "true";
+            $this->data['attributeList']['aria-label'] = "";
+        }
     }
 
     private function iconIsSvg($icon)

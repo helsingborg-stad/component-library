@@ -48,5 +48,6 @@ class Modal extends \ComponentLibrary\Component\BaseController
 
         //Set dialog attributes
         $this->data['attributeList']['aria-modal'] = 'true';
+        $this->data['attributeList']['role'] = 'dialog';
     }
 }

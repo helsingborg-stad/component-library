@@ -86,9 +86,7 @@ class Field extends \ComponentLibrary\Component\Form\Form
         }
 
         // Must include a id.
-        if (!$id) {
-            $id = $this->data['id'] = $this->sanitizeIdAttribute(uniqid());
-        }
+        $id = $this->data['id'] = $this->sanitizeIdAttribute(!empty($this->data['id']) ? $this->data['id'] : uniqid());
 
         //Prevent e from being entered into number field
         if ($type == 'number') {
@@ -182,17 +180,21 @@ class Field extends \ComponentLibrary\Component\Form\Form
         }
 
         //Move field specific attributes to field element.
-        $this->data['fieldAttributeList'] = $this->moveAttributes(
-            $this->data['attributeList'],
-            $this->data['fieldAttributeList']
-        );
+        if($moveAttributesListToFieldAttributes) {
+            $this->data['fieldAttributeList'] = array_merge(
+                $this->data['fieldAttributeList'],
+                $this->data['attributeList']
+            );
+        }
 
         //Remove field specific attributes from main element.
-        $this->data['attributeList'] = array_filter(
-            $this->data['attributeList'],
-            array($this, 'isNotFieldAttribute'),
-            ARRAY_FILTER_USE_KEY
-        );
+        if($moveAttributesListToFieldAttributes) {
+            $this->data['attributeList'] = array_filter(
+                $this->data['attributeList'],
+                array($this, 'isNotFieldAttribute'),
+                ARRAY_FILTER_USE_KEY
+            );
+        }
 
         //Placeholder
         if ($placeholder) {

@@ -9,7 +9,7 @@
             <li class="{{$baseClass}}__item {{$baseClass}}__item-{{ $loop->index }}">
 
                 @image([
-                    'src'=> $item['smallImage'],
+                    'src'=> $item['image'] ?? $item['smallImage'],
                     'alt' => $item['alt'],
                     'caption' => $item['caption'],
                     'fullWidth' => true,
