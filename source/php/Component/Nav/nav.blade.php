@@ -14,7 +14,8 @@
           @endif
 
           {{-- Children list --}}
-          @includeWhen($item['hasToggle'], 'Nav.toggle')
+          @includeWhen($item['hasToggle'] && $sublevelTriggerIcon !== 'plus', 'Nav.toggle.caret')
+          @includeWhen($item['hasToggle'] && $sublevelTriggerIcon === 'plus', 'Nav.toggle.plusminus')
         </div>
 
         {{-- Children list --}}
