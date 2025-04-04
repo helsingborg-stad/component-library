@@ -1,55 +1,24 @@
 <!-- fileinput.blade.php -->
+<div class="c-field {{ $class }}" {!! $attribute !!}>
 
-<div class="{{ $class }}" {!! $attribute !!}>
-    <label class="{{$baseClass}}__label" for="fs_{{$id}}">{{$label}}{!! $required ? '<span class="u-color__text--danger">*</span>' : '' !!}</label>
-    @if(!empty($description))
-        @typography([
-            'element' => 'div',
-            'classList' => ['text-sm', 'text-dark-gray']
-            ])
-            {{ $description }}
-        @endtypography
+    @if(!empty($label))
+        <label class="c-field__label {{$baseClass}}__label {{$hideLabel ? 'u-sr__only' : ''}}" for="input_{{ $id }}" id="label_{{ $id }}">
+            {{$label}}
+            @if($required)
+                <span class="u-color__text--danger" aria-hidden="true">*</span>
+            @endif
+        </label>
     @endif
 
-    <input type="file"
-        class="{{ $baseClass }}__input "
-        name="{{ $multiple ? $name . '[]' : $name }}"
-        id="fs_{{ $id }}"
-        accept="{{ $accept }}"
-        {{ $multiple ? 'multiple' : '' }}
-        {!! !empty($required) ? 'required="true" data-js-required' : '' !!}
-    >
+    <div class="{{$baseClass}}__inner {{$baseClass}}__inner--{{$type}}">
+        @include('Fileinput.' . $display)
+    </div>
 
-    @button([
-        'componentElement' => 'label',
-        'style' => 'basic',
-        'text' => !empty($buttonLabel) ? $buttonLabel : $label,
-        'icon' => 'file_upload',
-        'classList' => [$baseClass . '__button'],
-        'attributeList' => ['for' => 'fs_' . $id],
-    ])
-    @endbutton
-
-    <template id="rowinput_template_{{$id}}">
-        <ul>
-            <li>
-                @icon([
-                    'icon' => 'attach_file',
-                    'size' => 'sm'
-                ])
-                @endicon
-                <span class="u-strong js-file-input-name"></span> 
-                <span class="js-file-input-size"></span>
-                @icon([
-                    'icon' => 'delete',
-                    'size' => 'md',
-                    'classList' => ['c-fileinput__remove-file']
-                ])
-                @endicon
-            </li>
-        </ul>
-    </template>
-
-    <ul class="{{ $baseClass }}__files js-form-file-input u-display--none" data-from-template-id="rowinput_template_{{$id}}">
-    </ul>
+    @if(!empty($description) && $display !== 'area')
+        @typography([
+            'classList' => ['c-field__description', $baseClass . '__description']
+        ])
+        {{$description}}
+        @endtypography
+    @endif
 </div>

@@ -2,7 +2,7 @@
     "slug": "fileinput",
     "default": {
         "display": "",
-        "decription": "",
+        "description": "",
         "name": "files",
         "accept": "audio/*,video/*,image/*",
         "multiple": false,
@@ -29,7 +29,7 @@
     },
     "types": {
         "display": "string",
-        "decription": "string",
+        "description": "string",
         "name": "string",
         "accept": "string",
         "multiple": "boolean",
