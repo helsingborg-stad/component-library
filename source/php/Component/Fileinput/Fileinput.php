@@ -13,10 +13,14 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
             $this->data['id'] = $this->sanitizeIdAttribute(uniqid());
         }
 
-        if ($display === 'area') {
-            $this->data['classList'][] = 'c-fileinput--area';
+        //Error if display is unknown
+        if(!in_array($display, ['button', 'area'])) {
+            throw new \Exception('Invalid display type. Use "button" or "area".');
         }
-        
+
+        //Main type class modifier
+        $this->data['classList'][] = $this->getBaseClass($display, true);
+
         if($filesMax) {
             $this->data['attributeList']['filesMax'] = $filesMax;
         }
