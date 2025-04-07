@@ -28,7 +28,10 @@
 
 <template id="rowinput_template_{{$id}}">
   @collection__item([
-    'icon' => 'attach_file'
+    'icon' => 'attach_file',
+    'attributeList' => [
+      'data-js-file' => 'listitem'
+    ],
   ])
     @typography(['classList' => ['c-fileinput__file-name', 'js-file-input-name'], 'attributeList' => ['data-js-file' => 'name']])
       Unknown filename
