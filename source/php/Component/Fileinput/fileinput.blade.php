@@ -2,15 +2,26 @@
 <div class="c-field {{ $class }}" {!! $attribute !!}>
 
     @if(!empty($label))
-        <label class="c-field__label {{$baseClass}}__label {{$hideLabel ? 'u-sr__only' : ''}}" for="input_{{ $id }}" id="label_{{ $id }}">
+        @element([
+            'componentElement' => 'label',
+            'classList' => [
+                'c-field__label', 
+                $baseClass . '__label'
+            ],
+            'attributeList' => [
+                'for' => 'input_' . $id,
+                'id' => 'label_' . $id
+            ]
+        ])
             {{$label}}
+
             @if($required)
                 <span class="u-color__text--danger" aria-hidden="true">*</span>
             @endif
-        </label>
+        @endelement
     @endif
 
-    <div class="{{$baseClass}}__inner {{$baseClass}}__inner--{{$type}}">
+    <div class="{{$baseClass}}__inner {{$baseClass}}__inner--{{$display}}">
         @include('Fileinput.' . $display)
     </div>
 

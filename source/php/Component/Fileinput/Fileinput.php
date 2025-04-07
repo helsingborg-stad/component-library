@@ -20,6 +20,7 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
 
         //Main type class modifier
         $this->data['classList'][] = $this->getBaseClass($display, true);
+        $this->data['attributeList']['data-js-file-type'] = $display;
 
         if($filesMax) {
             $this->data['attributeList']['filesMax'] = $filesMax;
