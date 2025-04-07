@@ -13,18 +13,13 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
             $this->data['id'] = $this->sanitizeIdAttribute(uniqid());
         }
 
-        //Error if display is unknown
-        if(!in_array($display, ['button', 'area'])) {
-            throw new \Exception('Invalid display type. Use "button" or "area".');
-        }
-
-        //Main type class modifier
-        $this->data['classList'][] = $this->getBaseClass($display, true);
-        $this->data['attributeList']['data-js-file-type'] = $display;
-
         if($filesMax) {
-            $this->data['attributeList']['filesMax'] = $filesMax;
+            $this->data['attributeList']['data-js-file-max'] = $filesMax;
         }
+
+        $this->data['attributeList']['data-js-file-is-multi'] = $multiple;
+
+        $this->data['classList'][] = $this->getBaseClass('is-empty', true);
 
         $this->data['required'] = $required ?? false;
     }

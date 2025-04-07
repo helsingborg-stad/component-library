@@ -10,7 +10,8 @@
             ],
             'attributeList' => [
                 'for' => 'input_' . $id,
-                'id' => 'label_' . $id
+                'id' => 'label_' . $id,
+                'data-js-file' => 'label'
             ]
         ])
             {{$label}}
@@ -21,15 +22,19 @@
         @endelement
     @endif
 
-    <div class="{{$baseClass}}__inner {{$baseClass}}__inner--{{$display}}">
-        @include('Fileinput.' . $display)
-    </div>
+    <!-- Actual input -->
+    <input type="file"
+        class="{{ $baseClass }}__input"
+        name="{{ $multiple ? $name . '[]' : $name }}"
+        id="fs_{{ $id }}"
+        accept="{{ $accept }}"
+        {{ $multiple ? 'multiple' : '' }}
+        {!! !empty($required) ? 'required="true" data-js-required' : '' !!}
+        data-js-file="input"
+        aria-hidden="true"
+    >
 
-    @if(!empty($description) && $display !== 'area')
-        @typography([
-            'classList' => ['c-field__description', $baseClass . '__description']
-        ])
-        {{$description}}
-        @endtypography
-    @endif
+    <div class="{{$baseClass}}__inner {{$baseClass}}__inner--area">
+        @include('Fileinput.area')
+    </div>
 </div>

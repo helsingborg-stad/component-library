@@ -1,7 +1,6 @@
 {
     "slug": "fileinput",
     "default": {
-        "display": "",
         "description": "",
         "name": "files",
         "accept": "audio/*,video/*,image/*",
@@ -15,7 +14,6 @@
         "filesMax": false
     },
     "description": {
-        "display": "Display input uploader as button or area",
         "description": "Additional description or instructions.",
         "name": "files",
         "accept": "audio/*,video/*,image/*",
@@ -28,7 +26,6 @@
         "filesMax": "Maximum number of files (false, int)"
     },
     "types": {
-        "display": "string",
         "description": "string",
         "name": "string",
         "accept": "string",
@@ -47,7 +44,7 @@
             "components": [
                 "fileInput",
                 "icon",
-                "listing"
+                "button"
             ]
         }
     }
