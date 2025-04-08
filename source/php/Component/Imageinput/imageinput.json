@@ -7,7 +7,8 @@
     "beforeLabel": "",
     "afterLabel": "",
     "label": "",
-    "required": false
+    "required": false,
+    "helperText": null
   },
   "description": {
     "display": "Display input uploader as button or area",
@@ -17,7 +18,9 @@
     "beforeLabel": "Insert before label",
     "afterLabel": "Input label",
     "label": "Insert after label",
-    "icon": "@link:component/icon"
+    "icon": "@link:component/icon",
+    "required": "Required field",
+    "helperText": "Insert helper text"
   },
   "view": "imageinput.blade.php",
   "dependency": {
