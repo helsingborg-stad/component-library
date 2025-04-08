@@ -8,10 +8,11 @@
         "beforeLabel": "",
         "afterLabel": "",
         "label": "",
-        "buttonLabel": "",
+        "buttonLabel": "Select file",
+        "buttonRemoveLabel": "Remove file",
         "icon": "file_upload",
         "required": false,
-        "filesMax": false
+        "filesMax": 1
     },
     "description": {
         "description": "Additional description or instructions.",
@@ -21,9 +22,11 @@
         "beforeLabel": "Insert before label",
         "afterLabel": "Input label",
         "label": "Insert after label",
+        "buttonLabel": "What text to show on the button",
+        "buttonRemoveLabel": "What text to show on the remove button",
         "icon": "@link:component/icon",
         "required": "If field is required",
-        "filesMax": "Maximum number of files (false, int)"
+        "filesMax": "Maximum number of files (int). Foced to 1 if multiple is false. Default 10 for multiple."
     },
     "types": {
         "description": "string",
@@ -34,9 +37,10 @@
         "afterLabel": "string",
         "label": "string",
         "buttonLabel": "string",
+        "buttonRemoveLabel": "string",
         "icon": "string",
         "required": "boolean",
-        "filesMax": "integer|boolean"
+        "filesMax": "integer"
     },
     "view": "fileinput.blade.php",
     "dependency": {
