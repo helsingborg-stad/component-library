@@ -13,13 +13,19 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
             $this->data['id'] = $this->sanitizeIdAttribute(uniqid());
         }
 
-        if($filesMax) {
+        $this->data['attributeList']['data-js-file'] = "dropzone";
+
+        if(($filesMax > 1) && $multiple) {
             $this->data['attributeList']['data-js-file-max'] = $filesMax;
+        }
+
+        if(!$multiple) {
+            $this->data['attributeList']['data-js-file-max'] = 1;
         }
 
         $this->data['attributeList']['data-js-file-is-multi'] = $multiple;
 
-        $this->data['classList'][] = $this->getBaseClass('is-empty', true);
+        $this->data['classList'][] = "is-empty";
 
         $this->data['required'] = $required ?? false;
     }
