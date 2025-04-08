@@ -5,6 +5,7 @@
     {{ $description }}
   @endtypography
 
+  <!-- This button is used to trigger the file input -->
   @button([
     'icon' => 'file_upload',
     'text' => 'Select File',
@@ -21,10 +22,27 @@
   ])
   @endbutton
 
-  <div class="{{$baseClass}}__file-list">
+  <!-- This button is used to illustrate drag and drop, it has no function -->
+  @button([
+    'icon' => 'place_item',
+    'text' => 'Drop File Here',
+    'size' => 'md',
+    'style' => 'basic',
+    'classList' => [
+      'u-margin__top--3',
+      'js-file-input-drop'
+    ],
+    'attributeList' => [
+      'data-js-file' => 'drop',
+      'aria-hidden' => 'true'
+    ]
+  ])
+  @endbutton
+
+  <div class="{{$baseClass}}__file-list" data-js-file="list">
     
     <template data-js-file="listitem-template">
-      <div class="{{$baseClass}}__item" data-js-file="listitem">
+      <div class="{{$baseClass}}__item" data-js-file="listitem" data-js-file-id="">
         <div class="{{$baseClass}}__item-icon-wrapper">
           @icon([
             'icon' => 'attach_file',
