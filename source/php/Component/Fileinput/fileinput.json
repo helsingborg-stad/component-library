@@ -10,6 +10,7 @@
         "label": "",
         "buttonLabel": "Select file",
         "buttonRemoveLabel": "Remove file",
+        "buttonDropLabel": "Drop files here",
         "icon": "file_upload",
         "required": false,
         "filesMax": 1

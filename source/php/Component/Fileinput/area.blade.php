@@ -8,7 +8,7 @@
   <!-- This button is used to trigger the file input -->
   @button([
     'icon' => 'file_upload',
-    'text' => 'Select File',
+    'text' => $buttonLabel,
     'size' => 'md',
     'style' => 'basic',
     'classList' => [
@@ -25,7 +25,7 @@
   <!-- This button is used to illustrate drag and drop, it has no function -->
   @button([
     'icon' => 'place_item',
-    'text' => 'Drop File Here',
+    'text' => $buttonDropLabel,
     'size' => 'md',
     'style' => 'basic',
     'classList' => [
@@ -59,8 +59,8 @@
         </div>
       
         <div class="{{$baseClass}}__item-text">
-          <span class="{{$baseClass}}__item-name" data-js-file="filename">Unknown filename that is truncated if too long text</span>
-          <span class="{{$baseClass}}__item-size" data-js-file="filesize">1MB</span>
+          <span class="{{$baseClass}}__item-name" data-js-file="filename"></span>
+          <span class="{{$baseClass}}__item-size" data-js-file="filesize"></span>
         </div>
 
         <div class="{{$baseClass}}__item-remove" data-tooltip="Remove file">
@@ -72,7 +72,7 @@
               $baseClass . '__item-remove-button'
             ],
             'attributeList' => [
-              'aria-label' => 'Remove file',
+              'aria-label' => $buttonRemoveLabel,
               'data-js-file' => 'remove'
             ]
           ])
