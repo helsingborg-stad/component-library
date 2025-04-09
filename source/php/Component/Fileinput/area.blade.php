@@ -17,7 +17,8 @@
       'js-file-input-button'
     ],
     'attributeList' => [
-      'data-js-file' => 'button'
+      'data-js-file' => 'button',
+      'aria-live' => 'polite',
     ]
   ])
   @endbutton
@@ -80,8 +81,6 @@
         </div>
       </div>
     </template>
-
-    
 </div>
 
 <div
