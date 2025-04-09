@@ -18,11 +18,13 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
 
         // Set 10 as default max files, when multiple
         if($multiple) {
-            $this->data['attributeList']['data-js-file-max'] = $filesMax != 1 ? $filesMax : 10;
+            $this->data['filesMax'] = $filesMax = $filesMax != 1 ? $filesMax : 10;
+            $this->data['attributeList']['data-js-file-max'] = $filesMax;
         }
 
         // If multiple is false, set max files to 1
         if(!$multiple) {
+            $this->data['filesMax'] = 1;
             $this->data['attributeList']['data-js-file-max'] = 1;
         }
 
