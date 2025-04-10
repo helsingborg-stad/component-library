@@ -5,7 +5,7 @@
         is_bool($item['children']) ? 'js-async-children' : ''
       ],
       'style' => 'basic',
-      'icon' => 'expand_more',
+      'icon' => $expandIcon ?: 'expand_more',
       'size' => 'md',
       'pressed' => $item['active'] ? 'true' : 'false',
       'attributeList' => [
