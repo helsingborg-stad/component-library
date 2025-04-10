@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="100" height="100" viewBox="0 0 160 160"
-     class="svg-toggle-plus-minus">
-
+<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" class="reactive-icon-plus-minus">
   <style>
-    <![CDATA[
-      button:has([aria-pressed="true"]) .svg.svg-toggle-plus-minus .vertical-line {
-        transform: rotate(450deg);
+      button[aria-pressed="true"] .c-icon.c-icon--svg-path svg.reactive-icon-plus-minus .plus,
+      button[aria-pressed="true"] .c-icon.c-icon--svg-path svg.reactive-icon-plus-minus .minus {
+        transform: rotate(180deg);
+      }
+
+      button[aria-pressed="true"] .c-icon.c-icon--svg-path svg.reactive-icon-plus-minus .plus {
         opacity: 0;
       }
-      .svg-toggle-plus-minus rect {
-        transition: transform 800ms, opacity 800ms;
-        transform-origin: 50% 50%;
-      }
-    ]]>
-  </style>
 
-  <rect class="vertical-line" x="70" width="20" height="160" />
-  <rect class="horizontal-line" y="70" width="160" height="20" />
+      .c-icon.c-icon--svg-path svg.reactive-icon-plus-minus path {
+        transition: transform 400ms, opacity 200ms;
+        transform-origin: 480px -480px;
+      }
+  </style>
+  <path class="minus" d="M240-440q-17 0-28.5-11.5T200-480q0-17 11.5-28.5T240-520h480q17 0 28.5 11.5T760-480q0 17-11.5 28.5T720-440H240Z"/>
+  <path class="plus" d="M440-440H240q-17 0-28.5-11.5T200-480q0-17 11.5-28.5T240-520h200v-200q0-17 11.5-28.5T480-760q17 0 28.5 11.5T520-720v200h200q17 0 28.5 11.5T760-480q0 17-11.5 28.5T720-440H520v200q0 17-11.5 28.5T480-200q-17 0-28.5-11.5T440-240v-200Z"/>
 </svg>
