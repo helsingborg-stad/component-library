@@ -11,6 +11,7 @@
         "sectionElement": "div",
         "sectionHeadingElement": "button",
         "sectionContentElement": "div",
+        "spacedSections": false,
         "taxonomy": [],
         "taxonomyPosition":  ""
     },
@@ -25,6 +26,7 @@
         "sectionElement": "Section element",
         "sectionHeadingElement": "Section heading component",
         "sectionContentElement": "Section content component",
+        "spacedSections": "Sections are spaced instead of glued together",
         "taxonomy": "Array of taxonomies such as tags",
         "taxonomyPosition":  "Taxonomy position like top or below"
     },
@@ -39,6 +41,7 @@
         "sectionElement": "string",
         "sectionHeadingElement": "string",
         "sectionContentElement": "string",
+        "spacedSections": "bool",
         "taxonomy": "array",
         "taxonomyPosition": "string"
     },
