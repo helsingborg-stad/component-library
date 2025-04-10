@@ -12,6 +12,10 @@ class Accordion extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
+        if ($spacedSections) {
+            $this->data['classList'] = ['c-accordion--spaced-sections'];
+        }
+
         $this->data['id'] = $this->sanitizeIdAttribute(uniqid());
     }
 }
