@@ -33,7 +33,6 @@ class Icon extends \ComponentLibrary\Component\BaseController
             $customSvgIcons = self::$runtimeCache['svgFromFile'];
         }
 
-
         // The check below handles a default hidden value.
         // Allows for the default value to be overwritten.
         if (is_null($filled)) {
