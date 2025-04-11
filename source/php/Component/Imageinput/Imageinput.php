@@ -13,11 +13,13 @@ class Imageinput extends \ComponentLibrary\Component\BaseController
         foreach ($this->unpassable as $key) {
             unset($passDownData[$key]);
         }
-
+        
         //Remove any filetype in accept mime array, that isent an image
+        $this->data['accept'] = explode(',', $this->data['accept'] ?? []);
         $this->data['accept'] = array_filter($this->data['accept'], function($mime) {
             return str_contains($mime, 'image');
         });
+        $this->data['accept'] = implode(',', $this->data['accept']);
 
         //Map all data to data key (passtrough component)
         $this->data['data'] = $passDownData;
