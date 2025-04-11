@@ -1,53 +1,40 @@
 <!-- fileinput.blade.php -->
+<div class="c-field {{ $class }}" {!! $attribute !!}>
 
-<div class="{{ $class }}" {!! $attribute !!}>
-    <label class="{{$baseClass}}__label" for="fs_{{$id}}">{{$label}}{!! $required ? '<span class="u-color__text--danger">*</span>' : '' !!}</label>
-    @if(!empty($description))
-        @typography([
-            'element' => 'div',
-            'classList' => ['text-sm', 'text-dark-gray']
-            ])
-            {{ $description }}
-        @endtypography
+    @if(!empty($label))
+        @element([
+            'componentElement' => 'label',
+            'classList' => [
+                'c-field__label', 
+                $baseClass . '__label'
+            ],
+            'attributeList' => [
+                'for' => 'input_' . $id,
+                'id' => 'label_' . $id,
+                'data-js-file' => 'label'
+            ]
+        ])
+            {{$label}}
+
+            @if($required)
+                <span class="u-color__text--danger" aria-hidden="true">*</span>
+            @endif
+        @endelement
     @endif
 
+    <!-- Actual input -->
     <input type="file"
-        class="{{ $baseClass }}__input "
+        class="{{ $baseClass }}__input"
         name="{{ $multiple ? $name . '[]' : $name }}"
         id="fs_{{ $id }}"
         accept="{{ $accept }}"
         {{ $multiple ? 'multiple' : '' }}
         {!! !empty($required) ? 'required="true" data-js-required' : '' !!}
+        data-js-file="input"
+        aria-hidden="true"
     >
 
-    @button([
-        'componentElement' => 'label',
-        'style' => 'basic',
-        'text' => !empty($buttonLabel) ? $buttonLabel : $label,
-        'icon' => 'file_upload',
-        'classList' => [$baseClass . '__button'],
-        'attributeList' => ['for' => 'fs_' . $id],
-    ])
-    @endbutton
-
-      <ul class="{{ $baseClass }}__files js-form-file-input u-display--none">
-            <template>
-                <li>
-                    @icon([
-                        'icon' => 'attach_file',
-                        'size' => 'sm'
-                    ])
-                    @endicon
-					<span class="u-strong js-file-input-name"></span> 
-                    <span class="js-file-input-size"></span>
-                    @icon([
-                        'icon' => 'delete',
-                        'size' => 'md',
-                        'classList' => ['c-fileinput__remove-file']
-                    ])
-                    @endicon
-				</li>
-            </template>
-        </ul>
-
+    <div class="{{$baseClass}}__inner {{$baseClass}}__inner--area">
+        @include('Fileinput.area')
+    </div>
 </div>

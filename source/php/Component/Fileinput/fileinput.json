@@ -1,45 +1,41 @@
 {
     "slug": "fileinput",
     "default": {
-        "display": "",
-        "decription": "",
+        "description": "",
         "name": "files",
         "accept": "audio/*,video/*,image/*",
         "multiple": false,
-        "beforeLabel": "",
-        "afterLabel": "",
         "label": "",
-        "buttonLabel": "",
+        "buttonLabel": "Select file",
+        "buttonRemoveLabel": "Remove file",
+        "buttonDropLabel": "Drop files here",
         "icon": "file_upload",
         "required": false,
-        "filesMax": false
+        "filesMax": 1
     },
     "description": {
-        "display": "Display input uploader as button or area",
         "description": "Additional description or instructions.",
         "name": "files",
-        "accept": "audio/*,video/*,image/*",
+        "accept": "What file types to accept. Use MIME types. Example: audio/*,video/*,image/*",
         "multiple": "Allow single or multiple files",
-        "beforeLabel": "Insert before label",
-        "afterLabel": "Input label",
-        "label": "Insert after label",
+        "label": "Label to show on the field",
+        "buttonLabel": "What text to show on the button",
+        "buttonRemoveLabel": "What text to show on the remove button",
         "icon": "@link:component/icon",
         "required": "If field is required",
-        "filesMax": "Maximum number of files (false, int)"
+        "filesMax": "Maximum number of files (int). Foced to 1 if multiple is false. Default 10 for multiple."
     },
     "types": {
-        "display": "string",
-        "decription": "string",
+        "description": "string",
         "name": "string",
         "accept": "string",
         "multiple": "boolean",
-        "beforeLabel": "string",
-        "afterLabel": "string",
         "label": "string",
         "buttonLabel": "string",
+        "buttonRemoveLabel": "string",
         "icon": "string",
         "required": "boolean",
-        "filesMax": "integer|boolean"
+        "filesMax": "integer"
     },
     "view": "fileinput.blade.php",
     "dependency": {
@@ -47,7 +43,7 @@
             "components": [
                 "fileInput",
                 "icon",
-                "listing"
+                "button"
             ]
         }
     }

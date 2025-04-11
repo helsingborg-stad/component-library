@@ -4,34 +4,22 @@ namespace ComponentLibrary\Component\Imageinput;
 
 class Imageinput extends \ComponentLibrary\Component\BaseController
 {
-
-    const DEFAULT_ASPECT_RATIO = '16:9';
-
-    const ALLOWED_ASPECT_RATIOS = [
-        '16:9',
-        '4:3',
-        '1:1'
-    ];
+    private $unpassable = ['class', 'attribute'];
 
     public function init()
     {
-        //Extract array for easy access (fetch only)
-        extract($this->data);
-
-        if(empty($this->data['id']) ) {
-            $this->data['id'] = $this->sanitizeIdAttribute(uniqid());
+        //Remove keys that is not passable to child component
+        $passDownData = $this->data ?? []; 
+        foreach ($this->unpassable as $key) {
+            unset($passDownData[$key]);
         }
 
-        if ($display === 'area') {
-            $this->data['classList'][] = 'c-imageinput--area';
-        }
+        //Remove any filetype in accept mime array, that isent an image
+        $this->data['accept'] = array_filter($this->data['accept'], function($mime) {
+            return str_contains($mime, 'image');
+        });
 
-        if(!empty($filesMax)) {
-            $this->data['attributeList']['filesMax'] = $filesMax;
-        }
-        
-        // Aspect ratio for preview image
-        $this->data['aspectRatio'] = !empty($aspectRatio) && in_array($aspectRatio, self::ALLOWED_ASPECT_RATIOS) ? $aspectRatio : self::DEFAULT_ASPECT_RATIO;
-        $this->data['aspectRatioClass'] = 'u-ratio-' . str_replace(':', '-', $this->data['aspectRatio']);
+        //Map all data to data key (passtrough component)
+        $this->data['data'] = $passDownData;
     }
 }
