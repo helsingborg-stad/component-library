@@ -1,2 +1,2 @@
-@fileinput($passTroughData)
+@fileinput($passDownData)
 @endfileinput

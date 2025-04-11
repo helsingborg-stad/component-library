@@ -14,14 +14,15 @@ class Imageinput extends \ComponentLibrary\Component\BaseController
             unset($passDownData[$key]);
         }
         
-        //Remove any filetype in accept mime array, that isent an image
-        $this->data['accept'] = explode(',', $this->data['accept'] ?? []);
-        $this->data['accept'] = array_filter($this->data['accept'], function($mime) {
-            return str_contains($mime, 'image');
-        });
-        $this->data['accept'] = implode(',', $this->data['accept']);
+        $this->data['accept'] = (function ($accept) {
+            is_string($accept) && $accept = explode(',', $accept);
+            $accept = (array) $accept;
+            $accept = array_filter($accept, fn($mime) => str_contains($mime, 'image'));
+        
+            return implode(',', $accept);
+        })($this->data['accept'] ?? []);
 
         //Map all data to data key (passtrough component)
-        $this->data['data'] = $passDownData;
+        $this->data['passDownData'] = $passDownData;
     }
 }
