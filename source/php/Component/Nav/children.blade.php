@@ -7,7 +7,8 @@
     'height' => 'sm',
     'classList' => [
       $baseClass . '--bordered'
-    ]
+    ],
+    'expandIcon' => $expandIcon,
   ])
   @endnav
 @endif
