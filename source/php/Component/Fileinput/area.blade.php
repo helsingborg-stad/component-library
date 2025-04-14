@@ -2,7 +2,7 @@
 
   @if($description)
     @typography([
-      'classList' => ['c-field__description', $baseClass . '__description', 'u-margin__top--0', 'u-margin__bottom--3'],
+      'classList' => ['c-field__description', $baseClass . '__description', 'u-margin__top--1', 'u-margin__bottom--3'],
     ])
       {{ $description }}
     @endtypography
