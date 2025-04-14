@@ -1,9 +1,12 @@
 <div class="{{ $baseClass }}__area" data-js-file="area">
-  @typography([
-    'classList' => ['c-field__description', $baseClass . '__description', 'u-margin--0']
-  ])
-    {{ $description }}
-  @endtypography
+
+  @if($description)
+    @typography([
+      'classList' => ['c-field__description', $baseClass . '__description', 'u-margin__top--0', 'u-margin__bottom--3'],
+    ])
+      {{ $description }}
+    @endtypography
+  @endif
 
   <!-- This button is used to trigger the file input -->
   @button([
@@ -13,7 +16,6 @@
     'style' => 'basic',
     'classList' => [
       $baseClass . '__button',
-      'u-margin__top--3',
       'js-file-input-button'
     ],
     'attributeList' => [
@@ -30,7 +32,6 @@
     'size' => 'md',
     'style' => 'basic',
     'classList' => [
-      'u-margin__top--3',
       'js-file-input-drop'
     ],
     'attributeList' => [
