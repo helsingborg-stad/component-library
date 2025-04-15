@@ -18,6 +18,9 @@ class Slider extends \ComponentLibrary\Component\BaseController
         if (!empty($repeatSlide)) {
             $this->data['attributeList']['data-slider-loop'] = true;
         }
+
+        $this->data['classList'][] = 'splide';
+        $this->data['classList'][] = 'u-visibility--visible';
         
         $ratio = preg_replace('/:/i', '-', $ratio);
         $this->data['classList'][] = 'c-slider--' . $ratio;
