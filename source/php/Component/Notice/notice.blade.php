@@ -12,7 +12,7 @@
     {{-- notice__title --}}
     @if($message['title'])
         @typography([
-            "variant" => "h4",
+            "variant" => "h2",
             "element" => "h4",
             'classList' => [
                 $baseClass . '__title'
