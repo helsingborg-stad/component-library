@@ -1,4 +1,4 @@
-<div class="splide {{ $class }}" {!! $attribute !!}>
+<div class="{{ $class }}" {!! $attribute !!}>
 
     @if(!$isPost || !$customButtons)
         <div class="splide__arrows c-slider__arrows">

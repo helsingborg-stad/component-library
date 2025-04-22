@@ -128,6 +128,11 @@ class Nav extends \ComponentLibrary\Component\BaseController
 
             return implode(" ", $classList); 
         };
+
+        //Indent 
+        if($indentSubLevels === true) {
+            $this->data['classList'][] = $this->getBaseClass('indent-sublevels', true);
+        }
     }
 
     private function isOpen($isActive, $hasChildren, $isAncestor, $direction) {
