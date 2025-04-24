@@ -13,7 +13,7 @@
     @if($message['title'])
         @typography([
             "variant" => "h4",
-            "element" => "h4",
+            "element" => "h2",
             'classList' => [
                 $baseClass . '__title'
             ]
