@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" class="reactive-icon-plus-minus">
   <style>
       button[aria-pressed="true"] .c-icon.c-icon--svg-path svg.reactive-icon-plus-minus .plus,
