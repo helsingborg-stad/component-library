@@ -218,7 +218,7 @@ class Register
                     );
                 }
             } elseif (
-                !in_array($key, ['__laravel_slots', 'slot', 'id', 'classList', 'context', 'attributeList', 'baseClass', 'lang']) && 
+                !in_array($key, ['__laravel_slots', 'slot', 'id', 'classList', 'context', 'attributeList', 'baseClass', 'lang', 'isBlock']) && 
                 !(is_object($value) && $value instanceof ComponentSlot)
             ) {
                 $this->triggerError(
