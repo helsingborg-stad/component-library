@@ -23,7 +23,8 @@
         "buttonRemoveLabel": "What text to show on the remove button",
         "icon": "@link:component/icon",
         "required": "If field is required",
-        "filesMax": "Maximum number of files (int). Foced to 1 if multiple is false. Default 10 for multiple."
+        "filesMax": "Maximum number of files (int). Foced to 1 if multiple is false. Default 10 for multiple.",
+        "buttonDropLabel": "A label for the drop area"
     },
     "types": {
         "description": "string",
@@ -33,6 +34,7 @@
         "label": "string",
         "buttonLabel": "string",
         "buttonRemoveLabel": "string",
+        "buttonDropLabel": "string",
         "icon": "string",
         "required": "boolean",
         "filesMax": "integer"
