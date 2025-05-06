@@ -84,11 +84,12 @@
     </template>
 </div>
 
-<div
-  class="{{$baseClass}}__filecounter"
-  data-js-file="counter"
-  data-counter-current="0"
-  data-counter-max="{{$filesMax}}"
-  aria-hidden="true"
-  aria-live="polite"
->/</div>
+  <div
+    class="{{$baseClass}}__filecounter"
+    data-js-file="counter"
+    data-counter-current="0"
+    data-counter-max="{{$filesMax}}"
+    aria-hidden="true"
+    aria-live="polite"
+  >/</div>
+</div>
