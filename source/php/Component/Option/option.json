@@ -1,6 +1,7 @@
 {
     "slug": "option",
     "default": {
+        "type": "checkbox",
         "label": "",
         "required": false,
         "value": "",
@@ -8,6 +9,7 @@
         "name": null
     },
     "description": {
+        "type": "Type of option. Can be checkbox or radio.",
         "label": "Array of label items like labelText.",
         "required": "HTML5 validation on fields",
         "value": "option value",
