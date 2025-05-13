@@ -20,6 +20,7 @@ class Notice extends \ComponentLibrary\Component\BaseController
         if (isset($icon['name']) || isset($icon['icon'])) {
             $icon['icon'] = $icon['icon'] ?? $icon['name'];
             $icon['size'] = $icon['size'] ?? 'md';
+            $this->data['icon'] = $icon;
         }
      
         // State class
