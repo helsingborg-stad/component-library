@@ -17,8 +17,9 @@ class Notice extends \ComponentLibrary\Component\BaseController
         }
 
         // TODO: Find instances of this and 
-        if (!empty($icon['name'])) {
-            $icon['icon'] = $icon['name'];
+        if (isset($icon['name']) || isset($icon['icon'])) {
+            $icon['icon'] = $icon['icon'] ?? $icon['name'];
+            $icon['size'] = 'md';
         }
      
         // State class
