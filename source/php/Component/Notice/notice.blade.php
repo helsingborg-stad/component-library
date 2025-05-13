@@ -4,7 +4,7 @@
     {{-- notice__ico --}}
     @if($icon)
         <span class="{{$baseClass}}__icon">
-            @icon(['icon' => $icon['name'], 'size' => 'md'])
+            @icon($icon)
             @endicon
         </span>
     @endif
