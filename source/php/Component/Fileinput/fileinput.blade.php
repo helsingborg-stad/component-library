@@ -32,6 +32,7 @@
         {!! !empty($required) ? 'required="true" data-js-required' : '' !!}
         data-js-file="input"
         aria-hidden="true"
+        tabindex="-1"
     >
 
     <div class="{{$baseClass}}__inner {{$baseClass}}__inner--area">
