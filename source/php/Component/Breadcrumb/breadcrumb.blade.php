@@ -2,7 +2,7 @@
 @if($list)
 <{{$componentElement}} class="{{ $class }}" aria-label="{{$label}}" {!! $attribute !!}>
   @if($prefixLabel)
-    <span class="{{$baseClass}}__prefix u-sr__only">
+    <span class="{{$baseClass}}__prefix {{ $prefixClass }}">
       {{$prefixLabel}}
     </span>
   @endif
@@ -10,7 +10,7 @@
     @foreach($list as $item) 
       <{{$listItemType}} data-level="{{ $loop->depth }}" class="{{$baseClass}}__item {{$baseClass}}__item_{{ $loop->index }} {{$baseClass}}__item_depth-{{ $loop->depth }}">
         
-        @if(isset($item['icon']) && !empty($item['icon']))
+        @if(isset($item['icon']) && !empty($item['icon']) && !($loop->first && !$showHomeIcon))
           @icon(['icon' => $item['icon']])
           @endicon
         @endif
