@@ -10,6 +10,7 @@ class Imageinput extends \ComponentLibrary\Component\BaseController
     {
         //Remove keys that is not passable to child component
         $passDownData = $this->data ?? []; 
+
         foreach ($this->unpassable as $key) {
             unset($passDownData[$key]);
         }

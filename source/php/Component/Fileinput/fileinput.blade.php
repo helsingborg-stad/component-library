@@ -26,12 +26,13 @@
     <input type="file"
         class="{{ $baseClass }}__input"
         name="{{ $multiple ? $name . '[]' : $name }}"
-        id="fs_{{ $id }}"
+        id="input_{{ $id }}"
         accept="{{ $accept }}"
         {{ $multiple ? 'multiple' : '' }}
         {!! !empty($required) ? 'required="true" data-js-required' : '' !!}
         data-js-file="input"
         aria-hidden="true"
+        tabindex="-1"
     >
 
     <div class="{{$baseClass}}__inner {{$baseClass}}__inner--area">

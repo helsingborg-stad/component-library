@@ -11,8 +11,7 @@
     "buttonDropLabel": "Drop files here",
     "icon": "file_upload",
     "required": false,
-    "filesMax": 1,
-    "helperText": ""
+    "filesMax": 1
   },
   "description": {
       "description": "Additional description or instructions.",
@@ -24,8 +23,7 @@
       "buttonRemoveLabel": "What text to show on the remove button",
       "icon": "@link:component/icon",
       "required": "If field is required",
-      "filesMax": "Maximum number of files (int). Foced to 1 if multiple is false. Default 10 for multiple.",
-      "helperText": "A helper text"
+      "filesMax": "Maximum number of files (int). Foced to 1 if multiple is false. Default 10 for multiple."
   },
   "types": {
       "description": "string",
@@ -37,8 +35,7 @@
       "buttonRemoveLabel": "string",
       "icon": "string",
       "required": "boolean",
-      "filesMax": "integer",
-      "helperText": "string"
+      "filesMax": "integer"
   },
   "view": "imageinput.blade.php",
   "dependency": {

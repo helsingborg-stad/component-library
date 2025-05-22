@@ -4,7 +4,7 @@
     {{-- notice__ico --}}
     @if($icon)
         <span class="{{$baseClass}}__icon">
-            @icon(['icon' => $icon['name'], 'size' => 'md'])
+            @icon($icon)
             @endicon
         </span>
     @endif
@@ -13,7 +13,7 @@
     @if($message['title'])
         @typography([
             "variant" => "h4",
-            "element" => "h4",
+            "element" => "h2",
             'classList' => [
                 $baseClass . '__title'
             ]

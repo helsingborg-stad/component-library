@@ -15,6 +15,13 @@ class Notice extends \ComponentLibrary\Component\BaseController
         if (empty($id)) {
             $this->data['id'] = $this->sanitizeIdAttribute(uniqid());
         }
+
+        // TODO: Find instances of this and 
+        if (isset($icon['name']) || isset($icon['icon'])) {
+            $icon['icon'] = $icon['icon'] ?? $icon['name'];
+            $icon['size'] = $icon['size'] ?? 'md';
+            $this->data['icon'] = $icon;
+        }
      
         // State class
         if (in_array($type, ['success', 'warning', 'danger', 'info'])) {
