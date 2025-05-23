@@ -1,13 +1,17 @@
 <ul class="{{ $class }}">
     @foreach ($events as $event)
-        <li class="{{ $baseClass }}__event">
-            <div class="{{ $baseClass }}__date u-visibility--hidden@sm u-visibility--hidden@xs">
-                {!! $event['timelineDate'] !!}
-            </div>
-            <div class="{{ $baseClass }}__marker">
-                <div class="{{ $baseClass }}__date u-visibility--hidden@md u-visibility--hidden@lg u-visibility--hidden@xl">
+        <li class="{{ $baseClass }}__event @if (isset($event['active_step']) && $event['active_step']){{$baseClass }}__event--active @endif">
+            @if(!$sequential)
+                <div class="{{ $baseClass }}__date u-visibility--hidden@sm u-visibility--hidden@xs">
                     {!! $event['timelineDate'] !!}
                 </div>
+            @endif
+            <div class="{{ $baseClass }}__marker">
+                @if(!$sequential)
+                    <div class="{{ $baseClass }}__date u-visibility--hidden@md u-visibility--hidden@lg u-visibility--hidden@xl">
+                        {!! $event['timelineDate'] !!}
+                    </div>
+                @endif
             </div>
 
             @card([
