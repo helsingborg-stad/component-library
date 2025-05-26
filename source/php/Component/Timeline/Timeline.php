@@ -12,5 +12,9 @@ class Timeline extends \ComponentLibrary\Component\BaseController
     {
         //Extract array for easy access (fetch only)
         extract($this->data);
+
+        if (isset($sequential) && $sequential) {
+            $this->data['classList'][] = $this->getBaseClass() . '--' . 'sequential';
+        }
     }
 }
