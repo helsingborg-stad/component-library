@@ -13,10 +13,20 @@ class Breadcrumb extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
+		// Customizer settings
+		$this->data['customizer'] = apply_filters('Municipio/Controller/Customizer', []);
 
 		if (is_null($truncate)) {
 			$this->data['truncate'] = $this->data['defaultTruncate'] ?? 30;
 		}
+
+		$prefixClass = [];
+		if (!$this->data['customizer']->breadcrumbShowPrefixLabel) {
+			$prefixClass[] = 'u-sr__only';
+		}
+		$this->data['prefixClass'] = implode(' ', $prefixClass);
+
+		$this->data['showHomeIcon'] = $this->data['customizer']->breadcrumbShowHomeIcon ?? true;
 		
 		$this->data['list'] = $this->structureBreadcrumbs();
     }
