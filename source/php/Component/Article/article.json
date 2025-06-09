@@ -1,0 +1,32 @@
+{
+    "slug": "article",
+    "default": {
+        "tableOfContents": false,
+        "tableOfContentsTitle": "Table of Contents",
+        "compressSections": false,
+        "compressSectionsExpandText": "Expand",
+        "compressSectionsMinimizedText": "Minimize"
+    },
+    "description": {
+        "tableOfContents": "Display a table of contents for the article.",
+        "tableOfContentsTitle": "Title of the table of contents.",
+        "compressSections": "Compress sections to show only the title, and a part of the content (with expand button).",
+        "compressSectionsExpandLabel": "Text for the expand button when sections are compressed.",
+        "compressSectionsMinimizedLabel": "Text for the minimize button when sections are expanded."
+    },
+    "types": {
+        "tableOfContents": "boolean",
+        "tableOfContentsTitle": "string",
+        "compressSections": "boolean",
+        "compressSectionsExpandText": "string",
+        "compressSectionsMinimizedText": "string"
+    },
+    "view": "article.blade.php",
+    "dependency": {
+        "sass": {
+            "components": [
+                "article"
+            ]
+        }
+    }
+}
