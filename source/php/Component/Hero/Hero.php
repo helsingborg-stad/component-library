@@ -78,7 +78,7 @@ class Hero extends \ComponentLibrary\Component\BaseController
         }
 
         //Overlay
-        if (empty($contentBackgroundColor) && ($title || $paragraph || $byline || $meta)) {
+        if (empty($contentBackgroundColor) && ($title || $paragraph || $byline || $meta) && $this->data['heroView'] !== 'callToActions') {
             $this->data['classList'][] = $this->getBaseClass() . '--overlay';
             $this->data['overlay'] = true;
         } else {
@@ -102,8 +102,8 @@ class Hero extends \ComponentLibrary\Component\BaseController
             $this->data['background'] = 'background:' . $background . ';';
         }
 
-        if (!empty($buttonArgs)) {
-            
+        // Check if button args and only single button
+        if (!empty($buttonArgs) && is_array($buttonArgs) && isset($buttonArgs['href'])) {
             if (!empty($buttonArgs['href']) && isset($buttonArgs['text']) && !empty($buttonArgs['text'])) {
                 $this->data['buttonArgs'] = $buttonArgs;
             }
@@ -114,6 +114,8 @@ class Hero extends \ComponentLibrary\Component\BaseController
                     'classList' => ["{$this->getBaseClass()}__content--link"]
                 );
             }
+        } else {
+            $this->data['buttons'] = $buttonArgs;
         }
 
         $this->data['customHeroData'] = $this->handleCustomDataFunc($heroView, $customHeroData);
