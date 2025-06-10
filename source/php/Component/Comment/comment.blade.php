@@ -16,7 +16,7 @@
 
         <div class="{{$baseClass}}__top">
 
-            @link(['href' => $author_url, 'classList' => ['c-comment__link']])
+            @link(['href' => $author_url, 'classList' => ['c-comment__link'], 'componentElement' => 'div'])
                 @typography([
                     "element" => "h6",
                     "classList" => [$baseClass.'__author']
