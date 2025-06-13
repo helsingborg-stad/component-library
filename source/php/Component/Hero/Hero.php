@@ -169,6 +169,14 @@ class Hero extends \ComponentLibrary\Component\BaseController
         return $data;
     }
 
+    private function callToActions($customHeroData) {
+        if ($customHeroData['mediaFirst'] === true) {
+            $this->data['classList'][] = $this->getBaseClass() . '--media-first';
+        }
+
+        return $customHeroData;
+    }
+
     private function hasContent(): bool
     {
         $stringEmpty = fn ($value): bool => empty(trim($value ?? ""));
