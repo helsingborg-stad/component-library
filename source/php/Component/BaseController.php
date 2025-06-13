@@ -394,7 +394,8 @@ class BaseController
      * @return string       The sanitized id
      */
     public function sanitizeIdAttribute(string $id): string {
-        $id = preg_replace('/[^a-zA-Z0-9\-_\.]/', '', $id);
+        $id = preg_replace('/[^a-zA-Z0-9\-_]/', '', $id);
+
         if (!preg_match('/^[a-zA-Z]/', $id)) {
             $id = 'id_' . $id;
         }
