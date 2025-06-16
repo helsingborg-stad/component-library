@@ -8,8 +8,7 @@ class Slider extends \ComponentLibrary\Component\BaseController
     {
         //Extract array for eazy access (fetch only)
         extract($this->data);
-
-        $this->data['id'] = $this->sanitizeIdAttribute(uniqid("", true));
+        $this->data['id'] = $this->sanitizeIdAttribute(uniqid("sider_", true));
         $this->data['attributeList']['data-step'] = 0;
         $this->data['attributeList']['data-js-slider'] = 0;
         $this->data['attributeList']['data-js-slider-index'] = 0;
@@ -69,14 +68,7 @@ class Slider extends \ComponentLibrary\Component\BaseController
         if ($heroStyle) {
             $this->data['classList'][] = $this->getBaseClass() . "--hero";
         }
-        if (isset($isPost)) {
-            $this->data['isPost'] = $isPost;
-        } else {
-            $this->data['isPost'] = false;
-        }
 
-        if(!empty($customButtons)) {
-            $this->data['attributeList']['data-custom-buttons'] = $customButtons;
-        }
+        $this->data['attributeList']['data-js-slider-buttons'] = !empty($customButtons) ? $customButtons : $this->data['id'];
     }
 }

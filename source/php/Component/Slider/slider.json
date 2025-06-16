@@ -25,7 +25,8 @@
         "ratio": "The size ratio of the slider",
         "repeatSlide": "Will allow the slide to repeat its cycle",
         "padding": "Sets the amount of padding between slides",
-        "gap": "Sets the amount of gap between slides"
+        "gap": "Sets the amount of gap between slides",
+        "customButtons": "False will use default buttons, otherwise pass a string of the value of data-js-slider-buttons"
     },
     "view": "slider.blade.php",
     "dependency": {
