@@ -116,12 +116,10 @@ class Image extends \ComponentLibrary\Component\BaseController
         if (!isset($this->data['wrapperAttributes']['style'])) {
             $this->data['wrapperAttributes']['style'] = "";
         }
-        $aspectRatio = $this->resolveAspectRatioFromContainerQueryData($this->data['containerQueryData']);
-        if($aspectRatio) {
-            $this->data['wrapperAttributes']['style'] .= "aspect-ratio:{$aspectRatio};";
-        } else {
-            $this->data['wrapperAttributes']['style'] .= "aspect-ratio:16/9;";
-        }
+
+        $aspectRatio = $this->resolveAspectRatioFromContainerQueryData($this->data['containerQueryData']) ?? '16/9';
+
+        $this->data['wrapperAttributes']['style'] .= "aspect-ratio:{$aspectRatio};";
     }
 
     private function addLowResolutionPlaceholder(ImageInterface $src)
