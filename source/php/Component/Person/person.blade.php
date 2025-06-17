@@ -1,0 +1,1 @@
+@include('Person.views.' . $view)
