@@ -1,6 +1,6 @@
 {
     "name": "helsingborg-stad/component-library",
-    "type": "wordpress-muplugin",
+    "type": "package",
     "description": "A library of components for use in WordPress",
     "license": "MIT",
     "authors": [
