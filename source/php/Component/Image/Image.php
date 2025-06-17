@@ -119,6 +119,8 @@ class Image extends \ComponentLibrary\Component\BaseController
         $aspectRatio = $this->resolveAspectRatioFromContainerQueryData($this->data['containerQueryData']);
         if($aspectRatio) {
             $this->data['wrapperAttributes']['style'] .= "aspect-ratio:{$aspectRatio};";
+        } else {
+            $this->data['wrapperAttributes']['style'] .= "aspect-ratio:16/9;";
         }
     }
 
