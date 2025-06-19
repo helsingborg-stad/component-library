@@ -3,6 +3,8 @@
 namespace ComponentLibrary\Component\Card;
 
 use ComponentLibrary\Helper\Str;
+use ComponentLibrary\Helper\TagSanitizer;
+use Helper\ATagSanitizer;
 
 /**
  * Class Card
@@ -44,6 +46,10 @@ class Card extends \ComponentLibrary\Component\BaseController
 
         if ($collapsible && $content) {
             $this->data['collapsible'] = $this->getBaseClass() . '--collapse';
+        }
+
+        if (!empty($content) && !empty($link)) {
+            $this->data['content'] = (new TagSanitizer)->removeATags($content);
         }
 
         //Cast image data to array structure
