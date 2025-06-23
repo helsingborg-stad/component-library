@@ -1,0 +1,46 @@
+{
+    "slug": "person",
+    "default": {
+        "givenName": "",
+        "familyName": false,
+        "jobTitle": false,
+        "email": false,
+        "telephone": [],
+        "address": false,
+        "visitingAddress": false,
+        "description": false,
+        "image": false,
+        "administrationUnit": false,
+        "socialMedia": [],
+        "customSections": [],
+        "useAvatarFallback": true,
+        "view": "extended"
+    },
+    "description": {
+        "givenName": "Given name. In the U.S., the first name of a person",
+        "familyName": "Family name. In the U.S., the last name of a person",
+        "jobTitle": "The job title of the person (for example, Financial Manager)",
+        "email": "Email address.",
+        "telephone": "The telephone number",
+        "address": "Physical address of the person",
+        "visitingAddress": "Visiting address of the person (if different from the physical address)",
+        "description": "A brief description of the person",
+        "image": "An image of the person, URL or image ID",
+        "administrationUnit": "The administration unit the person belongs to",
+        "socialMedia": "Social media links for the person",
+        "customSections": "Custom sections for additional information about the person",
+        "useAvatarFallback": "Use an avatar image if no image is provided",
+        "view": "The view file to render the person component, simple or extended"
+    },
+    "view": "person.blade.php",
+    "dependency": {
+        "sass": {
+            "components": [
+                "card",
+                "typography",
+                "icon",
+                "signature"
+            ]
+        }
+    }
+}
