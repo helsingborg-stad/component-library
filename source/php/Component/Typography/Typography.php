@@ -6,6 +6,7 @@ class Typography extends \ComponentLibrary\Component\BaseController
 {
     private static $hasSeenH1       = null;
     private static $headingsContext = null;
+    private static $counter = 0;
 
     public function init() {
         //Extract array for easy access (fetch only)
@@ -15,6 +16,11 @@ class Typography extends \ComponentLibrary\Component\BaseController
         $this->data['isPromotedHeading'] = false;
         $this->data['originalElement'] = $element;
         $this->data['element'] = $element;
+
+        if ($autopromote && $isShortcode) {
+            $useHeadingsContext = false;
+            $autopromote = false;
+        }
 
         if ($useHeadingsContext && substr($element, 0, 1) == 'h') {
             $this->data['element'] = $this->setMaxHeading($element);
@@ -34,9 +40,10 @@ class Typography extends \ComponentLibrary\Component\BaseController
             }
         }
 
+        self::$counter++;
+
         $this->data['hasSeenH1'] = self::$hasSeenH1;
-        
-        //Variant
+
         $this->data['classList'][] = $this->getBaseClass() . "__variant--" . $this->getVariant($variant);
     }
 
