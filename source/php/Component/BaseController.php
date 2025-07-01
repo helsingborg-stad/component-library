@@ -3,6 +3,7 @@
 namespace ComponentLibrary\Component;
 
 use ComponentLibrary\Cache\CacheInterface;
+use ComponentLibrary\Helper\TagSanitizerInterface;
 
 class BaseController
 {
@@ -32,8 +33,11 @@ class BaseController
     /**
      * Run init
      */
-    public function __construct($data, protected CacheInterface $cache)
-    {
+    public function __construct(
+        $data,
+        protected CacheInterface $cache,
+        protected TagSanitizerInterface $tagSanitizer
+    ) {
         //Load input data
         if (!is_null($data) && is_array($data)) {
             $this->data = array_merge($this->data, $data);
@@ -88,9 +92,6 @@ class BaseController
         //Create id strings
         $data['id'] = $this->getId(); //"static" id dependent on the content
         $data['uid'] = $this->getUid(); //"random" id
-
-        //Key for if slot contains any data
-        $data['slotHasData'] = $this->slotHasData('slot');
 
         //Public methods accesible within views
         $data['buildAttributes'] = function ($attributes = array()) {

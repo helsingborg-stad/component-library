@@ -2,9 +2,6 @@
 
 namespace ComponentLibrary\Component\Collection__item;
 
-use ComponentLibrary\Helper\ATagSanitizer;
-use ComponentLibrary\Helper\TagSanitizer;
-
 class Collection__item extends \ComponentLibrary\Component\BaseController  
 {
     
@@ -16,11 +13,21 @@ class Collection__item extends \ComponentLibrary\Component\BaseController
         $this->data['floatingSlotHasData'] = $this->slotHasData('floating');
         $this->data['slotHasData']         = $this->slotHasData('slot');
 
+        if ($this->data['slotHasData']) {
+            $this->data['slot'] = $this->tagSanitizer->removeATags((string) $this->data['slot']);
+        }
+
+        if ($this->data['beforeSlotHasData']) {
+            $this->data['before'] = $this->tagSanitizer->removeATags((string) $this->data['before']);
+        }
+
+        if ($this->data['floatingSlotHasData']) {
+            $this->data['floating'] = $this->tagSanitizer->removeATags((string) $this->data['floating']);
+        }
+
         if (!empty($bordered)) {
             $this->data['classList'][] = $this->getBaseClass('bordered', true);
         }
-
-        $this->data['tagSanitizer'] = new TagSanitizer();
 
         $this->data['icon'] = $this->getIcon($icon);
 
