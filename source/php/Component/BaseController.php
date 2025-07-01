@@ -18,7 +18,8 @@ class BaseController
         'attribute' => "",
         'attributeList' => [],
         'context' => [],
-        'isBlock' => false
+        'isBlock' => false,
+        'isShortcode' => false
     );
 
     /**
