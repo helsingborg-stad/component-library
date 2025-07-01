@@ -14,6 +14,7 @@ class Collection__item extends \ComponentLibrary\Component\BaseController
 
         $this->data['beforeSlotHasData']   = $this->slotHasData('before');
         $this->data['floatingSlotHasData'] = $this->slotHasData('floating');
+        $this->data['slotHasData']         = $this->slotHasData('slot');
 
         if (!empty($bordered)) {
             $this->data['classList'][] = $this->getBaseClass('bordered', true);

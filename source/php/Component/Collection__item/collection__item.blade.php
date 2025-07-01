@@ -25,7 +25,8 @@
 
     @if($slotHasData)
         <div class="c-collection__content">
-            {!! ($link ? $tagSanitizer->removeATags((string) $slot) : $slot) !!}
+            {{-- {!! ($link ? $tagSanitizer->removeATags((string) $slot) : $slot) !!} --}}
+            {!! $slot !!}
         </div>
     @endif
 

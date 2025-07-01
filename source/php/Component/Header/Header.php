@@ -8,6 +8,8 @@ class Header extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
+        $this->data['slotHasData'] = $this->slotHasData('slot');
+
         if ($backgroundColor) {
             $this->data['classList'][] = "{$this->getBaseClass()}--{$backgroundColor}";
         }

@@ -9,6 +9,8 @@ class Collection extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
+        $this->data['slotHasData'] = $this->slotHasData('slot');
+
         //Modifiers
         if($bordered) {
             $this->data['classList'][] = $this->getBaseClass() . '--bordered'; 

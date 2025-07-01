@@ -9,6 +9,8 @@ class Button extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
+        $this->data['slotHasData'] = $this->slotHasData('slot');
+
         //Basic classes
         $this->data['classList'][] = $this->getBaseClass() . '__' . $style;
         $this->data['classList'][] = $this->getBaseClass() . '__' . $style . '--' . $color;

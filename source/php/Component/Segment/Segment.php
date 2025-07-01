@@ -14,6 +14,8 @@ class Segment extends \ComponentLibrary\Component\BaseController
         $this->data['floatingSlotHasData'] = $this->slotHasData('floating');
         $this->data['aboveContentSlotHasData'] = $this->slotHasData('aboveContent');
         $this->data['belowContentSlotHasData'] = $this->slotHasData('belowContent');
+        $this->data['slotHasData']             = $this->slotHasData('slot');
+
 
         if (!file_exists($file_path)) {
             $layout = 'full-width';

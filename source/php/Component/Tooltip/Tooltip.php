@@ -8,6 +8,8 @@ class Tooltip extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
+        $this->data['slotHasData'] = $this->slotHasData('slot');
+
         //Add classes
         $this->data['classList'][] = $this->getBaseClass() . '--'. $placement; 
         $this->data['classList'][] = $this->getBaseClass() . '--hidden'; 

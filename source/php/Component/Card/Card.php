@@ -24,6 +24,8 @@ class Card extends \ComponentLibrary\Component\BaseController
         $this->data['floatingSlotHasData']     = $this->slotHasData('floating');
         $this->data['aboveContentSlotHasData'] = $this->slotHasData('aboveContent');
         $this->data['belowContentSlotHasData'] = $this->slotHasData('belowContent');
+        $this->data['slotHasData']             = $this->slotHasData('slot');
+
 
         if ($image || $hasPlaceholder) {
             $this->data['classList'][] = $this->getBaseClass('has-image', true);

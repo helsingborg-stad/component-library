@@ -90,7 +90,7 @@ class BaseController
         $data['uid'] = $this->getUid(); //"random" id
 
         //Key for if slot contains any data
-        $data['slotHasData'] = isset($this->data['slot']) && !empty($this->accessProtected($this->data['slot'], "html"));
+        $data['slotHasData'] = $this->slotHasData('slot');
 
         //Public methods accesible within views
         $data['buildAttributes'] = function ($attributes = array()) {
@@ -154,16 +154,22 @@ class BaseController
     * 
     * @return a boolean value.
     */
-    public function slotHasData($slotKey) 
+    /**
+     * Checks if the specified slot contains data.
+     *
+     * @param string $slotKey The key of the slot to check.
+     * @return bool True if the slot has data, false otherwise.
+     */
+    public function slotHasData($slotKey)
     {
-        if (!array_key_exists($slotKey, $this->data)) {
+        if (!isset($this->data[$slotKey])) {
             return false;
         }
 
-        if (empty($this->accessProtected($this->data[$slotKey], "contents"))) {
-            return false;
-        }
-        return true;
+        $property = ($slotKey === 'slot') ? 'html' : 'contents';
+        $value = $this->accessProtected($this->data[$slotKey], $property);
+
+        return !empty($value);
     }
 
     private function getNamespaceParts()

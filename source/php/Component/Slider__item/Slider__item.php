@@ -10,6 +10,8 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
+        $this->data['slotHasData'] = $this->slotHasData('slot');
+
         $this->data['classListDesktop'] = $this->getBaseClass() . "__image";
         $this->data['classList'][] = 'splide__slide';
 

@@ -15,7 +15,9 @@ class Box extends \ComponentLibrary\Component\BaseController
         // Extract array for easy access (fetch only)
         extract($this->data);
 
-        $this->data['metaAreaSlotHasData']     = $this->slotHasData('metaArea');
+        $this->data['metaAreaSlotHasData'] = $this->slotHasData('metaArea');
+        $this->data['slotHasData']         = $this->slotHasData('slot');
+
 
         if ($link) {
             $this->data['componentElement'] = "a";
