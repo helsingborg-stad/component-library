@@ -16,7 +16,7 @@ class DrawerTest extends PHPUnit\Framework\TestCase
         $data = ['toggleButtonData' => ['text' => $label]];
 
         // Act
-        $component = new Drawer($data, new \ComponentLibrary\Cache\StaticCache());
+        $component = new Drawer($data, new \ComponentLibrary\Cache\StaticCache(), new \ComponentLibrary\Helper\TagSanitizer());
         $componentData = $component->getData();
 
         // Assert
@@ -30,7 +30,7 @@ class DrawerTest extends PHPUnit\Framework\TestCase
         $data = ['toggleButtonData' => ['text' => $label]];
 
         // Act
-        $component = new Drawer($data, new \ComponentLibrary\Cache\StaticCache());
+        $component = new Drawer($data, new \ComponentLibrary\Cache\StaticCache(), new \ComponentLibrary\Helper\TagSanitizer());
         $componentData = $component->getData();
 
         // Assert
@@ -44,7 +44,7 @@ class DrawerTest extends PHPUnit\Framework\TestCase
         $expectedClassNames = 'u-display--none@xs u-display--none@sm u-display--none@xl';
 
         // Act
-        $component = new Drawer(['screenSizes' => $screenSizes], new \ComponentLibrary\Cache\StaticCache());
+        $component = new Drawer(['screenSizes' => $screenSizes], new \ComponentLibrary\Cache\StaticCache(), new \ComponentLibrary\Helper\TagSanitizer());
 
         // Assert
         $this->assertEquals($expectedClassNames, $component->getData()['screenSizeClassNames']);
@@ -57,7 +57,7 @@ class DrawerTest extends PHPUnit\Framework\TestCase
         $expectedClassNames = 'u-display--none@md u-display--none@lg u-display--none@xl';
 
         // Act
-        $component = new Drawer($data, new \ComponentLibrary\Cache\StaticCache());
+        $component = new Drawer($data, new \ComponentLibrary\Cache\StaticCache(), new \ComponentLibrary\Helper\TagSanitizer());
 
         // Assert
         $this->assertEquals($expectedClassNames, $component->getData()['screenSizeClassNames']);
@@ -67,7 +67,7 @@ class DrawerTest extends PHPUnit\Framework\TestCase
     {
         // Arrange
         $data = [];
-        $component = new Drawer($data, new \ComponentLibrary\Cache\StaticCache());
+        $component = new Drawer($data, new \ComponentLibrary\Cache\StaticCache(), new \ComponentLibrary\Helper\TagSanitizer());
         $uid = $component->getUid();
         $expectedAttribute = "data-js-toggle-item=\"drawer-$uid\"";
 
@@ -79,7 +79,7 @@ class DrawerTest extends PHPUnit\Framework\TestCase
     {
         // Arrange
         $data = [];
-        $component = new Drawer($data, new \ComponentLibrary\Cache\StaticCache());
+        $component = new Drawer($data, new \ComponentLibrary\Cache\StaticCache(), new \ComponentLibrary\Helper\TagSanitizer());
         $uid = $component->getUid();
         $simulateClickValue = "[data-js-toggle-trigger=drawer-$uid]";
 
@@ -92,7 +92,7 @@ class DrawerTest extends PHPUnit\Framework\TestCase
         // Arrange
         $data = ['attributeList' => ['data-move-to' => 'foo']];
         $expectedMoveToAttribute = 'data-move-to="foo"';
-        $component = new Drawer($data, new \ComponentLibrary\Cache\StaticCache());
+        $component = new Drawer($data, new \ComponentLibrary\Cache\StaticCache(), new \ComponentLibrary\Helper\TagSanitizer());
 
         // Assert
         $this->assertEquals($expectedMoveToAttribute, $component->getData()['moveTo']);

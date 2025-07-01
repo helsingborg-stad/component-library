@@ -11,7 +11,7 @@ class BlockTest extends PHPUnit\Framework\TestCase
         $hasContentMethod = $block->getMethod('hasContent');
         $hasContentMethod->setAccessible(true);
 
-        $block = new \ComponentLibrary\Component\Block\Block($this->getComponentDefaultData(), new \ComponentLibrary\Cache\StaticCache());
+        $block = new \ComponentLibrary\Component\Block\Block($this->getComponentDefaultData(), new \ComponentLibrary\Cache\StaticCache(), new \ComponentLibrary\Helper\TagSanitizer());
         $this->assertTrue($hasContentMethod->invokeArgs($block, [$data]));
     }
 
@@ -24,7 +24,7 @@ class BlockTest extends PHPUnit\Framework\TestCase
         $hasContentMethod = $block->getMethod('hasContent');
         $hasContentMethod->setAccessible(true);
 
-        $block = new \ComponentLibrary\Component\Block\Block($this->getComponentDefaultData(), new \ComponentLibrary\Cache\StaticCache());
+        $block = new \ComponentLibrary\Component\Block\Block($this->getComponentDefaultData(), new \ComponentLibrary\Cache\StaticCache(), new \ComponentLibrary\Helper\TagSanitizer());
         $this->assertFalse($hasContentMethod->invokeArgs($block, [$data]));
     }
 
