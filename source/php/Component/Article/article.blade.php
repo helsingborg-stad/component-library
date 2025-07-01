@@ -2,17 +2,17 @@
 <article>
     @if($tableOfContents)
         <nav class="table-of-contents">
-            @typography([
-                'element' => 'h2',
-                'variant' => 'h3',
-                'classList' => ['toc-title'],
-            ])
+            @if($tableOfContentsTitle)
+                @typography([
+                    'element' => 'h2',
+                    'variant' => 'h3',
+                    'classList' => ['toc-title', 'u-display--flex', 'u-gutter--1']
+                ])
+                    @icon(['icon' => 'toc', 'size' => 'md'])@endicon
+                    {{ $tableOfContentsTitle }}
+                @endtypography
+            @endif
 
-                @icon(['icon' => 'toc', 'size' => 'md'])
-                @endicon
-
-                {{ $}}
-            @endtypography
             @listing([
                 'list' => $tableOfContents,
                 'elementType' => 'ul',

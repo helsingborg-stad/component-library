@@ -9,10 +9,96 @@ class Article extends \ComponentLibrary\Component\BaseController
 {
     public function init()
     {
+        // Create table of contents from the slot content
         $this->data['tableOfContents'] = $this->getTableOfContentsFromHtml(
             $this->data['slot'] ?? ''
         );
+
+        // Add slugs to headings in the slot content
+        $this->data['slot'] = $this->addSlugsToHeadings(
+            $this->data['slot'] ?? ''
+        );
+
+        // Sectionize the slot content
+        /*$this->data['slot'] = $this->sectionizeContent(
+            $this->data['slot'] ?? ''
+        );*/ 
     }
+
+    /**
+     * Sectionizes the provided HTML content by wrapping it in a section tag.
+     *
+     * @param string $html The HTML content to sectionize.
+     * @return string The sectionized HTML content.
+     */
+    private function sectionizeContent(string $html): string
+    {
+        if (empty($html) || !is_string($html)) {
+            return $html;
+        }
+
+        // Create a new DOMDocument instance
+        $dom = new DomDocument();
+        libxml_use_internal_errors(true);
+        $loaded = @$dom->loadHTML($html);
+        libxml_clear_errors();
+
+        if (!$loaded) {
+            return $html;
+        }
+
+        // Create a section element
+        $section = $dom->createElement('section');
+        $section->setAttribute('class', 'article-content');
+
+        // Import the existing HTML into the section
+        $fragment = $dom->createDocumentFragment();
+        $fragment->appendXML($html);
+        $section->appendChild($fragment);
+
+        // Replace the body content with the section
+        $body = $dom->getElementsByTagName('body')->item(0);
+        if ($body) {
+            while ($body->firstChild) {
+                $body->removeChild($body->firstChild);
+            }
+            $body->appendChild($section);
+        }
+
+        return $dom->saveHTML();
+    }
+
+    /**
+     * Adds slugs to headings in the provided HTML content.
+     *
+     * @param string $html The HTML content to process.
+     * @return string The HTML content with slugs added to headings.
+     */
+    private function addSlugsToHeadings(string $html): string
+    {
+        if (empty($html) || !is_string($html)) {
+            return $html;
+        }
+
+        $dom = new DomDocument();
+        libxml_use_internal_errors(true);
+        $loaded = @$dom->loadHTML($html);
+        libxml_clear_errors();
+
+        if (!$loaded) {
+            return $html;
+        }
+
+        $xpath = new DOMXPath($dom);
+        $headings = $xpath->query('//h1 | //h2 | //h3 | //h4 | //h5 | //h6');
+
+        foreach ($headings as $heading) {
+            $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9]+/', '-', $heading->textContent)));
+            $heading->setAttribute('id', $slug);
+        }
+
+        return $dom->saveHTML();
+    }   
 
     /**
      * Extracts a nested table of contents from the provided HTML content.
@@ -52,9 +138,9 @@ class Article extends \ComponentLibrary\Component\BaseController
                 continue;
             }
             $items[] = [
-                'text' => trim($heading->textContent),
+                'label' => trim($heading->textContent),
                 'level' => $level,
-                'slug' => strtolower(trim(preg_replace('/[^a-z0-9]+/', '-', $heading->textContent))),
+                'href' => "#" . strtolower(trim(preg_replace('/[^A-Za-z0-9]+/', '-', $heading->textContent))),
                 'children' => [],
             ];
         }
