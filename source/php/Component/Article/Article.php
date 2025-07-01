@@ -2,166 +2,148 @@
 
 namespace ComponentLibrary\Component\Article;
 
-use DomDocument;
+use DOMDocument;
 use DOMXPath;
+use DOMElement;
 
 class Article extends \ComponentLibrary\Component\BaseController
 {
-    public function init()
+    private const ANCHOR_PREFIX = 'toc-';
+
+    /**
+     * Initializes the component by generating a table of contents and injecting slugs.
+     *
+     * @return void
+     */
+    public function init(): void
     {
-        // Create table of contents from the slot content
-        $this->data['tableOfContents'] = $this->getTableOfContentsFromHtml(
+        //Get headings
+        $headings = self::extractHeadingsFromHtml(
             $this->data['slot'] ?? ''
         );
 
-        // Add slugs to headings in the slot content
-        $this->data['slot'] = $this->addSlugsToHeadings(
-            $this->data['slot'] ?? ''
-        );
-
-        // Sectionize the slot content
-        /*$this->data['slot'] = $this->sectionizeContent(
-            $this->data['slot'] ?? ''
-        );*/ 
+        //Process headings
+        if(!empty($headings)) {
+            $this->data['tableOfContents']  = self::buildNestedToc($headings);
+            $this->data['slot']             = self::injectSlugsIntoHtml(
+                $this->data['slot'] ?? '', 
+                $headings
+            );
+        } else {
+            $this->data['tableOfContents'] = false;
+        }
     }
 
     /**
-     * Sectionizes the provided HTML content by wrapping it in a section tag.
+     * Creates and returns a DOMDocument from the provided HTML string.
      *
-     * @param string $html The HTML content to sectionize.
-     * @return string The sectionized HTML content.
+     * @param string $html
+     * @return DOMDocument
      */
-    private function sectionizeContent(string $html): string
+    private static function createDomFromHtml(string $html): DOMDocument
     {
-        if (empty($html) || !is_string($html)) {
-            return $html;
-        }
+        $dom = new DOMDocument();
 
-        // Create a new DOMDocument instance
-        $dom = new DomDocument();
         libxml_use_internal_errors(true);
-        $loaded = @$dom->loadHTML($html);
+        @$dom->loadHTML('<?xml encoding="utf-8" ?>' . $html);
         libxml_clear_errors();
 
-        if (!$loaded) {
-            return $html;
-        }
-
-        // Create a section element
-        $section = $dom->createElement('section');
-        $section->setAttribute('class', 'article-content');
-
-        // Import the existing HTML into the section
-        $fragment = $dom->createDocumentFragment();
-        $fragment->appendXML($html);
-        $section->appendChild($fragment);
-
-        // Replace the body content with the section
-        $body = $dom->getElementsByTagName('body')->item(0);
-        if ($body) {
-            while ($body->firstChild) {
-                $body->removeChild($body->firstChild);
-            }
-            $body->appendChild($section);
-        }
-
-        return $dom->saveHTML();
+        return $dom;
     }
 
     /**
-     * Adds slugs to headings in the provided HTML content.
+     * Extracts headings (h1–h6) from the HTML and returns them as an array.
      *
-     * @param string $html The HTML content to process.
-     * @return string The HTML content with slugs added to headings.
+     * @param string $html
+     * @return array
      */
-    private function addSlugsToHeadings(string $html): string
+    private static function extractHeadingsFromHtml(string $html): array
     {
-        if (empty($html) || !is_string($html)) {
-            return $html;
-        }
+        if (empty($html)) return [];
 
-        $dom = new DomDocument();
-        libxml_use_internal_errors(true);
-        $loaded = @$dom->loadHTML($html);
-        libxml_clear_errors();
-
-        if (!$loaded) {
-            return $html;
-        }
+        $dom = self::createDomFromHtml($html);
 
         $xpath = new DOMXPath($dom);
-        $headings = $xpath->query('//h1 | //h2 | //h3 | //h4 | //h5 | //h6');
+        $elements = $xpath->query('//h1 | //h2 | //h3 | //h4 | //h5 | //h6');
 
-        foreach ($headings as $heading) {
-            $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9]+/', '-', $heading->textContent)));
-            $heading->setAttribute('id', $slug);
+        $headings = [];
+        foreach ($elements as $el) {
+            if (!$el instanceof DOMElement) continue;
+
+            $text = trim($el->textContent);
+            $level = (int) substr($el->nodeName, 1);
+            $slug = self::generateSlug($text);
+
+            $headings[] = compact('text', 'level', 'slug');
+        }
+
+        return $headings;
+    }
+
+    /**
+     * Injects slug-based IDs into headings within the HTML.
+     *
+     * @param string $html
+     * @param array $headings
+     * @return string
+     */
+    private static function injectSlugsIntoHtml(string $html, array $headings): string
+    {
+        if (empty($html) || empty($headings)) return $html;
+
+        $dom = self::createDomFromHtml($html);
+
+        $xpath = new DOMXPath($dom);
+        $elements = $xpath->query('//h1 | //h2 | //h3 | //h4 | //h5 | //h6');
+
+        foreach ($elements as $i => $el) {
+            if (isset($headings[$i]) && $el instanceof DOMElement) {
+                $el->setAttribute('id', $headings[$i]['slug']);
+            }
         }
 
         return $dom->saveHTML();
-    }   
+    }
 
     /**
-     * Extracts a nested table of contents from the provided HTML content.
+     * Builds a nested table of contents array based on heading levels.
      *
-     * @param string $html The HTML content to extract the table of contents from.
-     * @param int $startLevel The starting heading level to consider (default is 2).
-     * @param int $maxDepth The maximum depth of headings to include (default is 3).
-     * @return array A nested array of headings with their text, level, and slug.
+     * @param array $headings
+     * @param int $startLevel
+     * @param int $maxDepth
+     * @return array
      */
-    private function getTableOfContentsFromHtml(string $html, int $startLevel = 2, int $maxDepth = 3): array
+    private static function buildNestedToc(array $headings, int $startLevel = 2, int $maxDepth = 3): array
     {
-        if (empty($html) || !is_string($html)) {
-            return [];
-        }
+        $items = array_filter($headings, fn($h) => $h['level'] >= $startLevel && $h['level'] < $startLevel + $maxDepth);
 
-        $dom = new \DOMDocument();
-        libxml_use_internal_errors(true);
-        $loaded = @$dom->loadHTML($html);
-        libxml_clear_errors();
-
-        if (!$loaded) {
-            return [];
-        }
-
-        $xpath = new \DOMXPath($dom);
-        $headings = $xpath->query('//h1 | //h2 | //h3 | //h4 | //h5 | //h6');
-
-        if (!$headings || $headings->length === 0) {
-            return [];
-        }
-
-        // Collect headings within the specified levels
-        $items = [];
-        foreach ($headings as $heading) {
-            $level = (int) substr($heading->nodeName, 1);
-            if ($level < $startLevel || $level >= $startLevel + $maxDepth) {
-                continue;
-            }
-            $items[] = [
-                'label' => trim($heading->textContent),
-                'level' => $level,
-                'href' => "#" . strtolower(trim(preg_replace('/[^A-Za-z0-9]+/', '-', $heading->textContent))),
-                'children' => [],
-            ];
-        }
-
-        // Build nested structure
-        $toc = [];
-        $stack = [];
+        $toc = $stack = [];
         foreach ($items as $item) {
-            while (!empty($stack) && $item['level'] <= end($stack)['level']) {
-                array_pop($stack);
-            }
+            $tocItem = ['label' => $item['text'], 'level' => $item['level'], 'href' => '#' . $item['slug'], 'children' => []];
+            while (!empty($stack) && $tocItem['level'] <= end($stack)['level']) array_pop($stack);
+
             if (empty($stack)) {
-                $toc[] = $item;
+                $toc[] = $tocItem;
                 $stack[] = &$toc[array_key_last($toc)];
             } else {
                 $parent = &$stack[array_key_last($stack)];
-                $parent['children'][] = $item;
+                $parent['children'][] = $tocItem;
                 $stack[] = &$parent['children'][array_key_last($parent['children'])];
             }
         }
 
         return $toc;
+    }
+
+    /**
+     * Generates a URL-safe slug from the given text.
+     *
+     * @param string $text
+     * @return string
+     */
+    private static function generateSlug(string $text): string
+    {
+        $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9]+/', '-', $text)));
+        return self::ANCHOR_PREFIX . $slug;
     }
 }
