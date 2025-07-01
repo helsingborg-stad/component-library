@@ -6,7 +6,6 @@ class Typography extends \ComponentLibrary\Component\BaseController
 {
     private static $hasSeenH1       = null;
     private static $headingsContext = null;
-    private static $counter = 0;
 
     public function init() {
         //Extract array for easy access (fetch only)
@@ -39,8 +38,6 @@ class Typography extends \ComponentLibrary\Component\BaseController
                 self::$headingsContext = 1;
             }
         }
-
-        self::$counter++;
 
         $this->data['hasSeenH1'] = self::$hasSeenH1;
 
