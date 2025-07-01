@@ -4,6 +4,9 @@ namespace ComponentLibrary\Component\Slider__item;
 
 class Slider__item extends \ComponentLibrary\Component\BaseController
 {
+    private array $slotMapping = [
+        'slot' => 'slotHasData'
+    ];
 
     public function init() {
 
@@ -46,6 +49,13 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
 
         if ($heroStyle) {
             $this->data['classList'][] = $this->getBaseClass() . "--hero";
+        }
+
+        foreach ($this->slotMapping as $slot => $hasDataKey) {
+            $this->data[$hasDataKey] = $this->slotHasData($slot);
+            if ($this->data[$hasDataKey] && $link) {
+                $this->data[$slot] = $this->tagSanitizer->removeATags((string) $this->data[$slot]);
+            }
         }
     }
 }

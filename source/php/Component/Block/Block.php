@@ -9,6 +9,11 @@ namespace ComponentLibrary\Component\Block;
 class Block extends \ComponentLibrary\Component\BaseController
 {
     private $contentKeys = ['date', 'meta', 'secondaryMeta', 'heading', 'icon', 'content'];
+    private array $slotMapping = [
+        'floating' => 'floatingSlotHasData',
+        'slot'     => 'slotHasData',
+        'metaArea' => 'metaAreaSlotHasData'
+    ];
 
     public function init()
     {
@@ -65,7 +70,14 @@ class Block extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass("no-content", true);
         }
 
-        $this->data['hasContent'] = $this->hasContent($this->data); 
+        $this->data['hasContent'] = $this->hasContent($this->data);
+
+        foreach ($this->slotMapping as $slot => $hasDataKey) {
+            $this->data[$hasDataKey] = $this->slotHasData($slot);
+            if ($this->data[$hasDataKey] && $this->data['componentElement'] === 'a') {
+                $this->data[$slot] = $this->tagSanitizer->removeATags((string) $this->data[$slot]);
+            }
+        }
     }
 
     private function hasContent($data): bool

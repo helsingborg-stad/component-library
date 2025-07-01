@@ -10,14 +10,15 @@ use ComponentLibrary\Integrations\Image\ImageInterface;
  */
 class Box extends \ComponentLibrary\Component\BaseController
 {
+    private array $slotMapping = [
+        'metaArea' => 'metaAreaSlotHasData',
+        'slot'     => 'slotHasData'
+    ];
+
     public function init()
     {
         // Extract array for easy access (fetch only)
         extract($this->data);
-
-        $this->data['metaAreaSlotHasData'] = $this->slotHasData('metaArea');
-        $this->data['slotHasData']         = $this->slotHasData('slot');
-
 
         if ($link) {
             $this->data['componentElement'] = "a";
@@ -53,6 +54,13 @@ class Box extends \ComponentLibrary\Component\BaseController
         $this->renderMostImportant();
 
         $this->data['classList'][] = $this->getBaseClass() . '--ratio-' . str_replace(":", "-", $ratio);
+
+        foreach ($this->slotMapping as $slot => $hasDataKey) {
+            $this->data[$hasDataKey] = $this->slotHasData($slot);
+            if ($this->data[$hasDataKey] && $this->data['componentElement'] === 'a') {
+                $this->data[$slot] = $this->tagSanitizer->removeATags((string) $this->data[$slot]);
+            }
+        }
     }
 
     private function hasImage():bool

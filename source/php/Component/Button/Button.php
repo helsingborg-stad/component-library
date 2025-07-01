@@ -89,6 +89,10 @@ class Button extends \ComponentLibrary\Component\BaseController
         if (empty($disableColor)) {
             $this->data['classList'][] = $this->getBaseClass('no-disabled-color', true);
         }
+
+        if ($this->data['slotHasData'] && $componentElement === 'a') {
+            $this->data['slot'] = $this->tagSanitizer->removeATags((string) $this->data['slot']);
+        }
     }
 
     /**
