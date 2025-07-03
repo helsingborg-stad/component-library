@@ -13,7 +13,7 @@ class HeroTest extends \PHPUnit\Framework\TestCase
     public function testHasContentIsFalseIfHasNoContent($meta, $title, $byline, $paragraph)
     {
         $data = $this->getComponentData(['meta' => $meta, 'title' => $title, 'byline' => $byline, 'paragraph' => $paragraph]);
-        $component = new \ComponentLibrary\Component\Hero\Hero($data, new \ComponentLibrary\Cache\StaticCache());
+        $component = new \ComponentLibrary\Component\Hero\Hero($data, new \ComponentLibrary\Cache\StaticCache(), new \ComponentLibrary\Helper\TagSanitizer());
         $component->init();
         $data = $component->getData();
 
@@ -36,7 +36,7 @@ class HeroTest extends \PHPUnit\Framework\TestCase
     public function testHasContentIsTrueIfHasContent($meta, $title, $byline, $paragraph)
     {
         $data = $this->getComponentData(['meta' => $meta, 'title' => $title, 'byline' => $byline, 'paragraph' => $paragraph]);
-        $component = new \ComponentLibrary\Component\Hero\Hero($data, new \ComponentLibrary\Cache\StaticCache());
+        $component = new \ComponentLibrary\Component\Hero\Hero($data, new \ComponentLibrary\Cache\StaticCache(), new \ComponentLibrary\Helper\TagSanitizer());
         $component->init();
         $data = $component->getData();
 

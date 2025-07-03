@@ -3,6 +3,8 @@
 namespace ComponentLibrary\Component\Card;
 
 use ComponentLibrary\Helper\Str;
+use ComponentLibrary\Helper\TagSanitizer;
+use Helper\ATagSanitizer;
 
 /**
  * Class Card
@@ -10,18 +12,20 @@ use ComponentLibrary\Helper\Str;
  */
 class Card extends \ComponentLibrary\Component\BaseController
 {
+    private array $slotMapping = [
+        'afterContent' => 'afterContentSlotHasData',
+        'floating'     => 'floatingSlotHasData',
+        'aboveContent' => 'aboveContentSlotHasData',
+        'belowContent' => 'belowContentSlotHasData',
+        'slot'         => 'slotHasData'
+    ];
+
     public function init()
     {
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
         $this->data['collpaseID'] = uniqid();
-
-        //Detect if the slots have data
-        $this->data['afterContentSlotHasData'] = $this->slotHasData('afterContent');
-        $this->data['floatingSlotHasData']     = $this->slotHasData('floating');
-        $this->data['aboveContentSlotHasData'] = $this->slotHasData('aboveContent');
-        $this->data['belowContentSlotHasData'] = $this->slotHasData('belowContent');
 
         if ($image || $hasPlaceholder) {
             $this->data['classList'][] = $this->getBaseClass('has-image', true);
@@ -44,6 +48,10 @@ class Card extends \ComponentLibrary\Component\BaseController
 
         if ($collapsible && $content) {
             $this->data['collapsible'] = $this->getBaseClass() . '--collapse';
+        }
+
+        if (!empty($content) && !empty($link)) {
+            $this->data['content'] = (new TagSanitizer)->removeATags($content);
         }
 
         //Cast image data to array structure
@@ -90,6 +98,13 @@ class Card extends \ComponentLibrary\Component\BaseController
         $this->data['imageExists'] = $this->hasImage($image);
 
         $this->data['contentHtmlElement'] = $this->getContentHTMLElement($content);
+
+        foreach ($this->slotMapping as $slot => $hasDataKey) {
+            $this->data[$hasDataKey] = $this->slotHasData($slot);
+            if ($this->data[$hasDataKey] && $this->data['componentElement'] === 'a') {
+                $this->data[$slot] = $this->tagSanitizer->removeATags((string) $this->data[$slot]);
+            }
+        }
     }
     
     /**

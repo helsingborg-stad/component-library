@@ -25,7 +25,7 @@
 
     @if($slotHasData)
         <div class="c-collection__content">
-            {!!$slot!!}
+            {!! $slot !!}
         </div>
     @endif
 

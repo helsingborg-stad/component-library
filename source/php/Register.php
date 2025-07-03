@@ -3,6 +3,7 @@
 namespace ComponentLibrary;
 
 use ComponentLibrary\Cache\CacheInterface;
+use ComponentLibrary\Helper\TagSanitizerInterface;
 use HelsingborgStad\BladeService\BladeServiceInterface;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\View\ComponentSlot;
@@ -23,13 +24,12 @@ class Register
     public $controllerPaths = [];
     private $reservedNames = ["data", "class", "list", "lang"];
     private $controllers = [];
-    private BladeServiceInterface $blade;
-    private CacheInterface $componentCache;
 
-    public function __construct(BladeServiceInterface $bladeService, CacheInterface $componentCache)
-    {
-        $this->blade = $bladeService;
-        $this->componentCache = $componentCache;
+    public function __construct(
+        private BladeServiceInterface $blade,
+        private CacheInterface $componentCache,
+        private TagSanitizerInterface $tagSanitizer
+    ) {
     }
 
     /**
@@ -276,7 +276,7 @@ class Register
                 $controller = $this->controllers[$controllerId];
             } else {
                 $controller = (string) ("\\" . $this->getNamespace($controllerLocation) . "\\" . $controllerName);
-                $controller = new $controller($data, $this->componentCache);
+                $controller = new $controller($data, $this->componentCache, $this->tagSanitizer);
             }
 
             return $controller->getData();

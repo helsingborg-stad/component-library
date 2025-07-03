@@ -11,7 +11,7 @@ class DatebadgeTest extends TestCase {
      * @testdox class can be instantiated
      */
     public function testCanBeCreated() {
-        $instance = new Datebadge($this->getDefaultData(), $this->getCacheMock());
+        $instance = new Datebadge($this->getDefaultData(), $this->getCacheMock(), new \ComponentLibrary\Helper\TagSanitizer());
         $this->assertInstanceOf(Datebadge::class, $instance);
     }
 
@@ -22,7 +22,7 @@ class DatebadgeTest extends TestCase {
         $data = $this->getDefaultData();
         $data['date'] = '2021-01-01 14:00';
         
-        $instance = new Datebadge($data, $this->getCacheMock());
+        $instance = new Datebadge($data, $this->getCacheMock(), new \ComponentLibrary\Helper\TagSanitizer());
         
         $this->assertEquals('Jan', $instance->getData()['month']);
         $this->assertEquals('1', $instance->getData()['day']);
@@ -36,7 +36,7 @@ class DatebadgeTest extends TestCase {
         $data = $this->getDefaultData();
         $data['date'] = strtotime('2021-01-01 14:00');
         
-        $instance = new Datebadge($data, $this->getCacheMock());
+        $instance = new Datebadge($data, $this->getCacheMock(), new \ComponentLibrary\Helper\TagSanitizer());
         
         $this->assertEquals('Jan', $instance->getData()['month']);
         $this->assertEquals('1', $instance->getData()['day']);
