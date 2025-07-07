@@ -20,7 +20,7 @@
                 'link' => $event['link'],
                 'heading' => $event['title'],
                 'content' => $event['content'],
-                'image' => is_array($event['imageSrc'])
+                'image' => isset($event['imageSrc']) && is_array($event['imageSrc'])
                     ? [
                         'src' => $event['imageSrc'][0] ?? null,
                         'alt' => $event['title'],
