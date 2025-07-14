@@ -3,6 +3,7 @@
 namespace ComponentLibrary\Component;
 
 use ComponentLibrary\Cache\CacheInterface;
+use ComponentLibrary\Helper\TagSanitizerInterface;
 
 class BaseController
 {
@@ -18,7 +19,8 @@ class BaseController
         'attribute' => "",
         'attributeList' => [],
         'context' => [],
-        'isBlock' => false
+        'isBlock' => false,
+        'isShortcode' => false
     );
 
     /**
@@ -32,8 +34,11 @@ class BaseController
     /**
      * Run init
      */
-    public function __construct($data, protected CacheInterface $cache)
-    {
+    public function __construct(
+        $data,
+        protected CacheInterface $cache,
+        protected TagSanitizerInterface $tagSanitizer
+    ) {
         //Load input data
         if (!is_null($data) && is_array($data)) {
             $this->data = array_merge($this->data, $data);
@@ -88,9 +93,6 @@ class BaseController
         //Create id strings
         $data['id'] = $this->getId(); //"static" id dependent on the content
         $data['uid'] = $this->getUid(); //"random" id
-
-        //Key for if slot contains any data
-        $data['slotHasData'] = isset($this->data['slot']) && !empty($this->accessProtected($this->data['slot'], "html"));
 
         //Public methods accesible within views
         $data['buildAttributes'] = function ($attributes = array()) {
@@ -154,16 +156,22 @@ class BaseController
     * 
     * @return a boolean value.
     */
-    public function slotHasData($slotKey) 
+    /**
+     * Checks if the specified slot contains data.
+     *
+     * @param string $slotKey The key of the slot to check.
+     * @return bool True if the slot has data, false otherwise.
+     */
+    public function slotHasData($slotKey)
     {
-        if (!array_key_exists($slotKey, $this->data)) {
+        if (!isset($this->data[$slotKey])) {
             return false;
         }
 
-        if (empty($this->accessProtected($this->data[$slotKey], "contents"))) {
-            return false;
-        }
-        return true;
+        $property = ($slotKey === 'slot') ? 'html' : 'contents';
+        $value = $this->accessProtected($this->data[$slotKey], $property);
+
+        return !empty($value);
     }
 
     private function getNamespaceParts()

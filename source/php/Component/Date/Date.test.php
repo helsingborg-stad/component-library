@@ -16,7 +16,7 @@ class DateTest extends TestCase {
      * @testdox class can be instantiated
      */
     public function testCanBeCreated() {
-        $instance = new Date($this->getDefaultData(), $this->getCacheMock());
+        $instance = new Date($this->getDefaultData(), $this->getCacheMock(), new \ComponentLibrary\Helper\TagSanitizer());
         $this->assertInstanceOf(Date::class, $instance);
     }
 
@@ -27,7 +27,7 @@ class DateTest extends TestCase {
         $data = $this->getDefaultData();
         $data['timestamp'] = '2021-01-01';
 
-        $instance = new Date($data, $this->getCacheMock());
+        $instance = new Date($data, $this->getCacheMock(), new \ComponentLibrary\Helper\TagSanitizer());
 
         $this->assertEquals('2021-01-01', $instance->getData()['refinedDate']);
     }
@@ -39,7 +39,7 @@ class DateTest extends TestCase {
         $data = $this->getDefaultData();
         $data['timestamp'] = 'Monday, 27 January 2025';
 
-        $instance = new Date($data, $this->getCacheMock());
+        $instance = new Date($data, $this->getCacheMock(), new \ComponentLibrary\Helper\TagSanitizer());
 
         $this->assertEquals('2025-01-27', $instance->getData()['refinedDate']);
     }
@@ -51,7 +51,7 @@ class DateTest extends TestCase {
         $data = $this->getDefaultData();
         $data['timestamp'] = 'Måndag, 27 Januari 2025';
 
-        $instance = new Date($data, $this->getCacheMock());
+        $instance = new Date($data, $this->getCacheMock(), new \ComponentLibrary\Helper\TagSanitizer());
 
         $this->assertEquals('-', $instance->getData()['refinedDate']);
     }
@@ -63,7 +63,7 @@ class DateTest extends TestCase {
         $data = $this->getDefaultData();
         $data['timestamp'] = strtotime('2021-01-01');
         
-        $instance = new Date($data, $this->getCacheMock());
+        $instance = new Date($data, $this->getCacheMock(), new \ComponentLibrary\Helper\TagSanitizer());
         
         $this->assertEquals('2021-01-01', $instance->getData()['refinedDate']);
     }
@@ -76,7 +76,7 @@ class DateTest extends TestCase {
         $data['action'] = 'timesince';
         $data['timestamp'] = time();
         
-        $instance = new Date($data, $this->getCacheMock());
+        $instance = new Date($data, $this->getCacheMock(), new \ComponentLibrary\Helper\TagSanitizer());
         
         $this->assertStringContainsString('just now', $instance->getData()['refinedDate']);
     }
@@ -89,7 +89,7 @@ class DateTest extends TestCase {
         $data['action'] = 'timesince';
         $data['timestamp'] = strtotime('-1 hour');
         
-        $instance = new Date($data, $this->getCacheMock());
+        $instance = new Date($data, $this->getCacheMock(), new \ComponentLibrary\Helper\TagSanitizer());
         
         $this->assertStringContainsString('1 hour', $instance->getData()['refinedDate']);
     }
@@ -103,7 +103,7 @@ class DateTest extends TestCase {
         $data['timestamp'] = $timestamp;
         $data['format'] = $format;
         
-        $instance = new Date($data, $this->getCacheMock());
+        $instance = new Date($data, $this->getCacheMock(), new \ComponentLibrary\Helper\TagSanitizer());
         
         $this->assertEquals($result, $instance->getData()['refinedDate']);
     }

@@ -9,6 +9,8 @@ class Notice extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
+        $this->data['slotHasData'] = $this->slotHasData('slot');
+
         // Backwards compatibility
         $data['action']['text'] ??= ($data['action']['label'] ?? '');
 

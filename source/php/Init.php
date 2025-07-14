@@ -5,6 +5,7 @@ namespace ComponentLibrary;
 use ComponentLibrary\Cache\CacheInterface;
 use ComponentLibrary\Cache\StaticCache;
 use ComponentLibrary\Cache\TrySetWpCache;
+use ComponentLibrary\Helper\TagSanitizer;
 use ComponentLibrary\Register;
 use HelsingborgStad\BladeService\BladeService;
 use HelsingborgStad\BladeService\BladeServiceInterface;
@@ -52,7 +53,11 @@ class Init {
         }
 
         $this->bladeService = new BladeService($sanitizedViewPaths);
-        $this->register = new Register($this->bladeService, $this->getCache());
+        $this->register = new Register(
+            $this->bladeService,
+            $this->getCache(),
+            new TagSanitizer()
+        );
         
         // Initialize all controller paths so that this library is last
         $controllerPaths = array_unique(

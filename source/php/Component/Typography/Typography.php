@@ -16,6 +16,11 @@ class Typography extends \ComponentLibrary\Component\BaseController
         $this->data['originalElement'] = $element;
         $this->data['element'] = $element;
 
+        if ($autopromote && $isShortcode) {
+            $useHeadingsContext = false;
+            $autopromote = false;
+        }
+
         if ($useHeadingsContext && substr($element, 0, 1) == 'h') {
             $this->data['element'] = $this->setMaxHeading($element);
         }
@@ -35,8 +40,7 @@ class Typography extends \ComponentLibrary\Component\BaseController
         }
 
         $this->data['hasSeenH1'] = self::$hasSeenH1;
-        
-        //Variant
+
         $this->data['classList'][] = $this->getBaseClass() . "__variant--" . $this->getVariant($variant);
     }
 

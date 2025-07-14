@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Helper;
 
-class TagSanitizer
+class TagSanitizer implements TagSanitizerInterface
 {
     /**
      * Sanitize the excerpt by removing links.

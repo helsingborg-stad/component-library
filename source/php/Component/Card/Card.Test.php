@@ -44,6 +44,6 @@ class CardTest extends TestCase {
             'date' => null
         ];
 
-        return new Card(array_merge($default, $data), $this->createMock(CacheInterface::class));
+        return new Card(array_merge($default, $data), $this->createMock(CacheInterface::class), new \ComponentLibrary\Helper\TagSanitizer());
     }
 }
