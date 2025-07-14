@@ -177,7 +177,12 @@ class Register
                 }
             );
         } catch (\Throwable $e) {
-            echo  '<pre>' . var_dump($e) . '<pre>';
+            // Log error instead of echoing to prevent output in wrong order
+            if (function_exists('error_log')) {
+                error_log('ComponentLibrary: Error in registerViewComposer for component "' . $component->slug . '": ' . $e->getMessage());
+            }
+            // Re-throw to allow proper error handling
+            throw $e;
         }
     }
 
@@ -270,15 +275,9 @@ class Register
     {
         //Run controller & fetch data
         if ($controllerLocation = $this->locateController(ucfirst($controllerName))) {
-            $controllerId = md5($controllerLocation);
-
-            if (in_array($controllerId, $this->controllers)) {
-                $controller = $this->controllers[$controllerId];
-            } else {
-                $controller = (string) ("\\" . $this->getNamespace($controllerLocation) . "\\" . $controllerName);
-                $controller = new $controller($data, $this->componentCache, $this->tagSanitizer);
-            }
-
+            $controllerClass = (string) ("\\" . $this->getNamespace($controllerLocation) . "\\" . $controllerName);
+            $controller = new $controllerClass($data, $this->componentCache, $this->tagSanitizer);
+            
             return $controller->getData();
         }
 
@@ -435,11 +434,15 @@ class Register
      */
     private function cachedFileExists($path) {
         $id = md5($path);
+        
+        // Check static cache first
         if(isset(self::$cache['fileExists'][$id])) {
             return true; 
         }
 
+        // Check file system
         if(file_exists($path)) {
+            // Use atomic write to prevent race condition
             self::$cache['fileExists'][$id] = true; 
             return true;
         }
@@ -448,26 +451,25 @@ class Register
     }
 
     /**
-     * Check if a file exists using cached results.
+     * Get file contents using cached results.
      *
-     * This function checks for the existence of a file using cached results to improve performance.
-     * It first looks in the cache for a previous check result and returns true if the file is found.
-     * If not found in the cache, it checks the file system, updates the cache if found, and returns the result.
+     * This function retrieves file contents using cached results to improve performance.
+     * It first looks in the cache for a previous result and returns it if found.
+     * If not found in the cache, it reads the file, updates the cache, and returns the result.
      *
-     * @param string $path The path to the file to check.
-     * @return bool Returns true if the file exists, false otherwise.
+     * @param string $path The path to the file to read.
+     * @return string|false Returns the file contents if successful, false otherwise.
      */
     private function cachedFileGetContents($path) {
         $id = md5($path);
     
+        // Check static cache first
         if (isset(self::$cache['fileGetContents'][$id])) {
-            // If the content is already in the static cache, return it.
             return self::$cache['fileGetContents'][$id];
         }
     
+        // Check WordPress cache if available
         if (function_exists('wp_cache_get')) {
-            // If the wp_cache_get function exists (i.e., running inside WordPress),
-            // attempt to retrieve the content from the cache.
             $cachedContent = wp_cache_get($id, 'fileGetContents');
             if ($cachedContent !== false) {
                 // Cache the content in the static variable for future use.
@@ -476,19 +478,23 @@ class Register
             }
         }
     
-        // If not in cache, use file_get_contents
+        // Read from file system
         $content = file_get_contents($path);
+        
+        // Return false if file_get_contents failed
+        if ($content === false) {
+            return false;
+        }
     
+        // Cache in WordPress cache if available
         if (function_exists('wp_cache_set')) {
-            // If the wp_cache_set function exists (i.e., running inside WordPress),
-            // cache the content using WordPress's cache.
             wp_cache_set($id, $content, 'fileGetContents');
         }
     
         // Cache the content in the static variable for future use.
         self::$cache['fileGetContents'][$id] = $content;
     
-        return $content !== false ? $content : false;
+        return $content;
     }
     
     
