@@ -19,19 +19,20 @@
 
     @if($beforeSlotHasData)
         <div class="{{$baseClass}}__before">
-            {!! $before !!}
+            {!! ($link ? $tagSanitizer->removeATags((string) $before) : $before) !!}
         </div>
     @endif
 
     @if($slotHasData)
         <div class="c-collection__content">
+            {!! ($link ? $tagSanitizer->removeATags((string) $slot) : $slot) !!}
             {!! $slot !!}
         </div>
     @endif
 
     @if($secondary) 
         <div class="c-collection__secondary">
-            {!! $secondary !!}
+            {!! ($link ? $tagSanitizer->removeATags((string) $secondary) : $secondary) !!}
         </div>
     @endif
 </{{$componentElement}}>

@@ -2,6 +2,9 @@
 
 namespace ComponentLibrary\Component\Collection__item;
 
+use ComponentLibrary\Helper\ATagSanitizer;
+use ComponentLibrary\Helper\TagSanitizer;
+
 class Collection__item extends \ComponentLibrary\Component\BaseController  
 {
     private array $slotMapping = [
@@ -17,6 +20,8 @@ class Collection__item extends \ComponentLibrary\Component\BaseController
         if (!empty($bordered)) {
             $this->data['classList'][] = $this->getBaseClass('bordered', true);
         }
+
+        $this->data['tagSanitizer'] = new TagSanitizer();
 
         $this->data['icon'] = $this->getIcon($icon);
 
