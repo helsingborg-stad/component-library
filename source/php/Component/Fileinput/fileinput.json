@@ -9,6 +9,7 @@
         "buttonLabel": "Select file",
         "buttonRemoveLabel": "Remove file",
         "buttonDropLabel": "Drop files here",
+        "preview": false,
         "icon": "file_upload",
         "required": false,
         "filesMax": 1
@@ -37,7 +38,8 @@
         "buttonDropLabel": "string",
         "icon": "string",
         "required": "boolean",
-        "filesMax": "integer"
+        "filesMax": "integer",
+        "preview": "boolean"
     },
     "view": "fileinput.blade.php",
     "dependency": {
