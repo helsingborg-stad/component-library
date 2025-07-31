@@ -50,10 +50,6 @@ class Card extends \ComponentLibrary\Component\BaseController
             $this->data['collapsible'] = $this->getBaseClass() . '--collapse';
         }
 
-        if (!empty($content) && !empty($link)) {
-            $this->data['content'] = (new TagSanitizer)->removeATags($content);
-        }
-
         //Cast image data to array structure
         if (!empty($image) && is_string($image)) {
             $image = $this->data['image'] = [
@@ -98,6 +94,10 @@ class Card extends \ComponentLibrary\Component\BaseController
         $this->data['imageExists'] = $this->hasImage($image);
 
         $this->data['contentHtmlElement'] = $this->getContentHTMLElement($content);
+
+        if ($content && $this->data['componentElement'] === 'a') {
+            $this->data['content'] = $this->tagSanitizer->removeATags((string) $content);
+        }
 
         foreach ($this->slotMapping as $slot => $hasDataKey) {
             $this->data[$hasDataKey] = $this->slotHasData($slot);
