@@ -36,6 +36,8 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['data-js-file-max'] = $this->filesMax;
         }
 
+        $this->data['acceptedFilesList'] = $this->createAcceptedFilesList($accept);
+
         // Indicate multiple or not
         $this->data['attributeList']['data-js-file-is-multi'] = $multiple;
 
@@ -44,5 +46,19 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
 
         // Set required attribute
         $this->data['required'] = $required ?? false;
+    }
+
+    private function createAcceptedFilesList($accept): string
+    {
+        if (!is_string($accept)) {
+            return $accept;
+        }
+
+        return( $this->data['lang']->allowedFiles ?? 'Allowed files') . ': ' . implode(' ', array_map(function($type) {
+            if ($type === "video/*") return $this->data['lang']->videos ?? "Videos";
+            if ($type === "image/*") return $this->data['lang']->images ?? "Images";
+            if ($type === "audio/*") return $this->data['lang']->audios ?? "Audios";
+            return $type;
+        }, explode(',', $accept)));
     }
 }
