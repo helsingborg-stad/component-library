@@ -1,6 +1,22 @@
 <!-- fileinput.blade.php -->
 <div class="c-field {{ $class }}" {!! $attribute !!}>
-
+    @element([
+        'componentElement' => 'template',
+        'attributeList' => [
+            'data-js-file' => 'notice-template',
+            'data-js-upload-error-message' => $uploadErrorMessage,
+        ]
+    ])
+        @notice([
+            'type' => 'danger',
+            'icon' => [
+                'icon' => 'error',
+                'size' => 'lg',
+            ]
+        ])
+        <!-- Message -->
+        @endnotice
+    @endelement
     @if(!empty($label))
         @element([
             'componentElement' => 'label',
