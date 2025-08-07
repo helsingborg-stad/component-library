@@ -1,4 +1,4 @@
-@if ($href)
+@if (!empty($href))
     <a class="{{ $class }}" {!! $attribute !!}>
         {!! $slot !!}
     </a>

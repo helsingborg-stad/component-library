@@ -11,8 +11,12 @@ class Link extends \ComponentLibrary\Component\BaseController
         extract($this->data);
 
         //Link
-        if ($href) {
+        if (!empty($href)) {
             $this->data['attributeList']['href'] = $this->sanitizeHref($href);
+        } else {
+            if ($keepWrapper && $componentElement === 'span') {
+                $this->data['componentElement'] = 'div';
+            }
         }
 
         //Target
