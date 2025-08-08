@@ -7,7 +7,7 @@
     @if ($email)
         <span data-tooltip="{!! $email !!}">
             @button([
-                'text' => $lang->email,
+                'text' => $lang->email ?? 'Email',
                 'color' => 'default',
                 'style' => 'basic',
                 'href' => 'mailto:' . $email,
@@ -27,18 +27,16 @@
         @foreach ($telephone as $phone)
             <span data-tooltip="{!! $phone['number'] !!}">
                 @button([
-                    'text' => $lang->call,
+                    'text' => $lang->call ?? 'Call',
                     'color' => 'default',
                     'style' => 'basic',
                     'href' => 'tel:' . $phone['number'],
-                    'icon' => $phone['type'] == 'smartphone' ? 'smartphone' : 'call',
+                    'icon' => $phone['icon'] ?? 'call',
                     'reversePositions' => 'true',
                     'attributeList' => [
                         'itemprop' => 'telephone',
                     ],
                     'classList' => [
-                        'c-button--phone',
-                        'c-button--' . $phone['type'],
                         'u-justify-content--start',
                         'u-margin__top--1'
                     ],

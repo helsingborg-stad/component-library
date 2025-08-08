@@ -21,7 +21,7 @@
         "familyName": "Family name. In the U.S., the last name of a person",
         "jobTitle": "The job title of the person (for example, Financial Manager)",
         "email": "Email address.",
-        "telephone": "The telephone number",
+        "telephone": "Phone numbers and icon. Array with arrays containing [number: string, icon: smartphone]",
         "address": "Physical address of the person",
         "visitingAddress": "Visiting address of the person (if different from the physical address)",
         "description": "A brief description of the person",
@@ -33,6 +33,22 @@
         "view": "The view file to render the person component, simple or extended"
     },
     "view": "person.blade.php",
+    "types": {
+        "givenName": "string",
+        "familyName": "boolean",
+        "jobTitle": "boolean",
+        "email": "string",
+        "telephone": "array",
+        "address": "string",
+        "visitingAddress": "string",
+        "description": "string",
+        "image": "int|string",
+        "administrationUnit": "string",
+        "socialMedia": "array",
+        "customSections": "array",
+        "useAvatarFallback": "boolean",
+        "view": "string"
+    },
     "dependency": {
         "sass": {
             "components": [

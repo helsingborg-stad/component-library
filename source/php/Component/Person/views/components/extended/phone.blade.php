@@ -1,15 +1,15 @@
 <span data-tooltip="{!! $number !!}">
     @button([
-        'text' => $lang->call,
+        'text' => $lang->call ?? 'Call',
         'color' => 'default',
         'style' => 'basic',
         'href' => 'tel:' . $number,
-        'icon' => $type == 'smartphone' ? 'smartphone' : 'call',
+        'icon' => $icon ?? 'call',
         'reversePositions' => 'true',
         'attributeList' => [
             'itemprop' => 'telephone'
         ],
-        'classList' => ['c-button--phone', 'c-button--' . $type, 'u-margin--0']
+        'classList' => ['u-margin--0']
     ])
     @endbutton
 </span>

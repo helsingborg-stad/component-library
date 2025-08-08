@@ -1,6 +1,6 @@
 <span data-tooltip="{!! $email !!}">
     @button([
-        'text' => $lang->email,
+        'text' => $lang->email ?? 'Email',
         'color' => 'default',
         'style' => 'basic',
         'href' => 'mailto:' . $email,
