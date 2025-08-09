@@ -11,9 +11,11 @@ class Segment extends \ComponentLibrary\Component\BaseController
 
         $file_path = __DIR__ . "/partials/" . $layout . '.blade.php';
 
-        $this->data['floatingSlotHasData'] = $this->slotHasData('floating');
+        $this->data['floatingSlotHasData']     = $this->slotHasData('floating');
         $this->data['aboveContentSlotHasData'] = $this->slotHasData('aboveContent');
         $this->data['belowContentSlotHasData'] = $this->slotHasData('belowContent');
+        $this->data['slotHasData']             = $this->slotHasData('slot');
+
 
         if (!file_exists($file_path)) {
             $layout = 'full-width';

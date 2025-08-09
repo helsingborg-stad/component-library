@@ -17,7 +17,7 @@ class NoticeTest extends \PHPUnit\Framework\TestCase
         $message = (object) ['title' => 'Title', 'message' => 'Message'];
         $data = ['type' => null, 'stretch' => null, 'message' => $message, 'action' => null, 'dismissable' => null];
 
-        $notice = new Notice($data, new \ComponentLibrary\Cache\StaticCache());
+        $notice = new Notice($data, new \ComponentLibrary\Cache\StaticCache(), new \ComponentLibrary\Helper\TagSanitizer());
         $data = $notice->getData();
 
         $this->assertEquals($data['message']['title'], 'Title');
