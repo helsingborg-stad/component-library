@@ -87,11 +87,10 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
             ],
         ];
 
-        $videoTypes = ['video/', 'mov', 'webm', 'mp4'];
-        $audioTypes = ['audio/', 'mp3', 'ogg', 'aac'];
-        $imageTypes = ['image/', 'jpg', 'jpeg', 'png', 'gif'];
-        $documentTypes = ['doc', 'docx', 'xls', 'xlsx', 'pdf'];
-
+        $videoTypes = ['video/', '.mov', '.webm', '.mp4'];
+        $audioTypes = ['audio/', '.mp3', '.ogg', '.aac'];
+        $imageTypes = ['image/', '.jpg', '.jpeg', '.png', '.gif'];
+        $documentTypes = ['.doc', '.docx', '.xls', '.xlsx', '.pdf'];
         // Check if any of $accept items are in videoTypes, etc.
         if (count(array_intersect($accept, $videoTypes)) > 0) {
             return $sizePresets['video'][$maxSize] ?? $sizePresets['video']['large'];

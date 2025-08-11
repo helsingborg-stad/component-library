@@ -27,7 +27,7 @@
         "required": "If field is required",
         "filesMax": "Maximum number of files (int). Foced to 1 if multiple is false. Default 10 for multiple.",
         "buttonDropLabel": "A label for the drop area",
-        "maxSize": "Maximum file size allowed. Number (int) in bytes or string (small, medium, large). Default is null (no limit)."
+        "maxSize": "Maximum file size allowed in MB. Number (int) in bytes or string (small, medium, large). Default is null (no limit)."
     },
     "types": {
         "description": "string",
