@@ -84,13 +84,24 @@
     </template>
 </div>
     <div class="{{$baseClass}}__accepted-files-wrapper" data-js-file="counter-wrapper">
-        @element([
-            'classList' => [
-                $baseClass . '__accepted-files'
-            ]
-        ])
-            {{$acceptedFilesList}}
-        @endelement
+        @element([])
+            @if(!empty($maxSize))
+                @element([
+                    'classList' => [
+                        $baseClass . '__maximum-size'
+                    ]
+                ])
+                    {{$maxSize}}
+                @endelement
+            @endif
+                @element([
+                    'classList' => [
+                        $baseClass . '__accepted-files'
+                    ]
+                ])
+                    {{$acceptedFilesList}}
+                @endelement
+      @endelement
         @element([
             'classList' => [
                 $baseClass . '__filecounter',

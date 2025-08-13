@@ -41,7 +41,8 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
         
         $maxFileSize = $this->determineMaxSize($maxSize, $acceptedTypesArray);
 
-        if ($maxFileSize) {
+        if (!empty($maxFileSize)) {
+            $this->data['maxSize'] = ($this->data['lang']->maximumSize ?? 'Maximum size') . ': ' . $maxFileSize . ' MB';
             $this->data['attributeList']['data-js-file-max-size'] = $maxFileSize;
         }
 
@@ -56,8 +57,12 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
         $this->data['required'] = $required ?? false;
     }
 
-    private function determineMaxSize(int|string $maxSize, array $accept): ?string
+    private function determineMaxSize(int|string|null $maxSize, array $accept): ?string
     {
+        if (empty($maxSize)) {
+            return null;
+        }
+
         // If numeric, return as is
         if (is_numeric($maxSize)) {
             return (string)$maxSize;
@@ -86,23 +91,17 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
                 'large' => '10',
             ],
         ];
+        $typeGroups = [
+            'video' => ['video/', '.mov', '.webm', '.mp4'],
+            'audio' => ['audio/', '.mp3', '.ogg', '.aac'],
+            'image' => ['image/', '.jpg', '.jpeg', '.png', '.gif'],
+            'document' => ['.doc', '.docx', '.xls', '.xlsx', '.pdf']
+        ];
 
-        $videoTypes = ['video/', '.mov', '.webm', '.mp4'];
-        $audioTypes = ['audio/', '.mp3', '.ogg', '.aac'];
-        $imageTypes = ['image/', '.jpg', '.jpeg', '.png', '.gif'];
-        $documentTypes = ['.doc', '.docx', '.xls', '.xlsx', '.pdf'];
-        // Check if any of $accept items are in videoTypes, etc.
-        if (count(array_intersect($accept, $videoTypes)) > 0) {
-            return $sizePresets['video'][$maxSize] ?? $sizePresets['video']['large'];
-        } 
-        if (count(array_intersect($accept, $audioTypes)) > 0) {
-            return $sizePresets['audio'][$maxSize] ?? $sizePresets['audio']['large'];
-        }
-        if (count(array_intersect($accept, $imageTypes)) > 0) {
-            return $sizePresets['image'][$maxSize] ?? $sizePresets['image']['large'];
-        }
-        if (count(array_intersect($accept, $documentTypes)) > 0) {
-            return $sizePresets['document'][$maxSize] ?? $sizePresets['document']['large'];
+        foreach ($typeGroups as $type => $types) {
+            if (count(array_intersect($accept, $types)) > 0) {
+                return $sizePresets[$type][$maxSize] ?? $sizePresets[$type]['large'];
+            }
         }
 
         return null;
