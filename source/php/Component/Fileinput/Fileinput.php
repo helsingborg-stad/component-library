@@ -39,6 +39,9 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
         // Indicate multiple or not
         $this->data['attributeList']['data-js-file-is-multi'] = $multiple;
 
+        // Upload error message
+        $this->data['uploadErrorMessage'] = $uploadErrorMessage ?? $this->data['lang']->uploadErrorMessage ?? 'Following files could not be uploaded';
+
         // Set class empty
         $this->data['classList'][] = "is-empty";
 
