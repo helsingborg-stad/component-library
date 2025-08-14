@@ -31,7 +31,7 @@
                     'color' => 'default',
                     'style' => 'basic',
                     'href' => 'tel:' . $phone['number'],
-                    'icon' => $phone['icon'] ?? 'call',
+                    'icon' => $phone['type'] == 'smartphone' ? 'smartphone' : 'call',
                     'reversePositions' => 'true',
                     'attributeList' => [
                         'itemprop' => 'telephone',
