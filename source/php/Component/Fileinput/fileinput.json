@@ -11,6 +11,7 @@
         "buttonDropLabel": "Drop files here",
         "preview": false,
         "fileMaxSize": null,
+        "maxSize": null,
         "uploadErrorMessage": null,
         "icon": "file_upload",
         "required": false,
