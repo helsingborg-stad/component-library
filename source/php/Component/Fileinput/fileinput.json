@@ -15,8 +15,7 @@
         "uploadErrorMessage": null,
         "icon": "file_upload",
         "required": false,
-        "filesMax": 1,
-        "preview": false
+        "filesMax": 1
     },
     "description": {
         "description": "Additional description or instructions.",
@@ -46,7 +45,7 @@
         "icon": "string",
         "required": "boolean",
         "filesMax": "integer",
-        "preview": "boolean"",
+        "preview": "boolean",
         "maxSize": "string|int"
     },
     "view": "fileinput.blade.php",
