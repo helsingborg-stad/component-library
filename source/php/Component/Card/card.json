@@ -9,15 +9,17 @@
         "image": false,
         "ratio": "16:9",
         "collapsible": false,
-        "tags":  null,
+        "tags": null,
         "link": "",
+        "linkText": "",
         "date": false,
         "dateBadge": false,
         "hasPlaceholder": false,
         "icon": false,
         "iconBackgroundColor": null,
         "color": "default",
-        "metaFirst": false
+        "metaFirst": false,
+        "headingAboveImage": false
     },
     "description": {
         "heading": "The card heading",
@@ -30,13 +32,15 @@
         "collapsible": "If the content should be collapsible.",
         "tags": "A tags array",
         "link": "A hyperlink to another location.",
+        "linkText": "The text of the link, if not set, the link will not be displayed.",
         "date": "Preformatted date",
         "dateBadge": "Display date as a badge. Requires image to be set.",
         "hasPlaceholder": "If the card should have a placeholder, if the image is missing.",
         "icon": "An array with the same specification as the icon component",
         "iconBackgroundColor": "The background color of the icon",
         "color": "The background color of the image.",
-        "metaFirst": "If the meta should be displayed before the heading."
+        "metaFirst": "If the meta should be displayed before the heading.",
+        "headingAboveImage": "If the headings should be displayed above the image."
     },
     "types": {
         "heading": "string",
@@ -49,6 +53,7 @@
         "collapsible": "boolean",
         "tags": "array",
         "link": "string",
+        "linkText": "string",
         "date": "array",
         "dateBadge": "boolean",
         "hasPlaceholder": "boolean",
@@ -56,7 +61,8 @@
         "iconBackgroundColor": "string",
         "color": "string",
         "containerAware": "boolean",
-        "metaFirst": "boolean"
+        "metaFirst": "boolean",
+        "headingAboveImage": "boolean"
     },
     "view": "card.blade.php",
     "dependency": {

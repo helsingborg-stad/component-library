@@ -1,3 +1,5 @@
+@includeWhen($headingAboveImage, 'Card.partials.header')
+
 @includeWhen(
   $imageExists || ($hasPlaceholder && !$imageExists), 
   'Card.components.image'
@@ -9,6 +11,7 @@
   $meta || 
   $date || 
   $content || 
+  $linkText || 
   $floatingSlotHasData ||
   $aboveContentSlotHasData ||
   $belowContentSlotHasData,
