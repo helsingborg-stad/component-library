@@ -101,7 +101,8 @@
                 ])
                     {{$acceptedFilesList}}
                 @endelement
-      @endelement
+        @endelement
+        
         @element([
             'classList' => [
                 $baseClass . '__filecounter',

@@ -109,8 +109,6 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
         return null;
     }
 
-
-
     private function createAcceptedFilesList(array $accept): string
     {
         return( $this->data['lang']->allowedFiles ?? 'Allowed files') . ': ' . implode(' ', array_map(function($type) {
