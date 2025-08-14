@@ -9,9 +9,12 @@
         "buttonLabel": "Select file",
         "buttonRemoveLabel": "Remove file",
         "buttonDropLabel": "Drop files here",
+        "fileMaxSize": null,
+        "uploadErrorMessage": null,
         "icon": "file_upload",
         "required": false,
-        "filesMax": 1
+        "filesMax": 1,
+        "preview": false
     },
     "description": {
         "description": "Additional description or instructions.",
@@ -21,10 +24,12 @@
         "label": "Label to show on the field",
         "buttonLabel": "What text to show on the button",
         "buttonRemoveLabel": "What text to show on the remove button",
+        "uploadErrorMessage": "Message to show when upload fails",
         "icon": "@link:component/icon",
         "required": "If field is required",
         "filesMax": "Maximum number of files (int). Foced to 1 if multiple is false. Default 10 for multiple.",
-        "buttonDropLabel": "A label for the drop area"
+        "buttonDropLabel": "A label for the drop area",
+        "maxSize": "Maximum file size allowed in MB. Number (int) in bytes or string (small, medium, large). Default is null (no limit)."
     },
     "types": {
         "description": "string",
@@ -35,9 +40,12 @@
         "buttonLabel": "string",
         "buttonRemoveLabel": "string",
         "buttonDropLabel": "string",
+        "uploadErrorMessage": "string",
         "icon": "string",
         "required": "boolean",
-        "filesMax": "integer"
+        "filesMax": "integer",
+        "preview": "boolean",
+        "maxSize": "string|int"
     },
     "view": "fileinput.blade.php",
     "dependency": {
