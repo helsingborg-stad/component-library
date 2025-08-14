@@ -51,6 +51,11 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['data-js-file-max-size'] = $maxFileSize;
         }
 
+        if (!empty($preview)) {
+            $this->data['classList'][] = $this->getBaseClass('preview', true);
+            $this->data['attributeList']['data-js-file-preview'] = true;
+        }
+
         // Indicate multiple or not
         $this->data['attributeList']['data-js-file-is-multi'] = $multiple;
 
