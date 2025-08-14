@@ -22,5 +22,13 @@ class Option extends \ComponentLibrary\Component\BaseController
         if (!empty($required)) {
              $this->data['attributeList']['required'] = true;
         }
+
+        if (empty($value) && !empty($this->data['attributeList']['value'])) {
+            $this->data['value'] = $this->data['attributeList']['value'];
+        }
+
+        if (empty($name) && !empty($this->data['attributeList']['name'])) {
+            $this->data['name'] = $this->data['attributeList']['name'];
+        }
     }
 }
