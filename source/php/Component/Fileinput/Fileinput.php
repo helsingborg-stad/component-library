@@ -15,6 +15,11 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
             $this->data['id'] = $this->sanitizeIdAttribute(uniqid());
         }
 
+        if ($preview) {
+            $this->data['classList'][] = $this->getBaseClass('preview', true);
+            $this->data['attributeList']['data-js-file-preview'] = true;
+        }
+
         // Set as dropzone
         $this->data['attributeList']['data-js-file'] = "dropzone";
 
