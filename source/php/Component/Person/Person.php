@@ -11,14 +11,6 @@ class Person extends \ComponentLibrary\Component\BaseController
         // Extract array for easy access (fetch only)
         extract($this->data);
 
-        //Translations
-        $this->data['lang'] = (object) [
-            'email' => __('Email', 'modularity'),
-            'call' => __('Call', 'modularity'),
-            'address' => __('Address', 'modularity'),
-            'visiting_address' => __('Visiting address', 'modularity')
-        ];
-
         $this->prepareData();
 
         $this->data['view'] = in_array($view, $this->availableViews) ? $view : 'extended';
