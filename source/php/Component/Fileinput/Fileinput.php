@@ -15,7 +15,7 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
             $this->data['id'] = $this->sanitizeIdAttribute(uniqid());
         }
 
-        if ($preview) {
+        if (!empty($preview)) {
             $this->data['classList'][] = $this->getBaseClass('preview', true);
             $this->data['attributeList']['data-js-file-preview'] = true;
         }
@@ -34,26 +34,22 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
             $this->data['filesMax'] = 1;
             $this->data['attributeList']['data-js-file-max'] = 1;
         }
-
+        
         // Do not allow -1 as max files, or more than $this->filesMax
         if($multiple && ($filesMax == -1 || $filesMax > $this->filesMax)) {
             $this->data['filesMax'] = $this->filesMax;
             $this->data['attributeList']['data-js-file-max'] = $this->filesMax;
         }
-
+   
         $acceptedTypesArray = is_array($accept) ? $accept : explode(',', $accept);
         $this->data['acceptedFilesList'] = $this->createAcceptedFilesList($acceptedTypesArray);
         
+        $maxSize = 'small';
         $maxFileSize = $this->determineMaxSize($maxSize, $acceptedTypesArray);
 
         if (!empty($maxFileSize)) {
             $this->data['maxSize'] = ($this->data['lang']->maximumSize ?? 'Maximum size') . ': ' . $maxFileSize . ' MB';
             $this->data['attributeList']['data-js-file-max-size'] = $maxFileSize;
-        }
-
-        if (!empty($preview)) {
-            $this->data['classList'][] = $this->getBaseClass('preview', true);
-            $this->data['attributeList']['data-js-file-preview'] = true;
         }
 
         // Indicate multiple or not
