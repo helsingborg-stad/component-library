@@ -20,6 +20,11 @@ class Collection__item extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass('bordered', true);
         }
 
+        // Icon position
+        if ($this->data['icon'] && $iconLast) {
+            $this->data['classList'][] = $this->getBaseClass('icon-last', true);
+        }
+
         //Link handling
         if($link) {
             $this->data['componentElement'] = "a"; 
