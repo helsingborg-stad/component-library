@@ -54,7 +54,7 @@ class Image extends \ComponentLibrary\Component\BaseController
         $this->data['wrapperAttributes'] = self::buildAttributes($this->data['wrapperAttributes']);
 
         // Add class if alt-text is missing
-        if (empty($this->data['alt'])) {
+        if (empty($this->data['alt']) && (!empty($placeholderEnabled) && !empty($placeholderIcon))) {
             $this->data['attributeList']['data-a11y-error'] = "Alt text is missing";
         }
     }
