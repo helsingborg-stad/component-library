@@ -39,14 +39,15 @@ class Link extends \ComponentLibrary\Component\BaseController
      * 
      * @return string       The sanitized href
      */
-    private function sanitizeHref(?string $href): string
+    public function sanitizeHref(?string $href): string
     {
         if(empty($href)) {
             return '';
         }
         $scheme = parse_url($href, PHP_URL_SCHEME);
         return match ($scheme) {
-            'tel', 'mailto' => $scheme . ':' . preg_replace('/\s+|-/', '', substr($href, strlen($scheme) + 1)),
+            'tel' => $scheme . ':' . preg_replace('/\s+|-/', '', substr($href, strlen($scheme) + 1)),
+            'mailto' => $scheme . ':' . preg_replace('/\s+/', '', substr($href, strlen($scheme) + 1)),
             default => $href,
         };
     }

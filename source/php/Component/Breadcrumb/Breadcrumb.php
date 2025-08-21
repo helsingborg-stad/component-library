@@ -14,14 +14,18 @@ class Breadcrumb extends \ComponentLibrary\Component\BaseController
         extract($this->data);
 
 		// Customizer settings
-		$this->data['customizer'] = apply_filters('Municipio/Controller/Customizer', []);
+		if(function_exists('apply_filters')) {
+			$this->data['customizer'] = apply_filters('Municipio/Controller/Customizer', []);
+		} else {
+			$this->data['customizer'] = new \stdClass();
+		}
 
 		if (is_null($truncate)) {
 			$this->data['truncate'] = $this->data['defaultTruncate'] ?? 30;
 		}
 
 		$prefixClass = [];
-		if (!$this->data['customizer']->breadcrumbShowPrefixLabel) {
+		if (!($this->data['customizer']->breadcrumbShowPrefixLabel ?? false)) {	
 			$prefixClass[] = 'u-sr__only';
 		}
 		$this->data['prefixClass'] = implode(' ', $prefixClass);
