@@ -4,6 +4,7 @@
         "componentElement": "div",
         "prefix": "",
         "icon": false,
+        "iconLast": false,
         "action": false,
         "secondary": "",
         "link": "",
