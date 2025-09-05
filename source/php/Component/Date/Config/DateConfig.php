@@ -4,7 +4,8 @@ namespace ComponentLibrary\Component\Date\Config;
 
 class DateConfig
 {
-    private string $dateFormat = 'D d M Y';
+    private string $fallbackDateFormat = 'D d M Y';
+    private ?string $dateFormat = null;
 
     /**
      * Get the date format
@@ -13,7 +14,7 @@ class DateConfig
      */
     public function getDateFormat(): string
     {
-      return $this->dateFormat;
+      return $this->dateFormat ?? $this->fallbackDateFormat;
     }
 
     /**
