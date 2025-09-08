@@ -18,7 +18,14 @@
         </div>
 
         {{-- Children list --}}
-        @includeWhen($item['hasChildren'], 'Nav.children')
+        @element([
+            'classList' => [
+                $baseClass . '__child-container',
+            ]
+        ])
+          @includeWhen($item['hasChildren'] && empty($isExtendedDropdown), 'Nav.children')
+          @includeWhen($item['hasChildren'] && !empty($isExtendedDropdown), 'Nav.extended')
+        @endelement
 
       </li>
 

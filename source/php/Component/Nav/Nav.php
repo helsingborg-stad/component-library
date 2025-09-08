@@ -55,6 +55,10 @@ class Nav extends \ComponentLibrary\Component\BaseController
         if(is_array($items)) {
             $this->data['items'] = $items = $this->normalizeItems($items);
         }
+
+        if (!empty($isExtendedDropdown)) {
+            $this->data['classList'][] = $this->getBaseClass('extended-dropdown', true);
+        }
         
         //Set item attribute list
         $this->data['items'] = $this->itemAttributeList(
