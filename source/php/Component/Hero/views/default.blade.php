@@ -11,7 +11,7 @@
 
     @includeWhen($video || $hasAnimation, 'Hero.partials.controls')
 
-    @if ($title || $paragraph || $byline)
+    @if ($hasContent || $video)
 
         <div class="o-container {{ $baseClass }}__container">
             
