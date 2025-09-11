@@ -180,12 +180,15 @@ class Image implements ImageInterface {
 
     // Loop through the image sizes
     foreach($imageSizes as $index => $size) {
+
+        $imageUrl = $this->resolver->getImageUrl(
+          $this->imageId,
+          [$size, $this->scaledHeight($size)]
+        );
+
         $return[] = [
             'uuid' => $uniqueId . "-" . $size,
-            'url' => $this->resolver->getImageUrl(
-                $this->imageId,
-                [$size, $this->scaledHeight($size)]
-            ),
+            'url' => $imageUrl,
             'media' => [
               'landscape' => $this->createMediaQuery('landscape', $previousSize, $size, (bool) !($index === $totalSizes - 1)),
               'portrait'  => $this->createMediaQuery('portrait', $previousSize, $size, (bool) !($index === $totalSizes - 1)),
@@ -193,11 +196,8 @@ class Image implements ImageInterface {
             'src' => $this->getUrl(),
             'imageSize' => [$size, $this->scaledHeight($size)],
             'aspectRatio' => $this->getAspectRatioFromQuery(
-              $size, 
-              $this->resolver->getImageUrl(
-                $this->imageId,
-                [$size, $this->scaledHeight($size)]
-              )
+              $size,
+              $imageUrl
             ),
         ];
 
