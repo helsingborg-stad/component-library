@@ -178,6 +178,9 @@ class Image implements ImageInterface {
     // Get the total number of sizes for reference
     $totalSizes = count($imageSizes);
 
+    // Base image
+    $baseImageUrl = $this->geturl();
+
     // Loop through the image sizes
     foreach($imageSizes as $index => $size) {
 
@@ -193,7 +196,7 @@ class Image implements ImageInterface {
               'landscape' => $this->createMediaQuery('landscape', $previousSize, $size, (bool) !($index === $totalSizes - 1)),
               'portrait'  => $this->createMediaQuery('portrait', $previousSize, $size, (bool) !($index === $totalSizes - 1)),
             ],
-            'src' => $this->getUrl(),
+            'src' => $baseImageUrl,
             'imageSize' => [$size, $this->scaledHeight($size)],
             'aspectRatio' => $this->getAspectRatioFromQuery(
               $size,
