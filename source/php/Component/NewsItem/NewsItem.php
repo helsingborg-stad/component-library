@@ -22,18 +22,6 @@ class NewsItem extends \ComponentLibrary\Component\BaseController
         // Extract array for eazy access (fetch only)
         extract($this->data);
 
-        // Header slots
-        $this->data['headerRightAreaSlotHasData'] = $this->slotHasData('headerRightArea');
-        $this->data['headerLeftAreaSlotHasData'] = $this->slotHasData('headerLeftArea');
-
-        // Content slots
-        $this->data['contentLeftAreaSlotHasData'] = $this->slotHasData('contentLeftArea');
-        $this->data['contentRightAreaSlotHasData'] = $this->slotHasData('contentRightArea');
-
-        // Title slots
-        $this->data['titleLeftAreaSlotHasData'] = $this->slotHasData('titleLeftArea');
-        $this->data['titleRightAreaSlotHasData'] = $this->slotHasData('titleRightArea');
-
         if ($date && !is_array($date)) {
             $this->data['date'] = [
                 'timestamp' => $date,
