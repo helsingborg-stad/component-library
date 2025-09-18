@@ -8,6 +8,15 @@ namespace ComponentLibrary\Component\NewsItem;
  */
 class NewsItem extends \ComponentLibrary\Component\BaseController
 {
+    private array $slotMapping = [
+        'headerRightArea'  => 'headerRightAreaSlotHasData',
+        'headerLeftArea'   => 'headerLeftAreaSlotHasData',
+        'contentLeftArea'  => 'contentLeftAreaSlotHasData',
+        'contentRightArea' => 'contentRightAreaSlotHasData',
+        'titleLeftArea'    => 'titleLeftAreaSlotHasData',
+        'titleRightArea'   => 'titleRightAreaSlotHasData'
+    ];
+
     public function init() {
 
         // Extract array for eazy access (fetch only)
@@ -41,6 +50,19 @@ class NewsItem extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['href'] = $link;
         } else {
             $this->data['componentElement'] = "div";
+        }
+
+        if ($this->data['componentElement'] === 'a') {
+            if ($content) {
+                $this->data['content'] = $this->tagSanitizer->removeATags((string) $content);
+            }
+
+            foreach ($this->slotMapping as $slot => $hasDataKey) {
+                $this->data[$hasDataKey] = $this->slotHasData($slot);
+                if ($this->data[$hasDataKey]) {
+                    $this->data[$slot] = $this->tagSanitizer->removeATags((string) $this->data[$slot]);
+                }
+            }
         }
     }
 }
