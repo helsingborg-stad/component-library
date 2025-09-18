@@ -52,16 +52,17 @@ class NewsItem extends \ComponentLibrary\Component\BaseController
             $this->data['componentElement'] = "div";
         }
 
-        if ($this->data['componentElement'] === 'a') {
-            if ($content) {
-                $this->data['content'] = $this->tagSanitizer->removeATags((string) $content);
-            }
+        $isLinked = $this->data['componentElement'] === 'a';
 
-            foreach ($this->slotMapping as $slot => $hasDataKey) {
-                $this->data[$hasDataKey] = $this->slotHasData($slot);
-                if ($this->data[$hasDataKey]) {
-                    $this->data[$slot] = $this->tagSanitizer->removeATags((string) $this->data[$slot]);
-                }
+        if ($isLinked && $content) {
+            $this->data['content'] = $this->tagSanitizer->removeATags((string) $content);
+        }
+
+        foreach ($this->slotMapping as $slot => $hasDataKey) {
+            $this->data[$hasDataKey] = $this->slotHasData($slot);
+
+            if ($isLinked && $this->data[$hasDataKey]) {
+                $this->data[$slot] = $this->tagSanitizer->removeATags((string) $this->data[$slot]);
             }
         }
     }
