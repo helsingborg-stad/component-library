@@ -10,7 +10,6 @@
         "buttonRemoveLabel": "Remove file",
         "buttonDropLabel": "Drop files here",
         "preview": true,
-        "fileMaxSize": null,
         "maxSize": null,
         "uploadErrorMessage": null,
         "icon": "file_upload",
