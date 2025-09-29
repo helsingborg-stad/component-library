@@ -4,19 +4,8 @@
         <div class="{{$baseClass}}__button-wrapper {{$headingType}} " tabindex="-1">
             
             {!!$beforeHeading!!}
-            
-            @if (is_array($heading))
-                @foreach($heading as $headingItem)
-                    <span class="{{$baseClass}}__button-column">{{$headingItem}}</span>
-                @endforeach
-            @else
-            @typography([
-                'element' => 'h3',
-                'variant' => 'h4'
-            ])
-                {!! $heading !!}
-            @endtypography
-            @endif
+
+            @includeWhen($heading, 'Accordion__item.partials.heading')
             
             @if($taxonomyPosition === 'top' && $taxonomy > 0)
                 @tags([
