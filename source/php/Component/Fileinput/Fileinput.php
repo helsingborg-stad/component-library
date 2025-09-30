@@ -24,7 +24,7 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
         $this->data['attributeList']['data-js-file'] = "dropzone";
 
         // Set 10 as default max files, when multiple
-        if($multiple) {
+        if ($multiple) {
             $this->data['filesMax'] = $filesMax = $filesMax != 1 ? $filesMax : 10;
             $this->data['attributeList']['data-js-file-max'] = $filesMax;
         }
@@ -43,8 +43,7 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
    
         $acceptedTypesArray = is_array($accept) ? $accept : explode(',', $accept);
         $this->data['acceptedFilesList'] = $this->createAcceptedFilesList($acceptedTypesArray);
-        
-        $maxSize = 'small';
+
         $maxFileSize = $this->determineMaxSize($maxSize, $acceptedTypesArray);
 
         if (!empty($maxFileSize)) {
