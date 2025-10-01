@@ -8,22 +8,19 @@ namespace ComponentLibrary\Component\NewsItem;
  */
 class NewsItem extends \ComponentLibrary\Component\BaseController
 {
-    public function init() {
+    private array $slotMapping = [
+        'headerRightArea'  => 'headerRightAreaSlotHasData',
+        'headerLeftArea'   => 'headerLeftAreaSlotHasData',
+        'contentLeftArea'  => 'contentLeftAreaSlotHasData',
+        'contentRightArea' => 'contentRightAreaSlotHasData',
+        'titleLeftArea'    => 'titleLeftAreaSlotHasData',
+        'titleRightArea'   => 'titleRightAreaSlotHasData',
+    ];
 
+    public function init()
+    {
         // Extract array for eazy access (fetch only)
         extract($this->data);
-
-        // Header slots
-        $this->data['headerRightAreaSlotHasData'] = $this->slotHasData('headerRightArea');
-        $this->data['headerLeftAreaSlotHasData'] = $this->slotHasData('headerLeftArea');
-
-        // Content slots
-        $this->data['contentLeftAreaSlotHasData'] = $this->slotHasData('contentLeftArea');
-        $this->data['contentRightAreaSlotHasData'] = $this->slotHasData('contentRightArea');
-
-        // Title slots
-        $this->data['titleLeftAreaSlotHasData'] = $this->slotHasData('titleLeftArea');
-        $this->data['titleRightAreaSlotHasData'] = $this->slotHasData('titleRightArea');
 
         if ($date && !is_array($date)) {
             $this->data['date'] = [
@@ -41,6 +38,17 @@ class NewsItem extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['href'] = $link;
         } else {
             $this->data['componentElement'] = "div";
+        }
+
+        if ($this->data['componentElement'] === 'a') {
+            $this->data['content'] = $content ? $this->tagSanitizer->removeATags($content) : null;
+        }
+
+        foreach ($this->slotMapping as $slot => $hasDataKey) {
+            $this->data[$hasDataKey] = $this->slotHasData($slot);
+            if ($this->data[$hasDataKey] && $this->data['componentElement'] === 'a') {
+                $this->data[$slot] = $this->tagSanitizer->removeATags((string) $this->data[$slot]);
+            }
         }
     }
 }
