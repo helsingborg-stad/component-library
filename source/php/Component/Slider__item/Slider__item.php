@@ -35,7 +35,7 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
         }
 
         $this->data['showContainer'] = false;
-        if (!empty($title) || !empty($subTitle) ||!empty($text) || !empty($bottom)) {
+        if (!empty($title) || !empty($subTitle) ||!empty($text) || !empty($bottom) || !empty($cta)) {
             $this->data['showContainer'] = true;
         }
 
