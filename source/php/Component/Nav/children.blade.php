@@ -6,7 +6,6 @@
     'direction' => 'vertical',
     'height' => 'sm',
     'classList' => [
-      $baseClass . '--bordered',
       $baseClass . '--child'
     ],
     'expandIcon' => $expandIcon,
