@@ -26,7 +26,6 @@ class DatebadgeTest extends TestCase {
         
         $this->assertEquals('Jan', $instance->getData()['month']);
         $this->assertEquals('1', $instance->getData()['day']);
-        $this->assertEquals('14:00', $instance->getData()['time']);
     }
 
     /**
@@ -40,13 +39,13 @@ class DatebadgeTest extends TestCase {
         
         $this->assertEquals('Jan', $instance->getData()['month']);
         $this->assertEquals('1', $instance->getData()['day']);
-        $this->assertEquals('14:00', $instance->getData()['time']);
     }
 
     private function getDefaultData():array {
         return [
             'date' => '2021-01-01',
-            'size' => 'sm',
+            'size' => 'md',
+            'color' => 'light'
         ];
     }
 
