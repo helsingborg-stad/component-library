@@ -1,0 +1,17 @@
+{
+    "slug": "grid",
+    "default": {
+    },
+    "description": {
+    },
+    "types": {
+    },
+    "view": "grid.blade.php",
+    "dependency": {
+        "sass": {
+            "components": [
+                "grid"
+            ]
+        }
+    }
+}

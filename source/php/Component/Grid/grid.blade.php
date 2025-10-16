@@ -1,0 +1,2 @@
+<!-- gallery.blade.php -->
+hello
