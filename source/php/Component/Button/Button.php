@@ -111,7 +111,8 @@ class Button extends \ComponentLibrary\Component\BaseController
         }
         $scheme = parse_url($href, PHP_URL_SCHEME);
         return match ($scheme) {
-            'tel', 'mailto' => $scheme . ':' . preg_replace('/\s+|-/', '', substr($href, strlen($scheme) + 1)),
+            'tel' => $scheme . ':' . preg_replace('/\s+|-/', '', substr($href, strlen($scheme) + 1)),
+            'mailto' => $scheme . ':' . preg_replace('/\s+/', '', substr($href, strlen($scheme) + 1)),
             default => $href,
         };
     }
