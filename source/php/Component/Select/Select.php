@@ -13,7 +13,6 @@ class Select extends \ComponentLibrary\Component\BaseController
         if (empty($id)) {
             $id = $this->data['id'] = uniqid();
         }
-        $this->data['attributeList']['id'] = "select_{$id}";
 
         //Set icon size
         $this->data['iconSize'] = $this->getIconSize($size); 
