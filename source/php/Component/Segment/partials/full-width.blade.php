@@ -1,10 +1,8 @@
-@if ($title || $icon || $meta)
-    <div class="{{$baseClass}}__content o-container o-container--content o-container--keep-spacing">
-        <div class="{{$baseClass}}__padder">
-            @include('Segment.components.content')
-        </div>
+<div class="{{$baseClass}}__content o-container o-container--content o-container--keep-spacing">
+    <div class="{{$baseClass}}__padder">
+        @include('Segment.components.content')
     </div>
-@endif
+</div>
 
 @if ($slotHasData)
     <div class="{{$baseClass}}__slot o-container">
