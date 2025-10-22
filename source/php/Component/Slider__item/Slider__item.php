@@ -51,6 +51,10 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . "--hero";
         }
 
+        if ($video) {
+            $this->data['attributeList']['data-js-slider-video'] = $video;
+        }
+
         foreach ($this->slotMapping as $slot => $hasDataKey) {
             $this->data[$hasDataKey] = $this->slotHasData($slot);
             if ($this->data[$hasDataKey] && $link) {
