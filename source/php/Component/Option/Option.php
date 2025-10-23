@@ -17,6 +17,8 @@ class Option extends \ComponentLibrary\Component\BaseController
 
         if (!empty($name)) {
             $this->data['attributeList']['name'] = $name;
+        } else {
+            $this->data['attributeList']['name'] = $label;
         }
 
         if (!empty($required)) {
