@@ -17,7 +17,7 @@ class Option extends \ComponentLibrary\Component\BaseController
 
         if (!empty($name)) {
             $this->data['attributeList']['name'] = $name;
-        } else {
+        } else if (!empty($this->data['attributeList']['name'])) {} else {
             $this->data['attributeList']['name'] = $label;
         }
 
@@ -27,10 +27,6 @@ class Option extends \ComponentLibrary\Component\BaseController
 
         if (empty($value) && !empty($this->data['attributeList']['value'])) {
             $this->data['value'] = $this->data['attributeList']['value'];
-        }
-
-        if (empty($name) && !empty($this->data['attributeList']['name'])) {
-            $this->data['name'] = $this->data['attributeList']['name'];
         }
     }
 }
