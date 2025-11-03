@@ -9,18 +9,17 @@ class Datebadge extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
-        //Sizes
-        if (in_array($size, ['sm', 'md'])) {
-            $this->data['classList'][] = $this->getBaseClass() . "--" . $size;
-        } else {
-            $this->data['classList'][] = $this->getBaseClass() . "--md";
+        $this->data['classList'][] = $this->getBaseClass($size, true);
+        $this->data['classList'][] = $this->getBaseClass($color, true);
+
+        if (!empty($translucent)) {
+            $this->data['classList'][] = $this->getBaseClass('translucent', true);
         }
 
         //Format
         $date = !is_int($date) ? strtotime($date) : $date;
         $this->data['month']    = $this->getDateFunc("M", $date);
         $this->data['day']      = $this->getDateFunc("j", $date);
-        $this->data['time']     = $this->getDateFunc("H:i", $date);
     }
 
     /**

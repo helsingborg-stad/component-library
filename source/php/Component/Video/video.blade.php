@@ -18,7 +18,7 @@
         @endif
 
         @if($errorMessage)
-            @notice(['isWarning' => true])
+            @notice(['type' => 'warning'])
             {{$errorMessage}}
             @endnotice
         @endif

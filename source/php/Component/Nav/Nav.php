@@ -25,7 +25,7 @@ class Nav extends \ComponentLibrary\Component\BaseController
         if(!isset($this->data['depth'])) {
             $this->data['depth'] = 1;  
         }
-
+        
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
@@ -54,6 +54,10 @@ class Nav extends \ComponentLibrary\Component\BaseController
         //Set default values to items array
         if(is_array($items)) {
             $this->data['items'] = $items = $this->normalizeItems($items);
+        }
+
+        if (!empty($isExtendedDropdown)) {
+            $this->data['classList'][] = $this->getBaseClass('extended-dropdown', true);
         }
         
         //Set item attribute list

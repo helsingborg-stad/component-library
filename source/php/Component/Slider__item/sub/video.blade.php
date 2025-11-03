@@ -9,7 +9,7 @@
         $baseClass."__background--video"
     ],
     'formats' => [
-        ['src' => $video, 'type' => "mp4"],
+        ['src' => '#', 'type' => "mp4"],
     ],
     'context' => ['component.slider', 'component.slider.video']
 ])

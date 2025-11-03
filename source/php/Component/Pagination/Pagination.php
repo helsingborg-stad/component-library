@@ -57,10 +57,48 @@ class Pagination extends \ComponentLibrary\Component\BaseController
             $this->data['nextDisabled'] = 'true'; 
         }
 
+        //Sanitize links
+        $this->data['previous'] = $this->sanitizePaginationLink($this->data['previous']);
+        $this->data['next'] = $this->sanitizePaginationLink($this->data['next']);
+        $this->data['list'] = array_map(function($item) {
+            if(isset($item['href'])) {
+                $item['href'] = $this->sanitizePaginationLink($item['href']);
+            }
+            return $item;
+        }, $this->data['list']);
+
         $this->tmpList = $this->data['list'];
         $this->data['list'] = $this->overflow();
         $this->data['firstItem'] = $this->firstItem();
         $this->data['lastItem'] = $this->lastItem();
+    }
+
+    /**
+     * Sanitize pagination link by removing unwanted query vars.
+     * This is only done in WordPress environment.
+     *
+     * @param string $url
+     * @return string
+     */
+    private function sanitizePaginationLink($url)
+    {
+
+        //Bypass if not in WP environment
+        if(!function_exists('apply_filters')) {
+            return $url;
+        }
+
+        //Get allowed query vars
+        $allowedQueryVars = apply_filters('query_vars', []);
+
+        //Remove unregistered query vars
+        return remove_query_arg(
+            array_diff(
+                array_keys($_GET ?? []),
+                $allowedQueryVars
+            ),
+            $url
+        );
     }
 
     /**

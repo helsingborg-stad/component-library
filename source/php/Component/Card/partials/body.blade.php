@@ -12,7 +12,7 @@
         {!! $aboveContent !!}
     @endif
     @includeWhen($content, 'Card.components.content')
-    @includeWhen(!empty($linkText), 'Card.components.linkText')
+    @includeWhen($link && !empty($linkText), 'Card.components.linkText')
     @if($belowContentSlotHasData)
         {!! $belowContent !!}
     @endif

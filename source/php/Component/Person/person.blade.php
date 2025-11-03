@@ -1,3 +1,3 @@
-<div class="c-person c-person--{{ $view }}">
+<div class="{{ $class }} c-person--{{ $view }}" {{!! $attribute !!}}>
     @include('Person.views.' . $view)
 </div>
