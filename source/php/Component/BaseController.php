@@ -39,6 +39,7 @@ class BaseController
         protected CacheInterface $cache,
         protected TagSanitizerInterface $tagSanitizer
     ) {
+        
         //Load input data
         if (!is_null($data) && is_array($data)) {
             $this->data = array_merge($this->data, $data);
@@ -130,7 +131,7 @@ class BaseController
     private function getId()
     {
         if (isset($this->data['id']) && !empty($this->data['id'])) {
-            return (string) str_replace(" ", "", strtolower($this->data['id']));
+            return (string) str_replace(" ", "", ($this->data['id']));
         }
         return "";
     }
@@ -402,7 +403,8 @@ class BaseController
      * @return string       The sanitized id
      */
     public function sanitizeIdAttribute(string $id): string {
-        $id = preg_replace('/[^a-zA-Z0-9\-_]/', '', $id);
+        // Allow a-z, A-Z, 0-9, -, _, [, ], {, }
+        $id = preg_replace('/[^a-zA-Z0-9\-\_\[\]\{\}]/', '', $id);
 
         if (!preg_match('/^[a-zA-Z]/', $id)) {
             $id = 'id_' . $id;
