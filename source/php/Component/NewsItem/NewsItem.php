@@ -2,6 +2,8 @@
 
 namespace ComponentLibrary\Component\NewsItem;
 
+use ComponentLibrary\Integrations\Image\ImageInterface;
+
 /**
  * Class NewsItem
  * @package ComponentLibrary\Component\Navbar
@@ -31,6 +33,13 @@ class NewsItem extends \ComponentLibrary\Component\BaseController
 
         if ($standing) {
             $this->data['classList'][] = $this->getBaseClass('standing', true);
+        }
+
+        $this->data['hasImage'] = false;
+        if ($image instanceof ImageInterface) {
+             $this->data['hasImage'] = $image->getUrl() ? true : false;
+        } else {
+             $this->data['hasImage'] = !empty($image['src']) ? true : false;
         }
 
         if ($link) {

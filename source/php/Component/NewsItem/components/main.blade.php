@@ -5,9 +5,9 @@
     @endif
 </div>
 
-@if ($image || $hasPlaceholderImage || $contentRightAreaSlotHasData)
+@if ($hasImage || $hasPlaceholderImage || $contentRightAreaSlotHasData)
     <div class="{{$baseClass}}__main-right">
-        @includeWhen($image || $hasPlaceholderImage, 'NewsItem.partials.image')
+        @includeWhen($hasImage || $hasPlaceholderImage, 'NewsItem.partials.image')
         @if($contentRightAreaSlotHasData)
             {!! $contentRightArea !!}
         @endif
