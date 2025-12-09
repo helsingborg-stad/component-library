@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ComponentLibrary\Renderer\BladeEngine;
 
 use PHPUnit\Framework\TestCase;
-use WpService\Contracts\ApplyFilters;
 
 class NullWpServiceTest extends TestCase
 {

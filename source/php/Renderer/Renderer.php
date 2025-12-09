@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ComponentLibrary\Renderer;
 
 use HelsingborgStad\BladeService\BladeServiceInterface;
@@ -13,13 +15,14 @@ class Renderer implements RendererInterface
     public function render(string $view, array $data = []): string
     {
         try {
-            $markup = $this->bladeService->makeView($view, array_merge($data, array('errorMessage' => false)))->render();
+            $markup = $this->bladeService->makeView($view, array_merge($data, ['errorMessage' => false]))->render();
         } catch (\Throwable $e) {
             if (!defined('WP_DEBUG') || constant('WP_DEBUG') !== true) {
                 throw $e;
             }
 
             $this->bladeService->errorHandler($e)->print();
+            return '';
         }
 
         return $markup;
