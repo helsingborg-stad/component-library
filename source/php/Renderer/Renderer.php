@@ -17,7 +17,7 @@ class Renderer implements RendererInterface
         try {
             $markup = $this->bladeService->makeView($view, array_merge($data, ['errorMessage' => false]))->render();
         } catch (\Throwable $e) {
-            if (!defined('WP_DEBUG') || constant('WP_DEBUG') !== true) {
+            if (!defined('WP_DEBUG') || WP_DEBUG !== true) {
                 throw $e;
             }
 

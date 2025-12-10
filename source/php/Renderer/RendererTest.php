@@ -32,14 +32,8 @@ class RendererTest extends TestCase
         $bladeService = $bladeServiceFactory->create([__DIR__ . '/views']);
         $renderer = new Renderer($bladeService);
 
-        try {
-            $renderer->render('non_existent_view', []);
-        } catch (\Throwable $e) {
-            static::assertInstanceOf(\InvalidArgumentException::class, $e);
-            return;
-        }
-
-        static::fail('Expected exception was not thrown.');
+        $this->expectException(\InvalidArgumentException::class);
+        $renderer->render('non_existent_view', []);
     }
 
     /**

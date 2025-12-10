@@ -25,7 +25,7 @@ class BladeServiceFactory
     {
         $viewPaths = $this->getSanitizedDirectoryPathsInternal($externalViewPaths, 'ComponentLibrary/ViewPaths');
         if (count($viewPaths) === 0) {
-            throw new \Exception('View paths not defined.');
+            throw new \Exception('No valid view paths were configured. Please ensure at least one valid directory path is provided.');
         }
         $bladeService = new BladeService($viewPaths);
         $register = new Register(
@@ -44,30 +44,60 @@ class BladeServiceFactory
         return $bladeService;
     }
 
+    /**
+     * Returns sanitized paths with trailing directory separator.
+     *
+     * @param array $externalPaths
+     * @param string $filter
+     * @return array
+     */
     private function getSanitizedPathsInternal(array $externalPaths, string $filter): array
     {
-        $paths = array_unique(array_merge($this->getInternalPaths(), $externalPaths));
-        $filteredPaths = $this->wpService->applyFilters($filter, $paths);
-        if (!is_array($filteredPaths)) {
-            $filteredPaths = [];
-        }
-        return array_map(static function ($path) {
-            $directory = rtrim($path, DIRECTORY_SEPARATOR);
-            return $directory . DIRECTORY_SEPARATOR;
-        }, $filteredPaths);
+        return $this->getSanitizedPathsWithMapper(
+            $externalPaths,
+            $filter,
+            static function ($path) {
+                $directory = rtrim($path, DIRECTORY_SEPARATOR);
+                return $directory . DIRECTORY_SEPARATOR;
+            }
+        );
     }
 
+    /**
+     * Returns sanitized directory paths, ensuring they are directories or have a trailing separator.
+     *
+     * @param array $externalPaths
+     * @param string $filter
+     * @return array
+     */
     private function getSanitizedDirectoryPathsInternal(array $externalPaths, string $filter): array
+    {
+        return $this->getSanitizedPathsWithMapper(
+            $externalPaths,
+            $filter,
+            static function ($path) {
+                $directory = rtrim($path, DIRECTORY_SEPARATOR);
+                return is_dir($directory) ? $directory : $directory . DIRECTORY_SEPARATOR;
+            }
+        );
+    }
+
+    /**
+     * Shared logic for sanitizing and filtering paths with a custom mapping function.
+     *
+     * @param array $externalPaths
+     * @param string $filter
+     * @param callable $mapper
+     * @return array
+     */
+    private function getSanitizedPathsWithMapper(array $externalPaths, string $filter, callable $mapper): array
     {
         $paths = array_unique(array_merge($this->getInternalPaths(), $externalPaths));
         $filteredPaths = $this->wpService->applyFilters($filter, $paths);
         if (!is_array($filteredPaths)) {
             $filteredPaths = [];
         }
-        return array_map(static function ($path) {
-            $directory = rtrim($path, DIRECTORY_SEPARATOR);
-            return is_dir($directory) ? $directory : $directory . DIRECTORY_SEPARATOR;
-        }, $filteredPaths);
+        return array_map($mapper, $filteredPaths);
     }
 
     public function getInternalPaths(): array

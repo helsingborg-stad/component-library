@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 class NullWpServiceTest extends TestCase
 {
     /**
-     * @testdox applyFilters() does nothing with the provided value
+     * @testdox applyFilters() returns the provided value unchanged without applying any filters
      */
     public function testApplyFiltersReturnsValueUnchanged()
     {
