@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ComponentLibrary\Renderer;
 
-use ComponentLibrary\Renderer\BladeEngine\BladeServiceFactory;
+use ComponentLibrary\Renderer\BladeService\BladeServiceFactory;
 use PHPUnit\Framework\TestCase;
 
 class RendererTest extends TestCase

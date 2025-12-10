@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ComponentLibrary\Renderer\BladeEngine;
+namespace ComponentLibrary\Renderer\BladeService;
 
 use HelsingborgStad\BladeService\BladeServiceInterface;
 use PHPUnit\Framework\TestCase;
