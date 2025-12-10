@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ab4d0bf02e6d6f3a64a95615222708fb",
+    "content-hash": "c55f3dea23480a6792020df1d95c3214",
     "packages": [
         {
             "name": "carbonphp/carbon-doctrine-types",
@@ -218,6 +218,55 @@
                 "source": "https://github.com/helsingborg-stad/Blade/tree/3.5.1"
             },
             "time": "2024-05-27T13:51:35+00:00"
+        },
+        {
+            "name": "helsingborg-stad/wpservice",
+            "version": "2.0.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/helsingborg-stad/wpservice.git",
+                "reference": "3ed37137b25defbc98e24904f8523ea2f86e3c24"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/helsingborg-stad/wpservice/zipball/3ed37137b25defbc98e24904f8523ea2f86e3c24",
+                "reference": "3ed37137b25defbc98e24904f8523ea2f86e3c24",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "helsingborg-stad/phpcs": "^0.3.5",
+                "johnpbloch/wordpress": "^6.6",
+                "php-stubs/generator": "*",
+                "php-stubs/wordpress-stubs": "^6.6",
+                "phpunit/phpunit": "^9.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "WpService\\": "src/",
+                    "WpCronService\\": "src/WpCronService/",
+                    "WpService\\Generator\\": "generator/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thor Brink",
+                    "email": "thor.brink@helsingborg.se"
+                }
+            ],
+            "description": "Simplifies WordPress integration by providing a centralized WpService that exposes global WordPress functions in a streamlined manner. Simplify your development workflow and enhance WordPress integration with ease.",
+            "support": {
+                "issues": "https://github.com/helsingborg-stad/wpservice/issues",
+                "source": "https://github.com/helsingborg-stad/wpservice/tree/2.0.9"
+            },
+            "time": "2025-10-07T11:25:27+00:00"
         },
         {
             "name": "illuminate/bus",
@@ -3570,5 +3619,5 @@
         "php": "^8.0"
     },
     "platform-dev": {},
-    "plugin-api-version": "2.9.0"
+    "plugin-api-version": "2.6.0"
 }

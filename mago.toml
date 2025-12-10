@@ -8,9 +8,13 @@ includes = ["vendor"]
 excludes = []
 
 [formatter]
-print-width = 120
+print-width = 999
 tab-width = 4
 use-tabs = false
+preserve-breaking-parameter-list = true
+preserve-breaking-argument-list = true
+preserve-breaking-array-like = true
+preserve-breaking-attribute-list = true
 
 [linter]
 integrations = ["phpunit"]
