@@ -2,24 +2,23 @@
 
 declare(strict_types=1);
 
-namespace ComponentLibrary\Renderer\BladeEngine;
+namespace ComponentLibrary\Renderer\BladeService;
 
 use ComponentLibrary\Cache\StaticCache;
 use ComponentLibrary\Cache\TrySetWpCache;
 use ComponentLibrary\Helper\TagSanitizer;
-use ComponentLibrary\Register;
+use ComponentLibrary\Renderer\NullWpService;
 use HelsingborgStad\BladeService\BladeService;
 use HelsingborgStad\BladeService\BladeServiceInterface;
 use WpService\Contracts\ApplyFilters;
+use WpService\Contracts\WpCacheGet;
+use WpService\Contracts\WpCacheSet;
 
 class BladeServiceFactory
 {
-    private ApplyFilters $wpService;
-
-    public function __construct(ApplyFilters $wpService = new NullWpService())
-    {
-        $this->wpService = $wpService;
-    }
+    public function __construct(
+        private ApplyFilters&WpCacheGet&WpCacheSet $wpService = new NullWpService(),
+    ) {}
 
     public function create(array $externalViewPaths): BladeServiceInterface
     {
@@ -28,10 +27,11 @@ class BladeServiceFactory
             throw new \Exception('No valid view paths were configured. Please ensure at least one valid directory path is provided.');
         }
         $bladeService = new BladeService($viewPaths);
-        $register = new Register(
+        $register = new Register\Register(
             $bladeService,
             new TrySetWpCache(new StaticCache()),
             new TagSanitizer(),
+            $this->wpService,
         );
         // Register controller paths
         foreach ($this->getSanitizedPathsInternal([], 'helsingborg-stad/blade/controllerPaths') as $path) {
@@ -59,7 +59,7 @@ class BladeServiceFactory
             static function ($path) {
                 $directory = rtrim($path, DIRECTORY_SEPARATOR);
                 return $directory . DIRECTORY_SEPARATOR;
-            }
+            },
         );
     }
 
@@ -78,7 +78,7 @@ class BladeServiceFactory
             static function ($path) {
                 $directory = rtrim($path, DIRECTORY_SEPARATOR);
                 return is_dir($directory) ? $directory : $directory . DIRECTORY_SEPARATOR;
-            }
+            },
         );
     }
 
