@@ -19,7 +19,7 @@
                     'autopromote' => true
                 ])
                     @link([
-                        'href' => $link,
+                        'href' => !$dynamicLink ? $link : "",
                         'keepContent' => true,
                         'keepWrapper' => false
                     ])

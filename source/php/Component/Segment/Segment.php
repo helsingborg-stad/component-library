@@ -129,6 +129,8 @@ class Segment extends \ComponentLibrary\Component\BaseController
             $this->data['date']['classList'][] = $this->getBaseClass('date');
         }
 
+        // Determine if dynamic link, determines if whole segment may be clickable
+        $this->data['dynamicLink'] = empty($buttons) ? $link : false;
     }
 
     /**
