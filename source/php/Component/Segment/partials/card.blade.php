@@ -1,6 +1,6 @@
 <div class="{{$baseClass}}__content">
     @card([
-        'link' => $link ?? "",
+        'link' => $dynamicLink ?? "",
         'classList' => [$baseClass . '__content-card']
     ])
     @include('Segment.components.content')
