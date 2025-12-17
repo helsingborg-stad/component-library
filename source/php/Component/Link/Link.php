@@ -28,6 +28,11 @@ class Link extends \ComponentLibrary\Component\BaseController
         if ($xfn) {
             $this->data['attributeList']['rel'] = $xfn;
         }
+
+        //Unstyled
+        if ($unstyled) {
+            $this->data['classList'][] = $this->getBaseClass('unstyled', true);
+        }
     }
 
     /**
