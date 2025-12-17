@@ -1,5 +1,6 @@
 <div class="{{$baseClass}}__content">
     @card([
+        'link' => $link ?? "",
         'classList' => [$baseClass . '__content-card']
     ])
     @include('Segment.components.content')
