@@ -28,6 +28,11 @@ class Link extends \ComponentLibrary\Component\BaseController
         if ($xfn) {
             $this->data['attributeList']['rel'] = $xfn;
         }
+
+        //Unstyled
+        if ($unstyled) {
+            $this->data['classList'][] = $this->getBaseClass('unstyled', true);
+        }
     }
 
     /**
@@ -44,7 +49,11 @@ class Link extends \ComponentLibrary\Component\BaseController
         if(empty($href)) {
             return '';
         }
+        
+        $href   = trim($href);
+        $href   = html_entity_decode($href, ENT_QUOTES | ENT_HTML5);
         $scheme = parse_url($href, PHP_URL_SCHEME);
+        
         return match ($scheme) {
             'tel' => $scheme . ':' . preg_replace('/\s+|-/', '', substr($href, strlen($scheme) + 1)),
             'mailto' => $scheme . ':' . preg_replace('/\s+/', '', substr($href, strlen($scheme) + 1)),
