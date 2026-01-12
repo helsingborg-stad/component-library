@@ -226,6 +226,11 @@ class Image implements ImageInterface {
       return implode('/', [$size, $this->scaledHeight($size)]);
     }
 
+    //Check if the url is a valid string
+    if(!is_string($url) || empty($url)) { 
+      return null;
+    }
+
     // Get all image sizes from the URL
     preg_match_all('/(\d{2,4})x(\d{2,4})/', $url, $matches);
 
