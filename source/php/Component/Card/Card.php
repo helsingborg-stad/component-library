@@ -85,7 +85,7 @@ class Card extends \ComponentLibrary\Component\BaseController
         }
 
         //Add aria-label to card if link is present
-        if ($link && $heading && $content) {
+        if ($link && $heading && $content && empty($this->data['attributeList']['aria-label'])) {
             $this->data['attributeList']['aria-label'] = $heading . " - ". Str::truncateSentence(
                 strip_tags($content)
             );
