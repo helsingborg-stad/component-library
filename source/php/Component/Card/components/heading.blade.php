@@ -7,6 +7,16 @@
         'direction' => 'vertical'
     ])
 
+        @if ($eyebrow)
+            @typography([
+                'element' => 'span',
+                'variant' => 'meta',
+                'classList' => [$baseClass . '__eyebrow', 'u-margin__bottom--2']
+            ])
+                <span>{{ $eyebrow }}</span>
+            @endtypography
+        @endif
+
         @if($heading) 
             @typography([
                 'element'   => 'h2',
