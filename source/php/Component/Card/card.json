@@ -1,6 +1,7 @@
 {
     "slug": "card",
     "default": {
+        "eyebrow": "",
         "heading": "",
         "subHeading": "",
         "meta": "",
@@ -22,6 +23,7 @@
         "headingAboveImage": false
     },
     "description": {
+        "eyebrow": "A smaller heading above the primary one",
         "heading": "The card heading",
         "subHeading": "A subheading below the heading, explaining more stuff.",
         "meta": "Small text below title, in meta style.",
@@ -43,6 +45,7 @@
         "headingAboveImage": "If the headings should be displayed above the image."
     },
     "types": {
+        "eyebrow": "string",
         "heading": "string",
         "subHeading": "string",
         "meta": "string",
