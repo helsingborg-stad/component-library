@@ -44,6 +44,9 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
             $this->data['filesMax'] = $this->filesMax;
             $this->data['attributeList']['data-js-file-max'] = $this->filesMax;
         }
+
+        // Map min number of files.
+        $this->data = $this->mapFilesMin($this->data);
    
         $acceptedTypesArray = is_array($accept) ? $accept : explode(',', $accept);
         $this->data['acceptedFilesList'] = $this->createAcceptedFilesList($acceptedTypesArray);
@@ -126,5 +129,32 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
             if ($type === "audio/*") return $this->data['lang']->audios ?? "Audios";
             return $type;
         }, $accept));
+    }
+
+    private function mapFilesMin(array $data):array {
+
+        if(!isset($data['filesMin'])) {
+            $data['filesMin'] = null;
+            return $data;
+        }
+
+        if(!is_numeric($data['filesMin']) ) {
+            throw new \TypeError('filesMin cannot be greater than filesMax');
+        }
+
+        if(isset($data['filesMax']) && is_numeric($data['filesMax']) && $data['filesMin'] >= $data['filesMax']) {
+            throw new \TypeError('filesMin cannot be greater than filesMax');
+        }
+
+        if($data['filesMin'] < 0) {
+            throw new \TypeError('filesMin cannot be negative');
+        }
+
+        if($data['filesMin'] >= 0) {
+            $data['filesMin'] = (int)$data['filesMin'];
+            $data['attributeList']['data-js-file-min'] = $data['filesMin'];
+        }
+
+        return $data;
     }
 }

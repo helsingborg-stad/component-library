@@ -70,18 +70,39 @@
         @endelement
         
         @element([
+          'classList' => [
+            $baseClass . '__file-stats',
+          ]
+        ])
+          @element([
             'classList' => [
-                $baseClass . '__filecounter',
+              $baseClass . '__filecounter',
             ],
             'attributeList' => [
-                'data-js-file' => 'counter',
-                'data-counter-current' => '0',
-                'data-counter-max' => $filesMax,
+              'data-js-file' => 'counter',
+              'data-counter-current' => '0',
+              'data-counter-max' => $filesMax,
+              'aria-hidden' => 'true',
+              'aria-live' => 'polite',
+            ]
+          ])
+          /
+          @endelement
+          @if($filesMin)
+            @element([
+              'classList' => [
+                $baseClass . '__filemin',
+              ],
+              'attributeList' => [
+                'data-js-file' => 'minimum',
                 'aria-hidden' => 'true',
                 'aria-live' => 'polite',
-            ]
-        ])
-        /
+              ]
+            ])
+              Minimum required: {{ $filesMin }} files
+            @endelement
+          @endif
         @endelement
+        
    </div>
 </div>
