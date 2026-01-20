@@ -5,4 +5,5 @@
         @include('Select.partials.dropdown_item')
       @endforeach
   </ul>
+  @includeWhen($search, 'Select.partials.searchNoResults')
 </div>

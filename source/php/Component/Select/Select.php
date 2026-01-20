@@ -4,6 +4,8 @@ namespace ComponentLibrary\Component\Select;
 
 class Select extends \ComponentLibrary\Component\BaseController
 {
+    public const AUTO_ENABLE_SEARCH_THRESHOLD = 7;
+
     public function init()
     {
         //Extract array for eazy access (fetch only)
@@ -106,6 +108,19 @@ class Select extends \ComponentLibrary\Component\BaseController
             }
             return $boolean ? false : '';
         };
+
+        $this->data = $this->mapSearch($this->data);
+    }
+
+    private function mapSearch(array $data): array {
+
+        if(!isset($data['search']) || is_null($data['search'])) {
+            if(count($data['options']) > static::AUTO_ENABLE_SEARCH_THRESHOLD) {
+                $data['search'] = true; 
+            }
+        }
+
+        return $data;
     }
 
     private function getIconSize($fieldSize = 'md'): string
