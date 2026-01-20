@@ -5,11 +5,13 @@ namespace ComponentLibrary\Component\Fileinput;
 use ComponentLibrary\Cache\CacheInterface;
 use PHPUnit\Framework\TestCase;
 
-class FileinputTest extends TestCase {
+class FileinputTest extends TestCase
+{
     /**
      * @testdox can be instantiated
      */
-    public function testCanBeInstantiated() {
+    public function testCanBeInstantiated()
+    {
         $cache = static::createCache();
         $tagSanitizer = static::createTagSanitizer();
         $fileinput = new Fileinput(static::getData(), $cache, $tagSanitizer);
@@ -19,7 +21,8 @@ class FileinputTest extends TestCase {
     /**
      * @testdox sets max number of files if provided
      */
-    public function testSetsMaxNumberOfFilesIfProvided() {
+    public function testSetsMaxNumberOfFilesIfProvided()
+    {
         $cache = static::createCache();
         $tagSanitizer = static::createTagSanitizer();
         $fileinput = new Fileinput(static::getData(['filesMax' => 3]), $cache, $tagSanitizer);
@@ -32,7 +35,8 @@ class FileinputTest extends TestCase {
     /**
      * @testdox sets min number of files if provided
      */
-    public function testSetsMinNumberOfFilesIfProvided() {
+    public function testSetsMinNumberOfFilesIfProvided()
+    {
         $cache = static::createCache();
         $tagSanitizer = static::createTagSanitizer();
         $fileinput = new Fileinput(static::getData(['filesMin' => 3]), $cache, $tagSanitizer);
@@ -45,7 +49,8 @@ class FileinputTest extends TestCase {
     /**
      * @testdox Throws error if min number of files is negative
      */
-    public function testThrowsErrorIfMinNumberOfFilesIsNegative() {
+    public function testThrowsErrorIfMinNumberOfFilesIsNegative()
+    {
         static::expectException(\TypeError::class);
 
         $cache = static::createCache();
@@ -56,7 +61,8 @@ class FileinputTest extends TestCase {
     /**
      * @testdox Throws error if min number of files greater than max number of files
      */
-    public function testThrowsErrorIfMinNumberOfFilesGreaterThanMaxNumberOfFiles() {
+    public function testThrowsErrorIfMinNumberOfFilesGreaterThanMaxNumberOfFiles()
+    {
         static::expectException(\TypeError::class);
 
         $cache = static::createCache();
@@ -64,7 +70,20 @@ class FileinputTest extends TestCase {
         new Fileinput(static::getData(['filesMin' => 5, 'filesMax' => 3]), $cache, $tagSanitizer);
     }
 
-    private static function getData(array $merge = []):array {
+    /**
+     * @testdox Throws error if min number is not an integer
+     */
+    public function testThrowsErrorIfMinNumberIsNotAnInteger()
+    {
+        static::expectException(\TypeError::class);
+
+        $cache = static::createCache();
+        $tagSanitizer = static::createTagSanitizer();
+        new Fileinput(static::getData(['filesMin' => 'string']), $cache, $tagSanitizer);
+    }
+
+    private static function getData(array $merge = []): array
+    {
         return array_merge([
             'accept' => '.jpg,.png',
             'filesMax' => 10,
@@ -72,20 +91,22 @@ class FileinputTest extends TestCase {
         ], $merge);
     }
 
-    private static function createCache():CacheInterface {
+    private static function createCache(): CacheInterface
+    {
         return new class implements CacheInterface {
-            public function get(string $key, ?string $group = null): mixed
+            public function get(string $key, null|string $group = null): mixed
             {
                 return null;
             }
 
-            public function set(string $key, mixed $data, ?string $group = null): void
+            public function set(string $key, mixed $data, null|string $group = null): void
             {
             }
         };
     }
 
-    private static function createTagSanitizer(): \ComponentLibrary\Helper\TagSanitizerInterface {
+    private static function createTagSanitizer(): \ComponentLibrary\Helper\TagSanitizerInterface
+    {
         return new class implements \ComponentLibrary\Helper\TagSanitizerInterface {
             public function removeATags(string $string): string
             {

@@ -12,9 +12,11 @@
         "preview": true,
         "maxSize": null,
         "uploadErrorMessage": null,
+        "uploadErrorMessageMinFiles": null,
         "icon": "file_upload",
         "required": false,
-        "filesMax": 1
+        "filesMax": 1,
+        "filesMin": 0
     },
     "description": {
         "description": "Additional description or instructions.",
@@ -25,9 +27,11 @@
         "buttonLabel": "What text to show on the button",
         "buttonRemoveLabel": "What text to show on the remove button",
         "uploadErrorMessage": "Message to show when upload fails",
+        "uploadErrorMessageMinFiles": "Message to show when minimum number of files is not met",
         "icon": "@link:component/icon",
         "required": "If field is required",
         "filesMax": "Maximum number of files (int). Foced to 1 if multiple is false. Default 10 for multiple.",
+        "filesMin": "Minimum number of files (int). Default 0.",
         "buttonDropLabel": "A label for the drop area",
         "maxSize": "Maximum file size allowed in MB. Number (int) in bytes or string (small, medium, large). Default is null (no limit)."
     },
@@ -41,9 +45,11 @@
         "buttonRemoveLabel": "string",
         "buttonDropLabel": "string",
         "uploadErrorMessage": "string",
+        "uploadErrorMessageMinFiles": "string",
         "icon": "string",
         "required": "boolean",
         "filesMax": "integer",
+        "filesMin": "integer",
         "preview": "boolean",
         "maxSize": "string|int"
     },
