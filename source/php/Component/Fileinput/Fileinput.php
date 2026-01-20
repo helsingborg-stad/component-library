@@ -11,7 +11,7 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
-        if(empty($this->data['id']) ) {
+        if (empty($this->data['id'])) {
             $this->data['id'] = $this->sanitizeIdAttribute(uniqid());
         }
 
@@ -21,7 +21,7 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
         }
 
         // Set as dropzone
-        $this->data['attributeList']['data-js-file'] = "dropzone";
+        $this->data['attributeList']['data-js-file'] = 'dropzone';
 
         if ($filesMax && $filesMax > 1) {
             $multiple = true;
@@ -34,17 +34,20 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
         }
 
         // If multiple is false, set max files to 1
-        if(!$multiple) {
+        if (!$multiple) {
             $this->data['filesMax'] = 1;
             $this->data['attributeList']['data-js-file-max'] = 1;
         }
-        
+
         // Do not allow -1 as max files, or more than $this->filesMax
-        if($multiple && ($filesMax == -1 || $filesMax > $this->filesMax)) {
+        if ($multiple && ($filesMax == -1 || $filesMax > $this->filesMax)) {
             $this->data['filesMax'] = $this->filesMax;
             $this->data['attributeList']['data-js-file-max'] = $this->filesMax;
         }
-   
+
+        // Map min number of files.
+        $this->data = $this->mapFilesMin($this->data);
+
         $acceptedTypesArray = is_array($accept) ? $accept : explode(',', $accept);
         $this->data['acceptedFilesList'] = $this->createAcceptedFilesList($acceptedTypesArray);
 
@@ -60,15 +63,16 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
 
         // Upload error message
         $this->data['uploadErrorMessage'] = $uploadErrorMessage ?? $this->data['lang']->uploadErrorMessage ?? 'Following files could not be uploaded';
+        $this->data['uploadErrorMessageMinFiles'] = $uploadErrorMessageMinFiles ?? $this->data['lang']->uploadErrorMessageMinFiles ?? 'Please upload more files';
 
         // Set class empty
-        $this->data['classList'][] = "is-empty";
+        $this->data['classList'][] = 'is-empty';
 
         // Set required attribute
         $this->data['required'] = $required ?? false;
     }
 
-    private function determineMaxSize(int|string|null $maxSize, array $accept): ?string
+    private function determineMaxSize(int|string|null $maxSize, array $accept): null|string
     {
         if (empty($maxSize)) {
             return null;
@@ -76,7 +80,7 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
 
         // If numeric, return as is
         if (is_numeric($maxSize)) {
-            return (string)$maxSize;
+            return (string) $maxSize;
         }
 
         // Define category size limits in MB
@@ -106,7 +110,7 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
             'video' => ['video/', '.mov', '.webm', '.mp4'],
             'audio' => ['audio/', '.mp3', '.ogg', '.aac'],
             'image' => ['image/', '.jpg', '.jpeg', '.png', '.gif'],
-            'document' => ['.doc', '.docx', '.xls', '.xlsx', '.pdf']
+            'document' => ['.doc', '.docx', '.xls', '.xlsx', '.pdf'],
         ];
 
         foreach ($typeGroups as $type => $types) {
@@ -120,11 +124,41 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
 
     private function createAcceptedFilesList(array $accept): string
     {
-        return( $this->data['lang']->allowedFiles ?? 'Allowed files') . ': ' . implode(' ', array_map(function($type) {
-            if ($type === "video/*") return $this->data['lang']->videos ?? "Videos";
-            if ($type === "image/*") return $this->data['lang']->images ?? "Images";
-            if ($type === "audio/*") return $this->data['lang']->audios ?? "Audios";
+        return ($this->data['lang']->allowedFiles ?? 'Allowed files') . ': ' . implode(' ', array_map(function ($type) {
+            if ($type === 'video/*')
+                return $this->data['lang']->videos ?? 'Videos';
+            if ($type === 'image/*')
+                return $this->data['lang']->images ?? 'Images';
+            if ($type === 'audio/*')
+                return $this->data['lang']->audios ?? 'Audios';
             return $type;
         }, $accept));
+    }
+
+    private function mapFilesMin(array $data): array
+    {
+        if (!isset($data['filesMin'])) {
+            $data['filesMin'] = null;
+            return $data;
+        }
+
+        if (!is_numeric($data['filesMin'])) {
+            throw new \TypeError('filesMin must be numeric');
+        }
+
+        if (isset($data['filesMax']) && is_numeric($data['filesMax']) && $data['filesMin'] >= $data['filesMax']) {
+            throw new \TypeError('filesMin cannot be greater than filesMax');
+        }
+
+        if ($data['filesMin'] < 0) {
+            throw new \TypeError('filesMin cannot be negative');
+        }
+
+        if ($data['filesMin'] >= 0) {
+            $data['filesMin'] = (int) $data['filesMin'];
+            $data['attributeList']['data-js-file-min'] = $data['filesMin'];
+        }
+
+        return $data;
     }
 }

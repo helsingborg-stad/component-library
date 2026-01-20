@@ -5,6 +5,7 @@
         'attributeList' => [
             'data-js-file' => 'notice-template',
             'data-js-upload-error-message' => $uploadErrorMessage,
+            'data-js-upload-error-message-min-files' => $uploadErrorMessageMinFiles,
         ]
     ])
         @notice([

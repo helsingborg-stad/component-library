@@ -76,18 +76,19 @@
         @endelement
         
         @element([
-            'classList' => [
-                $baseClass . '__filecounter',
-            ],
-            'attributeList' => [
-                'data-js-file' => 'counter',
-                'data-counter-current' => '0',
-                'data-counter-max' => $filesMax,
-                'aria-hidden' => 'true',
-                'aria-live' => 'polite',
-            ]
+          'classList' => [
+            $baseClass . '__filecounter',
+          ],
+          'attributeList' => [
+            'data-js-file' => 'counter',
+            'data-counter-current' => '0',
+            'data-counter-max' => $filesMax,
+            'aria-hidden' => 'true',
+            'aria-live' => 'polite',
+          ]
         ])
         /
         @endelement
+        
    </div>
 </div>
