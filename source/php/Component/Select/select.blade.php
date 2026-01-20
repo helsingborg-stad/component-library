@@ -53,6 +53,7 @@
         @includeWhen($clearButtonEnabled, 'Select.partials.clear')
         @include('Select.partials.action')
     </div>
+    @includeWhen($search, 'Select.partials.search')
     @include('Select.partials.dropdown')
     @include('Select.partials.error')
 

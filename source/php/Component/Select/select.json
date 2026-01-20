@@ -16,7 +16,8 @@
         "size": "md",
         "maxSelections": false,
         "hidePlaceholder": false,
-        "selectAttributeList": []
+        "selectAttributeList": [],
+        "search": null
     },
     "description": {
         "label": "The placeholder of the dropdown",
@@ -33,7 +34,8 @@
         "size": "The size of the select component (sm, md, lg)",
         "maxSelections": "The maximum number of selections allowed. Will only be applied if \"multiple\" is true.",
         "hidePlaceholder": "Hides the placeholder but keeps the label",
-        "selectAttributeList": "Ann array with attributes that will be set on the actual select element."
+        "selectAttributeList": "Ann array with attributes that will be set on the actual select element.",
+        "search": "Enables a search input within the select dropdown."
     },
     "view": "select.blade.php",
     "dependency": {
