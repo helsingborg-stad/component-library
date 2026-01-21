@@ -75,6 +75,8 @@ class Card extends \ComponentLibrary\Component\BaseController
             
             if (!empty($linkText) && function_exists('apply_filters')) {
                 $this->data['linkTextIcon'] = apply_filters('ComponentLibrary/Component/Card/LinkTextIcon', 'east');
+            } else {
+                $this->data['linkTextIcon'] = 'east';
             }
         } else {
             $this->data['componentElement'] = "div";
