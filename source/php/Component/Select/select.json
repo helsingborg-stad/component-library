@@ -18,6 +18,7 @@
         "hidePlaceholder": false,
         "selectAttributeList": [],
         "search": null,
+        "searchPlaceholder": "Search...",
         "searchNoResultsText": "No results found"
     },
     "description": {
@@ -37,6 +38,7 @@
         "hidePlaceholder": "Hides the placeholder but keeps the label",
         "selectAttributeList": "Ann array with attributes that will be set on the actual select element.",
         "search": "Enables a search input within the select dropdown.",
+        "searchPlaceholder": "The placeholder text for the search input.",
         "searchNoResultsText": "The text to show when no results are found in the search."
     },
     "view": "select.blade.php",
