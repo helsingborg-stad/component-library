@@ -25,8 +25,6 @@ class Card extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
-        $wpService = \Modularity\Helper\WpService::get();
-
         $this->data['collpaseID'] = uniqid();
 
         if ($image || $hasPlaceholder) {
@@ -75,8 +73,8 @@ class Card extends \ComponentLibrary\Component\BaseController
             $this->data['componentElement'] = "a";
             $this->data['attributeList']['href'] = $link;
             
-            if (!empty($linkText)) {
-                $this->data['linkTextIcon'] = $wpService->applyFilters('ComponentLibrary/Component/Card/LinkTextIcon', 'east');
+            if (!empty($linkText) && function_exists('apply_filters')) {
+                $this->data['linkTextIcon'] = apply_filters('ComponentLibrary/Component/Card/LinkTextIcon', 'east');
             }
         } else {
             $this->data['componentElement'] = "div";
