@@ -39,7 +39,7 @@ class FileinputTest extends TestCase
     {
         $cache = static::createCache();
         $tagSanitizer = static::createTagSanitizer();
-        $fileinput = new Fileinput(static::getData(['filesMin' => 3]), $cache, $tagSanitizer);
+        $fileinput = new Fileinput(static::getData(['filesMin' => 3, 'filesMax' => 5]), $cache, $tagSanitizer);
 
         $resultData = $fileinput->getData();
 
@@ -84,11 +84,11 @@ class FileinputTest extends TestCase
 
     private static function getData(array $merge = []): array
     {
-        return array_merge([
-            'accept' => '.jpg,.png',
-            'filesMax' => 10,
-            'maxSize' => 5,
-        ], $merge);
+        $jsonFile = __DIR__ . '/fileinput.json';
+        $decodedJson = json_decode(file_get_contents($jsonFile), true);
+        $defaultData = $decodedJson['default'] ?? [];
+
+        return array_merge($defaultData, $merge);
     }
 
     private static function createCache(): CacheInterface
