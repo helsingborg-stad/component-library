@@ -13,14 +13,14 @@ class BaseController
      */
     protected $data = array(
         'id' => '', //Unique dom id
-        'class' => "", //Auto compiled from class list on data fetch
-        'baseClass' => "",
+        'class' => '', //Auto compiled from class list on data fetch
+        'baseClass' => '',
         'classList' => [], //An array of class names (push classes here),
-        'attribute' => "",
+        'attribute' => '',
         'attributeList' => [],
         'context' => [],
         'isBlock' => false,
-        'isShortcode' => false
+        'isShortcode' => false,
     );
 
     /**
@@ -37,9 +37,8 @@ class BaseController
     public function __construct(
         $data,
         protected CacheInterface $cache,
-        protected TagSanitizerInterface $tagSanitizer
+        protected TagSanitizerInterface $tagSanitizer,
     ) {
-        
         //Load input data
         if (!is_null($data) && is_array($data)) {
             $this->data = array_merge($this->data, $data);
@@ -51,18 +50,18 @@ class BaseController
         } elseif (is_string($this->data['context'])) {
             $this->data['context'] = [
                 $this->data['context'],
-                $this->createDefaultContext($this)
+                $this->createDefaultContext($this),
             ];
         }
 
         //Applies a general wp filter
         if (function_exists('apply_filters')) {
-            $this->data = apply_filters("ComponentLibrary/Component/Data", $this->data);
+            $this->data = apply_filters('ComponentLibrary/Component/Data', $this->data);
         }
 
         //Applies a general wp filter
         if (function_exists('apply_filters')) {
-            $this->data = apply_filters($this->createFilterName($this) . DIRECTORY_SEPARATOR . "Data", $this->data);
+            $this->data = apply_filters($this->createFilterName($this) . DIRECTORY_SEPARATOR . 'Data', $this->data);
         }
 
         if (function_exists('apply_filters')) {
@@ -108,11 +107,11 @@ class BaseController
         if (function_exists('apply_filters')) {
             if (is_array($data) && !empty($data)) {
                 foreach ($data as $key => $item) {
-                    if (!in_array($key, array("data", "classes", 'class'))) {
+                    if (!in_array($key, array('data', 'classes', 'class'))) {
                         $data[$key] = apply_filters(
-                            $this->createFilterName($this) . DIRECTORY_SEPARATOR . ucfirst($key), 
+                            $this->createFilterName($this) . DIRECTORY_SEPARATOR . ucfirst($key),
                             $data[$key],
-                            $data['context'] ?? []
+                            $data['context'] ?? [],
                         );
                     }
                 }
@@ -131,9 +130,9 @@ class BaseController
     private function getId()
     {
         if (isset($this->data['id']) && !empty($this->data['id'])) {
-            return (string) str_replace(" ", "", ($this->data['id']));
+            return (string) str_replace(' ', '', $this->data['id']);
         }
-        return "";
+        return '';
     }
 
     /**
@@ -149,14 +148,14 @@ class BaseController
         return $this->uid = uniqid();
     }
 
-   /**
-    * If the slot exists in the data array, and the html property of the slot is not empty, then
-    * return true
-    * 
-    * @param slotKey The name of the slot you want to check.
-    * 
-    * @return a boolean value.
-    */
+    /**
+     * If the slot exists in the data array, and the html property of the slot is not empty, then
+     * return true
+     *
+     * @param slotKey The name of the slot you want to check.
+     *
+     * @return a boolean value.
+     */
     /**
      * Checks if the specified slot contains data.
      *
@@ -169,7 +168,7 @@ class BaseController
             return false;
         }
 
-        $property = ($slotKey === 'slot') ? 'html' : 'contents';
+        $property = $slotKey === 'slot' ? 'html' : 'contents';
         $value = $this->accessProtected($this->data[$slotKey], $property);
 
         return !empty($value);
@@ -180,7 +179,7 @@ class BaseController
         //Get all parts of the location
         return explode(
             "\\",
-            get_called_class()
+            get_called_class(),
         );
     }
 
@@ -189,7 +188,7 @@ class BaseController
         if (!empty($modifier)) {
             foreach ($modifier as &$value) {
                 if ($value && is_string($value)) {
-                    $class[] =  $this->getBaseClass() . '--' . $value;
+                    $class[] = $this->getBaseClass() . '--' . $value;
                 }
             }
         }
@@ -212,7 +211,7 @@ class BaseController
 
         if (is_array($classList) && !empty($classList)) {
             foreach ($classList as $classListItem) {
-                if (strpos($classListItem, " ")) {
+                if (strpos($classListItem, ' ')) {
                     return false;
                 }
                 if (empty($classListItem)) {
@@ -236,9 +235,9 @@ class BaseController
                     'The parameter classList is not allowed to contain spaces or include empty strings. 
                     Multiple classes may be separated by entering a array of items.
                     Please review data inputted: %s',
-                    print_r($this, true)
+                    print_r($this, true),
                 ),
-                E_USER_WARNING
+                E_USER_WARNING,
             );
         }
 
@@ -246,36 +245,36 @@ class BaseController
         if (isset($this->data['classList']) && is_array($this->data['classList'])) {
             array_unshift(
                 $this->data['classList'],
-                (string) $this->getBaseClass()
+                (string) $this->getBaseClass(),
             );
             $class = (array) $this->data['classList'];
         } else {
             $class = array();
         }
 
-        $namespaceParts =  $this->getNameSpaceParts();
+        $namespaceParts = $this->getNameSpaceParts();
         $componentName = end($namespaceParts);
 
         //Applies a general wp filter
         if (function_exists('apply_filters')) {
-            $modifier = apply_filters("ComponentLibrary/Component/Modifier", [], $this->data['context']);
+            $modifier = apply_filters('ComponentLibrary/Component/Modifier', [], $this->data['context']);
             $class = $this->setModifier($class, $modifier);
         }
 
         //Applies component specific wp filter
         if (function_exists('apply_filters')) {
-            $modifier = apply_filters("ComponentLibrary/Component/". $componentName ."/Modifier", [], $this->data['context']);
+            $modifier = apply_filters('ComponentLibrary/Component/' . $componentName . '/Modifier', [], $this->data['context']);
             $class = $this->setModifier($class, $modifier);
         }
 
         //Applies a general wp filter
         if (function_exists('apply_filters')) {
-            $class = apply_filters("ComponentLibrary/Component/Class", $class);
+            $class = apply_filters('ComponentLibrary/Component/Class', $class);
         }
 
         //Applies component specific wp filter
         if (function_exists('apply_filters')) {
-            $class = apply_filters("ComponentLibrary/Component/". $componentName ."/Class", $class, $this->data['context']);
+            $class = apply_filters('ComponentLibrary/Component/' . $componentName . '/Class', $class, $this->data['context']);
         }
 
         //Return manipulated classes as array
@@ -284,7 +283,7 @@ class BaseController
         }
 
         //Return manipulated data array as string
-        return (string) implode(" ", (array) $class);
+        return (string) implode(' ', (array) $class);
     }
 
     /**
@@ -307,7 +306,7 @@ class BaseController
      *
      * @return string A single css class
      */
-    protected function getBaseClass(string $className = "", bool $isModifier = false): string
+    protected function getBaseClass(string $className = '', bool $isModifier = false): string
     {
         //If base class is specified from component controller then use that
         if ($this->data['baseClass']) {
@@ -318,19 +317,19 @@ class BaseController
         $namespaceParts = $this->getNamespaceParts();
 
         //Separator notation
-        $separator = ($isModifier ? '--' : '__'); 
+        $separator = $isModifier ? '--' : '__';
 
         //Create array of items
         return strtolower(
             implode(
-                "",
+                '',
                 [
-                    "c-",
+                    'c-',
                     end($namespaceParts),
-                    ($className ? $separator : ''),
-                    $className
-                ]
-            )
+                    $className ? $separator : '',
+                    $className,
+                ],
+            ),
         );
     }
 
@@ -345,7 +344,7 @@ class BaseController
 
         //Add attribute for container awareness
         if ($this->getContainerAware() == true) {
-            $attribute['data-observe-resizes'] = "";
+            $attribute['data-observe-resizes'] = '';
         }
 
         //Add id if defined
@@ -358,12 +357,12 @@ class BaseController
 
         //Applies a general wp filter
         if (function_exists('apply_filters')) {
-            $attribute = apply_filters($this->createFilterName($this) . DIRECTORY_SEPARATOR . "Attribute", $attribute);
+            $attribute = apply_filters($this->createFilterName($this) . DIRECTORY_SEPARATOR . 'Attribute', $attribute);
         }
 
         //Applies a general wp filter
         if (function_exists('apply_filters')) {
-            $attribute = apply_filters("ComponentLibrary/Component/Attribute", $attribute);
+            $attribute = apply_filters('ComponentLibrary/Component/Attribute', $attribute);
         }
 
         //Sanitize "broken" css.
@@ -395,14 +394,15 @@ class BaseController
 
     /**
      * Santitize the id attribute of a component
-     * 
-     * This will prevent invalid characters and ensure that the id 
+     *
+     * This will prevent invalid characters and ensure that the id
      * starts with a letter as required by the HTML spec.
-     * 
+     *
      * @param string $id    The id to sanitize
      * @return string       The sanitized id
      */
-    public function sanitizeIdAttribute(string $id): string {
+    public function sanitizeIdAttribute(string $id): string
+    {
         // Allow a-z, A-Z, 0-9, -, _, [, ], {, }
         $id = preg_replace('/[^a-zA-Z0-9\-\_\[\]\{\}]/', '', $id);
 
@@ -425,7 +425,7 @@ class BaseController
 
     /**
      * Builds a string of attributes.
-     * 
+     *
      * @param array $attributes An array of attributes to be added to the string.
      * @return string A string of attributes.
      */
@@ -434,7 +434,7 @@ class BaseController
         $attributeStrings = [];
 
         foreach ($attributes as $key => $value) {
-            if(is_resource($value) || (!is_string($value) && is_callable($value))) {
+            if (is_resource($value) || !is_string($value) && is_callable($value)) {
                 continue;
             }
 
@@ -450,12 +450,12 @@ class BaseController
                 $value = $value ? '1' : '0';
             }
 
-            if($value === "null" || $value === null) {
-                $escapedValue = "";
+            if ($value === 'null' || $value === null) {
+                $escapedValue = '';
             } else {
                 $escapedValue = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
             }
-            
+
             $attributeStrings[] = "$key=\"$escapedValue\"";
         }
 
@@ -471,8 +471,8 @@ class BaseController
                     return sprintf('%s: %s;', $k, $v);
                 },
                 array_values($styles),
-                array_keys($styles)
-            )
+                array_keys($styles),
+            ),
         );
     }
 
@@ -486,7 +486,7 @@ class BaseController
         //Get all parts of the location
         $name = explode(
             "\\",
-            get_class($class)
+            get_class($class),
         );
 
         //Remove duplicates
@@ -506,7 +506,7 @@ class BaseController
         //Get all parts of the location
         $name = explode(
             "\\",
-            get_class($class)
+            get_class($class),
         );
 
         if (isset($name[0])) {
@@ -517,7 +517,7 @@ class BaseController
         $name = array_unique($name);
 
         //Create string
-        return strtolower(implode(".", $name));
+        return strtolower(implode('.', $name));
     }
 
     /**
