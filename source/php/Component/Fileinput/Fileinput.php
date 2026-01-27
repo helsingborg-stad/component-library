@@ -54,7 +54,7 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
         $maxFileSize = $this->determineMaxSize($maxSize, $acceptedTypesArray);
 
         if (!empty($maxFileSize)) {
-            $this->data['maxSize'] = ($this->data['lang']->maximumSize ?? 'Maximum size') . ': ' . $maxFileSize . ' MB';
+            $this->data['maxSize'] = ($this->data['maximumSizeLabel']) . ': ' . $maxFileSize . ' MB';
             $this->data['attributeList']['data-js-file-max-size'] = $maxFileSize;
         }
 
@@ -124,13 +124,13 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
 
     private function createAcceptedFilesList(array $accept): string
     {
-        return ($this->data['lang']->allowedFiles ?? 'Allowed files') . ': ' . implode(' ', array_map(function ($type) {
+        return ($this->data['allowedFileTypesLabel']) . ': ' . implode(' ', array_map(function ($type) {
             if ($type === 'video/*')
-                return $this->data['lang']->videos ?? 'Videos';
+                return $this->data['fileTypeVideosLabel'];
             if ($type === 'image/*')
-                return $this->data['lang']->images ?? 'Images';
+                return $this->data['fileTypeImagesLabel'];
             if ($type === 'audio/*')
-                return $this->data['lang']->audios ?? 'Audios';
+                return $this->data['fileTypeAudioLabel'];
             return $type;
         }, $accept));
     }
