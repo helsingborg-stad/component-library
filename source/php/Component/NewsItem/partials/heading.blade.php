@@ -3,5 +3,5 @@
     'variant' => 'h3',
     'classList' => [$baseClass . '__heading']
 ])
-    {{ $heading }}
+    {!! $heading !!}
 @endtypography
