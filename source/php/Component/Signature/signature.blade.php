@@ -1,6 +1,6 @@
 <{{$componentElement}} class="{{$class}}" {!! $attribute !!}>
     
-    @if($author)
+    @if($author||$published||$updated)
         @if ($avatar || $placeholderAvatar)
             @avatar([
                 'image' => ($avatar) ? $avatar : false,
@@ -13,32 +13,33 @@
             @endavatar
         @endif
         <div class="{{$baseClass}}__author-box">
-            <div>
-                @typography([
-                    "element" => "span",
-                    "variant" => "subtitle",
-                    "classList" => [
-                        $baseClass.'__author'
-                    ]
-                ])
-                    {{$author}}
-                @endtypography
-
-                @if($authorRole ) 
+            @if($author)
+                <div>
                     @typography([
                         "element" => "span",
-                        "variant" => "byline",
+                        "variant" => "subtitle",
                         "classList" => [
-                            $baseClass.'__title'
+                            $baseClass.'__author'
                         ]
                     ])
-                        {{$authorRole}}
+                        {{$author}}
                     @endtypography
 
-                @endif
-                    {!! $slot !!}
-            </div>
+                    @if($authorRole ) 
+                        @typography([
+                            "element" => "span",
+                            "variant" => "byline",
+                            "classList" => [
+                                $baseClass.'__title'
+                            ]
+                        ])
+                            {{$authorRole}}
+                        @endtypography
 
+                    @endif
+                        {!! $slot !!}
+                </div>
+            @endif
             @if($published||$updated)
                 <div class="{{$baseClass}}__dates {{$author ? $baseClass.'__dates--aligned' : ''}}">
 
