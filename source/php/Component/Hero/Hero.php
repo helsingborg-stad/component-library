@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\Hero;
 
-class Hero extends \ComponentLibrary\Component\BaseController
+class Hero extends \ComponentLibrary\Component\BaseController implements HeroInterface
 {
     public function init()
     {
@@ -188,5 +188,142 @@ class Hero extends \ComponentLibrary\Component\BaseController
         if (!empty($this->data['buttonArgs'])) return true;
 
         return false;
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'hero';
+    }
+
+    // -------------------------------------------------------------------------
+    // HeroInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getImage(): mixed
+    {
+        return $this->data['image'] ?? false;
+    }
+
+    public function getImageFocus(): object
+    {
+        return $this->data['imageFocus'] ?? (object) [];
+    }
+
+    public function getVideo(): string
+    {
+        return $this->data['video'] ?? false;
+    }
+
+    public function getSize(): string
+    {
+        return $this->data['size'] ?? 'normal';
+    }
+
+    public function getTitle(): string
+    {
+        return $this->data['title'] ?? '';
+    }
+
+    public function getByline(): string
+    {
+        return $this->data['byline'] ?? '';
+    }
+
+    public function getParagraph(): string
+    {
+        return $this->data['paragraph'] ?? '';
+    }
+
+    public function getStretch(): bool
+    {
+        return $this->data['stretch'] ?? false;
+    }
+
+    public function getAnimation(): string
+    {
+        return $this->data['animation'] ?? false;
+    }
+
+    public function getAriaLabel(): string
+    {
+        return $this->data['ariaLabel'] ?? 'Hero';
+    }
+
+    public function getHeroView(): string
+    {
+        return $this->data['heroView'] ?? 'default';
+    }
+
+    public function getCustomHeroData(): array
+    {
+        return $this->data['customHeroData'] ?? false;
+    }
+
+    public function getMeta(): string
+    {
+        return $this->data['meta'] ?? false;
+    }
+
+    public function getBackground(): string
+    {
+        return $this->data['background'] ?? false;
+    }
+
+    public function getTextColor(): string
+    {
+        return $this->data['textColor'] ?? '';
+    }
+
+    public function getTextAlignment(): string
+    {
+        return $this->data['textAlignment'] ?? 'left';
+    }
+
+    public function getContentBackgroundColor(): string
+    {
+        return $this->data['contentBackgroundColor'] ?? '';
+    }
+
+    public function getContentAlignmentVertical(): string
+    {
+        return $this->data['contentAlignmentVertical'] ?? 'bottom';
+    }
+
+    public function getContentAlignmentHorizontal(): string
+    {
+        return $this->data['contentAlignmentHorizontal'] ?? 'left';
+    }
+
+    public function getContentApplyRoundedCorners(): bool
+    {
+        return $this->data['contentApplyRoundedCorners'] ?? true;
+    }
+
+    public function getContentApplyShadows(): bool
+    {
+        return $this->data['contentApplyShadows'] ?? true;
+    }
+
+    public function getButtonArgs(): array
+    {
+        return $this->data['buttonArgs'] ?? [];
+    }
+
+    public function getPoster(): bool
+    {
+        return $this->data['poster'] ?? false;
+    }
+
+    public function getOverlay(): string
+    {
+        return $this->data['overlay'] ?? '';
+    }
+
+    public function getContent(): string|bool
+    {
+        return $this->data['content'] ?? false;
     }
 }

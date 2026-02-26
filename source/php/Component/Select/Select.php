@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\Select;
 
-class Select extends \ComponentLibrary\Component\BaseController
+class Select extends \ComponentLibrary\Component\BaseController implements SelectInterface
 {
     public const AUTO_ENABLE_SEARCH_THRESHOLD = 7;
 
@@ -129,5 +129,107 @@ class Select extends \ComponentLibrary\Component\BaseController
             return 'md'; 
         }
         return $fieldSize; 
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'select';
+    }
+
+    // -------------------------------------------------------------------------
+    // SelectInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getLabel(): string
+    {
+        return $this->data['label'] ?? '';
+    }
+
+    public function getPlaceholder(): string
+    {
+        return $this->data['placeholder'] ?? '';
+    }
+
+    public function getId(): bool
+    {
+        return $this->data['id'] ?? false;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->data['description'] ?? '';
+    }
+
+    public function getRequired(): bool
+    {
+        return $this->data['required'] ?? false;
+    }
+
+    public function getOptions(): array
+    {
+        return $this->data['options'] ?? [];
+    }
+
+    public function getErrorMessage(): bool
+    {
+        return $this->data['errorMessage'] ?? false;
+    }
+
+    public function getPreselected(): bool
+    {
+        return $this->data['preselected'] ?? false;
+    }
+
+    public function getMultiple(): bool
+    {
+        return $this->data['multiple'] ?? false;
+    }
+
+    public function getHideLabel(): bool
+    {
+        return $this->data['hideLabel'] ?? false;
+    }
+
+    public function getHelperText(): string
+    {
+        return $this->data['helperText'] ?? '';
+    }
+
+    public function getSize(): string
+    {
+        return $this->data['size'] ?? 'md';
+    }
+
+    public function getMaxSelections(): bool
+    {
+        return $this->data['maxSelections'] ?? false;
+    }
+
+    public function getHidePlaceholder(): bool
+    {
+        return $this->data['hidePlaceholder'] ?? false;
+    }
+
+    public function getSelectAttributeList(): array
+    {
+        return $this->data['selectAttributeList'] ?? [];
+    }
+
+    public function getSearch(): mixed
+    {
+        return $this->data['search'] ?? null;
+    }
+
+    public function getSearchPlaceholder(): string
+    {
+        return $this->data['searchPlaceholder'] ?? 'Search...';
+    }
+
+    public function getSearchNoResultsText(): string
+    {
+        return $this->data['searchNoResultsText'] ?? 'No results found';
     }
 }

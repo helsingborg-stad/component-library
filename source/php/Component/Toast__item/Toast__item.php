@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\Toast__item;
 
-class Toast__item extends \ComponentLibrary\Component\BaseController
+class Toast__item extends \ComponentLibrary\Component\BaseController implements Toast__itemInterface
 {
     private $unpassable = ['class', 'attribute'];
 
@@ -29,5 +29,13 @@ class Toast__item extends \ComponentLibrary\Component\BaseController
         if($this->data['data']['action'] ?? false) {
             $this->data['data']['classList'][] = $this->getBaseClass('has-action', true);
         }
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'toast__item';
     }
 }

@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\Paper;
 
-class Paper extends \ComponentLibrary\Component\BaseController 
+class Paper extends \ComponentLibrary\Component\BaseController implements PaperInterface 
 {
     public function init() {
         //Extract array for eazy access (fetch only)
@@ -30,4 +30,31 @@ class Paper extends \ComponentLibrary\Component\BaseController
 
     }
 
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'paper';
+    }
+
+    // -------------------------------------------------------------------------
+    // PaperInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlot(): string
+    {
+        return $this->data['slot'] ?? '';
+    }
+
+    public function getPadding(): bool
+    {
+        return $this->data['padding'] ?? false;
+    }
+
+    public function getTransparent(): bool
+    {
+        return $this->data['transparent'] ?? false;
+    }
 }

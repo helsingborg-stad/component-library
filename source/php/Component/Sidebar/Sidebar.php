@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\Sidebar;
 
-class Sidebar extends \ComponentLibrary\Component\BaseController
+class Sidebar extends \ComponentLibrary\Component\BaseController implements SidebarInterface
 {
 
     public function init()
@@ -57,5 +57,32 @@ class Sidebar extends \ComponentLibrary\Component\BaseController
             $items[$key] = $item;
         }
         return $items;
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'sidebar';
+    }
+
+    // -------------------------------------------------------------------------
+    // SidebarInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getLogo(): string
+    {
+        return $this->data['logo'] ?? '';
+    }
+
+    public function getItems(): array
+    {
+        return $this->data['items'] ?? [];
+    }
+
+    public function getShowHideButton(): bool
+    {
+        return $this->data['showHideButton'] ?? false;
     }
 }

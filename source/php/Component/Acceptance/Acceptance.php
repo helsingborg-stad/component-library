@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\Acceptance;
 
-class Acceptance extends \ComponentLibrary\Component\BaseController
+class Acceptance extends \ComponentLibrary\Component\BaseController implements AcceptanceInterface
 {
     //Indicated that there are exceptions of js behaviors in frontend
     private $jsBehaviourSystemTypes = ['video'];
@@ -293,5 +293,57 @@ class Supplier
         $this->policy = $policy;
         $this->requiresAccept = $requiresAccept;
         $this->systemType = $systemType;
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'acceptance';
+    }
+
+    // -------------------------------------------------------------------------
+    // AcceptanceInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getLabels(): mixed
+    {
+        return $this->data['labels'] ?? false;
+    }
+
+    public function getHeight(): bool|string
+    {
+        return $this->data['height'] ?? false;
+    }
+
+    public function getSrc(): bool|array
+    {
+        return $this->data['src'] ?? false;
+    }
+
+    public function getPolicy(): bool
+    {
+        return $this->data['policy'] ?? false;
+    }
+
+    public function getHost(): bool
+    {
+        return $this->data['host'] ?? false;
+    }
+
+    public function getIcon(): string
+    {
+        return $this->data['icon'] ?? 'info';
+    }
+
+    public function getCover(): bool
+    {
+        return $this->data['cover'] ?? false;
+    }
+
+    public function getModifier(): string
+    {
+        return $this->data['modifier'] ?? '';
     }
 }

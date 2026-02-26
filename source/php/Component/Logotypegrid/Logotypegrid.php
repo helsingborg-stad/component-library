@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\Logotypegrid;
 
-class Logotypegrid extends \ComponentLibrary\Component\BaseController
+class Logotypegrid extends \ComponentLibrary\Component\BaseController implements LogotypegridInterface
 {
 
     public function init() {
@@ -20,5 +20,22 @@ class Logotypegrid extends \ComponentLibrary\Component\BaseController
                 ], $item);
             }
         }
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'logotypegrid';
+    }
+
+    // -------------------------------------------------------------------------
+    // LogotypegridInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getItems(): array
+    {
+        return $this->data['items'] ?? [];
     }
 }

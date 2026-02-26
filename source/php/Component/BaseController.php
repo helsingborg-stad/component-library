@@ -5,7 +5,7 @@ namespace ComponentLibrary\Component;
 use ComponentLibrary\Cache\CacheInterface;
 use ComponentLibrary\Helper\TagSanitizerInterface;
 
-class BaseController
+class BaseController implements ComponentInterface
 {
     /**
      * Holds the view's data
@@ -77,10 +77,16 @@ class BaseController
      *
      * @return array Data
      */
-    public function getData()
+    public function getData(): array
     {
         //Store locally
         $data = $this->data;
+
+        //Expose the controller instance to the view layer.
+        //
+        // Note: Blade's special $this variable cannot be reassigned safely,
+        // so templates should use $componentController instead.
+        $data['componentController'] = $this;
 
         //Generate classes string
         $data['class'] = $this->getClass();
@@ -107,7 +113,7 @@ class BaseController
         if (function_exists('apply_filters')) {
             if (is_array($data) && !empty($data)) {
                 foreach ($data as $key => $item) {
-                    if (!in_array($key, array('data', 'classes', 'class'))) {
+                    if (!in_array($key, array('data', 'classes', 'class', 'componentController'))) {
                         $data[$key] = apply_filters(
                             $this->createFilterName($this) . DIRECTORY_SEPARATOR . ucfirst($key),
                             $data[$key],
@@ -120,6 +126,29 @@ class BaseController
 
         //Return manipulated data array
         return (array) $data;
+    }
+
+    /**
+     * Returns the component slug derived from the unqualified class name.
+     * Concrete controllers override this with the exact value from their config.
+     *
+     * @return string
+     */
+    public function getSlug(): string
+    {
+        $parts = explode('\\', static::class);
+        return lcfirst(end($parts));
+    }
+
+    /**
+     * Returns the unqualified class name of the component.
+     *
+     * @return string
+     */
+    public function getName(): string
+    {
+        $parts = explode('\\', static::class);
+        return end($parts);
     }
 
     /**

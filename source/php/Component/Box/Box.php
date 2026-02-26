@@ -8,7 +8,7 @@ use ComponentLibrary\Integrations\Image\ImageInterface;
  * Class Box
  * @package ComponentLibrary\Component\Box
  */
-class Box extends \ComponentLibrary\Component\BaseController
+class Box extends \ComponentLibrary\Component\BaseController implements BoxInterface
 {
     private array $slotMapping = [
         'metaArea' => 'metaAreaSlotHasData',
@@ -114,5 +114,67 @@ class Box extends \ComponentLibrary\Component\BaseController
         }
 
         return $string;
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'box';
+    }
+
+    // -------------------------------------------------------------------------
+    // BoxInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getHeading(): string
+    {
+        return $this->data['heading'] ?? '';
+    }
+
+    public function getContent(): string
+    {
+        return $this->data['content'] ?? '';
+    }
+
+    public function getMeta(): string|array
+    {
+        return $this->data['meta'] ?? '';
+    }
+
+    public function getSecondaryMeta(): string|array
+    {
+        return $this->data['secondaryMeta'] ?? '';
+    }
+
+    public function getLink(): string
+    {
+        return $this->data['link'] ?? '';
+    }
+
+    public function getRatio(): string
+    {
+        return $this->data['ratio'] ?? '1:1';
+    }
+
+    public function getDate(): string
+    {
+        return $this->data['date'] ?? '';
+    }
+
+    public function getDateBadge(): bool
+    {
+        return $this->data['dateBadge'] ?? null;
+    }
+
+    public function getImage(): mixed
+    {
+        return $this->data['image'] ?? false;
+    }
+
+    public function getIcon(): string
+    {
+        return $this->data['icon'] ?? '';
     }
 }

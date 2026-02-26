@@ -11,7 +11,7 @@ use Exception;
  * Class Date
  * Handles various date-related actions like formatting, calculating time since/until, and tooltip generation.
  */
-class Date extends \ComponentLibrary\Component\BaseController
+class Date extends \ComponentLibrary\Component\BaseController implements DateInterface
 {
     private ?DateFormatter $dateFormatter = null;
     private ?TimeSinceFormatter $timeSinceFormatter = null;
@@ -188,5 +188,77 @@ class Date extends \ComponentLibrary\Component\BaseController
             return new \Exception('Date Component: Failed to parse date string from "'.$date.'".');
         }
         return $unixTime;
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'date';
+    }
+
+    // -------------------------------------------------------------------------
+    // DateInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getTimestamp(): string|int
+    {
+        return $this->data['timestamp'] ?? '';
+    }
+
+    public function getTimeSince(): bool
+    {
+        return $this->data['time_since'] ?? false;
+    }
+
+    public function getTimeSinceCap(): string
+    {
+        return $this->data['time_since_cap'] ?? '6 months';
+    }
+
+    public function getFormat(): string
+    {
+        return $this->data['format'] ?? null;
+    }
+
+    public function getRegion(): string
+    {
+        return $this->data['region'] ?? 'en_US';
+    }
+
+    public function getTimezone(): string
+    {
+        return $this->data['timezone'] ?? 'UTC';
+    }
+
+    public function getAction(): string|bool
+    {
+        return $this->data['action'] ?? 'formatDate';
+    }
+
+    public function getLabels(): object|array
+    {
+        return $this->data['labels'] ?? [];
+    }
+
+    public function getLabelsPlural(): object|array
+    {
+        return $this->data['labelsPlural'] ?? [];
+    }
+
+    public function getTimeSinceSuffix(): string
+    {
+        return $this->data['timeSinceSuffix'] ?? 'ago';
+    }
+
+    public function getNowLabel(): string
+    {
+        return $this->data['nowLabel'] ?? 'just now';
+    }
+
+    public function getTimeNowCap(): int
+    {
+        return $this->data['timeNowCap'] ?? 60;
     }
 }

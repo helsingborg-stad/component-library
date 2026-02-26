@@ -6,7 +6,7 @@ namespace ComponentLibrary\Component\Block;
  * Class Block
  * @package ComponentLibrary\Component\Block
  */
-class Block extends \ComponentLibrary\Component\BaseController
+class Block extends \ComponentLibrary\Component\BaseController implements BlockInterface
 {
     private $contentKeys = ['date', 'meta', 'secondaryMeta', 'heading', 'icon', 'content'];
     private array $slotMapping = [
@@ -112,5 +112,72 @@ class Block extends \ComponentLibrary\Component\BaseController
         if (is_string($value)) return empty(trim($value));
 
         return true;
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'block';
+    }
+
+    // -------------------------------------------------------------------------
+    // BlockInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getHeading(): string
+    {
+        return $this->data['heading'] ?? '';
+    }
+
+    public function getContent(): string|array
+    {
+        return $this->data['content'] ?? '';
+    }
+
+    public function getMeta(): string|array
+    {
+        return $this->data['meta'] ?? '';
+    }
+
+    public function getSecondaryMeta(): string|array
+    {
+        return $this->data['secondaryMeta'] ?? '';
+    }
+
+    public function getImage(): mixed
+    {
+        return $this->data['image'] ?? false;
+    }
+
+    public function getLink(): string
+    {
+        return $this->data['link'] ?? '';
+    }
+
+    public function getRatio(): string
+    {
+        return $this->data['ratio'] ?? '4:3';
+    }
+
+    public function getDate(): array
+    {
+        return $this->data['date'] ?? '';
+    }
+
+    public function getDateBadge(): bool
+    {
+        return $this->data['dateBadge'] ?? false;
+    }
+
+    public function getIcon(): bool|array
+    {
+        return $this->data['icon'] ?? false;
+    }
+
+    public function getIconBackgroundColor(): string
+    {
+        return $this->data['iconBackgroundColor'] ?? null;
     }
 }

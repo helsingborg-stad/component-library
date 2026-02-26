@@ -8,7 +8,7 @@ use ComponentLibrary\Integrations\Image\ImageInterface;
  * Class NewsItem
  * @package ComponentLibrary\Component\Navbar
  */
-class NewsItem extends \ComponentLibrary\Component\BaseController
+class NewsItem extends \ComponentLibrary\Component\BaseController implements NewsItemInterface
 {
     private array $slotMapping = [
         'headerRightArea'  => 'headerRightAreaSlotHasData',
@@ -59,5 +59,62 @@ class NewsItem extends \ComponentLibrary\Component\BaseController
                 $this->data[$slot] = $this->tagSanitizer->removeATags((string) $this->data[$slot]);
             }
         }
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'newsItem';
+    }
+
+    // -------------------------------------------------------------------------
+    // NewsItemInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getHeading(): string
+    {
+        return $this->data['heading'] ?? null;
+    }
+
+    public function getSubHeading(): string
+    {
+        return $this->data['subHeading'] ?? null;
+    }
+
+    public function getContent(): string
+    {
+        return $this->data['content'] ?? null;
+    }
+
+    public function getImage(): array
+    {
+        return $this->data['image'] ?? null;
+    }
+
+    public function getDate(): array
+    {
+        return $this->data['date'] ?? null;
+    }
+
+    public function getReadTime(): string
+    {
+        return $this->data['readTime'] ?? null;
+    }
+
+    public function getStanding(): bool
+    {
+        return $this->data['standing'] ?? false;
+    }
+
+    public function getLink(): string
+    {
+        return $this->data['link'] ?? null;
+    }
+
+    public function getHasPlaceholderImage(): bool
+    {
+        return $this->data['hasPlaceholderImage'] ?? null;
     }
 }

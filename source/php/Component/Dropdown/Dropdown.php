@@ -6,7 +6,7 @@ namespace ComponentLibrary\Component\Dropdown;
  * Class Dropdown
  * @package ComponentLibrary\Component\Dropdown
  */
-class Dropdown extends \ComponentLibrary\Component\BaseController
+class Dropdown extends \ComponentLibrary\Component\BaseController implements DropdownInterface
 {
 
     public function init()
@@ -55,5 +55,47 @@ class Dropdown extends \ComponentLibrary\Component\BaseController
         if (isset($popup)) {
             $this->data['classList'][] = $this->getBaseClass() . '--on-' . $popup;
         }
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'dropdown';
+    }
+
+    // -------------------------------------------------------------------------
+    // DropdownInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getItems(): array
+    {
+        return $this->data['items'] ?? [];
+    }
+
+    public function getHref(): string
+    {
+        return $this->data['href'] ?? '#';
+    }
+
+    public function getComponentElement(): string
+    {
+        return $this->data['componentElement'] ?? 'div';
+    }
+
+    public function getItemElement(): string
+    {
+        return $this->data['itemElement'] ?? 'a';
+    }
+
+    public function getDirection(): string
+    {
+        return $this->data['direction'] ?? 'bottom';
+    }
+
+    public function getPopup(): string
+    {
+        return $this->data['popup'] ?? '';
     }
 }

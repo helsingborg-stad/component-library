@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\Segment;
 
-class Segment extends \ComponentLibrary\Component\BaseController
+class Segment extends \ComponentLibrary\Component\BaseController implements SegmentInterface
 {
     public function init()
     {
@@ -148,5 +148,137 @@ class Segment extends \ComponentLibrary\Component\BaseController
             return !empty($image);
         }
         return false;
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'segment';
+    }
+
+    // -------------------------------------------------------------------------
+    // SegmentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getLayout(): string
+    {
+        return $this->data['layout'] ?? 'full-width';
+    }
+
+    public function getTitle(): string|bool
+    {
+        return $this->data['title'] ?? false;
+    }
+
+    public function getContent(): string|bool
+    {
+        return $this->data['content'] ?? false;
+    }
+
+    public function getTextSize(): string
+    {
+        return $this->data['textSize'] ?? 'default';
+    }
+
+    public function getImage(): mixed
+    {
+        return $this->data['image'] ?? false;
+    }
+
+    public function getBackground(): string
+    {
+        return $this->data['background'] ?? false;
+    }
+
+    public function getBackgroundOverlay(): string
+    {
+        return $this->data['backgroundOverlay'] ?? false;
+    }
+
+    public function getTextColor(): string
+    {
+        return $this->data['textColor'] ?? 'dark';
+    }
+
+    public function getHeight(): string
+    {
+        return $this->data['height'] ?? 'content';
+    }
+
+    public function getPaddingTop(): bool
+    {
+        return $this->data['paddingTop'] ?? true;
+    }
+
+    public function getPaddingBottom(): bool
+    {
+        return $this->data['paddingBottom'] ?? true;
+    }
+
+    public function getTextAlignment(): string
+    {
+        return $this->data['textAlignment'] ?? 'top';
+    }
+
+    public function getReverseColumns(): bool
+    {
+        return $this->data['reverseColumns'] ?? false;
+    }
+
+    public function getOverlay(): string
+    {
+        return $this->data['overlay'] ?? false;
+    }
+
+    public function getStretch(): bool
+    {
+        return $this->data['stretch'] ?? false;
+    }
+
+    public function getButtons(): array
+    {
+        return $this->data['buttons'] ?? false;
+    }
+
+    public function getDate(): string|bool
+    {
+        return $this->data['date'] ?? false;
+    }
+
+    public function getMeta(): string|bool
+    {
+        return $this->data['meta'] ?? false;
+    }
+
+    public function getTags(): array|bool
+    {
+        return $this->data['tags'] ?? false;
+    }
+
+    public function getIcon(): array|bool
+    {
+        return $this->data['icon'] ?? false;
+    }
+
+    public function getIconBackgroundColor(): string
+    {
+        return $this->data['iconBackgroundColor'] ?? null;
+    }
+
+    public function getLink(): string|bool
+    {
+        return $this->data['link'] ?? false;
+    }
+
+    public function getHasPlaceholder(): bool
+    {
+        return $this->data['hasPlaceholder'] ?? true;
+    }
+
+    public function getLang(): array|bool
+    {
+        return $this->data['lang'] ?? (object) [];
     }
 }

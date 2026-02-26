@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\Loader;
 
-class Loader extends \ComponentLibrary\Component\BaseController
+class Loader extends \ComponentLibrary\Component\BaseController implements LoaderInterface
 {
     public function init()
     {
@@ -62,4 +62,41 @@ class Loader extends \ComponentLibrary\Component\BaseController
         $this->addToClassList(true, '__' . $shape . '--' . $size);
     }
 
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'loader';
+    }
+
+    // -------------------------------------------------------------------------
+    // LoaderInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getComponentElement(): string
+    {
+        return $this->data['componentElement'] ?? 'div';
+    }
+
+    public function getShape(): string
+    {
+        return $this->data['shape'] ?? 'circular';
+    }
+
+    public function getSize(): string
+    {
+        return $this->data['size'] ?? 'md';
+    }
+
+    public function getColor(): string
+    {
+        return $this->data['color'] ?? 'black';
+    }
+
+    public function getText(): string
+    {
+        return $this->data['text'] ?? '';
+    }
 }

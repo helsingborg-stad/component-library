@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\Drawer;
 
-class Drawer extends \ComponentLibrary\Component\BaseController
+class Drawer extends \ComponentLibrary\Component\BaseController implements DrawerInterface
 {
     private array $defaultScreenSizes = ['xs', 'sm'];
 
@@ -23,7 +23,7 @@ class Drawer extends \ComponentLibrary\Component\BaseController
         $this->data['screenSizeClassNames'] = $this->getScreenSizeClassNamesAsString(
             $screenSizes
         ); 
-        $this->data['toggleButtonData'] = $this->getToggleButtonData(
+        $this->data['toggleButtonData'] = $this->buildToggleButtonData(
             $toggleButtonData ?? [],
             $this->getScreenSizeClassNames($screenSizes)
         );
@@ -81,7 +81,7 @@ class Drawer extends \ComponentLibrary\Component\BaseController
         return "";
     }
 
-    private function getToggleButtonData($toggleButtonData, array $screenSizeClassNames)
+    private function buildToggleButtonData($toggleButtonData, array $screenSizeClassNames)
     {
         //Nothing to process
         if (empty($toggleButtonData)) {
@@ -94,5 +94,32 @@ class Drawer extends \ComponentLibrary\Component\BaseController
         $toggleButtonData['classList'][] = $this->getBaseClass('toggle');
 
         return $toggleButtonData;
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'drawer';
+    }
+
+    // -------------------------------------------------------------------------
+    // DrawerInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getLabel(): string
+    {
+        return $this->data['label'] ?? 'Close';
+    }
+
+    public function getScreenSizes(): array
+    {
+        return $this->data['screenSizes'] ?? null;
+    }
+
+    public function getToggleButtonData(): array
+    {
+        return $this->data['toggleButtonData'] ?? [];
     }
 }

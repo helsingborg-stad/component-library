@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\Button;
 
-class Button extends \ComponentLibrary\Component\BaseController
+class Button extends \ComponentLibrary\Component\BaseController implements ButtonInterface
 {
     public function init()
     {
@@ -166,5 +166,117 @@ class Button extends \ComponentLibrary\Component\BaseController
                 $this->data['attributeList']['aria-label'] = $icon;
             }
         }
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'button';
+    }
+
+    // -------------------------------------------------------------------------
+    // ButtonInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getText(): string
+    {
+        return $this->data['text'] ?? false;
+    }
+
+    public function getSize(): string
+    {
+        return $this->data['size'] ?? 'md';
+    }
+
+    public function getColor(): string
+    {
+        return $this->data['color'] ?? 'default';
+    }
+
+    public function getType(): string
+    {
+        return $this->data['type'] ?? 'button';
+    }
+
+    public function getStyle(): string
+    {
+        return $this->data['style'] ?? 'filled';
+    }
+
+    public function getShape(): string
+    {
+        return $this->data['shape'] ?? 'normal';
+    }
+
+    public function getHref(): ?string
+    {
+        return $this->data['href'] ?? false;
+    }
+
+    public function getTarget(): string
+    {
+        return $this->data['target'] ?? '_top';
+    }
+
+    public function getComponentElement(): string
+    {
+        return $this->data['componentElement'] ?? 'button';
+    }
+
+    public function getLabelElement(): string
+    {
+        return $this->data['labelElement'] ?? 'span';
+    }
+
+    public function getRipple(): bool
+    {
+        return $this->data['ripple'] ?? true;
+    }
+
+    public function getPressed(): string
+    {
+        return $this->data['pressed'] ?? 'false';
+    }
+
+    public function getToggle(): bool
+    {
+        return $this->data['toggle'] ?? false;
+    }
+
+    public function getIcon(): string
+    {
+        return $this->data['icon'] ?? false;
+    }
+
+    public function getReversePositions(): bool
+    {
+        return $this->data['reversePositions'] ?? false;
+    }
+
+    public function getFullWidth(): bool
+    {
+        return $this->data['fullWidth'] ?? false;
+    }
+
+    public function getClassListIcon(): array
+    {
+        return $this->data['classListIcon'] ?? [];
+    }
+
+    public function getClassListText(): array
+    {
+        return $this->data['classListText'] ?? [];
+    }
+
+    public function getAriaLabel(): string
+    {
+        return $this->data['ariaLabel'] ?? '';
+    }
+
+    public function getDisableColor(): bool
+    {
+        return $this->data['disableColor'] ?? true;
     }
 }

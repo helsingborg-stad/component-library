@@ -10,7 +10,7 @@ use Helper\ATagSanitizer;
  * Class Card
  * @package ComponentLibrary\Component\Card
  */
-class Card extends \ComponentLibrary\Component\BaseController
+class Card extends \ComponentLibrary\Component\BaseController implements CardInterface
 {
     private array $slotMapping = [
         'afterContent' => 'afterContentSlotHasData',
@@ -142,5 +142,117 @@ class Card extends \ComponentLibrary\Component\BaseController
             return 'div';
         }
         return 'p';
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'card';
+    }
+
+    // -------------------------------------------------------------------------
+    // CardInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getEyebrow(): string
+    {
+        return $this->data['eyebrow'] ?? '';
+    }
+
+    public function getHeading(): string
+    {
+        return $this->data['heading'] ?? '';
+    }
+
+    public function getSubHeading(): string
+    {
+        return $this->data['subHeading'] ?? '';
+    }
+
+    public function getMeta(): string
+    {
+        return $this->data['meta'] ?? '';
+    }
+
+    public function getContent(): string
+    {
+        return $this->data['content'] ?? '';
+    }
+
+    public function getButtons(): array
+    {
+        return $this->data['buttons'] ?? [];
+    }
+
+    public function getImage(): mixed
+    {
+        return $this->data['image'] ?? false;
+    }
+
+    public function getRatio(): string
+    {
+        return $this->data['ratio'] ?? '16:9';
+    }
+
+    public function getCollapsible(): bool
+    {
+        return $this->data['collapsible'] ?? false;
+    }
+
+    public function getTags(): array
+    {
+        return $this->data['tags'] ?? null;
+    }
+
+    public function getLink(): string
+    {
+        return $this->data['link'] ?? '';
+    }
+
+    public function getLinkText(): string
+    {
+        return $this->data['linkText'] ?? '';
+    }
+
+    public function getDate(): array
+    {
+        return $this->data['date'] ?? false;
+    }
+
+    public function getDateBadge(): bool
+    {
+        return $this->data['dateBadge'] ?? false;
+    }
+
+    public function getHasPlaceholder(): bool
+    {
+        return $this->data['hasPlaceholder'] ?? false;
+    }
+
+    public function getIcon(): bool|array
+    {
+        return $this->data['icon'] ?? false;
+    }
+
+    public function getIconBackgroundColor(): string
+    {
+        return $this->data['iconBackgroundColor'] ?? null;
+    }
+
+    public function getColor(): string
+    {
+        return $this->data['color'] ?? 'default';
+    }
+
+    public function getMetaFirst(): bool
+    {
+        return $this->data['metaFirst'] ?? false;
+    }
+
+    public function getHeadingAboveImage(): bool
+    {
+        return $this->data['headingAboveImage'] ?? false;
     }
 }

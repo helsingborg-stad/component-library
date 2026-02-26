@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\Collection;
 
-class Collection extends \ComponentLibrary\Component\BaseController  
+class Collection extends \ComponentLibrary\Component\BaseController implements CollectionInterface  
 {
     
     public function init() {
@@ -58,5 +58,57 @@ class Collection extends \ComponentLibrary\Component\BaseController
                 );
             }
         }
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'collection';
+    }
+
+    // -------------------------------------------------------------------------
+    // CollectionInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getComponentElement(): string
+    {
+        return $this->data['componentElement'] ?? 'div';
+    }
+
+    public function getList(): array|bool
+    {
+        return $this->data['list'] ?? false;
+    }
+
+    public function getBordered(): bool
+    {
+        return $this->data['bordered'] ?? false;
+    }
+
+    public function getCompact(): bool
+    {
+        return $this->data['compact'] ?? false;
+    }
+
+    public function getSharp(): bool
+    {
+        return $this->data['sharp'] ?? false;
+    }
+
+    public function getSharpBottom(): bool
+    {
+        return $this->data['sharpBottom'] ?? false;
+    }
+
+    public function getSharpTop(): bool
+    {
+        return $this->data['sharpTop'] ?? false;
+    }
+
+    public function getUnbox(): bool
+    {
+        return $this->data['unbox'] ?? false;
     }
 }

@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\Footer;
 
-class Footer extends \ComponentLibrary\Component\BaseController  
+class Footer extends \ComponentLibrary\Component\BaseController implements FooterInterface  
 {
     public function init() {
         //Extract array for eazy access (fetch only)
@@ -57,5 +57,67 @@ class Footer extends \ComponentLibrary\Component\BaseController
             }
         }
         return $arr;
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'footer';
+    }
+
+    // -------------------------------------------------------------------------
+    // FooterInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getComponentElement(): string
+    {
+        return $this->data['componentElement'] ?? 'footer';
+    }
+
+    public function getSlotOnly(): bool
+    {
+        return $this->data['slotOnly'] ?? false;
+    }
+
+    public function getId(): string
+    {
+        return $this->data['id'] ?? null;
+    }
+
+    public function getLogotype(): string
+    {
+        return $this->data['logotype'] ?? '/';
+    }
+
+    public function getLogotypeHref(): string
+    {
+        return $this->data['logotypeHref'] ?? '';
+    }
+
+    public function getLinks(): array
+    {
+        return $this->data['links'] ?? [];
+    }
+
+    public function getSubfooterLogotype(): string
+    {
+        return $this->data['subfooterLogotype'] ?? '';
+    }
+
+    public function getPrefooter(): string
+    {
+        return $this->data['prefooter'] ?? null;
+    }
+
+    public function getPostfooter(): string
+    {
+        return $this->data['postfooter'] ?? null;
+    }
+
+    public function getFooterareas(): string
+    {
+        return $this->data['footerareas'] ?? null;
     }
 }

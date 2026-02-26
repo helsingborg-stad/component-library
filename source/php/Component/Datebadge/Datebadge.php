@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\Datebadge;
 
-class Datebadge extends \ComponentLibrary\Component\BaseController
+class Datebadge extends \ComponentLibrary\Component\BaseController implements DatebadgeInterface
 {
     public function init()
     {
@@ -35,5 +35,37 @@ class Datebadge extends \ComponentLibrary\Component\BaseController
             return wp_date($format, $date);
         }
         return date($format, $date);
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'datebadge';
+    }
+
+    // -------------------------------------------------------------------------
+    // DatebadgeInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getDate(): string|int
+    {
+        return $this->data['date'] ?? false;
+    }
+
+    public function getSize(): string
+    {
+        return $this->data['size'] ?? 'md';
+    }
+
+    public function getTranslucent(): bool
+    {
+        return $this->data['translucent'] ?? false;
+    }
+
+    public function getColor(): string
+    {
+        return $this->data['color'] ?? 'light';
     }
 }

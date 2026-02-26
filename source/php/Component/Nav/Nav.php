@@ -11,7 +11,7 @@ use SubItem;
  *
  * @package ComponentLibrary\Component\Nav
  */
-class Nav extends \ComponentLibrary\Component\BaseController
+class Nav extends \ComponentLibrary\Component\BaseController implements NavInterface
 {
 
     /**
@@ -285,5 +285,77 @@ class Nav extends \ComponentLibrary\Component\BaseController
         }
 
         return $items;
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'nav';
+    }
+
+    // -------------------------------------------------------------------------
+    // NavInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getItems(): array
+    {
+        return $this->data['items'] ?? [];
+    }
+
+    public function getDirection(): string
+    {
+        return $this->data['direction'] ?? 'vertical';
+    }
+
+    public function getIncludeToggle(): bool
+    {
+        return $this->data['includeToggle'] ?? false;
+    }
+
+    public function getIsExtendedDropdown(): bool
+    {
+        return $this->data['isExtendedDropdown'] ?? false;
+    }
+
+    public function getAllowStyle(): bool
+    {
+        return $this->data['allowStyle'] ?? true;
+    }
+
+    public function getButtonStyle(): string
+    {
+        return $this->data['buttonStyle'] ?? 'filled';
+    }
+
+    public function getButtonColor(): string
+    {
+        return $this->data['buttonColor'] ?? 'primary';
+    }
+
+    public function getExpandLabel(): string
+    {
+        return $this->data['expandLabel'] ?? 'Expand';
+    }
+
+    public function getHeight(): string
+    {
+        return $this->data['height'] ?? '';
+    }
+
+    public function getCompressed(): bool
+    {
+        return $this->data['compressed'] ?? false;
+    }
+
+    public function getExpandIcon(): string
+    {
+        return $this->data['expandIcon'] ?? 'expand_more';
+    }
+
+    public function getIndentSubLevels(): bool
+    {
+        return $this->data['indentSubLevels'] ?? false;
     }
 }

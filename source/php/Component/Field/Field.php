@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\Field;
 
-class Field extends \ComponentLibrary\Component\Form\Form
+class Field extends \ComponentLibrary\Component\Form\Form implements FieldInterface
 {
     private $disallowedAttributeKeys = [
         'required',
@@ -12,7 +12,7 @@ class Field extends \ComponentLibrary\Component\Form\Form
         'value',
         'rows',
         'data-validation-message',
-        'data-validation-regexp'
+        'data-validation-regexp',
     ];
 
     private $validAutocompleteValues = [
@@ -67,7 +67,7 @@ class Field extends \ComponentLibrary\Component\Form\Form
         'tel-extension',
         'impp',
         'url',
-        'photo'
+        'photo',
     ];
 
     public function init()
@@ -111,7 +111,7 @@ class Field extends \ComponentLibrary\Component\Form\Form
         //Multiline
         if (is_numeric($multiline)) {
             $this->data['fieldAttributeList']['rows'] = $multiline;
-            $this->data['fieldAttributeList']['style'] = "resize: none;";
+            $this->data['fieldAttributeList']['style'] = 'resize: none;';
         }
 
         //Label visibility
@@ -123,17 +123,17 @@ class Field extends \ComponentLibrary\Component\Form\Form
         }
 
         //Set type
-        $this->data['classList'][] = $this->getBaseClass() . "--" . $type;
+        $this->data['classList'][] = $this->getBaseClass() . '--' . $type;
 
         //Handle icon
         $this->data['icon'] = $this->getIcon($icon, $size);
         if ($this->data['icon']) {
-            $this->data['classList'][] = $this->getBaseClass("icon", true);
+            $this->data['classList'][] = $this->getBaseClass('icon', true);
         }
 
         //Normalize size
         if (!in_array($size, ['sm', 'md', 'lg'])) {
-            $size = "md";
+            $size = 'md';
         }
         $this->data['classList'][] = $this->getBaseClass($size, true);
 
@@ -146,17 +146,17 @@ class Field extends \ComponentLibrary\Component\Form\Form
 
         //Borderless
         if ($borderless) {
-            $this->data['classList'][] = $this->getBaseClass("borderless", true);
+            $this->data['classList'][] = $this->getBaseClass('borderless', true);
         }
 
         //Borderless
         if ($shadow) {
-            $this->data['classList'][] = $this->getBaseClass("shadow", true);
+            $this->data['classList'][] = $this->getBaseClass('shadow', true);
         }
 
         //Handle radius
         if ($this->data['radius']) {
-            $this->data['classList'][] = $this->getBaseClass() . "--radius-" . $this->data['radius'];
+            $this->data['classList'][] = $this->getBaseClass() . '--radius-' . $this->data['radius'];
         }
 
         // Make backwards compatible
@@ -175,24 +175,24 @@ class Field extends \ComponentLibrary\Component\Form\Form
             $this->setMinAndMaxDate(
                 $datepicker['minDate'] ?? false,
                 $datepicker['maxDate'] ?? false,
-                $this->data['type']
+                $this->data['type'],
             );
         }
 
         //Move field specific attributes to field element.
-        if($moveAttributesListToFieldAttributes) {
+        if ($moveAttributesListToFieldAttributes) {
             $this->data['fieldAttributeList'] = array_merge(
                 $this->data['fieldAttributeList'],
-                $this->data['attributeList']
+                $this->data['attributeList'],
             );
         }
 
         //Remove field specific attributes from main element.
-        if($moveAttributesListToFieldAttributes) {
+        if ($moveAttributesListToFieldAttributes) {
             $this->data['attributeList'] = array_filter(
                 $this->data['attributeList'],
                 array($this, 'isNotFieldAttribute'),
-                ARRAY_FILTER_USE_KEY
+                ARRAY_FILTER_USE_KEY,
             );
         }
 
@@ -213,10 +213,10 @@ class Field extends \ComponentLibrary\Component\Form\Form
 
         // Handle required, as attribute and var
         if ($required) {
-            $this->data['fieldAttributeList']['required']           = "required";
-            $this->data['fieldAttributeList']['data-js-required']   = "";
-            $this->data['fieldAttributeList']['data-required']      = "1";
-            $this->data['fieldAttributeList']['aria-required']      = "true";
+            $this->data['fieldAttributeList']['required'] = 'required';
+            $this->data['fieldAttributeList']['data-js-required'] = '';
+            $this->data['fieldAttributeList']['data-required'] = '1';
+            $this->data['fieldAttributeList']['aria-required'] = 'true';
         }
 
         // Autocomplete
@@ -228,20 +228,20 @@ class Field extends \ComponentLibrary\Component\Form\Form
                         The component will fallback to generic "on" value. 
                         Please set one of these: %s',
                         $autocomplete,
-                        implode(", ", $this->validAutocompleteValues)
+                        implode(', ', $this->validAutocompleteValues),
                     ),
-                    E_USER_WARNING
+                    E_USER_WARNING,
                 );
 
-                $autocomplete = "on";
+                $autocomplete = 'on';
             }
 
-            $this->data['fieldAttributeList']['autocomplete']  = $autocomplete;
+            $this->data['fieldAttributeList']['autocomplete'] = $autocomplete;
         } else {
-            $this->data['fieldAttributeList']['autocomplete']  = "off";
+            $this->data['fieldAttributeList']['autocomplete'] = 'off';
         }
 
-        /* Customizer */ 
+        /* Customizer */
         if ($hideLabel) {
             if (empty($placeholder) && !empty($label)) {
                 $this->data['fieldAttributeList']['placeholder'] = $label;
@@ -250,7 +250,7 @@ class Field extends \ComponentLibrary\Component\Form\Form
 
         //Create field attributes
         $this->data['fieldAttribute'] = self::buildAttributes(
-            $this->data['fieldAttributeList']
+            $this->data['fieldAttributeList'],
         );
     }
 
@@ -260,7 +260,7 @@ class Field extends \ComponentLibrary\Component\Form\Form
      * @param array|bool $icon
      * @return array|bool
      */
-    public function getIcon($icon, $size)
+    public function getIcon(array $icon, string $size): array|null
     {
         if (is_array($icon) && !empty($icon)) {
             return array_merge([
@@ -269,7 +269,7 @@ class Field extends \ComponentLibrary\Component\Form\Form
             ], $icon);
         }
 
-        return false;
+        return null;
     }
 
     /**
@@ -300,19 +300,21 @@ class Field extends \ComponentLibrary\Component\Form\Form
      */
     public function setMinAndMaxDate($minDate, $maxDate, $type = 'date')
     {
-        $type = ($type === 'datetime-local') ? 'date-time' : $type;
+        $type = $type === 'datetime-local' ? 'date-time' : $type;
 
-        $minDate ?
-        $this->data['fieldAttributeList']['min'] = date(
-            \ComponentLibrary\Helper\Date::getDateFormat($type),
-            strtotime($minDate)
-        ) : '';
+        $minDate
+            ? ($this->data['fieldAttributeList']['min'] = date(
+                \ComponentLibrary\Helper\Date::getDateFormat($type),
+                strtotime($minDate),
+            ))
+            : '';
 
-        $maxDate ?
-        $this->data['fieldAttributeList']['max'] = date(
-            \ComponentLibrary\Helper\Date::getDateFormat($type),
-            strtotime($maxDate)
-        ) : '';
+        $maxDate
+            ? ($this->data['fieldAttributeList']['max'] = date(
+                \ComponentLibrary\Helper\Date::getDateFormat($type),
+                strtotime($maxDate),
+            ))
+            : '';
     }
 
     /**
@@ -326,7 +328,7 @@ class Field extends \ComponentLibrary\Component\Form\Form
         return (bool) !in_array($key, [
             'class',
             'data-uid',
-            'id'
+            'id',
         ]);
     }
 
@@ -375,9 +377,9 @@ class Field extends \ComponentLibrary\Component\Form\Form
                             Please use the respective parameter. Component will 
                             run in compability mode until this issue is resolved. 
                             Attributes will override the component parameter.',
-                            $key
+                            $key,
                         ),
-                        E_USER_WARNING
+                        E_USER_WARNING,
                     );
                     $stack[$key] = $attribute;
                 }
@@ -386,5 +388,108 @@ class Field extends \ComponentLibrary\Component\Form\Form
         }
 
         return false;
+    }
+
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'field';
+    }
+
+    // -------------------------------------------------------------------------
+    // FieldInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getLabel(): string
+    {
+        return $this->data['label'] ?? '';
+    }
+
+    public function getType(): string
+    {
+        return $this->data['type'] ?? 'text';
+    }
+
+    public function getValidationRegexp(): bool
+    {
+        return $this->data['validationRegexp'] ?? false;
+    }
+
+    public function getInvalidMessage(): bool
+    {
+        return $this->data['invalidMessage'] ?? false;
+    }
+
+    public function getRequired(): bool
+    {
+        return $this->data['required'] ?? false;
+    }
+
+    public function getAutocomplete(): string
+    {
+        return $this->data['autocomplete'] ?? 'on';
+    }
+
+    public function getValue(): string
+    {
+        return $this->data['value'] ?? '';
+    }
+
+    public function getSize(): string
+    {
+        return $this->data['size'] ?? 'md';
+    }
+
+    public function getRadius(): string
+    {
+        return $this->data['radius'] ?? 'md';
+    }
+
+    public function getPlaceholder(): string
+    {
+        return $this->data['placeholder'] ?? '';
+    }
+
+    public function getHideLabel(): bool
+    {
+        return $this->data['hideLabel'] ?? false;
+    }
+
+    public function getHelperText(): string
+    {
+        return $this->data['helperText'] ?? '';
+    }
+
+    public function getMultiline(): bool
+    {
+        return $this->data['multiline'] ?? false;
+    }
+
+    public function getBorderless(): bool
+    {
+        return $this->data['borderless'] ?? false;
+    }
+
+    public function getShadow(): bool
+    {
+        return $this->data['shadow'] ?? false;
+    }
+
+    public function getFieldAttributeList(): array
+    {
+        return $this->data['fieldAttributeList'] ?? [];
+    }
+
+    public function getMoveAttributesListToFieldAttributes(): bool
+    {
+        return $this->data['moveAttributesListToFieldAttributes'] ?? true;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->data['description'] ?? '';
     }
 }

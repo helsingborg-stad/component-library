@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\Toast;
 
-class Toast extends \ComponentLibrary\Component\BaseController
+class Toast extends \ComponentLibrary\Component\BaseController implements ToastInterface
 {
     public function init()
     {
@@ -12,5 +12,22 @@ class Toast extends \ComponentLibrary\Component\BaseController
                 $this->data['position'], true
             );
         }
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'toast';
+    }
+
+    // -------------------------------------------------------------------------
+    // ToastInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getPosition(): string
+    {
+        return $this->data['position'] ?? 'bottom-left';
     }
 }

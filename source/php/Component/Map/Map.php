@@ -6,7 +6,7 @@ namespace ComponentLibrary\Component\Map;
  * Class Map
  * @package ComponentLibrary\Component\Map
  */
-class Map extends \ComponentLibrary\Component\BaseController
+class Map extends \ComponentLibrary\Component\BaseController implements MapInterface
 {
     public function init()
     {
@@ -24,5 +24,42 @@ class Map extends \ComponentLibrary\Component\BaseController
 
         $this->data['matAttributeList'] = [];
         $this->data['mapAttributeList']['style'] = "position: unset; height: {$height}; width: 100%; background: #f0f0f0;";
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'map';
+    }
+
+    // -------------------------------------------------------------------------
+    // MapInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getMarkers(): array
+    {
+        return $this->data['markers'] ?? [];
+    }
+
+    public function getStartPosition(): object
+    {
+        return $this->data['startPosition'] ?? (object) [];
+    }
+
+    public function getMapStyle(): string
+    {
+        return $this->data['mapStyle'] ?? 'default';
+    }
+
+    public function getHeight(): string
+    {
+        return $this->data['height'] ?? '600px';
+    }
+
+    public function getProvider(): string
+    {
+        return $this->data['provider'] ?? 'openstreetmap';
     }
 }

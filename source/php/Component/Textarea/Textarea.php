@@ -6,7 +6,7 @@ namespace ComponentLibrary\Component\Textarea;
  * Class Textarea
  * @package ComponentLibrary\Component\Textarea
  */
-class Textarea extends \ComponentLibrary\Component\BaseController
+class Textarea extends \ComponentLibrary\Component\BaseController implements TextareaInterface
 {
     public function init()
     {
@@ -49,5 +49,32 @@ class Textarea extends \ComponentLibrary\Component\BaseController
         $this->data['required'] = $this->compParams['required'];
         $this->data['invalidMessage'] = $this->compParams['invalidMessage'];
         $this->data['value'] = $this->compParams['value'];
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'textarea';
+    }
+
+    // -------------------------------------------------------------------------
+    // TextareaInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getLabel(): string
+    {
+        return $this->data['label'] ?? '';
+    }
+
+    public function getRequired(): bool
+    {
+        return $this->data['required'] ?? false;
+    }
+
+    public function getValue(): string
+    {
+        return $this->data['value'] ?? '';
     }
 }

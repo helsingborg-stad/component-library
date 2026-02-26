@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\Link;
 
-class Link extends \ComponentLibrary\Component\BaseController
+class Link extends \ComponentLibrary\Component\BaseController implements LinkInterface
 {
     public function init()
     {
@@ -59,5 +59,57 @@ class Link extends \ComponentLibrary\Component\BaseController
             'mailto' => $scheme . ':' . preg_replace('/\s+/', '', substr($href, strlen($scheme) + 1)),
             default => $href,
         };
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'link';
+    }
+
+    // -------------------------------------------------------------------------
+    // LinkInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getComponentElement(): string
+    {
+        return $this->data['componentElement'] ?? 'span';
+    }
+
+    public function getSlot(): string
+    {
+        return $this->data['slot'] ?? 'Undefined label';
+    }
+
+    public function getHref(): string
+    {
+        return $this->data['href'] ?? '';
+    }
+
+    public function getTarget(): string
+    {
+        return $this->data['target'] ?? '_top';
+    }
+
+    public function getKeepContent(): bool
+    {
+        return $this->data['keepContent'] ?? true;
+    }
+
+    public function getKeepWrapper(): bool
+    {
+        return $this->data['keepWrapper'] ?? true;
+    }
+
+    public function getXfn(): bool
+    {
+        return $this->data['xfn'] ?? false;
+    }
+
+    public function getUnstyled(): bool
+    {
+        return $this->data['unstyled'] ?? false;
     }
 }

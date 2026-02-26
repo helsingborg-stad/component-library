@@ -6,7 +6,7 @@ namespace ComponentLibrary\Component\Breadcrumb;
  * Class Breadcrumb
  * @package ComponentLibrary\Component\Breadcrumb
  */
-class Breadcrumb extends \ComponentLibrary\Component\BaseController  
+class Breadcrumb extends \ComponentLibrary\Component\BaseController implements BreadcrumbInterface  
 {
     
     public function init() {
@@ -58,4 +58,51 @@ class Breadcrumb extends \ComponentLibrary\Component\BaseController
 
 		return $list;
 	}
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'breadcrumb';
+    }
+
+    // -------------------------------------------------------------------------
+    // BreadcrumbInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getList(): array
+    {
+        return $this->data['list'] ?? [];
+    }
+
+    public function getLabel(): string
+    {
+        return $this->data['label'] ?? 'Breadcrumb';
+    }
+
+    public function getComponentElement(): string
+    {
+        return $this->data['componentElement'] ?? 'nav';
+    }
+
+    public function getListType(): string
+    {
+        return $this->data['listType'] ?? 'ol';
+    }
+
+    public function getListItemType(): string
+    {
+        return $this->data['listItemType'] ?? 'li';
+    }
+
+    public function getPrefixLabel(): string
+    {
+        return $this->data['prefixLabel'] ?? '';
+    }
+
+    public function getTruncate(): int|bool
+    {
+        return $this->data['truncate'] ?? null;
+    }
 }

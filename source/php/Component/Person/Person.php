@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\Person;
 
-class Person extends \ComponentLibrary\Component\BaseController
+class Person extends \ComponentLibrary\Component\BaseController implements PersonInterface
 {
     private $availableViews = ['simple', 'extended'];
 
@@ -29,5 +29,87 @@ class Person extends \ComponentLibrary\Component\BaseController
 
         // Email
         $this->data['email'] = !empty($email) ? $email : false;
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'person';
+    }
+
+    // -------------------------------------------------------------------------
+    // PersonInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getGivenName(): string
+    {
+        return $this->data['givenName'] ?? '';
+    }
+
+    public function getFamilyName(): bool
+    {
+        return $this->data['familyName'] ?? false;
+    }
+
+    public function getJobTitle(): bool
+    {
+        return $this->data['jobTitle'] ?? false;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->data['email'] ?? false;
+    }
+
+    public function getTelephone(): array
+    {
+        return $this->data['telephone'] ?? [];
+    }
+
+    public function getAddress(): string
+    {
+        return $this->data['address'] ?? false;
+    }
+
+    public function getVisitingAddress(): string
+    {
+        return $this->data['visitingAddress'] ?? false;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->data['description'] ?? false;
+    }
+
+    public function getImage(): int|string
+    {
+        return $this->data['image'] ?? false;
+    }
+
+    public function getAdministrationUnit(): string
+    {
+        return $this->data['administrationUnit'] ?? false;
+    }
+
+    public function getSocialMedia(): array
+    {
+        return $this->data['socialMedia'] ?? [];
+    }
+
+    public function getCustomSections(): array
+    {
+        return $this->data['customSections'] ?? [];
+    }
+
+    public function getUseAvatarFallback(): bool
+    {
+        return $this->data['useAvatarFallback'] ?? true;
+    }
+
+    public function getView(): string
+    {
+        return $this->data['view'] ?? 'extended';
     }
 }

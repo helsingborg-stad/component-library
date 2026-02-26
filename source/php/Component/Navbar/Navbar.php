@@ -6,7 +6,7 @@ namespace ComponentLibrary\Component\Navbar;
  * Class Card
  * @package ComponentLibrary\Component\Navbar
  */
-class Navbar extends \ComponentLibrary\Component\BaseController
+class Navbar extends \ComponentLibrary\Component\BaseController implements NavbarInterface
 {
     public function init() {
 
@@ -47,5 +47,42 @@ class Navbar extends \ComponentLibrary\Component\BaseController
         }
 
         return $items;
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'navbar';
+    }
+
+    // -------------------------------------------------------------------------
+    // NavbarInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getLogo(): string
+    {
+        return $this->data['logo'] ?? '';
+    }
+
+    public function getItems(): array
+    {
+        return $this->data['items'] ?? [];
+    }
+
+    public function getSidebar(): bool
+    {
+        return $this->data['sidebar'] ?? false;
+    }
+
+    public function getExpandedMenu(): bool
+    {
+        return $this->data['expanded_menu'] ?? false;
+    }
+
+    public function getIsDynamic(): bool
+    {
+        return $this->data['isDynamic'] ?? false;
     }
 }
