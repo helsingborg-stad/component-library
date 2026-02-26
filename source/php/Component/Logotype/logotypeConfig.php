@@ -1,0 +1,30 @@
+<?php
+
+return [
+    'slug' => 'logotype',
+    'default' => (object) [
+        'src' => false,
+        'alt' => '',
+        'caption' => '',
+        'title' => '',
+        'placeholderText' => 'Image missing',
+        'hasRipple' => true,
+    ],
+    'description' => [
+        'src' => 'A image source',
+        'alt' => 'Alt text for the image',
+        'caption' => 'A label below the logotype. eg company name',
+        'title' => 'A title (not displayed)',
+        'placeholderText' => 'What to show if an invalid url is entered.',
+        'hasRipple' => 'Enable / disable ripple fx',
+    ],
+    'view' => 'logotype.blade.php',
+    'dependency' => [
+        'sass' => [
+            'components' => [
+                'logotype',
+                'image',
+            ],
+        ],
+    ],
+];

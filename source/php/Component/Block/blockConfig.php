@@ -1,0 +1,54 @@
+<?php
+
+return [
+    'slug' => 'block',
+    'default' => (object) [
+        'heading' => '',
+        'content' => '',
+        'meta' => '',
+        'secondaryMeta' => '',
+        'image' => false,
+        'link' => '',
+        'ratio' => '4:3',
+        'date' => '',
+        'dateBadge' => false,
+        'icon' => false,
+        'iconBackgroundColor' => null,
+    ],
+    'description' => [
+        'heading' => 'The heading of the block',
+        'content' => 'Short text to describe target content.',
+        'meta' => 'String or array of strings containing the meta information',
+        'secondaryMeta' => 'String or array of strings containing the secondary meta information',
+        'image' => 'Array of image attributes, src, alt, backgroudColor.',
+        'link' => 'Simple href link',
+        'ratio' => 'Ratio of the block',
+        'date' => 'Preformatted date',
+        'dateBadge' => 'Display date as a badge.',
+        'icon' => 'An array with the same specification as the icon component',
+    ],
+    'types' => [
+        'heading' => 'string',
+        'content' => 'string|array',
+        'meta' => 'string|array',
+        'secondaryMeta' => 'string|array',
+        'image' => 'array|boolean|ImageInterface',
+        'link' => 'string',
+        'ratio' => 'string',
+        'date' => 'array',
+        'dateBadge' => 'boolean',
+        'icon' => 'boolean|array',
+        'iconBackgroundColor' => 'string',
+    ],
+    'view' => 'block.blade.php',
+    'dependency' => [
+        'sass' => [
+            'components' => [
+                'block',
+                'image',
+                'typography',
+                'group',
+            ],
+        ],
+    ],
+];

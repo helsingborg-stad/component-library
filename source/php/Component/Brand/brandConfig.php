@@ -1,0 +1,27 @@
+<?php
+
+return [
+    'slug' => 'brand',
+    'default' => (object) [
+        'logotype' => [],
+        'text' => [],
+    ],
+    'description' => [
+        'logotype' => 'Array containing specified logotype component attributes',
+        'text' => 'Array of brand name, each item will be separated on multiple lines',
+    ],
+    'types' => [
+        'logotype' => 'array',
+        'text' => 'array',
+    ],
+    'view' => 'brand.blade.php',
+    'dependency' => [
+        'sass' => [
+            'components' => [
+                'brand',
+                'logotype',
+                'image',
+            ],
+        ],
+    ],
+];

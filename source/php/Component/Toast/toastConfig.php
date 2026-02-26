@@ -1,0 +1,23 @@
+<?php
+
+return [
+    'slug' => 'toast',
+    'default' => (object) [
+        'position' => 'bottom-left',
+    ],
+    'description' => [
+        'position' => 'Position of the toast: top-left, top-right, bottom-left, bottom-right.',
+    ],
+    'types' => [
+        'position' => 'string',
+    ],
+    'view' => 'notice.blade.php',
+    'dependency' => [
+        'sass' => [
+            'components' => [
+                'notice',
+                'Toast__item',
+            ],
+        ],
+    ],
+];

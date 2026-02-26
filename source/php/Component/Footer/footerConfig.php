@@ -1,0 +1,49 @@
+<?php
+
+return [
+    'slug' => 'footer',
+    'default' => (object) [
+        'componentElement' => 'footer',
+        'slotOnly' => false,
+        'id' => null,
+        'logotype' => '/',
+        'logotypeHref' => '',
+        'links' => [],
+        'subfooterLogotype' => '',
+        'prefooter' => null,
+        'postfooter' => null,
+        'footerareas' => null,
+    ],
+    'descriptions' => [
+        'componentElement' => 'The element tag to render',
+        'slotOnly' => 'Set to true will enable only slot area',
+        'id' => 'Custom container id',
+        'logotype' => 'Footer logotype url.',
+        'logotypeHref' => 'The url to link the logotype to.',
+        'subfooterLogotype' => 'Subfooter logotype url.',
+        'prefooter' => 'Arbitrary HTML placed before the main footer content. Wrapped in container and 12col grid.',
+        'postfooter' => 'Arbitrary HTML placed after the main footer content. Wrapped in container and 12col grid.',
+        'footerareas' => 'Arbitrary HTML content. Wrapped in container and 12col grid.',
+    ],
+    'types' => [
+        'componentElement' => 'string',
+        'slotOnly' => 'boolean',
+        'id' => 'string',
+        'logotype' => 'string',
+        'logotypeHref' => 'string',
+        'links' => 'array',
+        'subfooterLogotype' => 'string',
+        'prefooter' => 'string',
+        'postfooter' => 'string',
+        'footerareas' => 'string',
+    ],
+    'view' => 'footer.blade.php',
+    'dependency' => [
+        'sass' => [
+            'components' => [
+                'footer',
+                'typography',
+            ],
+        ],
+    ],
+];

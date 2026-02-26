@@ -1,0 +1,27 @@
+<?php
+
+return [
+    'slug' => 'typography',
+    'default' => (object) [
+        'element' => 'p',
+        'variant' => false,
+        'slot' => '',
+        'autopromote' => false,
+        'useHeadingsContext' => true,
+    ],
+    'description' => [
+        'element' => 'What element the markup will use.',
+        'variant' => 'Headings (h1, h2...) can only be set to other headings. If left empty it will default to the given element.',
+        'slot' => 'The content',
+        'autopromote' => 'Upgrade element to h1 (from h3 and above), if seen first on page.',
+        'useHeadingsContext' => 'If a heading should be based off of the context its in.',
+    ],
+    'view' => 'typography.blade.php',
+    'dependency' => [
+        'sass' => [
+            'components' => [
+                'typography',
+            ],
+        ],
+    ],
+];

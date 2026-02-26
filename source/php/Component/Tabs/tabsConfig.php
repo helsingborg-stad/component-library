@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'slug' => 'tabs',
+    'default' => (object) [
+        'id' => '',
+        'componentElement' => 'div',
+        'tabs' => [],
+        'headingElement' => 'button',
+        'contentElement' => 'div',
+    ],
+    'description' => [
+        'id' => 'ID for the component',
+        'componentElement' => 'The tag for the component',
+        'tabs' => 'List containing tabs with tab title and content.',
+    ],
+    'view' => 'tabs.blade.php',
+    'dependency' => [
+        'sass' => [
+            'components' => [
+                'tabs',
+            ],
+        ],
+    ],
+];

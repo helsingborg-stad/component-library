@@ -1,0 +1,32 @@
+<?php
+
+return [
+    'slug' => 'tags',
+    'default' => (object) [
+        'style' => 'default',
+        'componentElement' => 'div',
+        'beforeLabel' => '#',
+        'icon' => [],
+        'afterLabel' => '',
+        'format' => false,
+        'compress' => false,
+    ],
+    'description' => [
+        'componentElement' => '',
+        'beforeLabel' => '',
+        'icon' => 'Same specification as Icon, adds an icon ',
+        'afterLabel' => '',
+        'format' => 'If the component should format the input text.',
+        'compress' => 'Show [N] amount of items, hide the rest of them behind a expand indicator.',
+    ],
+    'view' => 'tags.blade.php',
+    'dependency' => [
+        'sass' => [
+            'components' => [
+                'tags',
+                'icon',
+                'link',
+            ],
+        ],
+    ],
+];

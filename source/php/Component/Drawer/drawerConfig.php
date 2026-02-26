@@ -1,0 +1,31 @@
+<?php
+
+return [
+    'slug' => 'drawer',
+    'default' => (object) [
+        'label' => 'Close',
+        'screenSizes' => [
+            'xs',
+            'sm',
+            'md',
+            'lg',
+            'xl',
+        ],
+        'toggleButtonData' => [],
+    ],
+    'description' => [
+        'label' => 'What to say in the label of the close drawer button.',
+        'screenSizes' => 'Show on selected screen sizes. xs,sm,md,lg,xl.',
+        'toggleButtonData' => 'The data to be passed to the toggle button. If empty no button will be rendered.',
+    ],
+    'view' => 'drawer.blade.php',
+    'dependency' => [
+        'sass' => [
+            'components' => [
+                'button',
+                'icon',
+                'nav',
+            ],
+        ],
+    ],
+];

@@ -1,0 +1,24 @@
+<?php
+
+return [
+    'slug' => 'textarea',
+    'default' => (object) [
+        'label' => '',
+        'required' => false,
+        'value' => '',
+    ],
+    'description' => [
+        'label' => 'Array of label items like labelText.',
+        'required' => 'HTML5 validation on fields',
+        'value' => 'Field value',
+    ],
+    'view' => 'textarea.blade.php',
+    'dependency' => [
+        'sass' => [
+            'components' => [
+                'textarea',
+                'icon',
+            ],
+        ],
+    ],
+];

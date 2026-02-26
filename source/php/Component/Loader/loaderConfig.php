@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'slug' => 'loader',
+    'default' => (object) [
+        'componentElement' => 'div',
+        'shape' => 'circular',
+        'size' => 'md',
+        'color' => 'black',
+        'text' => '',
+    ],
+    'description' => [
+        'componentElement' => 'The tag for the component',
+        'shape' => 'Visual shape for the loader (circular, linear)',
+        'size' => 'Size for the loader (xs, sm, md, lg, xl)',
+        'color' => 'black, white, secondary, primary',
+        'text' => 'Loading text',
+    ],
+    'view' => 'loader.blade.php',
+    'dependency' => [
+        'sass' => [
+            'components' => [
+                'loader',
+                'typography',
+            ],
+        ],
+    ],
+];

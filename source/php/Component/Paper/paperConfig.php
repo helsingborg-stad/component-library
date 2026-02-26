@@ -1,0 +1,23 @@
+<?php
+
+return [
+    'slug' => 'paper',
+    'default' => (object) [
+        'slot' => '',
+        'padding' => false,
+        'transparent' => false,
+    ],
+    'description' => [
+        'slot' => 'Paper content',
+        'padding' => 'Numeric value of padding sizes. Se padding doc for more info.',
+        'transparent' => 'Transparent paper with no shadow',
+    ],
+    'view' => 'paper.blade.php',
+    'dependency' => [
+        'sass' => [
+            'components' => [
+                'paper',
+            ],
+        ],
+    ],
+];
