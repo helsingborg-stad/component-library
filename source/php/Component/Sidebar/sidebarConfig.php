@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'slug' => 'sidebar',
+    'default' => (object) [
+        'logo' => '',
+        'items' => [],
+        'showHideButton' => false,
+    ],
+    'description' => [
+        'logo' => 'A link to a logo',
+        'items' => 'An array of links',
+        'showHideButton' => 'Option to display the button to hide sidebar, otherwise just clicking outside the drawer will close it.',
+    ],
+    'view' => 'sidebar.blade.php',
+    'dependency' => [
+        'sass' => [
+            'components' => [
+                'sidebar',
+                'icon',
+                'image',
+            ],
+        ],
+    ],
+];

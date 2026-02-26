@@ -1,0 +1,58 @@
+<?php
+
+return [
+    'slug' => 'accordion__item',
+    'default' => (object) [
+        'id' => '',
+        'heading' => '',
+        'beforeHeading' => '',
+        'afterHeading' => '',
+        'beforeContent' => '',
+        'afterContent' => '',
+        'sectionElement' => 'div',
+        'sectionHeadingElement' => 'a',
+        'sectionContentElement' => 'div',
+        'taxonomy' => [],
+        'taxonomyPosition' => '',
+        'icon' => 'keyboard_arrow_down',
+    ],
+    'description' => [
+        'id' => 'ID for the accordion',
+        'heading' => 'The heading',
+        'beforeHeading' => 'Insert before heading',
+        'afterHeading' => 'Insert after heading',
+        'beforeContent' => 'Insert before content',
+        'afterContent' => 'Insert after content',
+        'sectionElement' => 'Section element',
+        'sectionHeadingElement' => 'Section heading component',
+        'sectionContentElement' => 'Section content component',
+        'taxonomy' => 'Array of taxonomies such as tags',
+        'taxonomyPosition' => 'Taxonomy position like top or below',
+        'icon' => 'Icon to show for expand functionality.',
+    ],
+    'types' => [
+        'id' => 'string',
+        'heading' => 'string|array',
+        'beforeHeading' => 'string',
+        'afterHeading' => 'string',
+        'beforeContent' => 'string',
+        'afterContent' => 'string',
+        'sectionElement' => 'string',
+        'sectionHeadingElement' => 'string',
+        'sectionContentElement' => 'string',
+        'taxonomy' => 'array',
+        'taxonomyPosition' => 'string',
+        'icon' => 'string',
+    ],
+    'view' => 'accordion__item.blade.php',
+    'dependency' => [
+        'sass' => [
+            'components' => [
+                'accordion',
+                'accordion__item',
+                'icon',
+                'tags',
+            ],
+        ],
+    ],
+];

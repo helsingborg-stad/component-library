@@ -1,0 +1,31 @@
+<?php
+
+return [
+    'slug' => 'navbar',
+    'default' => (object) [
+        'logo' => '',
+        'items' => [],
+        'sidebar' => false,
+        'expanded_menu' => false,
+        'isDynamic' => false,
+    ],
+    'description' => [
+        'logo' => 'A link to a logo',
+        'items' => 'An array of links',
+        'sidebar' => 'If set to true the toggle will toggle sidebar',
+        'expanded_menu' => 'Data for expanded menu',
+    ],
+    'view' => 'navbar.blade.php',
+    'dependency' => [
+        'sass' => [
+            'components' => [
+                'navbar',
+                'image',
+                'button',
+                'icon',
+                'grid',
+                'typography',
+            ],
+        ],
+    ],
+];

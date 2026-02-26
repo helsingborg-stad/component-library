@@ -1,0 +1,51 @@
+<?php
+
+return [
+    'slug' => 'box',
+    'default' => (object) [
+        'heading' => '',
+        'content' => '',
+        'meta' => '',
+        'secondaryMeta' => '',
+        'link' => '',
+        'ratio' => '1:1',
+        'date' => '',
+        'dateBadge' => null,
+        'image' => false,
+        'icon' => '',
+    ],
+    'description' => [
+        'heading' => 'The heading of the block',
+        'content' => 'Short text to describe target content.',
+        'meta' => 'String or array of strings containing the meta information',
+        'secondaryMeta' => 'String or array of strings containing the secondary meta information',
+        'link' => 'Simple href link',
+        'ratio' => 'Ratio of the block',
+        'date' => 'Preformatted date',
+        'dateBadge' => 'Display date as a badge.',
+        'image' => 'Image object (see image component), svg or raster image.',
+        'icon' => 'Icon name as a string.',
+    ],
+    'types' => [
+        'heading' => 'string',
+        'content' => 'string',
+        'meta' => 'string|array',
+        'secondaryMeta' => 'string|array',
+        'link' => 'string',
+        'ratio' => 'string',
+        'date' => 'string',
+        'dateBadge' => 'boolean',
+        'image' => 'array|boolean|ImageInterface',
+        'icon' => 'string',
+    ],
+    'view' => 'box.blade.php',
+    'dependency' => [
+        'sass' => [
+            'components' => [
+                'box',
+                'image',
+                'typography',
+            ],
+        ],
+    ],
+];

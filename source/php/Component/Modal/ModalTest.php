@@ -29,8 +29,7 @@ class ModalTest extends PHPUnit\Framework\TestCase
 
     private function getComponentData(array $data): array
     {
-        $jsonFile = file_get_contents('source/php/Component/Modal/modal.json', true);
-        $json = json_decode($jsonFile, true);
-        return array_merge($json['default'], $data);
+        $config = require 'source/php/Component/Modal/modalConfig.php';
+        return array_merge((array) $config['default'], $data);
     }
 }

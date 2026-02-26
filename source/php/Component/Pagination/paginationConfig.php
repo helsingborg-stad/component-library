@@ -1,0 +1,52 @@
+<?php
+
+return [
+    'slug' => 'pagination',
+    'default' => (object) [
+        'list' => [],
+        'current' => 1,
+        'currentClass' => '--is-active',
+        'componentElement' => 'nav',
+        'listElement' => 'ul',
+        'listItem' => 'li',
+        'linkPrefix' => '?pagination=',
+        'anchorTag' => '',
+        'previousDisabled' => 'false',
+        'nextDisabled' => 'false',
+        'useJS' => false,
+        'randomizeOrder' => false,
+        'perPage' => 10,
+        'maxPages' => false,
+        'buttonStyle' => 'filled',
+        'buttonSize' => 'sm',
+        'pagesToShow' => false,
+        'keepDOM' => false,
+    ],
+    'description' => [
+        'list' => 'Array with pages',
+        'current' => 'current page as index number',
+        'currentClass' => 'The current classname',
+        'componentElement' => 'The tag for the component',
+        'listElement' => 'List element tag',
+        'listItem' => 'List item tag',
+        'linkPrefix' => 'Pagination uses a link prefix on prev next buttons before the numeric index, add it here.',
+        'anchorTag' => 'Adds the ability to add an anchor tag in the end of every link.',
+        'useJS' => 'If the item should use default JS to supply pagination',
+        'randomizeOrder' => 'When useJS is true, this option randomize the order of the items.',
+        'perPage' => 'How many items per page',
+        'maxPages' => 'Maximum amount of pages',
+        'buttonStyle' => 'The style of button to display',
+        'buttonSize' => 'Size of the buttons',
+        'pagesToShow' => 'Amount of pages that is shown to the user at one time.',
+    ],
+    'view' => 'pagination.blade.php',
+    'dependency' => [
+        'sass' => [
+            'components' => [
+                'pagination',
+                'button',
+                'icon',
+            ],
+        ],
+    ],
+];

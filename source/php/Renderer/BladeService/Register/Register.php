@@ -345,7 +345,7 @@ class Register
      * Get the file path for the configuration file.
      *
      * This function constructs the path to the configuration file based on the provided directory path.
-     * The configuration file is expected to be named after the directory with a '.json' extension.
+     * The configuration file is expected to be named after the directory with a 'Config.php' suffix.
      *
      * @param string $path The directory path to generate the configuration file path from.
      * @return string The complete path to the configuration file.
@@ -353,7 +353,7 @@ class Register
      */
     private function getConfigFilePath($path)
     {
-        $configFile = $path . DIRECTORY_SEPARATOR . lcfirst(basename($path)) . '.json';
+        $configFile = $path . DIRECTORY_SEPARATOR . lcfirst(basename($path)) . 'Config.php';
         if ($this->cachedFileExists($configFile)) {
             return $configFile;
         }
@@ -364,60 +364,32 @@ class Register
     /**
      * Read and parse a configuration file.
      *
-     * This function reads a configuration file from the specified path and parses it as JSON.
-     * It also provides caching for the parsed JSON data.
+     * This function requires a PHP configuration file that must return an array.
+     * Results are cached in a static array to avoid redundant file loads.
      *
      * @param string $path The path to the configuration file.
-     * @return array|false An array representing the parsed JSON data if successful, or false if parsing fails.
-     * @throws \Exception If the configuration file is unreadable or contains invalid JSON.
+     * @return array The configuration array returned by the file.
+     * @throws \Exception If the configuration file is missing or does not return an array.
      */
     private function readConfigFile(string $path)
     {
         $id = md5($path);
 
-        //Fetch cached value
         if (isset(self::$cache['configJson'][$id])) {
             return self::$cache['configJson'][$id];
         }
 
-        //Read config
-        if (!($json = $this->cachedFileGetContents($path))) {
+        if (!$this->cachedFileExists($path)) {
             throw new \Exception('Configuration file unreadable at ' . $path);
         }
 
-        //Check if valid json & return
-        if ($this->validateJson($json, $path)) {
-            return self::$cache['configJson'][$id] = (array) json_decode($json); //Return & store in cache.
+        $config = require $path;
+
+        if (!is_array($config)) {
+            throw new \Exception('Configuration file must return an array at ' . $path);
         }
 
-        return false;
-    }
-
-    /**
-     * Validate the format of a JSON string.
-     *
-     * This function validates the format of a JSON string by attempting to parse it as JSON.
-     * It utilizes the built-in `json_validate` function in PHP 8.3 and later, or falls back to
-     * decoding the JSON string and checking if the decoding was successful in earlier PHP versions.
-     *
-     * @param string $json The JSON string to validate.
-     * @param string $path The path to the JSON file (used for error reporting).
-     * @return bool Returns true if the JSON string is valid, false otherwise.
-     * @throws \Exception If the JSON string is not valid according to its format.
-     */
-    private function validateJson(string $json, string $path)
-    {
-        if (function_exists('json_validate')) {
-            $validJson = json_validate($json); //Introduced in PHP 8.3
-        } else {
-            $validJson = (bool) json_decode($json, true); //Before PHP 8.3
-        }
-
-        if (!$validJson) {
-            throw new \Exception('Invalid formatting of configuration file in ' . $path);
-        }
-
-        return true;
+        return self::$cache['configJson'][$id] = $config;
     }
 
     /**

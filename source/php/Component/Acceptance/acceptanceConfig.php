@@ -1,0 +1,51 @@
+<?php
+
+return [
+    'slug' => 'acceptance',
+    'default' => (object) [
+        'labels' => false,
+        'height' => false,
+        'src' => false,
+        'policy' => false,
+        'host' => false,
+        'name' => false,
+        'icon' => 'info',
+        'cover' => false,
+        'modifier' => '',
+    ],
+    'description' => [
+        'labels' => 'Object or array containing knownLabels and unknownLabels with title, info, and button',
+        'height' => 'height in number ex 500',
+        'src' => 'array of urls to hide ex. https://www.youtube.com',
+        'policy' => 'URL to third party website policy',
+        'host' => 'host ex. youtube.com',
+        'name' => 'name of the host',
+        'icon' => 'Icon name as a string.',
+        'cover' => 'URL for background image',
+        'modifier' => 'Modifier variable ex. video',
+    ],
+    'types' => [
+        'labels' => 'array|object|boolean',
+        'height' => 'boolean|string',
+        'src' => 'boolean|array',
+        'policy' => 'boolean',
+        'host' => 'boolean',
+        'name' => 'boolean',
+        'icon' => 'string',
+        'cover' => 'boolean',
+        'modifier' => 'string',
+    ],
+    'view' => 'acceptance.blade.php',
+    'dependency' => [
+        'sass' => [
+            'components' => [
+                'acceptance',
+                'button',
+                'icon',
+                'typography',
+                'iframe',
+                'modal',
+            ],
+        ],
+    ],
+];

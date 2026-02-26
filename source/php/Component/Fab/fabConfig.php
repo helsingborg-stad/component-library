@@ -1,0 +1,31 @@
+<?php
+
+return [
+    'slug' => 'fab',
+    'default' => (object) [
+        'position' => 'bottom-right',
+        'heading' => 'Samlade länkar för elever och föräldrar',
+        'button' => false,
+        'slot' => '',
+        'closeLabel' => false,
+        'closeIcon' => false,
+    ],
+    'description' => [
+        'position' => 'Where on the screen the FAB should be positioned',
+        'heading' => 'Heading text for panel',
+        'button' => 'Settings for the button element (trigger)',
+        'slot' => 'Contents of popup panel',
+        'closeLabel' => 'The label to indicate closing action',
+        'closeIcon' => 'The icon to indicate closing action',
+    ],
+    'view' => 'fab.blade.php',
+    'dependency' => [
+        'sass' => [
+            'components' => [
+                'fab',
+                'button',
+                'icon',
+            ],
+        ],
+    ],
+];

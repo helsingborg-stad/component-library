@@ -1,0 +1,55 @@
+<?php
+
+return [
+    'slug' => 'date',
+    'default' => (object) [
+        'timestamp' => '',
+        'time_since' => false,
+        'time_since_cap' => '6 months',
+        'format' => null,
+        'region' => 'en_US',
+        'timezone' => 'UTC',
+        'action' => 'formatDate',
+        'labels' => [],
+        'labelsPlural' => [],
+        'timeSinceSuffix' => 'ago',
+        'nowLabel' => 'just now',
+        'timeNowCap' => 60,
+    ],
+    'description' => [
+        'timestamp' => 'The date, in date string format or in unix timestamp format.',
+        'time_since' => 'Will return the date since.',
+        'time_since_cap' => 'How long back to spell out time since',
+        'format' => 'Present date\'s in this format. Default: D d M Y',
+        'region' => 'Region for the date',
+        'timezone' => 'Timezone for the date',
+        'action' => 'What to do with the inputted date: formatDate, timesince, timeuntil. Can be false to just output the timestamp.',
+        'labels' => 'Array containing translations valid keys: year, month, week, day, hour, minute, second',
+        'labelsPlural' => 'Array containing translations valid keys: year, month, week, day, hour, minute, second',
+        'timeSinceSuffix' => 'Suffix for the time since label',
+        'nowLabel' => 'What to show when the date is considered to be in the present',
+        'timeNowCap' => 'How many seconds back to show \'nowLabel\'',
+    ],
+    'types' => [
+        'timestamp' => 'string|integer',
+        'time_since' => 'boolean',
+        'time_since_cap' => 'string',
+        'format' => 'string',
+        'region' => 'string',
+        'timezone' => 'string',
+        'action' => 'string|boolean',
+        'labels' => 'object|array',
+        'labelsPlural' => 'object|array',
+        'timeSinceSuffix' => 'string',
+        'nowLabel' => 'string',
+        'timeNowCap' => 'integer',
+    ],
+    'view' => 'date.blade.php',
+    'dependency' => [
+        'sass' => [
+            'components' => [
+                'date',
+            ],
+        ],
+    ],
+];

@@ -1,0 +1,29 @@
+<?php
+
+return [
+    'slug' => 'gallery',
+    'default' => (object) [
+        'list' => [],
+        'ariaLabels' => [],
+    ],
+    'description' => [
+        'list' => 'Array with following keys: largeImage, smallImage, caption and alt',
+        'ariaLabels' => 'Object with following keys: prev, next',
+    ],
+    'types' => [
+        'list' => 'array',
+        'ariaLabels' => 'object',
+    ],
+    'view' => 'gallery.blade.php',
+    'dependency' => [
+        'sass' => [
+            'components' => [
+                'gallery',
+                'modal',
+                'image',
+                'button',
+                'icon',
+            ],
+        ],
+    ],
+];

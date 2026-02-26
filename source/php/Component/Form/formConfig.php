@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'slug' => 'form',
+    'default' => (object) [
+        'method' => 'POST',
+        'action' => '#',
+        'validation' => true,
+        'errorMessage' => '',
+        'validateMessage' => '',
+    ],
+    'description' => [
+        'method' => 'Set to POST by default',
+        'action' => 'Path to file, set to # by default',
+        'validation' => 'Validation method toggle on off',
+        'errorMessage' => 'If filled: Gives a general error message when form is invalid',
+        'validateMessage' => 'If filled: Gives a general success message when form is valid',
+    ],
+    'view' => 'form.blade.php',
+    'dependency' => [
+        'sass' => [
+            'components' => [
+                'form',
+                'notice',
+            ],
+        ],
+    ],
+];

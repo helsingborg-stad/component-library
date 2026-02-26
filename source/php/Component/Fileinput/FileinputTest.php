@@ -84,9 +84,8 @@ class FileinputTest extends TestCase
 
     private static function getData(array $merge = []): array
     {
-        $jsonFile = __DIR__ . '/fileinput.json';
-        $decodedJson = json_decode(file_get_contents($jsonFile), true);
-        $defaultData = $decodedJson['default'] ?? [];
+        $config = require __DIR__ . '/fileinputConfig.php';
+        $defaultData = (array) ($config['default'] ?? []);
 
         return array_merge($defaultData, $merge);
     }

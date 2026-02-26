@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'slug' => 'element',
+    'default' => (object) [
+        'componentElement' => 'div',
+        'hideIfNoContent' => true,
+    ],
+    'description' => [
+        'componentElement' => 'The tag to use for this component.',
+        'hideIfNoContent' => 'If true, the component will not be rendered if there is no content.',
+    ],
+    'types' => [
+        'componentElement' => 'string',
+        'hideIfNoContent' => 'boolean',
+    ],
+    'view' => 'element.blade.php',
+    'dependency' => [
+        'sass' => [
+            'components' => [
+                'element',
+            ],
+        ],
+    ],
+];

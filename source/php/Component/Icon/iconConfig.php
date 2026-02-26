@@ -1,0 +1,44 @@
+<?php
+
+return [
+    'slug' => 'icon',
+    'default' => (object) [
+        'size' => 'inherit',
+        'label' => '',
+        'icon' => '',
+        'color' => '',
+        'customColor' => '',
+        'componentElement' => 'span',
+        'filled' => null,
+        'decorative' => false,
+    ],
+    'description' => [
+        'size' => 'Sizes: xs, sm, md, lg, xl, xxl',
+        'label' => 'A label on the icon',
+        'icon' => 'The icon name or a url to a svg file',
+        'color' => 'The color of the icon',
+        'customColor' => 'A custom HEX color',
+        'componentElement' => 'Icon HTML tag',
+        'filled' => 'If the icons should be filled or not',
+        'decorative' => 'If the icon is decorative only or serves a purpose.',
+    ],
+    'types' => [
+        'size' => 'string',
+        'label' => 'string',
+        'icon' => 'string',
+        'color' => 'string',
+        'customColor' => 'string',
+        'componentElement' => 'string',
+        'filled' => 'boolean',
+        'isSvg' => 'boolean',
+        'decorative' => 'boolean',
+    ],
+    'view' => 'icon.blade.php',
+    'dependency' => [
+        'sass' => [
+            'components' => [
+                'icon',
+            ],
+        ],
+    ],
+];
