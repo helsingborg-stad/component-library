@@ -2,6 +2,8 @@
 
 namespace ComponentLibrary;
 
+use ComponentLibrary\Component\Config\ComponentConfiguration;
+use ComponentLibrary\Component\Config\ComponentConfigurationInterface;
 use ComponentLibrary\Cache\CacheInterface;
 use ComponentLibrary\Helper\TagSanitizerInterface;
 use HelsingborgStad\BladeService\BladeServiceInterface;
@@ -11,19 +13,19 @@ use Throwable;
 
 class Register
 {
-    private static $cache = [
-        'configJson'        => [],
+    private static array $cache = [
+        'config'            => [],
         'fileExists'        => [],
         'fileGetContents'   => [],
         'glob'              => [],
     ]; 
 
-    public $data;
-    public $cachePath = ""; 
-    public $viewPaths = [];
-    public $controllerPaths = [];
-    private $reservedNames = ["data", "class", "list", "lang"];
-    private $controllers = [];
+    public ?object $data = null;
+    public string $cachePath = ""; 
+    public array $viewPaths = [];
+    public array $controllerPaths = [];
+    private array $reservedNames = ["data", "class", "list", "lang"];
+    private array $controllers = [];
 
     public function __construct(
         private BladeServiceInterface $blade,
@@ -36,11 +38,11 @@ class Register
      * Add a new component to the system.
      *
      * @param string $slug The unique identifier for the component.
-     * @param array $defaultArgs The default arguments for the component.
+     * @param array $defaultParameters The default arguments for the component.
      * @param string|null $view The optional view name for the component.
      * @throws \Exception if the provided slug is reserved or invalid.
      */
-    public function add($slug, $defaultArgs, $argsTypes = false, $view = null)
+    public function add(string $slug, array $defaultParameters, array $parameterTypes = [], ?string $view = null): void
     {
         //Create utility data object
         if (is_null($this->data)) {
@@ -57,11 +59,11 @@ class Register
 
         //Adds to full object
         $this->data->{$slug} = (object) array(
-            'slug'       => (string) $slug,
-            'args'       => (object) $defaultArgs,
-            'view'       => (string) $slug . DIRECTORY_SEPARATOR . $view,
-            'controller' => (string) $slug,
-            'argsTypes'  => (object) $argsTypes
+            'slug'       => $slug,
+            'args'       => (object) $defaultParameters,
+            'view'       => $slug . DIRECTORY_SEPARATOR . $view,
+            'controller' => $slug,
+            'argsTypes'  => (object) $parameterTypes
         );
 
         $this->blade->registerComponentDirective( ucfirst($slug) . '.' . $slug, $slug);
@@ -73,7 +75,7 @@ class Register
      *
      * @return string The updated object with controller paths
      */
-    public function addControllerPath($path, $prepend = true): array
+    public function addControllerPath(string $path, bool $prepend = true): array
     {
         //Sanitize path
         $path = rtrim($path, "/");
@@ -98,7 +100,7 @@ class Register
      * 
      * @return string The slugs of all registered components
      */
-    public function registerInternalComponents($path): array
+    public function registerInternalComponents(string $path): array
     {
         //Declare
         $result = array();
@@ -120,21 +122,21 @@ class Register
 
                 //Register the component
                 $this->add(
-                    $config['slug'],
-                    $config['default'],
-                    $config['types'] ?? (object) [],
-                    $config['view'] ? $config['view'] : $config['slug'] . "blade.php"
+                    $config->getSlug(),
+                    $config->getDefaultParameters(),
+                    $config->getTypes(),
+                    $config->getView()
                 );
 
                 //Log
-                $result[] = $config['slug'];
+                $result[] = $config->getSlug();
             }
         }
 
         return $result;
     }
 
-    public function getEngine()
+    public function getEngine(): BladeServiceInterface
     {
         return $this->blade;
     }
@@ -144,7 +146,7 @@ class Register
      * 
      * @return string The view name included filetype
      */
-    private function getViewName($slug, $view = null): string
+    private function getViewName(string $slug, ?string $view = null): string
     {
         if (is_null($view)) {
             $view = $slug . '.blade.php';
@@ -152,7 +154,7 @@ class Register
         return $view;
     }
 
-    public function registerViewComposer(object $component)
+    public function registerViewComposer(object $component): void
     {
         try {
             $this->blade->registerComponent(
@@ -165,6 +167,16 @@ class Register
                     
                     
                     $viewData = $this->accessProtected($view, 'data');
+
+                    if (!is_array($viewData) && !is_object($viewData)) {
+                        throw new \UnexpectedValueException(
+                            'View data must be an array or object, received: ' . gettype($viewData)
+                        );
+                    }
+
+                    if (is_object($viewData)) {
+                        $viewData = get_object_vars($viewData);
+                    }
                     $this->handleTypingsErrors($viewData, $component->argsTypes, $component->slug);
 
                     // Get controller data
@@ -189,24 +201,26 @@ class Register
     /**
      * Handle typing errors for the given view data and arguments types.
      *
-     * @param array|object $viewData The view data to check for typing errors.
-     * @param array|object|false $argsTypes The expected argument types for each key in the view data.
+     * @param array $viewData The view data to check for typing errors.
+     * @param array|object $argsTypes The expected argument types for each key in the view data.
      * @param string $componentSlug The slug of the component being checked.
      * @return void
      */
-    public function handleTypingsErrors($viewData, $argsTypes, $componentSlug) {
+    public function handleTypingsErrors(array $viewData, array|object $argsTypes, string $componentSlug): void
+    {
 
         if ($this->shouldHideTypingsErrors()) {
             return;
         }
 
-        if (empty((array) $argsTypes) || (empty($viewData) && !is_array($viewData))) { 
+        if (is_array($argsTypes) && empty($argsTypes)) { 
             return; 
         }
 
         foreach ($viewData as $key => $value) {
-            if (is_object($argsTypes) && isset($argsTypes->{$key})) {
-                $types = explode('|', $argsTypes->{$key});
+            $types = $this->resolveArgumentTypes($argsTypes, $key);
+
+            if (!empty($types)) {
                 $valueType = gettype($value);
         
                 // Check if the value is an object, and get its class name without the namespace
@@ -219,7 +233,7 @@ class Register
                     $valueTypeDisplay = $valueType === 'object' ? $classNameWithoutNamespace : $valueType;
                     $this->triggerError(
                         'The parameter <b>"' . $key . '"</b> in the <b>' . $componentSlug . '</b> component should be of type <b>"' 
-                        . $argsTypes->{$key} . '"</b> but was received as type <b>"' . $valueTypeDisplay . '"</b>.'
+                        . implode('|', $types) . '"</b> but was received as type <b>"' . $valueTypeDisplay . '"</b>.'
                     );
                 }
             } elseif (
@@ -234,11 +248,28 @@ class Register
     }
 
     /**
+     * @param array|object $argsTypes
+     * @return array<int, string>
+     */
+    private function resolveArgumentTypes(array|object $argsTypes, string $key): array
+    {
+        if (is_object($argsTypes) && isset($argsTypes->{$key})) {
+            return explode('|', (string) $argsTypes->{$key});
+        }
+
+        if (is_array($argsTypes) && isset($argsTypes[$key])) {
+            return explode('|', (string) $argsTypes[$key]);
+        }
+
+        return [];
+    }
+
+    /**
      * Determines whether typing errors should be hidden.
      *
      * @return bool Returns true if typing errors should be hidden, false otherwise.
      */
-    private function shouldHideTypingsErrors() 
+    private function shouldHideTypingsErrors(): bool 
     {
         return (defined('WP_ENVIRONMENT_TYPE') && WP_ENVIRONMENT_TYPE === 'production') || defined('WP_CLI');
     }
@@ -249,7 +280,7 @@ class Register
      * @param string $message The error message.
      * @return void
      */
-    private function triggerError($message = "") {
+    private function triggerError(string $message = ""): void {
         trigger_error($message, E_USER_WARNING);
     }
 
@@ -258,7 +289,7 @@ class Register
      *
      * @return string Array of values
      */
-    public function accessProtected($obj, $prop)
+    public function accessProtected(object $obj, string $prop): mixed
     {
         $reflection = new \ReflectionClass($obj);
         $property = $reflection->getProperty($prop);
@@ -269,9 +300,9 @@ class Register
     /**
      * Get data from controller
      *
-     * @return string Array of controller data
+     * @return array<int|string, mixed> Array of controller data
      */
-    public function getControllerArgs($data, $controllerName): array
+    public function getControllerArgs(array $data, string $controllerName): array
     {
         //Run controller & fetch data
         if ($controllerLocation = $this->locateController(ucfirst($controllerName))) {
@@ -289,7 +320,7 @@ class Register
      *
      * @return string The expected controller name
      */
-    public function camelCase($viewName): string
+    public function camelCase(string $viewName): string
     {
         return (string)str_replace(
             " ",
@@ -305,7 +336,7 @@ class Register
      *
      * @return string Controller path
      */
-    public function locateController($controller)
+    public function locateController(string $controller): string|false
     {
         if (is_array($this->controllerPaths) && !empty($this->controllerPaths)) {
             foreach ($this->controllerPaths as $path) {
@@ -327,7 +358,7 @@ class Register
      *
      * @return string            Namespace or null
      */
-    public function getNamespace($classPath)
+    public function getNamespace(string $classPath): ?string
     {
         $src = $this->cachedFileGetContents($classPath);
         if (preg_match('/namespace\s+(.+?);/', $src, $m)) {
@@ -341,7 +372,7 @@ class Register
      *
      * @return string Simple view name without appended filetype
      */
-    public function cleanViewName($viewName): string
+    public function cleanViewName(string $viewName): string
     {
         return (string) str_replace('.blade.php', '', $viewName);
     }
@@ -356,7 +387,7 @@ class Register
      * @return string The complete path to the configuration file.
      * @throws \Exception If no configuration file is found in the specified path.
      */
-    private function getConfigFilePath($path) {
+    private function getConfigFilePath(string $path): string {
         $configFile = $path . DIRECTORY_SEPARATOR . lcfirst(basename($path)) . "Config.php";
         if($this->cachedFileExists($configFile)) {
             return $configFile;
@@ -368,18 +399,19 @@ class Register
     /**
      * Read and parse a configuration file.
      *
-     * This function requires a PHP configuration file that must return an array.
+     * This function requires a PHP configuration file that must return an array or configuration instance.
      * Results are cached in a static array to avoid redundant file loads.
+     * Plain array configurations are automatically wrapped into ComponentConfiguration singleton instances.
      *
      * @param string $path The path to the configuration file.
-     * @return array The configuration array returned by the file.
+     * @return ComponentConfigurationInterface The configuration object returned by the file.
      * @throws \Exception If the configuration file is missing or does not return an array.
      */
-    private function readConfigFile(string $path) {
+    private function readConfigFile(string $path): ComponentConfigurationInterface {
         $id = md5($path);
 
-        if (isset(self::$cache['configJson'][$id])) {
-            return self::$cache['configJson'][$id];
+        if (isset(self::$cache['config'][$id])) {
+            return self::$cache['config'][$id];
         }
 
         if (!$this->cachedFileExists($path)) {
@@ -388,11 +420,18 @@ class Register
 
         $config = require $path;
 
-        if (!is_array($config)) {
-            throw new \Exception("Configuration file must return an array at " . $path);
+        if ($config instanceof ComponentConfigurationInterface) {
+            $configInstance = $config;
+        } elseif (is_array($config)) {
+            $configInstance = ComponentConfiguration::getInstance($config);
+        } else {
+            $receivedType = is_object($config) ? get_class($config) : gettype($config);
+            throw new \Exception(
+                "Configuration file must return an array or an implementation of ComponentLibrary\\Component\\Config\\ComponentConfigurationInterface at " . $path . ', received: ' . $receivedType
+            );
         }
 
-        return self::$cache['configJson'][$id] = $config;
+        return self::$cache['config'][$id] = $configInstance;
     }
     
     /**
@@ -405,7 +444,7 @@ class Register
      * @param string $path The path to the file to check.
      * @return bool Returns true if the file exists, false otherwise.
      */
-    private function cachedFileExists($path) {
+    private function cachedFileExists(string $path): bool {
         $id = md5($path);
         
         // Check static cache first
@@ -433,7 +472,7 @@ class Register
      * @param string $path The path to the file to read.
      * @return string|false Returns the file contents if successful, false otherwise.
      */
-    private function cachedFileGetContents($path) {
+    private function cachedFileGetContents(string $path): string|false {
         $id = md5($path);
     
         // Check static cache first
@@ -482,7 +521,7 @@ class Register
      * @param string $path The path to the file to check.
      * @return bool Returns true if the file exists, false otherwise.
      */
-    private function cachedGlob($path) {
+    private function cachedGlob(string $path): array|false {
         $id = md5($path);
         if(isset(self::$cache['glob'][$id])) {
             return self::$cache['glob'][$id];
