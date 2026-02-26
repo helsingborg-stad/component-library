@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\Typography;
 
-class Typography extends \ComponentLibrary\Component\BaseController
+class Typography extends \ComponentLibrary\Component\BaseController implements TypographyInterface
 {
     private static $hasSeenH1       = null;
     private static $headingsContext = null;
@@ -41,10 +41,10 @@ class Typography extends \ComponentLibrary\Component\BaseController
 
         $this->data['hasSeenH1'] = self::$hasSeenH1;
 
-        $this->data['classList'][] = $this->getBaseClass() . "__variant--" . $this->getVariant($variant);
+        $this->data['classList'][] = $this->getBaseClass() . "__variant--" . $this->buildVariant($variant);
     }
 
-    private function getVariant($variant) {
+    private function buildVariant($variant) {
         $element = $this->data['element'];
         $headings = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 
@@ -93,5 +93,42 @@ class Typography extends \ComponentLibrary\Component\BaseController
             } 
         }
         return $element;
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'typography';
+    }
+
+    // -------------------------------------------------------------------------
+    // TypographyInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getElement(): string
+    {
+        return $this->data['element'] ?? 'p';
+    }
+
+    public function getVariant(): bool
+    {
+        return $this->data['variant'] ?? false;
+    }
+
+    public function getSlot(): string
+    {
+        return $this->data['slot'] ?? '';
+    }
+
+    public function getAutopromote(): bool
+    {
+        return $this->data['autopromote'] ?? false;
+    }
+
+    public function getUseHeadingsContext(): bool
+    {
+        return $this->data['useHeadingsContext'] ?? true;
     }
 }

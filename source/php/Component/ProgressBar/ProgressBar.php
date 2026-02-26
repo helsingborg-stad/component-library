@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\ProgressBar;
 
-class ProgressBar extends \ComponentLibrary\Component\BaseController  
+class ProgressBar extends \ComponentLibrary\Component\BaseController implements ProgressBarInterface  
 {
     
     public function init() {
@@ -16,5 +16,27 @@ class ProgressBar extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . '--cancelled';
         }
      
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'progressBar';
+    }
+
+    // -------------------------------------------------------------------------
+    // ProgressBarInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getIsCancelled(): bool
+    {
+        return $this->data['isCancelled'] ?? false;
+    }
+
+    public function getValue(): int
+    {
+        return $this->data['value'] ?? 0;
     }
 }

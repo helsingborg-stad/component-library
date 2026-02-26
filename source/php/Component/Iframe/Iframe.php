@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\Iframe;
 
-class Iframe extends \ComponentLibrary\Component\BaseController
+class Iframe extends \ComponentLibrary\Component\BaseController implements IframeInterface
 {
     public function init()
     {
@@ -66,5 +66,62 @@ class Iframe extends \ComponentLibrary\Component\BaseController
      */
     private function getDomainFromUrl($url) {
         return parse_url($url)['host'];
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'iframe';
+    }
+
+    // -------------------------------------------------------------------------
+    // IframeInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSrc(): string
+    {
+        return $this->data['src'] ?? 'about:blank';
+    }
+
+    public function getLoading(): string
+    {
+        return $this->data['loading'] ?? 'lazy';
+    }
+
+    public function getWidth(): string
+    {
+        return $this->data['width'] ?? '100%';
+    }
+
+    public function getHeight(): string
+    {
+        return $this->data['height'] ?? '400';
+    }
+
+    public function getFrameborder(): string
+    {
+        return $this->data['frameborder'] ?? '0';
+    }
+
+    public function getLabels(): string
+    {
+        return $this->data['labels'] ?? '';
+    }
+
+    public function getModifier(): string
+    {
+        return $this->data['modifier'] ?? '';
+    }
+
+    public function getTitle(): string
+    {
+        return $this->data['title'] ?? 'External content';
+    }
+
+    public function getPoster(): bool
+    {
+        return $this->data['poster'] ?? false;
     }
 }

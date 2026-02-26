@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\Tile;
 
-class Tile extends \ComponentLibrary\Component\BaseController
+class Tile extends \ComponentLibrary\Component\BaseController implements TileInterface
 {
     public function init()
     {
@@ -22,5 +22,32 @@ class Tile extends \ComponentLibrary\Component\BaseController
     private function setBackgroundImage($img) {
         if ($img != "")
             $this->data['attributeList']['style'] = 'background-image: url(' . $img . ')';
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'tile';
+    }
+
+    // -------------------------------------------------------------------------
+    // TileInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getWidth(): string
+    {
+        return $this->data['width'] ?? '';
+    }
+
+    public function getHeight(): string
+    {
+        return $this->data['height'] ?? '';
+    }
+
+    public function getBackgroundImage(): string
+    {
+        return $this->data['backgroundImage'] ?? '';
     }
 }

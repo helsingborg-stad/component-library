@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\Brand;
 
-class Brand extends \ComponentLibrary\Component\BaseController
+class Brand extends \ComponentLibrary\Component\BaseController implements BrandInterface
 {
 
     public function init() {
@@ -23,5 +23,27 @@ class Brand extends \ComponentLibrary\Component\BaseController
         if(empty($text)) {
             $this->data['logotype']['attributeList'] = $attributeList; 
         }
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'brand';
+    }
+
+    // -------------------------------------------------------------------------
+    // BrandInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getLogotype(): array
+    {
+        return $this->data['logotype'] ?? [];
+    }
+
+    public function getText(): array
+    {
+        return $this->data['text'] ?? [];
     }
 }

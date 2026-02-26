@@ -6,7 +6,7 @@ namespace ComponentLibrary\Component\Testimonials;
  * Class Testimonials
  * @package ComponentLibrary\Component\Testimonials
  */
-class Testimonials extends \ComponentLibrary\Component\BaseController
+class Testimonials extends \ComponentLibrary\Component\BaseController implements TestimonialsInterface
 {
     public function init()
     {
@@ -82,4 +82,41 @@ class Testimonials extends \ComponentLibrary\Component\BaseController
         return is_int(12 / $perRow) ? 12 / $perRow : 12;
     }
 
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'testimonials';
+    }
+
+    // -------------------------------------------------------------------------
+    // TestimonialsInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getComponentElement(): string
+    {
+        return $this->data['componentElement'] ?? 'div';
+    }
+
+    public function getTestimonials(): array
+    {
+        return $this->data['testimonials'] ?? [];
+    }
+
+    public function getPerRow(): int
+    {
+        return $this->data['perRow'] ?? 4;
+    }
+
+    public function getIsCarousel(): bool
+    {
+        return $this->data['isCarousel'] ?? false;
+    }
+
+    public function getSlidesPerPage(): int
+    {
+        return $this->data['slidesPerPage'] ?? 2;
+    }
 }

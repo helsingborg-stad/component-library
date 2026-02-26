@@ -6,7 +6,7 @@ namespace ComponentLibrary\Component\Accordion__item;
  * Class Accordion
  * @package ComponentLibrary\Component\Accordion
  */
-class Accordion__item extends \ComponentLibrary\Component\BaseController
+class Accordion__item extends \ComponentLibrary\Component\BaseController implements Accordion__itemInterface
 {
     private $heading;
 
@@ -31,5 +31,77 @@ class Accordion__item extends \ComponentLibrary\Component\BaseController
 
     private function headingType($heading) {
         return !empty($heading) && is_array($heading);
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'accordion__item';
+    }
+
+    // -------------------------------------------------------------------------
+    // Accordion__itemInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getId(): string
+    {
+        return $this->data['id'] ?? '';
+    }
+
+    public function getHeading(): string|array
+    {
+        return $this->data['heading'] ?? '';
+    }
+
+    public function getBeforeHeading(): string
+    {
+        return $this->data['beforeHeading'] ?? '';
+    }
+
+    public function getAfterHeading(): string
+    {
+        return $this->data['afterHeading'] ?? '';
+    }
+
+    public function getBeforeContent(): string
+    {
+        return $this->data['beforeContent'] ?? '';
+    }
+
+    public function getAfterContent(): string
+    {
+        return $this->data['afterContent'] ?? '';
+    }
+
+    public function getSectionElement(): string
+    {
+        return $this->data['sectionElement'] ?? 'div';
+    }
+
+    public function getSectionHeadingElement(): string
+    {
+        return $this->data['sectionHeadingElement'] ?? 'a';
+    }
+
+    public function getSectionContentElement(): string
+    {
+        return $this->data['sectionContentElement'] ?? 'div';
+    }
+
+    public function getTaxonomy(): array
+    {
+        return $this->data['taxonomy'] ?? [];
+    }
+
+    public function getTaxonomyPosition(): string
+    {
+        return $this->data['taxonomyPosition'] ?? '';
+    }
+
+    public function getIcon(): string
+    {
+        return $this->data['icon'] ?? 'keyboard_arrow_down';
     }
 }

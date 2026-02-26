@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\Notice;
 
-class Notice extends \ComponentLibrary\Component\BaseController
+class Notice extends \ComponentLibrary\Component\BaseController implements NoticeInterface
 {
     public function init()
     {
@@ -105,5 +105,47 @@ class Notice extends \ComponentLibrary\Component\BaseController
             $action = null;
         }
         return $action;
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'notice';
+    }
+
+    // -------------------------------------------------------------------------
+    // NoticeInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getType(): string
+    {
+        return $this->data['type'] ?? 'info';
+    }
+
+    public function getMessage(): array|object
+    {
+        return $this->data['message'] ?? (object) [];
+    }
+
+    public function getIcon(): array
+    {
+        return $this->data['icon'] ?? false;
+    }
+
+    public function getStretch(): bool
+    {
+        return $this->data['stretch'] ?? false;
+    }
+
+    public function getDismissable(): bool|string
+    {
+        return $this->data['dismissable'] ?? false;
+    }
+
+    public function getAction(): array|bool
+    {
+        return $this->data['action'] ?? false;
     }
 }

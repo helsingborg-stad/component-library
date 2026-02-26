@@ -273,7 +273,10 @@ class Register
             $controllerClass = (string) ("\\" . $this->getNamespace($controllerLocation) . "\\" . $controllerName);
             $controller = new $controllerClass($data, $this->componentCache, $this->tagSanitizer);
 
-            return $controller->getData();
+            return array_merge(
+                $controller->getData(),
+                ['componentController' => $controller],
+            );
         }
 
         return array();

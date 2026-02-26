@@ -8,7 +8,7 @@ use ComponentLibrary\Helper\Icons;
  * Class Icon
  * @package ComponentLibrary\Component\Icon
  */
-class Icon extends \ComponentLibrary\Component\BaseController
+class Icon extends \ComponentLibrary\Component\BaseController implements IconInterface
 {
     private $altTextPrefix = "Icon: ";
     private $altText = [
@@ -196,5 +196,57 @@ class Icon extends \ComponentLibrary\Component\BaseController
         ];
 
         return isset($sizes[$size]) ? $this->getBaseClass() . "--size-" . $size : $this->getBaseClass() . "--size-inherit";
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'icon';
+    }
+
+    // -------------------------------------------------------------------------
+    // IconInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSize(): string
+    {
+        return $this->data['size'] ?? 'inherit';
+    }
+
+    public function getLabel(): string
+    {
+        return $this->data['label'] ?? '';
+    }
+
+    public function getIcon(): string
+    {
+        return $this->data['icon'] ?? '';
+    }
+
+    public function getColor(): string
+    {
+        return $this->data['color'] ?? '';
+    }
+
+    public function getCustomColor(): string
+    {
+        return $this->data['customColor'] ?? '';
+    }
+
+    public function getComponentElement(): string
+    {
+        return $this->data['componentElement'] ?? 'span';
+    }
+
+    public function getFilled(): bool
+    {
+        return $this->data['filled'] ?? null;
+    }
+
+    public function getDecorative(): bool
+    {
+        return $this->data['decorative'] ?? false;
     }
 }

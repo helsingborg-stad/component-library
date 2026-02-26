@@ -6,7 +6,7 @@ namespace ComponentLibrary\Component\Option;
  * Class Option
  * @package ComponentLibrary\Component\Option
  */
-class Option extends \ComponentLibrary\Component\BaseController
+class Option extends \ComponentLibrary\Component\BaseController implements OptionInterface
 {
     public function init()
     {
@@ -28,5 +28,42 @@ class Option extends \ComponentLibrary\Component\BaseController
         if (empty($value) && !empty($this->data['attributeList']['value'])) {
             $this->data['value'] = $this->data['attributeList']['value'];
         }
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'option';
+    }
+
+    // -------------------------------------------------------------------------
+    // OptionInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getType(): string
+    {
+        return $this->data['type'] ?? 'checkbox';
+    }
+
+    public function getLabel(): string
+    {
+        return $this->data['label'] ?? '';
+    }
+
+    public function getRequired(): bool
+    {
+        return $this->data['required'] ?? false;
+    }
+
+    public function getValue(): string
+    {
+        return $this->data['value'] ?? '';
+    }
+
+    public function getChecked(): bool
+    {
+        return $this->data['checked'] ?? false;
     }
 }

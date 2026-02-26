@@ -3,3 +3,4 @@
         {{ $slot }}
     </{{ $componentElement }}>
 @endif
+@dump($componentController->getSlug())

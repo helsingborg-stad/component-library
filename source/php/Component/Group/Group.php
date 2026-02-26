@@ -6,7 +6,7 @@ namespace ComponentLibrary\Component\Group;
  * Class Group
  * @package ComponentLibrary\Component\Group
  */
-class Group extends \ComponentLibrary\Component\BaseController
+class Group extends \ComponentLibrary\Component\BaseController implements GroupInterface
 {
     public function init()
     {
@@ -61,5 +61,72 @@ class Group extends \ComponentLibrary\Component\BaseController
         if ($columns) {
             $this->data['classList'][] = $this->getBaseClass() . "--columns-" . $columns;
         }
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'group';
+    }
+
+    // -------------------------------------------------------------------------
+    // GroupInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getDirection(): string
+    {
+        return $this->data['direction'] ?? 'horizontal';
+    }
+
+    public function getJusitifyContent(): string
+    {
+        return $this->data['jusitifyContent'] ?? '';
+    }
+
+    public function getAlignItems(): string
+    {
+        return $this->data['alignItems'] ?? '';
+    }
+
+    public function getAlignContent(): string
+    {
+        return $this->data['alignContent'] ?? '';
+    }
+
+    public function getDisplay(): string
+    {
+        return $this->data['display'] ?? '';
+    }
+
+    public function getWrap(): string
+    {
+        return $this->data['wrap'] ?? '';
+    }
+
+    public function getFlexGrow(): bool
+    {
+        return $this->data['flexGrow'] ?? false;
+    }
+
+    public function getFlexShrink(): bool
+    {
+        return $this->data['flexShrink'] ?? true;
+    }
+
+    public function getGap(): string
+    {
+        return $this->data['gap'] ?? '';
+    }
+
+    public function getFluidGrid(): mixed
+    {
+        return $this->data['fluidGrid'] ?? null;
+    }
+
+    public function getColumns(): mixed
+    {
+        return $this->data['columns'] ?? null;
     }
 }

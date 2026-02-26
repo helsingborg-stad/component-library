@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\Slider__item;
 
-class Slider__item extends \ComponentLibrary\Component\BaseController
+class Slider__item extends \ComponentLibrary\Component\BaseController implements Slider__itemInterface
 {
     private array $slotMapping = [
         'slot' => 'slotHasData'
@@ -61,5 +61,97 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
                 $this->data[$slot] = $this->tagSanitizer->removeATags((string) $this->data[$slot]);
             }
         }
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'slider__item';
+    }
+
+    // -------------------------------------------------------------------------
+    // Slider__itemInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getTitle(): string|bool
+    {
+        return $this->data['title'] ?? '';
+    }
+
+    public function getText(): string|bool
+    {
+        return $this->data['text'] ?? '';
+    }
+
+    public function getCta(): array|bool
+    {
+        return $this->data['cta'] ?? [];
+    }
+
+    public function getImage(): mixed
+    {
+        return $this->data['image'] ?? false;
+    }
+
+    public function getVideo(): bool|string
+    {
+        return $this->data['video'] ?? false;
+    }
+
+    public function getAlt(): string
+    {
+        return $this->data['alt'] ?? '';
+    }
+
+    public function getLink(): string|bool
+    {
+        return $this->data['link'] ?? false;
+    }
+
+    public function getLinkDescription(): string
+    {
+        return $this->data['linkDescription'] ?? '';
+    }
+
+    public function getLayout(): string
+    {
+        return $this->data['layout'] ?? 'bottom';
+    }
+
+    public function getTheme(): string
+    {
+        return $this->data['theme'] ?? 'base';
+    }
+
+    public function getContainerColor(): string
+    {
+        return $this->data['containerColor'] ?? '';
+    }
+
+    public function getHeroStyle(): string
+    {
+        return $this->data['heroStyle'] ?? false;
+    }
+
+    public function getTextAlignment(): string
+    {
+        return $this->data['textAlignment'] ?? '';
+    }
+
+    public function getOverlay(): string
+    {
+        return $this->data['overlay'] ?? 'none';
+    }
+
+    public function getSlot(): bool|string
+    {
+        return $this->data['slot'] ?? false;
+    }
+
+    public function getBottom(): bool|string
+    {
+        return $this->data['bottom'] ?? false;
     }
 }

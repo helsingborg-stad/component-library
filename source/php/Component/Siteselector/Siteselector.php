@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\Siteselector;
 
-class Siteselector extends \ComponentLibrary\Component\BaseController
+class Siteselector extends \ComponentLibrary\Component\BaseController implements SiteselectorInterface
 {
     public function init() {
         //Extract array for easy access (fetch only)
@@ -168,5 +168,47 @@ class Siteselector extends \ComponentLibrary\Component\BaseController
             }
         }
         return $items;
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'siteselector';
+    }
+
+    // -------------------------------------------------------------------------
+    // SiteselectorInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getElement(): string
+    {
+        return $this->data['element'] ?? 'div';
+    }
+
+    public function getItems(): array
+    {
+        return $this->data['items'] ?? [];
+    }
+
+    public function getMaxItems(): bool
+    {
+        return $this->data['maxItems'] ?? false;
+    }
+
+    public function getShowMoreLabel(): string
+    {
+        return $this->data['showMoreLabel'] ?? '';
+    }
+
+    public function getRadius(): string
+    {
+        return $this->data['radius'] ?? 'full';
+    }
+
+    public function getColor(): string
+    {
+        return $this->data['color'] ?? 'primary';
     }
 }

@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\Pagination;
 
-class Pagination extends \ComponentLibrary\Component\BaseController  
+class Pagination extends \ComponentLibrary\Component\BaseController implements PaginationInterface  
 {
 
     //Handles temporary working list of items
@@ -197,5 +197,107 @@ class Pagination extends \ComponentLibrary\Component\BaseController
         $item['key'] = $lastKey;
         
         return $item;
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'pagination';
+    }
+
+    // -------------------------------------------------------------------------
+    // PaginationInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getList(): array
+    {
+        return $this->data['list'] ?? [];
+    }
+
+    public function getCurrent(): int
+    {
+        return $this->data['current'] ?? 1;
+    }
+
+    public function getCurrentClass(): string
+    {
+        return $this->data['currentClass'] ?? '--is-active';
+    }
+
+    public function getComponentElement(): string
+    {
+        return $this->data['componentElement'] ?? 'nav';
+    }
+
+    public function getListElement(): string
+    {
+        return $this->data['listElement'] ?? 'ul';
+    }
+
+    public function getListItem(): string
+    {
+        return $this->data['listItem'] ?? 'li';
+    }
+
+    public function getLinkPrefix(): string
+    {
+        return $this->data['linkPrefix'] ?? '?pagination=';
+    }
+
+    public function getAnchorTag(): string
+    {
+        return $this->data['anchorTag'] ?? '';
+    }
+
+    public function getPreviousDisabled(): string
+    {
+        return $this->data['previousDisabled'] ?? 'false';
+    }
+
+    public function getNextDisabled(): string
+    {
+        return $this->data['nextDisabled'] ?? 'false';
+    }
+
+    public function getUseJS(): bool
+    {
+        return $this->data['useJS'] ?? false;
+    }
+
+    public function getRandomizeOrder(): bool
+    {
+        return $this->data['randomizeOrder'] ?? false;
+    }
+
+    public function getPerPage(): int
+    {
+        return $this->data['perPage'] ?? 10;
+    }
+
+    public function getMaxPages(): bool
+    {
+        return $this->data['maxPages'] ?? false;
+    }
+
+    public function getButtonStyle(): string
+    {
+        return $this->data['buttonStyle'] ?? 'filled';
+    }
+
+    public function getButtonSize(): string
+    {
+        return $this->data['buttonSize'] ?? 'sm';
+    }
+
+    public function getPagesToShow(): bool
+    {
+        return $this->data['pagesToShow'] ?? false;
+    }
+
+    public function getKeepDOM(): bool
+    {
+        return $this->data['keepDOM'] ?? false;
     }
 }

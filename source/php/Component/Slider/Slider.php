@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\Slider;
 
-class Slider extends \ComponentLibrary\Component\BaseController
+class Slider extends \ComponentLibrary\Component\BaseController implements SliderInterface
 {
     public function init()
     {
@@ -70,5 +70,77 @@ class Slider extends \ComponentLibrary\Component\BaseController
         }
 
         $this->data['attributeList']['data-js-slider-buttons'] = !empty($customButtons) ? $customButtons : $this->data['id'];
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'slider';
+    }
+
+    // -------------------------------------------------------------------------
+    // SliderInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getShowStepper(): bool
+    {
+        return $this->data['showStepper'] ?? true;
+    }
+
+    public function getAutoSlide(): bool
+    {
+        return $this->data['autoSlide'] ?? true;
+    }
+
+    public function getPeekSlides(): bool
+    {
+        return $this->data['peekSlides'] ?? false;
+    }
+
+    public function getNavigationHover(): bool
+    {
+        return $this->data['navigationHover'] ?? true;
+    }
+
+    public function getRatio(): string
+    {
+        return $this->data['ratio'] ?? '16:9';
+    }
+
+    public function getRepeatSlide(): bool
+    {
+        return $this->data['repeatSlide'] ?? true;
+    }
+
+    public function getHeroStyle(): bool
+    {
+        return $this->data['heroStyle'] ?? false;
+    }
+
+    public function getShadow(): bool
+    {
+        return $this->data['shadow'] ?? true;
+    }
+
+    public function getCustomButtons(): bool
+    {
+        return $this->data['customButtons'] ?? false;
+    }
+
+    public function getArrowButtons(): object
+    {
+        return $this->data['arrowButtons'] ?? (object) [];
+    }
+
+    public function getPadding(): int
+    {
+        return $this->data['padding'] ?? 0;
+    }
+
+    public function getGap(): int
+    {
+        return $this->data['gap'] ?? 2;
     }
 }

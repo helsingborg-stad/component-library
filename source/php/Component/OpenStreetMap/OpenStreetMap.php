@@ -6,7 +6,7 @@ namespace ComponentLibrary\Component\OpenStreetMap;
  * Class OpenStreetMap
  * @package ComponentLibrary\Component\OpenStreetMap
  */
-class OpenStreetMap extends \ComponentLibrary\Component\BaseController
+class OpenStreetMap extends \ComponentLibrary\Component\BaseController implements OpenStreetMapInterface
 {
     public function init()
     {
@@ -84,5 +84,47 @@ class OpenStreetMap extends \ComponentLibrary\Component\BaseController
         }
 
         $this->data['attributeList']['data-js-map-id'] = $this->data['id'];
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'openStreetMap';
+    }
+
+    // -------------------------------------------------------------------------
+    // OpenStreetMapInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getPins(): array
+    {
+        return $this->data['pins'] ?? [];
+    }
+
+    public function getStartPosition(): array
+    {
+        return $this->data['startPosition'] ?? [];
+    }
+
+    public function getMapStyle(): string
+    {
+        return $this->data['mapStyle'] ?? 'default';
+    }
+
+    public function getHeight(): string
+    {
+        return $this->data['height'] ?? '100vh';
+    }
+
+    public function getFullWidth(): bool
+    {
+        return $this->data['fullWidth'] ?? false;
+    }
+
+    public function getExpanded(): bool
+    {
+        return $this->data['expanded'] ?? false;
     }
 }

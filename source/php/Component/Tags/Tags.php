@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\Tags;
 
-class Tags extends \ComponentLibrary\Component\BaseController
+class Tags extends \ComponentLibrary\Component\BaseController implements TagsInterface
 {
     public function init()
     {
@@ -71,5 +71,52 @@ class Tags extends \ComponentLibrary\Component\BaseController
         }
 
         return $filteredTags;
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'tags';
+    }
+
+    // -------------------------------------------------------------------------
+    // TagsInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getStyle(): string
+    {
+        return $this->data['style'] ?? 'default';
+    }
+
+    public function getComponentElement(): string
+    {
+        return $this->data['componentElement'] ?? 'div';
+    }
+
+    public function getBeforeLabel(): string
+    {
+        return $this->data['beforeLabel'] ?? '#';
+    }
+
+    public function getIcon(): array
+    {
+        return $this->data['icon'] ?? [];
+    }
+
+    public function getAfterLabel(): string
+    {
+        return $this->data['afterLabel'] ?? '';
+    }
+
+    public function getFormat(): bool
+    {
+        return $this->data['format'] ?? false;
+    }
+
+    public function getCompress(): bool
+    {
+        return $this->data['compress'] ?? false;
     }
 }

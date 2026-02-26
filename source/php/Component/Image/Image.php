@@ -2,18 +2,18 @@
 
 namespace ComponentLibrary\Component\Image;
 
-use ComponentLibrary\Integrations\Image\ImageInterface;
+use ComponentLibrary\Integrations\Image\ImageInterface as IntegrationImageInterface;
 
-class Image extends \ComponentLibrary\Component\BaseController
+class Image extends \ComponentLibrary\Component\BaseController implements ImageInterface
 {
     public function init()
     {
         // Handle image processing
-        if ($this->data['src'] instanceof ImageInterface) {
+        if ($this->data['src'] instanceof IntegrationImageInterface) {
             $this->handleImageProcessing(
                 $this->data['src'],
                 $this->data['alt'],
-                $this->data['lqipEnabled']
+                $this->data['lqipEnabled'],
             );
         } else {
             $this->data['containerQueryData'] = null;
@@ -26,7 +26,7 @@ class Image extends \ComponentLibrary\Component\BaseController
         $this->addAdditionalClasses(
             $this->data['fullWidth'],
             $this->data['cover'],
-            $this->data['src']
+            $this->data['src'],
         );
 
         // Handle alt text
@@ -55,18 +55,18 @@ class Image extends \ComponentLibrary\Component\BaseController
 
         // Add class if alt-text is missing
         if (empty($this->data['alt']) && (!empty($placeholderEnabled) && !empty($placeholderIcon))) {
-            $this->data['attributeList']['data-a11y-error'] = "Alt text is missing";
+            $this->data['attributeList']['data-a11y-error'] = 'Alt text is missing';
         }
     }
 
     private function addPlaceholderClass($src)
     {
         if (!$src) {
-            $this->data['classList'][] = $this->getBaseClass() . "--is-placeholder";
+            $this->data['classList'][] = $this->getBaseClass() . '--is-placeholder';
         }
     }
 
-    private function handleImageProcessing(ImageInterface $src, &$alt, $lqipEnabled)
+    private function handleImageProcessing(IntegrationImageInterface $src, &$alt, $lqipEnabled)
     {
         //If source is SVG, then there is no need to do any container query processing
         if ($this->getExtension($src->getUrl()) === 'svg') {
@@ -79,7 +79,7 @@ class Image extends \ComponentLibrary\Component\BaseController
         $this->data['containerQueryData'] = $src->getContainerQueryData();
         $this->data['src'] = $src->getUrl();
         $this->data['srcset'] = $src->getSrcSet();
-        $this->data['focus'] = sprintf("object-position: %s;", $this->reduceFocusPoint($src->getFocusPoint()));
+        $this->data['focus'] = sprintf('object-position: %s;', $this->reduceFocusPoint($src->getFocusPoint()));
 
         if (empty($alt)) {
             $alt = $this->data['alt'] = $src->getAltText();
@@ -90,7 +90,7 @@ class Image extends \ComponentLibrary\Component\BaseController
         }
 
         //Add aspect ratio, if not in cover mode or calculateAspectRatio is false.
-        if(!$this->data['cover'] && $this->data['calculateAspectRatio']) {
+        if (!$this->data['cover'] && $this->data['calculateAspectRatio']) {
             $this->addWrapperAspectRatio();
         }
 
@@ -99,7 +99,7 @@ class Image extends \ComponentLibrary\Component\BaseController
         }
     }
 
-    private function resolveAspectRatioFromContainerQueryData($containerQueryData): ?string
+    private function resolveAspectRatioFromContainerQueryData($containerQueryData): null|string
     {
         if (is_array($containerQueryData) && !empty($containerQueryData)) {
             foreach ($containerQueryData as $data) {
@@ -111,10 +111,10 @@ class Image extends \ComponentLibrary\Component\BaseController
         return null;
     }
 
-    private function addWrapperAspectRatio() 
+    private function addWrapperAspectRatio()
     {
         if (!isset($this->data['wrapperAttributes']['style'])) {
-            $this->data['wrapperAttributes']['style'] = "";
+            $this->data['wrapperAttributes']['style'] = '';
         }
 
         $aspectRatio = $this->resolveAspectRatioFromContainerQueryData($this->data['containerQueryData']) ?? '16/9';
@@ -122,15 +122,15 @@ class Image extends \ComponentLibrary\Component\BaseController
         $this->data['wrapperAttributes']['style'] .= "aspect-ratio:{$aspectRatio};";
     }
 
-    private function addLowResolutionPlaceholder(ImageInterface $src)
+    private function addLowResolutionPlaceholder(IntegrationImageInterface $src)
     {
         if (!isset($this->data['wrapperAttributes']['style'])) {
-            $this->data['wrapperAttributes']['style'] = "";
+            $this->data['wrapperAttributes']['style'] = '';
         }
         $this->data['wrapperAttributes']['style'] .= sprintf(
-            "background-image: url(%s); background-position: %s;",
+            'background-image: url(%s); background-position: %s;',
             $src->getLqipUrl(),
-            $this->reduceFocusPoint($src->getFocusPoint())
+            $this->reduceFocusPoint($src->getFocusPoint()),
         );
     }
 
@@ -143,8 +143,8 @@ class Image extends \ComponentLibrary\Component\BaseController
 
     private function handleFileTypeClass($src)
     {
-        if (is_string($src) && $extension = $this->getExtension($src)) {
-            $this->data['classList'][] = $this->getBaseClass("type-" . $extension, true);
+        if (is_string($src) && ($extension = $this->getExtension($src))) {
+            $this->data['classList'][] = $this->getBaseClass('type-' . $extension, true);
         }
     }
 
@@ -166,7 +166,7 @@ class Image extends \ComponentLibrary\Component\BaseController
     private function setAltText(&$alt, $caption)
     {
         if (!$alt) {
-            $this->data['alt'] = !empty($caption) ? $caption : "";
+            $this->data['alt'] = !empty($caption) ? $caption : '';
         }
     }
 
@@ -186,30 +186,123 @@ class Image extends \ComponentLibrary\Component\BaseController
 
     /**
      * Reduce focus point to a string
-     * 
+     *
      * @param array $focusPoint
-     * 
+     *
      * @return string
      */
     private function reduceFocusPoint(array $focusPoint): string
     {
-        return implode(" ", array_map(function ($value) {
+        return implode(' ', array_map(function ($value) {
             return "{$value}%";
         }, $focusPoint));
     }
 
     /**
      * Get the extension of a file
-     * 
+     *
      * @param string $src
-     * 
+     *
      * @return string
      */
-    private function getExtension(?string $src): ?string
+    private function getExtension(null|string $src): null|string
     {
-        if ($src && $extension = pathinfo($src, PATHINFO_EXTENSION)) {
+        if ($src && ($extension = pathinfo($src, PATHINFO_EXTENSION))) {
             return $extension;
         }
         return null;
+    }
+
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'image';
+    }
+
+    // -------------------------------------------------------------------------
+    // ImageInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSrc(): mixed
+    {
+        return $this->data['src'] ?? false;
+    }
+
+    public function getSrcset(): null|string
+    {
+        return $this->data['srcset'] ?? null;
+    }
+
+    public function getAlt(): null|string
+    {
+        return $this->data['alt'] ?? null;
+    }
+
+    public function getCaption(): string|bool
+    {
+        return $this->data['caption'] ?? null;
+    }
+
+    public function getRemoveCaption(): bool
+    {
+        return $this->data['removeCaption'] ?? false;
+    }
+
+    public function getByline(): null|string
+    {
+        return $this->data['byline'] ?? '';
+    }
+
+    public function getFullWidth(): bool
+    {
+        return $this->data['fullWidth'] ?? false;
+    }
+
+    public function getCover(): bool
+    {
+        return $this->data['cover'] ?? false;
+    }
+
+    public function getRounded(): bool
+    {
+        return $this->data['rounded'] ?? false;
+    }
+
+    public function getPlaceholderEnabled(): bool
+    {
+        return $this->data['placeholderEnabled'] ?? true;
+    }
+
+    public function getPlaceholderText(): string|bool
+    {
+        return $this->data['placeholderText'] ?? false;
+    }
+
+    public function getPlaceholderIcon(): string
+    {
+        return $this->data['placeholderIcon'] ?? 'broken_image';
+    }
+
+    public function getPlaceholderIconSize(): string
+    {
+        return $this->data['placeholderIconSize'] ?? 'xxl';
+    }
+
+    public function getImgAttributeList(): array
+    {
+        return $this->data['imgAttributeList'] ?? [];
+    }
+
+    public function getLqipEnabled(): bool
+    {
+        return $this->data['lqipEnabled'] ?? true;
+    }
+
+    public function getCalculateAspectRatio(): bool
+    {
+        return $this->data['calculateAspectRatio'] ?? true;
     }
 }

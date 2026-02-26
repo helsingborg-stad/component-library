@@ -6,7 +6,7 @@ namespace ComponentLibrary\Component\Avatar;
  * Class Avatar
  * @package ComponentLibrary\Component\Avatar
  */
-class Avatar extends \ComponentLibrary\Component\BaseController
+class Avatar extends \ComponentLibrary\Component\BaseController implements AvatarInterface
 {
 	public function init()
 	{
@@ -157,4 +157,31 @@ class Avatar extends \ComponentLibrary\Component\BaseController
 		return $this->data['displayAvatar'] = (bool) array_filter($compParams); 
 
 	}
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'avatar';
+    }
+
+    // -------------------------------------------------------------------------
+    // AvatarInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getImage(): mixed
+    {
+        return $this->data['image'] ?? false;
+    }
+
+    public function getIcon(): array
+    {
+        return $this->data['icon'] ?? [];
+    }
+
+    public function getSize(): string
+    {
+        return $this->data['size'] ?? 'md';
+    }
 }

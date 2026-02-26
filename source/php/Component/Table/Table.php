@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\Table;
 
-class Table extends \ComponentLibrary\Component\BaseController
+class Table extends \ComponentLibrary\Component\BaseController implements TableInterface
 {
     public function init()
     {
@@ -79,5 +79,77 @@ class Table extends \ComponentLibrary\Component\BaseController
         foreach ($this->data['list'] as &$row) {
             $row['columns'] = array_pad($row['columns'], $longest, ' ');
         }
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'table';
+    }
+
+    // -------------------------------------------------------------------------
+    // TableInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getList(): array
+    {
+        return $this->data['list'] ?? [];
+    }
+
+    public function getHeadings(): array
+    {
+        return $this->data['headings'] ?? [];
+    }
+
+    public function getShowHeader(): bool
+    {
+        return $this->data['showHeader'] ?? true;
+    }
+
+    public function getShowCaption(): bool
+    {
+        return $this->data['showCaption'] ?? false;
+    }
+
+    public function getFilterable(): bool
+    {
+        return $this->data['filterable'] ?? false;
+    }
+
+    public function getSortable(): bool
+    {
+        return $this->data['sortable'] ?? false;
+    }
+
+    public function getShowSum(): bool
+    {
+        return $this->data['showSum'] ?? false;
+    }
+
+    public function getFullscreen(): bool
+    {
+        return $this->data['fullscreen'] ?? false;
+    }
+
+    public function getIsMultidimensional(): bool
+    {
+        return $this->data['isMultidimensional'] ?? false;
+    }
+
+    public function getTitle(): string
+    {
+        return $this->data['title'] ?? '';
+    }
+
+    public function getIncludePaper(): bool
+    {
+        return $this->data['includePaper'] ?? true;
+    }
+
+    public function getLabels(): object
+    {
+        return $this->data['labels'] ?? (object) [];
     }
 }

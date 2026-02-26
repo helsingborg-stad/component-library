@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\MegaMenu;
 
-class MegaMenu extends \ComponentLibrary\Component\BaseController  
+class MegaMenu extends \ComponentLibrary\Component\BaseController implements MegaMenuInterface  
 {
     
     public function init() {
@@ -43,5 +43,57 @@ class MegaMenu extends \ComponentLibrary\Component\BaseController
         }
 
         return $result;
+    }
+    // -------------------------------------------------------------------------
+    // ComponentInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getSlug(): string
+    {
+        return 'megaMenu';
+    }
+
+    // -------------------------------------------------------------------------
+    // MegaMenuInterface — generated getters
+    // -------------------------------------------------------------------------
+
+    public function getMenuItems(): array
+    {
+        return $this->data['menuItems'] ?? [];
+    }
+
+    public function getParentType(): string
+    {
+        return $this->data['parentType'] ?? 'default';
+    }
+
+    public function getParentStyle(): string|bool
+    {
+        return $this->data['parentStyle'] ?? false;
+    }
+
+    public function getParentStyleColor(): string
+    {
+        return $this->data['parentStyleColor'] ?? 'primary';
+    }
+
+    public function getChildType(): string
+    {
+        return $this->data['childType'] ?? 'default';
+    }
+
+    public function getChildStyle(): string|bool
+    {
+        return $this->data['childStyle'] ?? false;
+    }
+
+    public function getChildStyleColor(): string
+    {
+        return $this->data['childStyleColor'] ?? 'primary';
+    }
+
+    public function getMobile(): bool
+    {
+        return $this->data['mobile'] ?? false;
     }
 }

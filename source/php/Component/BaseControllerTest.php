@@ -1,6 +1,8 @@
 <?php
 
+use ComponentLibrary\Cache\CacheInterface;
 use ComponentLibrary\Component\BaseController;
+use ComponentLibrary\Helper\TagSanitizerInterface;
 
 class BaseControllerTest extends PHPUnit\Framework\TestCase
 {
@@ -18,7 +20,7 @@ class BaseControllerTest extends PHPUnit\Framework\TestCase
 
     public function testBuildAttributesAllowsObjectAsValue()
     {
-        $attributes = ['Object' => (object)['key' => 'value']];
+        $attributes = ['Object' => (object) ['key' => 'value']];
         $this->assertEquals('Object="{&quot;key&quot;:&quot;value&quot;}"', BaseController::buildAttributes($attributes));
     }
 
@@ -27,7 +29,7 @@ class BaseControllerTest extends PHPUnit\Framework\TestCase
         $attributes = ['Zero' => '0'];
         $this->assertEquals('Zero="0"', BaseController::buildAttributes($attributes));
     }
-    
+
     public function testAllowsZeroAsInteger()
     {
         $attributes = ['Zero' => 0];
@@ -68,7 +70,30 @@ class BaseControllerTest extends PHPUnit\Framework\TestCase
 
     public function testIgnoresCallables()
     {
-        $attributes = ['Callable' => function() { return 'test'; }];
+        $attributes = ['Callable' => function () {
+            return 'test';
+        }];
         $this->assertEquals('', BaseController::buildAttributes($attributes));
+    }
+
+    public function testGetDataExposesComponentControllerForViews()
+    {
+        // Arrange
+        $cache = $this->createMock(CacheInterface::class);
+        $tagSanitizer = $this->createMock(TagSanitizerInterface::class);
+        $controller = new class([], $cache, $tagSanitizer) extends BaseController {
+            public function init()
+            {
+            }
+        };
+
+        // Act
+        $data = $controller->getData();
+
+        // Assert
+        $this->assertArrayHasKey('componentController', $data);
+        $this->assertSame($controller, $data['componentController']);
+        $this->assertIsString($data['componentController']->getSlug());
+        $this->assertNotEmpty($data['componentController']->getSlug());
     }
 }
