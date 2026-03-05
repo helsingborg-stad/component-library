@@ -1,18 +1,17 @@
 {
     "slug": "map",
     "default": {
-        "markers": [],
-        "startPosition": {
-            "lat": 56.046467,
-            "lng": 12.694512
-        },
+        "lat": 56.046467,
+        "lng": 12.694512,
         "zoom": 11,
         "mapStyle": "default",
         "height": "600px",
+        "markers": [],
         "provider": "openstreetmap"
     },
     "description": {
-        "startPosition": "An object containing lat (number), lng (number).",
+        "lat": "The initial center latitude of the map (number)",
+        "lng": "The initial center longitude of the map (number)",
         "markers": "An array of objects containing lat (number), lng (number), content (string, can be displayed in a popup) icon (string, based on the icon component names) color (string, hex or color name)",
         "mapStyle": "Theming of the map (pale, dark, color, default)",
         "zoom": "The initial zoom level of the map (number)",
@@ -20,7 +19,8 @@
         "provider": "The map provider to use (openstreetmap, googlemaps)"
     },
     "types": {
-        "startPosition": "object",
+        "lat": "number",
+        "lng": "number",
         "markers": "array",
         "mapStyle": "string",
         "height": "string",
