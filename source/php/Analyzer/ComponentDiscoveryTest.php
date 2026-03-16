@@ -57,9 +57,9 @@ class ComponentDiscoveryTest extends TestCase
     }
 
     /**
-     * @testdox it throws RuntimeException for non-existent directory
+     * @testdox it returns empty array for non-existent directory
      */
-    public function testDiscoverSlugsThrowsForInvalidPath(): void
+    public function testDiscoverSlugsReturnsEmptyForInvalidPath(): void
     {
         $discovery = new ComponentDiscovery('/nonexistent/path');
 

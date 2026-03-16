@@ -58,8 +58,8 @@ class ComponentDiscovery
         $slugs      = [];
         $directories = glob($this->componentBasePath . '*', GLOB_ONLYDIR);
 
-        if ($directories === false) {
-            throw new \RuntimeException("Failed to scan component directory: {$this->componentBasePath}");
+        if (!is_array($directories)) {
+            return [];
         }
 
         foreach ($directories as $directory) {

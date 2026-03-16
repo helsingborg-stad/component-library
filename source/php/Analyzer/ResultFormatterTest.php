@@ -59,7 +59,7 @@ class ResultFormatterTest extends TestCase
 
         $output = $formatter->formatTable($results, true);
 
-        $this->assertStringNotContainsString(' USED COMPONENTS' . "\n", $output);
+        $this->assertStringNotContainsString("USED COMPONENTS\n", $output);
         $this->assertStringContainsString('UNUSED COMPONENTS', $output);
         $this->assertStringContainsString('@card', $output);
     }
