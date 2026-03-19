@@ -2,7 +2,7 @@
     'href' => $link,
     'classList' => ['c-segment__image-container'],
     'keepContent' => true,
-    'keepWrapper' => true,
+    'keepWrapper' => $layout === 'card',
     'attributeList' => [
         'aria-label' => $lang->visit . ': ' . $link,
     ]
