@@ -39,8 +39,7 @@
     </div>
 
     @if (array_filter([!empty($email), !empty($telephone), !empty($socialMedia)]))
-        <div class="u-border__top--1 u-margin__top--auto u-padding__x--2"
-            style="gap: var(--base, 8px); border-top-color: var(--color-border-divider) !important;">
+        <div class="u-border__top--1 u-margin__top--auto u-padding__x--2 u-display--flex u-gap--1">
 
             {{-- E-mail --}}
             @includeWhen(!empty($email), 'Person.views.components.extended.email', ['icon' => 'email'])
