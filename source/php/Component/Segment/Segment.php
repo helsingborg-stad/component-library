@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 namespace ComponentLibrary\Component\Segment;
 
@@ -106,7 +106,7 @@ class Segment extends \ComponentLibrary\Component\BaseController
             if (preg_match('^#(?:[0-9a-fA-F]{3}){1,2}$^', $background)) {
                 $this->data['attributeList']['style'] = 'background-color: ' . $background . ';';
             } else {
-                $this->data['classList'][] = 'u-color__bg--' . $background;
+                $this->data['classList'][] = 'u-color--' . $background;
             }
         }
 
