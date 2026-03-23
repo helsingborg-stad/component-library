@@ -125,6 +125,11 @@ class Field extends \ComponentLibrary\Component\Form\Form
         //Set type
         $this->data['classList'][] = $this->getBaseClass() . "--" . $type;
 
+        // Default date icon when none is explicitly provided
+        if ($type === 'date' && empty($icon)) {
+            $icon = ['icon' => 'date_range'];
+        }
+
         //Handle icon
         $this->data['icon'] = $this->getIcon($icon, $size);
         if ($this->data['icon']) {
