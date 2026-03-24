@@ -14,9 +14,7 @@ class Slider extends \ComponentLibrary\Component\BaseController
         $this->data['attributeList']['data-js-slider-index'] = 0;
         $this->data['attributeList']['data-js-slider-index'] = 0;
 
-        if (!empty($repeatSlide)) {
-            $this->data['attributeList']['data-slider-loop'] = true;
-        }
+        $this->data['attributeList']['data-slider-type'] = $repeatSlide ? 'loop' : ($type ?? 'slide');
 
         $this->data['classList'][] = 'splide';
         $this->data['classList'][] = 'u-visibility--visible';
