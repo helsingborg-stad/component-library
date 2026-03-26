@@ -56,6 +56,14 @@ class Breadcrumb extends \ComponentLibrary\Component\BaseController
 			}
 		}
 
+		if(!is_array($list)) {
+			return [];
+		}
+
+		$list = array_filter($list, function ($item) {
+			return !empty($item['label']);
+		});
+
 		return $list;
 	}
 }
