@@ -8,10 +8,11 @@ class Iframe extends \ComponentLibrary\Component\BaseController
     {
         extract($this->data);
 
+        $this->data['requiresAccept'] = true;
         $this->data['attributeList']['allowfullscreen'] = true;
 
         if (empty($id)) {
-            $this->data['id'] = $this->sanitizeIdAttribute("iframe-" . uniqid());
+            $this->data['id'] = $this->sanitizeIdAttribute('iframe-' . uniqid());
         }
 
         if (isset($width)) {
@@ -37,16 +38,19 @@ class Iframe extends \ComponentLibrary\Component\BaseController
         if (isset($src)) {
             $this->data['attributeList']['src'] = $src;
 
-            if (empty($poster) && function_exists('apply_filters')) {
-                $this->data['poster'] = apply_filters('ComponentLibrary/Iframe/Poster', $src);
+            if (function_exists('apply_filters')) {
+                if (empty($poster)) {
+                    $this->data['poster'] = apply_filters('ComponentLibrary/Iframe/Poster', $src);
+                }
+                $this->data['requiresAccept'] = (bool) apply_filters('ComponentLibrary/Component/Iframe/DisplayAcceptance', $src);
             }
         }
 
         if (isset($labels)) {
             $this->data['labels'] = $labels;
         }
-        
-        if(!empty($poster)) {
+
+        if (!empty($poster)) {
             $this->data['attributeList']['poster'] = $poster;
             $this->data['poster'] = $poster;
         }
@@ -56,7 +60,6 @@ class Iframe extends \ComponentLibrary\Component\BaseController
 
         $this->data['embeddedDomain'] = $this->getDomainFromUrl($src);
     }
-    
 
     /**
      * Gets the domain from a given URL.
@@ -64,7 +67,8 @@ class Iframe extends \ComponentLibrary\Component\BaseController
      * @param string $url The URL from which to extract the domain.
      * @return string|false The extracted domain or false if not available.
      */
-    private function getDomainFromUrl($url) {
+    private function getDomainFromUrl($url)
+    {
         return parse_url($url)['host'];
     }
 }
