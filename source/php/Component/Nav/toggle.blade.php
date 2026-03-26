@@ -9,7 +9,8 @@
       'size' => 'md',
       'pressed' => $item['active'] ? 'true' : 'false',
       'attributeList' => [
-        'aria-label' => $getExpandLabel($item['label'], $expandLabel)
+        'aria-label' => $getExpandLabel($item['label'], $expandLabel),
+        'aria-pressed' => $item['active'] ? 'true' : 'false'
       ]
   ])
   @endbutton
