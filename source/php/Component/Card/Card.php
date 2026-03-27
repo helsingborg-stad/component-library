@@ -14,6 +14,7 @@ class Card extends \ComponentLibrary\Component\BaseController
 {
     private array $slotMapping = [
         'afterContent' => 'afterContentSlotHasData',
+        'beforeContent' => 'beforeContentSlotHasData',
         'floating'     => 'floatingSlotHasData',
         'aboveContent' => 'aboveContentSlotHasData',
         'belowContent' => 'belowContentSlotHasData',
