@@ -7,6 +7,7 @@
     "src"      => array($attributeList['src']),
     "icon"     => "info",
     "cover"    => $poster,
+    "requiresAccept" => $requiresAccept,
     ])
     <iframe id="{{ $id }}" class="{{$class}}" {!! $attribute !!}>
     </iframe>

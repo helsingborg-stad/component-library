@@ -12,15 +12,13 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
         //Extract array for easy access (fetch only)
         extract($this->data);
 
-        $this->data['requiresAccept'] = true;
-
         $this->data['classList'][] = 'js-suppressed-content';
         $this->data['classList'][] = 'u-level-1';
 
         if (isset($icon)) {
             $this->data['icon'] = $icon;
         }
-        
+
         if (!empty($src)) {
             $this->data['attributeList']['data-src'] = json_encode($src, JSON_UNESCAPED_SLASHES);
 
@@ -32,7 +30,7 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
         }
 
         if (!empty($this->data['supplierSystemType'])) {
-            $this->data['classList'][] = $this->getBaseClass() . "--" . $this->data['supplierSystemType'];
+            $this->data['classList'][] = $this->getBaseClass() . '--' . $this->data['supplierSystemType'];
 
             if (in_array($this->data['supplierSystemType'], $this->jsBehaviourSystemTypes)) {
                 $this->data['classList'][] = 'js-suppressed-content--' . $this->data['supplierSystemType'];
@@ -40,7 +38,7 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
                 $this->data['classList'][] = 'js-suppressed-content--none';
             }
         }
-        
+
         if ($cover && $this->isValidBackgroundAssetName($cover)) {
             $this->data['attributeList']['style'][] = "background-image:url(\"$cover\");background-size:cover";
         }
@@ -48,7 +46,7 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
         if (!empty($height)) {
             $this->data['attributeList']['style'][] = "height:{$height}px";
         }
-        
+
         if (!empty($this->data['labels'])) {
             $knownLabels = json_encode($this->data['labels']['knownLabels']);
             $unknownLabels = json_encode($this->data['labels']['unknownLabels']);
@@ -61,7 +59,7 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
                 $knownLabels = str_replace(
                     array('{SUPPLIER_WEBSITE}', '{SUPPLIER_POLICY}'),
                     array($this->data['supplierName'], $this->data['supplierPolicy']),
-                    $knownLabels
+                    $knownLabels,
                 );
 
                 $this->data['labels'] = json_decode($knownLabels);
@@ -69,17 +67,17 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
                 $unknownLabels = str_replace(
                     '{SUPPLIER_WEBSITE}',
                     $this->data['supplierHost'],
-                    $unknownLabels
+                    $unknownLabels,
                 );
                 $this->data['labels'] = json_decode($unknownLabels);
             }
         }
-        
+
         if (!empty($this->data['attributeList']['style']) && is_iterable($this->data['attributeList']['style'])) {
             $this->data['attributeList']['style'] = implode(';', $this->data['attributeList']['style']);
         }
     }
-    
+
     /**
      * Get suppliers
      * Creates a list of suppliers with
@@ -95,98 +93,98 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
                 array('maps.google.com', 'maps.google.se', 'google.com', 'www.google.com', 'google.se', 'www.google.se'),
                 'https://policies.google.com/privacy',
                 true,
-                'map'
+                'map',
             ),
             new Supplier(
                 'ArcGIS',
                 array('helsingborg.maps.arcgis.com', 'maps.arcgis.com'),
                 'https://www.esri.se/sv-se/integritet/gdpr',
                 true,
-                'map'
+                'map',
             ),
             new Supplier(
                 'YouTube',
                 array('youtube.com', 'www.youtube.com', 'youtu.be'),
                 'https://policies.google.com/privacy',
                 true,
-                'video'
+                'video',
             ),
             new Supplier(
                 'Vimeo',
                 array('vimeo.com', 'www.vimeo.com', 'player.vimeo.com'),
                 'https://vimeo.com/privacy',
                 true,
-                'video'
+                'video',
             ),
             new Supplier(
                 'Helsingborg Stad',
                 array('helsingborg.se', 'www.helsingborg.se', 'driftinfo.helsingborg.se', 'it.helsingborg.se', 'ettbattre.helsingborg.se', 'media.helsingborg.se'),
                 'https://helsingborg.se/om-webbplatsen/sa-har-behandlar-vi-dina-personuppgifter/',
                 false,
-                'municipal'
+                'municipal',
             ),
             new Supplier(
                 'Mynewsdesk',
-                array( 'helsingborg.mynewsdesk.com', 'mynewsdesk.com'),
+                array('helsingborg.mynewsdesk.com', 'mynewsdesk.com'),
                 'https://www.mynewsdesk.com/se/about/terms-and-conditions/',
                 true,
-                'news'
+                'news',
             ),
             new Supplier(
                 'KommersAnnons.se',
-                array( 'kommersannons.se', 'www.kommersannons.se'),
+                array('kommersannons.se', 'www.kommersannons.se'),
                 'https://kommersannons.se/',
                 true,
-                'money'
+                'money',
             ),
             new Supplier(
                 'Stratsys',
-                array( 'stratsys.se', 'www.stratsys.se', 'jamforelse.stratsys.se'),
+                array('stratsys.se', 'www.stratsys.se', 'jamforelse.stratsys.se'),
                 'https://www.stratsys.com/sv/integritetspolicy',
                 false,
-                'stats'
+                'stats',
             ),
             new Supplier(
                 'Sparkle',
                 array('5p4rk13.com'),
                 'https://getsparkle.io/terms/',
                 true,
-                'social'
+                'social',
             ),
             new Supplier(
                 'Curator',
                 array('cdn.curator.io', 'curator.io'),
                 'https://curator.io/privacy-policy',
                 true,
-                'social'
+                'social',
             ),
             new Supplier(
                 'Visma',
                 array('visma.se', 'visma.com', 'minsida.siriusit.net', 'siriusit.net'),
                 'https://www.visma.com/privacy-statement/sweden/',
                 false,
-                'login'
+                'login',
             ),
             new Supplier(
                 'Twoday',
                 array('twoday.se'),
                 'https://twoday.se/privacy-policy',
                 false,
-                'login'
+                'login',
             ),
             new Supplier(
                 'Spotify',
                 array('www.spotify.com', 'open.spotify.com', 'spotify.com'),
                 'https://www.spotify.com/se/legal/privacy-policy/',
                 true,
-                'music'
+                'music',
             ),
             new Supplier(
                 'Soundcloud',
                 array('www.soundcloud.com', 'w.soundcloud.com', 'soundcloud.com'),
                 'https://soundcloud.com/pages/privacy',
                 true,
-                'music'
+                'music',
             ),
         );
 
@@ -213,23 +211,23 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
                 $url = \ComponentLibrary\Helper\URL::normalizeUrl($value);
                 $value = parse_url($url)['host'];
             }
-            $this->data['supplierHost']         = strtolower(implode(', ', $src));
-            $this->data['supplierSystemType']   = 'general';
+            $this->data['supplierHost'] = strtolower(implode(', ', $src));
+            $this->data['supplierSystemType'] = 'general';
         } else {
-            $suppliers  = $this->getSuppliers();
-            
+            $suppliers = $this->getSuppliers();
+
             $url = \ComponentLibrary\Helper\URL::normalizeUrl($src[0]);
-            $srcParsed  = parse_url($url);
-            $host       = strtolower($srcParsed['host']);
+            $srcParsed = parse_url($url);
+            $host = strtolower($srcParsed['host']);
 
             if (is_iterable($suppliers)) {
                 foreach ($suppliers as $supplier) {
                     $key = array_search($host, $supplier->domain, true);
                     if (is_integer($key)) {
-                        $this->data['supplierHost']         = $supplier->domain[$key];
-                        $this->data['supplierName']         = $supplier->name;
-                        $this->data['requiresAccept']       = $supplier->requiresAccept;
-                        $this->data['supplierSystemType']   = $supplier->systemType;
+                        $this->data['supplierHost'] = $supplier->domain[$key];
+                        $this->data['supplierName'] = $supplier->name;
+                        $this->data['requiresAccept'] = $supplier->requiresAccept;
+                        $this->data['supplierSystemType'] = $supplier->systemType;
 
                         if (isset($supplier->policy)) {
                             $this->data['supplierPolicy'] = $supplier->policy;
@@ -237,8 +235,8 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
 
                         break;
                     } else {
-                        $this->data['supplierHost']         = $host;
-                        $this->data['supplierSystemType']   = 'general';
+                        $this->data['supplierHost'] = $host;
+                        $this->data['supplierSystemType'] = 'general';
                     }
                 }
             }
@@ -249,18 +247,18 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
 
     /**
      * Check if image is a valid background asset name
-     * 
+     *
      * @param string $name
-     * 
+     *
      * @return bool
      */
     private function isValidBackgroundAssetName($name): bool
     {
         $name = pathinfo($name, PATHINFO_FILENAME);
-        if(empty($name)) {
+        if (empty($name)) {
             return false;
         }
-        return true; 
+        return true;
     }
 }
 
@@ -286,7 +284,7 @@ class Supplier
         array $domain,
         string $policy = '',
         bool $requiresAccept = true,
-        string $systemType = 'general'
+        string $systemType = 'general',
     ) {
         $this->name = $name;
         $this->domain = $domain;

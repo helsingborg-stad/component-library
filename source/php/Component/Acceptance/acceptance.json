@@ -9,7 +9,8 @@
         "name": false,
         "icon": "info",
         "cover": false,
-        "modifier": ""
+        "modifier": "",
+        "requiresAccept": true
     },
     "description": {
         "labels": "Object or array containing knownLabels and unknownLabels with title, info, and button",
@@ -20,7 +21,8 @@
         "name": "name of the host",
         "icon": "Icon name as a string.",
         "cover": "URL for background image",
-        "modifier": "Modifier variable ex. video"
+        "modifier": "Modifier variable ex. video",
+        "requiresAccept": "Whether user-acceptance is required or not"
     },
     "types": {
         "labels": "array|object|boolean",
@@ -31,7 +33,8 @@
         "name": "boolean",
         "icon": "string",
         "cover": "boolean",
-        "modifier": "string"
+        "modifier": "string",
+        "requiresAccept": "boolean"
     },
     "view": "acceptance.blade.php",
     "dependency": {
