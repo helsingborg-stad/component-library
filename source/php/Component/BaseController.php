@@ -149,14 +149,6 @@ class BaseController
     }
 
     /**
-     * If the slot exists in the data array, and the html property of the slot is not empty, then
-     * return true
-     *
-     * @param slotKey The name of the slot you want to check.
-     *
-     * @return a boolean value.
-     */
-    /**
      * Checks if the specified slot contains data.
      *
      * @param string $slotKey The key of the slot to check.
@@ -174,6 +166,11 @@ class BaseController
         return !empty($value);
     }
 
+    /**
+     * Get all parts of the namespace as an array
+     *
+     * @return array An array of namespace parts
+     */
     private function getNamespaceParts()
     {
         //Get all parts of the location
@@ -183,6 +180,13 @@ class BaseController
         );
     }
 
+    /**
+     * Adds modifier classes to the class array
+     *
+     * @param array $class The current array of classes
+     * @param array $modifier The modifiers to add
+     * @return array The modified class array
+     */
     private function setModifier($class, $modifier)
     {
         if (!empty($modifier)) {
@@ -342,11 +346,6 @@ class BaseController
             $attribute = array();
         }
 
-        //Add attribute for container awareness
-        if ($this->getContainerAware() == true) {
-            $attribute['data-observe-resizes'] = '';
-        }
-
         //Add id if defined
         if (!empty($this->data['id'])) {
             $attribute['id'] = $this->sanitizeIdAttribute($this->data['id']);
@@ -370,6 +369,9 @@ class BaseController
             $attribute['style'] = trim($this->sanitizeInlineCss($attribute['style']));
         }
 
+        //Add component slug data attribute
+        $attribute['data-component'] = $this->getComponentSlug();
+
         //Remove empty style attrs
         if (empty($attribute['style'])) {
             unset($attribute['style']);
@@ -379,6 +381,7 @@ class BaseController
         if (empty($attribute['aria-labelledby'])) {
             unset($attribute['aria-labelledby']);
         }
+
         if (empty($attribute['aria-label'])) {
             unset($attribute['aria-label']);
         }
@@ -519,6 +522,18 @@ class BaseController
         //Create string
         return strtolower(implode('.', $name));
     }
+
+    /**
+     * Get the slug of the component
+     *
+     * @return string
+     */
+    private function getComponentSlug(): string
+    {        
+        $namespaceParts = $this->getNamespaceParts();
+        return strtolower(end($namespaceParts)) ?? '';
+    }
+
 
     /**
      * Proxy for accessing private props
