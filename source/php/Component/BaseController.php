@@ -56,7 +56,7 @@ class BaseController
 
         //Applies a general wp filter
         if (function_exists('apply_filters')) {
-            $this->data = apply_filters('ComponentLibrary/Component/Data', $this->data);
+            $this->data = apply_filters('ComponentLibrary/Component/Data', $this->data, $this);
         }
 
         //Applies a general wp filter
