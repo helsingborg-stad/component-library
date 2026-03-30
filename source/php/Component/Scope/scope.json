@@ -1,0 +1,23 @@
+{
+    "slug": "divider",
+    "default": {
+        "componentElement": "div",
+        "name": ""
+    },
+    "description": {
+        "componentElement": "The tag to use for this component.",
+        "name": "The name of the scope."
+    },
+    "types":{
+        "componentElement": "string",
+        "name": "string"
+    },
+    "view": "scope.blade.php",
+    "dependency": {
+        "sass": {
+            "components": [
+                "scope"
+            ]
+        }
+    }
+}
