@@ -2,11 +2,19 @@
     "slug": "fab",
     "default": {
         "position": "bottom-right",
-        "heading": "Samlade länkar för elever och föräldrar",
+        "heading": false,
         "button": false,
         "slot": "",
         "closeLabel": false,
         "closeIcon": false
+    },
+    "types":{
+        "position": "string",
+        "heading": "string|boolean",
+        "button": "array|boolean",
+        "slot": "string",
+        "closeLabel": "string|boolean",
+        "closeIcon": "string|boolean"
     },
     "description": {
         "position": "Where on the screen the FAB should be positioned",
