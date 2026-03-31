@@ -2,6 +2,9 @@
 
 namespace ComponentLibrary\Component\Textarea;
 
+use ComponentLibrary\Cache\CacheInterface;
+use ComponentLibrary\Helper\TagSanitizerInterface;
+
 /**
  * Class Textarea
  * @package ComponentLibrary\Component\Textarea
@@ -9,10 +12,14 @@ namespace ComponentLibrary\Component\Textarea;
  */
 class Textarea extends \ComponentLibrary\Component\BaseController
 {
-    public function init()
+    public function __construct($data, CacheInterface $cache, TagSanitizerInterface $tagSanitizer)
     {
         trigger_error('The Textarea component is deprecated and will be removed. Please use the Field component with ["type" => "text", "multiline" => true] instead.', E_USER_DEPRECATED);
+        return parent::__construct($data, $cache, $tagSanitizer);
+    }
 
+    public function init()
+    {
         //Extract array for eazy access (fetch only)
         extract($this->data);
         $this->compParams = [
