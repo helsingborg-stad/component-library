@@ -5,11 +5,14 @@ namespace ComponentLibrary\Component\Textarea;
 /**
  * Class Textarea
  * @package ComponentLibrary\Component\Textarea
+ * @deprecated This component is deprecated and will be removed. Please use the Field component with ["type" => "text", "multiline" => true] instead.
  */
 class Textarea extends \ComponentLibrary\Component\BaseController
 {
     public function init()
     {
+        trigger_error('The Textarea component is deprecated and will be removed. Please use the Field component with ["type" => "text", "multiline" => true] instead.', E_USER_DEPRECATED);
+
         //Extract array for eazy access (fetch only)
         extract($this->data);
         $this->compParams = [
@@ -24,7 +27,7 @@ class Textarea extends \ComponentLibrary\Component\BaseController
         $this->setData();
 
         //Populate attributes
-        $this->data['attributeList']['aria-multiline'] = "true";
+        $this->data['attributeList']['aria-multiline'] = 'true';
 
         if (!empty($placeholder)) {
             $this->data['attributeList']['placeholder'] = $placeholder;
@@ -33,10 +36,10 @@ class Textarea extends \ComponentLibrary\Component\BaseController
 
         //Is required props
         if ($required) {
-            $this->data['attributeList']['required'] = "required";
-            $this->data['attributeList']['data-required'] = "1";
-            $this->data['attributeList']['data-js-required'] = "";
-            $this->data['attributeList']['aria-required'] = "true";
+            $this->data['attributeList']['required'] = 'required';
+            $this->data['attributeList']['data-required'] = '1';
+            $this->data['attributeList']['data-js-required'] = '';
+            $this->data['attributeList']['aria-required'] = 'true';
         }
     }
 
