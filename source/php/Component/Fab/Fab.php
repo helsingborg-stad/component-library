@@ -15,9 +15,16 @@ class Fab extends \ComponentLibrary\Component\BaseController
         //Generate panel id js support
         $this->data['panelId'] = "panel-id-" . uniqid(); 
 
+        //Check if slot has data
+        $this->data['slotHasData'] = $this->slotHasData('slot');
+
         //Create panel trigger
         if(is_array($button) && !empty($button)) {
-            $this->data['button']['attributeList'] = ['data-js-toggle-trigger' => $this->data['panelId']];
+
+            // Only add data trigger, if there are a slot to toggle
+            if($this->data['slotHasData'] === false) {
+                $this->data['button']['attributeList'] = ['data-js-toggle-trigger' => $this->data['panelId']];
+            }
 
             if ($closeLabel) {
                 $this->data['button']['attributeList']['data-toggle-label'] = $closeLabel;
