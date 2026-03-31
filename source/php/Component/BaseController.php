@@ -351,6 +351,11 @@ class BaseController
             $attribute['id'] = $this->sanitizeIdAttribute($this->data['id']);
         }
 
+        //Add attribute for container awareness
+        if ($this->getContainerAware() == true) {
+            $attribute['data-observe-resizes'] = '';
+        }
+
         //Add unique id
         $attribute['data-uid'] = $this->getUid();
 
