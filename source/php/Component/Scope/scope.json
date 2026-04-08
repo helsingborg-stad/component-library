@@ -10,7 +10,7 @@
     },
     "types":{
         "componentElement": "string",
-        "name": "string"
+        "name": "string|array"
     },
     "view": "scope.blade.php",
     "dependency": {
