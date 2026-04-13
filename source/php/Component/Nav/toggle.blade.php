@@ -7,10 +7,10 @@
       'style' => 'basic',
       'icon' => $expandIcon ?: 'expand_more',
       'size' => 'md',
-      'pressed' => $item['active'] ? 'true' : 'false',
+      'pressed' => ($item['active'] || $item['ancestor']) ? 'true' : 'false',
       'attributeList' => [
         'aria-label' => $getExpandLabel($item['label'], $expandLabel),
-        'aria-pressed' => $item['active'] ? 'true' : 'false'
+        'aria-pressed' => ($item['active'] || $item['ancestor']) ? 'true' : 'false'
       ]
   ])
   @endbutton
