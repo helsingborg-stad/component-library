@@ -1,23 +1,18 @@
 {
-    "slug": "scope",
-    "default": {
-        "componentElement": "div",
-        "name": ""
-    },
-    "description": {
-        "componentElement": "The tag to use for this component.",
-        "name": "The name of the scope."
-    },
-    "types":{
-        "componentElement": "string",
-        "name": "string|array"
-    },
-    "view": "scope.blade.php",
-    "dependency": {
-        "sass": {
-            "components": [
-                "scope"
-            ]
-        }
-    }
+	"slug": "scope",
+	"default": {
+		"name": ""
+	},
+	"description": {
+		"name": "The name of the scope. "
+	},
+	"types": {
+		"name": "string|array"
+	},
+	"view": "scope.blade.php",
+	"dependency": {
+		"sass": {
+			"components": ["scope"]
+		}
+	}
 }

@@ -1,3 +1,1 @@
-<{{$componentElement}} class="{{$class}}" {!! $attribute !!}>
-    {!! $slot !!}
-</{{$componentElement}}>
+{!! $applyScope($slot) !!}
