@@ -29,25 +29,40 @@ class Scope extends \ComponentLibrary\Component\BaseController
     {
         return function (HtmlString $inner) use ($scopes): HtmlString {
             $html = $inner->toHtml();
-            $dom = new \DOMDocument();
-            @$dom->loadHTML('<div id="__scope_root__">' . $html . '</div>', LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-            $root = $dom->getElementById('__scope_root__');
+            return new HtmlString($this->addScopeToTopLevel($html, $scopes));
+        };
+    }
 
-            if (!$root) {
-                return $inner;
-            }
+    private function addScopeToTopLevel(string $html, string $scopes): string
+    {
+        $depth = 0;
+        $output = '';
+        $offset = 0;
 
-            foreach ($root->childNodes as $child) {
-                if ($child instanceof \DOMElement) {
-                    $child->setAttribute('data-scope', $scopes);
+        preg_match_all('/<\/?([a-zA-Z][a-zA-Z0-9:-]*)([^>]*)>/', $html, $matches, PREG_OFFSET_CAPTURE);
+
+        foreach ($matches[0] as $i => $match) {
+            [$tag, $pos] = $match;
+
+            $output .= substr($html, $offset, $pos - $offset);
+
+            $isClosing = str_starts_with($tag, '</');
+
+            if (!$isClosing && $depth === 0) {
+                // inject attribute
+                if (!str_contains($tag, 'data-scope=')) {
+                    $tag = rtrim($tag, '>') . ' data-scope="' . $scopes . '">';
                 }
             }
 
-            $newHtml = '';
-            foreach ($root->childNodes as $child) {
-                $newHtml .= $dom->saveHTML($child);
-            }
-            return new HtmlString($newHtml);
-        };
+            $output .= $tag;
+
+            $depth += $isClosing ? -1 : 1;
+            $offset = $pos + strlen($match[0]);
+        }
+
+        $output .= substr($html, $offset);
+
+        return $output;
     }
 }

@@ -69,6 +69,22 @@ class ScopeTest extends TestCase
         $this->assertEquals($expected, $output->toHtml());
     }
 
+    /**
+     * @testdox does not scramble swedish language characters
+     */
+    public function testApplyScopeWithSwedishCharacters()
+    {
+        $scope = new Scope(['name' => 'example'], static::createCacheService(), static::createTagSanitizerService());
+        $scope->init();
+
+        $applyScope = $scope->getData()['applyScope'];
+        $input = new HtmlString('<div><p>Täst</p><span>Anöthär</span></div>');
+        $output = call_user_func($applyScope, $input);
+
+        $expected = '<div data-scope="s-example;"><p>Täst</p><span>Anöthär</span></div>';
+        $this->assertEquals($expected, $output->toHtml());
+    }
+
     private static function createCacheService(): CacheInterface
     {
         return new class implements CacheInterface {
