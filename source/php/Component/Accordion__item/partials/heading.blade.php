@@ -3,20 +3,20 @@
         @if ($index === 0)
             @typography([
                 'element' => 'h3',
-                'variant' => 'h4',
-                'classList' => [$baseClass . '__button-column']
+                'variant' => 'h6',
+                'classList' => [$accordionClass . '__button-column']
             ])
                 {!! $headingItem !!}
             @endtypography
             @else
-            <span class="{{$baseClass}}__button-column">{{$headingItem}}</span>
+            <span class="{{$accordionClass}}__button-column">{{$headingItem}}</span>
         @endif
     @endforeach
 @else
     @typography([
         'element' => 'h3',
-        'variant' => 'h4',
-        'classList' => [$baseClass . '__button-column']
+        'variant' => 'h6',
+        'classList' => [$accordionClass . '__button-column']
     ])
         {!! $heading !!}
     @endtypography
