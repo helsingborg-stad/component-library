@@ -67,12 +67,4 @@
             {!! $bottom !!}
         </div>
     @endif
-
-    @if ($navigation)
-        @steppers(
-        [
-        'type' => 'dots'
-        ])
-        @endsteppers
-    @endif
 </dialog>

@@ -13,7 +13,6 @@
 <div class="{{$baseClass .'s'}}">
     <div class="{{$baseClass . 's__slider'}}">
         @slider([
-            'showStepper' => false,
             'autoSlide' => false,
             'attributeList' => [
                 'data-slides-per-page' => $slidesPerPage,
