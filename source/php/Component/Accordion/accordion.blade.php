@@ -3,26 +3,7 @@
     <{{$componentElement}} class="{{ $class }}" js-expand-container {!! $attribute !!}>
         @foreach($list as $section)
             <{{$sectionElement}} class="{{$baseClass}}__section">
-
-                <{{$sectionHeadingElement}} class="{{$baseClass}}__button" role="button" aria-label="{{$section['heading']}}" aria-controls="{{ $baseClass }}__aria-{{ $id }}-{{ $loop->index }}" aria-expanded="false" js-expand-button>
-                    <span class="{{$baseClass}}__button-wrapper" tabindex="-1">
-                        {!!$beforeHeading!!}
-
-                        {!! $section['heading'] !!}
-                        @if($taxonomyPosition === 'top' && $taxonomy > 0)
-                            @tags([
-                                'tags' => $taxonomy
-                            ])
-                            @endtags
-                        @endif
-
-                        {!!$afterHeading!!}
-
-                        @icon(['icon' => 'keyboard_arrow_down', 'size' => 'md', 'classList' => [$baseClass . '__icon']])
-                        @endicon
-
-                    </span>
-                </{{$sectionHeadingElement}}>
+                @include('Accordion.partials.heading-button')
 
                 <{{$sectionContentElement}} class="{{$baseClass}}__content" id="{{ $baseClass }}__aria-{{ $id }}-{{ $loop->index }}" aria-hidden="true">
                     
