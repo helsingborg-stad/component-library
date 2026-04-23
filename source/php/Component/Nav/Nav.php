@@ -91,7 +91,10 @@ class Nav extends \ComponentLibrary\Component\BaseController
             //Active state
             if($item['active']) {
                 $classList[] = "is-current";
-                $classList[] = "is-open";
+
+                if ($direction == 'vertical') {
+                    $classList[] = "is-open";
+                }
             }
 
             if($this->isAncestor($item['ancestor'])) {
