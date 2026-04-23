@@ -92,7 +92,7 @@ class Nav extends \ComponentLibrary\Component\BaseController
             if($item['active']) {
                 $classList[] = "is-current";
 
-                if ($direction == 'vertical') {
+                if ($direction === 'vertical') {
                     $classList[] = "is-open";
                 }
             }
