@@ -1,0 +1,17 @@
+{
+    "slug": "chat",
+    "default": {
+        "title": "Title"
+    },
+    "view": "chat.blade.php",
+    "dependency": {
+        "sass": {
+            "components": [
+                "chat",
+                "chat__message",
+                "chat__input",
+                "element"
+            ]
+        }
+    }
+}
