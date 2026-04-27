@@ -1,0 +1,15 @@
+{
+    "slug": "chat__input",
+    "default": {
+        "placeholder": "Type your message here..."
+    },
+    "view": "chat__input.blade.php",
+    "dependency": {
+        "sass": {
+            "components": [
+                "chat__input",
+                "element"
+            ]
+        }
+    }
+}
