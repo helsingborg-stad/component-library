@@ -1,0 +1,15 @@
+{
+    "slug": "chat__message",
+    "default": {
+        "isReply": false
+    },
+    "view": "chat__message.blade.php",
+    "dependency": {
+        "sass": {
+            "components": [
+                "chat__message",
+                "element"
+            ]
+        }
+    }
+}
