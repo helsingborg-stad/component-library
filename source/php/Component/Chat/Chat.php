@@ -12,7 +12,7 @@ class Chat extends \ComponentLibrary\Component\BaseController
 
         //Extract array for eazy access (fetch only)
         extract($this->data);
-        $this->data['attributeList']['data-js-chat'] = $this->id ?? uniqid('chat-');
+        $this->data['attributeList']['data-js-chat'] = $this->data['id'] ?? uniqid('chat-');
         foreach ($this->slotMapping as $slot => $hasDataKey) {
             $this->data[$hasDataKey] = $this->slotHasData($slot);
         }
