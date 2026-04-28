@@ -11,7 +11,6 @@
     ])
         <!-- Messages will be dynamically inserted here -->
     @endelement
-    @chat__input([
-    ])
+    @chat__input($chatInputData)
     @endchat__input
 @endelement

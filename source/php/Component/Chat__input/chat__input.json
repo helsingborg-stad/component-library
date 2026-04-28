@@ -1,7 +1,8 @@
 {
     "slug": "chat__input",
     "default": {
-        "placeholder": "Type your message here..."
+        "placeholderText": null,
+        "sendButtonText": null
     },
     "view": "chat__input.blade.php",
     "dependency": {
