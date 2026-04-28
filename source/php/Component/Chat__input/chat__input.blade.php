@@ -11,8 +11,9 @@
             'contenteditable' => 'true',
             'role' => 'textbox',
             'aria-multiline' => 'true',
-            'aria-label' => $placeholder ?? '',
+            'aria-label' => $placeholderText ?? '',
             'data-js-chat-editable' => true,
+            'data-placeholder' => $placeholderText ?? '',
         ]
     ])
         <!-- input area -->

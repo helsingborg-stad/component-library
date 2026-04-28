@@ -1,7 +1,14 @@
 {
     "slug": "chat",
     "default": {
-        "title": "Title"
+        "title": "Title",
+        "persistent": false,
+        "chatInputData": []
+    },
+    "description": {
+        "title": "The title of the chat.",
+        "persistent": "If the chat should be persistent, meaning it will be visible on all pages and not just the page it is rendered on. Uses local storage to keep track of the chat state, also requires a unique and persistent ID to be set on the chat component.",
+        "chatInputData": "Data for the chat input component. Check the chat__input component for more details."
     },
     "view": "chat.blade.php",
     "dependency": {
