@@ -12,7 +12,7 @@
         @endtypography
     @endif
 
-    @if($titleSlotHasContent)
+    @if($titleAreaSlotHasContent)
         {!! $titleArea !!}
     @endif
 @endelement
