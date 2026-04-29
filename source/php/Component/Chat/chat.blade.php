@@ -10,7 +10,7 @@
     ),
     'attributeList' => $attributeList
 ])
-    @includeWhen($title, 'Chat.partials.title-area')
+    @includeWhen($title || $titleAreaSlotHasContent, 'Chat.partials.title-area')
     @include('Chat.partials.chat-area')
     @include('Chat.partials.message-template')
 @endelement

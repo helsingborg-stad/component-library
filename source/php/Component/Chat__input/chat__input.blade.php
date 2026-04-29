@@ -5,7 +5,7 @@
     @element([
         'componentElement' => 'div',
         'classList' => [
-            $baseClass . '__editable',
+            $baseClass . '__editable'
         ],
         'attributeList' => [
             'contenteditable' => 'true',

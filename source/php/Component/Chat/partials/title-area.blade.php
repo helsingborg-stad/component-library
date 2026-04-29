@@ -8,7 +8,7 @@
             'element' => 'h2',
             'variant' => 'h6',
         ])
-            Chat
+            {{ $title }}
         @endtypography
     @endif
 
