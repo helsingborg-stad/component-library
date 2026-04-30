@@ -15,7 +15,8 @@
         "button": "array|boolean",
         "slot": "string",
         "closeLabel": "string|boolean",
-        "closeIcon": "string|boolean"
+        "closeIcon": "string|boolean",
+        "size": "string"
     },
     "description": {
         "position": "Where on the screen the FAB should be positioned",
@@ -23,7 +24,8 @@
         "button": "Settings for the button element (trigger)",
         "slot": "Contents of popup panel",
         "closeLabel": "The label to indicate closing action",
-        "closeIcon": "The icon to indicate closing action"
+        "closeIcon": "The icon to indicate closing action",
+        "size": "The size of the button; sm, md, lg."
     },
     "view": "fab.blade.php",
     "dependency": {
