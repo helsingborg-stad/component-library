@@ -15,6 +15,8 @@ class Fab extends \ComponentLibrary\Component\BaseController
         //Generate panel id js support
         $this->data['panelId'] = "panel-id-" . uniqid(); 
 
+        $this->data['classList'][] = $this->getBaseClass('width-' . $size, true);
+
         //Create panel trigger
         if(is_array($button) && !empty($button)) {
             $this->data['button']['attributeList'] = ['data-js-toggle-trigger' => $this->data['panelId']];
