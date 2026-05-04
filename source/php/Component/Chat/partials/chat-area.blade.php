@@ -11,6 +11,12 @@
     ])
         <!-- Messages will be dynamically inserted here -->
     @endelement
-    @chat__input($chatInputData)
-    @endchat__input
+    @element([
+        'classList' => [
+            $baseClass . '__input-area',
+        ],
+    ])
+        @chat__input($chatInputData)
+        @endchat__input
+    @endelement
 @endelement
