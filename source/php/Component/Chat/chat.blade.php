@@ -3,8 +3,7 @@
         [
             $baseClass,
             'o-layout-grid',
-            'o-layout-grid--cq',
-            'o-layout-grid--gap-4'
+            'o-layout-grid--cq'
         ],
         $classList
     ),
