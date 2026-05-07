@@ -1,7 +1,7 @@
 @element([
     'componentElement' => 'template',
     'attributeList' => [
-        'data-js-user-message-template' => 'true',
+        'data-js-user-message-template' => 'true'
     ]
 ])
     @chat__message([

@@ -3,18 +3,20 @@
     "default": {
         "title": null,
         "persistent": false,
+        "height": null,
         "chatInputData": []
     },
     "description": {
         "title": "The title of the chat.",
         "persistent": "If the chat should be persistent, meaning it will be visible on all pages and not just the page it is rendered on. Uses local storage to keep track of the chat state, also requires a unique and persistent ID to be set on the chat component.",
-        "chatInputData": "Data for the chat input component. Check the chat__input component for more details."
+        "chatInputData": "Data for the chat input component. Check the chat__input component for more details.",
+        "height": "CSS value of the maximum height of the chat area (message area)"
     },
     "types": {
         "title": "string",
         "persistent": "boolean",
         "chatInputData": "array",
-        "clearButton": "array"
+        "height": "string"
     },
     "view": "chat.blade.php",
     "dependency": {
