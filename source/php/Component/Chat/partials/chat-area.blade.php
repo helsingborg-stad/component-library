@@ -1,22 +1,28 @@
 @element([
-    'componentElement' => 'div',
+    'classList' => [
+        $baseClass . '__message-area'
+    ],
+    'attributeList' => [
+        'style' => 'max-height:' . $height . ';',
+        'data-js-message-area' => true
+    ]
 ])
     @element([
         'classList' => [
-            $baseClass . '__message-area',
+            $baseClass . '__messages',
         ],
         'attributeList' => [
-            'data-js-message-area' => true,
+            'data-js-messages-container' => true
         ]
     ])
         <!-- Messages will be dynamically inserted here -->
     @endelement
-    @element([
-        'classList' => [
-            $baseClass . '__input-area',
-        ],
-    ])
-        @chat__input($chatInputData)
-        @endchat__input
-    @endelement
+@endelement
+@element([
+    'classList' => [
+        $baseClass . '__input-area',
+    ],
+])
+    @chat__input($chatInputData)
+    @endchat__input
 @endelement

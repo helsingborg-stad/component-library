@@ -14,6 +14,10 @@ class Chat extends \ComponentLibrary\Component\BaseController
         extract($this->data);
         $this->data['attributeList']['data-js-chat'] = $this->data['id'] ?? uniqid('chat-');
 
+        if (!$height) {
+            $this->data['height'] = 'unset';
+        }
+
         if ($persistent && $this->data['id'] !== null) {
             $this->data['attributeList']['data-js-chat-persistent'] = true;
         }
