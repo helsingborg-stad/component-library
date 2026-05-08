@@ -18,11 +18,19 @@ class Notice extends \ComponentLibrary\Component\BaseController
             $this->data['id'] = $this->sanitizeIdAttribute(uniqid());
         }
 
-        // TODO: Find instances of this and 
-        if (isset($icon['name']) || isset($icon['icon'])) {
-            $icon['icon'] = $icon['icon'] ?? $icon['name'];
-            $icon['size'] = $icon['size'] ?? 'md';
-            $this->data['icon'] = $icon;
+        // TODO: Find instances of icon name direct assign, and remove this patch. 
+        $iconName = $icon['icon'] ?? $icon['name'] ?? null;
+
+        if (is_string($iconName) && $iconName !== '') {
+            $this->data['icon'] = [
+                ...$icon,
+                'icon' => $iconName,
+                'size' => $icon['size'] ?? 'md',
+            ];
+            
+            if(isset($this->data['icon']['name'])) {
+                unset($this->data['icon']['name']);
+            }
         }
      
         // State class
