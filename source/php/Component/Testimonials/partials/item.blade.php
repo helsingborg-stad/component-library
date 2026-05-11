@@ -1,5 +1,5 @@
 @card([
-    'classList' => [$class]
+    'classList' => array_merge([$baseClass], $classList ?? [])
 ])
     @image([
         'classList' => [$baseClass . '__image'],
