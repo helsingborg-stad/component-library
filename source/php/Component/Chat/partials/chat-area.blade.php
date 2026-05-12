@@ -3,7 +3,7 @@
         $baseClass . '__message-area'
     ],
     'attributeList' => [
-        'style' => 'max-height:' . $height . ';',
+        'style' => 'height:' . $height . ';',
         'data-js-message-area' => true
     ]
 ])
