@@ -13,7 +13,7 @@ class Fab extends \ComponentLibrary\Component\BaseController
         extract($this->data);
 
         //Generate panel id js support
-        $this->data['panelId'] = $this->data['id'] ?? uniqid('panel-id-');
+        $this->data['panelId'] = $this->data['id'] ?: uniqid('panel-id-');
 
         $this->data['classList'][] = $this->getBaseClass('width-' . $size, true);
 
