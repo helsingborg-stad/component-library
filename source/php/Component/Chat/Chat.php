@@ -12,11 +12,11 @@ class Chat extends \ComponentLibrary\Component\BaseController
 
         //Extract array for eazy access (fetch only)
         extract($this->data);
-        $this->data['attributeList']['data-js-chat'] = $this->data['id'] ?? uniqid('chat-');
+        $this->data['attributeList']['data-js-chat'] = !empty($this->data['id']) ? $this->data['id'] : uniqid('chat-');
 
         $this->data['classList'][] = $this->getBaseClass($size, true);
 
-        if ($persistent && $this->data['id'] !== null) {
+        if ($persistent && !empty($this->data['id'])) {
             $this->data['attributeList']['data-js-chat-persistent'] = true;
         }
 
