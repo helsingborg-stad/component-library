@@ -6,6 +6,7 @@ class Chat extends \ComponentLibrary\Component\BaseController
 {
     private array $slotMapping = [
         'titleArea' => 'titleAreaSlotHasContent',
+        'belowChatArea' => 'belowChatAreaSlotHasContent',
     ];
     
     public function init() {
