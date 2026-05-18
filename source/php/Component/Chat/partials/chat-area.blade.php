@@ -17,6 +17,11 @@
         <!-- Messages will be dynamically inserted here -->
     @endelement
 @endelement
+
+@if($belowChatAreaSlotHasContent)
+    {!! $belowChatArea !!}
+@endif
+
 @element([
     'classList' => [
         $baseClass . '__input-area',
