@@ -67,6 +67,7 @@
             @group([
                 'justifyContent' => 'space-between',
                 'alignItems' => 'start',
+                'normalizeChildren' => false,
             ])
                 @if ($heading)
                     @typography([
