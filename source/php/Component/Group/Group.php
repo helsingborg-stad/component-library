@@ -61,5 +61,9 @@ class Group extends \ComponentLibrary\Component\BaseController
         if ($columns) {
             $this->data['classList'][] = $this->getBaseClass() . "--columns-" . $columns;
         }
+
+        if($normalizeChildren === false) {
+            $this->data['classList'][] = $this->getBaseClass() . "--skip-child-normalization";
+        }
     }
 }
