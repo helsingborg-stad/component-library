@@ -20,12 +20,14 @@
 @if($containerQueryData)
     <!-- Image styles -->
     <style>
-    @foreach($containerQueryData as $item)
-        @foreach(['landscape', 'portrait'] as $dimension)
-        @container {{$item['media'][$dimension]}} and (orientation: {{$dimension}}) {
-            .{{$baseClass}}.{{$baseClass}}--container-query .{{$baseClass}}--{{$item['uuid']}} {display: block;}
+        @layer components {
+            @foreach($containerQueryData as $item)
+                @foreach(['landscape', 'portrait'] as $dimension)
+                @container {{$item['media'][$dimension]}} and (orientation: {{$dimension}}) {
+                    .{{$baseClass}}.{{$baseClass}}--container-query .{{$baseClass}}--{{$item['uuid']}} {display: block;}
+                }
+                @endforeach
+            @endforeach
         }
-        @endforeach
-    @endforeach
     </style>
 @endif
