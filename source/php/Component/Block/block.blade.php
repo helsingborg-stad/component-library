@@ -68,6 +68,7 @@
                 'justifyContent' => 'space-between',
                 'alignItems' => 'start',
                 'normalizeChildren' => false,
+                'fullWidth' => true,
             ])
                 @if ($heading)
                     @typography([
