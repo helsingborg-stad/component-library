@@ -65,5 +65,9 @@ class Group extends \ComponentLibrary\Component\BaseController
         if($normalizeChildren === false) {
             $this->data['classList'][] = $this->getBaseClass() . "--skip-child-normalization";
         }
+
+        if($fullWidth) {
+            $this->data['classList'][] = $this->getBaseClass() . "--full-width";
+        }
     }
 }
