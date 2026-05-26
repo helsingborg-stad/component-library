@@ -8,15 +8,13 @@
     "description": {
         "id": "ID for the accordion",
         "heading": "The heading",
-        "content": "The content of the accordion item",
-        "border": "Whether the accordion item should have a border or not"
+        "content": "The content of the accordion item"
     },
     "types":
     {
         "id": "string",
         "heading": "string|array",
-        "content": "string",
-        "border": "bool"
+        "content": "string"
     },
     "view": "accordion__item.blade.php",
     "dependency": {
