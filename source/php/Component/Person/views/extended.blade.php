@@ -26,7 +26,9 @@
             @endtypography
         @endif
 
-        @accordion([])
+        @accordion([
+            'border' => false
+        ])
             {{-- Address --}}
             @includeWhen(!empty($address), 'Person.views.components.extended.address')
 
