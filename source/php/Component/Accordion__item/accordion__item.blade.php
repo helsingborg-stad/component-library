@@ -1,39 +1,34 @@
 {{-- Accordion Item --}}
-<{{$sectionElement}} class="{{$class}}" {!! $attribute !!}">
-    <{{$sectionHeadingElement}} class="{{$baseClass}}__button" aria-label="{{$ariaLabel}}" aria-controls="{{ $baseClass }}__aria-{{ $id }}" aria-expanded="false" js-expand-button href="#{{$id}}">
-        <div class="{{$baseClass}}__button-wrapper {{$headingType}} " tabindex="-1">
-            
-            {!!$beforeHeading!!}
-
-            @includeWhen($heading, 'Accordion__item.partials.heading')
-            
-            @if($taxonomyPosition === 'top' && $taxonomy > 0)
-                @tags([
-                    'tags' => $taxonomy
-                ])
-                @endtags
-            @endif
-
-            {!!$afterHeading!!}
-
-            @icon(['icon' => $icon, 'size' => 'md', 'classList' => [$baseClass . '__icon', $baseClass . '__icon--' . $icon]])
-            @endicon
-        </div>
-
-        </{{$sectionHeadingElement}}>
-
-            <{{$sectionContentElement}} class="{{$baseClass}}__content" id="{{ $baseClass }}__aria-{{ $id }}" aria-hidden="true">
-            
-            {!!$beforeContent!!}
-                {!! $slot !!}
-            {!!$afterContent!!}
-
-        @if($taxonomyPosition === 'below' && $taxonomy > 0)
-            @tags([
-                'tags' => $taxonomy
+@element([
+    'componentElement' => 'details',
+    'classList' => $classList ?? [],
+    'attributeList' => $attributeList ?? []
+])
+    @element([
+        'componentElement' => 'summary',
+        'classList' => [$baseClass . '__heading']
+    ])
+        @foreach($heading as $headingItem)
+            @element([
+                'componentElement' => 'span',
+                'classList' => [$baseClass . '__heading-item']
             ])
-            @endtags
-        @endif
-    </{{$sectionContentElement}}>
-</{{$sectionElement}}>
-{{-- End Accordion Item --}}
+                {{ $headingItem }}
+            @endelement
+        @endforeach
+
+        @icon([
+            'icon' => 'keyboard_arrow_down',
+            'size' => 'md',
+            'classList' => [$baseClass . '__icon']
+        ])
+        @endicon
+    @endelement
+    @element([
+        'componentElement' => 'div',
+        'classList' => [$baseClass . '__content']
+    ])
+        {{ $content }}
+        {{ $slot }}
+    @endelement
+@endelement
