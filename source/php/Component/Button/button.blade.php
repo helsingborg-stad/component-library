@@ -1,8 +1,5 @@
 <{{$componentElement}} class="{{ $class }}" {!! $attribute !!}>   
     @if(!$isLabel) <{{$labelElement}} class="{{$baseClass}}__label"> @endif
-        @if ($type === 'submit' || $type === 'button')
-            <span class="{{$baseClass}}__loader"></span>
-        @endif
 
         @if ($slotHasData)
             {!! $slot !!}
