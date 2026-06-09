@@ -18,6 +18,12 @@ class Accordion extends \ComponentLibrary\Component\BaseController
 
         if ($spacing) {
             $this->data['classList'][] = $this->getBaseClass('spaced', true);
+            $divider = false;
+        }
+
+        if ($divider) {
+            $this->data['classList'][] = $this->getBaseClass('divided', true);
+            $border = false;
         }
 
         if ($border) {
