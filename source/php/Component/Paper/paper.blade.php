@@ -1,4 +1,6 @@
 <!-- paper.blade.php -->
 <div class="{{$class}}" {!! $attribute !!}>
-    {{ $slot }}
+    <div class="{{$baseClass}}__content">
+        {{ $slot }}
+    </div>
 </div>
