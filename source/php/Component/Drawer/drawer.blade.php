@@ -15,6 +15,7 @@
             ],
             'classList' => [
                 'c-drawer__close',
+                'c-button--align-visually'
             ],
             'size' => 'md',
             'text' => $label,
