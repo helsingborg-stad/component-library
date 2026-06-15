@@ -1,0 +1,18 @@
+{
+	"slug": "card__body",
+	"default": {
+		"slot": ""
+	},
+	"description": {
+		"slot": "Content placed in the card body area."
+	},
+	"types": {
+		"slot": "string"
+	},
+	"view": "card__body.blade.php",
+	"dependency": {
+		"sass": {
+			"components": ["card"]
+		}
+	}
+}

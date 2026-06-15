@@ -1,0 +1,18 @@
+{
+	"slug": "card__header",
+	"default": {
+		"slot": ""
+	},
+	"description": {
+		"slot": "Content placed in the card header area."
+	},
+	"types": {
+		"slot": "string"
+	},
+	"view": "card__header.blade.php",
+	"dependency": {
+		"sass": {
+			"components": ["card"]
+		}
+	}
+}

@@ -1,0 +1,18 @@
+{
+	"slug": "card__footer",
+	"default": {
+		"slot": ""
+	},
+	"description": {
+		"slot": "Content placed in the card footer area."
+	},
+	"types": {
+		"slot": "string"
+	},
+	"view": "card__footer.blade.php",
+	"dependency": {
+		"sass": {
+			"components": ["card"]
+		}
+	}
+}

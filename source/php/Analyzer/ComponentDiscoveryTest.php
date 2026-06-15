@@ -16,7 +16,7 @@ class ComponentDiscoveryTest extends TestCase
     public function testDiscoverSlugsReturnsArrayOfSlugs(): void
     {
         $componentPath = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Component' . DIRECTORY_SEPARATOR;
-        $discovery     = new ComponentDiscovery($componentPath);
+        $discovery = new ComponentDiscovery($componentPath);
 
         $slugs = $discovery->discoverSlugs();
 
@@ -30,7 +30,7 @@ class ComponentDiscoveryTest extends TestCase
     public function testDiscoverSlugsContainsKnownComponents(): void
     {
         $componentPath = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Component' . DIRECTORY_SEPARATOR;
-        $discovery     = new ComponentDiscovery($componentPath);
+        $discovery = new ComponentDiscovery($componentPath);
 
         $slugs = $discovery->discoverSlugs();
 
@@ -42,14 +42,31 @@ class ComponentDiscoveryTest extends TestCase
     }
 
     /**
+     * @testdox it finds card child area components
+     */
+    public function testDiscoverSlugsContainsCardAreaComponents(): void
+    {
+        $componentPath = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Component' . DIRECTORY_SEPARATOR;
+        $discovery = new ComponentDiscovery($componentPath);
+
+        $slugs = $discovery->discoverSlugs();
+
+        $this->assertContains('card__header', $slugs);
+        $this->assertContains('card__image', $slugs);
+        $this->assertContains('card__body', $slugs);
+        $this->assertContains('card__floating', $slugs);
+        $this->assertContains('card__footer', $slugs);
+    }
+
+    /**
      * @testdox it returns sorted slugs
      */
     public function testDiscoverSlugsReturnsSortedArray(): void
     {
         $componentPath = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Component' . DIRECTORY_SEPARATOR;
-        $discovery     = new ComponentDiscovery($componentPath);
+        $discovery = new ComponentDiscovery($componentPath);
 
-        $slugs  = $discovery->discoverSlugs();
+        $slugs = $discovery->discoverSlugs();
         $sorted = $slugs;
         sort($sorted);
 
@@ -75,11 +92,11 @@ class ComponentDiscoveryTest extends TestCase
      */
     public function testDiscoverSlugsReturnsEmptyForEmptyDirectory(): void
     {
-        $tempDir   = sys_get_temp_dir() . '/component-test-empty-' . uniqid();
+        $tempDir = sys_get_temp_dir() . '/component-test-empty-' . uniqid();
         mkdir($tempDir, 0755, true);
 
         $discovery = new ComponentDiscovery($tempDir);
-        $slugs     = $discovery->discoverSlugs();
+        $slugs = $discovery->discoverSlugs();
 
         $this->assertIsArray($slugs);
         $this->assertEmpty($slugs);

@@ -1,5 +1,5 @@
 
-<div class="{{$baseClass}}__image-container">
+@card__image
     @image([
         'src' => is_array($image) ? ($image['src'] ?? null) : $image,
         'alt' => is_array($image) ? ($image['alt'] ?? null) : null,
@@ -10,4 +10,4 @@
         'placeholderEnabled' => $hasPlaceholder,
     ])
     @endimage
-</div>
+@endcard__image

@@ -1,4 +1,6 @@
-<div class="c-card__header {{ $baseClass }}__header">
+@card__header([
+    'classList' => [$baseClass . '__header']
+])
     @typography([
         'element' => 'h2',
         'variant' => 'h3',
@@ -12,4 +14,4 @@
     ])
         {{ $label }}
     @endtypography
-</div>
+@endcard__header

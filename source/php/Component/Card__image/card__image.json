@@ -1,0 +1,18 @@
+{
+	"slug": "card__image",
+	"default": {
+		"slot": ""
+	},
+	"description": {
+		"slot": "Content placed in the card image area."
+	},
+	"types": {
+		"slot": "string"
+	},
+	"view": "card__image.blade.php",
+	"dependency": {
+		"sass": {
+			"components": ["card"]
+		}
+	}
+}

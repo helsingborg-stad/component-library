@@ -6,7 +6,9 @@
     'classList' => ['u-height--100', 'c-card--contact'],
     'context' => 'module.contacts.card'
 ])
-    <div class="c-card__body u-padding--0">
+    @card__body([
+        'classList' => ['u-padding--0']
+    ])
         @signature([
             'author' => $fullName,
             'authorRole' => $fullTitle ?? '',
@@ -36,10 +38,12 @@
             {{-- Other sections --}}
             @includeWhen(!empty($customSections), 'Person.views.components.extended.custom')
         @endaccordion
-    </div>
+    @endcard__body
 
     @if (array_filter([!empty($email), !empty($telephone), !empty($socialMedia)]))
-        <div class="u-border__top--1 u-margin__top--auto u-padding__x--2 u-display--flex u-gap--1">
+        @card__footer([
+            'classList' => ['u-border__top--1', 'u-margin__top--auto', 'u-padding__x--2', 'u-display--flex', 'u-gap--1']
+        ])
 
             {{-- E-mail --}}
             @includeWhen(!empty($email), 'Person.views.components.extended.email', ['icon' => 'email'])
@@ -58,6 +62,6 @@
                 @endforeach
             @endif
 
-        </div>
+        @endcard__footer
     @endif
 @endcard

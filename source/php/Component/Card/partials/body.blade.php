@@ -1,9 +1,9 @@
-<div class="{{$baseClass}}__body">
+@card__body
     @includeWhen($dateBadge && $date, 'Card.components.datebadge')
     @if($floatingSlotHasData)
-        <div class="{{$baseClass}}__floating">
+        @card__floating
             {!! $floating !!}
-        </div>
+        @endcard__floating
     @endif
     @includeWhen($meta && $metaFirst, 'Card.components.meta')
     @includeWhen(($heading || $subHeading || ($meta && !$metaFirst) || $icon) && !$headingAboveImage, 'Card.components.heading')
@@ -16,4 +16,4 @@
     @if($belowContentSlotHasData)
         {!! $belowContent !!}
     @endif
- </div>
+@endcard__body

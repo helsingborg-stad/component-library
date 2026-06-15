@@ -1,4 +1,6 @@
-<div class="c-card__body {{ $baseClass }}__body">
+@card__body([
+    'classList' => [$baseClass . '__body']
+])
     @if (!empty($meta))
         @typography([
             'element' => 'p',
@@ -15,4 +17,4 @@
         ])
         @endlisting
     @endif
-</div>
+@endcard__body

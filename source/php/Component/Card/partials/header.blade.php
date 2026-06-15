@@ -1,3 +1,3 @@
-<div class="c-card__header">
+@card__header
   @include('Card.components.heading')
-</div>
+@endcard__header

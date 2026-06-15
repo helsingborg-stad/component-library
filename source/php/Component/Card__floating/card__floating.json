@@ -1,0 +1,18 @@
+{
+	"slug": "card__floating",
+	"default": {
+		"slot": ""
+	},
+	"description": {
+		"slot": "Content placed in the card floating area."
+	},
+	"types": {
+		"slot": "string"
+	},
+	"view": "card__floating.blade.php",
+	"dependency": {
+		"sass": {
+			"components": ["card"]
+		}
+	}
+}

@@ -1,4 +1,9 @@
-<div class="{{$baseClass}}__footer" data-js-toggle-class="u-display--none" data-js-toggle-item="{{$collpaseID}}">
+@card__footer([
+    'attributeList' => [
+        'data-js-toggle-class' => 'u-display--none',
+        'data-js-toggle-item' => $collpaseID
+    ]
+])
     @if($buttons)
         @foreach($buttons as $button)
             @button($button)
@@ -15,4 +20,4 @@
             ])
         @endtags
     @endif
-</div>
+@endcard__footer
