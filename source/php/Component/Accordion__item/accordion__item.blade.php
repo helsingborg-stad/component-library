@@ -9,12 +9,13 @@
         'classList' => [$baseClass . '__heading']
     ])
         @foreach($heading as $headingItem)
-            @element([
-                'componentElement' => 'span',
-                'classList' => [$baseClass . '__heading-item']
+            @typography([
+                'element' => 'h3',
+                'variant' => 'h4',
+                'classList' => [$baseClass . '__heading-item'],
             ])
                 {{ $headingItem }}
-            @endelement
+            @endtypography
         @endforeach
 
         @icon([
