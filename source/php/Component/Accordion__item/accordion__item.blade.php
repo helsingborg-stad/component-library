@@ -1,9 +1,5 @@
-{{-- Accordion Item --}}
-@element([
-    'componentElement' => 'details',
-    'classList' => $classList ?? [],
-    'attributeList' => $attributeList ?? []
-])
+{{-- accordion__item.blade.php --}}
+<details class="{{ $class }}" {!! $attribute !!}>
     @element([
         'componentElement' => 'summary',
         'classList' => [$baseClass . '__heading']
@@ -32,4 +28,4 @@
         {{ $content }}
         {{ $slot }}
     @endelement
-@endelement
+</details>
