@@ -6,9 +6,10 @@
     ])
         @foreach($heading as $headingItem)
             @typography([
-                'element' => 'h3',
+                'element' => 'span',
                 'variant' => 'h4',
                 'classList' => [$baseClass . '__heading-item'],
+                'attributeList' => ['role' => 'heading', 'aria-level' => '3']
             ])
                 {{ $headingItem }}
             @endtypography
