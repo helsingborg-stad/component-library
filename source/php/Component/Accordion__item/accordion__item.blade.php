@@ -26,7 +26,7 @@
         'componentElement' => 'div',
         'classList' => [$baseClass . '__content']
     ])
-        {{ $content }}
-        {{ $slot }}
+        {!! $content !!}
+        {!! $slot !!}
     @endelement
 </details>
