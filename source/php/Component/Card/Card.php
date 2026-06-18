@@ -3,8 +3,6 @@
 namespace ComponentLibrary\Component\Card;
 
 use ComponentLibrary\Helper\Str;
-use ComponentLibrary\Helper\TagSanitizer;
-use Helper\ATagSanitizer;
 
 /**
  * Class Card
@@ -15,10 +13,10 @@ class Card extends \ComponentLibrary\Component\BaseController
     private array $slotMapping = [
         'afterContent' => 'afterContentSlotHasData',
         'beforeContent' => 'beforeContentSlotHasData',
-        'floating'     => 'floatingSlotHasData',
+        'floating' => 'floatingSlotHasData',
         'aboveContent' => 'aboveContentSlotHasData',
         'belowContent' => 'belowContentSlotHasData',
-        'slot'         => 'slotHasData'
+        'slot' => 'slotHasData',
     ];
 
     public function init()
@@ -35,7 +33,7 @@ class Card extends \ComponentLibrary\Component\BaseController
         if ($date && !is_array($date)) {
             $this->data['date'] = [
                 'timestamp' => $date,
-                'action' => 'formatDate'
+                'action' => 'formatDate',
             ];
         }
 
@@ -53,9 +51,10 @@ class Card extends \ComponentLibrary\Component\BaseController
 
         //Cast image data to array structure
         if (!empty($image) && is_string($image)) {
-            $image = $this->data['image'] = [
-                'src' => $image
-            ];
+            $image =
+                $this->data['image'] = [
+                    'src' => $image,
+                ];
         }
 
         if (!empty($icon)) {
@@ -71,16 +70,16 @@ class Card extends \ComponentLibrary\Component\BaseController
         }
 
         if ($link) {
-            $this->data['componentElement'] = "a";
+            $this->data['componentElement'] = 'a';
             $this->data['attributeList']['href'] = $link;
-            
+
             if (!empty($linkText) && function_exists('apply_filters')) {
                 $this->data['linkTextIcon'] = apply_filters('ComponentLibrary/Component/Card/LinkTextIcon', 'east');
             } else {
                 $this->data['linkTextIcon'] = 'east';
             }
         } else {
-            $this->data['componentElement'] = "div";
+            $this->data['componentElement'] = 'div';
         }
 
         if ($link) {
@@ -88,16 +87,18 @@ class Card extends \ComponentLibrary\Component\BaseController
         }
 
         if ($ratio) {
-            $this->data['classList'][] = $this->getBaseClass() . '--ratio-' . str_replace(":", "-", $ratio);
+            $this->data['classList'][] = $this->getBaseClass() . '--ratio-' . str_replace(':', '-', $ratio);
         }
 
         //Add aria-label to card if link is present
         if ($link && $heading && $content && empty($this->data['attributeList']['aria-label'])) {
-            $this->data['attributeList']['aria-label'] = $heading . " - ". Str::truncateSentence(
-                strip_tags($content)
+            $this->data['attributeList']['aria-label'] = $heading
+            . ' - '
+            . Str::truncateSentence(
+                strip_tags($content),
             );
         }
-      
+
         $this->data['imageExists'] = $this->hasImage($image);
 
         $this->data['contentHtmlElement'] = $this->getContentHTMLElement($content);
@@ -113,15 +114,16 @@ class Card extends \ComponentLibrary\Component\BaseController
             }
         }
     }
-    
+
     /**
      * Check if the image is set
-     * 
+     *
      * @param mixed $image
-     * 
+     *
      * @return bool
      */
-    private function hasImage($image) {
+    private function hasImage($image)
+    {
         if (is_a($image, 'ComponentLibrary\Integrations\Image\Image')) {
             return !empty($image->getUrl());
         }
@@ -133,15 +135,17 @@ class Card extends \ComponentLibrary\Component\BaseController
 
     /**
      * Get the type of content wrapper that should be used
-     * 
+     *
      * @param string $content
-     * 
+     *
      * @return string
      */
-    private function getContentHTMLElement($content) {
-        if (!is_string($content) || strpos($content, '<p>') !== false) {
+    private function getContentHTMLElement($content)
+    {
+        if (is_string($content) && strip_tags($content) !== $content) {
             return 'div';
         }
+
         return 'p';
     }
 }
