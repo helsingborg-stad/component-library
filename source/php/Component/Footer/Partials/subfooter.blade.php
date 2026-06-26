@@ -7,7 +7,8 @@
                         'id' => 'footer-subfooter-logotype',
                         'src'=> $subfooterLogotype,
                         'alt' => __('Go to homepage', 'component-library'),
-                        'classList' => [$baseClass . '__subfooter__logotype']
+                        'classList' => [$baseClass . '__subfooter__logotype'],
+                        'maskable' => true,
                     ])
                     @endlogotype
                 </div>

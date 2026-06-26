@@ -6,7 +6,7 @@
 		"caption": "",
 		"title": "",
 		"placeholderText": "Image missing",
-		"mask": false
+		"maskable": false
 	},
 	"description": {
 		"src": "A image source",
@@ -14,7 +14,7 @@
 		"caption": "A label below the logotype. eg company name",
 		"title": "A title (not displayed)",
 		"placeholderText": "What to show if an invalid url is entered.",
-		"mask": "Mask logotype with contrast color."
+		"maskable": "Enable mask mode by emitting the data-logotype-maskable attribute."
 	},
 	"types": {
 		"src": "string|boolean",
@@ -22,7 +22,7 @@
 		"caption": "string",
 		"title": "string",
 		"placeholderText": "string",
-		"mask": "boolean"
+		"maskable": "boolean"
 	},
 	"view": "logotype.blade.php",
 	"dependency": {

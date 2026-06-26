@@ -2,22 +2,23 @@
 @scope(['name' => ['footer']])
 <{{ $componentElement }} class="{{ $class }}" {!! $attribute !!}>
     @if ($slotOnly && $slot)
-
         <div class="c-footer__main-wrapper">
-
             @if (!empty($logotype))
                 <div class="c-footer__header-wrapper">
                     <div class="o-container">
                         <div class="o-grid-12">
                             @link(['href' => $logotypeHref])
-                            @logotype([
-                              'id' => 'footer-logotype',
-                              'src'=> $logotype,
-                              'alt' => __('Go to homepage', 'component-library'),
-                              'classList' => ['site-footer__logo', 'c-footer__logotype'],
-                              'context' => 'footer.logotype'
-                            ])
-                            @endlogotype
+                                @scope(['name' => ['mainfooterlogotype']])
+                                    @logotype([
+                                        'id' => 'footer-logotype',
+                                        'src'=> $logotype,
+                                        'alt' => __('Go to homepage', 'component-library'),
+                                        'classList' => ['site-footer__logo', 'c-footer__logotype'],
+                                        'context' => 'footer.logotype',
+                                        'maskable' => true,
+                                    ])
+                                    @endlogotype
+                                @endscope
                             @endlink
                         </div>
                     </div>
@@ -58,10 +59,19 @@
 
         </div>
     @else
-        <div class="g-divider g-divider--lg"></div>
         <div class="{{ $baseClass }}__body">
             <a href="{{ $logotypeHref }}" class="{{ $baseClass }}__home-link">
-                <img id="logotype" src="{{ $logotype }}" alt="{{ 'Go to homepage' }}">
+                @scope(['name' => ['footerlogotype']])
+                    @logotype([
+                        'id' => 'footer-logotype',
+                        'src'=> $logotype,
+                        'alt' => __('Go to homepage', 'component-library'),
+                        'classList' => ['site-footer__logo', 'c-footer__logotype'],
+                        'context' => 'footer.logotype',
+                        'maskable' => true,
+                    ])
+                    @endlogotype
+                @endscope
             </a>
             <div class="{{ $baseClass }}__nav">
                 @if ($slot)
