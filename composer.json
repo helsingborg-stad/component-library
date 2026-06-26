@@ -31,7 +31,7 @@
             "ComponentLibrary\\": "source/php/"
         }
     },
-    "version": "5.24.0",
+    "version": "5.24.2",
     "config": {
         "allow-plugins": {
             "carthage-software/mago": true
