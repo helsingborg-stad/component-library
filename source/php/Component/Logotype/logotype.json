@@ -1,28 +1,33 @@
 {
-    "slug": "logotype",
-    "default": {
-        "src": false,
-        "alt": "",
-        "caption": "",
-        "title": "",
-        "placeholderText": "Image missing",
-        "hasRipple": true
-    },
-    "description": {
-        "src": "A image source",
-        "alt": "Alt text for the image",
-        "caption": "A label below the logotype. eg company name",
-        "title": "A title (not displayed)",
-        "placeholderText": "What to show if an invalid url is entered.",
-        "hasRipple": "Enable / disable ripple fx"
-    },
-    "view": "logotype.blade.php",
-    "dependency": {
-        "sass": {
-            "components": [
-                "logotype",
-                "image"
-            ]
-        }
-    }
+	"slug": "logotype",
+	"default": {
+		"src": false,
+		"alt": "",
+		"caption": "",
+		"title": "",
+		"placeholderText": "Image missing",
+		"mask": false
+	},
+	"description": {
+		"src": "A image source",
+		"alt": "Alt text for the image",
+		"caption": "A label below the logotype. eg company name",
+		"title": "A title (not displayed)",
+		"placeholderText": "What to show if an invalid url is entered.",
+		"mask": "Mask logotype with contrast color."
+	},
+	"types": {
+		"src": "string|boolean",
+		"alt": "string",
+		"caption": "string",
+		"title": "string",
+		"placeholderText": "string",
+		"mask": "boolean"
+	},
+	"view": "logotype.blade.php",
+	"dependency": {
+		"sass": {
+			"components": ["logotype", "image"]
+		}
+	}
 }
