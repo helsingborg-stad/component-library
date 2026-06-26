@@ -19,9 +19,9 @@ class Logotype extends \ComponentLibrary\Component\BaseController
             $this->data['alt'] = $this->data['caption'];
         }
 
-        // Add maskable class and attribute if maskable is set to true
-        $isMaskable = (bool) ($maskable ?? $mask ?? false);
-        if ($isMaskable && $src) {
+        // Add maskable class and attribute only when src is SVG and maskable is true
+        $isMaskable = (bool) ($maskable ?? false);
+        if ($isMaskable && $src && $this->isSvgSource($src)) {
             if (!isset($this->data['attributeList']) || !is_array($this->data['attributeList'])) {
                 $this->data['attributeList'] = [];
             }
@@ -37,5 +37,26 @@ class Logotype extends \ComponentLibrary\Component\BaseController
 
             $this->data['classList'][] = $this->getBaseClass() . '--is-maskable';
         }
+    }
+
+    /**
+     * Determines whether a source path points to an SVG file.
+     *
+     * @param mixed $src
+     *
+     * @return bool
+     */
+    private function isSvgSource($src): bool
+    {
+        if (!is_string($src) || $src === '') {
+            return false;
+        }
+
+        $path = parse_url($src, PHP_URL_PATH);
+        if (!is_string($path) || $path === '') {
+            $path = $src;
+        }
+
+        return strtolower((string) pathinfo($path, PATHINFO_EXTENSION)) === 'svg';
     }
 }
