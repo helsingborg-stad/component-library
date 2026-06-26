@@ -1,8 +1,9 @@
 <!-- footer.blade.php -->
+@scope(['name' => ['footer']])
 <{{ $componentElement }} class="{{ $class }}" {!! $attribute !!}>
     @if ($slotOnly && $slot)
 
-        <div class="c-footer__main-wrapper {{ $preFooterTextAlignment }}">
+        <div class="c-footer__main-wrapper">
 
             @if (!empty($logotype))
                 <div class="c-footer__header-wrapper">
@@ -97,3 +98,4 @@
 
     @includeWhen($displaySubFooter,'Footer.Partials.subfooter')
 </{{ $componentElement }}>
+@endscope
