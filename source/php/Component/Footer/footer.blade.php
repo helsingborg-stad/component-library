@@ -12,7 +12,7 @@
                                     @logotype([
                                         'id' => 'footer-logotype',
                                         'src'=> $logotype,
-                                        'alt' => __('Go to homepage', 'component-library'),
+                                        'alt' => $lang->goToHomepage ?? 'Go to homepage',
                                         'classList' => ['site-footer__logo', 'c-footer__logotype'],
                                         'context' => 'footer.logotype',
                                         'maskable' => true,
@@ -65,7 +65,7 @@
                     @logotype([
                         'id' => 'footer-logotype',
                         'src'=> $logotype,
-                        'alt' => __('Go to homepage', 'component-library'),
+                        'alt' => $lang->goToHomepage ?? 'Go to homepage',
                         'classList' => ['site-footer__logo', 'c-footer__logotype'],
                         'context' => 'footer.logotype',
                         'maskable' => true,

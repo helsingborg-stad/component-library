@@ -6,7 +6,7 @@
                     @logotype([
                         'id' => 'footer-subfooter-logotype',
                         'src'=> $subfooterLogotype,
-                        'alt' => __('Go to homepage', 'component-library'),
+                        'alt' => $lang->goToHomepage ?? 'Go to homepage',
                         'classList' => [$baseClass . '__subfooter__logotype'],
                         'maskable' => true,
                     ])
