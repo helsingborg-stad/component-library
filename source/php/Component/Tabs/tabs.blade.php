@@ -3,11 +3,7 @@
     <{{$componentElement}} class="{{ $class }}" role="tablist" js-expand-container {!! $attribute !!}>
         <div class="{{ $baseClass }}__header">
             @foreach($tabs as $tab)
-                <{{$headingElement}} role="tab" class="{{$baseClass}}__button" aria-controls="{{ $baseClass }}__aria-{{ $id }}-{{ $loop->index }}" aria-expanded="{{ $loop->index === 0 ? 'true' : 'false' }}" js-expand-button>
-                    <span class="{{$baseClass}}__button-wrapper" tabindex="-1">
-                        {{ $tab['title'] ?? '' }}
-                    </span>
-                </{{$headingElement}}>
+                @include('Tabs.partials.tab-button')
             @endforeach
         </div>
         @foreach($tabs as $tab)
