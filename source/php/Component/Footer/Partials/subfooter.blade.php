@@ -1,5 +1,5 @@
 @scope(['name' => ['subfooter']])
-    <div class="{{$baseClass}}__subfooter {{$directionClass}} {{$alignmentClass}}">
+    <div class="{{$baseClass}}__subfooter">
         <div class="o-container">
             <div class="{{$baseClass}}__subfooter__wrapper">
                 @if($subfooterLogotype)
