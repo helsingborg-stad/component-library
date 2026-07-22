@@ -8,17 +8,15 @@
                     <div class="o-container">
                         <div class="o-grid-12">
                             @link(['href' => $logotypeHref])
-                                @scope(['name' => ['mainfooterlogotype']])
-                                    @logotype([
-                                        'id' => 'footer-logotype',
-                                        'src'=> $logotype,
-                                        'alt' => $lang->goToHomepage ?? 'Go to homepage',
-                                        'classList' => ['site-footer__logo', 'c-footer__logotype'],
-                                        'context' => 'footer.logotype',
-                                        'maskable' => true,
-                                    ])
-                                    @endlogotype
-                                @endscope
+                                @logotype([
+                                    'id' => 'footer-logotype',
+                                    'src'=> $logotype,
+                                    'alt' => $lang->goToHomepage ?? 'Go to homepage',
+                                    'classList' => ['site-footer__logo', 'c-footer__logotype'],
+                                    'context' => 'footer.logotype',
+                                    'maskable' => true,
+                                ])
+                                @endlogotype
                             @endlink
                         </div>
                     </div>
@@ -61,17 +59,15 @@
     @else
         <div class="{{ $baseClass }}__body">
             <a href="{{ $logotypeHref }}" class="{{ $baseClass }}__home-link">
-                @scope(['name' => ['footerlogotype']])
-                    @logotype([
-                        'id' => 'footer-logotype',
-                        'src'=> $logotype,
-                        'alt' => $lang->goToHomepage ?? 'Go to homepage',
-                        'classList' => ['site-footer__logo', 'c-footer__logotype'],
-                        'context' => 'footer.logotype',
-                        'maskable' => true,
-                    ])
-                    @endlogotype
-                @endscope
+                @logotype([
+                    'id' => 'footer-logotype',
+                    'src'=> $logotype,
+                    'alt' => $lang->goToHomepage ?? 'Go to homepage',
+                    'classList' => ['site-footer__logo', 'c-footer__logotype'],
+                    'context' => 'footer.logotype',
+                    'maskable' => true,
+                ])
+                @endlogotype
             </a>
             <div class="{{ $baseClass }}__nav">
                 @if ($slot)
