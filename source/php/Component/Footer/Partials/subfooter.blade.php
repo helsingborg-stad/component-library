@@ -1,4 +1,4 @@
-@scope(['name' => ['footer']])
+@scope(['name' => ['subfooter']])
     <div class="{{$baseClass}}__subfooter {{$directionClass}} {{$alignmentClass}}">
         <div class="o-container">
             <div class="{{$baseClass}}__subfooter__wrapper">
