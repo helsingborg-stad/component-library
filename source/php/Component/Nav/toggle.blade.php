@@ -1,4 +1,4 @@
-@if($item['children'] && $includeToggle && $item['style'] == "default")
+@if($item['hasToggle'] && $includeToggle && $item['style'] == "default")
   @button([
       'classList' => [
         $baseClass . '__toggle', 
