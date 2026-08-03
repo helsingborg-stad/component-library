@@ -104,7 +104,7 @@ class Nav extends \ComponentLibrary\Component\BaseController
             //Open state
             $openState = [
                 $item['active'], 
-                $this->hasChildren($item['children']), 
+                $item['hasChildren'], 
                 $item['ancestor'],
                 $direction
             ];
@@ -119,12 +119,12 @@ class Nav extends \ComponentLibrary\Component\BaseController
             }
 
             //Has children
-            if($this->hasToggle($item['children'])) {
+            if($item['hasToggle']) {
                 $classList[] = "has-children";
             }
 
             //If item has a toggle
-            if($this->hasToggle($item['children'])) {
+            if($item['hasToggle']) {
                 $classList[] = "has-toggle"; 
             }
 
@@ -159,21 +159,61 @@ class Nav extends \ComponentLibrary\Component\BaseController
         return (bool) $ancestor;
     }
     
-    private function hasChildren($children) {
-
-        if(is_array($children) && !empty($children)) {
+    /**
+     * Determines whether a navigation item has children.
+     *
+     * Returns true for non-empty arrays or boolean true (which signals async
+     * child-loading intent regardless of whether async metadata is present).
+     *
+     * @param mixed $children The children value of the item.
+     *
+     * @return bool
+     */
+    private function hasChildren(mixed $children): bool
+    {
+        if (is_array($children) && !empty($children)) {
             return true;
         }
 
-        if(is_bool($children)) {
-            return $children;
+        if ($children === true) {
+            return true;
         }
-        
+
         return false;
     }
 
-    private function hasToggle($children) {
-        return (bool) ($this->data['includeToggle'] && $this->hasChildren($children)); 
+    /**
+     * Determines whether a navigation item should render an expand toggle.
+     *
+     * The toggle is shown when:
+     *  - includeToggle is enabled, AND
+     *  - children is a non-empty array (concrete children), OR
+     *  - children is boolean true AND the item carries async-fetch metadata
+     *    (e.g. data-fetch-url).
+     *
+     * When children is true but no async metadata is present the toggle is
+     * suppressed to avoid misleading UI.
+     *
+     * @param mixed $children The children value of the item.
+     * @param array $item     The full item array used to inspect async metadata.
+     *
+     * @return bool
+     */
+    private function hasToggle(mixed $children, array $item = []): bool
+    {
+        if (!$this->data['includeToggle']) {
+            return false;
+        }
+
+        if (is_array($children) && !empty($children)) {
+            return true;
+        }
+
+        if ($children === true) {
+            return $this->hasAsyncUrl($item);
+        }
+
+        return false;
     }
 
     private function hasAsyncUrl($item) {
