@@ -1,8 +1,8 @@
 <!-- header.blade.php -->
 <{{$componentElement}} class="{{ $class }}" {!! $attribute !!}>
-  <div class="{{$baseClass}}__inner">
-    @if($slotHasData)
-      {!! $slot !!}
-    @endif
-  </div>
+
+  @if($slotHasData)
+    {!! $slot !!}
+  @endif
+  
 </{{$componentElement}}>
