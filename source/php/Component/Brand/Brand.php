@@ -29,5 +29,12 @@ class Brand extends \ComponentLibrary\Component\BaseController
 
         // Apply aspect-ratio style when a valid aspectRatio is provided
         $this->applyAspectRatioStyle($aspectRatio ?? null);
+
+        // If aspectRatio is not provided, add default view box 
+        if (empty($aspectRatio)) {
+            $this->data['viewBox'] = ' viewBox="0 0 500 100" ';
+        } else {
+            $this->data['viewBox'] = '';
+        }
     }
 }
