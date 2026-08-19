@@ -1,6 +1,6 @@
 <?php
 
-namespace ComponentLibrary\Component\Traits;
+namespace ComponentLibrary\Traits;
 
 trait ResolvesAspectRatio
 {

@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\Brand;
 
-use ComponentLibrary\Component\Traits\ResolvesAspectRatio;
+use ComponentLibrary\Traits\ResolvesAspectRatio;
 
 class Brand extends \ComponentLibrary\Component\BaseController
 {
