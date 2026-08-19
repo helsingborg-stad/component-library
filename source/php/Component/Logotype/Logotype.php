@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\Logotype;
 
-use ComponentLibrary\Component\Traits\ResolvesAspectRatio;
+use ComponentLibrary\Traits\ResolvesAspectRatio;
 
 class Logotype extends \ComponentLibrary\Component\BaseController
 {
