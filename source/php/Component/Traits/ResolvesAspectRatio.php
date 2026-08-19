@@ -67,5 +67,7 @@ trait ResolvesAspectRatio
         $this->data['attributeList']['style'] = trim(
             $existingStyle !== '' ? $existingStyle . ' ' . $declaration : $declaration
         );
+        
+        $this->data['attributeList']['data-aspect-ratio'] = $resolvedAspectRatio;
     }
 }
