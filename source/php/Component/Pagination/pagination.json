@@ -18,7 +18,8 @@
         "buttonStyle": "filled",
         "buttonSize": "sm",
         "pagesToShow": false,
-        "keepDOM": false
+        "keepDOM": false,
+        "async": true
     },
     "description": {
         "list": "Array with pages",
@@ -35,7 +36,9 @@
         "maxPages": "Maximum amount of pages",
         "buttonStyle": "The style of button to display",
         "buttonSize": "Size of the buttons",
-        "pagesToShow": "Amount of pages that is shown to the user at one time."
+        "pagesToShow": "Amount of pages that is shown to the user at one time.",
+        "keepDOM": "When useJS is true, this option keeps the DOM elements in place when paginating.",
+        "async": "When useJS is true, this option will make the pagination async."
     },
     "view": "pagination.blade.php",
     "dependency": {
