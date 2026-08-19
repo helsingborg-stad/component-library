@@ -2,8 +2,11 @@
 
 namespace ComponentLibrary\Component\Brand;
 
+use ComponentLibrary\Component\Traits\ResolvesAspectRatio;
+
 class Brand extends \ComponentLibrary\Component\BaseController
 {
+    use ResolvesAspectRatio;
 
     public function init() {
 
@@ -23,5 +26,8 @@ class Brand extends \ComponentLibrary\Component\BaseController
         if(empty($text)) {
             $this->data['logotype']['attributeList'] = $attributeList; 
         }
+
+        // Apply aspect-ratio style when a valid aspectRatio is provided
+        $this->applyAspectRatioStyle($aspectRatio ?? null);
     }
 }

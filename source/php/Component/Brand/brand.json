@@ -1,25 +1,27 @@
-{
-    "slug": "brand",
-    "default": {
-        "logotype": [],
-        "text": []
-    },
-    "description": {
-        "logotype": "Array containing specified logotype component attributes",
-        "text": "Array of brand name, each item will be separated on multiple lines"
-    },
-    "types": {
-        "logotype": "array",
-        "text": "array"
-    },
-    "view": "brand.blade.php",
-    "dependency": {
-        "sass": {
-            "components": [
-                "brand",
-                "logotype",
-                "image"
-            ]
-        }
-    }
+	"slug": "brand",
+	"default": {
+		"logotype": [],
+		"text": [],
+		"aspectRatio": false
+	},
+	"description": {
+		"logotype": "Array containing specified logotype component attributes",
+		"text": "Array of brand name, each item will be separated on multiple lines",
+		"aspectRatio": "Optional CSS aspect-ratio value (number or numeric string greater than 0). When omitted or invalid, the component renders with its default dimensions."
+	},
+	"types": {
+		"logotype": "array",
+		"text": "array",
+		"aspectRatio": "number|string|boolean"
+	},
+	"view": "brand.blade.php",
+	"dependency": {
+		"sass": {
+			"components": [
+				"brand",
+				"logotype",
+				"image"
+			]
+		}
+	}
 }

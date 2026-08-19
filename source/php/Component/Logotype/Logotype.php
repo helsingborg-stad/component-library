@@ -2,8 +2,12 @@
 
 namespace ComponentLibrary\Component\Logotype;
 
+use ComponentLibrary\Component\Traits\ResolvesAspectRatio;
+
 class Logotype extends \ComponentLibrary\Component\BaseController
 {
+    use ResolvesAspectRatio;
+
     public function init()
     {
         //Extract array for eazy access (fetch only)
@@ -37,6 +41,9 @@ class Logotype extends \ComponentLibrary\Component\BaseController
 
             $this->data['classList'][] = $this->getBaseClass() . '--is-maskable';
         }
+
+        // Apply aspect-ratio style when a valid aspectRatio is provided
+        $this->applyAspectRatioStyle($aspectRatio ?? null);
     }
 
     /**

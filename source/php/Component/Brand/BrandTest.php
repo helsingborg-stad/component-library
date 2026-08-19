@@ -1,51 +1,62 @@
 <?php
 
-namespace ComponentLibrary\Component\Logotype;
+namespace ComponentLibrary\Component\Brand;
 
 use ComponentLibrary\Cache\CacheInterface;
 use PHPUnit\Framework\TestCase;
 
-class LogotypeTest extends TestCase
+class BrandTest extends TestCase
 {
-    public function testMaskableAttributesAreAddedForSvgSource(): void
+    // -------------------------------------------------------------------------
+    // Legacy scenarios — existing rendering behaviour must be unchanged
+    // -------------------------------------------------------------------------
+
+    public function testLogoWithOneTextRowRendersWithoutAspectRatioStyle(): void
     {
         $controller = $this->getController([
-            'maskable' => true,
-            'src' => '/assets/logo.svg',
+            'logotype' => ['src' => '/logo.svg'],
+            'text' => ['Acme Corp'],
         ]);
 
         $data = $controller->getData();
 
-        $this->assertSame('true', $data['attributeList']['data-logotype-maskable']);
-        $this->assertSame('/assets/logo.svg', $data['attributeList']['data-logotype-maskable-src']);
-        $this->assertContains('c-logotype--is-maskable', $data['classList']);
+        $this->assertStringNotContainsString('aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
     }
 
-    public function testMaskableAttributesAreNotAddedForNonSvgSource(): void
+    public function testLogoWithMultipleTextRowsRendersWithoutAspectRatioStyle(): void
     {
         $controller = $this->getController([
-            'maskable' => true,
-            'src' => '/assets/logo.png',
+            'logotype' => ['src' => '/logo.svg'],
+            'text' => ['Acme Corp', 'Tagline'],
         ]);
 
         $data = $controller->getData();
 
-        $this->assertArrayNotHasKey('data-logotype-maskable', $data['attributeList']);
-        $this->assertArrayNotHasKey('data-logotype-maskable-src', $data['attributeList']);
-        $this->assertNotContains('c-logotype--is-maskable', $data['classList']);
+        $this->assertStringNotContainsString('aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
     }
 
-    public function testMaskableAttributesAreAddedForSvgSourceWithQueryString(): void
+    public function testOnlyLogotypeRendersWithoutAspectRatioStyle(): void
     {
         $controller = $this->getController([
-            'maskable' => true,
-            'src' => '/assets/logo.svg?version=1',
+            'logotype' => ['src' => '/logo.svg'],
+            'text' => [],
         ]);
 
         $data = $controller->getData();
 
-        $this->assertSame('true', $data['attributeList']['data-logotype-maskable']);
-        $this->assertContains('c-logotype--is-maskable', $data['classList']);
+        $this->assertStringNotContainsString('aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
+    }
+
+    public function testOnlyTextRendersWithoutAspectRatioStyle(): void
+    {
+        $controller = $this->getController([
+            'logotype' => [],
+            'text' => ['Acme Corp'],
+        ]);
+
+        $data = $controller->getData();
+
+        $this->assertStringNotContainsString('aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
     }
 
     // -------------------------------------------------------------------------
@@ -54,20 +65,24 @@ class LogotypeTest extends TestCase
 
     public function testValidNumericAspectRatioIsApplied(): void
     {
-        $controller = $this->getController(['aspectRatio' => 1.5]);
+        $controller = $this->getController([
+            'aspectRatio' => 2.5,
+        ]);
 
         $data = $controller->getData();
 
-        $this->assertStringContainsString('aspect-ratio: 1.5', $data['attributeList']['style']);
+        $this->assertStringContainsString('aspect-ratio: 2.5', $data['attributeList']['style']);
     }
 
     public function testValidNumericStringAspectRatioIsApplied(): void
     {
-        $controller = $this->getController(['aspectRatio' => '4']);
+        $controller = $this->getController([
+            'aspectRatio' => '3',
+        ]);
 
         $data = $controller->getData();
 
-        $this->assertStringContainsString('aspect-ratio: 4', $data['attributeList']['style']);
+        $this->assertStringContainsString('aspect-ratio: 3', $data['attributeList']['style']);
     }
 
     // -------------------------------------------------------------------------
@@ -77,6 +92,15 @@ class LogotypeTest extends TestCase
     public function testMissingAspectRatioProducesNoStyle(): void
     {
         $controller = $this->getController([]);
+
+        $data = $controller->getData();
+
+        $this->assertStringNotContainsString('aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
+    }
+
+    public function testFalseAspectRatioProducesNoStyle(): void
+    {
+        $controller = $this->getController(['aspectRatio' => false]);
 
         $data = $controller->getData();
 
@@ -94,7 +118,7 @@ class LogotypeTest extends TestCase
 
     public function testNegativeAspectRatioIsIgnored(): void
     {
-        $controller = $this->getController(['aspectRatio' => -2]);
+        $controller = $this->getController(['aspectRatio' => -1]);
 
         $data = $controller->getData();
 
@@ -103,7 +127,16 @@ class LogotypeTest extends TestCase
 
     public function testNonNumericStringAspectRatioIsIgnored(): void
     {
-        $controller = $this->getController(['aspectRatio' => 'square']);
+        $controller = $this->getController(['aspectRatio' => 'wide']);
+
+        $data = $controller->getData();
+
+        $this->assertStringNotContainsString('aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
+    }
+
+    public function testEmptyStringAspectRatioIsIgnored(): void
+    {
+        $controller = $this->getController(['aspectRatio' => '']);
 
         $data = $controller->getData();
 
@@ -130,8 +163,9 @@ class LogotypeTest extends TestCase
     {
         return [
             'integer'        => [1, '1'],
-            'float'          => [2.5, '2.5'],
-            'numeric string' => ['3', '3'],
+            'float'          => [1.5, '1.5'],
+            'numeric string' => ['2', '2'],
+            'small float'    => [0.1, '0.1'],
         ];
     }
 
@@ -150,18 +184,22 @@ class LogotypeTest extends TestCase
     public static function invalidAspectRatioProvider(): array
     {
         return [
-            'null'        => [null],
-            'false'       => [false],
-            'empty string'=> [''],
-            'zero'        => [0],
-            'negative'    => [-1],
-            'non-numeric' => ['wide'],
+            'null'           => [null],
+            'false'          => [false],
+            'empty string'   => [''],
+            'zero'           => [0],
+            'negative'       => [-1],
+            'non-numeric'    => ['wide'],
         ];
     }
 
-    private function getController(array $data = []): Logotype
+    // -------------------------------------------------------------------------
+    // Helper
+    // -------------------------------------------------------------------------
+
+    private function getController(array $data = []): Brand
     {
-        return new Logotype(
+        return new Brand(
             $data,
             $this->createMock(CacheInterface::class),
             new \ComponentLibrary\Helper\TagSanitizer(),
