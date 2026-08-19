@@ -58,7 +58,7 @@ class LogotypeTest extends TestCase
 
         $data = $controller->getData();
 
-        $this->assertStringContainsString('aspect-ratio: 1.5', $data['attributeList']['style']);
+        $this->assertStringContainsString('--c-logotype--aspect-ratio: 1.5', $data['attributeList']['style']);
     }
 
     public function testValidNumericStringAspectRatioIsApplied(): void
@@ -67,7 +67,7 @@ class LogotypeTest extends TestCase
 
         $data = $controller->getData();
 
-        $this->assertStringContainsString('aspect-ratio: 4', $data['attributeList']['style']);
+        $this->assertStringContainsString('--c-logotype--aspect-ratio: 4', $data['attributeList']['style']);
     }
 
     // -------------------------------------------------------------------------
@@ -80,7 +80,7 @@ class LogotypeTest extends TestCase
 
         $data = $controller->getData();
 
-        $this->assertStringNotContainsString('aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
+        $this->assertStringNotContainsString('--c-logotype--aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
     }
 
     public function testZeroAspectRatioIsIgnored(): void
@@ -89,7 +89,7 @@ class LogotypeTest extends TestCase
 
         $data = $controller->getData();
 
-        $this->assertStringNotContainsString('aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
+        $this->assertStringNotContainsString('--c-logotype--aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
     }
 
     public function testNegativeAspectRatioIsIgnored(): void
@@ -98,7 +98,7 @@ class LogotypeTest extends TestCase
 
         $data = $controller->getData();
 
-        $this->assertStringNotContainsString('aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
+        $this->assertStringNotContainsString('--c-logotype--aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
     }
 
     public function testNonNumericStringAspectRatioIsIgnored(): void
@@ -107,7 +107,7 @@ class LogotypeTest extends TestCase
 
         $data = $controller->getData();
 
-        $this->assertStringNotContainsString('aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
+        $this->assertStringNotContainsString('--c-logotype--aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
     }
 
     // -------------------------------------------------------------------------

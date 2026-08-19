@@ -10,13 +10,14 @@ a fully backwards-compatible, additive change.
 
 ## What changed
 
-| Component  | New property   | Behaviour when absent / invalid |
-|------------|----------------|---------------------------------|
-| `Brand`    | `aspectRatio`  | Renders exactly as before       |
-| `Logotype` | `aspectRatio`  | Renders exactly as before       |
+| Component  | New property   | CSS custom property written        | Behaviour when absent / invalid |
+|------------|----------------|------------------------------------|---------------------------------|
+| `Brand`    | `aspectRatio`  | `--c-brand--aspect-ratio`          | Renders exactly as before       |
+| `Logotype` | `aspectRatio`  | `--c-logotype--aspect-ratio`       | Renders exactly as before       |
 
-When a **valid** `aspectRatio` value is provided it is written as a CSS
-`aspect-ratio` inline style on the component's root element.
+When a **valid** `aspectRatio` value is provided it is written as a
+component-namespaced CSS custom property in the component's inline `style`
+attribute, processed by BaseController's `sanitizeInlineCss()` as normal.
 
 ---
 
@@ -58,35 +59,42 @@ Pass the new property wherever a fixed aspect ratio is desired:
 ```php
 // Brand — numeric value
 @brand([
-    'logotype' => $logotype,
-    'text'     => ['Acme Corp'],
+    'logotype'    => $logotype,
+    'text'        => ['Acme Corp'],
     'aspectRatio' => 5,
 ])
 @endbrand
 
-// Brand — numeric string
-@brand([
-    'logotype' => $logotype,
-    'text'     => ['Acme Corp'],
-    'aspectRatio' => '5',
-])
-@endbrand
-
-// Logotype — numeric value
+// Logotype — numeric string
 @logotype([
     'src'         => '/path/to/logo.svg',
     'alt'         => 'Acme logo',
-    'aspectRatio' => 1,
+    'aspectRatio' => '1.5',
 ])
 @endlogotype
 ```
 
 ### Step 3 — verify rendering
 
-Check that the rendered HTML includes the expected inline style, for example:
+Check that the rendered HTML includes the expected CSS custom property, e.g.:
 
 ```html
-<div class="c-brand" style="aspect-ratio: 5;" data-component="brand" …>
+<div class="c-brand" style="--c-brand--aspect-ratio: 5;" data-component="brand" …>
+<figure class="c-logotype" style="--c-logotype--aspect-ratio: 1.5;" data-component="logotype" …>
+```
+
+### Step 4 — use the variable in your CSS (optional)
+
+Consuming themes can read the variable to apply the ratio however they need:
+
+```css
+.c-brand {
+    aspect-ratio: var(--c-brand--aspect-ratio);
+}
+
+.c-logotype {
+    aspect-ratio: var(--c-logotype--aspect-ratio);
+}
 ```
 
 ---
@@ -96,6 +104,5 @@ Check that the rendered HTML includes the expected inline style, for example:
 - The `aspectRatio` property defaults to `false` in both `brand.json` and
   `logotype.json`, so omitting it is identical to the previous behaviour.
 - Invalid values are treated as absent — no errors are thrown.
-- No template files were modified; the aspect ratio is applied exclusively
-  through the existing `attributeList['style']` mechanism in the PHP
-  controllers.
+- The CSS custom property is written into `attributeList['style']` and is
+  automatically sanitized by BaseController's `sanitizeInlineCss()`.

@@ -20,7 +20,7 @@ class BrandTest extends TestCase
 
         $data = $controller->getData();
 
-        $this->assertStringNotContainsString('aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
+        $this->assertStringNotContainsString('--c-brand--aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
     }
 
     public function testLogoWithMultipleTextRowsRendersWithoutAspectRatioStyle(): void
@@ -32,7 +32,7 @@ class BrandTest extends TestCase
 
         $data = $controller->getData();
 
-        $this->assertStringNotContainsString('aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
+        $this->assertStringNotContainsString('--c-brand--aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
     }
 
     public function testOnlyLogotypeRendersWithoutAspectRatioStyle(): void
@@ -44,7 +44,7 @@ class BrandTest extends TestCase
 
         $data = $controller->getData();
 
-        $this->assertStringNotContainsString('aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
+        $this->assertStringNotContainsString('--c-brand--aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
     }
 
     public function testOnlyTextRendersWithoutAspectRatioStyle(): void
@@ -56,7 +56,7 @@ class BrandTest extends TestCase
 
         $data = $controller->getData();
 
-        $this->assertStringNotContainsString('aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
+        $this->assertStringNotContainsString('--c-brand--aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
     }
 
     // -------------------------------------------------------------------------
@@ -71,7 +71,7 @@ class BrandTest extends TestCase
 
         $data = $controller->getData();
 
-        $this->assertStringContainsString('aspect-ratio: 2.5', $data['attributeList']['style']);
+        $this->assertStringContainsString('--c-brand--aspect-ratio: 2.5', $data['attributeList']['style']);
     }
 
     public function testValidNumericStringAspectRatioIsApplied(): void
@@ -82,7 +82,7 @@ class BrandTest extends TestCase
 
         $data = $controller->getData();
 
-        $this->assertStringContainsString('aspect-ratio: 3', $data['attributeList']['style']);
+        $this->assertStringContainsString('--c-brand--aspect-ratio: 3', $data['attributeList']['style']);
     }
 
     // -------------------------------------------------------------------------
@@ -95,7 +95,7 @@ class BrandTest extends TestCase
 
         $data = $controller->getData();
 
-        $this->assertStringNotContainsString('aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
+        $this->assertStringNotContainsString('--c-brand--aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
     }
 
     public function testFalseAspectRatioProducesNoStyle(): void
@@ -104,7 +104,7 @@ class BrandTest extends TestCase
 
         $data = $controller->getData();
 
-        $this->assertStringNotContainsString('aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
+        $this->assertStringNotContainsString('--c-brand--aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
     }
 
     public function testZeroAspectRatioIsIgnored(): void
@@ -113,7 +113,7 @@ class BrandTest extends TestCase
 
         $data = $controller->getData();
 
-        $this->assertStringNotContainsString('aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
+        $this->assertStringNotContainsString('--c-brand--aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
     }
 
     public function testNegativeAspectRatioIsIgnored(): void
@@ -122,7 +122,7 @@ class BrandTest extends TestCase
 
         $data = $controller->getData();
 
-        $this->assertStringNotContainsString('aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
+        $this->assertStringNotContainsString('--c-brand--aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
     }
 
     public function testNonNumericStringAspectRatioIsIgnored(): void
@@ -131,7 +131,7 @@ class BrandTest extends TestCase
 
         $data = $controller->getData();
 
-        $this->assertStringNotContainsString('aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
+        $this->assertStringNotContainsString('--c-brand--aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
     }
 
     public function testEmptyStringAspectRatioIsIgnored(): void
@@ -140,7 +140,7 @@ class BrandTest extends TestCase
 
         $data = $controller->getData();
 
-        $this->assertStringNotContainsString('aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
+        $this->assertStringNotContainsString('--c-brand--aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
     }
 
     // -------------------------------------------------------------------------

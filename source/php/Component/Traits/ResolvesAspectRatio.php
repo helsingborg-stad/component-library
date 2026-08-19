@@ -34,11 +34,13 @@ trait ResolvesAspectRatio
     }
 
     /**
-     * Applies a valid aspectRatio value as a CSS inline style on the component.
+     * Applies a valid aspectRatio value as a component-namespaced CSS custom
+     * property in the component's inline style attribute.
      *
-     * Merges the aspect-ratio declaration into the existing attributeList style
-     * value, ensuring the existing style is properly terminated with a semicolon
-     * before appending.
+     * The CSS variable name is derived from the component's base class, e.g.
+     * --c-brand--aspect-ratio or --c-logotype--aspect-ratio. BaseController's
+     * sanitizeInlineCss() will process the resulting style string automatically
+     * during getData().
      *
      * @param mixed $aspectRatio
      *
@@ -55,14 +57,15 @@ trait ResolvesAspectRatio
             $this->data['attributeList'] = [];
         }
 
+        $cssVar = '--' . $this->getBaseClass() . '--aspect-ratio';
         $existingStyle = trim((string) ($this->data['attributeList']['style'] ?? ''));
         if ($existingStyle !== '' && !str_ends_with($existingStyle, ';')) {
             $existingStyle .= ';';
         }
 
-        $aspectRatioStyle = 'aspect-ratio: ' . $resolvedAspectRatio . ';';
+        $declaration = $cssVar . ': ' . $resolvedAspectRatio . ';';
         $this->data['attributeList']['style'] = trim(
-            $existingStyle !== '' ? $existingStyle . ' ' . $aspectRatioStyle : $aspectRatioStyle
+            $existingStyle !== '' ? $existingStyle . ' ' . $declaration : $declaration
         );
     }
 }
