@@ -1,0 +1,31 @@
+{
+	"slug": "collapsiblesearch",
+	"default": {
+		"button": [],
+		"placeholder": "Search…",
+		"inputName": "s",
+		"inputLabel": "Search",
+		"action": "",
+		"method": "get",
+		"closeLabel": "Close search",
+		"isExpanded": false,
+		"lang": {}
+	},
+	"description": {
+		"button": "Button component configuration array. Accepts all standard button parameters (text, icon, size, color, style, shape, etc.). Merged directly into the trigger button.",
+		"placeholder": "Placeholder text inside the search input.",
+		"inputName": "Name attribute for the search input (used in query string).",
+		"inputLabel": "Accessible label for the search input.",
+		"action": "Form action URL. Defaults to current page.",
+		"method": "Form submission method; get or post.",
+		"closeLabel": "Accessible label for the close button.",
+		"isExpanded": "Render the component in its expanded state on load.",
+		"lang": "Translatable string overrides."
+	},
+	"view": "collapsibleSearch.blade.php",
+	"dependency": {
+		"sass": {
+			"components": ["collapsible-search", "button", "icon"]
+		}
+	}
+}
