@@ -10,6 +10,7 @@
         class="{{ $baseClass }}__panel"
         id="{{ $uid }}-panel"
         role="search"
+        aria-label="{{ $inputLabel }}"
         method="{{ $method }}"
         @if ($action) action="{{ $action }}" @endif
         aria-hidden="{{ $isExpanded ? 'false' : 'true' }}"
