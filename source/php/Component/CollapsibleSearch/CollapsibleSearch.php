@@ -44,6 +44,9 @@ class CollapsibleSearch extends \ComponentLibrary\Component\BaseController
         // (submit, close) can match the trigger size.
         $this->data['size'] = $button['size'] ?? 'md';
 
+        // Add size modifier class so CSS can scale the form panel dimensions.
+        $this->data['classList'][] = 'c-collapsible-search--' . $this->data['size'];
+
         // Normalise icon: the public API accepts both a plain string and the
         // array form ['name' => '...', 'size' => '...', ...] used elsewhere in
         // the styleguide.  Icon.php only accepts a string, so extract the name.

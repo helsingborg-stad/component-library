@@ -16,33 +16,38 @@
         @if (!$isExpanded) inert @endif
     >
         <label
-            class="{{ $baseClass }}__label u-visually-hidden"
+            class="{{ $baseClass }}__label u-sr__only"
             for="{{ $uid }}-input"
         >{{ $inputLabel }}</label>
 
-        <input
-            class="{{ $baseClass }}__input"
-            id="{{ $uid }}-input"
-            type="search"
-            name="{{ $inputName }}"
-            placeholder="{{ $placeholder }}"
-            autocomplete="off"
-            data-js-collapsible-search-input
-        />
+        <div class="{{ $baseClass }}__input-wrapper">
 
-        {{-- Submit search --}}
-        @button([
-            'icon'             => 'search',
-            'style'            => 'basic',
-            'color'            => 'default',
-            'size'             => $size ?? 'md',
-            'type'             => 'submit',
-            'componentElement' => 'button',
-            'ariaLabel'        => $lang['submitLabel'] ?? 'Search',
-            'classList'        => [$baseClass . '__submit'],
-            'attributeList'    => ['data-js-collapsible-search-submit' => ''],
-        ])
-        @endbutton
+            {{-- Search input --}}
+            <input
+                class="{{ $baseClass }}__input"
+                id="{{ $uid }}-input"
+                type="search"
+                name="{{ $inputName }}"
+                placeholder="{{ $placeholder }}"
+                autocomplete="off"
+                data-js-collapsible-search-input
+            />
+
+            {{-- Submit search --}}
+            @button([
+                'icon'             => 'search',
+                'style'            => 'basic',
+                'color'            => 'default',
+                'size'             => $size ?? 'md',
+                'type'             => 'submit',
+                'componentElement' => 'button',
+                'ariaLabel'        => $lang['submitLabel'] ?? 'Search',
+                'classList'        => [$baseClass . '__submit'],
+                'attributeList'    => ['data-js-collapsible-search-submit' => ''],
+            ])
+            @endbutton
+
+        </div>
 
         {{-- Close / collapse --}}
         @button([
