@@ -68,6 +68,12 @@ class CollapsibleSearchTest extends PHPUnit\Framework\TestCase
         $this->assertArrayHasKey('data-js-collapsible-search', $data['attributeList']);
     }
 
+    public function testWrapperUsesThePublicHyphenatedComponentName(): void
+    {
+        $data = $this->make();
+        $this->assertEquals('collapsible-search', $data['attributeList']['data-component']);
+    }
+
     // -------------------------------------------------------------------------
     // Expanded state
     // -------------------------------------------------------------------------

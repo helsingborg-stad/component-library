@@ -72,10 +72,15 @@ class CollapsibleSearch extends \ComponentLibrary\Component\BaseController
             ],
         );
 
-        // Merge the component data-attribute onto the wrapper element.
+        // Keep the rendered component name aligned with the public, hyphenated
+        // component slug. Design Center uses this attribute to find the
+        // matching token and control definitions.
         $this->data['attributeList'] = array_merge(
             (array) ($attributeList ?? []),
-            ['data-js-collapsible-search' => ''],
+            [
+                'data-js-collapsible-search' => '',
+                'data-component' => 'collapsible-search',
+            ],
         );
     }
 }

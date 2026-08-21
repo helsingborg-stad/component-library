@@ -374,8 +374,13 @@ class BaseController
             $attribute['style'] = trim($this->sanitizeInlineCss($attribute['style']));
         }
 
-        //Add component slug data attribute
-        $attribute['data-component'] = $this->getComponentSlug();
+        //Add component slug data attribute unless a component deliberately
+        //provides a canonical alias. This is useful when a legacy PHP
+        //namespace cannot express the public component name (for example,
+        //CollapsibleSearch vs. collapsible-search).
+        if (empty($attribute['data-component'])) {
+            $attribute['data-component'] = $this->getComponentSlug();
+        }
 
         //Remove empty style attrs
         if (empty($attribute['style'])) {
