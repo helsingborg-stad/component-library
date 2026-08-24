@@ -22,7 +22,7 @@
 		"isExpanded": "Render the component in its expanded state on load.",
 		"lang": "Translatable string overrides."
 	},
-	"view": "collapsibleSearch.blade.php",
+	"view": "collapsiblesearch.blade.php",
 	"dependency": {
 		"sass": {
 			"components": ["collapsible-search", "button", "icon"]

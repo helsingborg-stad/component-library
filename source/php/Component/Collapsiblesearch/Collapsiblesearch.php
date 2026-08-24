@@ -1,15 +1,15 @@
 <?php
 
-namespace ComponentLibrary\Component\CollapsibleSearch;
+namespace ComponentLibrary\Component\Collapsiblesearch;
 
 /**
- * CollapsibleSearch component controller.
+ * Collapsiblesearch component controller.
  *
  * Renders a toggle-able search UI: a plain button in its closed state that
  * expands into a pill-shaped search form. All standard button parameters are
  * accepted and passed through to the trigger button unchanged.
  */
-class CollapsibleSearch extends \ComponentLibrary\Component\BaseController
+class Collapsiblesearch extends \ComponentLibrary\Component\BaseController
 {
     /**
      * Initialize component data.
@@ -19,7 +19,7 @@ class CollapsibleSearch extends \ComponentLibrary\Component\BaseController
     public function init(): void
     {
         // Force the BEM base class to the hyphenated form.
-        $this->data['baseClass'] = 'c-collapsible-search';
+        $this->data['baseClass'] = 'c-collapsiblesearch';
 
         // Generate a stable unique ID usable for aria-controls / label pairing.
         $this->data['uid'] = $this->getUid();
@@ -28,7 +28,7 @@ class CollapsibleSearch extends \ComponentLibrary\Component\BaseController
 
         // Expanded modifier
         if ($isExpanded) {
-            $this->data['classList'][] = 'c-collapsible-search--expanded';
+            $this->data['classList'][] = 'c-collapsiblesearch--expanded';
         }
 
         // Normalise lang: Register's shallow (array) cast leaves nested {}
@@ -45,7 +45,7 @@ class CollapsibleSearch extends \ComponentLibrary\Component\BaseController
         $this->data['size'] = $button['size'] ?? 'md';
 
         // Add size modifier class so CSS can scale the form panel dimensions.
-        $this->data['classList'][] = 'c-collapsible-search--' . $this->data['size'];
+        $this->data['classList'][] = 'c-collapsiblesearch--' . $this->data['size'];
 
         // Normalise icon: the public API accepts both a plain string and the
         // array form ['name' => '...', 'size' => '...', ...] used elsewhere in
@@ -79,7 +79,7 @@ class CollapsibleSearch extends \ComponentLibrary\Component\BaseController
             (array) ($attributeList ?? []),
             [
                 'data-js-collapsible-search' => '',
-                'data-component' => 'collapsible-search',
+                'data-component' => 'collapsiblesearch',
             ],
         );
     }

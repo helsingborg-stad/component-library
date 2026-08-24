@@ -1,11 +1,11 @@
 <?php
 
 /**
- * CollapsibleSearchTest
+ * CollapsiblesearchTest
  *
- * Tests for the CollapsibleSearch component controller.
+ * Tests for the Collapsiblesearch component controller.
  */
-class CollapsibleSearchTest extends PHPUnit\Framework\TestCase
+class CollapsiblesearchTest extends PHPUnit\Framework\TestCase
 {
     // -------------------------------------------------------------------------
     // Helpers
@@ -20,7 +20,7 @@ class CollapsibleSearchTest extends PHPUnit\Framework\TestCase
     private function getComponentData(array $overrides = []): array
     {
         $jsonFile = file_get_contents(
-            'source/php/Component/CollapsibleSearch/collapsibleSearch.json',
+            'source/php/Component/Collapsiblesearch/collapsiblesearch.json',
             true,
         );
         $json = json_decode($jsonFile, true);
@@ -37,7 +37,7 @@ class CollapsibleSearchTest extends PHPUnit\Framework\TestCase
     private function make(array $overrides = []): array
     {
         $data = $this->getComponentData($overrides);
-        $component = new \ComponentLibrary\Component\CollapsibleSearch\CollapsibleSearch(
+        $component = new \ComponentLibrary\Component\Collapsiblesearch\Collapsiblesearch(
             $data,
             new \ComponentLibrary\Cache\StaticCache(),
             new \ComponentLibrary\Helper\TagSanitizer(),
@@ -53,7 +53,7 @@ class CollapsibleSearchTest extends PHPUnit\Framework\TestCase
     public function testBaseClassIsHyphenated(): void
     {
         $data = $this->make();
-        $this->assertEquals('c-collapsible-search', $data['baseClass']);
+        $this->assertEquals('c-collapsiblesearch', $data['baseClass']);
     }
 
     public function testUidIsGenerated(): void
@@ -68,10 +68,10 @@ class CollapsibleSearchTest extends PHPUnit\Framework\TestCase
         $this->assertArrayHasKey('data-js-collapsible-search', $data['attributeList']);
     }
 
-    public function testWrapperUsesThePublicHyphenatedComponentName(): void
+    public function testWrapperUsesThePublicComponentName(): void
     {
         $data = $this->make();
-        $this->assertEquals('collapsible-search', $data['attributeList']['data-component']);
+        $this->assertEquals('collapsiblesearch', $data['attributeList']['data-component']);
     }
 
     // -------------------------------------------------------------------------
@@ -81,13 +81,13 @@ class CollapsibleSearchTest extends PHPUnit\Framework\TestCase
     public function testExpandedModifierClassIsAbsentByDefault(): void
     {
         $data = $this->make();
-        $this->assertNotContains('c-collapsible-search--expanded', $data['classList']);
+        $this->assertNotContains('c-collapsiblesearch--expanded', $data['classList']);
     }
 
     public function testExpandedModifierClassIsAddedWhenIsExpandedTrue(): void
     {
         $data = $this->make(['isExpanded' => true]);
-        $this->assertContains('c-collapsible-search--expanded', $data['classList']);
+        $this->assertContains('c-collapsiblesearch--expanded', $data['classList']);
     }
 
     // -------------------------------------------------------------------------
