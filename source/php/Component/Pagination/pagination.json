@@ -19,7 +19,7 @@
         "buttonSize": "sm",
         "pagesToShow": false,
         "keepDOM": false,
-        "async": true
+        "async": false
     },
     "description": {
         "list": "Array with pages",
