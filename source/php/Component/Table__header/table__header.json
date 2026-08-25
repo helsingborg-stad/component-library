@@ -1,0 +1,19 @@
+{
+    "slug": "table__header",
+    "default": {
+    },
+    "description": {
+    },
+    "view": "table__header.blade.php",
+    "dependency": {
+        "sass": {
+            "components": [
+                "table",
+                "icon",
+                "modal",
+                "field",
+                "card"
+            ]
+        }
+    }
+}
