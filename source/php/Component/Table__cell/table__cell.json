@@ -1,0 +1,23 @@
+{
+    "slug": "table__cell",
+    "default": {
+        "componentElement": "td",
+        "index": null
+    },
+    "description": {
+        "index": "The index of the cell in the row. Used for sorting and styling."
+    },
+    "view": "table__cell.blade.php",
+    "types": {
+        "slot": "string",
+        "index": "integer",
+        "componentElement": "string"
+    },
+    "dependency": {
+        "sass": {
+            "components": [
+                "table"
+            ]
+        }
+    }
+}

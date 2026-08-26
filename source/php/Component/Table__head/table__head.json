@@ -1,0 +1,18 @@
+{
+    "slug": "table__head",
+    "default": {
+    },
+    "description": {
+    },
+    "view": "table__head.blade.php",
+    "types": {
+        "slot": "string"
+    },
+    "dependency": {
+        "sass": {
+            "components": [
+                "table"
+            ]
+        }
+    }
+}

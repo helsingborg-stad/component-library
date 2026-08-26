@@ -6,7 +6,7 @@ class Table extends \ComponentLibrary\Component\BaseController
 {
     public function init()
     {
-        //Extract array for eazy access (fetch only)
+        //Extract array for easy access (fetch only)
         extract($this->data);
 
         $this->padCells();

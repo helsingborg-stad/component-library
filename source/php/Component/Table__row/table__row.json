@@ -1,0 +1,20 @@
+{
+    "slug": "table__row",
+    "default": {
+        "index": null
+    },
+    "description": {
+    },
+    "view": "table__row.blade.php",
+    "types": {
+        "slot": "string",
+        "index": "integer"
+    },
+    "dependency": {
+        "sass": {
+            "components": [
+                "table"
+            ]
+        }
+    }
+}
