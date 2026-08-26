@@ -356,9 +356,6 @@ class BaseController
             $attribute['data-observe-resizes'] = '';
         }
 
-        //Add unique id
-        $attribute['data-uid'] = $this->getUid();
-
         //Applies a general wp filter
         if (function_exists('apply_filters')) {
             $attribute = apply_filters($this->createFilterName($this) . DIRECTORY_SEPARATOR . 'Attribute', $attribute);
