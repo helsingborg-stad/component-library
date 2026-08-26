@@ -16,13 +16,16 @@ class Table extends \ComponentLibrary\Component\BaseController
            $this->data['labels'] = (array) $labels; 
         }
 
+        $this->data['attributeList']['data-js-table'] = true; 
+
         if ($filterable) {
-            $this->data['attributeList']['js-table-filter'] = '';
+            $this->data['attributeList']['js-table-filter'] = true;
         }
 
         if ($sortable) {
-            $this->data['attributeList']['js-table-sort'] = '';
+            $this->data['attributeList']['js-table-sort'] = true;
         }
+
 
         if ($isMultidimensional) {
             $this->data['classList'][]  = $this->getBaseClass() . '--multidimensional';
