@@ -6,5 +6,6 @@ class Table__head extends \ComponentLibrary\Component\BaseController
 {
     public function init()
     {
+        $this->data['attributeList']['data-js-table-head'] = true;
     }
 }

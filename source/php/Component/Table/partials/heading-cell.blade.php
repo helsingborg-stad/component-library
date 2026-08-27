@@ -17,7 +17,13 @@
     <!-- Sort button -->
     @if(!empty($sortable))
         @if((!empty($isMultidimensional) && $loop->index !== 0) || empty($isMultidimensional))                                        
-            @icon(['icon' => 'swap_vert', 'size' => 'md', 'classList' => [$baseClass . '__sort-button']])
+            @icon([
+                'icon' => 'swap_vert',
+                'size' => 'md',
+                'classList' => [
+                    $baseClass . '__sort-button'
+                ]
+            ])
             @endicon
         @endif
     @endif

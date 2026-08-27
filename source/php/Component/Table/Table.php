@@ -23,7 +23,7 @@ class Table extends \ComponentLibrary\Component\BaseController
         }
 
         if ($sortable) {
-            $this->data['attributeList']['js-table-sort'] = true;
+            $this->data['attributeList']['data-js-table-sort'] = true;
         }
 
 

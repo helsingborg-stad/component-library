@@ -14,12 +14,13 @@ class Table__cell extends \ComponentLibrary\Component\BaseController
             : 'td';
 
         $this->data['attributeList']['scope'] = 'cell';
+        $this->data['attributeList']['data-js-table-cell'] = true;
 
         $this->data['classList'][]  = $this->getBaseClass();
 
         if ($index !== null) {
             $this->data['classList'][]  = $this->getBaseClass() . '--column-' . $index;
-            $this->data['attributeList']['data-js-row-index'] = $index;
+            $this->data['attributeList']['data-js-column-index'] = $index;
         }
 
     }

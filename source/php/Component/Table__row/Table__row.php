@@ -10,6 +10,7 @@ class Table__row extends \ComponentLibrary\Component\BaseController
         extract($this->data);
 
         $this->data['attributeList']['scope'] = 'row';
+        $this->data['attributeList']['data-js-table-row'] = true;
         $this->data['classList'][] = $this->getBaseClass();
 
         if ($index !== null) {
