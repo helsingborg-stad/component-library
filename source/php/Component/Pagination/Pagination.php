@@ -20,15 +20,20 @@ class Pagination extends \ComponentLibrary\Component\BaseController
         /* Javascrip pagination */
         if($this->data['useJS']) {
             $this->data['list'] = [['label' => '', 'href' => '']];
-            $this->data['attributeList']['data-js-pagination'] = '';
+            $this->data['attributeList']['data-js-pagination'] = '1';
             $this->data['attributeList']['data-js-pagination-per-page'] = $this->data['perPage'];
             $this->data['attributeList']['data-js-pagination-max-pages'] = $this->data['maxPages'];
             $this->data['attributeList']['data-js-pagination-pages-to-show'] = $this->data['pagesToShow'];
+
+            if ($async) {
+                $this->data['attributeList']['data-js-pagination-async'] = '1';
+            }
+
             if ($keepDOM) {
-                $this->data['attributeList']['data-js-pagination-keep-dom'] = '';
+                $this->data['attributeList']['data-js-pagination-keep-dom'] = '1';
             }
             if ($randomizeOrder) {
-                $this->data['attributeList']['data-js-pagination-randomize-order'] = '';
+                $this->data['attributeList']['data-js-pagination-randomize-order'] = '1';
             }
         }
     
