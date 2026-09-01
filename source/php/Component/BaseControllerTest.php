@@ -2,8 +2,27 @@
 
 use ComponentLibrary\Component\BaseController;
 
+class BaseControllerFilterNameFixture extends BaseController
+{
+}
+
 class BaseControllerTest extends PHPUnit\Framework\TestCase
 {
+    public function testCreateFilterNameReturnsStableValueForClass()
+    {
+        $reflection = new ReflectionClass(BaseControllerFilterNameFixture::class);
+        $controller = $reflection->newInstanceWithoutConstructor();
+
+        $this->assertSame(
+            'BaseControllerFilterNameFixture',
+            $controller->createFilterName($controller),
+        );
+        $this->assertSame(
+            $controller->createFilterName($controller),
+            $controller->createFilterName($controller),
+        );
+    }
+
     public function testBuildAttributesReturnsAllAttributesAsString()
     {
         $attributes = ['One' => 'one', 'Two' => 'two'];

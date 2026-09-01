@@ -32,6 +32,14 @@ class BaseController
     protected array $compParams;
 
     /**
+     * Namespace-derived values are identical for every instance of a component
+     * controller class, so resolve them only once per request.
+     */
+    private static array $namespacePartsCache = [];
+    private static array $filterNameCache = [];
+    private static array $defaultContextCache = [];
+
+    /**
      * Run init
      */
     public function __construct(
@@ -173,11 +181,13 @@ class BaseController
      */
     private function getNamespaceParts()
     {
-        //Get all parts of the location
-        return explode(
-            "\\",
-            get_called_class(),
-        );
+        $className = get_class($this);
+
+        if (!isset(self::$namespacePartsCache[$className])) {
+            self::$namespacePartsCache[$className] = explode("\\", $className);
+        }
+
+        return self::$namespacePartsCache[$className];
     }
 
     /**
@@ -496,17 +506,23 @@ class BaseController
      */
     public function createFilterName($class)
     {
+        $className = get_class($class);
+
+        if (isset(self::$filterNameCache[$className])) {
+            return self::$filterNameCache[$className];
+        }
+
         //Get all parts of the location
         $name = explode(
             "\\",
-            get_class($class),
+            $className,
         );
 
         //Remove duplicates
         $name = array_unique($name);
 
         //Create string
-        return implode(DIRECTORY_SEPARATOR, $name);
+        return self::$filterNameCache[$className] = implode(DIRECTORY_SEPARATOR, $name);
     }
 
     /**
@@ -516,10 +532,16 @@ class BaseController
      */
     private function createDefaultContext($class)
     {
+        $className = get_class($class);
+
+        if (isset(self::$defaultContextCache[$className])) {
+            return self::$defaultContextCache[$className];
+        }
+
         //Get all parts of the location
         $name = explode(
             "\\",
-            get_class($class),
+            $className,
         );
 
         if (isset($name[0])) {
@@ -530,7 +552,7 @@ class BaseController
         $name = array_unique($name);
 
         //Create string
-        return strtolower(implode('.', $name));
+        return self::$defaultContextCache[$className] = strtolower(implode('.', $name));
     }
 
     /**
