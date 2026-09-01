@@ -49,6 +49,9 @@
 
                 @if ($showHeader && !empty($headings))
                     @table__head([])
+                        @if($headSlotHasData)
+                            {!! $head !!}
+                        @endif
                         @table__row([])
                             @foreach($headings as $heading)
                                 @table__cell([
@@ -63,6 +66,9 @@
                 @endif
                 @if(!empty($list))
                     @table__body([])
+                        @if($bodySlotHasData)
+                            {!! $body !!}
+                        @endif
                         @foreach($list as $row)
                             @table__row([
                                 'index' => $loop->index,
