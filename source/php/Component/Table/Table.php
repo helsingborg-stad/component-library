@@ -19,11 +19,12 @@ class Table extends \ComponentLibrary\Component\BaseController
         $this->data['attributeList']['data-js-table'] = true; 
 
         if ($filterable) {
-            $this->data['attributeList']['js-table-filter'] = true;
+            $this->data['attributeList']['data-js-table-filter'] = true;
         }
 
         if ($sortable) {
             $this->data['attributeList']['data-js-table-sort'] = true;
+            $this->data['classList'][] = $this->getBaseClass() . '--sortable';
         }
 
 
@@ -31,15 +32,12 @@ class Table extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][]  = $this->getBaseClass() . '--multidimensional';
         }
 
-        if ($showSum) {
-            $this->data['classList'][]  = $this->getBaseClass() . '--summary';
-        }
         if($fullscreen && empty($title)) {
             $this->data['classList'][] = $this->getBaseClass() . '--title-none';
         }
 
         if ($showSum) {
-            $this->data['attributeList']['table-sum'] = true;
+            $this->data['classList'][]  = $this->getBaseClass() . '--summary';
 
             $sumRow = ['columns' => []];
             foreach ($list as $rowIndex => $row) {

@@ -1,14 +1,16 @@
 {
     "slug": "table__row",
     "default": {
-        "index": null
+        "index": null,
+        "isSummary": false
     },
     "description": {
     },
     "view": "table__row.blade.php",
     "types": {
         "slot": "string",
-        "index": "integer"
+        "index": "integer",
+        "isSummary": "boolean"
     },
     "dependency": {
         "sass": {

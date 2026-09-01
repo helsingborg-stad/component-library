@@ -30,7 +30,7 @@
                     'type' => 'search',
                     'name' => 'search',
                     'attributeList' => [
-                        'js-table-filter-input' => ''
+                        'data-js-table-filter-input' => '1'
                     ],
                     'classList' => ($fullscreen||$title) ? ['u-margin__top--2'] : [],
                     'placeholder' => !empty($labels) && !empty($labels['searchPlaceholder']) ? $labels['searchPlaceholder'] : 'Search',
@@ -42,7 +42,7 @@
         </div>
         @endif
         <div class="{{$baseClass}}__inner">
-            <table class="{{$baseClass}}__table">
+            <table class="{{$baseClass}}__table" data-js-table-element="1">
                 @if(!empty($showCaption) && !empty($caption))
                     <caption>{{ $caption }}</caption>
                 @endif
@@ -66,6 +66,7 @@
                         @foreach($list as $row)
                             @table__row([
                                 'index' => $loop->index,
+                                'isSummary' => $showSum && $loop->last
                             ])
                                 @foreach($row['columns'] as $column)
                                     @table__cell([
