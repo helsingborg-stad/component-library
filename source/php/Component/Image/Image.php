@@ -68,18 +68,21 @@ class Image extends \ComponentLibrary\Component\BaseController
 
     private function handleImageProcessing(ImageInterface $src, &$alt, $lqipEnabled)
     {
+        $imageUrl = $src->getUrl();
+
         //If source is SVG, then there is no need to do any container query processing
-        if ($this->getExtension($src->getUrl()) === 'svg') {
-            $this->data['src'] = $src->getUrl();
+        if ($this->getExtension($imageUrl) === 'svg') {
+            $this->data['src'] = $imageUrl;
             $this->data['classList'][] = $this->getBaseClass('svg-background', true);
             $this->data['containerQueryData'] = null;
             return;
         }
 
         $this->data['containerQueryData'] = $src->getContainerQueryData();
-        $this->data['src'] = $src->getUrl();
+        $this->data['src'] = $imageUrl;
         $this->data['srcset'] = $src->getSrcSet();
-        $this->data['focus'] = sprintf("object-position: %s;", $this->reduceFocusPoint($src->getFocusPoint()));
+        $focusPoint = $src->getFocusPoint();
+        $this->data['focus'] = sprintf("object-position: %s;", $this->reduceFocusPoint($focusPoint));
 
         if (empty($alt)) {
             $alt = $this->data['alt'] = $src->getAltText();
@@ -94,8 +97,9 @@ class Image extends \ComponentLibrary\Component\BaseController
             $this->addWrapperAspectRatio();
         }
 
-        if ($lqipEnabled && $src->getLqipUrl()) {
-            $this->addLowResolutionPlaceholder($src);
+        $lqipUrl = $lqipEnabled ? $src->getLqipUrl() : null;
+        if ($lqipUrl) {
+            $this->addLowResolutionPlaceholder($lqipUrl, $focusPoint);
         }
     }
 
@@ -122,15 +126,15 @@ class Image extends \ComponentLibrary\Component\BaseController
         $this->data['wrapperAttributes']['style'] .= "aspect-ratio:{$aspectRatio};";
     }
 
-    private function addLowResolutionPlaceholder(ImageInterface $src)
+    private function addLowResolutionPlaceholder(string $lqipUrl, array $focusPoint)
     {
         if (!isset($this->data['wrapperAttributes']['style'])) {
             $this->data['wrapperAttributes']['style'] = "";
         }
         $this->data['wrapperAttributes']['style'] .= sprintf(
             "background-image: url(%s); background-position: %s;",
-            $src->getLqipUrl(),
-            $this->reduceFocusPoint($src->getFocusPoint())
+            $lqipUrl,
+            $this->reduceFocusPoint($focusPoint)
         );
     }
 
