@@ -6,7 +6,7 @@ class Table extends \ComponentLibrary\Component\BaseController
 {
     public function init()
     {
-        //Extract array for eazy access (fetch only)
+        //Extract array for easy access (fetch only)
         extract($this->data);
 
         $this->padCells();
@@ -16,27 +16,31 @@ class Table extends \ComponentLibrary\Component\BaseController
            $this->data['labels'] = (array) $labels; 
         }
 
+        $this->data['attributeList']['data-js-table'] = true; 
+
         if ($filterable) {
-            $this->data['attributeList']['js-table-filter'] = '';
+            $this->data['attributeList']['data-js-table-filter'] = true;
         }
 
         if ($sortable) {
-            $this->data['attributeList']['js-table-sort'] = '';
+            $this->data['attributeList']['data-js-table-sort'] = true;
+            $this->data['classList'][] = $this->getBaseClass() . '--sortable';
+        }
+
+        if ($async) {
+            $this->data['attributeList']['data-js-table-async'] = true;
         }
 
         if ($isMultidimensional) {
             $this->data['classList'][]  = $this->getBaseClass() . '--multidimensional';
         }
 
-        if ($showSum) {
-            $this->data['classList'][]  = $this->getBaseClass() . '--summary';
-        }
         if($fullscreen && empty($title)) {
             $this->data['classList'][] = $this->getBaseClass() . '--title-none';
         }
 
         if ($showSum) {
-            $this->data['attributeList']['table-sum'] = true;
+            $this->data['classList'][]  = $this->getBaseClass() . '--summary';
 
             $sumRow = ['columns' => []];
             foreach ($list as $rowIndex => $row) {

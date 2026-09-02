@@ -1,0 +1,17 @@
+{
+    "slug": "table__body",
+    "default": {
+    },
+    "description": {
+    },
+    "view": "table__body.blade.php",
+    "types": {
+    },
+    "dependency": {
+        "sass": {
+            "components": [
+                "table"
+            ]
+        }
+    }
+}
