@@ -114,10 +114,12 @@ class BaseController
         //Applies single filter for each data item (class and data exepted)
         if (function_exists('apply_filters')) {
             if (is_array($data) && !empty($data)) {
+                $filterName = $this->createFilterName($this) . DIRECTORY_SEPARATOR;
+
                 foreach ($data as $key => $item) {
                     if (!in_array($key, array('data', 'classes', 'class'))) {
                         $data[$key] = apply_filters(
-                            $this->createFilterName($this) . DIRECTORY_SEPARATOR . ucfirst($key),
+                            $filterName . ucfirst($key),
                             $data[$key],
                             $data['context'] ?? [],
                         );

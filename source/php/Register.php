@@ -78,6 +78,9 @@ class Register
         //Sanitize path
         $path = rtrim($path, "/");
 
+        //A newly added path may override a previously resolved controller.
+        $this->controllers = [];
+
         //Push to location array
         if ($prepend === true) {
             if (array_unshift($this->controllerPaths, $path)) {
@@ -273,9 +276,15 @@ class Register
      */
     public function getControllerArgs($data, $controllerName): array
     {
+        if (!array_key_exists($controllerName, $this->controllers)) {
+            $controllerLocation = $this->locateController(ucfirst($controllerName));
+            $this->controllers[$controllerName] = $controllerLocation
+                ? (string) ("\\" . $this->getNamespace($controllerLocation) . "\\" . $controllerName)
+                : false;
+        }
+
         //Run controller & fetch data
-        if ($controllerLocation = $this->locateController(ucfirst($controllerName))) {
-            $controllerClass = (string) ("\\" . $this->getNamespace($controllerLocation) . "\\" . $controllerName);
+        if ($controllerClass = $this->controllers[$controllerName]) {
             $controller = new $controllerClass($data, $this->componentCache, $this->tagSanitizer);
             
             return $controller->getData();
