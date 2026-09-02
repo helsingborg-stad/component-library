@@ -9,9 +9,6 @@ class Table extends \ComponentLibrary\Component\BaseController
         //Extract array for easy access (fetch only)
         extract($this->data);
 
-        $this->data['headSlotHasData'] = $this->slotHasData('head');
-        $this->data['bodySlotHasData'] = $this->slotHasData('body');
-
         $this->padCells();
 
         //Typecast labels
@@ -30,6 +27,9 @@ class Table extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . '--sortable';
         }
 
+        if ($async) {
+            $this->data['attributeList']['data-js-table-async'] = true;
+        }
 
         if ($isMultidimensional) {
             $this->data['classList'][]  = $this->getBaseClass() . '--multidimensional';

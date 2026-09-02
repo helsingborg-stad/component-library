@@ -1,5 +1,5 @@
 <!-- table.blade.php -->
-@if($list)
+@if(!empty($list) || !empty($async))
 @card([])
     <div class="{{ $class }}" {!! $attribute !!}>
         @if(!empty($title) || !empty($fullscreen) || !empty($filterable))
@@ -41,17 +41,16 @@
 
         </div>
         @endif
-        <div class="{{$baseClass}}__inner">
+        <div class="{{$baseClass}}__inner" data-js-table-wrapper="1">
             <table class="{{$baseClass}}__table" data-js-table-element="1">
                 @if(!empty($showCaption) && !empty($caption))
                     <caption>{{ $caption }}</caption>
                 @endif
 
+                {!! $slot !!}
+
                 @if ($showHeader && !empty($headings))
                     @table__head([])
-                        @if($headSlotHasData)
-                            {!! $head !!}
-                        @endif
                         @table__row([])
                             @foreach($headings as $heading)
                                 @table__cell([
@@ -66,9 +65,6 @@
                 @endif
                 @if(!empty($list))
                     @table__body([])
-                        @if($bodySlotHasData)
-                            {!! $body !!}
-                        @endif
                         @foreach($list as $row)
                             @table__row([
                                 'index' => $loop->index,
