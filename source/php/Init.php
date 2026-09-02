@@ -12,6 +12,15 @@ use HelsingborgStad\BladeService\BladeServiceInterface;
 
 class Init {
 
+    /**
+     * Blade services are expensive to construct because every component directive
+     * and view composer is registered on each instance. Keep one instance per
+     * effective path configuration for the lifetime of the current PHP request.
+     *
+     * @var array<string, BladeServiceInterface>
+     */
+    private static array $bladeServiceCache = [];
+
     private $register = null;
     private BladeServiceInterface $bladeService;
     
@@ -52,13 +61,6 @@ class Init {
             }
         }
 
-        $this->bladeService = new BladeService($sanitizedViewPaths);
-        $this->register = new Register(
-            $this->bladeService,
-            $this->getCache(),
-            new TagSanitizer()
-        );
-        
         // Initialize all controller paths so that this library is last
         $controllerPaths = array_unique(
             array_merge($paths['controllerPaths'], $internalPaths)
@@ -67,11 +69,6 @@ class Init {
             $controllerPaths = apply_filters(
                 'helsingborg-stad/blade/controllerPaths',
                 $controllerPaths
-            );
-        }
-        foreach ($controllerPaths as $path) {
-            $this->register->addControllerPath(
-                rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR
             );
         }
         
@@ -86,11 +83,45 @@ class Init {
             );
         }
 
+        $cacheKey = hash('sha256', serialize([
+            $sanitizedViewPaths,
+            $controllerPaths,
+            $internalComponentsPath,
+        ]));
+
+        if (isset(self::$bladeServiceCache[$cacheKey])) {
+            $this->bladeService = self::$bladeServiceCache[$cacheKey];
+            return;
+        }
+
+        $this->bladeService = new BladeService($sanitizedViewPaths);
+        $this->register = new Register(
+            $this->bladeService,
+            $this->getCache(),
+            new TagSanitizer()
+        );
+
+        foreach ($controllerPaths as $path) {
+            $this->register->addControllerPath(
+                rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR
+            );
+        }
+
         foreach ($internalComponentsPath as $path) {
             $this->register->registerInternalComponents(
                 rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR
             );
         }
+
+        self::$bladeServiceCache[$cacheKey] = $this->bladeService;
+    }
+
+    /**
+     * Clear the in-process cache. Primarily useful for long-running workers and tests.
+     */
+    public static function clearBladeServiceCache(): void
+    {
+        self::$bladeServiceCache = [];
     }
 
     private function getCache(): CacheInterface

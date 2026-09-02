@@ -11,6 +11,9 @@ class Image implements ImageInterface {
   const MIMIMUM_SIZE_DIFFERENCE = 150; // Minimum difference between the requested size and the common screen sizes, if in proximity, omit the common screen size
   const DEFAULT_FOCUS_POINT = ['left' => '50', 'top' => '50']; // Default focus point
 
+  private array $resolvedImageUrls = [];
+  private ?array $resolvedFocusPoint = null;
+
   public function __construct(
     private int $imageId, 
     private array $imageSize, 
@@ -60,7 +63,7 @@ class Image implements ImageInterface {
    * @inheritDoc
    */
   public function getUrl(): ?string {
-    return $this->resolver->getImageUrl($this->imageId, $this->imageSize);
+    return $this->resolveImageUrl($this->imageSize);
   }
 
   /**
@@ -69,7 +72,7 @@ class Image implements ImageInterface {
    * @return string
    */
   public function getLqipUrl(): ?string {
-    return $this->resolver->getImageUrl($this->imageId, [100, false]);
+    return $this->resolveImageUrl([100, false]);
   }
 
   /**
@@ -88,8 +91,7 @@ class Image implements ImageInterface {
     );
     if(is_array($srcSet) && !empty($srcSet)) {
       foreach($srcSet as $size) {
-        $result[] = $this->resolver->getImageUrl(
-          $this->imageId,
+        $result[] = $this->resolveImageUrl(
           [$size, $this->scaledHeight($size)]
         ) . ' ' . $size . 'w';
       }
@@ -142,17 +144,21 @@ class Image implements ImageInterface {
    * @return array
    */
   public function getFocusPoint(): array {
+    if($this->resolvedFocusPoint !== null) {
+      return $this->resolvedFocusPoint;
+    }
+
     if($this->focusResolver) {
       $resolvedFocus = $this->focusResolver->getFocusPoint();
 
       if(isset($resolvedFocus['left']) && isset($resolvedFocus['top'])) {
-        return [
+        return $this->resolvedFocusPoint = [
           'left' => $resolvedFocus['left'],
           'top' => $resolvedFocus['top']
         ];
       }
     }
-    return self::DEFAULT_FOCUS_POINT;
+    return $this->resolvedFocusPoint = self::DEFAULT_FOCUS_POINT;
   }
 
   /** 
@@ -184,8 +190,7 @@ class Image implements ImageInterface {
     // Loop through the image sizes
     foreach($imageSizes as $index => $size) {
 
-        $imageUrl = $this->resolver->getImageUrl(
-          $this->imageId,
+        $imageUrl = $this->resolveImageUrl(
           [$size, $this->scaledHeight($size)]
         );
 
@@ -209,6 +214,25 @@ class Image implements ImageInterface {
     }
 
     return $return;
+  }
+
+  /**
+   * Resolve each image size only once for this image instance.
+   *
+   * @param array $size
+   * @return string|null
+   */
+  private function resolveImageUrl(array $size): ?string {
+    $cacheKey = serialize($size);
+
+    if(array_key_exists($cacheKey, $this->resolvedImageUrls)) {
+      return $this->resolvedImageUrls[$cacheKey];
+    }
+
+    return $this->resolvedImageUrls[$cacheKey] = $this->resolver->getImageUrl(
+      $this->imageId,
+      $size
+    );
   }
 
   /**

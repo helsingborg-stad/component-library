@@ -106,6 +106,76 @@ class ImageTest extends TestCase
         $this->assertEquals($image::DEFAULT_FOCUS_POINT, $focusPoint);
     }
 
+    public function testImageUrlsAreResolvedOncePerDistinctSize()
+    {
+        $resolver = new class implements ImageResolverInterface {
+            public array $requestedSizes = [];
+
+            public function getImageUrl(int $id, array $size): ?string {
+                $this->requestedSizes[] = $size;
+                return "https://example.com/image-{$id}-{$size[0]}x" . ($size[1] ?: 'auto') . ".jpg";
+            }
+
+            public function getImageAltText(int $id): ?string {
+                return null;
+            }
+        };
+
+        $image = new Image(1, [1920, 800], $resolver);
+
+        $image->getUrl();
+        $image->getUrl();
+        $image->getContainerQueryData();
+        $image->getSrcSet();
+        $image->getLqipUrl();
+        $image->getLqipUrl();
+
+        $uniqueSizes = array_unique(array_map('serialize', $resolver->requestedSizes));
+
+        $this->assertCount(7, $resolver->requestedSizes);
+        $this->assertCount(7, $uniqueSizes);
+    }
+
+    public function testNullImageUrlIsCached()
+    {
+        $resolver = new class implements ImageResolverInterface {
+            public int $calls = 0;
+
+            public function getImageUrl(int $id, array $size): ?string {
+                $this->calls++;
+                return null;
+            }
+
+            public function getImageAltText(int $id): ?string {
+                return null;
+            }
+        };
+
+        $image = new Image(1, [800, 600], $resolver);
+
+        $this->assertNull($image->getUrl());
+        $this->assertNull($image->getUrl());
+        $this->assertSame(1, $resolver->calls);
+    }
+
+    public function testFocusPointIsResolvedOnce()
+    {
+        $focusResolver = new class implements ImageFocusResolverInterface {
+            public int $calls = 0;
+
+            public function getFocusPoint(): array {
+                $this->calls++;
+                return ['left' => '25', 'top' => '75'];
+            }
+        };
+
+        $image = new Image(1, [800, 600], $this->getResolver(), $focusResolver);
+
+        $this->assertSame(['left' => '25', 'top' => '75'], $image->getFocusPoint());
+        $this->assertSame(['left' => '25', 'top' => '75'], $image->getFocusPoint());
+        $this->assertSame(1, $focusResolver->calls);
+    }
+
     /**
      * Get a reusable resolver for testing
      * 
