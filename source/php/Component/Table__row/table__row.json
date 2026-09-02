@@ -5,10 +5,11 @@
         "isSummary": false
     },
     "description": {
+        "index": "The index of the row in the table. Used for sorting and styling.",
+        "isSummary": "Indicates if the row is a summary row."
     },
     "view": "table__row.blade.php",
     "types": {
-        "slot": "string",
         "index": "integer",
         "isSummary": "boolean"
     },

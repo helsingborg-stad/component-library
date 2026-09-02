@@ -5,11 +5,11 @@
         "index": null
     },
     "description": {
+        "componentElement": "The HTML element used for the table cell, only td and th are valid.",
         "index": "The index of the cell in the row. Used for sorting and styling."
     },
     "view": "table__cell.blade.php",
     "types": {
-        "slot": "string",
         "index": "integer",
         "componentElement": "string"
     },

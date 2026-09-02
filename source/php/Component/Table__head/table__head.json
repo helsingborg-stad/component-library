@@ -6,7 +6,6 @@
     },
     "view": "table__head.blade.php",
     "types": {
-        "slot": "string"
     },
     "dependency": {
         "sass": {
