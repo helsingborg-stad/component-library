@@ -8,6 +8,10 @@ class Image extends \ComponentLibrary\Component\BaseController
 {
     public function init()
     {
+        if ($this->data['imgAttributeList'] instanceof \stdClass) {
+            $this->data['imgAttributeList'] = get_object_vars($this->data['imgAttributeList']);
+        }
+
         // Handle image processing
         if ($this->data['src'] instanceof ImageInterface) {
             $this->handleImageProcessing(
@@ -41,7 +45,8 @@ class Image extends \ComponentLibrary\Component\BaseController
         // Handle placeholder class
         $this->addPlaceholderClass($this->data['src']);
 
-        // Add srcset to attribute list
+        // Add image defaults and responsive attributes
+        $this->addDefaultImageAttributes();
         $this->addSrcsetToAttributes($this->data['srcset']);
 
         // Build img attributes
@@ -78,23 +83,21 @@ class Image extends \ComponentLibrary\Component\BaseController
             return;
         }
 
-        $this->data['containerQueryData'] = $src->getContainerQueryData();
+        $containerQueryData = $src->getContainerQueryData();
+        $this->data['containerQueryData'] = null;
         $this->data['src'] = $imageUrl;
         $this->data['srcset'] = $src->getSrcSet();
         $focusPoint = $src->getFocusPoint();
         $this->data['focus'] = sprintf("object-position: %s;", $this->reduceFocusPoint($focusPoint));
+        $this->addResponsiveImageAttributes($containerQueryData, $this->data['srcset'], $this->data['focus']);
 
         if (empty($alt)) {
             $alt = $this->data['alt'] = $src->getAltText();
         }
 
-        if (is_array($this->data['containerQueryData'])) {
-            $this->data['classList'][] = $this->getBaseClass('container-query', true);
-        }
-
         //Add aspect ratio, if not in cover mode or calculateAspectRatio is false.
         if(!$this->data['cover'] && $this->data['calculateAspectRatio']) {
-            $this->addWrapperAspectRatio();
+            $this->addWrapperAspectRatio($containerQueryData);
         }
 
         $lqipUrl = $lqipEnabled ? $src->getLqipUrl() : null;
@@ -115,13 +118,13 @@ class Image extends \ComponentLibrary\Component\BaseController
         return null;
     }
 
-    private function addWrapperAspectRatio() 
+    private function addWrapperAspectRatio(array $containerQueryData)
     {
         if (!isset($this->data['wrapperAttributes']['style'])) {
             $this->data['wrapperAttributes']['style'] = "";
         }
 
-        $aspectRatio = $this->resolveAspectRatioFromContainerQueryData($this->data['containerQueryData']) ?? '16/9';
+        $aspectRatio = $this->resolveAspectRatioFromContainerQueryData($containerQueryData) ?? '16/9';
 
         $this->data['wrapperAttributes']['style'] .= "aspect-ratio:{$aspectRatio};";
     }
@@ -140,9 +143,71 @@ class Image extends \ComponentLibrary\Component\BaseController
 
     private function addSrcsetToAttributes($srcset)
     {
-        if ($srcset && !isset($this->data['containerQueryData'])) {
+        if ($srcset) {
             $this->data['imgAttributeList']['srcset'] = $srcset;
         }
+    }
+
+    /**
+     * Keep content images lazy by default while allowing callers such as Hero
+     * to opt into eager, high-priority loading through imgAttributeList.
+     */
+    private function addDefaultImageAttributes(): void
+    {
+        if (!isset($this->data['imgAttributeList']['loading'])) {
+            $this->data['imgAttributeList']['loading'] = 'lazy';
+        }
+    }
+
+    /**
+     * Describe one responsive image instead of rendering one hidden image per
+     * candidate. Container units retain component-level sizing, while an
+     * unsupported sizes value falls back to the HTML default of 100vw.
+     */
+    private function addResponsiveImageAttributes(array $containerQueryData, $srcset, string $focus): void
+    {
+        if ($srcset && !isset($this->data['imgAttributeList']['sizes'])) {
+            $this->data['imgAttributeList']['sizes'] = '100cqw';
+        }
+
+        $existingStyle = trim((string) ($this->data['imgAttributeList']['style'] ?? ''));
+        if ($existingStyle !== '' && substr($existingStyle, -1) !== ';') {
+            $existingStyle .= ';';
+        }
+        $this->data['imgAttributeList']['style'] = trim($existingStyle . ' ' . $focus);
+
+        $dimensions = $this->resolveDimensionsFromContainerQueryData($containerQueryData);
+        if ($dimensions === null) {
+            return;
+        }
+
+        if (!isset($this->data['imgAttributeList']['width'])) {
+            $this->data['imgAttributeList']['width'] = $dimensions[0];
+        }
+        if (!isset($this->data['imgAttributeList']['height'])) {
+            $this->data['imgAttributeList']['height'] = $dimensions[1];
+        }
+    }
+
+    /**
+     * Use the largest generated candidate as the intrinsic image dimensions.
+     * The browser preserves this ratio even when CSS scales or crops the image.
+     */
+    private function resolveDimensionsFromContainerQueryData(array $containerQueryData): ?array
+    {
+        for ($index = count($containerQueryData) - 1; $index >= 0; $index--) {
+            $aspectRatio = $containerQueryData[$index]['aspectRatio'] ?? null;
+            if (!is_string($aspectRatio)) {
+                continue;
+            }
+
+            $dimensions = array_map('intval', explode('/', $aspectRatio, 2));
+            if (count($dimensions) === 2 && $dimensions[0] > 0 && $dimensions[1] > 0) {
+                return $dimensions;
+            }
+        }
+
+        return null;
     }
 
     private function handleFileTypeClass($src)
