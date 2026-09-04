@@ -2,8 +2,6 @@
 
 namespace ComponentLibrary\Component\Card;
 
-use ComponentLibrary\Helper\Str;
-
 /**
  * Class Card
  * @package ComponentLibrary\Component\Card
@@ -88,15 +86,6 @@ class Card extends \ComponentLibrary\Component\BaseController
 
         if ($ratio) {
             $this->data['classList'][] = $this->getBaseClass() . '--ratio-' . str_replace(':', '-', $ratio);
-        }
-
-        //Add aria-label to card if link is present
-        if ($link && $heading && $content && empty($this->data['attributeList']['aria-label'])) {
-            $this->data['attributeList']['aria-label'] = $heading
-            . ' - '
-            . Str::truncateSentence(
-                strip_tags($content),
-            );
         }
 
         $this->data['imageExists'] = $this->hasImage($image);

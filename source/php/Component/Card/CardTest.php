@@ -50,6 +50,39 @@ class CardTest extends TestCase {
         $this->assertEquals('p', $controller->getData()['contentHtmlElement']);
     }
 
+    /**
+     * @testdox Linked cards use their visible content as the accessible name
+     */
+    public function testLinkedCardDoesNotGenerateAriaLabel() {
+        $controller = $this->getController([
+            'content' => 'A visible excerpt',
+            'date' => '2026-09-01',
+            'heading' => 'A visible heading',
+            'link' => 'https://example.com',
+        ]);
+        $controller->init();
+
+        $this->assertArrayNotHasKey('aria-label', $controller->getData()['attributeList']);
+    }
+
+    /**
+     * @testdox Linked cards preserve an explicitly supplied accessible name
+     */
+    public function testLinkedCardPreservesExplicitAriaLabel() {
+        $controller = $this->getController([
+            'attributeList' => ['aria-label' => 'Custom accessible name'],
+            'content' => 'A visible excerpt',
+            'heading' => 'A visible heading',
+            'link' => 'https://example.com',
+        ]);
+        $controller->init();
+
+        $this->assertSame(
+            'Custom accessible name',
+            $controller->getData()['attributeList']['aria-label']
+        );
+    }
+
     private function contentWithHtmlProvider(): array
     {
         return [
