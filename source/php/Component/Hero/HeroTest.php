@@ -53,6 +53,17 @@ class HeroTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    public function testHeroImagesArePrioritizedByDefault()
+    {
+        $data = $this->getComponentData([]);
+
+        $this->assertSame([
+            'loading' => 'eager',
+            'fetchpriority' => 'high',
+            'sizes' => '100vw',
+        ], $data['imageAttributeList']);
+    }
+
     private function getComponentData(array $data)
     {
         $jsonFile = file_get_contents('source/php/Component/Hero/hero.json', true);
