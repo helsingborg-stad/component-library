@@ -10,6 +10,7 @@
         "showSum": false,
         "fullscreen": false,
         "isMultidimensional": false,
+        "async": false,
         "title": "",
         "includePaper": true,
         "labels": {
