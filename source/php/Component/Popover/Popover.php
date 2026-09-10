@@ -25,6 +25,9 @@ class Popover extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['data-js-popover-vertical-placement'] = $this->getVerticalPlacement($verticalPlacement);
         }
 
+        if ($backdrop) {
+            $this->data['attributeList']['data-popover-backdrop'] = 'true';
+        }
     }
 
     private function getType(string $type)
