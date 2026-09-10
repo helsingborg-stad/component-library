@@ -84,12 +84,22 @@ class Image extends \ComponentLibrary\Component\BaseController
         }
 
         $containerQueryData = $src->getContainerQueryData();
-        $this->data['containerQueryData'] = null;
         $this->data['src'] = $imageUrl;
         $this->data['srcset'] = $src->getSrcSet();
         $focusPoint = $src->getFocusPoint();
         $this->data['focus'] = sprintf("object-position: %s;", $this->reduceFocusPoint($focusPoint));
-        $this->addResponsiveImageAttributes($containerQueryData, $this->data['srcset'], $this->data['focus']);
+
+        if ($this->data['preferSrcset']) {
+            // Render a single <img>, letting the browser pick a candidate via srcset/sizes.
+            $this->data['containerQueryData'] = null;
+            $this->addResponsiveImageAttributes($containerQueryData, $this->data['srcset'], $this->data['focus']);
+        } else {
+            // Default: one <img> per candidate size, switched by CSS container queries.
+            $this->data['containerQueryData'] = $containerQueryData;
+            if (is_array($containerQueryData) && !empty($containerQueryData)) {
+                $this->data['classList'][] = $this->getBaseClass('container-query', true);
+            }
+        }
 
         if (empty($alt)) {
             $alt = $this->data['alt'] = $src->getAltText();
@@ -143,7 +153,8 @@ class Image extends \ComponentLibrary\Component\BaseController
 
     private function addSrcsetToAttributes($srcset)
     {
-        if ($srcset) {
+        // Container-query mode renders one <img> per size, each with its own src, no srcset needed.
+        if ($srcset && !isset($this->data['containerQueryData'])) {
             $this->data['imgAttributeList']['srcset'] = $srcset;
         }
     }
@@ -160,9 +171,11 @@ class Image extends \ComponentLibrary\Component\BaseController
     }
 
     /**
-     * Describe one responsive image instead of rendering one hidden image per
-     * candidate. Container units retain component-level sizing, while an
-     * unsupported sizes value falls back to the HTML default of 100vw.
+     * Opt-in alternative to the default container-query switching: describes one
+     * responsive image instead of rendering one <img> per candidate. Container
+     * units retain component-level sizing, while an unsupported sizes value falls
+     * back to the HTML default of 100vw. Used for LCP-critical images (e.g. Hero)
+     * where downloading only one candidate matters more than an exact size match.
      */
     private function addResponsiveImageAttributes(array $containerQueryData, $srcset, string $focus): void
     {

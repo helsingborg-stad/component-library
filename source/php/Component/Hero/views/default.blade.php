@@ -2,7 +2,8 @@
     @image([
         'src'=> $image,
         'cover' => true,
-        'imgAttributeList' => $imageAttributeList
+        'imgAttributeList' => $imageAttributeList,
+        'preferSrcset' => true
     ])
     @endimage
 </div>
