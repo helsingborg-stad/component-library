@@ -16,8 +16,7 @@ class Image extends \ComponentLibrary\Component\BaseController
         if ($this->data['src'] instanceof ImageInterface) {
             $this->handleImageProcessing(
                 $this->data['src'],
-                $this->data['alt'],
-                $this->data['lqipEnabled']
+                $this->data['alt']
             );
         } else {
             $this->data['containerQueryData'] = null;
@@ -71,7 +70,7 @@ class Image extends \ComponentLibrary\Component\BaseController
         }
     }
 
-    private function handleImageProcessing(ImageInterface $src, &$alt, $lqipEnabled)
+    private function handleImageProcessing(ImageInterface $src, &$alt)
     {
         $imageUrl = $src->getUrl();
 
@@ -99,11 +98,6 @@ class Image extends \ComponentLibrary\Component\BaseController
         if(!$this->data['cover'] && $this->data['calculateAspectRatio']) {
             $this->addWrapperAspectRatio($containerQueryData);
         }
-
-        $lqipUrl = $lqipEnabled ? $src->getLqipUrl() : null;
-        if ($lqipUrl) {
-            $this->addLowResolutionPlaceholder($lqipUrl, $focusPoint);
-        }
     }
 
     private function resolveAspectRatioFromContainerQueryData($containerQueryData): ?string
@@ -127,18 +121,6 @@ class Image extends \ComponentLibrary\Component\BaseController
         $aspectRatio = $this->resolveAspectRatioFromContainerQueryData($containerQueryData) ?? '16/9';
 
         $this->data['wrapperAttributes']['style'] .= "aspect-ratio:{$aspectRatio};";
-    }
-
-    private function addLowResolutionPlaceholder(string $lqipUrl, array $focusPoint)
-    {
-        if (!isset($this->data['wrapperAttributes']['style'])) {
-            $this->data['wrapperAttributes']['style'] = "";
-        }
-        $this->data['wrapperAttributes']['style'] .= sprintf(
-            "background-image: url(%s); background-position: %s;",
-            $lqipUrl,
-            $this->reduceFocusPoint($focusPoint)
-        );
     }
 
     private function addSrcsetToAttributes($srcset)

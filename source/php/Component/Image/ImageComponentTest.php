@@ -17,7 +17,7 @@ class ImageComponentTest extends TestCase
         $source->expects($this->once())->method('getContainerQueryData')->willReturn([]);
         $source->expects($this->once())->method('getSrcSet')->willReturn(null);
         $source->expects($this->once())->method('getFocusPoint')->willReturn(['left' => '50', 'top' => '50']);
-        $source->expects($this->once())->method('getLqipUrl')->willReturn('https://example.com/lqip.jpg');
+        $source->expects($this->never())->method('getLqipUrl');
         $source->expects($this->never())->method('getAltText');
 
         $data = $this->getDefaultData();
@@ -43,11 +43,14 @@ class ImageComponentTest extends TestCase
             'https://example.com/image-425x177.jpg 425w, https://example.com/image-1920x800.jpg 1920w'
         );
         $source->method('getFocusPoint')->willReturn(['left' => '25', 'top' => '75']);
-        $source->method('getLqipUrl')->willReturn(null);
+        $source->expects($this->never())->method('getLqipUrl')->willReturn('https://example.com/lqip.jpg');
         $source->method('getAltText')->willReturn('Alternative text');
 
         $data = $this->getDefaultData();
         $data['src'] = $source;
+
+        // Legacy callers must not restore backgrounds visible through transparent pixels.
+        $data['lqipEnabled'] = true;
 
         $component = new ImageComponent(
             $data,
@@ -68,6 +71,8 @@ class ImageComponentTest extends TestCase
         $markup = $renderer->render('Image.image', $result);
 
         $this->assertSame(1, substr_count($markup, '<img'));
+        $this->assertStringNotContainsString('background-image', $markup);
+        $this->assertStringNotContainsString('https://example.com/lqip.jpg', $markup);
     }
 
     public function testCallerCanPrioritizeAnImageFromAnObjectDefinition(): void
