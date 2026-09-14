@@ -253,7 +253,13 @@ class ComponentDataReflector
             return $this->importCache[$fileName] = [];
         }
 
-        preg_match_all('/^use\s+(?!function\s+|const\s+)([^;]+);/m', $contents, $matches);
+        $header = preg_split(
+            '/^\s*(?:final\s+|abstract\s+)?(?:class|interface|trait|enum)\s+/m',
+            $contents,
+            2
+        )[0];
+
+        preg_match_all('/^use\s+(?!function\s+|const\s+)([^;]+);/m', $header, $matches);
 
         $imports = [];
 

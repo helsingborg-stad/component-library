@@ -742,6 +742,10 @@ class Register
         foreach (explode('|', $definition['type']) as $type) {
             $type = trim($type);
 
+            if (substr($type, -2) === '[]') {
+                $type = substr($type, 0, -2);
+            }
+
             if ($this->isScalarType($type)) {
                 continue;
             }
