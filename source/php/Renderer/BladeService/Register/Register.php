@@ -180,7 +180,12 @@ class Register
                         $this->accessProtected($view, 'data'),
                         $this->getAllowedDataClasses($dataClass),
                     );
-                    $this->handleTypingsErrors($viewData, $component->argsTypes, $component->slug);
+                    $this->handleTypingsErrors(
+                        $viewData,
+                        $component->argsTypes,
+                        $component->slug,
+                        $dataClass,
+                    );
 
                     // Get controller data
                     $controllerArgs = (array) $this->getControllerArgs(
@@ -210,9 +215,9 @@ class Register
      * @param string $componentSlug The slug of the component being checked.
      * @return void
      */
-    public function handleTypingsErrors($viewData, $argsTypes, $componentSlug)
+    public function handleTypingsErrors($viewData, $argsTypes, $componentSlug, ?string $dataClass = null)
     {
-        $dataClass = is_object($viewData) ? get_class($viewData) : null;
+        $dataClass = $dataClass ?? (is_object($viewData) ? get_class($viewData) : null);
         $viewData = $this->normalizeComponentInput(
             $viewData,
             $this->getAllowedDataClasses($dataClass),
@@ -480,12 +485,23 @@ class Register
             throw new \UnexpectedValueException('Component configuration data class must be a string or null.');
         }
 
-        foreach (['default', 'types', 'description', 'dependency'] as $key) {
+        foreach (['default', 'types', 'dependency'] as $key) {
             if (isset($config[$key]) && !is_array($config[$key]) && !is_object($config[$key])) {
                 throw new \UnexpectedValueException(
                     'Component configuration key "' . $key . '" must be an array or object.',
                 );
             }
+        }
+
+        if (
+            isset($config['description']) &&
+            !is_array($config['description']) &&
+            !is_object($config['description']) &&
+            !is_string($config['description'])
+        ) {
+            throw new \UnexpectedValueException(
+                'Component configuration key "description" must be a string, array, or object.',
+            );
         }
 
         return $config;
