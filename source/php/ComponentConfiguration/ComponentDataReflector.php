@@ -255,18 +255,60 @@ class ComponentDataReflector
             return $this->importCache[$fileName] = [];
         }
 
-        preg_match_all('/^use\s+([^;]+);/m', $contents, $matches);
+        preg_match_all('/^use\s+(?!function\s+|const\s+)([^;]+);/m', $contents, $matches);
 
         $imports = [];
 
         foreach ($matches[1] as $importStatement) {
-            $parts = preg_split('/\s+as\s+/i', trim($importStatement));
-            $fullyQualifiedClassName = ltrim($parts[0], '\\');
-            $alias = $parts[1] ?? $this->getShortClassName($fullyQualifiedClassName);
-            $imports[$alias] = $fullyQualifiedClassName;
+            foreach ($this->expandImportStatements(trim($importStatement)) as $expandedImportStatement) {
+                $this->storeImportedClass($imports, $expandedImportStatement);
+            }
         }
 
         return $this->importCache[$fileName] = $imports;
+    }
+
+    /**
+     * Expands grouped use statements into individual imports.
+     *
+     * @param string $importStatement The raw import statement.
+     * @return array<int, string>
+     */
+    private function expandImportStatements(string $importStatement): array
+    {
+        if (
+            preg_match('/^(.+?)\\\\\{(.+)\}$/', $importStatement, $matches) !== 1
+        ) {
+            return [$importStatement];
+        }
+
+        $prefix = rtrim($matches[1], '\\');
+        $groupedImports = array_map('trim', explode(',', $matches[2]));
+
+        return array_map(
+            static fn (string $groupedImport): string => $prefix . '\\' . $groupedImport,
+            $groupedImports
+        );
+    }
+
+    /**
+     * Stores a single imported class alias.
+     *
+     * @param array<string, string> $imports The import map.
+     * @param string $importStatement The import statement to store.
+     * @return void
+     */
+    private function storeImportedClass(array &$imports, string $importStatement): void
+    {
+        $parts = preg_split('/\s+as\s+/i', trim($importStatement));
+        $fullyQualifiedClassName = ltrim($parts[0], '\\');
+
+        if ($fullyQualifiedClassName === '') {
+            return;
+        }
+
+        $alias = $parts[1] ?? $this->getShortClassName($fullyQualifiedClassName);
+        $imports[$alias] = $fullyQualifiedClassName;
     }
 
     /**
