@@ -9,6 +9,17 @@ use ComponentLibrary\Component\Accordion\AccordionItemData;
 use ComponentLibrary\Component\Button\ButtonData;
 use PHPUnit\Framework\TestCase;
 
+final class GenericCollectionDataFixture
+{
+    /**
+     * @param array<int, AccordionItemData> $list
+     */
+    public function __construct(
+        public array $list = [],
+    ) {
+    }
+}
+
 class ComponentDataReflectorTest extends TestCase
 {
     public function testItReflectsDefaultValuesAndNullableTypes(): void
@@ -45,5 +56,14 @@ class ComponentDataReflectorTest extends TestCase
         static::assertSame('string|array', $definitions['heading']['type']);
         static::assertSame('AccordionItemData', $definitions['list']['collectionType']);
         static::assertSame([], $definitions['list']['default']);
+    }
+
+    public function testItReflectsGenericCollectionMetadata(): void
+    {
+        $reflector = new ComponentDataReflector();
+
+        $definitions = $reflector->getPropertyDefinitions(GenericCollectionDataFixture::class);
+
+        static::assertSame('AccordionItemData', $definitions['list']['collectionType']);
     }
 }

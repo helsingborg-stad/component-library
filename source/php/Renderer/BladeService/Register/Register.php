@@ -470,6 +470,10 @@ class Register
             throw new \UnexpectedValueException('Component configuration files must return a ComponentConfig instance or an array.');
         }
 
+        if (isset($config['data']) && is_object($config['data'])) {
+            $config['data'] = get_class($config['data']);
+        }
+
         return $this->assertValidComponentConfig($config);
     }
 
@@ -489,7 +493,7 @@ class Register
             throw new \UnexpectedValueException('Component configuration view must be a string.');
         }
 
-        if (isset($config['data']) && !is_string($config['data']) && !is_null($config['data'])) {
+        if (isset($config['data']) && !is_string($config['data']) && !is_object($config['data']) && !is_null($config['data'])) {
             throw new \UnexpectedValueException('Component configuration data class must be a string or null.');
         }
 
