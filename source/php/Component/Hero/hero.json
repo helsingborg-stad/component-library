@@ -2,6 +2,11 @@
     "slug": "hero",
     "default": {
         "image": false,
+        "imageAttributeList": {
+            "loading": "eager",
+            "fetchpriority": "high",
+            "sizes": "100vw"
+        },
         "imageFocus": {"top": 30, "left": 50},
         "video": false,
         "size": "normal",
@@ -29,6 +34,7 @@
     },
     "description": {
         "image": "Background image",
+        "imageAttributeList": "Attributes for the hero image element.",
         "imageFocus": "Where to focus in the background.",
         "video": "Display a video as a background. This option will replace image.",
         "size": "Ratio (normal, large)",
@@ -56,6 +62,7 @@
     },
     "types": {
         "image": "string|ImageInterface",
+        "imageAttributeList": "array",
         "imageFocus": "object",
         "video": "string",
         "size": "string",

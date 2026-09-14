@@ -40,7 +40,9 @@
         <div class="{{ $baseClass }}__image">
             @image([
                 'src' => $image,
-                'cover' => true
+                'cover' => true,
+                'imgAttributeList' => $imageAttributeList,
+                'preferSrcset' => true
             ])
             @endimage
         </div>

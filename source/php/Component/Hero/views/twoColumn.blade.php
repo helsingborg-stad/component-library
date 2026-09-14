@@ -9,7 +9,9 @@
                     @image([
                         'src' => $image,
                         'classList' => ['u-margin__bottom--0', $baseClass . '__group-image'],
-                        'cover' => true
+                        'cover' => true,
+                        'imgAttributeList' => $imageAttributeList,
+                        'preferSrcset' => true
                     ])
                     @endimage
                 </div>
