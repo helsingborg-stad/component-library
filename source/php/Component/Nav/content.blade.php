@@ -15,7 +15,21 @@
         </div>
 
         {{-- Children list --}}
-          @includeWhen($item['hasChildren'] && empty($isExtendedDropdown), 'Nav.children')
+          @if($item['usePopoverForChildren'])
+            @popover([
+              'id' => $item['popoverChildrenId'],
+              'relativeToTrigger' => true,
+              'verticalPlacement' => 'bottom',
+              'horizontalPlacement' => 'left',
+              'classList' => [
+                $baseClass . '__popover'
+              ]
+            ])
+              @include('Nav.children')
+            @endpopover
+          @endif
+
+          @includeWhen($item['hasChildren'] && empty($isExtendedDropdown) && !$item['usePopoverForChildren'], 'Nav.children')
           @includeWhen($item['hasChildren'] && !empty($isExtendedDropdown), 'Nav.extended')
       </li>
 
