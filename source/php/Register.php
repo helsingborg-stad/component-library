@@ -170,6 +170,7 @@ class Register
             $this->blade->registerComponent(
                 ucfirst($component->slug) . '.' . $component->slug,
                 function ($view) use ($component) {
+                    $dataClass = is_string($component->dataClass ?? null) ? $component->dataClass : null;
 
                     $controllerName = $this->camelCase(
                         $this->cleanViewName($component->slug)
@@ -177,14 +178,16 @@ class Register
                     
                     
                     $viewData = $this->normalizeComponentInput(
-                        $this->accessProtected($view, 'data')
+                        $this->accessProtected($view, 'data'),
+                        $this->getAllowedDataClasses($dataClass)
                     );
                     $this->handleTypingsErrors($viewData, $component->argsTypes, $component->slug);
 
                     // Get controller data
                     $controllerArgs = (array) $this->getControllerArgs(
                         array_merge((array) $component->args, (array) $viewData),
-                        $controllerName
+                        $controllerName,
+                        $dataClass
                     );
 
                     $view->with($controllerArgs);
@@ -209,7 +212,11 @@ class Register
      * @return void
      */
     public function handleTypingsErrors($viewData, $argsTypes, $componentSlug) {
-        $viewData = $this->normalizeComponentInput($viewData);
+        $dataClass = is_object($viewData) ? get_class($viewData) : null;
+        $viewData = $this->normalizeComponentInput(
+            $viewData,
+            $this->getAllowedDataClasses($dataClass)
+        );
 
         if ($this->shouldHideTypingsErrors()) {
             return;
@@ -278,9 +285,13 @@ class Register
      *
      * @return string Array of controller data
      */
-    public function getControllerArgs($data, $controllerName): array
+    public function getControllerArgs($data, $controllerName, ?string $dataClass = null): array
     {
-        $data = $this->normalizeComponentInput($data);
+        $dataClass = $dataClass ?? (is_object($data) ? get_class($data) : null);
+        $data = $this->normalizeComponentInput(
+            $data,
+            $this->getAllowedDataClasses($dataClass)
+        );
 
         if (!array_key_exists($controllerName, $this->controllers)) {
             $controllerLocation = $this->locateController(ucfirst($controllerName));
@@ -433,17 +444,52 @@ class Register
         if ($config instanceof ComponentConfig) {
             $reflector = new ComponentDataReflector();
 
-            return [
+            return $this->assertValidComponentConfig([
                 'slug' => $config->slug,
                 'default' => $config->data ? $reflector->getDefaultArguments($config->data) : [],
                 'types' => $config->data ? $reflector->getArgumentTypes($config->data) : [],
                 'view' => $config->view,
                 'dependency' => $config->dependencies,
                 'data' => $config->data,
-            ];
+            ]);
         }
 
-        return (array) $config;
+        if (!is_array($config)) {
+            throw new \UnexpectedValueException('Component configuration files must return a ComponentConfig instance or an array.');
+        }
+
+        return $this->assertValidComponentConfig($config);
+    }
+
+    /**
+     * Validates the supported runtime configuration shape.
+     *
+     * @param array $config The normalized configuration array.
+     * @return array
+     */
+    private function assertValidComponentConfig(array $config): array
+    {
+        if (!isset($config['slug']) || !is_string($config['slug']) || $config['slug'] === '') {
+            throw new \UnexpectedValueException('Component configuration must define a non-empty string slug.');
+        }
+
+        if (isset($config['view']) && !is_string($config['view'])) {
+            throw new \UnexpectedValueException('Component configuration view must be a string.');
+        }
+
+        if (isset($config['data']) && !is_string($config['data']) && !is_null($config['data'])) {
+            throw new \UnexpectedValueException('Component configuration data class must be a string or null.');
+        }
+
+        foreach (['default', 'types', 'description', 'dependency'] as $key) {
+            if (isset($config[$key]) && !is_array($config[$key]) && !is_object($config[$key])) {
+                throw new \UnexpectedValueException(
+                    'Component configuration key "' . $key . '" must be an array or object.'
+                );
+            }
+        }
+
+        return $config;
     }
 
     /**
@@ -578,7 +624,7 @@ class Register
      * @param mixed $value The value to normalize.
      * @return mixed
      */
-    private function normalizeComponentInput($value)
+    private function normalizeComponentInput($value, array $allowedDataClasses = [])
     {
         if ($value instanceof ComponentSlot) {
             return $value;
@@ -586,27 +632,91 @@ class Register
 
         if (is_array($value)) {
             foreach ($value as $key => $item) {
-                $value[$key] = $this->normalizeComponentInput($item);
+                $value[$key] = $this->normalizeComponentInput($item, $allowedDataClasses);
             }
 
             return $value;
         }
 
         if (is_object($value)) {
-            $className = basename(str_replace('\\', '/', get_class($value)));
-
-            if (!$value instanceof \stdClass && substr($className, -4) !== 'Data') {
+            if (
+                !$value instanceof \stdClass &&
+                !$this->matchesAllowedDataClass($value, $allowedDataClasses)
+            ) {
                 return $value;
             }
 
             $value = get_object_vars($value);
 
             foreach ($value as $key => $item) {
-                $value[$key] = $this->normalizeComponentInput($item);
+                $value[$key] = $this->normalizeComponentInput($item, $allowedDataClasses);
             }
         }
 
         return $value;
+    }
+
+    /**
+     * Returns the typed data classes that may be normalized for a component.
+     *
+     * @param string|null $dataClass The root typed data class.
+     * @return array<int, string>
+     */
+    private function getAllowedDataClasses(?string $dataClass): array
+    {
+        if (!is_string($dataClass) || $dataClass === '' || !class_exists($dataClass)) {
+            return [];
+        }
+
+        $reflector = new ComponentDataReflector();
+        $definitions = $reflector->getPropertyDefinitions($dataClass);
+        $allowedClasses = [
+            $dataClass,
+            basename(str_replace('\\', '/', $dataClass)),
+        ];
+
+        foreach ($definitions as $definition) {
+            foreach (explode('|', $definition['type']) as $type) {
+                if ($this->isScalarType($type)) {
+                    continue;
+                }
+
+                $allowedClasses[] = $type;
+            }
+
+            if (!empty($definition['collectionType'])) {
+                $allowedClasses[] = $definition['collectionType'];
+            }
+        }
+
+        return array_values(array_unique($allowedClasses));
+    }
+
+    /**
+     * Determines whether an object should be treated as component data.
+     *
+     * @param object $value The object to inspect.
+     * @param array<int, string> $allowedDataClasses The allowed classes.
+     * @return bool
+     */
+    private function matchesAllowedDataClass(object $value, array $allowedDataClasses): bool
+    {
+        $className = get_class($value);
+        $shortClassName = basename(str_replace('\\', '/', $className));
+
+        return in_array($className, $allowedDataClasses, true)
+            || in_array($shortClassName, $allowedDataClasses, true);
+    }
+
+    /**
+     * Determines whether a reflected type is scalar/runtime-native.
+     *
+     * @param string $type The type string.
+     * @return bool
+     */
+    private function isScalarType(string $type): bool
+    {
+        return in_array($type, ['mixed', 'NULL', 'null', 'boolean', 'bool', 'integer', 'int', 'double', 'float', 'string', 'array', 'object', 'false', 'true'], true);
     }
 
     /**
