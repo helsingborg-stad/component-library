@@ -759,7 +759,7 @@ class Register
 
         if (!empty($definition['collectionType'])) {
             $resolvedCollectionClass = $this->resolveDataClassName(
-                $definition['collectionType'],
+                $definition['collectionClass'] ?? $definition['collectionType'],
                 $contextDataClass
             );
 

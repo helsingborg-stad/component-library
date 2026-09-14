@@ -16,6 +16,11 @@ use ReflectionUnionType;
 class ComponentDataReflector
 {
     /**
+     * @var array<string, array<string, string>>
+     */
+    private array $importCache = [];
+
+    /**
      * Returns the reflected contract keyed by constructor parameter name.
      *
      * @param string $dataClass The typed data object class name.
@@ -31,6 +36,7 @@ class ComponentDataReflector
         }
 
         $collectionTypes = $this->getCollectionTypes($constructor);
+        $collectionClasses = $this->getCollectionClasses($constructor);
         $definitions = [];
 
         foreach ($constructor->getParameters() as $parameter) {
@@ -46,6 +52,7 @@ class ComponentDataReflector
                 'hasDefault' => $hasDefault,
                 'default' => $hasDefault ? $parameter->getDefaultValue() : null,
                 'collectionType' => $collectionTypes[$name] ?? null,
+                'collectionClass' => $collectionClasses[$name] ?? null,
             ];
         }
 
@@ -98,6 +105,20 @@ class ComponentDataReflector
      */
     private function getCollectionTypes(ReflectionMethod $constructor): array
     {
+        return array_map(
+            fn (string $value): string => $this->getShortClassName($value),
+            $this->getCollectionClasses($constructor)
+        );
+    }
+
+    /**
+     * Returns collection element class names declared in the constructor docblock.
+     *
+     * @param ReflectionMethod $constructor The reflected constructor.
+     * @return array<string, string>
+     */
+    private function getCollectionClasses(ReflectionMethod $constructor): array
+    {
         $docComment = $constructor->getDocComment();
 
         if (!is_string($docComment) || $docComment === '') {
@@ -116,7 +137,11 @@ class ComponentDataReflector
                 continue;
             }
 
-            $collectionTypes[$parameterName] = $this->getShortClassName(substr($declaredType, 0, -2));
+            $collectionType = substr($declaredType, 0, -2);
+            $collectionTypes[$parameterName] = $this->resolveDocblockClassName(
+                $collectionType,
+                $constructor
+            );
         }
 
         return $collectionTypes;
@@ -182,6 +207,66 @@ class ComponentDataReflector
     private function getShortClassName(string $className): string
     {
         return basename(str_replace('\\', '/', ltrim($className, '\\')));
+    }
+
+    /**
+     * Resolves a docblock class name against imports and the declaring namespace.
+     *
+     * @param string $className The class name from PHPDoc.
+     * @param ReflectionMethod $constructor The declaring constructor.
+     * @return string
+     */
+    private function resolveDocblockClassName(string $className, ReflectionMethod $constructor): string
+    {
+        $className = ltrim($className, '\\');
+
+        if (str_contains($className, '\\')) {
+            return $className;
+        }
+
+        $declaringClass = $constructor->getDeclaringClass();
+        $imports = $this->getImportedClasses($declaringClass->getFileName() ?: '');
+
+        if (isset($imports[$className])) {
+            return $imports[$className];
+        }
+
+        return $declaringClass->getNamespaceName() . '\\' . $className;
+    }
+
+    /**
+     * Parses imported class aliases from a PHP source file.
+     *
+     * @param string $fileName The source file path.
+     * @return array<string, string>
+     */
+    private function getImportedClasses(string $fileName): array
+    {
+        if ($fileName === '') {
+            return [];
+        }
+
+        if (isset($this->importCache[$fileName])) {
+            return $this->importCache[$fileName];
+        }
+
+        $contents = file_get_contents($fileName);
+        if ($contents === false) {
+            return $this->importCache[$fileName] = [];
+        }
+
+        preg_match_all('/^use\s+([^;]+);/m', $contents, $matches);
+
+        $imports = [];
+
+        foreach ($matches[1] as $importStatement) {
+            $parts = preg_split('/\s+as\s+/i', trim($importStatement));
+            $fullyQualifiedClassName = ltrim($parts[0], '\\');
+            $alias = $parts[1] ?? $this->getShortClassName($fullyQualifiedClassName);
+            $imports[$alias] = $fullyQualifiedClassName;
+        }
+
+        return $this->importCache[$fileName] = $imports;
     }
 
     /**

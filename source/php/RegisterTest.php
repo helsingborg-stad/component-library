@@ -110,6 +110,20 @@ class RegisterTest extends TestCase
         static::assertSame('<p>Answer</p>', $data['list'][0]['content']);
     }
 
+    public function testUntrustedPhpConfigPathIsRejected(): void
+    {
+        $componentDirectory = sys_get_temp_dir() . '/component-library-untrusted-' . uniqid('', true);
+        mkdir($componentDirectory, 0777, true);
+        $configPath = $componentDirectory . '/config.php';
+        file_put_contents($configPath, '<?php return [];');
+
+        $method = (new \ReflectionClass(Register::class))->getMethod('readConfigFile');
+        $method->setAccessible(true);
+
+        $this->expectException(\UnexpectedValueException::class);
+        $method->invoke($this->register, $configPath);
+    }
+
     private function createRegister(): Register
     {
         $componentPath = __DIR__ . '/Component';
