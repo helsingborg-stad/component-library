@@ -109,10 +109,10 @@ class ComponentDataReflector
         $collectionTypes = [];
 
         foreach ($matches as $match) {
-            $declaredType = $match[1];
+            $declaredType = $this->normalizeCollectionDeclaration($match[1]);
             $parameterName = $match[2];
 
-            if (substr($declaredType, -2) !== '[]') {
+            if ($declaredType === null || substr($declaredType, -2) !== '[]') {
                 continue;
             }
 
@@ -182,5 +182,32 @@ class ComponentDataReflector
     private function getShortClassName(string $className): string
     {
         return basename(str_replace('\\', '/', ltrim($className, '\\')));
+    }
+
+    /**
+     * Normalizes a PHPDoc collection declaration to a concrete class[] shape.
+     *
+     * @param string $declaredType The raw PHPDoc type token.
+     * @return string|null
+     */
+    private function normalizeCollectionDeclaration(string $declaredType): ?string
+    {
+        $declaredType = ltrim($declaredType, '?');
+
+        if (preg_match('/^\((.+)\)$/', $declaredType, $matches) === 1) {
+            $declaredType = $matches[1];
+        }
+
+        if (substr($declaredType, -2) !== '[]') {
+            return null;
+        }
+
+        $collectionType = substr($declaredType, 0, -2);
+
+        if (preg_match('/^[A-Za-z_\\\\][A-Za-z0-9_\\\\]*$/', $collectionType) !== 1) {
+            return null;
+        }
+
+        return $collectionType . '[]';
     }
 }

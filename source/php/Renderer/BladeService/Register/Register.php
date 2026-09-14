@@ -661,32 +661,99 @@ class Register
      */
     private function getAllowedDataClasses(?string $dataClass): array
     {
-        if (!is_string($dataClass) || $dataClass === '' || !class_exists($dataClass)) {
-            return [];
-        }
+        $allowedClasses = [];
+        $visitedClasses = [];
 
-        $reflector = new ComponentDataReflector();
-        $definitions = $reflector->getPropertyDefinitions($dataClass);
-        $allowedClasses = [
-            $dataClass,
-            basename(str_replace('\\', '/', $dataClass)),
-        ];
-
-        foreach ($definitions as $definition) {
-            foreach (explode('|', $definition['type']) as $type) {
-                if ($this->isScalarType($type)) {
-                    continue;
-                }
-
-                $allowedClasses[] = $type;
-            }
-
-            if (!empty($definition['collectionType'])) {
-                $allowedClasses[] = $definition['collectionType'];
-            }
-        }
+        $this->collectAllowedDataClasses($dataClass, $allowedClasses, $visitedClasses);
 
         return array_values(array_unique($allowedClasses));
+    }
+
+    /**
+     * Recursively collects allowed typed data classes for normalization.
+     *
+     * @param string|null $dataClass
+     * @param array<int, string> $allowedClasses
+     * @param array<string, bool> $visitedClasses
+     * @return void
+     */
+    private function collectAllowedDataClasses(?string $dataClass, array &$allowedClasses, array &$visitedClasses): void
+    {
+        if (!is_string($dataClass) || $dataClass === '' || !class_exists($dataClass)) {
+            return;
+        }
+
+        if (isset($visitedClasses[$dataClass])) {
+            return;
+        }
+
+        $visitedClasses[$dataClass] = true;
+        $allowedClasses[] = $dataClass;
+        $allowedClasses[] = basename(str_replace('\\', '/', $dataClass));
+
+        $reflector = new ComponentDataReflector();
+
+        foreach ($reflector->getPropertyDefinitions($dataClass) as $definition) {
+            foreach ($this->getNestedDataClassNames($definition, $dataClass) as $nestedClassName) {
+                $allowedClasses[] = basename(str_replace('\\', '/', $nestedClassName));
+                $this->collectAllowedDataClasses($nestedClassName, $allowedClasses, $visitedClasses);
+            }
+        }
+    }
+
+    /**
+     * Resolves nested typed data classes from a reflected definition.
+     *
+     * @param array<string, mixed> $definition
+     * @param string $contextDataClass
+     * @return array<int, string>
+     */
+    private function getNestedDataClassNames(array $definition, string $contextDataClass): array
+    {
+        $nestedClassNames = [];
+
+        foreach (explode('|', $definition['type']) as $type) {
+            if ($this->isScalarType($type)) {
+                continue;
+            }
+
+            $resolvedClass = $this->resolveDataClassName($type, $contextDataClass);
+            if ($resolvedClass !== null) {
+                $nestedClassNames[] = $resolvedClass;
+            }
+        }
+
+        if (!empty($definition['collectionType'])) {
+            $resolvedCollectionClass = $this->resolveDataClassName(
+                $definition['collectionType'],
+                $contextDataClass,
+            );
+
+            if ($resolvedCollectionClass !== null) {
+                $nestedClassNames[] = $resolvedCollectionClass;
+            }
+        }
+
+        return array_values(array_unique($nestedClassNames));
+    }
+
+    /**
+     * Resolves a short or fully qualified data class name in context.
+     *
+     * @param string $dataClassName
+     * @param string $contextDataClass
+     * @return string|null
+     */
+    private function resolveDataClassName(string $dataClassName, string $contextDataClass): ?string
+    {
+        if (class_exists($dataClassName)) {
+            return $dataClassName;
+        }
+
+        $namespace = (new \ReflectionClass($contextDataClass))->getNamespaceName();
+        $resolvedClassName = $namespace . '\\' . ltrim($dataClassName, '\\');
+
+        return class_exists($resolvedClassName) ? $resolvedClassName : null;
     }
 
     /**
