@@ -169,7 +169,7 @@ class ComponentDataReflector
             'float' => 'double',
             'null' => 'NULL',
             'false', 'true', 'array', 'string', 'object', 'mixed' => $typeName === 'null' ? 'NULL' : $typeName,
-            default => $this->getShortClassName($typeName),
+            default => ltrim($typeName, '\\'),
         };
     }
 

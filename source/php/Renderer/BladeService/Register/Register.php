@@ -131,7 +131,7 @@ class Register
                     $config['slug'],
                     $config['default'] ?? [],
                     $config['types'] ?? (object) [],
-                    $config['view'] ? $config['view'] : $config['slug'] . 'blade.php',
+                    $config['view'] ?? $config['slug'] . 'blade.php',
                     [
                         'dataClass' => $config['data'] ?? null,
                         'dependency' => $config['dependency'] ?? [],
