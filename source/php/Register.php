@@ -756,9 +756,11 @@ class Register
             }
         }
 
-        if (!empty($definition['collectionType'])) {
+        $collectionDataClass = $definition['collectionClass'] ?? $definition['collectionType'] ?? null;
+
+        if (!empty($collectionDataClass)) {
             $resolvedCollectionClass = $this->resolveDataClassName(
-                $definition['collectionClass'] ?? $definition['collectionType'],
+                $collectionDataClass,
                 $contextDataClass
             );
 
