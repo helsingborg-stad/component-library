@@ -198,6 +198,16 @@ class ComponentDataReflector
             $declaredType = $matches[1];
         }
 
+        if (
+            preg_match(
+                '/^(?:array|list)<(?:[A-Za-z_\\\\][A-Za-z0-9_\\\\]*\s*,\s*)?([A-Za-z_\\\\][A-Za-z0-9_\\\\]*)>$/',
+                $declaredType,
+                $matches
+            ) === 1
+        ) {
+            return $matches[1] . '[]';
+        }
+
         if (substr($declaredType, -2) !== '[]') {
             return null;
         }

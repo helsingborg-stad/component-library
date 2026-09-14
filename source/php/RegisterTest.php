@@ -87,6 +87,29 @@ class RegisterTest extends TestCase
         static::assertContains('c-accordion--spaced', $data['classList']);
     }
 
+    public function testGetControllerArgsSupportsExplicitTypedMetadataForLegacyArrays(): void
+    {
+        $this->register->registerInternalComponents(__DIR__ . '/Component');
+
+        $data = $this->register->getControllerArgs(
+            [
+                'heading' => ['FAQ'],
+                'list' => [
+                    new \ComponentLibrary\Component\Accordion\AccordionItemData(
+                        heading: 'Question',
+                        content: '<p>Answer</p>',
+                    ),
+                ],
+                'spacing' => true,
+            ],
+            'Accordion',
+            $this->register->data->accordion->dataClass,
+        );
+
+        static::assertSame('Question', $data['list'][0]['heading']);
+        static::assertSame('<p>Answer</p>', $data['list'][0]['content']);
+    }
+
     private function createRegister(): Register
     {
         $componentPath = __DIR__ . '/Component';

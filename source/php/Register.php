@@ -732,6 +732,8 @@ class Register
         $nestedClassNames = [];
 
         foreach (explode('|', $definition['type']) as $type) {
+            $type = trim($type);
+
             if ($this->isScalarType($type)) {
                 continue;
             }
