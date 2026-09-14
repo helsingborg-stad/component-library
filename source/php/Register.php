@@ -827,7 +827,12 @@ class Register
 
         foreach ($this->trustedComponentConfigPaths as $trustedPath) {
             $resolvedTrustedPath = realpath($trustedPath);
-            if ($resolvedTrustedPath !== false && str_starts_with($resolvedPath, $resolvedTrustedPath)) {
+            if ($resolvedTrustedPath === false) {
+                continue;
+            }
+
+            $trustedPrefix = rtrim($resolvedTrustedPath, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+            if ($resolvedPath === $resolvedTrustedPath || str_starts_with($resolvedPath, $trustedPrefix)) {
                 return true;
             }
         }
