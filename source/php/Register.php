@@ -26,6 +26,7 @@ class Register
     public $controllerPaths = [];
     private $reservedNames = ["data", "class", "list", "lang"];
     private $controllers = [];
+    private array $trustedComponentConfigPaths = [];
 
     public function __construct(
         private BladeServiceInterface $blade,
@@ -111,7 +112,10 @@ class Register
         $result = array();
 
         //Sanitize path
-        $basePath = rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . "*";
+        $path = rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+        $basePath = $path . "*";
+        $this->trustedComponentConfigPaths[] = $path;
+        $this->trustedComponentConfigPaths = array_values(array_unique($this->trustedComponentConfigPaths));
 
         //Glob
         $locations = $this->cachedGlob($basePath);
@@ -420,6 +424,10 @@ class Register
         }
 
         if (substr($path, -4) === '.php') {
+            if (!$this->isTrustedPhpConfigPath($path)) {
+                throw new \UnexpectedValueException('PHP component configuration files may only be loaded from trusted component paths.');
+            }
+
             return self::$cache['configJson'][$id] = $this->normalizeComponentConfig(
                 require $path
             );
@@ -802,6 +810,29 @@ class Register
     private function isScalarType(string $type): bool
     {
         return in_array($type, ['mixed', 'NULL', 'null', 'boolean', 'bool', 'integer', 'int', 'double', 'float', 'string', 'array', 'object', 'false', 'true'], true);
+    }
+
+    /**
+     * Determines whether a PHP config file is inside a trusted component path.
+     *
+     * @param string $path The config file path.
+     * @return bool
+     */
+    private function isTrustedPhpConfigPath(string $path): bool
+    {
+        $resolvedPath = realpath($path);
+        if ($resolvedPath === false) {
+            return false;
+        }
+
+        foreach ($this->trustedComponentConfigPaths as $trustedPath) {
+            $resolvedTrustedPath = realpath($trustedPath);
+            if ($resolvedTrustedPath !== false && str_starts_with($resolvedPath, $resolvedTrustedPath)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
