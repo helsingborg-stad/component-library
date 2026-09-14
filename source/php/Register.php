@@ -720,13 +720,11 @@ class Register
 
         $visitedClasses[$dataClass] = true;
         $allowedClasses[] = $dataClass;
-        $allowedClasses[] = basename(str_replace('\\', '/', $dataClass));
 
         $reflector = $this->getDataReflector();
 
         foreach ($reflector->getPropertyDefinitions($dataClass) as $definition) {
             foreach ($this->getNestedDataClassNames($definition, $dataClass) as $nestedClassName) {
-                $allowedClasses[] = basename(str_replace('\\', '/', $nestedClassName));
                 $this->collectAllowedDataClasses($nestedClassName, $allowedClasses, $visitedClasses);
             }
         }
@@ -800,11 +798,7 @@ class Register
      */
     private function matchesAllowedDataClass(object $value, array $allowedDataClasses): bool
     {
-        $className = get_class($value);
-        $shortClassName = basename(str_replace('\\', '/', $className));
-
-        return in_array($className, $allowedDataClasses, true)
-            || in_array($shortClassName, $allowedDataClasses, true);
+        return in_array(get_class($value), $allowedDataClasses, true);
     }
 
     /**

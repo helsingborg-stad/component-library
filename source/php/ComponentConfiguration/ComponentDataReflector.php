@@ -125,11 +125,9 @@ class ComponentDataReflector
             return [];
         }
 
-        preg_match_all('/^[ \t]*\*\s*@param\s+(.+?)\s+\$([^\s]+)/m', $docComment, $matches, PREG_SET_ORDER);
-
         $collectionTypes = [];
 
-        foreach ($matches as $match) {
+        foreach ($this->getParamTagMatches($docComment) as $match) {
             $declaredType = $this->normalizeCollectionDeclaration($match[1]);
             $parameterName = $match[2];
 
@@ -266,6 +264,58 @@ class ComponentDataReflector
         }
 
         return $this->importCache[$fileName] = $imports;
+    }
+
+    /**
+     * Extracts complete @param declarations, including wrapped lines.
+     *
+     * @param string $docComment The raw docblock.
+     * @return array<int, array{0:string,1:string}>
+     */
+    private function getParamTagMatches(string $docComment): array
+    {
+        $lines = preg_split('/\R/', $docComment) ?: [];
+        $declarations = [];
+        $currentDeclaration = null;
+
+        foreach ($lines as $line) {
+            if (preg_match('/^\s*\*\s*@param\s+(.+)$/', $line, $matches) === 1) {
+                if ($currentDeclaration !== null) {
+                    $declarations[] = $currentDeclaration;
+                }
+
+                $currentDeclaration = trim($matches[1]);
+                continue;
+            }
+
+            if ($currentDeclaration === null) {
+                continue;
+            }
+
+            if (preg_match('/^\s*\*\s*@\w+/', $line) === 1) {
+                $declarations[] = $currentDeclaration;
+                $currentDeclaration = null;
+                continue;
+            }
+
+            if (preg_match('/^\s*\*\s*(.+)$/', $line, $matches) === 1) {
+                $currentDeclaration .= ' ' . trim($matches[1]);
+            }
+        }
+
+        if ($currentDeclaration !== null) {
+            $declarations[] = $currentDeclaration;
+        }
+
+        $paramMatches = [];
+
+        foreach ($declarations as $declaration) {
+            if (preg_match('/^(.+?)\s+\$([A-Za-z_][A-Za-z0-9_]*)\b/', $declaration, $matches) === 1) {
+                $paramMatches[] = [$matches[1], $matches[2]];
+            }
+        }
+
+        return $paramMatches;
     }
 
     /**
