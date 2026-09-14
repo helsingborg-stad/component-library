@@ -302,6 +302,13 @@ class Register
             $this->getAllowedDataClasses($dataClass)
         );
 
+        if (is_string($dataClass) && is_array($data)) {
+            $data = array_merge(
+                $this->getDataReflector()->getDefaultArguments($dataClass),
+                $data
+            );
+        }
+
         if (!array_key_exists($controllerName, $this->controllers)) {
             $controllerLocation = $this->locateController(ucfirst($controllerName));
             $this->controllers[$controllerName] = $controllerLocation

@@ -162,7 +162,15 @@ class LogotypeTest extends TestCase
     private function getController(array $data = []): Logotype
     {
         return new Logotype(
-            $data,
+            array_merge([
+                'src' => false,
+                'alt' => '',
+                'caption' => '',
+                'title' => '',
+                'placeholderText' => 'Image missing',
+                'maskable' => false,
+                'aspectRatio' => false,
+            ], $data),
             $this->createMock(CacheInterface::class),
             new \ComponentLibrary\Helper\TagSanitizer(),
         );

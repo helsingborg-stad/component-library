@@ -1,3 +1,5 @@
+
+Warning: mkdir(): File exists in /Users/seno1000/www/public/styleguide-new/vendor/helsingborg-stad/component-library/vendor/carthage-software/mago/composer/internal.php on line 439
 <?php
 
 declare(strict_types=1);
@@ -106,8 +108,8 @@ class ComponentDataReflector
     private function getCollectionTypes(ReflectionMethod $constructor): array
     {
         return array_map(
-            fn (string $value): string => $this->getShortClassName($value),
-            $this->getCollectionClasses($constructor)
+            fn(string $value): string => $this->getShortClassName($value),
+            $this->getCollectionClasses($constructor),
         );
     }
 
@@ -128,8 +130,8 @@ class ComponentDataReflector
         $collectionTypes = [];
 
         foreach ($this->getParamTagMatches($docComment) as $match) {
-            $declaredType = $this->normalizeCollectionDeclaration($match[1]);
-            $parameterName = $match[2];
+            $declaredType = $this->normalizeCollectionDeclaration($match[0]);
+            $parameterName = $match[1];
 
             if ($declaredType === null || substr($declaredType, -2) !== '[]') {
                 continue;
@@ -138,7 +140,7 @@ class ComponentDataReflector
             $collectionType = substr($declaredType, 0, -2);
             $collectionTypes[$parameterName] = $this->resolveDocblockClassName(
                 $collectionType,
-                $constructor
+                $constructor,
             );
         }
 
@@ -162,7 +164,18 @@ class ComponentDataReflector
                 $types[] = $this->normalizeTypeName($namedType->getName());
             }
 
-            return array_values(array_unique($types));
+            $types = array_values(array_unique($types));
+
+            usort(
+                $types,
+                static fn(string $left, string $right): int => match (true) {
+                    $left === 'array' => 1,
+                    $right === 'array' => -1,
+                    default => 0,
+                },
+            );
+
+            return $types;
         }
 
         if ($type instanceof ReflectionNamedType) {
@@ -256,7 +269,7 @@ class ComponentDataReflector
         $header = preg_split(
             '/^\s*(?:final\s+|abstract\s+)?(?:class|interface|trait|enum)\s+/m',
             $contents,
-            2
+            2,
         )[0];
 
         preg_match_all('/^use\s+(?!function\s+|const\s+)([^;]+);/m', $header, $matches);
@@ -332,9 +345,7 @@ class ComponentDataReflector
      */
     private function expandImportStatements(string $importStatement): array
     {
-        if (
-            preg_match('/^(.+?)\\\\\{(.+)\}$/', $importStatement, $matches) !== 1
-        ) {
+        if (preg_match('/^(.+?)\\\\\{(.+)\}$/', $importStatement, $matches) !== 1) {
             return [$importStatement];
         }
 
@@ -342,8 +353,8 @@ class ComponentDataReflector
         $groupedImports = array_map('trim', explode(',', $matches[2]));
 
         return array_map(
-            static fn (string $groupedImport): string => $prefix . '\\' . $groupedImport,
-            $groupedImports
+            static fn(string $groupedImport): string => $prefix . '\\' . $groupedImport,
+            $groupedImports,
         );
     }
 
@@ -385,7 +396,7 @@ class ComponentDataReflector
             preg_match(
                 '/^(?:array|list)<(?:[A-Za-z_\\\\][A-Za-z0-9_\\\\]*\s*,\s*)?([A-Za-z_\\\\][A-Za-z0-9_\\\\]*)>$/',
                 $declaredType,
-                $matches
+                $matches,
             ) === 1
         ) {
             return $matches[1] . '[]';
