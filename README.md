@@ -23,10 +23,12 @@ This controller handles all data flow to every component.
 There are multiple ways of inputting data to a component. 
   
 1. The default configuration of the component.
-These settings are made in the configuration json 
-in each component folder. All variables used in the 
-controller SHOULD be declared here. This is to
-avoid undeclared variabe varnings. 
+These settings are made in a component configuration file
+in each component folder. Legacy components still use json
+configuration, while migrated components can define a typed
+PHP data object through `config.php`. All variables used in
+the controller SHOULD be declared by that contract to avoid
+undeclared variable warnings.
  
 2. By populating the directive (in view file). 
 This should be data that idicates states like
@@ -130,7 +132,7 @@ The most efficient and proposed way of adding a compning is by a PR to this pack
 
 - View (name.blade.php)
 - Controller (Name.php)
-- Configuration (name.json)
+- Configuration (`config.php` for typed components, `name.json` for legacy components)
 
 ### The view 
 The view sould be as simple as possible, in most cases just a few if-statements. For more advanced solution, please consider to use components as childs to a larger component according to Atomic design principle. 
@@ -157,20 +159,37 @@ class Foo extends \BladeComponentLibrary\Component\BaseController
 }
 ```
 
-### The configuration 
-A simple configuration of the slug for the component (used as component name). The default parameters and the view name (defaults to the slug name). The configuration should be written in a valid json format. This file must contain the keys "slug", "default" (default parameters), description and "view". 
+### Typed configuration
+Migrated components can describe their input contract with a typed PHP object and keep component metadata in a separate `config.php` file.
 
-**Example:** 
+**Example data object:**
 
-```json
+```php
+final class FooData
 {
-    "slug":"foo",
-    "default":{
-       "foo":true,
-    },
-    "description":{
-       "foo": "Is it foo?",
-    },
-    "view":"foo.blade.php"
- }
+    public function __construct(
+        public bool $foo = true,
+        public ?string $label = null,
+    ) {
+    }
+}
 ```
+
+**Example component config:**
+
+```php
+return new ComponentConfig(
+    slug: 'foo',
+    view: 'foo.blade.php',
+    data: FooData::class,
+    dependencies: [
+        'sass' => [
+            'components' => ['foo'],
+        ],
+    ],
+);
+```
+
+At runtime the library reflects the typed data object to derive default values and accepted types, then converts typed objects to arrays at the controller boundary so existing Blade views keep working unchanged.
+
+See `docs/typed-component-config.md` for migration guidance, nullable and union types, and nested data examples.

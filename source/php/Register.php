@@ -3,6 +3,8 @@
 namespace ComponentLibrary;
 
 use ComponentLibrary\Cache\CacheInterface;
+use ComponentLibrary\ComponentConfiguration\ComponentConfig;
+use ComponentLibrary\ComponentConfiguration\ComponentDataReflector;
 use ComponentLibrary\Helper\TagSanitizerInterface;
 use HelsingborgStad\BladeService\BladeServiceInterface;
 use Illuminate\Support\Facades\Blade;
@@ -40,7 +42,7 @@ class Register
      * @param string|null $view The optional view name for the component.
      * @throws \Exception if the provided slug is reserved or invalid.
      */
-    public function add($slug, $defaultArgs, $argsTypes = false, $view = null)
+    public function add($slug, $defaultArgs, $argsTypes = false, $view = null, array $metadata = [])
     {
         //Create utility data object
         if (is_null($this->data)) {
@@ -61,7 +63,9 @@ class Register
             'args'       => (object) $defaultArgs,
             'view'       => (string) $slug . DIRECTORY_SEPARATOR . $view,
             'controller' => (string) $slug,
-            'argsTypes'  => (object) $argsTypes
+            'argsTypes'  => (object) $argsTypes,
+            'dataClass'  => $metadata['dataClass'] ?? null,
+            'dependency' => $metadata['dependency'] ?? [],
         );
 
         $this->blade->registerComponentDirective( ucfirst($slug) . '.' . $slug, $slug);
@@ -124,9 +128,14 @@ class Register
                 //Register the component
                 $this->add(
                     $config['slug'],
-                    $config['default'],
+                    $config['default'] ?? [],
                     $config['types'] ?? (object) [],
                     $config['view'] ? $config['view'] : $config['slug'] . "blade.php"
+                    ,
+                    [
+                        'dataClass' => $config['data'] ?? null,
+                        'dependency' => $config['dependency'] ?? [],
+                    ]
                 );
 
                 //Log
@@ -167,7 +176,9 @@ class Register
                     );
                     
                     
-                    $viewData = $this->accessProtected($view, 'data');
+                    $viewData = $this->normalizeComponentInput(
+                        $this->accessProtected($view, 'data')
+                    );
                     $this->handleTypingsErrors($viewData, $component->argsTypes, $component->slug);
 
                     // Get controller data
@@ -198,6 +209,7 @@ class Register
      * @return void
      */
     public function handleTypingsErrors($viewData, $argsTypes, $componentSlug) {
+        $viewData = $this->normalizeComponentInput($viewData);
 
         if ($this->shouldHideTypingsErrors()) {
             return;
@@ -210,19 +222,11 @@ class Register
         foreach ($viewData as $key => $value) {
             if (is_object($argsTypes) && isset($argsTypes->{$key})) {
                 $types = explode('|', $argsTypes->{$key});
-                $valueType = gettype($value);
-        
-                // Check if the value is an object, and get its class name without the namespace
-                if ($valueType === 'object') {
-                    $classNameWithoutNamespace = class_basename($value);
-                }
-        
-                if (!in_array($valueType, $types) && !$valueType === 'NULL') {
-                    // Modify the error message to show object class name without namespace if applicable
-                    $valueTypeDisplay = $valueType === 'object' ? $classNameWithoutNamespace : $valueType;
+
+                if (!$this->matchesAnyExpectedType($value, $types)) {
                     $this->triggerError(
                         'The parameter <b>"' . $key . '"</b> in the <b>' . $componentSlug . '</b> component should be of type <b>"' 
-                        . $argsTypes->{$key} . '"</b> but was received as type <b>"' . $valueTypeDisplay . '"</b>.'
+                        . $argsTypes->{$key} . '"</b> but was received as type <b>"' . $this->getDisplayType($value) . '"</b>.'
                     );
                 }
             } elseif (
@@ -276,6 +280,8 @@ class Register
      */
     public function getControllerArgs($data, $controllerName): array
     {
+        $data = $this->normalizeComponentInput($data);
+
         if (!array_key_exists($controllerName, $this->controllers)) {
             $controllerLocation = $this->locateController(ucfirst($controllerName));
             $this->controllers[$controllerName] = $controllerLocation
@@ -366,6 +372,11 @@ class Register
      * @throws \Exception If no configuration file is found in the specified path.
      */
     private function getConfigFilePath($path) {
+        $phpConfigFile = $path . DIRECTORY_SEPARATOR . 'config.php';
+        if ($this->cachedFileExists($phpConfigFile)) {
+            return $phpConfigFile;
+        }
+
         $configFile = $path . DIRECTORY_SEPARATOR . lcfirst(basename($path)) .".json"; 
         if($this->cachedFileExists($configFile)) {
             return $configFile; 
@@ -392,6 +403,12 @@ class Register
             return self::$cache['configJson'][$id]; 
         }
 
+        if (substr($path, -4) === '.php') {
+            return self::$cache['configJson'][$id] = $this->normalizeComponentConfig(
+                require $path
+            );
+        }
+
         //Read config
         if (!$json = $this->cachedFileGetContents($path)) {
             throw new \Exception("Configuration file unreadable at " . $path);
@@ -403,6 +420,30 @@ class Register
         }
         
         return false;
+    }
+
+    /**
+     * Normalize supported component configuration formats to the legacy array shape.
+     *
+     * @param mixed $config The loaded component configuration.
+     * @return array
+     */
+    private function normalizeComponentConfig($config): array
+    {
+        if ($config instanceof ComponentConfig) {
+            $reflector = new ComponentDataReflector();
+
+            return [
+                'slug' => $config->slug,
+                'default' => $config->data ? $reflector->getDefaultArguments($config->data) : [],
+                'types' => $config->data ? $reflector->getArgumentTypes($config->data) : [],
+                'view' => $config->view,
+                'dependency' => $config->dependencies,
+                'data' => $config->data,
+            ];
+        }
+
+        return (array) $config;
     }
 
     /**
@@ -529,6 +570,122 @@ class Register
         }
 
         return false;
+    }
+
+    /**
+     * Recursively converts typed component input objects into arrays.
+     *
+     * @param mixed $value The value to normalize.
+     * @return mixed
+     */
+    private function normalizeComponentInput($value)
+    {
+        if ($value instanceof ComponentSlot) {
+            return $value;
+        }
+
+        if (is_array($value)) {
+            foreach ($value as $key => $item) {
+                $value[$key] = $this->normalizeComponentInput($item);
+            }
+
+            return $value;
+        }
+
+        if (is_object($value)) {
+            $className = basename(str_replace('\\', '/', get_class($value)));
+
+            if (!$value instanceof \stdClass && substr($className, -4) !== 'Data') {
+                return $value;
+            }
+
+            $value = get_object_vars($value);
+
+            foreach ($value as $key => $item) {
+                $value[$key] = $this->normalizeComponentInput($item);
+            }
+        }
+
+        return $value;
+    }
+
+    /**
+     * Determines whether a value matches any expected type.
+     *
+     * @param mixed $value The runtime value.
+     * @param array $types The expected type strings.
+     * @return bool
+     */
+    private function matchesAnyExpectedType($value, array $types): bool
+    {
+        foreach ($types as $type) {
+            if ($this->matchesExpectedType($value, trim((string) $type))) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Determines whether a value matches a single expected type string.
+     *
+     * @param mixed $value The runtime value.
+     * @param string $type The expected type string.
+     * @return bool
+     */
+    private function matchesExpectedType($value, string $type): bool
+    {
+        $normalizedType = ltrim($type, '\\');
+
+        return match ($normalizedType) {
+            'mixed' => true,
+            'NULL', 'null' => $value === null,
+            'boolean', 'bool' => is_bool($value),
+            'integer', 'int' => is_int($value),
+            'double', 'float' => is_float($value),
+            'string' => is_string($value),
+            'array' => is_array($value),
+            'object' => is_object($value),
+            'false' => $value === false,
+            'true' => $value === true,
+            default => $this->matchesObjectType($value, $normalizedType),
+        };
+    }
+
+    /**
+     * Determines whether a value matches an object class type.
+     *
+     * @param mixed $value The runtime value.
+     * @param string $type The expected class name.
+     * @return bool
+     */
+    private function matchesObjectType($value, string $type): bool
+    {
+        if (!is_object($value)) {
+            return strtolower(gettype($value)) === strtolower($type);
+        }
+
+        if ((class_exists($type) || interface_exists($type)) && $value instanceof $type) {
+            return true;
+        }
+
+        return basename(str_replace('\\', '/', get_class($value))) === $type;
+    }
+
+    /**
+     * Returns a readable runtime type name for error messages.
+     *
+     * @param mixed $value The runtime value.
+     * @return string
+     */
+    private function getDisplayType($value): string
+    {
+        if (is_object($value)) {
+            return basename(str_replace('\\', '/', get_class($value)));
+        }
+
+        return gettype($value);
     }
 
 }

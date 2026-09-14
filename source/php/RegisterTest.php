@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ComponentLibrary;
 
 use ComponentLibrary\Cache\StaticCache;
+use ComponentLibrary\Component\Button\ButtonData;
 use ComponentLibrary\Helper\TagSanitizer;
 use HelsingborgStad\BladeService\BladeService;
 use PHPUnit\Framework\TestCase;
@@ -34,6 +35,34 @@ class RegisterTest extends TestCase
 
         static::assertSame(2, $register->locateControllerCalls);
         static::assertSame(2, $register->getNamespaceCalls);
+    }
+
+    public function testTypedComponentConfigIsPreferredWhenAvailable(): void
+    {
+        $register = $this->createRegister();
+
+        $register->registerInternalComponents(__DIR__ . '/Component');
+
+        static::assertSame('string|NULL', $register->data->button->argsTypes->href);
+        static::assertSame(ButtonData::class, $register->data->button->dataClass);
+    }
+
+    public function testGetControllerArgsSupportsTypedDataObjects(): void
+    {
+        $register = $this->createRegister();
+
+        $data = $register->getControllerArgs(
+            new ButtonData(
+                text: 'Send',
+                href: 'mailto:test@example.com',
+                icon: 'mail',
+            ),
+            'Button',
+        );
+
+        static::assertSame('Send', $data['text']);
+        static::assertSame('mailto:test@example.com', $data['attributeList']['href']);
+        static::assertSame('a', $data['componentElement']);
     }
 
     private function createRegister(): Register
