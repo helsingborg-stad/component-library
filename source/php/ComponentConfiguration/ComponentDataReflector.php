@@ -104,7 +104,7 @@ class ComponentDataReflector
             return [];
         }
 
-        preg_match_all('/@param\s+(.+?)\s+\$([^\s]+)/', $docComment, $matches, PREG_SET_ORDER);
+        preg_match_all('/^[ \t]*\*\s*@param\s+(.+?)\s+\$([^\s]+)/m', $docComment, $matches, PREG_SET_ORDER);
 
         $collectionTypes = [];
 

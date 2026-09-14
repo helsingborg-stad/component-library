@@ -27,6 +27,7 @@ class Register
     private $reservedNames = ["data", "class", "list", "lang"];
     private $controllers = [];
     private array $trustedComponentConfigPaths = [];
+    private ?ComponentDataReflector $dataReflector = null;
 
     public function __construct(
         private BladeServiceInterface $blade,
@@ -455,7 +456,7 @@ class Register
     private function normalizeComponentConfig($config): array
     {
         if ($config instanceof ComponentConfig) {
-            $reflector = new ComponentDataReflector();
+            $reflector = $this->getDataReflector();
 
             return $this->assertValidComponentConfig([
                 'slug' => $config->slug,
@@ -495,7 +496,7 @@ class Register
         }
 
         if (isset($config['data']) && !is_string($config['data']) && !is_object($config['data']) && !is_null($config['data'])) {
-            throw new \UnexpectedValueException('Component configuration data class must be a string or null.');
+            throw new \UnexpectedValueException('Component configuration data class must be a string, object instance, or null.');
         }
 
         foreach (['default', 'types', 'dependency'] as $key) {
@@ -722,7 +723,7 @@ class Register
         $allowedClasses[] = $dataClass;
         $allowedClasses[] = basename(str_replace('\\', '/', $dataClass));
 
-        $reflector = new ComponentDataReflector();
+        $reflector = $this->getDataReflector();
 
         foreach ($reflector->getPropertyDefinitions($dataClass) as $definition) {
             foreach ($this->getNestedDataClassNames($definition, $dataClass) as $nestedClassName) {
@@ -842,6 +843,20 @@ class Register
         }
 
         return false;
+    }
+
+    /**
+     * Returns a cached reflector for typed component data contracts.
+     *
+     * @return ComponentDataReflector
+     */
+    private function getDataReflector(): ComponentDataReflector
+    {
+        if (!$this->dataReflector instanceof ComponentDataReflector) {
+            $this->dataReflector = new ComponentDataReflector();
+        }
+
+        return $this->dataReflector;
     }
 
     /**
