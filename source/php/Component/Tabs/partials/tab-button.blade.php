@@ -1,5 +1,6 @@
 @button([
     'classList' => [$baseClass . '__button'],
+    'style' => 'basic',
     'attributeList' => [
         'role' => 'tab',
         'aria-controls' => $baseClass . '__aria-' . $id . '-' . $loop->index,

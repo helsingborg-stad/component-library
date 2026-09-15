@@ -13,7 +13,7 @@
         "position": "string",
         "heading": "string|boolean",
         "button": "array|boolean",
-        "slot": "string",
+        "slot": "string|HtmlString",
         "closeLabel": "string|boolean",
         "closeIcon": "string|boolean",
         "size": "string"

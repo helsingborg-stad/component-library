@@ -200,7 +200,11 @@ class BrandTest extends TestCase
     private function getController(array $data = []): Brand
     {
         return new Brand(
-            $data,
+            array_merge([
+                'logotype' => [],
+                'text' => [],
+                'aspectRatio' => false,
+            ], $data),
             $this->createMock(CacheInterface::class),
             new \ComponentLibrary\Helper\TagSanitizer(),
         );

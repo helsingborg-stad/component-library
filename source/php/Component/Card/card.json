@@ -83,7 +83,7 @@
 		"floating": "string",
 		"aboveContent": "string",
 		"belowContent": "string",
-		"slot": "string"
+		"slot": "string|HtmlString"
 	},
 	"view": "card.blade.php",
 	"dependency": {

@@ -5,16 +5,18 @@
     'href' => $item['href'],
     'xfn' => $item['xfn'] ?? false
   ])
-    @icon([
-      'icon' => $item['icon']['icon'] ?? null,
-      'size' => $item['icon']['size'] ?? null,
-      'filled' => $item['icon']['filled'] ?? null,
-      'classList' => $item['icon']['classList'] ?? [],
-      'attributeList' => array_merge($item['icon']['attributeList'] ?? [], [
-        'style' => 'background-color:' . ($item['color'] ?? '') . ';'
+    @if (!empty($item['icon']['icon']))
+      @icon([
+        'icon' => $item['icon']['icon'],
+        'size' => $item['icon']['size'] ?? 'inherit',
+        'filled' => $item['icon']['filled'] ?? false,
+        'classList' => $item['icon']['classList'] ?? [],
+        'attributeList' => array_merge($item['icon']['attributeList'] ?? [], [
+          'style' => 'background-color:' . ($item['color'] ?? '') . ';'
+        ])
       ])
-    ])
-    @endicon
+      @endicon
+    @endif
     @if ($item['label'])
     <span 
       class="{{$baseClass}}__text" 

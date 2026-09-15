@@ -5,7 +5,7 @@
         "type": "auto",
         "horizontalPlacement": null,
         "verticalPlacement": null,
-        "relativeToTrigger": false,
+        "relative": false,
         "backdrop": false
     },
     "description": {
@@ -13,7 +13,7 @@
         "type": "The type of the popover. Valid value is 'auto'.",
         "horizontalPlacement": "The horizontal placement of the popover relative to its trigger element. Valid values are 'left', 'right' or 'center'.",
         "verticalPlacement": "The vertical placement of the popover relative to its trigger element. Valid values are 'top', 'center' or 'bottom'.",
-        "relativeToTrigger": "Determines if the popover should be positioned relative to its trigger element. Valid values are true or false.",
+        "relative": "Determines if the popover should be positioned relative to its trigger element.",
         "backdrop": "Determines if the popover should have a backdrop. Valid values are true or false."
     },
     "view": "popover.blade.php",
@@ -22,7 +22,7 @@
         "type": "string",
         "horizontalPlacement": "string",
         "verticalPlacement": "string",
-        "relativeToTrigger": "boolean",
+        "relative": "boolean",
         "backdrop": "boolean"
     },
     "dependency": {
