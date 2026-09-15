@@ -18,7 +18,7 @@
           @if($item['usePopoverForChildren'])
             @popover([
               'id' => $item['popoverChildrenId'],
-              'relativeToTrigger' => true,
+              'relative' => true,
               'verticalPlacement' => 'bottom',
               'horizontalPlacement' => 'left',
               'classList' => [
