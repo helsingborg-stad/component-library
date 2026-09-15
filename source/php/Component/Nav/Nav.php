@@ -252,6 +252,11 @@ class Nav extends \ComponentLibrary\Component\BaseController
                 $item['popoverChildrenId'] = $item['usePopoverForChildren']
                     ? $this->getChildrenPopoverId($item, $itemIndex)
                     : null;
+
+                if ($item['popoverChildrenId']) {
+                    $item['attributeList']['data-js-popover-relative'] = $item['popoverChildrenId'];
+                }
+
                 $item['toggleAttributeList'] = $this->getToggleAttributeList($item);
 
                 $itemIndex++;
