@@ -89,7 +89,7 @@ class Image extends \ComponentLibrary\Component\BaseController
         $focusPoint = $src->getFocusPoint();
         $this->data['focus'] = sprintf("object-position: %s;", $this->reduceFocusPoint($focusPoint));
 
-        if ($this->data['preferSrcset']) {
+        if (isset($this->data['preferSrcset']) && $this->data['preferSrcset']) {
             // Render a single <img>, letting the browser pick a candidate via srcset/sizes.
             $this->data['containerQueryData'] = null;
             $this->addResponsiveImageAttributes($containerQueryData, $this->data['srcset'], $this->data['focus']);
