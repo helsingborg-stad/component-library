@@ -1,5 +1,3 @@
-
-Warning: mkdir(): File exists in /Users/seno1000/www/public/styleguide-new/vendor/helsingborg-stad/component-library/vendor/carthage-software/mago/composer/internal.php on line 439
 <?php
 
 declare(strict_types=1);
