@@ -9,7 +9,9 @@
     'href' => $item['href'],
     'xfn' => $item['xfn'] ?? false,
   ])
-    @icon($item['icon'])@endicon
+    @if (!empty($item['icon']['icon']))
+      @icon($item['icon'])@endicon
+    @endif
     <span class="{{$baseClass}}__text">{{$item['label']}}</span>
   @endlink
 @else
