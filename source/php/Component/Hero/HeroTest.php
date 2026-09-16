@@ -66,9 +66,8 @@ class HeroTest extends \PHPUnit\Framework\TestCase
 
     private function getComponentData(array $data)
     {
-        $jsonFile = file_get_contents('source/php/Component/Hero/hero.json', true);
-        $json = json_decode($jsonFile, true);
-        $default = $json['default'];
+        $default = (new \ComponentLibrary\ComponentConfiguration\ComponentDataReflector())
+            ->getDefaultArguments(\ComponentLibrary\Component\Hero\HeroData::class);
         return array_merge($default, $data);
     }
 }
