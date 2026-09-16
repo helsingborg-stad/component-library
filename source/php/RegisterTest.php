@@ -68,6 +68,17 @@ class RegisterTest extends TestCase
         static::assertSame(AvatarData::class, $this->register->data->avatar->dataClass);
     }
 
+    public function testTypedComponentConfigPreservesLegacyMetadataShapes(): void
+    {
+        $this->register->registerInternalComponents(__DIR__ . '/Component');
+
+        static::assertTrue(property_exists($this->register->data->group->argsTypes, 'justifyContent'));
+        static::assertFalse(property_exists($this->register->data->group->argsTypes, 'jusitifyContent'));
+        static::assertSame('integer|boolean', $this->register->data->field->argsTypes->multiline);
+        static::assertSame('string|integer|NULL', $this->register->data->fileinput->argsTypes->maxSize);
+        static::assertSame('string|boolean', $this->register->data->date->argsTypes->action);
+    }
+
     public function testGetControllerArgsSupportsTypedDataObjects(): void
     {
         $data = $this->register->getControllerArgs(

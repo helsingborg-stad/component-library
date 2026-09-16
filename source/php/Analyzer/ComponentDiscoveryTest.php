@@ -125,4 +125,26 @@ class ComponentDiscoveryTest extends TestCase
         rmdir($componentDir);
         rmdir($tempDir);
     }
+
+    /**
+     * @testdox it discovers a slug from an array-based PHP configuration
+     */
+    public function testDiscoverSlugsReadsArrayPhpConfig(): void
+    {
+        $tempDir = sys_get_temp_dir() . '/component-test-array-' . uniqid();
+        $componentDir = $tempDir . '/ArrayBased';
+        mkdir($componentDir, 0755, true);
+        file_put_contents(
+            $componentDir . '/config.php',
+            "<?php return ['slug' => 'array-based', 'view' => 'array-based.blade.php'];",
+        );
+
+        $slugs = (new ComponentDiscovery($tempDir))->discoverSlugs();
+
+        $this->assertSame(['array-based'], $slugs);
+
+        unlink($componentDir . '/config.php');
+        rmdir($componentDir);
+        rmdir($tempDir);
+    }
 }
