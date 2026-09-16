@@ -250,7 +250,7 @@ class Nav extends \ComponentLibrary\Component\BaseController
                 $item['itemIndex'] = $itemIndex;
                 $item['usePopoverForChildren'] = $this->shouldUsePopoverForChildren($item);
                 $item['popoverChildrenId'] = $item['usePopoverForChildren']
-                    ? $this->getChildrenPopoverId($item, $itemIndex)
+                    ? 'popover_' . $this->getChildrenPopoverId($item, $itemIndex)
                     : null;
 
                 if ($item['popoverChildrenId']) {
