@@ -114,12 +114,46 @@ class ComponentDiscoveryTest extends TestCase
         mkdir($componentDir, 0755, true);
         file_put_contents(
             $componentDir . '/config.php',
-            "<?php return new \\ComponentLibrary\\ComponentConfiguration\\ComponentConfig('typed', 'typed.blade.php');",
+            <<<'PHP'
+<?php
+
+declare(strict_types=1);
+
+use ComponentLibrary\ComponentConfiguration\ComponentConfig;
+
+return new ComponentConfig(
+    slug: 'typed',
+    view: 'typed.blade.php',
+    data: \ComponentLibrary\Component\Hero\HeroData::class,
+);
+PHP,
         );
 
         $slugs = (new ComponentDiscovery($tempDir))->discoverSlugs();
 
         $this->assertSame(['typed'], $slugs);
+
+        unlink($componentDir . '/config.php');
+        rmdir($componentDir);
+        rmdir($tempDir);
+    }
+
+    /**
+     * @testdox it discovers a slug from an array-based PHP configuration
+     */
+    public function testDiscoverSlugsReadsArrayPhpConfig(): void
+    {
+        $tempDir = sys_get_temp_dir() . '/component-test-array-' . uniqid();
+        $componentDir = $tempDir . '/ArrayBased';
+        mkdir($componentDir, 0755, true);
+        file_put_contents(
+            $componentDir . '/config.php',
+            "<?php return ['slug' => 'array-based', 'view' => 'array-based.blade.php'];",
+        );
+
+        $slugs = (new ComponentDiscovery($tempDir))->discoverSlugs();
+
+        $this->assertSame(['array-based'], $slugs);
 
         unlink($componentDir . '/config.php');
         rmdir($componentDir);

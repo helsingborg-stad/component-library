@@ -11,6 +11,7 @@ final class GroupData
 {
     public function __construct(
         public string $direction = 'horizontal',
+        public string $justifyContent = '',
         public string $jusitifyContent = '',
         public string $alignItems = '',
         public string $alignContent = '',

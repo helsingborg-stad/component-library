@@ -7,6 +7,7 @@ namespace ComponentLibrary;
 use ComponentLibrary\Cache\StaticCache;
 use ComponentLibrary\Component\Avatar\AvatarData;
 use ComponentLibrary\Component\Button\ButtonData;
+use ComponentLibrary\Component\Brand\BrandData;
 use ComponentLibrary\Component\Notice\NoticeData;
 use ComponentLibrary\Component\Fab\FabData;
 use ComponentLibrary\Component\Box\BoxData;
@@ -55,6 +56,14 @@ class RegisterTest extends TestCase
         static::assertSame(ButtonData::class, $this->register->data->button->dataClass);
     }
 
+    public function testBrandUsesItsTypedComponentConfig(): void
+    {
+        $this->register->registerInternalComponents(__DIR__ . '/Component');
+
+        static::assertSame('string|integer|double|boolean', $this->register->data->brand->argsTypes->aspectRatio);
+        static::assertSame(BrandData::class, $this->register->data->brand->dataClass);
+    }
+  
     public function testBoxUsesItsTypedComponentConfig(): void
     {
         $this->register->registerInternalComponents(__DIR__ . '/Component');
@@ -69,6 +78,18 @@ class RegisterTest extends TestCase
 
         static::assertSame('ComponentLibrary\\Integrations\\Image\\ImageInterface|string|boolean', $this->register->data->avatar->argsTypes->image);
         static::assertSame(AvatarData::class, $this->register->data->avatar->dataClass);
+    }
+
+    public function testTypedComponentConfigPreservesLegacyMetadataShapes(): void
+    {
+        $this->register->registerInternalComponents(__DIR__ . '/Component');
+
+        static::assertTrue(property_exists($this->register->data->group->argsTypes, 'justifyContent'));
+        static::assertTrue(property_exists($this->register->data->group->argsTypes, 'jusitifyContent'));
+        static::assertSame('integer|boolean', $this->register->data->field->argsTypes->multiline);
+        static::assertSame('string|integer|NULL', $this->register->data->fileinput->argsTypes->maxSize);
+        static::assertSame('string|boolean', $this->register->data->date->argsTypes->action);
+        static::assertSame('string|boolean', $this->register->data->hero->argsTypes->animation);
     }
 
     public function testGetControllerArgsSupportsTypedDataObjects(): void

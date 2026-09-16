@@ -36,10 +36,6 @@ declare(strict_types=1);
 
 namespace ComponentLibrary\Analyzer;
 
-require_once __DIR__ . '/vendor/autoload.php';
-
-use ComponentLibrary\ComponentConfiguration\ComponentConfig;
-
 /**
  * Discovers component slugs from the component library source directory.
  */
@@ -92,14 +88,9 @@ class ComponentDiscovery
         $phpConfigFile = $componentDirectory . DIRECTORY_SEPARATOR . 'config.php';
 
         if (file_exists($phpConfigFile)) {
-            $config = require $phpConfigFile;
-
-            if ($config instanceof ComponentConfig) {
-                return $config->slug;
-            }
-
-            if (is_array($config) && isset($config['slug'])) {
-                return (string) $config['slug'];
+            $slug = $this->readSlugFromPhpConfig($phpConfigFile);
+            if ($slug !== null) {
+                return $slug;
             }
         }
 
@@ -122,6 +113,27 @@ class ComponentDiscovery
         }
 
         return (string) $config['slug'];
+    }
+
+    private function readSlugFromPhpConfig(string $phpConfigFile): ?string
+    {
+        $contents = file_get_contents($phpConfigFile);
+        if ($contents === false) {
+            return null;
+        }
+
+        $patterns = [
+            '/\bslug\s*:\s*[\'"]([^\'"]+)[\'"]/',
+            '/[\'"]slug[\'"]\s*=>\s*[\'"]([^\'"]+)[\'"]/',
+        ];
+
+        foreach ($patterns as $pattern) {
+            if (preg_match($pattern, $contents, $matches) === 1) {
+                return $matches[1];
+            }
+        }
+
+        return null;
     }
 }
 
