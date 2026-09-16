@@ -3,6 +3,7 @@
 namespace ComponentLibrary\Component\Fileinput;
 
 use ComponentLibrary\Cache\CacheInterface;
+use ComponentLibrary\ComponentConfiguration\ComponentDataReflector;
 use PHPUnit\Framework\TestCase;
 
 class FileinputTest extends TestCase
@@ -84,9 +85,7 @@ class FileinputTest extends TestCase
 
     private static function getData(array $merge = []): array
     {
-        $jsonFile = __DIR__ . '/fileinput.json';
-        $decodedJson = json_decode(file_get_contents($jsonFile), true);
-        $defaultData = $decodedJson['default'] ?? [];
+        $defaultData = (new ComponentDataReflector())->getDefaultArguments(FileinputData::class);
 
         return array_merge($defaultData, $merge);
     }

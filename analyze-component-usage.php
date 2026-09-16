@@ -36,6 +36,10 @@ declare(strict_types=1);
 
 namespace ComponentLibrary\Analyzer;
 
+require_once __DIR__ . '/vendor/autoload.php';
+
+use ComponentLibrary\ComponentConfiguration\ComponentConfig;
+
 /**
  * Discovers component slugs from the component library source directory.
  */
@@ -49,7 +53,7 @@ class ComponentDiscovery
     }
 
     /**
-     * Discover all component slugs by reading their JSON configuration files.
+     * Discover all component slugs by reading JSON or typed PHP configuration files.
      *
      * @return string[] Array of component slugs (e.g., ['button', 'card', 'accordion'])
      */
@@ -76,7 +80,7 @@ class ComponentDiscovery
     }
 
     /**
-     * Read the component slug from its JSON configuration file.
+     * Read the component slug from its typed PHP or legacy JSON configuration file.
      *
      * @param string $componentDirectory Full path to the component directory.
      *
@@ -85,13 +89,27 @@ class ComponentDiscovery
     private function readSlugFromConfig(string $componentDirectory): ?string
     {
         $directoryName = basename($componentDirectory);
-        $configFile    = $componentDirectory . DIRECTORY_SEPARATOR . lcfirst($directoryName) . '.json';
+        $phpConfigFile = $componentDirectory . DIRECTORY_SEPARATOR . 'config.php';
 
-        if (!file_exists($configFile)) {
+        if (file_exists($phpConfigFile)) {
+            $config = require $phpConfigFile;
+
+            if ($config instanceof ComponentConfig) {
+                return $config->slug;
+            }
+
+            if (is_array($config) && isset($config['slug'])) {
+                return (string) $config['slug'];
+            }
+        }
+
+        $jsonConfigFile = $componentDirectory . DIRECTORY_SEPARATOR . lcfirst($directoryName) . '.json';
+
+        if (!file_exists($jsonConfigFile)) {
             return null;
         }
 
-        $contents = file_get_contents($configFile);
+        $contents = file_get_contents($jsonConfigFile);
 
         if ($contents === false) {
             return null;
