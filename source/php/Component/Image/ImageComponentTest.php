@@ -2,6 +2,8 @@
 
 use ComponentLibrary\Cache\CacheInterface;
 use ComponentLibrary\Component\Image\Image as ImageComponent;
+use ComponentLibrary\Component\Image\ImageData;
+use ComponentLibrary\ComponentConfiguration\ComponentDataReflector;
 use ComponentLibrary\Helper\TagSanitizer;
 use ComponentLibrary\Integrations\Image\ImageInterface;
 use ComponentLibrary\Renderer\Renderer;
@@ -141,8 +143,6 @@ class ImageComponentTest extends TestCase
 
     private function getDefaultData(): array
     {
-        $definition = json_decode(file_get_contents(__DIR__ . '/image.json'), true);
-
-        return $definition['default'];
+        return (new ComponentDataReflector())->getDefaultArguments(ImageData::class);
     }
 }
