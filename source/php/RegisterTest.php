@@ -240,11 +240,7 @@ class RegisterTest extends TestCase
 
     private function getButtonDefaults(): array
     {
-        $config = json_decode(
-            file_get_contents(__DIR__ . '/Component/Button/button.json'),
-            true,
-        );
-
-        return $config['default'];
+        return (new \ComponentLibrary\ComponentConfiguration\ComponentDataReflector())
+            ->getDefaultArguments(ButtonData::class);
     }
 }
