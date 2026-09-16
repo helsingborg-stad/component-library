@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace ComponentLibrary;
 
 use ComponentLibrary\Cache\StaticCache;
+use ComponentLibrary\Component\Avatar\AvatarData;
 use ComponentLibrary\Component\Button\ButtonData;
 use ComponentLibrary\Component\Fab\FabData;
+use ComponentLibrary\Component\Box\BoxData;
 use ComponentLibrary\Helper\TagSanitizer;
 use HelsingborgStad\BladeService\BladeService;
 use Illuminate\Support\HtmlString;
@@ -50,6 +52,22 @@ class RegisterTest extends TestCase
 
         static::assertSame('string|NULL', $this->register->data->button->argsTypes->href);
         static::assertSame(ButtonData::class, $this->register->data->button->dataClass);
+    }
+
+    public function testBoxUsesItsTypedComponentConfig(): void
+    {
+        $this->register->registerInternalComponents(__DIR__ . '/Component');
+
+        static::assertSame('ComponentLibrary\\Integrations\\Image\\ImageInterface|boolean|array', $this->register->data->box->argsTypes->image);
+        static::assertSame(BoxData::class, $this->register->data->box->dataClass);
+    }
+
+    public function testAvatarUsesItsTypedComponentConfig(): void
+    {
+        $this->register->registerInternalComponents(__DIR__ . '/Component');
+
+        static::assertSame('ComponentLibrary\\Integrations\\Image\\ImageInterface|string|boolean', $this->register->data->avatar->argsTypes->image);
+        static::assertSame(AvatarData::class, $this->register->data->avatar->dataClass);
     }
 
     public function testGetControllerArgsSupportsTypedDataObjects(): void
