@@ -7,9 +7,11 @@ namespace ComponentLibrary;
 use ComponentLibrary\Cache\StaticCache;
 use ComponentLibrary\Component\Avatar\AvatarData;
 use ComponentLibrary\Component\Button\ButtonData;
+use ComponentLibrary\Component\Fab\FabData;
 use ComponentLibrary\Component\Box\BoxData;
 use ComponentLibrary\Helper\TagSanitizer;
 use HelsingborgStad\BladeService\BladeService;
+use Illuminate\Support\HtmlString;
 use PHPUnit\Framework\TestCase;
 
 class RegisterTest extends TestCase
@@ -82,6 +84,18 @@ class RegisterTest extends TestCase
         static::assertSame('Send', $data['text']);
         static::assertSame('mailto:test@example.com', $data['attributeList']['href']);
         static::assertSame('a', $data['componentElement']);
+    }
+
+    public function testGetControllerArgsPreservesFabHtmlStringSlot(): void
+    {
+        $slot = new HtmlString('<p>Actions</p>');
+
+        $data = $this->register->getControllerArgs(
+            new FabData(slot: $slot),
+            'Fab',
+        );
+
+        static::assertSame($slot, $data['slot']);
     }
 
     public function testGetControllerArgsNormalizesNestedTypedDataObjects(): void
