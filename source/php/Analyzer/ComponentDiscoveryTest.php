@@ -103,4 +103,26 @@ class ComponentDiscoveryTest extends TestCase
 
         rmdir($tempDir);
     }
+
+    /**
+     * @testdox it discovers a slug from a typed PHP configuration
+     */
+    public function testDiscoverSlugsReadsTypedPhpConfig(): void
+    {
+        $tempDir = sys_get_temp_dir() . '/component-test-typed-' . uniqid();
+        $componentDir = $tempDir . '/Typed';
+        mkdir($componentDir, 0755, true);
+        file_put_contents(
+            $componentDir . '/config.php',
+            "<?php return new \\ComponentLibrary\\ComponentConfiguration\\ComponentConfig('typed', 'typed.blade.php');",
+        );
+
+        $slugs = (new ComponentDiscovery($tempDir))->discoverSlugs();
+
+        $this->assertSame(['typed'], $slugs);
+
+        unlink($componentDir . '/config.php');
+        rmdir($componentDir);
+        rmdir($tempDir);
+    }
 }
