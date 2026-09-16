@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ComponentLibrary;
 
 use ComponentLibrary\Cache\StaticCache;
+use ComponentLibrary\Component\Avatar\AvatarData;
 use ComponentLibrary\Component\Button\ButtonData;
 use ComponentLibrary\Component\Brand\BrandData;
 use ComponentLibrary\Helper\TagSanitizer;
@@ -57,6 +58,14 @@ class RegisterTest extends TestCase
 
         static::assertSame('string|integer|double|boolean', $this->register->data->brand->argsTypes->aspectRatio);
         static::assertSame(BrandData::class, $this->register->data->brand->dataClass);
+    }
+
+    public function testAvatarUsesItsTypedComponentConfig(): void
+    {
+        $this->register->registerInternalComponents(__DIR__ . '/Component');
+
+        static::assertSame('ComponentLibrary\\Integrations\\Image\\ImageInterface|string|boolean', $this->register->data->avatar->argsTypes->image);
+        static::assertSame(AvatarData::class, $this->register->data->avatar->dataClass);
     }
 
     public function testGetControllerArgsSupportsTypedDataObjects(): void

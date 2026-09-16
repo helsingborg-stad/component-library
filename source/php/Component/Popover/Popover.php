@@ -13,8 +13,8 @@ class Popover extends \ComponentLibrary\Component\BaseController
         $this->data['id'] = $id ?? uniqid('popover-');
         $this->data['attributeList']['popover'] = $this->getType($type);
 
-        if ($relativeToTrigger) {
-            $this->data['attributeList']['data-js-popover-relative-to-trigger'] = 'true';
+        if ($relative) {
+            $this->data['attributeList']['data-js-popover-relative'] = 'true';
         }
 
         if ($horizontalPlacement) {
