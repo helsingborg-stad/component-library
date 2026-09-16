@@ -125,7 +125,6 @@ class ComponentDiscovery
         $patterns = [
             '/\bslug\s*:\s*[\'"]([^\'"]+)[\'"]/',
             '/[\'"]slug[\'"]\s*=>\s*[\'"]([^\'"]+)[\'"]/',
-            '/new\s+[^(]+\(\s*[\'"]([^\'"]+)[\'"]\s*,/',
         ];
 
         foreach ($patterns as $pattern) {

@@ -25,12 +25,5 @@ final class GroupData
         public bool $normalizeChildren = true,
         public bool $fullWidth = false,
     ) {
-        if ($this->justifyContent === '' && $this->jusitifyContent !== '') {
-            $this->justifyContent = $this->jusitifyContent;
-        }
-
-        if ($this->jusitifyContent === '' && $this->justifyContent !== '') {
-            $this->jusitifyContent = $this->justifyContent;
-        }
     }
 }
