@@ -114,7 +114,19 @@ class ComponentDiscoveryTest extends TestCase
         mkdir($componentDir, 0755, true);
         file_put_contents(
             $componentDir . '/config.php',
-            "<?php return new \\ComponentLibrary\\ComponentConfiguration\\ComponentConfig('typed', 'typed.blade.php');",
+            <<<'PHP'
+<?php
+
+declare(strict_types=1);
+
+use ComponentLibrary\ComponentConfiguration\ComponentConfig;
+
+return new ComponentConfig(
+    slug: 'typed',
+    view: 'typed.blade.php',
+    data: \stdClass::class,
+);
+PHP,
         );
 
         $slugs = (new ComponentDiscovery($tempDir))->discoverSlugs();

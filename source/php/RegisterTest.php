@@ -77,6 +77,7 @@ class RegisterTest extends TestCase
         static::assertSame('integer|boolean', $this->register->data->field->argsTypes->multiline);
         static::assertSame('string|integer|NULL', $this->register->data->fileinput->argsTypes->maxSize);
         static::assertSame('string|boolean', $this->register->data->date->argsTypes->action);
+        static::assertSame('string|boolean', $this->register->data->hero->argsTypes->animation);
     }
 
     public function testGetControllerArgsSupportsTypedDataObjects(): void
