@@ -236,6 +236,8 @@ class Nav extends \ComponentLibrary\Component\BaseController
     public function itemAttributeList($items, $data)
     {
         if (is_array($items) && !empty($items)) {
+            $itemIndex = 0;
+
             foreach ($items as $key => &$item) {
 
                 if (!isset($item['attributeList'])) {
@@ -245,11 +247,94 @@ class Nav extends \ComponentLibrary\Component\BaseController
                 $item = $this->setRoleAttributes($item); 
                 $item = $this->setDepthAttributes($item);
                 $item = $this->setAriaLabelAttributes($item);
+                $item['itemIndex'] = $itemIndex;
+                $item['usePopoverForChildren'] = $this->shouldUsePopoverForChildren($item);
+                $item['popoverChildrenId'] = $item['usePopoverForChildren']
+                    ? 'popover_' . $this->getChildrenPopoverId($item, $itemIndex)
+                    : null;
+
+                if ($item['popoverChildrenId']) {
+                    $item['attributeList']['data-js-popover-relative'] = $item['popoverChildrenId'];
+                }
+
+                $item['toggleAttributeList'] = $this->getToggleAttributeList($item);
+
+                $itemIndex++;
             }
 
         }
 
         return $items;
+    }
+
+    /**
+     * Determines whether children should render in popover mode for this item.
+     *
+     * @param array $item The normalized nav item.
+     *
+     * @return bool
+     */
+    private function shouldUsePopoverForChildren(array $item): bool
+    {
+        return $this->data['direction'] === 'horizontal'
+            && !empty($item['hasChildren'])
+            && !empty($item['hasToggle'])
+            && empty($this->data['isExtendedDropdown']);
+    }
+
+    /**
+     * Builds a deterministic popover id for the item.
+     *
+     * @param array $item      The normalized nav item.
+     * @param int   $itemIndex The item index in the current loop.
+     *
+     * @return string
+     */
+    private function getChildrenPopoverId(array $item, int $itemIndex): string
+    {
+        return $this->data['id'] . '-' . $item['id'] . '-' . $itemIndex . '__children-popover';
+    }
+
+    /**
+     * Builds attributes for the expand toggle button.
+     *
+     * @param array $item The normalized nav item.
+     *
+     * @return array
+     */
+    private function getToggleAttributeList(array $item): array
+    {
+        $toggleAttributeList = [
+            'aria-label' => $this->buildExpandLabel((string) ($item['label'] ?? ''), (string) ($this->data['expandLabel'] ?? '')),
+            'aria-pressed' => (!empty($item['active']) || !empty($item['ancestor'])) ? 'true' : 'false'
+        ];
+
+        if (!empty($item['usePopoverForChildren']) && !empty($item['popoverChildrenId'])) {
+            $toggleAttributeList = array_merge($toggleAttributeList, [
+                'popovertarget' => $item['popoverChildrenId'],
+                'popovertargetaction' => 'toggle',
+                'aria-haspopup' => 'menu'
+            ]);
+        }
+
+        return $toggleAttributeList;
+    }
+
+    /**
+     * Builds the expand label text.
+     *
+     * @param string $itemLabel   The item label.
+     * @param string $expandLabel The base expand label.
+     *
+     * @return string
+     */
+    private function buildExpandLabel(string $itemLabel, string $expandLabel): string
+    {
+        if (!empty($itemLabel)) {
+            return $expandLabel . ': ' . $itemLabel;
+        }
+
+        return $expandLabel;
     }
 
     /**
