@@ -12,6 +12,7 @@ final class GroupData
     public function __construct(
         public string $direction = 'horizontal',
         public string $justifyContent = '',
+        public string $jusitifyContent = '',
         public string $alignItems = '',
         public string $alignContent = '',
         public string $display = '',
@@ -24,5 +25,12 @@ final class GroupData
         public bool $normalizeChildren = true,
         public bool $fullWidth = false,
     ) {
+        if ($this->justifyContent === '' && $this->jusitifyContent !== '') {
+            $this->justifyContent = $this->jusitifyContent;
+        }
+
+        if ($this->jusitifyContent === '' && $this->justifyContent !== '') {
+            $this->jusitifyContent = $this->justifyContent;
+        }
     }
 }

@@ -12,6 +12,10 @@ class Group extends \ComponentLibrary\Component\BaseController
     {
         //Extract array for eazy access (fetch only)
         extract($this->data);
+        $justifyContent = $this->data['justifyContent'] ?? '';
+        if ($justifyContent === '' && isset($this->data['jusitifyContent'])) {
+            $justifyContent = $this->data['jusitifyContent'];
+        }
 
         if (!empty($fluidGrid)) {
             $fluidGrid = is_numeric($fluidGrid) ? $fluidGrid : 3;

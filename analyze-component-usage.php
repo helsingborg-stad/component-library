@@ -36,7 +36,11 @@ declare(strict_types=1);
 
 namespace ComponentLibrary\Analyzer;
 
-require_once __DIR__ . '/vendor/autoload.php';
+if (is_file(__DIR__ . '/vendor/autoload.php')) {
+    require_once __DIR__ . '/vendor/autoload.php';
+}
+
+require_once __DIR__ . '/source/php/ComponentConfiguration/ComponentConfig.php';
 
 use ComponentLibrary\ComponentConfiguration\ComponentConfig;
 

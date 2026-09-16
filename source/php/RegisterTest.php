@@ -73,7 +73,7 @@ class RegisterTest extends TestCase
         $this->register->registerInternalComponents(__DIR__ . '/Component');
 
         static::assertTrue(property_exists($this->register->data->group->argsTypes, 'justifyContent'));
-        static::assertFalse(property_exists($this->register->data->group->argsTypes, 'jusitifyContent'));
+        static::assertTrue(property_exists($this->register->data->group->argsTypes, 'jusitifyContent'));
         static::assertSame('integer|boolean', $this->register->data->field->argsTypes->multiline);
         static::assertSame('string|integer|NULL', $this->register->data->fileinput->argsTypes->maxSize);
         static::assertSame('string|boolean', $this->register->data->date->argsTypes->action);
