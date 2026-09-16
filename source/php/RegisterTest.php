@@ -6,6 +6,7 @@ namespace ComponentLibrary;
 
 use ComponentLibrary\Cache\StaticCache;
 use ComponentLibrary\Component\Button\ButtonData;
+use ComponentLibrary\Component\Avatar\AvatarData;
 use ComponentLibrary\Helper\TagSanitizer;
 use HelsingborgStad\BladeService\BladeService;
 use PHPUnit\Framework\TestCase;
@@ -48,6 +49,14 @@ class RegisterTest extends TestCase
 
         static::assertSame('string|NULL', $this->register->data->button->argsTypes->href);
         static::assertSame(ButtonData::class, $this->register->data->button->dataClass);
+    }
+
+    public function testAvatarUsesItsTypedComponentConfig(): void
+    {
+        $this->register->registerInternalComponents(__DIR__ . '/Component');
+
+        static::assertSame('ComponentLibrary\\Integrations\\Image\\ImageInterface|string|boolean', $this->register->data->avatar->argsTypes->image);
+        static::assertSame(AvatarData::class, $this->register->data->avatar->dataClass);
     }
 
     public function testGetControllerArgsSupportsTypedDataObjects(): void
