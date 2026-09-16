@@ -6,6 +6,7 @@ namespace ComponentLibrary;
 
 use ComponentLibrary\Cache\StaticCache;
 use ComponentLibrary\Component\Button\ButtonData;
+use ComponentLibrary\Component\Notice\NoticeData;
 use ComponentLibrary\Helper\TagSanitizer;
 use HelsingborgStad\BladeService\BladeService;
 use PHPUnit\Framework\TestCase;
@@ -108,6 +109,36 @@ class RegisterTest extends TestCase
 
         static::assertSame('Question', $data['list'][0]['heading']);
         static::assertSame('<p>Answer</p>', $data['list'][0]['content']);
+    }
+
+    public function testTypedNoticeConfigPreservesLegacyUnionTypes(): void
+    {
+        $this->register->registerInternalComponents(__DIR__ . '/Component');
+
+        static::assertEqualsCanonicalizing(
+            ['object', 'array'],
+            explode('|', $this->register->data->notice->argsTypes->message),
+        );
+        static::assertEqualsCanonicalizing(
+            ['boolean', 'string'],
+            explode('|', $this->register->data->notice->argsTypes->dismissable),
+        );
+    }
+
+    public function testGetControllerArgsSupportsTypedNoticeLegacyInputs(): void
+    {
+        $data = $this->register->getControllerArgs(
+            new NoticeData(
+                message: (object) ['title' => 'Title', 'message' => 'Message'],
+                dismissable: 'permanent',
+            ),
+            'Notice',
+        );
+
+        static::assertSame('Title', $data['message']['title']);
+        static::assertSame('Message', $data['message']['message']);
+        static::assertTrue($data['attributeList']['data-dismissable-notice']);
+        static::assertSame('permanent', $data['attributeList']['data-dismissable-notice-timeout']);
     }
 
     public function testUntrustedPhpConfigPathIsRejected(): void
