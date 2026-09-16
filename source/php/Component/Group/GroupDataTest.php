@@ -55,4 +55,34 @@ class GroupDataTest extends TestCase
 
         static::assertContains('c-group--justify-content-center', $group->getData()['classList']);
     }
+
+    public function testCorrectedJustifyContentInputIsStillSupported(): void
+    {
+        $data = array_merge(
+            (new ComponentDataReflector())->getDefaultArguments(GroupData::class),
+            ['justifyContent' => 'center'],
+        );
+
+        $group = new Group(
+            $data,
+            new class implements CacheInterface {
+                public function get(string $key, null|string $group = null): mixed
+                {
+                    return null;
+                }
+
+                public function set(string $key, mixed $data, null|string $group = null): void
+                {
+                }
+            },
+            new class implements TagSanitizerInterface {
+                public function removeATags(string $string): string
+                {
+                    return strip_tags($string, '<a>');
+                }
+            },
+        );
+
+        static::assertContains('c-group--justify-content-center', $group->getData()['classList']);
+    }
 }

@@ -124,7 +124,7 @@ use ComponentLibrary\ComponentConfiguration\ComponentConfig;
 return new ComponentConfig(
     slug: 'typed',
     view: 'typed.blade.php',
-    data: \stdClass::class,
+    data: \ComponentLibrary\Component\Hero\HeroData::class,
 );
 PHP,
         );
