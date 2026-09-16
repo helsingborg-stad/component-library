@@ -6,6 +6,7 @@ namespace ComponentLibrary;
 
 use ComponentLibrary\Cache\StaticCache;
 use ComponentLibrary\Component\Button\ButtonData;
+use ComponentLibrary\Component\Brand\BrandData;
 use ComponentLibrary\Helper\TagSanitizer;
 use HelsingborgStad\BladeService\BladeService;
 use PHPUnit\Framework\TestCase;
@@ -48,6 +49,14 @@ class RegisterTest extends TestCase
 
         static::assertSame('string|NULL', $this->register->data->button->argsTypes->href);
         static::assertSame(ButtonData::class, $this->register->data->button->dataClass);
+    }
+
+    public function testBrandUsesItsTypedComponentConfig(): void
+    {
+        $this->register->registerInternalComponents(__DIR__ . '/Component');
+
+        static::assertSame('string|integer|double|boolean', $this->register->data->brand->argsTypes->aspectRatio);
+        static::assertSame(BrandData::class, $this->register->data->brand->dataClass);
     }
 
     public function testGetControllerArgsSupportsTypedDataObjects(): void
