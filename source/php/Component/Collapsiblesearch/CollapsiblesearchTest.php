@@ -12,20 +12,18 @@ class CollapsiblesearchTest extends PHPUnit\Framework\TestCase
     // -------------------------------------------------------------------------
 
     /**
-     * Build component data by merging JSON defaults with the provided overrides.
+     * Build component data by merging typed defaults with the provided overrides.
      *
      * @param array $overrides
      * @return array
      */
     private function getComponentData(array $overrides = []): array
     {
-        $jsonFile = file_get_contents(
-            'source/php/Component/Collapsiblesearch/collapsiblesearch.json',
-            true,
+        return array_merge(
+            (new \ComponentLibrary\ComponentConfiguration\ComponentDataReflector())
+                ->getDefaultArguments(\ComponentLibrary\Component\Collapsiblesearch\CollapsiblesearchData::class),
+            $overrides,
         );
-        $json = json_decode($jsonFile, true);
-
-        return array_merge($json['default'], $overrides);
     }
 
     /**
