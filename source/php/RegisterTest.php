@@ -208,6 +208,19 @@ class RegisterTest extends TestCase
         $method->invoke($this->register, $configPath);
     }
 
+    public function testJsonOnlyComponentDirectoryIsRejected(): void
+    {
+        $componentDirectory = sys_get_temp_dir() . '/component-library-json-' . uniqid('', true);
+        mkdir($componentDirectory, 0777, true);
+        file_put_contents($componentDirectory . '/component.json', '{}');
+
+        $method = (new \ReflectionClass(Register::class))->getMethod('getConfigFilePath');
+        $method->setAccessible(true);
+
+        $this->expectException(\Exception::class);
+        $method->invoke($this->register, $componentDirectory);
+    }
+
     private function createRegister(): Register
     {
         $componentPath = __DIR__ . '/Component';

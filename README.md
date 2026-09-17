@@ -132,7 +132,7 @@ The most efficient and proposed way of adding a compning is by a PR to this pack
 
 - View (name.blade.php)
 - Controller (Name.php)
-- Configuration (`config.php` for typed components, `name.json` for legacy components)
+- Configuration (`config.php` returning a typed `ComponentConfig`)
 
 ### The view 
 The view sould be as simple as possible, in most cases just a few if-statements. For more advanced solution, please consider to use components as childs to a larger component according to Atomic design principle. 

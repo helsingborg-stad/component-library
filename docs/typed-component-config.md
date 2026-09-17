@@ -75,11 +75,10 @@ Use PHPDoc only where PHP itself cannot express collection element types.
 
 ## Migration strategy
 
-Components can be migrated one by one:
+All components use typed PHP configuration:
 
 1. Add a typed `*Data` class.
 2. Add `config.php` returning `ComponentConfig`.
 3. Keep the existing controller and Blade view unchanged unless the contract itself needs adjustments.
-4. Keep legacy json configuration for non-migrated components until they are converted.
 
-This allows typed contracts and legacy configuration to coexist during migration.
+Component registration requires a trusted `config.php` file. JSON component configuration files are not supported.
