@@ -28,6 +28,5 @@ final class Slider__itemData
         public string $overlay = 'none',
         public bool|string $slot = false,
         public bool|string $bottom = false,
-    ) {
-    }
+    ) {}
 }

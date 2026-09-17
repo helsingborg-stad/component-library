@@ -18,6 +18,5 @@ final class BrandData
         public array $logotype = [],
         public array $text = [],
         public int|float|string|bool $aspectRatio = false,
-    ) {
-    }
+    ) {}
 }

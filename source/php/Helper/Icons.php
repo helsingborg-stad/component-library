@@ -4,12 +4,15 @@ namespace ComponentLibrary\Helper;
 
 use ComponentLibrary\Cache\CacheInterface;
 
-class Icons {
+class Icons
+{
     private $customIconsSvgsKey = 'icons';
 
-    public function __construct(private CacheInterface $cache){}
+    public function __construct(
+        private CacheInterface $cache,
+    ) {}
 
-    public function getIcons():array
+    public function getIcons(): array
     {
         if (!empty($this->cache->get($this->customIconsSvgsKey))) {
             return $this->cache->get($this->customIconsSvgsKey);
@@ -21,7 +24,7 @@ class Icons {
         return $this->cache->get($this->customIconsSvgsKey);
     }
 
-    private function getSvgFilesContents(array $files):array
+    private function getSvgFilesContents(array $files): array
     {
         if (empty($files)) {
             return [];
@@ -36,14 +39,13 @@ class Icons {
         return $svgFiles;
     }
 
-    private function getIconSvgFilePaths():array
+    private function getIconSvgFilePaths(): array
     {
         if (function_exists('apply_filters')) {
             $svgFiles = apply_filters(
                 'ComponentLibrary\Component\Icon\CustomSvgIcons',
-                glob(__DIR__ . '/Svg/*.svg')
+                glob(__DIR__ . '/Svg/*.svg'),
             );
-            
         } else {
             $svgFiles = glob(__DIR__ . '/Svg/*.svg');
         }

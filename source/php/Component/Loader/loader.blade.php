@@ -12,4 +12,3 @@
     {{$text}}
     @endtypography
 @endif
-

@@ -2,23 +2,23 @@
 
 namespace ComponentLibrary\Component\Pagination;
 
-class Pagination extends \ComponentLibrary\Component\BaseController  
+class Pagination extends \ComponentLibrary\Component\BaseController
 {
-
     //Handles temporary working list of items
     private $tmpList = [];
-    
-    public function init() {
+
+    public function init()
+    {
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
         //Default to page one
-        if(!$current) {
-            $this->data['current'] = 1; 
+        if (!$current) {
+            $this->data['current'] = 1;
         }
 
         /* Javascrip pagination */
-        if($this->data['useJS']) {
+        if ($this->data['useJS']) {
             $this->data['list'] = [['label' => '', 'href' => '']];
             $this->data['attributeList']['data-js-pagination'] = '1';
             $this->data['attributeList']['data-js-pagination-per-page'] = $this->data['perPage'];
@@ -36,37 +36,37 @@ class Pagination extends \ComponentLibrary\Component\BaseController
                 $this->data['attributeList']['data-js-pagination-randomize-order'] = '1';
             }
         }
-    
+
         //Anchor
-        if(isset($this->data['list']) && is_array($this->data['list']) && !empty($this->data['list'])) {
-            foreach($this->data['list'] as &$item) {
-                if(isset($item['href'])) {
-                    $item['href'] = $item['href'] . $anchorTag; 
+        if (isset($this->data['list']) && is_array($this->data['list']) && !empty($this->data['list'])) {
+            foreach ($this->data['list'] as &$item) {
+                if (isset($item['href'])) {
+                    $item['href'] = $item['href'] . $anchorTag;
                 }
             }
         }
 
         //Previous data
-        if($this->data['current'] != 1) {
-            $this->data['previous'] = $this->handlePrefixUrlParam($linkPrefix, ($this->data['current'] - 1)) . $anchorTag; 
+        if ($this->data['current'] != 1) {
+            $this->data['previous'] = $this->handlePrefixUrlParam($linkPrefix, $this->data['current'] - 1) . $anchorTag;
         } else {
-            $this->data['previous'] = ''; 
-            $this->data['previousDisabled'] = 'true'; 
+            $this->data['previous'] = '';
+            $this->data['previousDisabled'] = 'true';
         }
 
         //Next data
-        if((count($this->data['list'])) != $this->data['current']) {
-            $this->data['next'] = $this->handlePrefixUrlParam($linkPrefix, ($this->data['current'] + 1)) . $anchorTag; 
+        if (count($this->data['list']) != $this->data['current']) {
+            $this->data['next'] = $this->handlePrefixUrlParam($linkPrefix, $this->data['current'] + 1) . $anchorTag;
         } else {
-            $this->data['next'] = ''; 
-            $this->data['nextDisabled'] = 'true'; 
+            $this->data['next'] = '';
+            $this->data['nextDisabled'] = 'true';
         }
 
         //Sanitize links
         $this->data['previous'] = $this->sanitizePaginationLink($this->data['previous']);
         $this->data['next'] = $this->sanitizePaginationLink($this->data['next']);
-        $this->data['list'] = array_map(function($item) {
-            if(isset($item['href'])) {
+        $this->data['list'] = array_map(function ($item) {
+            if (isset($item['href'])) {
                 $item['href'] = $this->sanitizePaginationLink($item['href']);
             }
             return $item;
@@ -87,9 +87,8 @@ class Pagination extends \ComponentLibrary\Component\BaseController
      */
     private function sanitizePaginationLink($url)
     {
-
         //Bypass if not in WP environment
-        if(!function_exists('apply_filters')) {
+        if (!function_exists('apply_filters')) {
             return $url;
         }
 
@@ -100,9 +99,9 @@ class Pagination extends \ComponentLibrary\Component\BaseController
         return remove_query_arg(
             array_diff(
                 array_keys($_GET ?? []),
-                $allowedQueryVars
+                $allowedQueryVars,
             ),
-            $url
+            $url,
         );
     }
 
@@ -113,20 +112,21 @@ class Pagination extends \ComponentLibrary\Component\BaseController
      * @param int $pageNumber The page number to be included in the URL.
      * @return string The generated paged URL.
      */
-    private function handlePrefixUrlParam($prefix, $pageNumber) {
+    private function handlePrefixUrlParam($prefix, $pageNumber)
+    {
         if (!isset($_SERVER)) {
             return '';
         }
-    
+
         $urlParams = $_SERVER['QUERY_STRING'];
         parse_str($urlParams, $params);
-        
+
         $params[$prefix] = $pageNumber;
-    
+
         $newUrlParams = http_build_query($params);
-    
+
         $url = '?' . $newUrlParams;
-    
+
         return $url;
     }
 
@@ -140,21 +140,21 @@ class Pagination extends \ComponentLibrary\Component\BaseController
         $allowedItems = 5;
         $itemsLength = count($this->data['list']);
 
-        if($itemsLength <= $allowedItems) {
+        if ($itemsLength <= $allowedItems) {
             return $this->data['list'];
         }
 
         $currentItem = $this->data['current'];
-        $currentIndex = $currentItem -1;
+        $currentIndex = $currentItem - 1;
         $offset = 2;
-        $firstIndex = $currentIndex - $offset < 0 ? 0 : $currentIndex - $offset;
+        $firstIndex = ($currentIndex - $offset) < 0 ? 0 : $currentIndex - $offset;
 
-        if($itemsLength - $currentItem < $offset) {
-            $offset = $offset - ($itemsLength - $currentItem );
+        if (($itemsLength - $currentItem) < $offset) {
+            $offset = $offset - ($itemsLength - $currentItem);
             $firstIndex = $firstIndex - $offset;
         }
 
-        return array_slice($this->data['list'],  $firstIndex, $allowedItems, true);
+        return array_slice($this->data['list'], $firstIndex, $allowedItems, true);
     }
 
     /**
@@ -188,19 +188,19 @@ class Pagination extends \ComponentLibrary\Component\BaseController
     public function lastItem()
     {
         $lastKey = count($this->tmpList) - 1;
-        
-        if(array_key_exists($lastKey, $this->data['list'])) {
+
+        if (array_key_exists($lastKey, $this->data['list'])) {
             return false;
         }
 
-        if(array_key_exists($lastKey -1, $this->data['list'])) {
+        if (array_key_exists($lastKey - 1, $this->data['list'])) {
             $this->data['list'][] = end($this->tmpList);
             return false;
         }
 
         $item = end($this->tmpList);
         $item['key'] = $lastKey;
-        
+
         return $item;
     }
 }

@@ -17,6 +17,6 @@ class DatebadgeDataTest extends TestCase
         static::assertInstanceOf(ComponentConfig::class, $config);
         static::assertSame('datebadge', $config->slug);
         static::assertSame(DatebadgeData::class, $config->data);
-        static::assertFalse((new ComponentDataReflector())->getDefaultArguments(DatebadgeData::class)['date']);
+        static::assertFalse(new ComponentDataReflector()->getDefaultArguments(DatebadgeData::class)['date']);
     }
 }

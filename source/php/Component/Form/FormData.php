@@ -6,7 +6,11 @@ namespace ComponentLibrary\Component\Form;
 
 final class FormData
 {
-    public function __construct(public string $method = 'POST', public string $action = '#', public bool $validation = true, public string $errorMessage = '', public string $validateMessage = '')
-    {
-    }
+    public function __construct(
+        public string $method = 'POST',
+        public string $action = '#',
+        public bool $validation = true,
+        public string $errorMessage = '',
+        public string $validateMessage = '',
+    ) {}
 }

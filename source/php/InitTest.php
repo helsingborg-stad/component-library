@@ -20,26 +20,26 @@ class InitTest extends TestCase
 
     public function testReusesBladeServiceForIdenticalPathConfiguration(): void
     {
-        $first = (new Init([]))->getEngine();
-        $second = (new Init([]))->getEngine();
+        $first = new Init([])->getEngine();
+        $second = new Init([])->getEngine();
 
         static::assertSame($first, $second);
     }
 
     public function testDoesNotReuseBladeServiceForDifferentPathConfiguration(): void
     {
-        $default = (new Init([]))->getEngine();
-        $withExternalPath = (new Init([__DIR__]))->getEngine();
+        $default = new Init([])->getEngine();
+        $withExternalPath = new Init([__DIR__])->getEngine();
 
         static::assertNotSame($default, $withExternalPath);
     }
 
     public function testCacheCanBeCleared(): void
     {
-        $first = (new Init([]))->getEngine();
+        $first = new Init([])->getEngine();
 
         Init::clearBladeServiceCache();
 
-        static::assertNotSame($first, (new Init([]))->getEngine());
+        static::assertNotSame($first, new Init([])->getEngine());
     }
 }

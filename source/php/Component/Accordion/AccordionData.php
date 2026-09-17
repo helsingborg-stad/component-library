@@ -24,6 +24,5 @@ final class AccordionData
         public bool $spacing = false,
         public bool $border = true,
         public bool $divider = false,
-    ) {
-    }
+    ) {}
 }

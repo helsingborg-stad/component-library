@@ -29,6 +29,5 @@ final class PaginationData
         public bool $pagesToShow = false,
         public bool $keepDOM = false,
         public bool $async = false,
-    ) {
-    }
+    ) {}
 }

@@ -9,18 +9,19 @@ class Segment extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
-        $file_path = __DIR__ . "/partials/" . $layout . '.blade.php';
+        $file_path = __DIR__ . '/partials/' . $layout . '.blade.php';
 
-        $this->data['floatingSlotHasData']     = $this->slotHasData('floating');
+        $this->data['floatingSlotHasData'] = $this->slotHasData('floating');
         $this->data['aboveContentSlotHasData'] = $this->slotHasData('aboveContent');
         $this->data['belowContentSlotHasData'] = $this->slotHasData('belowContent');
-        $this->data['slotHasData']             = $this->slotHasData('slot');
-
+        $this->data['slotHasData'] = $this->slotHasData('slot');
 
         if (!file_exists($file_path)) {
             $layout = 'full-width';
             $this->data['layout'] = $layout;
-        };
+        }
+
+        ;
 
         // Set the layout
         if ($layout) {
@@ -39,9 +40,9 @@ class Segment extends \ComponentLibrary\Component\BaseController
         $this->data['imageClassList'] = [];
         $this->data['imageClassList'][] = $this->getBaseClass('image');
 
-        if ($this->data['content'] == strip_tags($this->data['content'] ?? "", [])) {
+        if ($this->data['content'] == strip_tags($this->data['content'] ?? '', [])) {
             // Create paragraphs
-            $paragraphs = preg_split("/\r\n|\n|\r/", $this->data['content'] ?? "");
+            $paragraphs = preg_split("/\r\n|\n|\r/", $this->data['content'] ?? '');
             foreach ($paragraphs as &$part) {
                 if (empty($part)) {
                     continue;
@@ -98,7 +99,7 @@ class Segment extends \ComponentLibrary\Component\BaseController
         }
 
         if (!empty($contentAlignment)) {
-            $this->data['classList'][] =  $this->getBaseClass() . '--content-' . $contentAlignment;
+            $this->data['classList'][] = $this->getBaseClass() . '--content-' . $contentAlignment;
         }
 
         // Handle background data (wrapper)
@@ -107,21 +108,21 @@ class Segment extends \ComponentLibrary\Component\BaseController
                 $this->data['attributeList']['style'] = 'background-color: ' . $background . ';';
             } else {
                 $this->data['classList'][] = 'u-color--' . $background;
-                $this->data['classList'][] = 'u-color__bg--' . $background; //TODO: Remove (deprecated 2026-03-23). When new version of styleguide is stable. 
+                $this->data['classList'][] = 'u-color__bg--' . $background; //TODO: Remove (deprecated 2026-03-23). When new version of styleguide is stable.
             }
         }
 
         // Handle has image
         $this->data['hasImage'] = $hasImage = $this->hasImage($image);
-        if(!$hasImage && !$hasPlaceholder) {
+        if (!$hasImage && !$hasPlaceholder) {
             $this->data['classList'][] = $this->getBaseClass('no-image', true);
         }
 
-        //Handle date data 
+        //Handle date data
         if ($date && !is_array($date)) {
             $this->data['date'] = [
                 'timestamp' => $date,
-                'action' => 'formatDate'
+                'action' => 'formatDate',
             ];
         }
 
@@ -136,16 +137,16 @@ class Segment extends \ComponentLibrary\Component\BaseController
 
     /**
      * Check if the image is set
-     * 
+     *
      * @param mixed $image
-     * 
+     *
      * @return bool
      */
     private function hasImage($image)
     {
-        if(is_a($image, 'ComponentLibrary\Integrations\Image\Image')) {
+        if (is_a($image, 'ComponentLibrary\Integrations\Image\Image')) {
             return !empty($image->getUrl());
-        }elseif(is_string($image)) {
+        } elseif (is_string($image)) {
             return !empty($image);
         }
         return false;

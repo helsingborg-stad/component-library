@@ -14,7 +14,11 @@ class TextareaTest extends TestCase
     public function testComponentIsDeprecated()
     {
         try {
-            new Textarea(['required' => false], $this->createMock(CacheInterface::class), $this->createMock(TagSanitizerInterface::class));
+            new Textarea(
+                ['required' => false],
+                $this->createMock(CacheInterface::class),
+                $this->createMock(TagSanitizerInterface::class),
+            );
         } catch (\Throwable $e) {
             $this->assertSame(E_USER_DEPRECATED, $e->getCode(), 'Expected a deprecation notice to be triggered.');
             return;

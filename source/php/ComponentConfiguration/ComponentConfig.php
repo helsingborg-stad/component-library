@@ -20,6 +20,5 @@ class ComponentConfig
         public string $view,
         public ?string $data = null,
         public array $dependencies = [],
-    ) {
-    }
+    ) {}
 }

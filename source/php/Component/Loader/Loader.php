@@ -9,27 +9,26 @@ class Loader extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
-        $this->data['text'] = ($text) ? $text : '';
+        $this->data['text'] = $text ? $text : '';
 
         $this->setColor($shape, $color);
         $this->setSize($shape, $size);
 
         //Labeld by attribute
-        if($text) {
-            $this->data['attributeList']['aria-labelledby'] = $id;   
+        if ($text) {
+            $this->data['attributeList']['aria-labelledby'] = $id;
         }
 
         //Indicates that this is busy
-        $this->data['attributeList']['aria-busy'] = "true"; 
+        $this->data['attributeList']['aria-busy'] = 'true';
 
         //Role
-        $this->data['attributeList']['role'] = "progressbar"; 
-
+        $this->data['attributeList']['role'] = 'progressbar';
     }
 
     private function setColor($shape, $color)
     {
-        $this->addToClassList(true, '__'. $shape . '--color--' . $color);
+        $this->addToClassList(true, '__' . $shape . '--color--' . $color);
     }
 
     /**
@@ -42,7 +41,8 @@ class Loader extends \ComponentLibrary\Component\BaseController
     private function addToClassList($prependBaseClass, ...$classList)
     {
         foreach ($classList as $class) {
-            if ($prependBaseClass) $class = $this->getBaseClass() . $class;
+            if ($prependBaseClass)
+                $class = $this->getBaseClass() . $class;
 
             $this->data['classList'][] = $class;
         }
@@ -61,5 +61,4 @@ class Loader extends \ComponentLibrary\Component\BaseController
         $this->addToClassList(true, '__' . $shape);
         $this->addToClassList(true, '__' . $shape . '--' . $size);
     }
-
 }

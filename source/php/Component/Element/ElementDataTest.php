@@ -17,6 +17,9 @@ class ElementDataTest extends TestCase
         static::assertInstanceOf(ComponentConfig::class, $config);
         static::assertSame('element', $config->slug);
         static::assertSame(ElementData::class, $config->data);
-        static::assertSame(['componentElement' => 'div', 'hideIfNoContent' => true], (new ComponentDataReflector())->getDefaultArguments(ElementData::class));
+        static::assertSame(
+            ['componentElement' => 'div', 'hideIfNoContent' => true],
+            new ComponentDataReflector()->getDefaultArguments(ElementData::class),
+        );
     }
 }

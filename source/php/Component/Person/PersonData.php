@@ -24,6 +24,5 @@ final class PersonData
         public array $customSections = [],
         public bool $useAvatarFallback = true,
         public string $view = 'extended',
-    ) {
-    }
+    ) {}
 }

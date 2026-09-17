@@ -80,7 +80,10 @@ class LogotypeTest extends TestCase
 
         $data = $controller->getData();
 
-        $this->assertStringNotContainsString('--c-logotype--aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
+        $this->assertStringNotContainsString(
+            '--c-logotype--aspect-ratio',
+            (string) ($data['attributeList']['style'] ?? ''),
+        );
     }
 
     public function testZeroAspectRatioIsIgnored(): void
@@ -89,7 +92,10 @@ class LogotypeTest extends TestCase
 
         $data = $controller->getData();
 
-        $this->assertStringNotContainsString('--c-logotype--aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
+        $this->assertStringNotContainsString(
+            '--c-logotype--aspect-ratio',
+            (string) ($data['attributeList']['style'] ?? ''),
+        );
     }
 
     public function testNegativeAspectRatioIsIgnored(): void
@@ -98,7 +104,10 @@ class LogotypeTest extends TestCase
 
         $data = $controller->getData();
 
-        $this->assertStringNotContainsString('--c-logotype--aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
+        $this->assertStringNotContainsString(
+            '--c-logotype--aspect-ratio',
+            (string) ($data['attributeList']['style'] ?? ''),
+        );
     }
 
     public function testNonNumericStringAspectRatioIsIgnored(): void
@@ -107,7 +116,10 @@ class LogotypeTest extends TestCase
 
         $data = $controller->getData();
 
-        $this->assertStringNotContainsString('--c-logotype--aspect-ratio', (string) ($data['attributeList']['style'] ?? ''));
+        $this->assertStringNotContainsString(
+            '--c-logotype--aspect-ratio',
+            (string) ($data['attributeList']['style'] ?? ''),
+        );
     }
 
     // -------------------------------------------------------------------------
@@ -129,8 +141,8 @@ class LogotypeTest extends TestCase
     public static function validAspectRatioProvider(): array
     {
         return [
-            'integer'        => [1, '1'],
-            'float'          => [2.5, '2.5'],
+            'integer' => [1, '1'],
+            'float' => [2.5, '2.5'],
             'numeric string' => ['3', '3'],
         ];
     }
@@ -150,11 +162,11 @@ class LogotypeTest extends TestCase
     public static function invalidAspectRatioProvider(): array
     {
         return [
-            'null'        => [null],
-            'false'       => [false],
-            'empty string'=> [''],
-            'zero'        => [0],
-            'negative'    => [-1],
+            'null' => [null],
+            'false' => [false],
+            'empty string' => [''],
+            'zero' => [0],
+            'negative' => [-1],
             'non-numeric' => ['wide'],
         ];
     }

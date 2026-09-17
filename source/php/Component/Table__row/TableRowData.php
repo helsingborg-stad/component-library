@@ -12,6 +12,5 @@ final class TableRowData
     public function __construct(
         public ?int $index = null,
         public bool $isSummary = false,
-    ) {
-    }
+    ) {}
 }

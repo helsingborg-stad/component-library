@@ -11,12 +11,12 @@ use ComponentLibrary\Integrations\Image\ImageInterface;
 class NewsItem extends \ComponentLibrary\Component\BaseController
 {
     private array $slotMapping = [
-        'headerRightArea'  => 'headerRightAreaSlotHasData',
-        'headerLeftArea'   => 'headerLeftAreaSlotHasData',
-        'contentLeftArea'  => 'contentLeftAreaSlotHasData',
+        'headerRightArea' => 'headerRightAreaSlotHasData',
+        'headerLeftArea' => 'headerLeftAreaSlotHasData',
+        'contentLeftArea' => 'contentLeftAreaSlotHasData',
         'contentRightArea' => 'contentRightAreaSlotHasData',
-        'titleLeftArea'    => 'titleLeftAreaSlotHasData',
-        'titleRightArea'   => 'titleRightAreaSlotHasData',
+        'titleLeftArea' => 'titleLeftAreaSlotHasData',
+        'titleRightArea' => 'titleRightAreaSlotHasData',
     ];
 
     public function init()
@@ -27,7 +27,7 @@ class NewsItem extends \ComponentLibrary\Component\BaseController
         if ($date && !is_array($date)) {
             $this->data['date'] = [
                 'timestamp' => $date,
-                'action' => 'formatDate'
+                'action' => 'formatDate',
             ];
         }
 
@@ -37,16 +37,16 @@ class NewsItem extends \ComponentLibrary\Component\BaseController
 
         $this->data['hasImage'] = false;
         if ($image instanceof ImageInterface) {
-             $this->data['hasImage'] = $image->getUrl() ? true : false;
+            $this->data['hasImage'] = $image->getUrl() ? true : false;
         } else {
-             $this->data['hasImage'] = !empty($image['src']) ? true : false;
+            $this->data['hasImage'] = !empty($image['src']) ? true : false;
         }
 
         if ($link) {
-            $this->data['componentElement'] = "a";
+            $this->data['componentElement'] = 'a';
             $this->data['attributeList']['href'] = $link;
         } else {
-            $this->data['componentElement'] = "div";
+            $this->data['componentElement'] = 'div';
         }
 
         if ($this->data['componentElement'] === 'a') {

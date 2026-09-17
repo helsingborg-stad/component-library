@@ -2,21 +2,22 @@
 
 namespace ComponentLibrary\Component\Footer;
 
-class Footer extends \ComponentLibrary\Component\BaseController  
+class Footer extends \ComponentLibrary\Component\BaseController
 {
-    public function init() {
+    public function init()
+    {
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
         $this->data['links'] = $this->addTargetToLinks($links);
 
         if (!isset($this->data['logotypeHref'])) {
-            $this->data['logotypeHref'] = "/";
+            $this->data['logotypeHref'] = '/';
         }
 
         $this->data['displaySubFooter'] = $this->displaySubFooter(
             $subfooterLogotype ?? false,
-            $subfooter['content'] ?? false
+            $subfooter['content'] ?? false,
         );
     }
 
@@ -37,12 +38,12 @@ class Footer extends \ComponentLibrary\Component\BaseController
 
     protected function addTargetToLinks($arr)
     {
-        foreach($arr as $key => $data) {
-            if(array_key_exists('href', $data) && !array_key_exists('target', $data)) {
+        foreach ($arr as $key => $data) {
+            if (array_key_exists('href', $data) && !array_key_exists('target', $data)) {
                 $arr[$key]['target'] = '_self';
             }
 
-            if(!array_key_exists('href', $data)) {
+            if (!array_key_exists('href', $data)) {
                 $arr[$key] = $this->addTargetToLinks($data);
             }
         }

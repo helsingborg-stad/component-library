@@ -13,12 +13,12 @@ final class LinkData
 {
     /**
      * @param string $componentElement The wrapper element.
-        * @param string|HtmlString $slot The fallback slot content.
-    * @param string|false|null $href The target URL.
+     * @param string|HtmlString $slot The fallback slot content.
+     * @param string|false|null $href The target URL.
      * @param string $target The link target.
      * @param bool $keepContent Whether to keep the content when href is empty.
      * @param bool $keepWrapper Whether to keep the wrapper when href is empty.
-    * @param string|false|null $xfn Optional rel attribute value.
+     * @param string|false|null $xfn Optional rel attribute value.
      * @param bool $unstyled Whether to disable component styling.
      */
     public function __construct(
@@ -30,6 +30,5 @@ final class LinkData
         public bool $keepWrapper = true,
         public string|false|null $xfn = null,
         public bool $unstyled = false,
-    ) {
-    }
+    ) {}
 }

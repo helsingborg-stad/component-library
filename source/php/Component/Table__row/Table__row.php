@@ -21,6 +21,5 @@ class Table__row extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . '-' . $index;
             $this->data['attributeList']['data-js-row-index'] = $index;
         }
-
     }
 }

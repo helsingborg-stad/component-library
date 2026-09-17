@@ -2,9 +2,7 @@
 
 use ComponentLibrary\Component\BaseController;
 
-class BaseControllerFilterNameFixture extends BaseController
-{
-}
+class BaseControllerFilterNameFixture extends BaseController {}
 
 class BaseControllerTest extends PHPUnit\Framework\TestCase
 {
@@ -37,8 +35,11 @@ class BaseControllerTest extends PHPUnit\Framework\TestCase
 
     public function testBuildAttributesAllowsObjectAsValue()
     {
-        $attributes = ['Object' => (object)['key' => 'value']];
-        $this->assertEquals('Object="{&quot;key&quot;:&quot;value&quot;}"', BaseController::buildAttributes($attributes));
+        $attributes = ['Object' => (object) ['key' => 'value']];
+        $this->assertEquals(
+            'Object="{&quot;key&quot;:&quot;value&quot;}"',
+            BaseController::buildAttributes($attributes),
+        );
     }
 
     public function testAllowsZeroAsString()
@@ -46,7 +47,7 @@ class BaseControllerTest extends PHPUnit\Framework\TestCase
         $attributes = ['Zero' => '0'];
         $this->assertEquals('Zero="0"', BaseController::buildAttributes($attributes));
     }
-    
+
     public function testAllowsZeroAsInteger()
     {
         $attributes = ['Zero' => 0];
@@ -87,7 +88,9 @@ class BaseControllerTest extends PHPUnit\Framework\TestCase
 
     public function testIgnoresCallables()
     {
-        $attributes = ['Callable' => function() { return 'test'; }];
+        $attributes = ['Callable' => function () {
+            return 'test';
+        }];
         $this->assertEquals('', BaseController::buildAttributes($attributes));
     }
 }

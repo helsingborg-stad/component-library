@@ -115,21 +115,21 @@ class ComponentDiscoveryTest extends TestCase
         file_put_contents(
             $componentDir . '/config.php',
             <<<'PHP'
-<?php
+                <?php
 
-declare(strict_types=1);
+                declare(strict_types=1);
 
-use ComponentLibrary\ComponentConfiguration\ComponentConfig;
+                use ComponentLibrary\ComponentConfiguration\ComponentConfig;
 
-return new ComponentConfig(
-    slug: 'typed',
-    view: 'typed.blade.php',
-    data: \ComponentLibrary\Component\Hero\HeroData::class,
-);
-PHP,
+                return new ComponentConfig(
+                    slug: 'typed',
+                    view: 'typed.blade.php',
+                    data: \ComponentLibrary\Component\Hero\HeroData::class,
+                );
+                PHP,
         );
 
-        $slugs = (new ComponentDiscovery($tempDir))->discoverSlugs();
+        $slugs = new ComponentDiscovery($tempDir)->discoverSlugs();
 
         $this->assertSame(['typed'], $slugs);
 
@@ -151,7 +151,7 @@ PHP,
             "<?php return ['slug' => 'array-based', 'view' => 'array-based.blade.php'];",
         );
 
-        $slugs = (new ComponentDiscovery($tempDir))->discoverSlugs();
+        $slugs = new ComponentDiscovery($tempDir)->discoverSlugs();
 
         $this->assertSame(['array-based'], $slugs);
 

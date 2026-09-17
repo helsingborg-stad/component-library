@@ -5,15 +5,16 @@ namespace ComponentLibrary\Component\Collection__item;
 use ComponentLibrary\Helper\ATagSanitizer;
 use ComponentLibrary\Helper\TagSanitizer;
 
-class Collection__item extends \ComponentLibrary\Component\BaseController  
+class Collection__item extends \ComponentLibrary\Component\BaseController
 {
     private array $slotMapping = [
-        'before'   => 'beforeSlotHasData',
+        'before' => 'beforeSlotHasData',
         'floating' => 'floatingSlotHasData',
-        'slot'     => 'slotHasData'
+        'slot' => 'slotHasData',
     ];
 
-    public function init() {
+    public function init()
+    {
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
@@ -31,13 +32,13 @@ class Collection__item extends \ComponentLibrary\Component\BaseController
         }
 
         //Link handling
-        if($link) {
-            $this->data['componentElement'] = "a"; 
-            $this->data['action'] = false; 
+        if ($link) {
+            $this->data['componentElement'] = 'a';
+            $this->data['action'] = false;
             $this->data['classList'][] = $this->getBaseClass() . '--action';
-            $this->data['attributeList']['href'] = $link; 
-		} else {
-            $this->data['componentElement'] = "div"; 
+            $this->data['attributeList']['href'] = $link;
+        } else {
+            $this->data['componentElement'] = 'div';
         }
 
         foreach ($this->slotMapping as $slot => $hasDataKey) {
@@ -56,9 +57,9 @@ class Collection__item extends \ComponentLibrary\Component\BaseController
             return $icon;
         } else {
             return [
-                'icon' => $icon, 
+                'icon' => $icon,
                 'size' => 'md',
-                'decorative' => true
+                'decorative' => true,
             ];
         }
     }

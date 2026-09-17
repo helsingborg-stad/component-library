@@ -43,4 +43,3 @@
     @endmodal
     <div id="organizerContainer" class="u-display--none"></div>
 </{{$componentElement}}>
-

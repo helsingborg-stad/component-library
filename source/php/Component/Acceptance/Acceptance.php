@@ -90,7 +90,14 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
         $suppliers = array(
             new Supplier(
                 'Google',
-                array('maps.google.com', 'maps.google.se', 'google.com', 'www.google.com', 'google.se', 'www.google.se'),
+                array(
+                    'maps.google.com',
+                    'maps.google.se',
+                    'google.com',
+                    'www.google.com',
+                    'google.se',
+                    'www.google.se',
+                ),
                 'https://policies.google.com/privacy',
                 true,
                 'map',
@@ -118,7 +125,14 @@ class Acceptance extends \ComponentLibrary\Component\BaseController
             ),
             new Supplier(
                 'Helsingborg Stad',
-                array('helsingborg.se', 'www.helsingborg.se', 'driftinfo.helsingborg.se', 'it.helsingborg.se', 'ettbattre.helsingborg.se', 'media.helsingborg.se'),
+                array(
+                    'helsingborg.se',
+                    'www.helsingborg.se',
+                    'driftinfo.helsingborg.se',
+                    'it.helsingborg.se',
+                    'ettbattre.helsingborg.se',
+                    'media.helsingborg.se',
+                ),
                 'https://helsingborg.se/om-webbplatsen/sa-har-behandlar-vi-dina-personuppgifter/',
                 false,
                 'municipal',

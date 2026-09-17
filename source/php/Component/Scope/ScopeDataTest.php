@@ -17,6 +17,6 @@ class ScopeDataTest extends TestCase
         static::assertInstanceOf(ComponentConfig::class, $config);
         static::assertSame('scope', $config->slug);
         static::assertSame(ScopeData::class, $config->data);
-        static::assertSame('string|array', (new ComponentDataReflector())->getArgumentTypes(ScopeData::class)['name']);
+        static::assertSame('string|array', new ComponentDataReflector()->getArgumentTypes(ScopeData::class)['name']);
     }
 }

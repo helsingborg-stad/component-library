@@ -1,4 +1,31 @@
 <?php
+
 declare(strict_types=1);
+
 namespace ComponentLibrary\Component\Field;
-final class FieldData { public function __construct(public string $label = '', public string $name = '', public string $type = 'text', public string|bool $validationRegexp = false, public string|bool $invalidMessage = false, public bool $required = false, public string $autocomplete = 'on', public string $value = '', public string $icon = '', public string $size = 'md', public string $radius = 'md', public string $placeholder = '', public bool $hideLabel = false, public string $helperText = '', public int|bool $multiline = false, public bool $borderless = false, public bool $shadow = false, public array $fieldAttributeList = [], public bool $moveAttributesListToFieldAttributes = true, public string $description = '') {} }
+
+final class FieldData
+{
+    public function __construct(
+        public string $label = '',
+        public string $name = '',
+        public string $type = 'text',
+        public string|bool $validationRegexp = false,
+        public string|bool $invalidMessage = false,
+        public bool $required = false,
+        public string $autocomplete = 'on',
+        public string $value = '',
+        public string $icon = '',
+        public string $size = 'md',
+        public string $radius = 'md',
+        public string $placeholder = '',
+        public bool $hideLabel = false,
+        public string $helperText = '',
+        public int|bool $multiline = false,
+        public bool $borderless = false,
+        public bool $shadow = false,
+        public array $fieldAttributeList = [],
+        public bool $moveAttributesListToFieldAttributes = true,
+        public string $description = '',
+    ) {}
+}

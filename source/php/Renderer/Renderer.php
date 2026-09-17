@@ -16,10 +16,12 @@ class Renderer implements RendererInterface
     public function render(string $view, array $data = []): string
     {
         try {
-            $markup = $this->bladeService->makeView(
-                $view,
-                array_merge($this->normalizeComponentData($data), ['errorMessage' => false])
-            )->render();
+            $markup = $this->bladeService
+                ->makeView(
+                    $view,
+                    array_merge($this->normalizeComponentData($data), ['errorMessage' => false]),
+                )
+                ->render();
         } catch (\Throwable $e) {
             if (!defined('WP_DEBUG') || WP_DEBUG !== true) {
                 throw $e;

@@ -2,9 +2,10 @@
 
 namespace ComponentLibrary\Component\Chat__message;
 
-class Chat__message extends \ComponentLibrary\Component\BaseController  
+class Chat__message extends \ComponentLibrary\Component\BaseController
 {
-    public function init() {
+    public function init()
+    {
         extract($this->data);
 
         $this->data['classList'][] = $this->getBaseClass();

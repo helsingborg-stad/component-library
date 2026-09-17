@@ -58,7 +58,11 @@ class ScopeTest extends TestCase
      */
     public function testApplyScopeWithArrayName()
     {
-        $scope = new Scope(['name' => ['example1', 'example2']], static::createCacheService(), static::createTagSanitizerService());
+        $scope = new Scope(
+            ['name' => ['example1', 'example2']],
+            static::createCacheService(),
+            static::createTagSanitizerService(),
+        );
         $scope->init();
 
         $applyScope = $scope->getData()['applyScope'];

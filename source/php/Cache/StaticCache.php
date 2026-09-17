@@ -2,13 +2,14 @@
 
 namespace ComponentLibrary\Cache;
 
-class StaticCache implements CacheInterface {
-
+class StaticCache implements CacheInterface
+{
     private static $cache = [];
 
     public function __construct() {}
 
-    public function get(string $key, ?string $group = null): mixed {
+    public function get(string $key, ?string $group = null): mixed
+    {
         if ($group && isset(self::$cache[$group][$key])) {
             return self::$cache[$group][$key];
         }
@@ -20,7 +21,8 @@ class StaticCache implements CacheInterface {
         return null;
     }
 
-    public function set(string $key, mixed $data, ?string $group = null): void {
+    public function set(string $key, mixed $data, ?string $group = null): void
+    {
         if ($group) {
             self::$cache[$group] = self::$cache[$group] ?? [];
             self::$cache[$group][$key] = $data;

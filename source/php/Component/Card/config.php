@@ -9,5 +9,14 @@ return new ComponentConfig(
     slug: 'card',
     view: 'card.blade.php',
     data: CardData::class,
-    dependencies: ['sass' => ['components' => ['card', 'paper', 'icon', 'accordion', 'image', 'typography', 'avatar', 'group']]],
+    dependencies: ['sass' => ['components' => [
+        'card',
+        'paper',
+        'icon',
+        'accordion',
+        'image',
+        'typography',
+        'avatar',
+        'group',
+    ]]],
 );

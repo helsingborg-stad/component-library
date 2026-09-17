@@ -9,5 +9,14 @@ return new ComponentConfig(
     slug: 'newsItem',
     view: 'newsItem.blade.php',
     data: NewsItemData::class,
-    dependencies: ['sass' => ['components' => ['element', 'image', 'date', 'group', 'button', 'icon', 'grid', 'typography']]],
+    dependencies: ['sass' => ['components' => [
+        'element',
+        'image',
+        'date',
+        'group',
+        'button',
+        'icon',
+        'grid',
+        'typography',
+    ]]],
 );

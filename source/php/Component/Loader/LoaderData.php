@@ -15,6 +15,5 @@ final class LoaderData
         public string $size = 'md',
         public string $color = 'black',
         public string $text = '',
-    ) {
-    }
+    ) {}
 }

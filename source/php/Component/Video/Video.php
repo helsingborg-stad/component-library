@@ -2,34 +2,32 @@
 
 namespace ComponentLibrary\Component\Video;
 
-class Video extends \ComponentLibrary\Component\BaseController  
+class Video extends \ComponentLibrary\Component\BaseController
 {
-    
-    public function init() {
-
+    public function init()
+    {
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
         //Controls
-        if($hasControls) {
-            $this->data['controls'] = "controls"; 
+        if ($hasControls) {
+            $this->data['controls'] = 'controls';
         } else {
-            $this->data['controls'] = ""; 
+            $this->data['controls'] = '';
         }
 
         //Muted
-        if($isMuted) {
-            $this->data['muted'] = "muted"; 
+        if ($isMuted) {
+            $this->data['muted'] = 'muted';
         } else {
-            $this->data['muted'] = ""; 
+            $this->data['muted'] = '';
         }
 
         //Autoplay
-        if($shouldAutoplay) {
-            $this->data['autoplay'] = "autoplay"; 
+        if ($shouldAutoplay) {
+            $this->data['autoplay'] = 'autoplay';
         } else {
-            $this->data['autoplay'] = ""; 
+            $this->data['autoplay'] = '';
         }
-        
     }
 }

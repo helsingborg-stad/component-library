@@ -42,7 +42,10 @@ class Iframe extends \ComponentLibrary\Component\BaseController
                 if (empty($poster)) {
                     $this->data['poster'] = apply_filters('ComponentLibrary/Iframe/Poster', $src);
                 }
-                $this->data['requiresAccept'] = (bool) apply_filters('ComponentLibrary/Component/Iframe/DisplayAcceptance', $src);
+                $this->data['requiresAccept'] = (bool) apply_filters(
+                    'ComponentLibrary/Component/Iframe/DisplayAcceptance',
+                    $src,
+                );
             }
         }
 

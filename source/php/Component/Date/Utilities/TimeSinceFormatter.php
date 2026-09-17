@@ -10,7 +10,7 @@ class TimeSinceFormatter
         int $timeNowCap,
         string $nowLabel,
         array $labels = [],
-        array $labelsPlural = []
+        array $labelsPlural = [],
     ): string {
         $timeDiff = max($currentTime - $timestamp, 1); // Avoid zero or negative time
 
@@ -24,8 +24,13 @@ class TimeSinceFormatter
     private function convertToHumanReadableUnit(int $timeDiff, array $labels, array $labelsPlural): string
     {
         $units = [
-            31536000 => 'year', 2592000 => 'month', 604800 => 'week',
-            86400 => 'day', 3600 => 'hour', 60 => 'minute', 1 => 'second'
+            31536000 => 'year',
+            2592000 => 'month',
+            604800 => 'week',
+            86400 => 'day',
+            3600 => 'hour',
+            60 => 'minute',
+            1 => 'second',
         ];
 
         foreach ($units as $unit => $label) {
@@ -33,7 +38,7 @@ class TimeSinceFormatter
             if ($numUnits >= 1) {
                 $label = $numUnits > 1 && isset($labelsPlural[$label])
                     ? $labelsPlural[$label]
-                    : ($labels[$label] ?? $label);
+                    : $labels[$label] ?? $label;
                 return $numUnits . ' ' . $label;
             }
         }

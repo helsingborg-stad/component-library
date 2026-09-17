@@ -10,13 +10,13 @@ use ComponentLibrary\Helper\Icons;
  */
 class Icon extends \ComponentLibrary\Component\BaseController
 {
-    private $altTextPrefix = "Icon: ";
+    private $altTextPrefix = 'Icon: ';
     private $altText = [
-        'key'  => "Label"
+        'key' => 'Label',
     ];
-    private $altTextUndefined = "Undefined";
+    private $altTextUndefined = 'Undefined';
     private static $runtimeCache = [
-        'svgFromFile' => []
+        'svgFromFile' => [],
     ];
 
     public function init()
@@ -25,10 +25,8 @@ class Icon extends \ComponentLibrary\Component\BaseController
         extract($this->data);
 
         //Use a runtime cache to store the custom icons
-        if(!self::$runtimeCache['svgFromFile']) {
-            $customSvgIcons = self::$runtimeCache['svgFromFile'] = (
-                new Icons($this->cache)
-            )->getIcons();
+        if (!self::$runtimeCache['svgFromFile']) {
+            $customSvgIcons = self::$runtimeCache['svgFromFile'] = new Icons($this->cache)->getIcons();
         } else {
             $customSvgIcons = self::$runtimeCache['svgFromFile'];
         }
@@ -39,25 +37,25 @@ class Icon extends \ComponentLibrary\Component\BaseController
             $this->data['filled'] = $defaultFilled ?? true;
         }
 
-        //Support for filled icons 
+        //Support for filled icons
         $customIconName = $filled ? $icon . 'Filled' : $icon;
 
-        $this->data['svgFromLink'] =  $this->iconIsSvg($icon);
+        $this->data['svgFromLink'] = $this->iconIsSvg($icon);
 
         if ($this->data['svgFromLink']) {
-            $this->data['classList'][] = $this->getBaseClass() . "--svg-link";
+            $this->data['classList'][] = $this->getBaseClass() . '--svg-link';
         } elseif (array_key_exists($customIconName, $customSvgIcons)) {
             $this->data['svgElementFromFile'] = $customSvgIcons[$customIconName];
-            $this->data['classList'][] = $this->getBaseClass() . "--svg-path";
+            $this->data['classList'][] = $this->getBaseClass() . '--svg-path';
         } else {
             $this->data['classList'] = array_merge($this->data['classList'] ?? [], [
                 $this->createIconModifier($icon),
-                $this->getBaseClass() . "--material",
-                $this->getBaseClass() . "--material-" . $icon,
-                "material-symbols",
-                "material-symbols-rounded", //All classes added, to support all icon types
-                "material-symbols-sharp", //All classes added, to support all icon types
-                "material-symbols-outlined" //All classes added, to support all icon types
+                $this->getBaseClass() . '--material',
+                $this->getBaseClass() . '--material-' . $icon,
+                'material-symbols',
+                'material-symbols-rounded', //All classes added, to support all icon types
+                'material-symbols-sharp', //All classes added, to support all icon types
+                'material-symbols-outlined', //All classes added, to support all icon types
             ]);
             $this->data['attributeList']['data-material-symbol'] = $icon;
         }
@@ -67,9 +65,7 @@ class Icon extends \ComponentLibrary\Component\BaseController
         }
 
         if (!empty($customColor)) {
-            $this->data['attributeList']['style'] = 
-                'color:' . $customColor . ';' . 
-                'stroke:' . $customColor . ';';
+            $this->data['attributeList']['style'] = 'color:' . $customColor . ';' . 'stroke:' . $customColor . ';';
         } else {
             $this->data['classList'][] = $this->setIconColorCssClass($color);
         }
@@ -78,23 +74,23 @@ class Icon extends \ComponentLibrary\Component\BaseController
         $this->data['classList'][] = $this->setIconSizeCssClass($size);
 
         //Identify as an image
-        $this->data['attributeList']['role'] = "img";
-        $this->data['attributeList']['data-nosnippet'] = "";
-        $this->data['attributeList']['translate'] = "no";
+        $this->data['attributeList']['role'] = 'img';
+        $this->data['attributeList']['data-nosnippet'] = '';
+        $this->data['attributeList']['translate'] = 'no';
 
-        $this->data['attributeList']['aria-label'] = $decorative ? "" : $this->getAltText($icon);
-        $this->data['attributeList']['aria-hidden'] = $decorative ? "true" : "false";
+        $this->data['attributeList']['aria-label'] = $decorative ? '' : $this->getAltText($icon);
+        $this->data['attributeList']['aria-hidden'] = $decorative ? 'true' : 'false';
 
-        //If is placeholder, do not read. 
-        if($icon == "placeholder") {
-            $this->data['attributeList']['aria-hidden'] = "true";
-            $this->data['attributeList']['aria-label'] = "";
+        //If is placeholder, do not read.
+        if ($icon == 'placeholder') {
+            $this->data['attributeList']['aria-hidden'] = 'true';
+            $this->data['attributeList']['aria-label'] = '';
         }
     }
 
     private function iconIsSvg($icon)
-    {   
-        if( !is_string($icon) ) {
+    {
+        if (!is_string($icon)) {
             return false;
         }
 
@@ -110,13 +106,13 @@ class Icon extends \ComponentLibrary\Component\BaseController
      */
     private function createIconModifier($icon)
     {
-        if( is_null($icon) ) {
-            return "";
+        if (is_null($icon)) {
+            return '';
         }
 
         return $this->getBaseClass(
-            str_replace("_", "-", $icon),
-            true
+            str_replace('_', '-', $icon),
+            true,
         );
     }
 
@@ -173,19 +169,22 @@ class Icon extends \ComponentLibrary\Component\BaseController
         return $this->altTextPrefix() . $this->altTextUndefined();
     }
 
-    private function getSpacedLabel($label) {
+    private function getSpacedLabel($label)
+    {
         if ($label = trim($label)) {
-            $label = " " . $label;
+            $label = ' ' . $label;
         }
 
         return $label;
     }
 
-    private function setIconColorCssClass($color) {
-        return !empty($color) ? $this->getBaseClass() . "--color-" . strtolower($color) : "";
+    private function setIconColorCssClass($color)
+    {
+        return !empty($color) ? $this->getBaseClass() . '--color-' . strtolower($color) : '';
     }
 
-    private function setIconSizeCssClass($size) {
+    private function setIconSizeCssClass($size)
+    {
         $sizes = [
             'xs' => '16',
             'sm' => '24',
@@ -195,6 +194,8 @@ class Icon extends \ComponentLibrary\Component\BaseController
             'xxl' => '80',
         ];
 
-        return isset($sizes[$size]) ? $this->getBaseClass() . "--size-" . $size : $this->getBaseClass() . "--size-inherit";
+        return isset($sizes[$size])
+            ? $this->getBaseClass() . '--size-' . $size
+            : $this->getBaseClass() . '--size-inherit';
     }
 }

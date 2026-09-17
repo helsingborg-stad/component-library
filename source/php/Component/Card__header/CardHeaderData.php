@@ -11,6 +11,5 @@ final class CardHeaderData
 {
     public function __construct(
         public string $slot = '',
-    ) {
-    }
+    ) {}
 }

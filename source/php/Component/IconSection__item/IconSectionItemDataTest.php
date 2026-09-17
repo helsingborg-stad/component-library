@@ -17,6 +17,9 @@ class IconSectionItemDataTest extends TestCase
         static::assertInstanceOf(ComponentConfig::class, $config);
         static::assertSame('iconSection__item', $config->slug);
         static::assertSame(IconSectionItemData::class, $config->data);
-        static::assertSame(['icon' => null], (new ComponentDataReflector())->getDefaultArguments(IconSectionItemData::class));
+        static::assertSame(
+            ['icon' => null],
+            new ComponentDataReflector()->getDefaultArguments(IconSectionItemData::class),
+        );
     }
 }

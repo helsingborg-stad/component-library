@@ -17,26 +17,25 @@ class Testimonials extends \ComponentLibrary\Component\BaseController
         $this->data['baseClass'] = 'c-testimonial';
         $this->data['wrapperClassList'] = [];
         $this->data['wrapperAttributeList'] = [];
-        if(isset($ariaLabels)) {
+        if (isset($ariaLabels)) {
             $this->data['ariaLabels'] = $ariaLabels;
         }
 
-        if($isCarousel) {
+        if ($isCarousel) {
             $this->data['wrapperClassList'][] = 'c-testimonials__wrapper--is-carousel';
 
             $this->data['wrapperAttributeList']['js-testimonials--is-carousel'] = true;
-            $this->data['classList'][] = $this->getBaseClass() . '--is-hidden'; 
-        } 
+            $this->data['classList'][] = $this->getBaseClass() . '--is-hidden';
+        }
 
         $this->compParams = [
             'testimonials' => $testimonials,
             'perRow' => $perRow,
-            'componentElement' => $componentElement
+            'componentElement' => $componentElement,
         ];
 
-        $this->data['wrapperClassList'] = implode(' ', $this->data['wrapperClassList'] );
+        $this->data['wrapperClassList'] = implode(' ', $this->data['wrapperClassList']);
         $this->data['wrapperAttributeList'] = self::buildAttributes($this->data['wrapperAttributeList']);
-        
 
         $this->mapData();
     }
@@ -46,8 +45,10 @@ class Testimonials extends \ComponentLibrary\Component\BaseController
      */
     public function mapData()
     {
-        $this->data['testimonials'] = !empty($this->compParams['testimonials']) &&
-        is_array($this->compParams['testimonials']) ? $this->compParams['testimonials'] : array();
+        $this->data['testimonials'] = !empty($this->compParams['testimonials'])
+        && is_array($this->compParams['testimonials'])
+            ? $this->compParams['testimonials']
+            : array();
 
         // Sanitize testimonials data
         $this->data['testimonials'] = array_map(
@@ -57,18 +58,18 @@ class Testimonials extends \ComponentLibrary\Component\BaseController
                     'title' => $testimonial['title'] ?? '',
                     'testimonial' => $testimonial['testimonial'] ?? '',
                     'titleElement' => 'h4',
-                    'nameElement' =>  'h2',
+                    'nameElement' => 'h2',
                     'image' => $testimonial['image'] ?? '',
                     'avatar' => $testimonial['avatar'] ?? true,
                     'quoteColor' => $testimonial['quoteColor'] ?? 'grey',
-                    'imageTop' => $testimonial['imageTop'] ?? false
+                    'imageTop' => $testimonial['imageTop'] ?? false,
                 );
             },
-            $this->compParams['testimonials']
-        ); 
+            $this->compParams['testimonials'],
+        );
 
         $grid = $this->calculateGrid();
-        
+
         $this->data['gridClasses'] = 'grid-xs-12 grid-sm-6 grid-lg-' . $grid;
     }
 
@@ -77,9 +78,10 @@ class Testimonials extends \ComponentLibrary\Component\BaseController
      */
     public function calculateGrid()
     {
-        $perRow = ((int)$this->compParams['perRow'] > 0 && (int)$this->compParams['perRow'] <= 12) ?
-            (int)$this->compParams['perRow'] : 1;
+        $perRow =
+            (int) $this->compParams['perRow'] > 0 && (int) $this->compParams['perRow'] <= 12
+                ? (int) $this->compParams['perRow']
+                : 1;
         return is_int(12 / $perRow) ? 12 / $perRow : 12;
     }
-
 }

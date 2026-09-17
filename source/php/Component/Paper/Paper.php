@@ -2,15 +2,16 @@
 
 namespace ComponentLibrary\Component\Paper;
 
-class Paper extends \ComponentLibrary\Component\BaseController 
+class Paper extends \ComponentLibrary\Component\BaseController
 {
-    public function init() {
+    public function init()
+    {
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
         $this->compParams = [
-            'padding' 	=> $padding ?? false,
-            'transparent' 	=> $transparent ?? false
+            'padding' => $padding ?? false,
+            'transparent' => $transparent ?? false,
         ];
 
         $this->setData();
@@ -19,15 +20,15 @@ class Paper extends \ComponentLibrary\Component\BaseController
     /**
      * Set data for paper
      */
-    public function setData(){
-
+    public function setData()
+    {
         //Create padding && transparent modifier
-        $this->data['classList']['padding'] = (is_numeric($this->compParams['padding'])) ?
-            $this->getBaseClass() . "--padding-" . $this->compParams['padding'] : '';
+        $this->data['classList']['padding'] = is_numeric($this->compParams['padding'])
+            ? $this->getBaseClass() . '--padding-' . $this->compParams['padding']
+            : '';
 
-        $this->data['classList']['transparent'] = ($this->compParams['transparent']) ?
-            $this->getBaseClass() . "--transparent" : '';
-
+        $this->data['classList']['transparent'] = $this->compParams['transparent']
+            ? $this->getBaseClass() . '--transparent'
+            : '';
     }
-
 }

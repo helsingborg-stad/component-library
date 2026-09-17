@@ -37,23 +37,27 @@ class ImageComponentTest extends TestCase
     {
         $source = $this->createMock(ImageInterface::class);
         $source->method('getUrl')->willReturn('https://example.com/image-1920x800.jpg');
-        $source->method('getContainerQueryData')->willReturn([
-            [
-                'uuid' => 'item-1-425',
-                'url' => 'https://example.com/image-425x177.jpg',
-                'media' => ['landscape' => '(min-width: 0px)', 'portrait' => '(min-width: 0px)'],
-                'aspectRatio' => '425/177',
-            ],
-            [
-                'uuid' => 'item-1-1920',
-                'url' => 'https://example.com/image-1920x800.jpg',
-                'media' => ['landscape' => '(min-width: 425px)', 'portrait' => '(min-width: 425px)'],
-                'aspectRatio' => '1920/800',
-            ],
-        ]);
-        $source->method('getSrcSet')->willReturn(
-            'https://example.com/image-425x177.jpg 425w, https://example.com/image-1920x800.jpg 1920w'
-        );
+        $source
+            ->method('getContainerQueryData')
+            ->willReturn([
+                [
+                    'uuid' => 'item-1-425',
+                    'url' => 'https://example.com/image-425x177.jpg',
+                    'media' => ['landscape' => '(min-width: 0px)', 'portrait' => '(min-width: 0px)'],
+                    'aspectRatio' => '425/177',
+                ],
+                [
+                    'uuid' => 'item-1-1920',
+                    'url' => 'https://example.com/image-1920x800.jpg',
+                    'media' => ['landscape' => '(min-width: 425px)', 'portrait' => '(min-width: 425px)'],
+                    'aspectRatio' => '1920/800',
+                ],
+            ]);
+        $source
+            ->method('getSrcSet')
+            ->willReturn(
+                'https://example.com/image-425x177.jpg 425w, https://example.com/image-1920x800.jpg 1920w',
+            );
         $source->method('getFocusPoint')->willReturn(['left' => '25', 'top' => '75']);
         $source->method('getLqipUrl')->willReturn(null);
         $source->method('getAltText')->willReturn('Alternative text');
@@ -82,13 +86,17 @@ class ImageComponentTest extends TestCase
     {
         $source = $this->createMock(ImageInterface::class);
         $source->method('getUrl')->willReturn('https://example.com/image-1920x800.jpg');
-        $source->method('getContainerQueryData')->willReturn([
-            ['aspectRatio' => '425/177'],
-            ['aspectRatio' => '1920/800'],
-        ]);
-        $source->method('getSrcSet')->willReturn(
-            'https://example.com/image-425x177.jpg 425w, https://example.com/image-1920x800.jpg 1920w'
-        );
+        $source
+            ->method('getContainerQueryData')
+            ->willReturn([
+                ['aspectRatio' => '425/177'],
+                ['aspectRatio' => '1920/800'],
+            ]);
+        $source
+            ->method('getSrcSet')
+            ->willReturn(
+                'https://example.com/image-425x177.jpg 425w, https://example.com/image-1920x800.jpg 1920w',
+            );
         $source->method('getFocusPoint')->willReturn(['left' => '25', 'top' => '75']);
         $source->method('getLqipUrl')->willReturn(null);
         $source->method('getAltText')->willReturn('Alternative text');
@@ -143,6 +151,6 @@ class ImageComponentTest extends TestCase
 
     private function getDefaultData(): array
     {
-        return (new ComponentDataReflector())->getDefaultArguments(ImageData::class);
+        return new ComponentDataReflector()->getDefaultArguments(ImageData::class);
     }
 }

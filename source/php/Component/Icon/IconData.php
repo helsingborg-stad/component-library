@@ -19,6 +19,5 @@ final class IconData
         public ?bool $filled = null,
         public bool $isSvg = false,
         public bool $decorative = false,
-    ) {
-    }
+    ) {}
 }

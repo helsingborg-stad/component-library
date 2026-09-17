@@ -85,7 +85,7 @@ class FileinputTest extends TestCase
 
     private static function getData(array $merge = []): array
     {
-        $defaultData = (new ComponentDataReflector())->getDefaultArguments(FileinputData::class);
+        $defaultData = new ComponentDataReflector()->getDefaultArguments(FileinputData::class);
 
         return array_merge($defaultData, $merge);
     }
@@ -93,14 +93,12 @@ class FileinputTest extends TestCase
     private static function createCache(): CacheInterface
     {
         return new class implements CacheInterface {
-            public function get(string $key, null|string $group = null): mixed
+            public function get(string $key, ?string $group = null): mixed
             {
                 return null;
             }
 
-            public function set(string $key, mixed $data, null|string $group = null): void
-            {
-            }
+            public function set(string $key, mixed $data, ?string $group = null): void {}
         };
     }
 

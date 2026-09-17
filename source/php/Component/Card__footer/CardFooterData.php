@@ -11,6 +11,5 @@ final class CardFooterData
 {
     public function __construct(
         public string $slot = '',
-    ) {
-    }
+    ) {}
 }

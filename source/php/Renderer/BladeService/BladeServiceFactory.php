@@ -24,7 +24,9 @@ class BladeServiceFactory
     {
         $viewPaths = $this->getSanitizedDirectoryPathsInternal($externalViewPaths, 'ComponentLibrary/ViewPaths');
         if (count($viewPaths) === 0) {
-            throw new \Exception('No valid view paths were configured. Please ensure at least one valid directory path is provided.');
+            throw new \Exception(
+                'No valid view paths were configured. Please ensure at least one valid directory path is provided.',
+            );
         }
         $bladeService = new BladeService($viewPaths);
         $register = new Register\Register(

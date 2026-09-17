@@ -2,11 +2,14 @@
 
 class ModalTest extends PHPUnit\Framework\TestCase
 {
-
     public function testCloseButtonTextDefaultsToEmptyString()
     {
         $data = $this->getComponentData([]);
-        $modal = new \ComponentLibrary\Component\Modal\Modal($data, new \ComponentLibrary\Cache\StaticCache(), new \ComponentLibrary\Helper\TagSanitizer());
+        $modal = new \ComponentLibrary\Component\Modal\Modal(
+            $data,
+            new \ComponentLibrary\Cache\StaticCache(),
+            new \ComponentLibrary\Helper\TagSanitizer(),
+        );
 
         // Act
         $componentData = $modal->getData();
@@ -18,7 +21,11 @@ class ModalTest extends PHPUnit\Framework\TestCase
     public function testCloseButtonTextIsset()
     {
         $data = $this->getComponentData(['closeButtonText' => 'Close']);
-        $modal = new \ComponentLibrary\Component\Modal\Modal($data, new \ComponentLibrary\Cache\StaticCache(), new \ComponentLibrary\Helper\TagSanitizer());
+        $modal = new \ComponentLibrary\Component\Modal\Modal(
+            $data,
+            new \ComponentLibrary\Cache\StaticCache(),
+            new \ComponentLibrary\Helper\TagSanitizer(),
+        );
 
         // Act
         $componentData = $modal->getData();
@@ -30,8 +37,7 @@ class ModalTest extends PHPUnit\Framework\TestCase
     private function getComponentData(array $data): array
     {
         return array_merge(
-            (new \ComponentLibrary\ComponentConfiguration\ComponentDataReflector())
-                ->getDefaultArguments(\ComponentLibrary\Component\Modal\ModalData::class),
+            new \ComponentLibrary\ComponentConfiguration\ComponentDataReflector()->getDefaultArguments(\ComponentLibrary\Component\Modal\ModalData::class),
             $data,
         );
     }

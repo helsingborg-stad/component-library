@@ -2,15 +2,15 @@
 
 namespace ComponentLibrary\Component\Chat;
 
-class Chat extends \ComponentLibrary\Component\BaseController  
+class Chat extends \ComponentLibrary\Component\BaseController
 {
     private array $slotMapping = [
         'titleArea' => 'titleAreaSlotHasContent',
         'belowChatArea' => 'belowChatAreaSlotHasContent',
     ];
-    
-    public function init() {
 
+    public function init()
+    {
         //Extract array for eazy access (fetch only)
         extract($this->data);
         $this->data['attributeList']['data-js-chat'] = !empty($this->data['id']) ? $this->data['id'] : uniqid('chat-');

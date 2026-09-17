@@ -8,7 +8,8 @@ namespace ComponentLibrary\Component\Fab;
  */
 class Fab extends \ComponentLibrary\Component\BaseController
 {
-    public function init() {
+    public function init()
+    {
         //Extract array for easy access (fetch only)
         extract($this->data);
 
@@ -18,7 +19,7 @@ class Fab extends \ComponentLibrary\Component\BaseController
         $this->data['classList'][] = $this->getBaseClass('width-' . $size, true);
 
         //Create panel trigger
-        if(is_array($button) && !empty($button)) {
+        if (is_array($button) && !empty($button)) {
             $this->data['button']['attributeList'] = ['data-js-toggle-trigger' => $this->data['panelId']];
 
             if ($closeLabel) {

@@ -52,6 +52,5 @@ final class ButtonData
         public array $classListText = [],
         public string $ariaLabel = '',
         public bool $disableColor = true,
-    ) {
-    }
+    ) {}
 }

@@ -7,6 +7,4 @@ namespace ComponentLibrary\Component\Table__body;
 /**
  * Typed input contract for the Table body component.
  */
-final class TableBodyData
-{
-}
+final class TableBodyData {}

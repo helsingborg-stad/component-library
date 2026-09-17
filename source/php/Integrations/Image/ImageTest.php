@@ -1,9 +1,9 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
 use ComponentLibrary\Integrations\Image\Image;
-use ComponentLibrary\Integrations\Image\ImageResolverInterface;
 use ComponentLibrary\Integrations\Image\ImageFocusResolverInterface;
+use ComponentLibrary\Integrations\Image\ImageResolverInterface;
+use PHPUnit\Framework\TestCase;
 
 class ImageTest extends TestCase
 {
@@ -15,10 +15,11 @@ class ImageTest extends TestCase
         $image = new Image($imageId, $imageSize, $this->getResolver());
         $url = $image->getUrl();
 
-        $this->assertEquals("https://example.com/image-1-800x600.jpg", $url);
+        $this->assertEquals('https://example.com/image-1-800x600.jpg', $url);
     }
 
-    public function testGetSrcSetReturnsNullIfNoImageSizes() {
+    public function testGetSrcSetReturnsNullIfNoImageSizes()
+    {
         $imageId = 1;
         $imageSize = [100, 100];
         $image = new Image($imageId, $imageSize, $this->getResolver());
@@ -27,17 +28,18 @@ class ImageTest extends TestCase
         $this->assertNull($srcSet);
     }
 
-    public function testgetImageSizesReturnsACorrectSizeArray() {
+    public function testgetImageSizesReturnsACorrectSizeArray()
+    {
         $imageId = 1;
         $imageSize = [1450, 600];
         $image = new Image($imageId, $imageSize, $this->getResolver());
         $imageSizes = $image->getImageSizes(
-          $imageSize[0]
+            $imageSize[0],
         );
 
         $this->assertEquals([425, 768, 1024, 1450], $imageSizes);
     }
-    
+
     public function testGetSrcSetReturnsCorrectSrcSet()
     {
         $imageId = 1;
@@ -47,7 +49,7 @@ class ImageTest extends TestCase
 
         $srcSet = $image->getSrcSet();
 
-        $expectedSrcSet = "https://example.com/image-1-425x177.jpg 425w, https://example.com/image-1-768x320.jpg 768w, https://example.com/image-1-1024x427.jpg 1024w, https://example.com/image-1-1440x600.jpg 1440w, https://example.com/image-1-1680x700.jpg 1680w, https://example.com/image-1-1920x800.jpg 1920w";
+        $expectedSrcSet = 'https://example.com/image-1-425x177.jpg 425w, https://example.com/image-1-768x320.jpg 768w, https://example.com/image-1-1024x427.jpg 1024w, https://example.com/image-1-1440x600.jpg 1440w, https://example.com/image-1-1680x700.jpg 1680w, https://example.com/image-1-1920x800.jpg 1920w';
 
         $this->assertEquals($expectedSrcSet, $srcSet);
     }
@@ -61,7 +63,7 @@ class ImageTest extends TestCase
 
         $srcSet = $image->getSrcSet();
 
-        $expectedSrcSet = "https://example.com/image-1-425x177.jpg 425w, https://example.com/image-1-768x320.jpg 768w, https://example.com/image-1-1024x427.jpg 1024w, https://example.com/image-1-1440x600.jpg 1440w, https://example.com/image-1-1680x700.jpg 1680w, https://example.com/image-1-1920x800.jpg 1920w"; // Replace with expected srcSet
+        $expectedSrcSet = 'https://example.com/image-1-425x177.jpg 425w, https://example.com/image-1-768x320.jpg 768w, https://example.com/image-1-1024x427.jpg 1024w, https://example.com/image-1-1440x600.jpg 1440w, https://example.com/image-1-1680x700.jpg 1680w, https://example.com/image-1-1920x800.jpg 1920w'; // Replace with expected srcSet
 
         $this->assertEquals($expectedSrcSet, $srcSet);
     }
@@ -74,7 +76,7 @@ class ImageTest extends TestCase
         $image = Image::factory($imageId, $imageSize, $this->getResolver());
 
         $this->assertInstanceOf(Image::class, $image);
-        $this->assertEquals("https://example.com/image-1-800x600.jpg", $image->getUrl());
+        $this->assertEquals('https://example.com/image-1-800x600.jpg', $image->getUrl());
     }
 
     public function testFactoryThrowsExceptionForInvalidImageSize()
@@ -111,12 +113,14 @@ class ImageTest extends TestCase
         $resolver = new class implements ImageResolverInterface {
             public array $requestedSizes = [];
 
-            public function getImageUrl(int $id, array $size): ?string {
+            public function getImageUrl(int $id, array $size): ?string
+            {
                 $this->requestedSizes[] = $size;
-                return "https://example.com/image-{$id}-{$size[0]}x" . ($size[1] ?: 'auto') . ".jpg";
+                return "https://example.com/image-{$id}-{$size[0]}x" . ($size[1] ?: 'auto') . '.jpg';
             }
 
-            public function getImageAltText(int $id): ?string {
+            public function getImageAltText(int $id): ?string
+            {
                 return null;
             }
         };
@@ -141,12 +145,14 @@ class ImageTest extends TestCase
         $resolver = new class implements ImageResolverInterface {
             public int $calls = 0;
 
-            public function getImageUrl(int $id, array $size): ?string {
+            public function getImageUrl(int $id, array $size): ?string
+            {
                 $this->calls++;
                 return null;
             }
 
-            public function getImageAltText(int $id): ?string {
+            public function getImageAltText(int $id): ?string
+            {
                 return null;
             }
         };
@@ -163,7 +169,8 @@ class ImageTest extends TestCase
         $focusResolver = new class implements ImageFocusResolverInterface {
             public int $calls = 0;
 
-            public function getFocusPoint(): array {
+            public function getFocusPoint(): array
+            {
                 $this->calls++;
                 return ['left' => '25', 'top' => '75'];
             }
@@ -178,15 +185,19 @@ class ImageTest extends TestCase
 
     /**
      * Get a reusable resolver for testing
-     * 
+     *
      * @return ImageResolverInterface
      */
-    private function getResolver(): ImageResolverInterface {
+    private function getResolver(): ImageResolverInterface
+    {
         return new class implements ImageResolverInterface {
-            public function getImageUrl(int $id, array $size): string {
+            public function getImageUrl(int $id, array $size): string
+            {
                 return "https://example.com/image-{$id}-{$size[0]}x{$size[1]}.jpg";
             }
-            public function getImageAltText(int $id): string {
+
+            public function getImageAltText(int $id): string
+            {
                 return "Image {$id}";
             }
         };
@@ -194,16 +205,20 @@ class ImageTest extends TestCase
 
     /**
      * Get a reusable focus resolver for testing
-     * 
+     *
      * @return ImageFocusResolverInterface
      */
-    private function getFocusResolver(): ImageFocusResolverInterface {
+    private function getFocusResolver(): ImageFocusResolverInterface
+    {
         return new class implements ImageFocusResolverInterface {
-            public function __construct(private $data = null) {}
-            public function getFocusPoint(): array {
+            public function __construct(
+                private $data = null,
+            ) {}
+
+            public function getFocusPoint(): array
+            {
                 return ['left' => '51', 'top' => '51'];
             }
         };
     }
-    
 }

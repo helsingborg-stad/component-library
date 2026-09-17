@@ -6,6 +6,8 @@ use ComponentLibrary\Component\AnchorMenu\AnchorMenuData;
 use ComponentLibrary\ComponentConfiguration\ComponentConfig;
 
 return new ComponentConfig(
-    slug: 'anchorMenu', view: 'anchorMenu.blade.php', data: AnchorMenuData::class,
+    slug: 'anchorMenu',
+    view: 'anchorMenu.blade.php',
+    data: AnchorMenuData::class,
     dependencies: ['sass' => ['components' => ['link', 'group', 'icon']]],
 );

@@ -12,15 +12,25 @@ class HeroTest extends \PHPUnit\Framework\TestCase
      */
     public function testHasContentIsFalseIfHasNoContent($meta, $title, $byline, $paragraph)
     {
-        $data = $this->getComponentData(['meta' => $meta, 'title' => $title, 'byline' => $byline, 'paragraph' => $paragraph]);
-        $component = new \ComponentLibrary\Component\Hero\Hero($data, new \ComponentLibrary\Cache\StaticCache(), new \ComponentLibrary\Helper\TagSanitizer());
+        $data = $this->getComponentData([
+            'meta' => $meta,
+            'title' => $title,
+            'byline' => $byline,
+            'paragraph' => $paragraph,
+        ]);
+        $component = new \ComponentLibrary\Component\Hero\Hero(
+            $data,
+            new \ComponentLibrary\Cache\StaticCache(),
+            new \ComponentLibrary\Helper\TagSanitizer(),
+        );
         $component->init();
         $data = $component->getData();
 
         $this->assertFalse($data['hasContent']);
     }
 
-    public function hasNoContentProvider() {
+    public function hasNoContentProvider()
+    {
         return [
             ['', '', '', ''],
             [' ', '', '', ''],
@@ -35,21 +45,31 @@ class HeroTest extends \PHPUnit\Framework\TestCase
      */
     public function testHasContentIsTrueIfHasContent($meta, $title, $byline, $paragraph)
     {
-        $data = $this->getComponentData(['meta' => $meta, 'title' => $title, 'byline' => $byline, 'paragraph' => $paragraph]);
-        $component = new \ComponentLibrary\Component\Hero\Hero($data, new \ComponentLibrary\Cache\StaticCache(), new \ComponentLibrary\Helper\TagSanitizer());
+        $data = $this->getComponentData([
+            'meta' => $meta,
+            'title' => $title,
+            'byline' => $byline,
+            'paragraph' => $paragraph,
+        ]);
+        $component = new \ComponentLibrary\Component\Hero\Hero(
+            $data,
+            new \ComponentLibrary\Cache\StaticCache(),
+            new \ComponentLibrary\Helper\TagSanitizer(),
+        );
         $component->init();
         $data = $component->getData();
 
         $this->assertTrue($data['hasContent']);
     }
 
-    public function hasContentProvider() {
+    public function hasContentProvider()
+    {
         return [
             ['foo', 'foo', 'foo', 'foo'],
-            ['foo', '', '', ''],
-            ['', 'foo', '', ''],
-            ['', '', 'foo', ''],
-            ['', '', '', 'foo'],
+            ['foo', '',    '',    ''],
+            ['',    'foo', '',    ''],
+            ['',    '',    'foo', ''],
+            ['',    '',    '',    'foo'],
         ];
     }
 
@@ -57,17 +77,19 @@ class HeroTest extends \PHPUnit\Framework\TestCase
     {
         $data = $this->getComponentData([]);
 
-        $this->assertSame([
-            'loading' => 'eager',
-            'fetchpriority' => 'high',
-            'sizes' => '100vw',
-        ], $data['imageAttributeList']);
+        $this->assertSame(
+            [
+                'loading' => 'eager',
+                'fetchpriority' => 'high',
+                'sizes' => '100vw',
+            ],
+            $data['imageAttributeList'],
+        );
     }
 
     private function getComponentData(array $data)
     {
-        $default = (new \ComponentLibrary\ComponentConfiguration\ComponentDataReflector())
-            ->getDefaultArguments(\ComponentLibrary\Component\Hero\HeroData::class);
+        $default = new \ComponentLibrary\ComponentConfiguration\ComponentDataReflector()->getDefaultArguments(\ComponentLibrary\Component\Hero\HeroData::class);
         return array_merge($default, $data);
     }
 }

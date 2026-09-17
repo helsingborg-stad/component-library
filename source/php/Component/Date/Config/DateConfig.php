@@ -14,7 +14,7 @@ class DateConfig
      */
     public function getDateFormat(): string
     {
-      return $this->dateFormat ?? $this->fallbackDateFormat;
+        return $this->dateFormat ?? $this->fallbackDateFormat;
     }
 
     /**
@@ -24,7 +24,7 @@ class DateConfig
      */
     public function getTimeNowCap(): int
     {
-      return 3600;
+        return 3600;
     }
 
     /**
@@ -34,7 +34,7 @@ class DateConfig
      */
     public function getNowLabel(): string
     {
-      return 'just now';
+        return 'just now';
     }
 
     /**
@@ -44,8 +44,8 @@ class DateConfig
      */
     public function setDateFormat(?string $format): void
     {
-      if(!is_null($format)) {
-        $this->dateFormat = $format;
-      }
+        if (!is_null($format)) {
+            $this->dateFormat = $format;
+        }
     }
 }

@@ -8,17 +8,17 @@ class Slider extends \ComponentLibrary\Component\BaseController
     {
         //Extract array for eazy access (fetch only)
         extract($this->data);
-        $this->data['id'] = $this->sanitizeIdAttribute(uniqid("sider_", true));
+        $this->data['id'] = $this->sanitizeIdAttribute(uniqid('sider_', true));
         $this->data['attributeList']['data-step'] = 0;
         $this->data['attributeList']['data-js-slider'] = 0;
         $this->data['attributeList']['data-js-slider-index'] = 0;
         $this->data['attributeList']['data-js-slider-index'] = 0;
 
-        $this->data['attributeList']['data-slider-type'] = $repeatSlide ? 'loop' : ($type ?? 'slide');
+        $this->data['attributeList']['data-slider-type'] = $repeatSlide ? 'loop' : $type ?? 'slide';
 
         $this->data['classList'][] = 'splide';
         $this->data['classList'][] = 'u-visibility--visible';
-        
+
         $ratio = preg_replace('/:/i', '-', $ratio);
         $this->data['classList'][] = 'c-slider--' . $ratio;
 
@@ -60,9 +60,11 @@ class Slider extends \ComponentLibrary\Component\BaseController
         }
 
         if ($heroStyle) {
-            $this->data['classList'][] = $this->getBaseClass() . "--hero";
+            $this->data['classList'][] = $this->getBaseClass() . '--hero';
         }
 
-        $this->data['attributeList']['data-js-slider-buttons'] = !empty($customButtons) ? $customButtons : $this->data['id'];
+        $this->data['attributeList']['data-js-slider-buttons'] = !empty($customButtons)
+            ? $customButtons
+            : $this->data['id'];
     }
 }

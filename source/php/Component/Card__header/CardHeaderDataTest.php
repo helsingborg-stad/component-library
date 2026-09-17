@@ -17,6 +17,6 @@ class CardHeaderDataTest extends TestCase
         static::assertInstanceOf(ComponentConfig::class, $config);
         static::assertSame('card__header', $config->slug);
         static::assertSame(CardHeaderData::class, $config->data);
-        static::assertSame(['slot' => ''], (new ComponentDataReflector())->getDefaultArguments(CardHeaderData::class));
+        static::assertSame(['slot' => ''], new ComponentDataReflector()->getDefaultArguments(CardHeaderData::class));
     }
 }

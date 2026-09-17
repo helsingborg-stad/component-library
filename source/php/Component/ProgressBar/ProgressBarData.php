@@ -12,6 +12,5 @@ final class ProgressBarData
     public function __construct(
         public bool $isCancelled = false,
         public int|float $value = 0,
-    ) {
-    }
+    ) {}
 }

@@ -11,7 +11,8 @@ class TagSanitizer implements TagSanitizerInterface
      *
      * @return string
      */
-    public function removeATags(string $string): string {
+    public function removeATags(string $string): string
+    {
         return preg_replace('/<a\b[^>]*>(.*?)<\/a>/is', '$1', $string);
     }
 }

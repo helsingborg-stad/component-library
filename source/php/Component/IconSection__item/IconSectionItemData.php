@@ -11,6 +11,5 @@ final class IconSectionItemData
 {
     public function __construct(
         public ?array $icon = null,
-    ) {
-    }
+    ) {}
 }

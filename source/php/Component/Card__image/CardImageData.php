@@ -11,6 +11,5 @@ final class CardImageData
 {
     public function __construct(
         public string $slot = '',
-    ) {
-    }
+    ) {}
 }

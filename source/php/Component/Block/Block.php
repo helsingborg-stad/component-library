@@ -11,18 +11,18 @@ class Block extends \ComponentLibrary\Component\BaseController
     private $contentKeys = ['date', 'meta', 'secondaryMeta', 'heading', 'icon', 'content'];
     private array $slotMapping = [
         'floating' => 'floatingSlotHasData',
-        'slot'     => 'slotHasData',
-        'metaArea' => 'metaAreaSlotHasData'
+        'slot' => 'slotHasData',
+        'metaArea' => 'metaAreaSlotHasData',
     ];
 
     public function init()
     {
         // Extract array for easy access (fetch only)
         extract($this->data);
-        
+
         $this->data['floatingSlotHasData'] = $this->slotHasData('floating');
         $this->data['metaAreaSlotHasData'] = $this->slotHasData('metaArea');
-        $this->data['slotHasData']         = $this->slotHasData('slot');
+        $this->data['slotHasData'] = $this->slotHasData('slot');
 
         if ($image && is_array($image) && !isset($image['backgroundColor'])) {
             $this->data['image']['backgroundColor'] = 'primary';
@@ -33,10 +33,10 @@ class Block extends \ComponentLibrary\Component\BaseController
         }
 
         if ($link) {
-            $this->data['componentElement'] = "a";
+            $this->data['componentElement'] = 'a';
             $this->data['attributeList']['href'] = $link;
         } else {
-            $this->data['componentElement'] = "div";
+            $this->data['componentElement'] = 'div';
         }
 
         if (!in_array($ratio, ['1:1', '4:3', '12:16', '16:9'])) {
@@ -54,7 +54,7 @@ class Block extends \ComponentLibrary\Component\BaseController
         if ($date && !is_array($date)) {
             $this->data['date'] = [
                 'timestamp' => $date,
-                'action' => 'formatDate'
+                'action' => 'formatDate',
             ];
         }
 
@@ -63,11 +63,10 @@ class Block extends \ComponentLibrary\Component\BaseController
             $this->data['date']['classList'][] = $this->getBaseClass('date');
         }
 
+        $this->data['classList'][] = $this->getBaseClass() . '--ratio-' . str_replace(':', '-', $ratio);
 
-        $this->data['classList'][] = $this->getBaseClass() . '--ratio-' . str_replace(":", "-", $ratio);
-
-        if(!$this->hasContent($this->data)) {
-            $this->data['classList'][] = $this->getBaseClass("no-content", true);
+        if (!$this->hasContent($this->data)) {
+            $this->data['classList'][] = $this->getBaseClass('no-content', true);
         }
 
         $this->data['hasContent'] = $this->hasContent($this->data);
@@ -87,7 +86,6 @@ class Block extends \ComponentLibrary\Component\BaseController
         });
 
         foreach ($existingKeys as $key) {
-
             $keyValue = $data[$key];
 
             if (!$this->contentElementIsEmpty($keyValue)) {
@@ -101,15 +99,17 @@ class Block extends \ComponentLibrary\Component\BaseController
     private function contentElementIsEmpty($value): bool
     {
         if (is_array($value) || is_object($value)) {
-            foreach ((array)$value as $item) {
+            foreach ((array) $value as $item) {
                 if (!$this->contentElementIsEmpty($item)) {
                     return false;
                 }
             }
         }
 
-        if (is_numeric($value)) return false;
-        if (is_string($value)) return empty(trim($value));
+        if (is_numeric($value))
+            return false;
+        if (is_string($value))
+            return empty(trim($value));
 
         return true;
     }

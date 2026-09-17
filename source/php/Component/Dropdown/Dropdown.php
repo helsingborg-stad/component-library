@@ -8,7 +8,6 @@ namespace ComponentLibrary\Component\Dropdown;
  */
 class Dropdown extends \ComponentLibrary\Component\BaseController
 {
-
     public function init()
     {
         //Extract array for eazy access (fetch only)
@@ -17,7 +16,7 @@ class Dropdown extends \ComponentLibrary\Component\BaseController
         $this->data['listSlotHasContent'] = $this->slotHasData('list');
 
         $this->data['items'] = array_map(
-            fn ($i) => array_merge(
+            fn($i) => array_merge(
                 $i,
                 [
                     'attributes' => self::buildAttributes(
@@ -26,19 +25,19 @@ class Dropdown extends \ComponentLibrary\Component\BaseController
                             [
                                 'class' => implode(' ', [
                                     'c-dropdown__item',
-                                    ...$i['classList'] ?? []
-                                ])
-                            ]
-                        )
+                                    ...($i['classList'] ?? []),
+                                ]),
+                            ],
+                        ),
                     ),
                     'linkAttributes' => self::buildAttributes($i['linkAttributeList'] ?? []),
-                ]
+                ],
             ),
-            $this->data['items'] ?? []
+            $this->data['items'] ?? [],
         );
-        
+
         $this->data['classList'][] = 'js-dropdown';
-        
+
         if (isset($direction)) {
             $this->data['direction'] = $direction;
             $this->data['classList'][] = $this->getBaseClass() . '-button--' . $direction;

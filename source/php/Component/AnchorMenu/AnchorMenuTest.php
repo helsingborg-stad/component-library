@@ -14,7 +14,11 @@ class AnchorMenuTest extends TestCase
     public function testComponentIsDeprecated()
     {
         try {
-            new AnchorMenu([], $this->createMock(CacheInterface::class), $this->createMock(TagSanitizerInterface::class));
+            new AnchorMenu(
+                [],
+                $this->createMock(CacheInterface::class),
+                $this->createMock(TagSanitizerInterface::class),
+            );
         } catch (\Throwable $e) {
             $this->assertSame(E_USER_DEPRECATED, $e->getCode(), 'Expected a deprecation notice to be triggered.');
             return;

@@ -7,6 +7,4 @@ namespace ComponentLibrary\Component\Table__head;
 /**
  * Typed input contract for the Table head component.
  */
-final class TableHeadData
-{
-}
+final class TableHeadData {}

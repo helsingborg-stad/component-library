@@ -3,9 +3,9 @@
 namespace ComponentLibrary\Integrations\Image;
 
 /**
- * Interface for resolving image URLs. 
+ * Interface for resolving image URLs.
  * Used to resolve image URLs in the native system.
- * 
+ *
  * @package ComponentLibrary\Integrations\Image
  */
 
@@ -22,9 +22,9 @@ interface ImageResolverInterface
 
     /**
      * Get the image alt text by ID.
-     * 
+     *
      * @param int $id Image attachment ID.
-     * 
+     *
      * @return null|string Alt text of the image or null if not found.
      */
     public function getImageAltText(int $id): ?string;

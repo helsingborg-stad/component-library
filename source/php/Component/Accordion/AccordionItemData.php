@@ -18,6 +18,5 @@ final class AccordionItemData
         public string|array $heading,
         public string $content,
         public string $id = '',
-    ) {
-    }
+    ) {}
 }

@@ -20,6 +20,5 @@ final class SignatureData
         public string $updatedLabel = 'Updated',
         public string $publishedLabel = 'Published',
         public bool $placeholderAvatar = true,
-    ) {
-    }
+    ) {}
 }

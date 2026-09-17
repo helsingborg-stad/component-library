@@ -14,15 +14,14 @@ class Tags extends \ComponentLibrary\Component\BaseController
         $this->data['tagCount'] = is_countable($tags) ? count($tags) : 0;
 
         if ($format) {
-            $this->data['classList'][] = $this->getBaseClass() . "--format";
+            $this->data['classList'][] = $this->getBaseClass() . '--format';
         }
-
 
         if (!empty($this->data['tagsMarker'])) {
             $this->data['icon'] = ['icon' => 'circle', 'size' => 'xs'];
 
             if (!empty($this->data['icon'])) {
-                $this->data['beforeLabel'] = "";
+                $this->data['beforeLabel'] = '';
             }
         }
 
@@ -33,10 +32,10 @@ class Tags extends \ComponentLibrary\Component\BaseController
         $this->data['isHidden'] = function ($loopIteration) use ($compress) {
             if (!empty($compress)) {
                 if ($loopIteration >= $compress) {
-                    return "is-hidden";
+                    return 'is-hidden';
                 }
             }
-            return "";
+            return '';
         };
     }
 
@@ -57,13 +56,13 @@ class Tags extends \ComponentLibrary\Component\BaseController
                 }
 
                 if (!array_key_exists('href', $tag)) {
-                    $tag['href'] = "";
+                    $tag['href'] = '';
                 }
                 if (!array_key_exists('label', $tag)) {
-                    $tag['label'] = "No label";
+                    $tag['label'] = 'No label';
                 }
                 if (!array_key_exists('color', $tag)) {
-                    $tag['color'] = "default";
+                    $tag['color'] = 'default';
                 }
 
                 $filteredTags[] = $tag;

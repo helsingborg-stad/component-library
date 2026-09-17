@@ -2,9 +2,10 @@
 
 namespace ComponentLibrary\Component\Chat__input;
 
-class Chat__input extends \ComponentLibrary\Component\BaseController  
+class Chat__input extends \ComponentLibrary\Component\BaseController
 {
-    public function init() {
+    public function init()
+    {
         extract($this->data);
 
         $this->data['classList'][] = $this->getBaseClass();

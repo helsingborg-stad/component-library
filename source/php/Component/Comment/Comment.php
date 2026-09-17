@@ -9,7 +9,7 @@ class Comment extends \ComponentLibrary\Component\BaseController
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
-        $this->data['slotHasData']         = $this->slotHasData('slot');
+        $this->data['slotHasData'] = $this->slotHasData('slot');
 
         //Define actions (slot)
         $this->data['actions'] = isset($actions) ? $actions : false;
@@ -23,7 +23,7 @@ class Comment extends \ComponentLibrary\Component\BaseController
         if ($filterHtml) {
             $this->data['text'] = $this->filterTags(
                 $text,
-                $allowedTags
+                $allowedTags,
             );
         }
     }

@@ -17,6 +17,6 @@ class IconSectionDataTest extends TestCase
         static::assertInstanceOf(ComponentConfig::class, $config);
         static::assertSame('iconSection', $config->slug);
         static::assertSame(IconSectionData::class, $config->data);
-        static::assertSame(0, (new ComponentDataReflector())->getDefaultArguments(IconSectionData::class)['gap']);
+        static::assertSame(0, new ComponentDataReflector()->getDefaultArguments(IconSectionData::class)['gap']);
     }
 }

@@ -11,6 +11,5 @@ final class ScopeData
 {
     public function __construct(
         public string|array $name = '',
-    ) {
-    }
+    ) {}
 }

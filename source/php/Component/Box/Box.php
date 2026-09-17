@@ -12,7 +12,7 @@ class Box extends \ComponentLibrary\Component\BaseController
 {
     private array $slotMapping = [
         'metaArea' => 'metaAreaSlotHasData',
-        'slot'     => 'slotHasData'
+        'slot' => 'slotHasData',
     ];
 
     public function init()
@@ -21,10 +21,10 @@ class Box extends \ComponentLibrary\Component\BaseController
         extract($this->data);
 
         if ($link) {
-            $this->data['componentElement'] = "a";
+            $this->data['componentElement'] = 'a';
             $this->data['attributeList']['href'] = $link;
         } else {
-            $this->data['componentElement'] = "div";
+            $this->data['componentElement'] = 'div';
         }
 
         if (!in_array($ratio, ['1:1', '4:3', '12:16'])) {
@@ -34,14 +34,14 @@ class Box extends \ComponentLibrary\Component\BaseController
         if ($content) {
             $this->data['content'] = $this->strWordCut(
                 strip_tags($content),
-                200
+                200,
             );
         }
 
         if ($date && !is_array($date)) {
             $this->data['date'] = [
                 'timestamp' => $date,
-                'action' => 'formatDate'
+                'action' => 'formatDate',
             ];
         }
 
@@ -53,7 +53,7 @@ class Box extends \ComponentLibrary\Component\BaseController
         //Reset - Decides how to switch between data inputs
         $this->renderMostImportant();
 
-        $this->data['classList'][] = $this->getBaseClass() . '--ratio-' . str_replace(":", "-", $ratio);
+        $this->data['classList'][] = $this->getBaseClass() . '--ratio-' . str_replace(':', '-', $ratio);
 
         foreach ($this->slotMapping as $slot => $hasDataKey) {
             $this->data[$hasDataKey] = $this->slotHasData($slot);
@@ -63,7 +63,7 @@ class Box extends \ComponentLibrary\Component\BaseController
         }
     }
 
-    private function hasImage():bool
+    private function hasImage(): bool
     {
         return match (true) {
             $this->data['image'] instanceof ImageInterface => true,
@@ -78,7 +78,7 @@ class Box extends \ComponentLibrary\Component\BaseController
     public function renderMostImportant()
     {
         //Reset icon if image set
-        if($this->hasImage()) {
+        if ($this->hasImage()) {
             $this->data['icon'] = null;
         } else {
             $this->data['image'] = null;
@@ -106,11 +106,12 @@ class Box extends \ComponentLibrary\Component\BaseController
 
         if (strlen($string) > $length) {
             $stringCut = substr($string, 0, $length);
-            $string = substr(
-                $stringCut,
-                0,
-                strrpos($stringCut, ' ')
-            ) . $end;
+            $string =
+                substr(
+                    $stringCut,
+                    0,
+                    strrpos($stringCut, ' '),
+                ) . $end;
         }
 
         return $string;

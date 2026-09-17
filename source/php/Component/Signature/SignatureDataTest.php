@@ -17,6 +17,8 @@ class SignatureDataTest extends TestCase
         static::assertInstanceOf(ComponentConfig::class, $config);
         static::assertSame('signature', $config->slug);
         static::assertSame(SignatureData::class, $config->data);
-        static::assertTrue((new ComponentDataReflector())->getDefaultArguments(SignatureData::class)['placeholderAvatar']);
+        static::assertTrue(
+            new ComponentDataReflector()->getDefaultArguments(SignatureData::class)['placeholderAvatar'],
+        );
     }
 }

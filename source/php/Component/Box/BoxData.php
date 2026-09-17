@@ -34,6 +34,5 @@ final class BoxData
         public ?bool $dateBadge = null,
         public array|ImageInterface|bool $image = false,
         public string|array|bool $icon = '',
-    ) {
-    }
+    ) {}
 }

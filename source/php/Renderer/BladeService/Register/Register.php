@@ -54,7 +54,11 @@ class Register
 
         //Prohibit reserved names
         if (in_array($slug, $this->reservedNames)) {
-            throw new \Exception('Invalid slug (' . $slug . ') provided, cannot be used as a view name since it is reserved for internal purposes.');
+            throw new \Exception(
+                'Invalid slug ('
+                . $slug
+                . ') provided, cannot be used as a view name since it is reserved for internal purposes.',
+            );
         }
 
         //Get view name
@@ -204,7 +208,10 @@ class Register
         } catch (\Throwable $e) {
             // Log error instead of echoing to prevent output in wrong order
             if (function_exists('error_log')) {
-                error_log('ComponentLibrary: Error in registerViewComposer for component "' . $component->slug . '": ' . $e->getMessage());
+                error_log(
+                    'ComponentLibrary: Error in registerViewComposer for component "' . $component->slug . '": '
+                        . $e->getMessage(),
+                );
             }
             // Re-throw to allow proper error handling
             throw $e;
@@ -241,12 +248,38 @@ class Register
 
                 if (!$this->matchesAnyExpectedType($value, $types)) {
                     $this->triggerError(
-                        'The parameter <b>"' . $key . '"</b> in the <b>' . $componentSlug . '</b> component should be of type <b>"' . $argsTypes->{$key} . '"</b> but was received as type <b>"' . $this->getDisplayType($value) . '"</b>.',
+                        'The parameter <b>"'
+                        . $key
+                        . '"</b> in the <b>'
+                        . $componentSlug
+                        . '</b> component should be of type <b>"'
+                        . $argsTypes->{$key}
+                        . '"</b> but was received as type <b>"'
+                        . $this->getDisplayType($value)
+                        . '"</b>.',
                     );
                 }
-            } elseif (!in_array($key, ['__laravel_slots', 'slot', 'id', 'classList', 'context', 'attributeList', 'baseClass', 'lang', 'isBlock', 'isShortcode']) && !(is_object($value) && $value instanceof ComponentSlot)) {
+            } elseif (
+                !in_array($key, [
+                    '__laravel_slots',
+                    'slot',
+                    'id',
+                    'classList',
+                    'context',
+                    'attributeList',
+                    'baseClass',
+                    'lang',
+                    'isBlock',
+                    'isShortcode',
+                ])
+                && !(is_object($value) && $value instanceof ComponentSlot)
+            ) {
                 $this->triggerError(
-                    'The parameter <b>"' . $key . '"</b> is not recognized in the component <b>"' . $componentSlug . '"</b>',
+                    'The parameter <b>"'
+                    . $key
+                    . '"</b> is not recognized in the component <b>"'
+                    . $componentSlug
+                    . '"</b>',
                 );
             }
         }
@@ -419,7 +452,9 @@ class Register
         }
 
         if (!is_array($config)) {
-            throw new \UnexpectedValueException('Component configuration files must return a ComponentConfig instance or an array.');
+            throw new \UnexpectedValueException(
+                'Component configuration files must return a ComponentConfig instance or an array.',
+            );
         }
 
         if (isset($config['data']) && is_object($config['data'])) {
@@ -445,8 +480,15 @@ class Register
             throw new \UnexpectedValueException('Component configuration view must be a string.');
         }
 
-        if (isset($config['data']) && !is_string($config['data']) && !is_object($config['data']) && !is_null($config['data'])) {
-            throw new \UnexpectedValueException('Component configuration data class must be a string, object instance, or null.');
+        if (
+            isset($config['data'])
+            && !is_string($config['data'])
+            && !is_object($config['data'])
+            && !is_null($config['data'])
+        ) {
+            throw new \UnexpectedValueException(
+                'Component configuration data class must be a string, object instance, or null.',
+            );
         }
 
         foreach (['default', 'types', 'dependency'] as $key) {
@@ -458,10 +500,10 @@ class Register
         }
 
         if (
-            isset($config['description']) &&
-            !is_array($config['description']) &&
-            !is_object($config['description']) &&
-            !is_string($config['description'])
+            isset($config['description'])
+            && !is_array($config['description'])
+            && !is_object($config['description'])
+            && !is_string($config['description'])
         ) {
             throw new \UnexpectedValueException(
                 'Component configuration key "description" must be a string, array, or object.',
@@ -589,10 +631,7 @@ class Register
         }
 
         if (is_object($value)) {
-            if (
-                !$value instanceof \stdClass &&
-                !$this->matchesAllowedDataClass($value, $allowedDataClasses)
-            ) {
+            if (!$value instanceof \stdClass && !$this->matchesAllowedDataClass($value, $allowedDataClasses)) {
                 return $value;
             }
 
@@ -709,7 +748,7 @@ class Register
             return $dataClassName;
         }
 
-        $namespace = (new \ReflectionClass($contextDataClass))->getNamespaceName();
+        $namespace = new \ReflectionClass($contextDataClass)->getNamespaceName();
         $resolvedClassName = $namespace . '\\' . ltrim($dataClassName, '\\');
 
         return class_exists($resolvedClassName) ? $resolvedClassName : null;
@@ -735,7 +774,26 @@ class Register
      */
     private function isScalarType(string $type): bool
     {
-        return in_array($type, ['mixed', 'NULL', 'null', 'boolean', 'bool', 'integer', 'int', 'double', 'float', 'string', 'array', 'object', 'false', 'true'], true);
+        return in_array(
+            $type,
+            [
+                'mixed',
+                'NULL',
+                'null',
+                'boolean',
+                'bool',
+                'integer',
+                'int',
+                'double',
+                'float',
+                'string',
+                'array',
+                'object',
+                'false',
+                'true',
+            ],
+            true,
+        );
     }
 
     /**

@@ -12,6 +12,5 @@ final class InlineCssWrapperData
     public function __construct(
         public string $componentElement = 'div',
         public array $styles = [],
-    ) {
-    }
+    ) {}
 }

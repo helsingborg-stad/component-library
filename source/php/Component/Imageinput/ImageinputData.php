@@ -1,4 +1,32 @@
 <?php
+
 declare(strict_types=1);
+
 namespace ComponentLibrary\Component\Imageinput;
-final class ImageinputData { public function __construct(public string $description = '', public string $name = 'files', public string $accept = 'audio/*,video/*,image/*', public bool $multiple = false, public bool $preview = true, public ?int $maxSize = null, public ?string $uploadErrorMessage = null, public ?string $uploadErrorMessageMinFiles = null, public string $icon = 'file_upload', public bool $required = false, public int $filesMax = 1, public int $filesMin = 0, public string $label = '', public string $buttonLabel = 'Select file', public string $buttonRemoveLabel = 'Remove file', public string $buttonDropLabel = 'Drop files here', public string $allowedFileTypesLabel = 'Allowed files: ', public string $fileTypeVideosLabel = 'Videos', public string $fileTypeImagesLabel = 'Images', public string $fileTypeAudioLabel = 'Audios', public string $maximumSizeLabel = 'Maximum size') {} }
+
+final class ImageinputData
+{
+    public function __construct(
+        public string $description = '',
+        public string $name = 'files',
+        public string $accept = 'audio/*,video/*,image/*',
+        public bool $multiple = false,
+        public bool $preview = true,
+        public ?int $maxSize = null,
+        public ?string $uploadErrorMessage = null,
+        public ?string $uploadErrorMessageMinFiles = null,
+        public string $icon = 'file_upload',
+        public bool $required = false,
+        public int $filesMax = 1,
+        public int $filesMin = 0,
+        public string $label = '',
+        public string $buttonLabel = 'Select file',
+        public string $buttonRemoveLabel = 'Remove file',
+        public string $buttonDropLabel = 'Drop files here',
+        public string $allowedFileTypesLabel = 'Allowed files: ',
+        public string $fileTypeVideosLabel = 'Videos',
+        public string $fileTypeImagesLabel = 'Images',
+        public string $fileTypeAudioLabel = 'Audios',
+        public string $maximumSizeLabel = 'Maximum size',
+    ) {}
+}

@@ -2,7 +2,8 @@
 
 namespace ComponentLibrary\Helper;
 
-class Truncate {
+class Truncate
+{
     public static function truncate(string $content, int $length, string $suffix = '…'): string
     {
         if (strlen($content) <= $length) {

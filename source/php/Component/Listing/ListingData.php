@@ -6,7 +6,10 @@ namespace ComponentLibrary\Component\Listing;
 
 final class ListingData
 {
-    public function __construct(public array $list = [], public string $elementType = 'ul', public bool $icon = true, public bool $padding = false)
-    {
-    }
+    public function __construct(
+        public array $list = [],
+        public string $elementType = 'ul',
+        public bool $icon = true,
+        public bool $padding = false,
+    ) {}
 }

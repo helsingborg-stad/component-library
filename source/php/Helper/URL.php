@@ -1,4 +1,5 @@
 <?php
+
 namespace ComponentLibrary\Helper;
 
 class URL
@@ -15,7 +16,7 @@ class URL
         if ($forceHttps && str_starts_with($url, 'http://')) {
             return str_replace('http://', 'https://', $url);
         }
-        
+
         if ($forceHttps && str_starts_with($url, '//')) {
             return 'https:' . $url;
         }

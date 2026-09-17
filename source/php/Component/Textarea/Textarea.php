@@ -14,7 +14,10 @@ class Textarea extends \ComponentLibrary\Component\BaseController
 {
     public function __construct($data, CacheInterface $cache, TagSanitizerInterface $tagSanitizer)
     {
-        trigger_error('The Textarea component is deprecated and will be removed. Please use the Field component with ["type" => "text", "multiline" => true] instead.', E_USER_DEPRECATED);
+        trigger_error(
+            'The Textarea component is deprecated and will be removed. Please use the Field component with ["type" => "text", "multiline" => true] instead.',
+            E_USER_DEPRECATED,
+        );
         return parent::__construct($data, $cache, $tagSanitizer);
     }
 

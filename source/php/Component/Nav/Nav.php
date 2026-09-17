@@ -2,7 +2,7 @@
 
 namespace ComponentLibrary\Component\Nav;
 
-use SubItem; 
+use SubItem;
 
 /**
  * Class Nav
@@ -13,7 +13,6 @@ use SubItem;
  */
 class Nav extends \ComponentLibrary\Component\BaseController
 {
-
     /**
      * Initializes the Nav component with data.
      *
@@ -22,16 +21,16 @@ class Nav extends \ComponentLibrary\Component\BaseController
     public function init()
     {
         //Declarations
-        if(!isset($this->data['depth'])) {
-            $this->data['depth'] = 1;  
+        if (!isset($this->data['depth'])) {
+            $this->data['depth'] = 1;
         }
-        
+
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
         //Height modifiers
-        if($height) {
-            $this->data['classList'][] = $this->getBaseClass("height-" . $height, true);
+        if ($height) {
+            $this->data['classList'][] = $this->getBaseClass('height-' . $height, true);
         }
 
         //Add id if missing, prevents duplicated references
@@ -45,120 +44,122 @@ class Nav extends \ComponentLibrary\Component\BaseController
 
         //Classes
         $this->data['classList'][] = $this->getBaseClass(
-            "depth-" . $this->data['depth'],
-            true
+            'depth-' . $this->data['depth'],
+            true,
         );
-        $this->data['classList'][] = "unlist";
+        $this->data['classList'][] = 'unlist';
         $this->data['classList'][] = $this->getBaseClass($direction, true);
 
         //Set default values to items array
-        if(is_array($items)) {
+        if (is_array($items)) {
             $this->data['items'] = $items = $this->normalizeItems($items);
         }
 
         if (!empty($isExtendedDropdown)) {
             $this->data['classList'][] = $this->getBaseClass('extended-dropdown', true);
         }
-        
+
         //Set item attribute list
         $this->data['items'] = $this->itemAttributeList(
-            $items, 
-            $this->data
+            $items,
+            $this->data,
         );
 
         //General Attributes
         $this->data['attributeList']['aria-orientation'] = $direction;
         $this->data['attributeList']['role'] = 'menu';
-        $this->data['attributeList']['data-js-keep-in-viewport-after-resize'] = "1";
+        $this->data['attributeList']['data-js-keep-in-viewport-after-resize'] = '1';
 
         //Get Expand label
         $this->data['getExpandLabel'] = function ($itemLable, $expandLabel) {
-            if(!empty($itemLable)) {
-                return $expandLabel . ": ". $itemLable;
+            if (!empty($itemLable)) {
+                return $expandLabel . ': ' . $itemLable;
             }
             return $expandLabel;
-        }; 
+        };
 
         //Create item class (view func)
-        $this->data['itemClass'] = function($item, $direction) {
+        $this->data['itemClass'] = function ($item, $direction) {
             $classList = $item['classList'];
 
             //Base class list
-            $classList[] = $this->getBaseClass('item'); 
+            $classList[] = $this->getBaseClass('item');
             $classList[] = $this->getBaseClass('item') . '--' . $item['style'];
             $classList[] = $this->getBaseClass('item') . '--depth-' . $this->data['depth'];
 
             //Active state
-            if($item['active']) {
-                $classList[] = "is-current";
+            if ($item['active']) {
+                $classList[] = 'is-current';
 
                 if ($direction === 'vertical') {
-                    $classList[] = "is-open";
+                    $classList[] = 'is-open';
                 }
             }
 
-            if($this->isAncestor($item['ancestor'])) {
-                $classList[] = "is-ancestor"; 
+            if ($this->isAncestor($item['ancestor'])) {
+                $classList[] = 'is-ancestor';
             }
 
             //Open state
             $openState = [
-                $item['active'], 
-                $item['hasChildren'], 
+                $item['active'],
+                $item['hasChildren'],
                 $item['ancestor'],
-                $direction
+                $direction,
             ];
 
-            if($this->isOpen(...$openState)) {
-                $classList[] = "is-open";
+            if ($this->isOpen(...$openState)) {
+                $classList[] = 'is-open';
             }
 
             //If has fetched
-            if(is_array($item['children'])) {
-                $classList[] = "has-fetched"; 
+            if (is_array($item['children'])) {
+                $classList[] = 'has-fetched';
             }
 
             //Has children
-            if($item['hasToggle']) {
-                $classList[] = "has-children";
+            if ($item['hasToggle']) {
+                $classList[] = 'has-children';
             }
 
             //If item has a toggle
-            if($item['hasToggle']) {
-                $classList[] = "has-toggle"; 
+            if ($item['hasToggle']) {
+                $classList[] = 'has-toggle';
             }
 
             //If item has async method
-            if($this->hasAsyncUrl($item)) {
-                $classList[] = "has-async"; 
-                $classList[] = "js-async-children-data";
+            if ($this->hasAsyncUrl($item)) {
+                $classList[] = 'has-async';
+                $classList[] = 'js-async-children-data';
             }
 
-            return implode(" ", $classList); 
+            return implode(' ', $classList);
         };
 
-        //Indent 
-        if($indentSubLevels === true) {
+        //Indent
+        if ($indentSubLevels === true) {
             $this->data['classList'][] = $this->getBaseClass('indent-sublevels', true);
         }
     }
 
-    private function isOpen($isActive, $hasChildren, $isAncestor, $direction) {
-        if($isActive && $hasChildren && $direction == 'vertical') {
-            return true; 
+    private function isOpen($isActive, $hasChildren, $isAncestor, $direction)
+    {
+        if ($isActive && $hasChildren && $direction == 'vertical') {
+            return true;
         }
 
-        if($isAncestor && $direction == 'vertical') {
-            return true; 
+        if ($isAncestor && $direction == 'vertical') {
+            return true;
         }
 
-        return false; 
+        return false;
     }
 
-    private function isAncestor($ancestor) {
+    private function isAncestor($ancestor)
+    {
         return (bool) $ancestor;
     }
-    
+
     /**
      * Determines whether a navigation item has children.
      *
@@ -216,10 +217,11 @@ class Nav extends \ComponentLibrary\Component\BaseController
         return false;
     }
 
-    private function hasAsyncUrl($item) {
-        if(isset($item['attributeList']) && is_array($item['attributeList'])) {
-            if(array_key_exists('data-fetch-url', $item['attributeList'])) {
-                return !empty($item['attributeList']['data-fetch-url']); 
+    private function hasAsyncUrl($item)
+    {
+        if (isset($item['attributeList']) && is_array($item['attributeList'])) {
+            if (array_key_exists('data-fetch-url', $item['attributeList'])) {
+                return !empty($item['attributeList']['data-fetch-url']);
             }
         }
         return false;
@@ -239,12 +241,11 @@ class Nav extends \ComponentLibrary\Component\BaseController
             $itemIndex = 0;
 
             foreach ($items as $key => &$item) {
-
                 if (!isset($item['attributeList'])) {
                     $item['attributeList'] = [];
                 }
 
-                $item = $this->setRoleAttributes($item); 
+                $item = $this->setRoleAttributes($item);
                 $item = $this->setDepthAttributes($item);
                 $item = $this->setAriaLabelAttributes($item);
                 $item['itemIndex'] = $itemIndex;
@@ -261,7 +262,6 @@ class Nav extends \ComponentLibrary\Component\BaseController
 
                 $itemIndex++;
             }
-
         }
 
         return $items;
@@ -276,10 +276,12 @@ class Nav extends \ComponentLibrary\Component\BaseController
      */
     private function shouldUsePopoverForChildren(array $item): bool
     {
-        return $this->data['direction'] === 'horizontal'
+        return (
+            $this->data['direction'] === 'horizontal'
             && !empty($item['hasChildren'])
             && !empty($item['hasToggle'])
-            && empty($this->data['isExtendedDropdown']);
+            && empty($this->data['isExtendedDropdown'])
+        );
     }
 
     /**
@@ -305,15 +307,18 @@ class Nav extends \ComponentLibrary\Component\BaseController
     private function getToggleAttributeList(array $item): array
     {
         $toggleAttributeList = [
-            'aria-label' => $this->buildExpandLabel((string) ($item['label'] ?? ''), (string) ($this->data['expandLabel'] ?? '')),
-            'aria-pressed' => (!empty($item['active']) || !empty($item['ancestor'])) ? 'true' : 'false'
+            'aria-label' => $this->buildExpandLabel(
+                (string) ($item['label'] ?? ''),
+                (string) ($this->data['expandLabel'] ?? ''),
+            ),
+            'aria-pressed' => !empty($item['active']) || !empty($item['ancestor']) ? 'true' : 'false',
         ];
 
         if (!empty($item['usePopoverForChildren']) && !empty($item['popoverChildrenId'])) {
             $toggleAttributeList = array_merge($toggleAttributeList, [
                 'popovertarget' => $item['popoverChildrenId'],
                 'popovertargetaction' => 'toggle',
-                'aria-haspopup' => 'menu'
+                'aria-haspopup' => 'menu',
             ]);
         }
 
@@ -340,12 +345,13 @@ class Nav extends \ComponentLibrary\Component\BaseController
     /**
      * Append aria-label attribute
      */
-    private function setAriaLabelAttributes($item) {
+    private function setAriaLabelAttributes($item)
+    {
         $item['attributeList'] = array_merge(
             $item['attributeList'],
             [
-                'aria-label' => $item['label'] ?? ''
-            ]
+                'aria-label' => $item['label'] ?? '',
+            ],
         );
 
         return $item;
@@ -354,12 +360,13 @@ class Nav extends \ComponentLibrary\Component\BaseController
     /**
      * Append depth attribute
      */
-    private function setDepthAttributes($item) {
+    private function setDepthAttributes($item)
+    {
         $item['attributeList'] = array_merge(
             $item['attributeList'],
             [
-                'data-depth' => $this->data['depth']
-            ]
+                'data-depth' => $this->data['depth'],
+            ],
         );
         return $item;
     }
@@ -372,8 +379,8 @@ class Nav extends \ComponentLibrary\Component\BaseController
         $item['attributeList'] = array_merge(
             $item['attributeList'],
             [
-                'role' => 'menuitem'
-            ]
+                'role' => 'menuitem',
+            ],
         );
         return $item;
     }
@@ -387,27 +394,27 @@ class Nav extends \ComponentLibrary\Component\BaseController
      */
     public function normalizeItems(array $items): array
     {
-        if(is_countable($items)) {
+        if (is_countable($items)) {
             foreach ($items as $key => &$item) {
                 $item = array_merge([
                     'id' => rand(1, PHP_INT_MAX),
-                    'label' => "Unknown",
+                    'label' => 'Unknown',
                     'ancestor' => false,
                     'active' => false,
                     'children' => false,
-                    'href' => "#",
+                    'href' => '#',
                     'classList' => [],
-                    'style' => "default",
+                    'style' => 'default',
                     'icon' => [],
                 ], $item);
 
-                $item['hasToggle']      = $this->hasToggle($item['children'], $item);
-                $item['hasChildren']    = $this->hasChildren($item['children'], $item);
+                $item['hasToggle'] = $this->hasToggle($item['children'], $item);
+                $item['hasChildren'] = $this->hasChildren($item['children'], $item);
 
                 //Recurse for children
                 if (is_countable($item['children'])) {
                     $item['children'] = $this->normalizeItems(
-                        $item['children']
+                        $item['children'],
                     );
                 }
             }

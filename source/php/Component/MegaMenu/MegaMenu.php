@@ -2,31 +2,31 @@
 
 namespace ComponentLibrary\Component\MegaMenu;
 
-class MegaMenu extends \ComponentLibrary\Component\BaseController  
+class MegaMenu extends \ComponentLibrary\Component\BaseController
 {
-    
-    public function init() {
-
+    public function init()
+    {
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
         $this->data['classList'][] = 'u-display--none';
-        
-        if($menuItems) {
+
+        if ($menuItems) {
             $this->data['menuItems'] = $this->generateMenuItems($menuItems);
         }
 
-        if(!$mobile) {
+        if (!$mobile) {
             $this->data['classList'][] = 'u-display--none@xs';
             $this->data['classList'][] = 'u-display--none@sm';
             $this->data['classList'][] = 'u-display--none@md';
         }
     }
 
-    public function generateMenuItems(array $menuItems = []) {
+    public function generateMenuItems(array $menuItems = [])
+    {
         $result = [];
 
-        foreach($menuItems as $key => $menuItem) {
+        foreach ($menuItems as $key => $menuItem) {
             $menuItem['classList'] = $menuItem['classList'] ?? [];
 
             if ($menuItem['active'] ?? false) {
@@ -37,7 +37,7 @@ class MegaMenu extends \ComponentLibrary\Component\BaseController
                 $menuItem['classList'][] = $this->getBaseClass() . '__item--has-children';
                 $menuItem['children'] = $this->generateMenuItems($menuItem['children']);
             }
-            
+
             $menuItem['classNames'] = trim(implode(' ', $menuItem['classList']));
             $result[$key] = $menuItem;
         }

@@ -20,6 +20,5 @@ final class ProductData
         public array $bulletPoints = [],
         public array $button = [],
         public bool $featured = false,
-    ) {
-    }
+    ) {}
 }

@@ -8,7 +8,8 @@ namespace ComponentLibrary\Component\Accordion;
  */
 class Accordion extends \ComponentLibrary\Component\BaseController
 {
-    public function init() {
+    public function init()
+    {
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
@@ -31,12 +32,15 @@ class Accordion extends \ComponentLibrary\Component\BaseController
         $this->data['heading'] = $this->getHeading();
         $headingCount = $this->getHeadingCount() ?? 0;
 
-        $this->data['attributeList']['style'] = $headingCount > 0 ? '--' . $this->getBaseClass() . '--heading-count: ' . $headingCount . ';' : '1';
+        $this->data['attributeList']['style'] = $headingCount > 0
+            ? '--' . $this->getBaseClass() . '--heading-count: ' . $headingCount . ';'
+            : '1';
 
         $this->data['id'] = $this->sanitizeIdAttribute(uniqid());
     }
 
-    private function getHeading(): ?array {
+    private function getHeading(): ?array
+    {
         $heading = $this->data['heading'] ?? null;
 
         if (empty($heading)) {
@@ -50,7 +54,8 @@ class Accordion extends \ComponentLibrary\Component\BaseController
         return $heading;
     }
 
-    private function getHeadingCount(): int {
+    private function getHeadingCount(): int
+    {
         if (empty($this->data['heading'])) {
             return 1;
         }

@@ -12,11 +12,11 @@ class Table extends \ComponentLibrary\Component\BaseController
         $this->padCells();
 
         //Typecast labels
-        if(is_object($labels)) {
-           $this->data['labels'] = (array) $labels; 
+        if (is_object($labels)) {
+            $this->data['labels'] = (array) $labels;
         }
 
-        $this->data['attributeList']['data-js-table'] = true; 
+        $this->data['attributeList']['data-js-table'] = true;
 
         if ($filterable) {
             $this->data['attributeList']['data-js-table-filter'] = true;
@@ -32,24 +32,24 @@ class Table extends \ComponentLibrary\Component\BaseController
         }
 
         if ($isMultidimensional) {
-            $this->data['classList'][]  = $this->getBaseClass() . '--multidimensional';
+            $this->data['classList'][] = $this->getBaseClass() . '--multidimensional';
         }
 
-        if($fullscreen && empty($title)) {
+        if ($fullscreen && empty($title)) {
             $this->data['classList'][] = $this->getBaseClass() . '--title-none';
         }
 
         if ($showSum) {
-            $this->data['classList'][]  = $this->getBaseClass() . '--summary';
+            $this->data['classList'][] = $this->getBaseClass() . '--summary';
 
             $sumRow = ['columns' => []];
             foreach ($list as $rowIndex => $row) {
                 foreach ($row['columns'] as $cellIndex => $cell) {
                     if ($cellIndex !== 0) {
                         if (!isset($sumRow['columns'][$cellIndex])) {
-                            $sumRow['columns'][$cellIndex] = (int)$cell;
+                            $sumRow['columns'][$cellIndex] = (int) $cell;
                         } else {
-                            $sumRow['columns'][$cellIndex] += (int)$cell;
+                            $sumRow['columns'][$cellIndex] += (int) $cell;
                         }
                     }
                 }

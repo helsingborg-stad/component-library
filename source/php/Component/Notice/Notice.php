@@ -12,13 +12,13 @@ class Notice extends \ComponentLibrary\Component\BaseController
         $this->data['slotHasData'] = $this->slotHasData('slot');
 
         // Backwards compatibility
-        $data['action']['text'] ??= ($data['action']['label'] ?? '');
+        $data['action']['text'] ??= $data['action']['label'] ?? '';
 
         if (empty($id)) {
             $this->data['id'] = $this->sanitizeIdAttribute(uniqid());
         }
 
-        // TODO: Find instances of icon name direct assign, and remove this patch. 
+        // TODO: Find instances of icon name direct assign, and remove this patch.
         $iconName = $icon['icon'] ?? $icon['name'] ?? null;
 
         if (is_string($iconName) && $iconName !== '') {
@@ -27,31 +27,31 @@ class Notice extends \ComponentLibrary\Component\BaseController
                 'icon' => $iconName,
                 'size' => $icon['size'] ?? 'md',
             ];
-            
-            if(isset($this->data['icon']['name'])) {
+
+            if (isset($this->data['icon']['name'])) {
                 unset($this->data['icon']['name']);
             }
         }
-     
+
         // State class
         if (in_array($type, ['success', 'warning', 'danger', 'info'])) {
-            $this->data['classList'][] = $this->getBaseClass() . "--" . $type;
+            $this->data['classList'][] = $this->getBaseClass() . '--' . $type;
         } else {
-            $this->data['classList'][] = $this->getBaseClass() . "--info";
+            $this->data['classList'][] = $this->getBaseClass() . '--info';
         }
 
         //Take up full width
         if ($stretch) {
-            $this->data['classList'][] = $this->getBaseClass() . "--stretch";
+            $this->data['classList'][] = $this->getBaseClass() . '--stretch';
         }
 
         // Information
-        $this->data['message']  = $this->handleMessageData($message);
+        $this->data['message'] = $this->handleMessageData($message);
 
         // Action
-        $this->data['action']   = $this->handleActionData($action);
+        $this->data['action'] = $this->handleActionData($action);
         if (isset($this->data['action']['position']) && $this->data['action']['position'] === 'below') {
-            $this->data['classList'][] = $this->getBaseClass() . "--action-below";
+            $this->data['classList'][] = $this->getBaseClass() . '--action-below';
         }
 
         // Dismissable signature
@@ -61,17 +61,21 @@ class Notice extends \ComponentLibrary\Component\BaseController
 
             //Add signature to attribute list
             $hashBase = $this->createDismissableSignature($this->data);
-            $this->data['attributeList'][
-                'data-dismissable-notice-uid'
-            ] = md5(serialize($hashBase));
+            $this->data['attributeList']['data-dismissable-notice-uid'] = md5(serialize($hashBase));
 
             //Add dismussed time period to attribute list
-            $timeout = in_array($dismissable, [
-                'immediate', 'session', 'permanent'
-            ], true) ? $dismissable : 'session';
-            $this->data['attributeList'][
-                'data-dismissable-notice-timeout'
-            ] = $timeout ?? 0;
+            $timeout = in_array(
+                $dismissable,
+                [
+                    'immediate',
+                    'session',
+                    'permanent',
+                ],
+                true,
+            )
+                ? $dismissable
+                : 'session';
+            $this->data['attributeList']['data-dismissable-notice-timeout'] = $timeout ?? 0;
         }
     }
 
@@ -87,7 +91,7 @@ class Notice extends \ComponentLibrary\Component\BaseController
     }
 
     /**
-     * Handle message data, make 
+     * Handle message data, make
      * arrays conform to base format.
      *
      * @param array $message
@@ -99,7 +103,7 @@ class Notice extends \ComponentLibrary\Component\BaseController
     }
 
     /**
-     * Handle action data, makes non empty 
+     * Handle action data, makes non empty
      * arrays conform to base format.
      * Empty arrays are converted to null.
      *

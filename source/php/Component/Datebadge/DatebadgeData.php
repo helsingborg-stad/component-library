@@ -14,6 +14,5 @@ final class DatebadgeData
         public string $size = 'md',
         public bool $translucent = false,
         public string $color = 'light',
-    ) {
-    }
+    ) {}
 }

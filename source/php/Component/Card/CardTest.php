@@ -5,15 +5,15 @@ namespace ComponentLibrary\Component\Card;
 use ComponentLibrary\Cache\CacheInterface;
 use PHPUnit\Framework\TestCase;
 
-class CardTest extends TestCase {
-    
+class CardTest extends TestCase
+{
     /**
      * @testdox Test that the class is added to the classList if image is truthy
      */
-    public function testImageClassIsAdded() {
+    public function testImageClassIsAdded()
+    {
         $controller = $this->getController(['image' => true]);
         $controller->init();
-        
 
         $this->assertContains('c-card--has-image', $controller->getData()['classList']);
     }
@@ -21,7 +21,8 @@ class CardTest extends TestCase {
     /**
      * @testdox Test that the class is added to the classList if hasPlaceholder and date is truthy
      */
-    public function testImageClassIsAddedWithPlaceholder() {
+    public function testImageClassIsAddedWithPlaceholder()
+    {
         $controller = $this->getController(['hasPlaceholder' => true]);
         $controller->init();
 
@@ -32,7 +33,8 @@ class CardTest extends TestCase {
      * @testdox $contentHtmlElement is "div" if content contains html
      * @dataProvider contentWithHtmlProvider
      */
-    public function testContentHtmlElementIsDiv($content) {
+    public function testContentHtmlElementIsDiv($content)
+    {
         $controller = $this->getController(['content' => $content]);
         $controller->init();
 
@@ -43,7 +45,8 @@ class CardTest extends TestCase {
      * @testdox $contentHtmlElement is "p" if content does not contain html
      * @dataProvider contentWithoutHtmlProvider
      */
-    public function testContentHtmlElementIsP($content) {
+    public function testContentHtmlElementIsP($content)
+    {
         $controller = $this->getController(['content' => $content]);
         $controller->init();
 
@@ -67,7 +70,7 @@ class CardTest extends TestCase {
             ['Test'],
             ['Another test'],
             ['12345'],
-            ['!@#$%']
+            ['!@#$%'],
         ];
     }
 
@@ -84,9 +87,13 @@ class CardTest extends TestCase {
             'link' => false,
             'ratio' => false,
             'tags' => false,
-            'date' => null
+            'date' => null,
         ];
 
-        return new Card(array_merge($default, $data), $this->createMock(CacheInterface::class), new \ComponentLibrary\Helper\TagSanitizer());
+        return new Card(
+            array_merge($default, $data),
+            $this->createMock(CacheInterface::class),
+            new \ComponentLibrary\Helper\TagSanitizer(),
+        );
     }
 }

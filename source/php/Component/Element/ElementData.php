@@ -12,6 +12,5 @@ final class ElementData
     public function __construct(
         public string $componentElement = 'div',
         public bool $hideIfNoContent = true,
-    ) {
-    }
+    ) {}
 }

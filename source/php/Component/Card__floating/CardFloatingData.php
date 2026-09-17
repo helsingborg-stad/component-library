@@ -11,6 +11,5 @@ final class CardFloatingData
 {
     public function __construct(
         public string $slot = '',
-    ) {
-    }
+    ) {}
 }

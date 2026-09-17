@@ -16,8 +16,7 @@ final class GenericCollectionDataFixture
      */
     public function __construct(
         public array $list = [],
-    ) {
-    }
+    ) {}
 }
 
 class ComponentDataReflectorTest extends TestCase

@@ -22,6 +22,5 @@ final class AvatarData
         public array $icon = [],
         public string $name = '',
         public string $size = 'md',
-    ) {
-    }
+    ) {}
 }

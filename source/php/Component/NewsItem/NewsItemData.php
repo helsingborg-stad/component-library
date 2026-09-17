@@ -25,6 +25,5 @@ final class NewsItemData
         public mixed $contentLeftArea = null,
         public mixed $contentRightArea = null,
         public ?bool $hasPlaceholderImage = null,
-    ) {
-    }
+    ) {}
 }

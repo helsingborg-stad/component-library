@@ -6,7 +6,7 @@ namespace ComponentLibrary\Component\Toast;
 
 final class ToastData
 {
-    public function __construct(public string $position = 'bottom-left')
-    {
-    }
+    public function __construct(
+        public string $position = 'bottom-left',
+    ) {}
 }

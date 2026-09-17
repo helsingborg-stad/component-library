@@ -11,7 +11,8 @@ class LinkTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->component = $this->getMockBuilder(Link::class)
+        $this->component = $this
+            ->getMockBuilder(Link::class)
             ->disableOriginalConstructor()
             ->onlyMethods([])
             ->getMock();
@@ -33,6 +34,9 @@ class LinkTest extends TestCase
      */
     public function testSanitizeHrefDoesNotRemoveHyphensFromEmail()
     {
-        $this->assertEquals('mailto:test-email@example.com', $this->component->sanitizeHref('mailto:test-email@example.com'));
+        $this->assertEquals(
+            'mailto:test-email@example.com',
+            $this->component->sanitizeHref('mailto:test-email@example.com'),
+        );
     }
 }

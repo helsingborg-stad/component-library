@@ -4,11 +4,11 @@ namespace ComponentLibrary\Integrations\Image;
 
 use ComponentLibrary\Integrations\Image\ImageResolverInterface;
 
-interface ImageInterface {
-
+interface ImageInterface
+{
     /**
      * Get the URL of the image
-     * 
+     *
      * @return string
      */
     public function getUrl(): ?string;
@@ -21,7 +21,7 @@ interface ImageInterface {
     /**
      * Get the srcset of the image.
      * If the image is to small to create a srcset, return null.
-     * 
+     *
      * @return string|null
      */
     public function getSrcSet(): ?string;
@@ -29,7 +29,7 @@ interface ImageInterface {
     /**
      * Get the focus point of the image
      * Default is 50% 50%
-     * 
+     *
      * @return array
      */
     public function getFocusPoint(): array;
@@ -39,21 +39,26 @@ interface ImageInterface {
      */
     public function getAltText(): ?string;
 
-    /** 
+    /**
      * Get a container query supportive array
-     * 
+     *
      * @return array
      */
     public function getContainerQueryData(): array;
 
     /**
      * Factory method to create an image object
-     * 
+     *
      * @param int $imageId                          The WordPress ID of the image
      * @param array $imageSize                      Width and height of the image
      * @param ImageResolverInterface $resolver      A interface that resolves the image in the native system
-     * 
+     *
      * @return ImageInterface
      */
-    public static function factory(int $imageId, array $imageSize, ImageResolverInterface $resolver, ?ImageFocusResolverInterface $focusResolver = null): ImageInterface;
+    public static function factory(
+        int $imageId,
+        array $imageSize,
+        ImageResolverInterface $resolver,
+        ?ImageFocusResolverInterface $focusResolver = null,
+    ): ImageInterface;
 }

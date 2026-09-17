@@ -25,7 +25,7 @@ class NavTest extends TestCase
      */
     public function testHasChildrenIsFalseForLeafItem(): void
     {
-        $nav   = $this->createNav(['includeToggle' => true]);
+        $nav = $this->createNav(['includeToggle' => true]);
         $items = $nav->normalizeItems([['children' => false]]);
 
         $this->assertFalse($items[0]['hasChildren']);
@@ -36,7 +36,7 @@ class NavTest extends TestCase
      */
     public function testHasChildrenIsTrueForNonEmptyArray(): void
     {
-        $nav   = $this->createNav(['includeToggle' => true]);
+        $nav = $this->createNav(['includeToggle' => true]);
         $items = $nav->normalizeItems([
             ['children' => [['label' => 'Child One']]],
         ]);
@@ -49,7 +49,7 @@ class NavTest extends TestCase
      */
     public function testHasChildrenIsFalseForEmptyArray(): void
     {
-        $nav   = $this->createNav(['includeToggle' => true]);
+        $nav = $this->createNav(['includeToggle' => true]);
         $items = $nav->normalizeItems([['children' => []]]);
 
         $this->assertFalse($items[0]['hasChildren']);
@@ -60,7 +60,7 @@ class NavTest extends TestCase
      */
     public function testHasChildrenIsTrueForBooleanTrue(): void
     {
-        $nav   = $this->createNav(['includeToggle' => true]);
+        $nav = $this->createNav(['includeToggle' => true]);
         $items = $nav->normalizeItems([['children' => true]]);
 
         $this->assertTrue($items[0]['hasChildren']);
@@ -75,7 +75,7 @@ class NavTest extends TestCase
      */
     public function testHasToggleIsFalseForLeafItem(): void
     {
-        $nav   = $this->createNav(['includeToggle' => true]);
+        $nav = $this->createNav(['includeToggle' => true]);
         $items = $nav->normalizeItems([['children' => false]]);
 
         $this->assertFalse($items[0]['hasToggle']);
@@ -86,7 +86,7 @@ class NavTest extends TestCase
      */
     public function testHasToggleIsTrueForNonEmptyChildrenArray(): void
     {
-        $nav   = $this->createNav(['includeToggle' => true]);
+        $nav = $this->createNav(['includeToggle' => true]);
         $items = $nav->normalizeItems([
             ['children' => [['label' => 'Child One']]],
         ]);
@@ -99,7 +99,7 @@ class NavTest extends TestCase
      */
     public function testHasToggleIsFalseForEmptyChildrenArray(): void
     {
-        $nav   = $this->createNav(['includeToggle' => true]);
+        $nav = $this->createNav(['includeToggle' => true]);
         $items = $nav->normalizeItems([['children' => []]]);
 
         $this->assertFalse($items[0]['hasToggle']);
@@ -110,7 +110,7 @@ class NavTest extends TestCase
      */
     public function testHasToggleIsFalseForBooleanTrueWithoutAsyncMetadata(): void
     {
-        $nav   = $this->createNav(['includeToggle' => true]);
+        $nav = $this->createNav(['includeToggle' => true]);
         $items = $nav->normalizeItems([['children' => true]]);
 
         $this->assertFalse($items[0]['hasToggle']);
@@ -121,10 +121,10 @@ class NavTest extends TestCase
      */
     public function testHasToggleIsTrueForBooleanTrueWithAsyncMetadata(): void
     {
-        $nav   = $this->createNav(['includeToggle' => true]);
+        $nav = $this->createNav(['includeToggle' => true]);
         $items = $nav->normalizeItems([
             [
-                'children'      => true,
+                'children' => true,
                 'attributeList' => ['data-fetch-url' => 'https://example.com/children'],
             ],
         ]);
@@ -137,10 +137,10 @@ class NavTest extends TestCase
      */
     public function testHasToggleIsFalseForBooleanTrueWithEmptyFetchUrl(): void
     {
-        $nav   = $this->createNav(['includeToggle' => true]);
+        $nav = $this->createNav(['includeToggle' => true]);
         $items = $nav->normalizeItems([
             [
-                'children'      => true,
+                'children' => true,
                 'attributeList' => ['data-fetch-url' => ''],
             ],
         ]);
@@ -153,10 +153,10 @@ class NavTest extends TestCase
      */
     public function testHasToggleIsFalseWhenIncludeToggleIsDisabled(): void
     {
-        $nav   = $this->createNav(['includeToggle' => false]);
+        $nav = $this->createNav(['includeToggle' => false]);
         $items = $nav->normalizeItems([
             [
-                'children'      => true,
+                'children' => true,
                 'attributeList' => ['data-fetch-url' => 'https://example.com/children'],
             ],
         ]);
@@ -169,7 +169,7 @@ class NavTest extends TestCase
      */
     public function testHasToggleIsFalseWhenIncludeToggleIsDisabledForConcreteChildren(): void
     {
-        $nav   = $this->createNav(['includeToggle' => false]);
+        $nav = $this->createNav(['includeToggle' => false]);
         $items = $nav->normalizeItems([
             ['children' => [['label' => 'Child One']]],
         ]);
@@ -186,9 +186,9 @@ class NavTest extends TestCase
      */
     public function testItemClassListDoesNotContainHasToggleForLeafItem(): void
     {
-        $nav  = $this->createNav([
+        $nav = $this->createNav([
             'includeToggle' => true,
-            'items'         => [['label' => 'Leaf', 'children' => false]],
+            'items' => [['label' => 'Leaf', 'children' => false]],
         ]);
         $data = $nav->getData();
 
@@ -202,11 +202,11 @@ class NavTest extends TestCase
      */
     public function testItemClassListContainsHasToggleForConcreteChildren(): void
     {
-        $nav  = $this->createNav([
+        $nav = $this->createNav([
             'includeToggle' => true,
-            'items'         => [
+            'items' => [
                 [
-                    'label'    => 'Parent',
+                    'label' => 'Parent',
                     'children' => [['label' => 'Child One']],
                 ],
             ],
@@ -223,9 +223,9 @@ class NavTest extends TestCase
      */
     public function testItemClassListDoesNotContainHasToggleForBooleanTrueWithoutAsyncUrl(): void
     {
-        $nav  = $this->createNav([
+        $nav = $this->createNav([
             'includeToggle' => true,
-            'items'         => [['label' => 'Async Item', 'children' => true]],
+            'items' => [['label' => 'Async Item', 'children' => true]],
         ]);
         $data = $nav->getData();
 
@@ -239,12 +239,12 @@ class NavTest extends TestCase
      */
     public function testItemClassListContainsHasToggleForBooleanTrueWithAsyncUrl(): void
     {
-        $nav  = $this->createNav([
+        $nav = $this->createNav([
             'includeToggle' => true,
-            'items'         => [
+            'items' => [
                 [
-                    'label'         => 'Async Item',
-                    'children'      => true,
+                    'label' => 'Async Item',
+                    'children' => true,
                     'attributeList' => ['data-fetch-url' => 'https://example.com/children'],
                 ],
             ],
@@ -265,12 +265,12 @@ class NavTest extends TestCase
      */
     public function testActiveAncestorWithConcreteChildrenGetsIsOpenClass(): void
     {
-        $nav  = $this->createNav([
+        $nav = $this->createNav([
             'includeToggle' => true,
-            'items'         => [
+            'items' => [
                 [
-                    'label'    => 'Parent',
-                    'active'   => true,
+                    'label' => 'Parent',
+                    'active' => true,
                     'children' => [['label' => 'Child One']],
                 ],
             ],
@@ -287,11 +287,11 @@ class NavTest extends TestCase
      */
     public function testAncestorItemGetsIsOpenClass(): void
     {
-        $nav  = $this->createNav([
+        $nav = $this->createNav([
             'includeToggle' => true,
-            'items'         => [
+            'items' => [
                 [
-                    'label'    => 'Ancestor',
+                    'label' => 'Ancestor',
                     'ancestor' => true,
                     'children' => [['label' => 'Child One']],
                 ],
@@ -318,18 +318,18 @@ class NavTest extends TestCase
     private function createNav(array $data = []): Nav
     {
         $defaults = [
-            'items'              => [],
-            'direction'          => 'vertical',
-            'includeToggle'      => false,
+            'items' => [],
+            'direction' => 'vertical',
+            'includeToggle' => false,
             'isExtendedDropdown' => false,
-            'allowStyle'         => true,
-            'buttonStyle'        => 'filled',
-            'buttonColor'        => 'primary',
-            'expandLabel'        => 'Expand',
-            'height'             => '',
-            'compressed'         => false,
-            'expandIcon'         => 'expand_more',
-            'indentSubLevels'    => false,
+            'allowStyle' => true,
+            'buttonStyle' => 'filled',
+            'buttonColor' => 'primary',
+            'expandLabel' => 'Expand',
+            'height' => '',
+            'compressed' => false,
+            'expandIcon' => 'expand_more',
+            'indentSubLevels' => false,
         ];
 
         return new Nav(

@@ -6,24 +6,31 @@ use ComponentLibrary\Cache\CacheInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-class DatebadgeTest extends TestCase {
+class DatebadgeTest extends TestCase
+{
     /**
      * @testdox class can be instantiated
      */
-    public function testCanBeCreated() {
-        $instance = new Datebadge($this->getDefaultData(), $this->getCacheMock(), new \ComponentLibrary\Helper\TagSanitizer());
+    public function testCanBeCreated()
+    {
+        $instance = new Datebadge(
+            $this->getDefaultData(),
+            $this->getCacheMock(),
+            new \ComponentLibrary\Helper\TagSanitizer(),
+        );
         $this->assertInstanceOf(Datebadge::class, $instance);
     }
 
     /**
      * @testdox sets month day and time from date
      */
-    public function testSetsMonthDayAndTimeFromDate() {
+    public function testSetsMonthDayAndTimeFromDate()
+    {
         $data = $this->getDefaultData();
         $data['date'] = '2021-01-01 14:00';
-        
+
         $instance = new Datebadge($data, $this->getCacheMock(), new \ComponentLibrary\Helper\TagSanitizer());
-        
+
         $this->assertEquals('Jan', $instance->getData()['month']);
         $this->assertEquals('1', $instance->getData()['day']);
     }
@@ -31,25 +38,28 @@ class DatebadgeTest extends TestCase {
     /**
      * @testdox accepts unix timestamp as date
      */
-    public function testAcceptsUnixTimestampAsDate() {
+    public function testAcceptsUnixTimestampAsDate()
+    {
         $data = $this->getDefaultData();
         $data['date'] = strtotime('2021-01-01 14:00');
-        
+
         $instance = new Datebadge($data, $this->getCacheMock(), new \ComponentLibrary\Helper\TagSanitizer());
-        
+
         $this->assertEquals('Jan', $instance->getData()['month']);
         $this->assertEquals('1', $instance->getData()['day']);
     }
 
-    private function getDefaultData():array {
+    private function getDefaultData(): array
+    {
         return [
             'date' => '2021-01-01',
             'size' => 'md',
-            'color' => 'light'
+            'color' => 'light',
         ];
     }
 
-    private function getCacheMock():CacheInterface|MockObject {
+    private function getCacheMock(): CacheInterface|MockObject
+    {
         return $this->createMock(\ComponentLibrary\Cache\CacheInterface::class);
     }
 }

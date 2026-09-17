@@ -2,9 +2,10 @@
 
 namespace ComponentLibrary\Component\Header;
 
-class Header extends \ComponentLibrary\Component\BaseController  
+class Header extends \ComponentLibrary\Component\BaseController
 {
-    public function init() {
+    public function init()
+    {
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
@@ -21,6 +22,5 @@ class Header extends \ComponentLibrary\Component\BaseController
         if ($sticky) {
             $this->data['classList'][] = "{$this->getBaseClass()}--sticky";
         }
-
     }
 }

@@ -18,8 +18,8 @@ class Datebadge extends \ComponentLibrary\Component\BaseController
 
         //Format
         $date = !is_int($date) ? strtotime($date) : $date;
-        $this->data['month']    = $this->getDateFunc("M", $date);
-        $this->data['day']      = $this->getDateFunc("j", $date);
+        $this->data['month'] = $this->getDateFunc('M', $date);
+        $this->data['day'] = $this->getDateFunc('j', $date);
     }
 
     /**

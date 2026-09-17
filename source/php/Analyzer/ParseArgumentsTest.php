@@ -15,7 +15,7 @@ class ParseArgumentsTest extends TestCase
      */
     public function testParsesTokenArgument(): void
     {
-        $args    = ['script.php', '--token=ghp_test123'];
+        $args = ['script.php', '--token=ghp_test123'];
         $options = parseArguments($args);
 
         $this->assertSame('ghp_test123', $options['token']);
@@ -26,7 +26,7 @@ class ParseArgumentsTest extends TestCase
      */
     public function testParsesFormatArgument(): void
     {
-        $args    = ['script.php', '--format=json'];
+        $args = ['script.php', '--format=json'];
         $options = parseArguments($args);
 
         $this->assertSame('json', $options['format']);
@@ -37,7 +37,7 @@ class ParseArgumentsTest extends TestCase
      */
     public function testParsesUnusedOnlyFlag(): void
     {
-        $args    = ['script.php', '--unused-only'];
+        $args = ['script.php', '--unused-only'];
         $options = parseArguments($args);
 
         $this->assertTrue($options['unused_only']);
@@ -48,7 +48,7 @@ class ParseArgumentsTest extends TestCase
      */
     public function testParsesHelpFlag(): void
     {
-        $args    = ['script.php', '--help'];
+        $args = ['script.php', '--help'];
         $options = parseArguments($args);
 
         $this->assertTrue($options['help']);
@@ -59,7 +59,7 @@ class ParseArgumentsTest extends TestCase
      */
     public function testDefaultValues(): void
     {
-        $args    = ['script.php'];
+        $args = ['script.php'];
         $options = parseArguments($args);
 
         $this->assertSame('table', $options['format']);
@@ -75,7 +75,7 @@ class ParseArgumentsTest extends TestCase
         $previousValue = getenv('GITHUB_TOKEN');
         putenv('GITHUB_TOKEN=env_token_123');
 
-        $args    = ['script.php'];
+        $args = ['script.php'];
         $options = parseArguments($args);
 
         $this->assertSame('env_token_123', $options['token']);
@@ -96,7 +96,7 @@ class ParseArgumentsTest extends TestCase
         $previousValue = getenv('GITHUB_TOKEN');
         putenv('GITHUB_TOKEN=env_token');
 
-        $args    = ['script.php', '--token=cli_token'];
+        $args = ['script.php', '--token=cli_token'];
         $options = parseArguments($args);
 
         $this->assertSame('cli_token', $options['token']);

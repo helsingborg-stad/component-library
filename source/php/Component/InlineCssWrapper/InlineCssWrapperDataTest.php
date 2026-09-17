@@ -17,6 +17,9 @@ class InlineCssWrapperDataTest extends TestCase
         static::assertInstanceOf(ComponentConfig::class, $config);
         static::assertSame('inlineCssWrapper', $config->slug);
         static::assertSame(InlineCssWrapperData::class, $config->data);
-        static::assertSame(['componentElement' => 'div', 'styles' => []], (new ComponentDataReflector())->getDefaultArguments(InlineCssWrapperData::class));
+        static::assertSame(
+            ['componentElement' => 'div', 'styles' => []],
+            new ComponentDataReflector()->getDefaultArguments(InlineCssWrapperData::class),
+        );
     }
 }

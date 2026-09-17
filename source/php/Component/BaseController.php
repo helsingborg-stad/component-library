@@ -279,7 +279,11 @@ class BaseController
 
         //Applies component specific wp filter
         if (function_exists('apply_filters')) {
-            $modifier = apply_filters('ComponentLibrary/Component/' . $componentName . '/Modifier', [], $this->data['context']);
+            $modifier = apply_filters(
+                'ComponentLibrary/Component/' . $componentName . '/Modifier',
+                [],
+                $this->data['context'],
+            );
             $class = $this->setModifier($class, $modifier);
         }
 
@@ -290,7 +294,11 @@ class BaseController
 
         //Applies component specific wp filter
         if (function_exists('apply_filters')) {
-            $class = apply_filters('ComponentLibrary/Component/' . $componentName . '/Class', $class, $this->data['context']);
+            $class = apply_filters(
+                'ComponentLibrary/Component/' . $componentName . '/Class',
+                $class,
+                $this->data['context'],
+            );
         }
 
         //Return manipulated classes as array
@@ -560,11 +568,10 @@ class BaseController
      * @return string
      */
     private function getComponentSlug(): string
-    {        
+    {
         $namespaceParts = $this->getNamespaceParts();
         return strtolower(end($namespaceParts)) ?? '';
     }
-
 
     /**
      * Proxy for accessing private props

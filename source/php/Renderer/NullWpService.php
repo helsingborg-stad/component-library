@@ -5,9 +5,12 @@ namespace ComponentLibrary\Renderer;
 /**
  * A null implementation of the ApplyFilters interface for environments without WordPress.
  */
-class NullWpService implements \WpService\Contracts\WpCacheGet, \WpService\Contracts\WpCacheSet, \WpService\Contracts\ApplyFilters
+class NullWpService implements
+    \WpService\Contracts\WpCacheGet,
+    \WpService\Contracts\WpCacheSet,
+    \WpService\Contracts\ApplyFilters
 {
-    public function wpCacheGet(int|string $key, string $group = '', bool $force = false, null|bool &$found = null): mixed
+    public function wpCacheGet(int|string $key, string $group = '', bool $force = false, ?bool &$found = null): mixed
     {
         return false;
     }

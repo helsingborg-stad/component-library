@@ -17,6 +17,6 @@ class CardBodyDataTest extends TestCase
         static::assertInstanceOf(ComponentConfig::class, $config);
         static::assertSame('card__body', $config->slug);
         static::assertSame(CardBodyData::class, $config->data);
-        static::assertSame(['slot' => ''], (new ComponentDataReflector())->getDefaultArguments(CardBodyData::class));
+        static::assertSame(['slot' => ''], new ComponentDataReflector()->getDefaultArguments(CardBodyData::class));
     }
 }

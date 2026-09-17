@@ -5,26 +5,34 @@ class BlockTest extends PHPUnit\Framework\TestCase
     /**
      * @dataProvider hasContentDataProvider
      */
-    public function  testHasContentReturnsTrueIfHasContent($data)
+    public function testHasContentReturnsTrueIfHasContent($data)
     {
         $block = new ReflectionClass(\ComponentLibrary\Component\Block\Block::class);
         $hasContentMethod = $block->getMethod('hasContent');
         $hasContentMethod->setAccessible(true);
 
-        $block = new \ComponentLibrary\Component\Block\Block($this->getComponentDefaultData(), new \ComponentLibrary\Cache\StaticCache(), new \ComponentLibrary\Helper\TagSanitizer());
+        $block = new \ComponentLibrary\Component\Block\Block(
+            $this->getComponentDefaultData(),
+            new \ComponentLibrary\Cache\StaticCache(),
+            new \ComponentLibrary\Helper\TagSanitizer(),
+        );
         $this->assertTrue($hasContentMethod->invokeArgs($block, [$data]));
     }
 
     /**
      * @dataProvider hasNoContentDataProvider
      */
-    public function  testHasContentReturnsFalseIfHasNoContent($data)
+    public function testHasContentReturnsFalseIfHasNoContent($data)
     {
         $block = new ReflectionClass(\ComponentLibrary\Component\Block\Block::class);
         $hasContentMethod = $block->getMethod('hasContent');
         $hasContentMethod->setAccessible(true);
 
-        $block = new \ComponentLibrary\Component\Block\Block($this->getComponentDefaultData(), new \ComponentLibrary\Cache\StaticCache(), new \ComponentLibrary\Helper\TagSanitizer());
+        $block = new \ComponentLibrary\Component\Block\Block(
+            $this->getComponentDefaultData(),
+            new \ComponentLibrary\Cache\StaticCache(),
+            new \ComponentLibrary\Helper\TagSanitizer(),
+        );
         $this->assertFalse($hasContentMethod->invokeArgs($block, [$data]));
     }
 
@@ -34,7 +42,7 @@ class BlockTest extends PHPUnit\Framework\TestCase
             [['meta' => 'Foo']],
             [['meta' => 123]],
             [['meta' => [1, 2, 3]]],
-            [['meta' => (object)[1, 2, 3]]],
+            [['meta' => (object) [1, 2, 3]]],
         ];
     }
 
@@ -47,13 +55,12 @@ class BlockTest extends PHPUnit\Framework\TestCase
             [['meta' => []]],
             [['meta' => ['']]],
             [['meta' => new stdClass()]],
-            [['meta' => (object)['']]],
+            [['meta' => (object) ['']]],
         ];
     }
 
     private function getComponentDefaultData()
     {
-        return (new \ComponentLibrary\ComponentConfiguration\ComponentDataReflector())
-            ->getDefaultArguments(\ComponentLibrary\Component\Block\BlockData::class);
+        return new \ComponentLibrary\ComponentConfiguration\ComponentDataReflector()->getDefaultArguments(\ComponentLibrary\Component\Block\BlockData::class);
     }
 }

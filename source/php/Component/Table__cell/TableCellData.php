@@ -12,6 +12,5 @@ final class TableCellData
     public function __construct(
         public string $componentElement = 'td',
         public ?int $index = null,
-    ) {
-    }
+    ) {}
 }

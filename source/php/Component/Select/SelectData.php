@@ -29,6 +29,5 @@ final class SelectData
         public ?bool $search = null,
         public string $searchPlaceholder = 'Search...',
         public string $searchNoResultsText = 'No results found',
-    ) {
-    }
+    ) {}
 }

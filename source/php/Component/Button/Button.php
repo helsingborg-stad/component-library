@@ -16,7 +16,7 @@ class Button extends \ComponentLibrary\Component\BaseController
         $this->data['classList'][] = $this->getBaseClass() . '__' . $style . '--' . $color;
         $this->data['classList'][] = $this->getBaseClass() . '--' . $size;
 
-        if($shape == 'pill') {
+        if ($shape == 'pill') {
             $this->data['classList'][] = $this->getBaseClass('pill', true);
         }
 
@@ -26,15 +26,18 @@ class Button extends \ComponentLibrary\Component\BaseController
 
         $this->setIconOnly($text, $icon);
 
-
         //Make linked buttons links
         if ($href) {
-            $componentElement = $this->data['componentElement'] = "a";
+            $componentElement = $this->data['componentElement'] = 'a';
             $this->data['attributeList']['href'] = $this->sanitizeHref($href);
         }
 
         //Set type (submit etc.)
-        if ($type && in_array($type, ['button', 'submit', 'reset']) && in_array($componentElement, ['button', 'input'])) {
+        if (
+            $type
+            && in_array($type, ['button', 'submit', 'reset'])
+            && in_array($componentElement, ['button', 'input'])
+        ) {
             $this->data['attributeList']['type'] = $type;
         }
 
@@ -43,7 +46,7 @@ class Button extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['target'] = $target;
         }
 
-        if($componentElement == 'label') {
+        if ($componentElement == 'label') {
             $this->data['isLabel'] = true;
         } else {
             $this->data['isLabel'] = false;
@@ -62,7 +65,7 @@ class Button extends \ComponentLibrary\Component\BaseController
             if (!is_array($classListIcon) && empty($classListIcon)) {
                 $classListIcon = [];
             }
-            
+
             $classListIcon[] = $this->getBaseClass() . '__label-icon--reverse';
 
             if (!is_array($classListText) && empty($classListText)) {
@@ -74,16 +77,16 @@ class Button extends \ComponentLibrary\Component\BaseController
 
         //Add classes to ico
         if (is_array($classListIcon) && !empty($classListIcon)) {
-            $this->data['classListIcon'] = implode(" ", $classListIcon);
+            $this->data['classListIcon'] = implode(' ', $classListIcon);
         } else {
-            $this->data['classListIcon'] = "";
+            $this->data['classListIcon'] = '';
         }
 
         //Add classes to text
         if (is_array($classListText) && !empty($classListText)) {
-            $this->data['classListText'] = implode(" ", $classListText);
+            $this->data['classListText'] = implode(' ', $classListText);
         } else {
-            $this->data['classListText'] = "";
+            $this->data['classListText'] = '';
         }
 
         if (empty($disableColor)) {
@@ -97,21 +100,21 @@ class Button extends \ComponentLibrary\Component\BaseController
 
     /**
      * Sanitize the href attribute
-     * 
+     *
      * This will format phone numbers and emails correctly
-     * 
+     *
      * @param string $href  The href attribute
-     * 
+     *
      * @return string       The sanitized href
      */
     private function sanitizeHref(?string $href): string
     {
-        if(empty($href)) {
+        if (empty($href)) {
             return '';
         }
 
-        $href   = trim($href);
-        $href   = html_entity_decode($href, ENT_QUOTES | ENT_HTML5);
+        $href = trim($href);
+        $href = html_entity_decode($href, ENT_QUOTES | ENT_HTML5);
         $scheme = parse_url($href, PHP_URL_SCHEME);
 
         return match ($scheme) {
@@ -124,7 +127,7 @@ class Button extends \ComponentLibrary\Component\BaseController
     /**
      * Set attributes, if not found in attributes list.
      * Attributes may be overridden with attributes from
-     * the attributeList input. 
+     * the attributeList input.
      *
      * @return void
      */
@@ -135,11 +138,11 @@ class Button extends \ComponentLibrary\Component\BaseController
         $attributeMap = [
             //'data-js-toggle-trigger' => $toggleId,
             //'data-js-toggle-item' => $toggleId,
-            //'data-js-toggle-class' => "is-pressed", 
-            'aria-pressed' => "false"
+            //'data-js-toggle-class' => "is-pressed",
+            'aria-pressed' => 'false',
         ];
 
-        foreach($attributeMap as $attribute => $data) {
+        foreach ($attributeMap as $attribute => $data) {
             if (!array_key_exists($attribute, $this->data['attributeList']) || empty($this->data['attributeList'])) {
                 $this->data['attributeList'][$attribute] = $data;
             }
@@ -147,7 +150,6 @@ class Button extends \ComponentLibrary\Component\BaseController
 
         $this->data['classList'][] = $this->getBaseClass() . '__toggle';
     }
-
 
     /**
      * Adds modifier to indicate that this button is missing a label
@@ -158,11 +160,10 @@ class Button extends \ComponentLibrary\Component\BaseController
      */
     private function setIconOnly($text, $icon)
     {
-
         if (!empty($icon) && empty($text)) {
             $this->data['classList'][] = $this->getBaseClass('icon-only', true);
-            
-            if(!$this->data['ariaLabel'] && !isset($this->data['attributeList']['aria-label'])) {
+
+            if (!$this->data['ariaLabel'] && !isset($this->data['attributeList']['aria-label'])) {
                 $this->data['attributeList']['aria-label'] = $icon;
             }
         }

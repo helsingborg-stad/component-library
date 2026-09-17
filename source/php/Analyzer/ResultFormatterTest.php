@@ -19,11 +19,11 @@ class ResultFormatterTest extends TestCase
 
         $results = [
             'button' => [
-                'total_count'  => 42,
+                'total_count' => 42,
                 'repositories' => ['helsingborg-stad/theme-a', 'helsingborg-stad/theme-b'],
             ],
             'card' => [
-                'total_count'  => 0,
+                'total_count' => 0,
                 'repositories' => [],
             ],
         ];
@@ -48,11 +48,11 @@ class ResultFormatterTest extends TestCase
 
         $results = [
             'button' => [
-                'total_count'  => 42,
+                'total_count' => 42,
                 'repositories' => ['helsingborg-stad/theme-a'],
             ],
             'card' => [
-                'total_count'  => 0,
+                'total_count' => 0,
                 'repositories' => [],
             ],
         ];
@@ -73,17 +73,17 @@ class ResultFormatterTest extends TestCase
 
         $results = [
             'button' => [
-                'total_count'  => 10,
+                'total_count' => 10,
                 'repositories' => ['helsingborg-stad/theme-a'],
             ],
             'card' => [
-                'total_count'  => 0,
+                'total_count' => 0,
                 'repositories' => [],
             ],
         ];
 
         $jsonOutput = $formatter->formatJson($results);
-        $decoded    = json_decode($jsonOutput, true);
+        $decoded = json_decode($jsonOutput, true);
 
         $this->assertIsArray($decoded);
         $this->assertArrayHasKey('summary', $decoded);
@@ -110,8 +110,8 @@ class ResultFormatterTest extends TestCase
 
         $results = [
             'button' => ['total_count' => 5, 'repositories' => ['repo-a']],
-            'card'   => ['total_count' => 0, 'repositories' => []],
-            'icon'   => ['total_count' => 3, 'repositories' => ['repo-b']],
+            'card' => ['total_count' => 0, 'repositories' => []],
+            'icon' => ['total_count' => 3, 'repositories' => ['repo-b']],
         ];
 
         $output = $formatter->formatTable($results);

@@ -17,6 +17,6 @@ class CardFooterDataTest extends TestCase
         static::assertInstanceOf(ComponentConfig::class, $config);
         static::assertSame('card__footer', $config->slug);
         static::assertSame(CardFooterData::class, $config->data);
-        static::assertSame(['slot' => ''], (new ComponentDataReflector())->getDefaultArguments(CardFooterData::class));
+        static::assertSame(['slot' => ''], new ComponentDataReflector()->getDefaultArguments(CardFooterData::class));
     }
 }

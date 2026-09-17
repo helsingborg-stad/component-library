@@ -11,36 +11,38 @@ class Brand extends \ComponentLibrary\Component\BaseController
     private const DEFAULT_VIEWBOX_WIDTH = 500;
     private const DEFAULT_VIEWBOX_HEIGHT = 96;
 
-    public function init() {
-
+    public function init()
+    {
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
         //Add class for logo
-        if(!empty($logotype) && is_array($logotype)) {
-            $this->data['logotype']['classList'][] = $this->getBaseClass("logotype"); 
+        if (!empty($logotype) && is_array($logotype)) {
+            $this->data['logotype']['classList'][] = $this->getBaseClass('logotype');
         }
 
         //Normalize text
-        if(!is_array($text) || empty($text)) {
+        if (!is_array($text) || empty($text)) {
             $this->data['text'] = false;
         }
 
-        if(empty($text)) {
-            $this->data['logotype']['attributeList'] = $attributeList; 
+        if (empty($text)) {
+            $this->data['logotype']['attributeList'] = $attributeList;
         }
 
         // Apply aspect-ratio style when a valid aspectRatio is provided
         $this->applyAspectRatioStyle($aspectRatio);
 
         // If aspectRatio is not provided, add default view box, else, calculate view box based on aspect ratio
-        $viewBoxWidth = empty($aspectRatio) ? self::DEFAULT_VIEWBOX_WIDTH: $this->getViewBoxWidth((string) $aspectRatio);
+        $viewBoxWidth = empty($aspectRatio)
+            ? self::DEFAULT_VIEWBOX_WIDTH
+            : $this->getViewBoxWidth((string) $aspectRatio);
 
         // Set the viewBox attribute for the SVG element
         $this->data['viewBox'] = '0 0 ' . $viewBoxWidth . ' ' . self::DEFAULT_VIEWBOX_HEIGHT;
     }
 
-    /* Parser for aspect ratio formats like "16:9", "4/3", "16x9", or float formats like "1.77" 
+    /* Parser for aspect ratio formats like "16:9", "4/3", "16x9", or float formats like "1.77"
      *
      * @param string $aspectRatio The aspect ratio in string format (e.g., "16:9", "4/3", "1.77").
      * @return array|null Returns an array with width and height if the format is valid, otherwise null.
@@ -70,7 +72,7 @@ class Brand extends \ComponentLibrary\Component\BaseController
         return null;
     }
 
-    /* Calculate the viewBox width based on the provided aspect ratio 
+    /* Calculate the viewBox width based on the provided aspect ratio
      *
      * @param string $aspectRatio The aspect ratio in string format (e.g., "16:9", "4/3", "1.77").
      * @return int The calculated viewBox width based on the aspect ratio.

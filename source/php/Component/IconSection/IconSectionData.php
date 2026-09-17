@@ -11,6 +11,5 @@ final class IconSectionData
 {
     public function __construct(
         public int|float $gap = 0,
-    ) {
-    }
+    ) {}
 }

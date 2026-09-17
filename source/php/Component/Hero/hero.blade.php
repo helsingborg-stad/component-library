@@ -2,6 +2,3 @@
 <section class="{{ $class }}" {!! $attribute !!}>
     @include('Hero.views.' . $heroView)
 </section>
-
-
-

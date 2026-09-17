@@ -29,21 +29,19 @@ class GroupDataTest extends TestCase
     public function testLegacyJusitifyContentInputIsStillSupported(): void
     {
         $data = array_merge(
-            (new ComponentDataReflector())->getDefaultArguments(GroupData::class),
+            new ComponentDataReflector()->getDefaultArguments(GroupData::class),
             ['jusitifyContent' => 'center'],
         );
 
         $group = new Group(
             $data,
             new class implements CacheInterface {
-                public function get(string $key, null|string $group = null): mixed
+                public function get(string $key, ?string $group = null): mixed
                 {
                     return null;
                 }
 
-                public function set(string $key, mixed $data, null|string $group = null): void
-                {
-                }
+                public function set(string $key, mixed $data, ?string $group = null): void {}
             },
             new class implements TagSanitizerInterface {
                 public function removeATags(string $string): string
@@ -59,21 +57,19 @@ class GroupDataTest extends TestCase
     public function testCorrectedJustifyContentInputIsStillSupported(): void
     {
         $data = array_merge(
-            (new ComponentDataReflector())->getDefaultArguments(GroupData::class),
+            new ComponentDataReflector()->getDefaultArguments(GroupData::class),
             ['justifyContent' => 'center'],
         );
 
         $group = new Group(
             $data,
             new class implements CacheInterface {
-                public function get(string $key, null|string $group = null): mixed
+                public function get(string $key, ?string $group = null): mixed
                 {
                     return null;
                 }
 
-                public function set(string $key, mixed $data, null|string $group = null): void
-                {
-                }
+                public function set(string $key, mixed $data, ?string $group = null): void {}
             },
             new class implements TagSanitizerInterface {
                 public function removeATags(string $string): string

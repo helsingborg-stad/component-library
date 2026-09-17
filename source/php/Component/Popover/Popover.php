@@ -18,11 +18,13 @@ class Popover extends \ComponentLibrary\Component\BaseController
         }
 
         if ($horizontalPlacement) {
-            $this->data['attributeList']['data-js-popover-horizontal-placement'] = $this->getHorizontalPlacement($horizontalPlacement);
+            $this->data['attributeList']['data-js-popover-horizontal-placement'] =
+                $this->getHorizontalPlacement($horizontalPlacement);
         }
 
         if ($verticalPlacement) {
-            $this->data['attributeList']['data-js-popover-vertical-placement'] = $this->getVerticalPlacement($verticalPlacement);
+            $this->data['attributeList']['data-js-popover-vertical-placement'] =
+                $this->getVerticalPlacement($verticalPlacement);
         }
 
         if ($backdrop) {
@@ -34,7 +36,7 @@ class Popover extends \ComponentLibrary\Component\BaseController
     {
         return in_array($type, ['auto', 'hint', 'manual']) ? $type : 'auto';
     }
-    
+
     private function getHorizontalPlacement(?string $horizontalPlacement)
     {
         return in_array($horizontalPlacement, ['left', 'right', 'center']) ? $horizontalPlacement : 'center';

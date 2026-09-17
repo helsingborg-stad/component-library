@@ -6,11 +6,11 @@ namespace ComponentLibrary;
 
 use ComponentLibrary\Cache\StaticCache;
 use ComponentLibrary\Component\Avatar\AvatarData;
-use ComponentLibrary\Component\Button\ButtonData;
-use ComponentLibrary\Component\Brand\BrandData;
-use ComponentLibrary\Component\Notice\NoticeData;
-use ComponentLibrary\Component\Fab\FabData;
 use ComponentLibrary\Component\Box\BoxData;
+use ComponentLibrary\Component\Brand\BrandData;
+use ComponentLibrary\Component\Button\ButtonData;
+use ComponentLibrary\Component\Fab\FabData;
+use ComponentLibrary\Component\Notice\NoticeData;
 use ComponentLibrary\Helper\TagSanitizer;
 use HelsingborgStad\BladeService\BladeService;
 use Illuminate\Support\HtmlString;
@@ -63,12 +63,15 @@ class RegisterTest extends TestCase
         static::assertSame('string|integer|double|boolean', $this->register->data->brand->argsTypes->aspectRatio);
         static::assertSame(BrandData::class, $this->register->data->brand->dataClass);
     }
-  
+
     public function testBoxUsesItsTypedComponentConfig(): void
     {
         $this->register->registerInternalComponents(__DIR__ . '/Component');
 
-        static::assertSame('ComponentLibrary\\Integrations\\Image\\ImageInterface|boolean|array', $this->register->data->box->argsTypes->image);
+        static::assertSame(
+            'ComponentLibrary\\Integrations\\Image\\ImageInterface|boolean|array',
+            $this->register->data->box->argsTypes->image,
+        );
         static::assertSame(BoxData::class, $this->register->data->box->dataClass);
     }
 
@@ -76,7 +79,10 @@ class RegisterTest extends TestCase
     {
         $this->register->registerInternalComponents(__DIR__ . '/Component');
 
-        static::assertSame('ComponentLibrary\\Integrations\\Image\\ImageInterface|string|boolean', $this->register->data->avatar->argsTypes->image);
+        static::assertSame(
+            'ComponentLibrary\\Integrations\\Image\\ImageInterface|string|boolean',
+            $this->register->data->avatar->argsTypes->image,
+        );
         static::assertSame(AvatarData::class, $this->register->data->avatar->dataClass);
     }
 
@@ -201,7 +207,7 @@ class RegisterTest extends TestCase
         $configPath = $componentDirectory . '/config.php';
         file_put_contents($configPath, '<?php return [];');
 
-        $method = (new \ReflectionClass(Register::class))->getMethod('readConfigFile');
+        $method = new \ReflectionClass(Register::class)->getMethod('readConfigFile');
         $method->setAccessible(true);
 
         $this->expectException(\UnexpectedValueException::class);
@@ -214,7 +220,7 @@ class RegisterTest extends TestCase
         mkdir($componentDirectory, 0777, true);
         file_put_contents($componentDirectory . '/component.json', '{}');
 
-        $method = (new \ReflectionClass(Register::class))->getMethod('getConfigFilePath');
+        $method = new \ReflectionClass(Register::class)->getMethod('getConfigFilePath');
         $method->setAccessible(true);
 
         $this->expectException(\Exception::class);
@@ -253,7 +259,6 @@ class RegisterTest extends TestCase
 
     private function getButtonDefaults(): array
     {
-        return (new \ComponentLibrary\ComponentConfiguration\ComponentDataReflector())
-            ->getDefaultArguments(ButtonData::class);
+        return new \ComponentLibrary\ComponentConfiguration\ComponentDataReflector()->getDefaultArguments(ButtonData::class);
     }
 }

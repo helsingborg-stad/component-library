@@ -4,9 +4,8 @@ namespace ComponentLibrary\Component\Logotypegrid;
 
 class Logotypegrid extends \ComponentLibrary\Component\BaseController
 {
-
-    public function init() {
-
+    public function init()
+    {
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
@@ -16,7 +15,7 @@ class Logotypegrid extends \ComponentLibrary\Component\BaseController
                 $item = (object) array_merge([
                     'url' => false,
                     'src' => false,
-                    'alt' => ''
+                    'alt' => '',
                 ], $item);
             }
         }

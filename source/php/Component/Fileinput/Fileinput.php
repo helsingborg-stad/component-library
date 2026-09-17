@@ -54,7 +54,7 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
         $maxFileSize = $this->determineMaxSize($maxSize, $acceptedTypesArray);
 
         if (!empty($maxFileSize)) {
-            $this->data['maxSize'] = ($this->data['maximumSizeLabel']) . ': ' . $maxFileSize . ' MB';
+            $this->data['maxSize'] = $this->data['maximumSizeLabel'] . ': ' . $maxFileSize . ' MB';
             $this->data['attributeList']['data-js-file-max-size'] = $maxFileSize;
         }
 
@@ -62,8 +62,11 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
         $this->data['attributeList']['data-js-file-is-multi'] = $multiple;
 
         // Upload error message
-        $this->data['uploadErrorMessage'] = $uploadErrorMessage ?? $this->data['lang']->uploadErrorMessage ?? 'Following files could not be uploaded';
-        $this->data['uploadErrorMessageMinFiles'] = $uploadErrorMessageMinFiles ?? $this->data['lang']->uploadErrorMessageMinFiles ?? 'Please upload more files';
+        $this->data['uploadErrorMessage'] =
+            $uploadErrorMessage ?? $this->data['lang']->uploadErrorMessage ?? 'Following files could not be uploaded';
+        $this->data['uploadErrorMessageMinFiles'] =
+            $uploadErrorMessageMinFiles ?? $this->data['lang']->uploadErrorMessageMinFiles
+                ?? 'Please upload more files';
 
         // Set class empty
         $this->data['classList'][] = 'is-empty';
@@ -72,7 +75,7 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
         $this->data['required'] = $required ?? false;
     }
 
-    private function determineMaxSize(int|string|null $maxSize, array $accept): null|string
+    private function determineMaxSize(int|string|null $maxSize, array $accept): ?string
     {
         if (empty($maxSize)) {
             return null;
@@ -124,7 +127,7 @@ class Fileinput extends \ComponentLibrary\Component\BaseController
 
     private function createAcceptedFilesList(array $accept): string
     {
-        return ($this->data['allowedFileTypesLabel']) . ': ' . implode(' ', array_map(function ($type) {
+        return $this->data['allowedFileTypesLabel'] . ': ' . implode(' ', array_map(function ($type) {
             if ($type === 'video/*')
                 return $this->data['fileTypeVideosLabel'];
             if ($type === 'image/*')

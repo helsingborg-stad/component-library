@@ -5,17 +5,17 @@ namespace ComponentLibrary\Component\Slider__item;
 class Slider__item extends \ComponentLibrary\Component\BaseController
 {
     private array $slotMapping = [
-        'slot' => 'slotHasData'
+        'slot' => 'slotHasData',
     ];
 
-    public function init() {
-
+    public function init()
+    {
         //Extract array for eazy access (fetch only)
         extract($this->data);
 
         $this->data['slotHasData'] = $this->slotHasData('slot');
 
-        $this->data['classListDesktop'] = $this->getBaseClass() . "__image";
+        $this->data['classListDesktop'] = $this->getBaseClass() . '__image';
         $this->data['classList'][] = 'splide__slide';
 
         if (!empty($containerColor)) {
@@ -23,19 +23,19 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
         }
 
         if (!empty($textAlignment)) {
-            $this->data['classList'][] = $this->getBaseClass() . "--text-align-" . $textAlignment;
+            $this->data['classList'][] = $this->getBaseClass() . '--text-align-' . $textAlignment;
         }
 
         if (!empty($textColor)) {
-            $this->data['classList'][] = $this->getBaseClass() . "--text-" . $textColor;
+            $this->data['classList'][] = $this->getBaseClass() . '--text-' . $textColor;
         }
 
         if (!empty($layout)) {
-            $this->data['classList'][] = $this->getBaseClass() . "--layout-" . $layout;
+            $this->data['classList'][] = $this->getBaseClass() . '--layout-' . $layout;
         }
 
         $this->data['showContainer'] = false;
-        if (!empty($title) || !empty($subTitle) ||!empty($text) || !empty($bottom) || !empty($cta)) {
+        if (!empty($title) || !empty($subTitle) || !empty($text) || !empty($bottom) || !empty($cta)) {
             $this->data['showContainer'] = true;
         }
 
@@ -48,7 +48,7 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
         }
 
         if ($heroStyle) {
-            $this->data['classList'][] = $this->getBaseClass() . "--hero";
+            $this->data['classList'][] = $this->getBaseClass() . '--hero';
         }
 
         if ($video) {

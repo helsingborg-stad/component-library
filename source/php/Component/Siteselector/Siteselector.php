@@ -4,51 +4,52 @@ namespace ComponentLibrary\Component\Siteselector;
 
 class Siteselector extends \ComponentLibrary\Component\BaseController
 {
-    public function init() {
+    public function init()
+    {
         //Extract array for easy access (fetch only)
         extract($this->data);
 
         //Border radius
-        if($radius) {
-            $this->data['classList'][] = $this->getBaseClass('radius-' . $radius, true); 
+        if ($radius) {
+            $this->data['classList'][] = $this->getBaseClass('radius-' . $radius, true);
         }
 
         //Color scheme
-        if($color) {
-            $this->data['classList'][] = $this->getBaseClass($color, true); 
+        if ($color) {
+            $this->data['classList'][] = $this->getBaseClass($color, true);
         }
 
-        //Disable max items 
-        if(!is_numeric($maxItems)) {
+        //Disable max items
+        if (!is_numeric($maxItems)) {
             $this->data['maxItems'] = $maxItems = false;
-            $this->data['hiddenItems']= $hiddenItems = false;
-        } elseif(is_numeric($maxItems)) {
+            $this->data['hiddenItems'] = $hiddenItems = false;
+        } elseif (is_numeric($maxItems)) {
             $slicedItems = $this->sliceItems(
                 $items,
                 $maxItems,
-                true
+                true,
             );
 
             $slicedHiddenItems = $this->sliceItems(
                 $items,
                 $maxItems,
-                false
+                false,
             );
 
-            $this->data['items']        = $items = $slicedItems; 
-            $this->data['hiddenItems']  = $hiddenItems = $slicedHiddenItems;
+            $this->data['items'] = $items = $slicedItems;
+            $this->data['hiddenItems'] = $hiddenItems = $slicedHiddenItems;
         }
 
         //Normalize
-        $this->data['items']        = $items = $this->normalizeItems($this->data['items']); 
-        $this->data['hiddenItems']  = $hiddenItems = $this->normalizeItems($this->data['hiddenItems'], 1); 
+        $this->data['items'] = $items = $this->normalizeItems($this->data['items']);
+        $this->data['hiddenItems'] = $hiddenItems = $this->normalizeItems($this->data['hiddenItems'], 1);
 
         //Hightlight current site
-        $this->data['items']        = $items = $this->hightlightItems($this->data['items']); 
-        $this->data['hiddenItems']  = $hiddenItems = $this->hightlightItems($this->data['hiddenItems']); 
- 
+        $this->data['items'] = $items = $this->hightlightItems($this->data['items']);
+        $this->data['hiddenItems'] = $hiddenItems = $this->hightlightItems($this->data['hiddenItems']);
+
         //Combine (make hidden items appear as a dropdown)
-        if($hiddenItems) {
+        if ($hiddenItems) {
             $this->data['items'][] = [
                 'id' => 'expand',
                 'label' => $this->data['showMoreLabel'],
@@ -56,10 +57,10 @@ class Siteselector extends \ComponentLibrary\Component\BaseController
                 'ancestor' => 0,
                 'children' => $hiddenItems,
                 'classList' => [
-                    $this->getBaseClass('more')
+                    $this->getBaseClass('more'),
                 ],
                 'active' => false,
-                'style' => 'default'
+                'style' => 'default',
             ];
         }
     }
@@ -74,11 +75,10 @@ class Siteselector extends \ComponentLibrary\Component\BaseController
      */
     private function sliceItems(array $items, int $maxItems, bool $visibleItems): array
     {
-        if($visibleItems) {
+        if ($visibleItems) {
             return array_slice($items, 0, $maxItems);
         }
         return array_slice($items, $maxItems);
-        
     }
 
     /**
@@ -89,28 +89,28 @@ class Siteselector extends \ComponentLibrary\Component\BaseController
      */
     private function normalizeItems($items, $depth = null): array
     {
-        if(!is_countable($items)) {
-            return []; 
+        if (!is_countable($items)) {
+            return [];
         }
 
-        foreach($items as $key => &$item) {
+        foreach ($items as $key => &$item) {
             $item = array_merge(
                 [
                     'id' => rand(1, PHP_INT_MAX),
-                    'label' => "Unknown",
+                    'label' => 'Unknown',
                     'ancestor' => false,
                     'active' => false,
                     'children' => false,
-                    'href' => "#",
-                    'style' => "default",
+                    'href' => '#',
+                    'style' => 'default',
                 ],
-                $item
+                $item,
             );
 
             $item['classList'] = isset($item['classList']) ? $item['classList'] : [];
             $item['classList'][] = $this->getBaseClass('item');
 
-            if(is_numeric($depth)) {
+            if (is_numeric($depth)) {
                 $item['depth'] = $depth;
             }
         }
@@ -120,16 +120,17 @@ class Siteselector extends \ComponentLibrary\Component\BaseController
 
     /**
      * Get the current domain that is running the application.
-     * 
+     *
      * @return string
      */
-    private function getCurrentDomain(): string {
+    private function getCurrentDomain(): string
+    {
         return $_SERVER['HTTP_HOST'] ?? '';
     }
 
     /**
-     * Get hostname form a full uri. 
-     * 
+     * Get hostname form a full uri.
+     *
      * @return string
      */
     private function getDomainFromUrl(string $url): string
@@ -139,29 +140,28 @@ class Siteselector extends \ComponentLibrary\Component\BaseController
 
     /**
      * Check if the provided url is matching the current domain
-     * 
+     *
      * @return bool
      */
-    private function isCurrentDomain(string $url): bool 
+    private function isCurrentDomain(string $url): bool
     {
-        if($this->getCurrentDomain() == $this->getDomainFromUrl($url)){
-            return true; 
+        if ($this->getCurrentDomain() == $this->getDomainFromUrl($url)) {
+            return true;
         }
-        return false; 
+        return false;
     }
 
     /**
      * Add is-current class to the current item
-     * 
+     *
      * @return array
      */
-    private function hightlightItems($items): array 
+    private function hightlightItems($items): array
     {
-
-        if(is_countable($items)) {
-            foreach($items as &$item) {
-                if($this->isCurrentDomain($item['href']) === true) {
-                    $item['active'] = true; 
+        if (is_countable($items)) {
+            foreach ($items as &$item) {
+                if ($this->isCurrentDomain($item['href']) === true) {
+                    $item['active'] = true;
                 } else {
                     $item['active'] = false;
                 }
