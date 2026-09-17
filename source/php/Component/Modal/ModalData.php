@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace ComponentLibrary\Component\Modal;
 
+use Illuminate\Support\HtmlString;
+
 final class ModalData
 {
     public function __construct(
         public string $heading = '',
-        public string $slot = '',
+        public ?HtmlString $slot = null,
         public string $bottom = '',
         public string $overlay = 'light',
         public bool $isPanel = false,

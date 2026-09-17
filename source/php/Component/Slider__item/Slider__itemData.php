@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ComponentLibrary\Component\Slider__item;
 
 use ComponentLibrary\Integrations\Image\ImageInterface;
+use Illuminate\Support\HtmlString;
 
 /**
  * Typed input contract for the Slider__item component.
@@ -26,7 +27,7 @@ final class Slider__itemData
         public string|bool $heroStyle = false,
         public string $textAlignment = '',
         public string $overlay = 'none',
-        public bool|string $slot = false,
+        public ?HtmlString $slot = null,
         public bool|string $bottom = false,
     ) {}
 }

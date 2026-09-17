@@ -39,6 +39,6 @@ final class CardData
         public string $floating = '',
         public string $aboveContent = '',
         public string $belowContent = '',
-        public string|HtmlString $slot = '',
+        public ?HtmlString $slot = null,
     ) {}
 }

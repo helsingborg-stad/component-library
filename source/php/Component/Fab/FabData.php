@@ -12,7 +12,7 @@ final class FabData
         public string $position = 'bottom-right',
         public string|bool $heading = false,
         public array|bool $button = false,
-        public string|HtmlString $slot = '',
+        public ?HtmlString $slot = null,
         public string|bool $closeLabel = false,
         public string|bool $closeIcon = false,
         public string $size = 'md',
