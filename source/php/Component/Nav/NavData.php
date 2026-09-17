@@ -22,5 +22,6 @@ final class NavData
         public bool $compressed = false,
         public string $expandIcon = 'expand_more',
         public bool $indentSubLevels = false,
+        public ?int $depth = null,
     ) {}
 }

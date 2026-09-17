@@ -13,7 +13,7 @@ final class LinkData
 {
     /**
      * @param string $componentElement The wrapper element.
-    * @param HtmlString|null $slot The optional slot content.
+     * @param HtmlString|null $slot The optional slot content.
      * @param string|false|null $href The target URL.
      * @param string $target The link target.
      * @param bool $keepContent Whether to keep the content when href is empty.

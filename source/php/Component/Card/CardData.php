@@ -23,7 +23,7 @@ final class CardData
         public string $ratio = '16:9',
         public bool $collapsible = false,
         public ?array $tags = null,
-        public string $link = '',
+        public string|bool $link = '',
         public string $linkText = '',
         public array|bool $date = false,
         public bool $dateBadge = false,

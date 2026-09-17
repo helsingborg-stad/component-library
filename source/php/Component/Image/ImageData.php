@@ -11,7 +11,7 @@ final class ImageData
     public function __construct(
         public string|ImageInterface|bool $src = false,
         public string|bool $srcset = false,
-        public string $alt = '',
+        public ?string $alt = '',
         public string $caption = '',
         public bool $removeCaption = false,
         public string $byline = '',

@@ -15,7 +15,7 @@ final class FieldData
         public bool $required = false,
         public string $autocomplete = 'on',
         public string $value = '',
-        public string $icon = '',
+        public string|array $icon = '',
         public string $size = 'md',
         public string $radius = 'md',
         public string $placeholder = '',

@@ -19,7 +19,7 @@ final class GroupData
         public string $wrap = '',
         public bool $flexGrow = false,
         public bool $flexShrink = true,
-        public string $gap = '',
+        public string|int $gap = '',
         public int|string|bool|null $fluidGrid = null,
         public int|string|null $columns = null,
         public bool $normalizeChildren = true,
