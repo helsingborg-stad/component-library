@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ComponentLibrary\Component\Link;
 
 use Illuminate\Support\HtmlString;
+use Illuminate\View\ComponentSlot;
 
 /**
  * Typed input contract for the Link component.
@@ -23,7 +24,7 @@ final class LinkData
      */
     public function __construct(
         public string $componentElement = 'span',
-        public ?HtmlString $slot = null,
+        public string|HtmlString|ComponentSlot|null $slot = '',
         public string|false|null $href = null,
         public string $target = '_top',
         public bool $keepContent = true,

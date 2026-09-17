@@ -126,6 +126,44 @@ class RegisterTest extends TestCase
         static::assertSame($slot, $data['slot']);
     }
 
+    public function testItRendersBladeComponentSlotsWithoutNormalizingThemToArrays(): void
+    {
+        $viewDirectory = sys_get_temp_dir() . '/component-library-slots-' . uniqid('', true);
+        mkdir($viewDirectory, 0777, true);
+        file_put_contents($viewDirectory . '/slot-regression.blade.php', <<<'BLADE'
+@typography(['element' => 'p'])
+    <strong>Typography content</strong>
+@endtypography
+
+@card([])
+    @slot('aboveContent')
+        <em>Above card content</em>
+    @endslot
+@endcard
+
+@card([])
+    @typography(['element' => 'h2'])
+        <span>Nested typography content</span>
+    @endtypography
+@endcard
+BLADE);
+
+        try {
+            $register = $this->createRegister([$viewDirectory, __DIR__ . '/Component']);
+            $register->registerInternalComponents(__DIR__ . '/Component');
+
+            $markup = $register->getEngine()->makeView('slot-regression')->render();
+
+            static::assertStringContainsString('<strong>Typography content</strong>', $markup);
+            static::assertStringContainsString('<em>Above card content</em>', $markup);
+            static::assertStringContainsString('<span>Nested typography content</span>', $markup);
+            static::assertStringNotContainsString('Array', $markup);
+        } finally {
+            unlink($viewDirectory . '/slot-regression.blade.php');
+            rmdir($viewDirectory);
+        }
+    }
+
     public function testGetControllerArgsNormalizesNestedTypedDataObjects(): void
     {
         $data = $this->register->getControllerArgs(
@@ -227,12 +265,12 @@ class RegisterTest extends TestCase
         $method->invoke($this->register, $componentDirectory);
     }
 
-    private function createRegister(): Register
+    private function createRegister(?array $viewPaths = null): Register
     {
         $componentPath = __DIR__ . '/Component';
 
         $register = new class(
-            new BladeService([$componentPath]),
+            new BladeService($viewPaths ?? [$componentPath]),
             new StaticCache(),
             new TagSanitizer(),
         ) extends Register {

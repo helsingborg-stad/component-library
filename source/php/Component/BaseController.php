@@ -4,6 +4,7 @@ namespace ComponentLibrary\Component;
 
 use ComponentLibrary\Cache\CacheInterface;
 use ComponentLibrary\Helper\TagSanitizerInterface;
+use Illuminate\View\ComponentSlot;
 
 class BaseController
 {
@@ -166,8 +167,12 @@ class BaseController
      */
     public function slotHasData($slotKey)
     {
-        if (!isset($this->data[$slotKey])) {
+        if (!isset($this->data[$slotKey]) || !is_object($this->data[$slotKey])) {
             return false;
+        }
+
+        if ($this->data[$slotKey] instanceof ComponentSlot) {
+            return trim((string) $this->data[$slotKey]) !== '';
         }
 
         $property = $slotKey === 'slot' ? 'html' : 'contents';
@@ -585,7 +590,7 @@ class BaseController
             $property = $reflection->getProperty($prop);
             $property->setAccessible(true);
             return $property->getValue($obj);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             return false;
         }
     }

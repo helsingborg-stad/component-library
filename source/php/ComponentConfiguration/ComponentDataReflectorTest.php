@@ -83,11 +83,14 @@ class ComponentDataReflectorTest extends TestCase
     /**
      * @dataProvider componentDataClassesWithSlots
      */
-    public function testItReflectsHtmlStringAsTheOnlySlotType(string $dataClass): void
+    public function testItReflectsHtmlStringAndComponentSlotTypes(string $dataClass): void
     {
         $types = (new ComponentDataReflector())->getArgumentTypes($dataClass);
 
-        static::assertSame('Illuminate\\Support\\HtmlString|NULL', $types['slot']);
+        static::assertSame(
+            'Illuminate\\Support\\HtmlString|Illuminate\\View\\ComponentSlot|string|NULL',
+            $types['slot'],
+        );
     }
 
     /**

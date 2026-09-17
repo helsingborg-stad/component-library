@@ -6,6 +6,7 @@ namespace ComponentLibrary\Component\Card;
 
 use ComponentLibrary\Integrations\Image\ImageInterface;
 use Illuminate\Support\HtmlString;
+use Illuminate\View\ComponentSlot;
 
 /**
  * Typed input contract for the Card component.
@@ -34,11 +35,11 @@ final class CardData
         public bool $containerAware = false,
         public bool $metaFirst = false,
         public bool $headingAboveImage = false,
-        public string $beforeContent = '',
-        public string $afterContent = '',
-        public string $floating = '',
-        public string $aboveContent = '',
-        public string $belowContent = '',
-        public ?HtmlString $slot = null,
+        public string|ComponentSlot $beforeContent = '',
+        public string|ComponentSlot $afterContent = '',
+        public string|ComponentSlot $floating = '',
+        public string|ComponentSlot $aboveContent = '',
+        public string|ComponentSlot $belowContent = '',
+        public string|HtmlString|ComponentSlot|null $slot = '',
     ) {}
 }

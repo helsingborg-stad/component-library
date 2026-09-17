@@ -1,8 +1,13 @@
 <?php
 
 use ComponentLibrary\Component\BaseController;
+use ComponentLibrary\Cache\StaticCache;
+use ComponentLibrary\Helper\TagSanitizer;
 
-class BaseControllerFilterNameFixture extends BaseController {}
+class BaseControllerFilterNameFixture extends BaseController
+{
+    public function init(): void {}
+}
 
 class BaseControllerTest extends PHPUnit\Framework\TestCase
 {
@@ -92,5 +97,18 @@ class BaseControllerTest extends PHPUnit\Framework\TestCase
             return 'test';
         }];
         $this->assertEquals('', BaseController::buildAttributes($attributes));
+    }
+
+    public function testSlotHasDataHandlesMissingAndUnexpectedSlotValues(): void
+    {
+        $controller = new BaseControllerFilterNameFixture(
+            ['slot' => [], 'aboveContent' => 'Unexpected string'],
+            new StaticCache(),
+            new TagSanitizer(),
+        );
+
+        static::assertFalse($controller->slotHasData('missing'));
+        static::assertFalse($controller->slotHasData('slot'));
+        static::assertFalse($controller->slotHasData('aboveContent'));
     }
 }
