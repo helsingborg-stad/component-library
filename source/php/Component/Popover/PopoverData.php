@@ -13,5 +13,6 @@ final class PopoverData
         public ?string $verticalPlacement = null,
         public bool $relative = false,
         public bool $backdrop = false,
+        public string $animation = 'fade'
     ) {}
 }
