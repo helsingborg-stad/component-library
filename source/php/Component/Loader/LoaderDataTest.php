@@ -17,6 +17,6 @@ class LoaderDataTest extends TestCase
         static::assertInstanceOf(ComponentConfig::class, $config);
         static::assertSame('loader', $config->slug);
         static::assertSame(LoaderData::class, $config->data);
-        static::assertSame('circular', new ComponentDataReflector()->getDefaultArguments(LoaderData::class)['shape']);
+        static::assertSame('circular', (new ComponentDataReflector())->getDefaultArguments(LoaderData::class)['shape']);
     }
 }

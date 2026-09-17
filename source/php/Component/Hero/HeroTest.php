@@ -89,7 +89,7 @@ class HeroTest extends \PHPUnit\Framework\TestCase
 
     private function getComponentData(array $data)
     {
-        $default = new \ComponentLibrary\ComponentConfiguration\ComponentDataReflector()->getDefaultArguments(\ComponentLibrary\Component\Hero\HeroData::class);
+        $default = (new \ComponentLibrary\ComponentConfiguration\ComponentDataReflector())->getDefaultArguments(\ComponentLibrary\Component\Hero\HeroData::class);
         return array_merge($default, $data);
     }
 }

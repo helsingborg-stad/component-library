@@ -19,7 +19,7 @@ class ElementDataTest extends TestCase
         static::assertSame(ElementData::class, $config->data);
         static::assertSame(
             ['componentElement' => 'div', 'hideIfNoContent' => true],
-            new ComponentDataReflector()->getDefaultArguments(ElementData::class),
+            (new ComponentDataReflector())->getDefaultArguments(ElementData::class),
         );
     }
 }

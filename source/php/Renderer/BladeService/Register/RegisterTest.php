@@ -24,7 +24,7 @@ class RegisterTest extends TestCase
         $configPath = $componentDirectory . '/config.php';
         file_put_contents($configPath, '<?php return [];');
 
-        $method = new \ReflectionClass(Register::class)->getMethod('readConfigFile');
+        $method = (new \ReflectionClass(Register::class))->getMethod('readConfigFile');
         $method->setAccessible(true);
 
         $this->expectException(\UnexpectedValueException::class);
@@ -43,7 +43,7 @@ class RegisterTest extends TestCase
         mkdir($componentDirectory, 0777, true);
         file_put_contents($componentDirectory . '/component.json', '{}');
 
-        $method = new \ReflectionClass(Register::class)->getMethod('getConfigFilePath');
+        $method = (new \ReflectionClass(Register::class))->getMethod('getConfigFilePath');
         $method->setAccessible(true);
 
         $this->expectException(\Exception::class);

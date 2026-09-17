@@ -17,6 +17,9 @@ class CardFloatingDataTest extends TestCase
         static::assertInstanceOf(ComponentConfig::class, $config);
         static::assertSame('card__floating', $config->slug);
         static::assertSame(CardFloatingData::class, $config->data);
-        static::assertSame(['slot' => ''], new ComponentDataReflector()->getDefaultArguments(CardFloatingData::class));
+        static::assertSame(
+            ['slot' => ''],
+            (new ComponentDataReflector())->getDefaultArguments(CardFloatingData::class),
+        );
     }
 }

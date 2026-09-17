@@ -19,7 +19,7 @@ class TableCellDataTest extends TestCase
         static::assertSame(TableCellData::class, $config->data);
         static::assertSame(
             'integer|NULL',
-            new ComponentDataReflector()->getArgumentTypes(TableCellData::class)['index'],
+            (new ComponentDataReflector())->getArgumentTypes(TableCellData::class)['index'],
         );
     }
 }

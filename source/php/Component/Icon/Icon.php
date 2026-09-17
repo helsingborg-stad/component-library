@@ -26,7 +26,7 @@ class Icon extends \ComponentLibrary\Component\BaseController
 
         //Use a runtime cache to store the custom icons
         if (!self::$runtimeCache['svgFromFile']) {
-            $customSvgIcons = self::$runtimeCache['svgFromFile'] = new Icons($this->cache)->getIcons();
+            $customSvgIcons = self::$runtimeCache['svgFromFile'] = (new Icons($this->cache))->getIcons();
         } else {
             $customSvgIcons = self::$runtimeCache['svgFromFile'];
         }

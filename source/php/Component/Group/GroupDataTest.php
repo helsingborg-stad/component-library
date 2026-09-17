@@ -29,7 +29,7 @@ class GroupDataTest extends TestCase
     public function testLegacyJusitifyContentInputIsStillSupported(): void
     {
         $data = array_merge(
-            new ComponentDataReflector()->getDefaultArguments(GroupData::class),
+            (new ComponentDataReflector())->getDefaultArguments(GroupData::class),
             ['jusitifyContent' => 'center'],
         );
 
@@ -57,7 +57,7 @@ class GroupDataTest extends TestCase
     public function testCorrectedJustifyContentInputIsStillSupported(): void
     {
         $data = array_merge(
-            new ComponentDataReflector()->getDefaultArguments(GroupData::class),
+            (new ComponentDataReflector())->getDefaultArguments(GroupData::class),
             ['justifyContent' => 'center'],
         );
 

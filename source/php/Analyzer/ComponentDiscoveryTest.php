@@ -129,7 +129,7 @@ class ComponentDiscoveryTest extends TestCase
                 PHP,
         );
 
-        $slugs = new ComponentDiscovery($tempDir)->discoverSlugs();
+        $slugs = (new ComponentDiscovery($tempDir))->discoverSlugs();
 
         $this->assertSame(['typed'], $slugs);
 
@@ -151,7 +151,7 @@ class ComponentDiscoveryTest extends TestCase
             "<?php return ['slug' => 'array-based', 'view' => 'array-based.blade.php'];",
         );
 
-        $slugs = new ComponentDiscovery($tempDir)->discoverSlugs();
+        $slugs = (new ComponentDiscovery($tempDir))->discoverSlugs();
 
         $this->assertSame(['array-based'], $slugs);
 

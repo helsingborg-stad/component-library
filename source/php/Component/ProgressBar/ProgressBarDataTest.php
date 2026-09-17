@@ -19,7 +19,7 @@ class ProgressBarDataTest extends TestCase
         static::assertSame(ProgressBarData::class, $config->data);
         static::assertSame(
             ['isCancelled' => false, 'value' => 0],
-            new ComponentDataReflector()->getDefaultArguments(ProgressBarData::class),
+            (new ComponentDataReflector())->getDefaultArguments(ProgressBarData::class),
         );
     }
 }

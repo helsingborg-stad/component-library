@@ -37,7 +37,7 @@ class ModalTest extends PHPUnit\Framework\TestCase
     private function getComponentData(array $data): array
     {
         return array_merge(
-            new \ComponentLibrary\ComponentConfiguration\ComponentDataReflector()->getDefaultArguments(\ComponentLibrary\Component\Modal\ModalData::class),
+            (new \ComponentLibrary\ComponentConfiguration\ComponentDataReflector())->getDefaultArguments(\ComponentLibrary\Component\Modal\ModalData::class),
             $data,
         );
     }

@@ -151,6 +151,6 @@ class ImageComponentTest extends TestCase
 
     private function getDefaultData(): array
     {
-        return new ComponentDataReflector()->getDefaultArguments(ImageData::class);
+        return (new ComponentDataReflector())->getDefaultArguments(ImageData::class);
     }
 }

@@ -19,7 +19,7 @@ class InlineCssWrapperDataTest extends TestCase
         static::assertSame(InlineCssWrapperData::class, $config->data);
         static::assertSame(
             ['componentElement' => 'div', 'styles' => []],
-            new ComponentDataReflector()->getDefaultArguments(InlineCssWrapperData::class),
+            (new ComponentDataReflector())->getDefaultArguments(InlineCssWrapperData::class),
         );
     }
 }

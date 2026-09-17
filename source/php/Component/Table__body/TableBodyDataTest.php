@@ -17,6 +17,6 @@ class TableBodyDataTest extends TestCase
         static::assertInstanceOf(ComponentConfig::class, $config);
         static::assertSame('table__body', $config->slug);
         static::assertSame(TableBodyData::class, $config->data);
-        static::assertSame([], new ComponentDataReflector()->getDefaultArguments(TableBodyData::class));
+        static::assertSame([], (new ComponentDataReflector())->getDefaultArguments(TableBodyData::class));
     }
 }

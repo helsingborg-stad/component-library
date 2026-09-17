@@ -61,6 +61,6 @@ class BlockTest extends PHPUnit\Framework\TestCase
 
     private function getComponentDefaultData()
     {
-        return new \ComponentLibrary\ComponentConfiguration\ComponentDataReflector()->getDefaultArguments(\ComponentLibrary\Component\Block\BlockData::class);
+        return (new \ComponentLibrary\ComponentConfiguration\ComponentDataReflector())->getDefaultArguments(\ComponentLibrary\Component\Block\BlockData::class);
     }
 }

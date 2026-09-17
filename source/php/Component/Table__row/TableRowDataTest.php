@@ -19,7 +19,7 @@ class TableRowDataTest extends TestCase
         static::assertSame(TableRowData::class, $config->data);
         static::assertSame(
             ['index' => null, 'isSummary' => false],
-            new ComponentDataReflector()->getDefaultArguments(TableRowData::class),
+            (new ComponentDataReflector())->getDefaultArguments(TableRowData::class),
         );
     }
 }

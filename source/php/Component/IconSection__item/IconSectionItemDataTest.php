@@ -19,7 +19,7 @@ class IconSectionItemDataTest extends TestCase
         static::assertSame(IconSectionItemData::class, $config->data);
         static::assertSame(
             ['icon' => null],
-            new ComponentDataReflector()->getDefaultArguments(IconSectionItemData::class),
+            (new ComponentDataReflector())->getDefaultArguments(IconSectionItemData::class),
         );
     }
 }

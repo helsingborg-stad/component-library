@@ -760,7 +760,7 @@ class Register
             return $dataClassName;
         }
 
-        $namespace = new \ReflectionClass($contextDataClass)->getNamespaceName();
+        $namespace = (new \ReflectionClass($contextDataClass))->getNamespaceName();
         $resolvedClassName = $namespace . '\\' . ltrim($dataClassName, '\\');
 
         return class_exists($resolvedClassName) ? $resolvedClassName : null;

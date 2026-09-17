@@ -85,7 +85,7 @@ class FileinputTest extends TestCase
 
     private static function getData(array $merge = []): array
     {
-        $defaultData = new ComponentDataReflector()->getDefaultArguments(FileinputData::class);
+        $defaultData = (new ComponentDataReflector())->getDefaultArguments(FileinputData::class);
 
         return array_merge($defaultData, $merge);
     }

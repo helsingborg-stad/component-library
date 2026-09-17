@@ -20,7 +20,7 @@ class CollapsiblesearchTest extends PHPUnit\Framework\TestCase
     private function getComponentData(array $overrides = []): array
     {
         return array_merge(
-            new \ComponentLibrary\ComponentConfiguration\ComponentDataReflector()->getDefaultArguments(\ComponentLibrary\Component\Collapsiblesearch\CollapsiblesearchData::class),
+            (new \ComponentLibrary\ComponentConfiguration\ComponentDataReflector())->getDefaultArguments(\ComponentLibrary\Component\Collapsiblesearch\CollapsiblesearchData::class),
             $overrides,
         );
     }
