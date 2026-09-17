@@ -10,7 +10,7 @@ final class PaperData
 {
     public function __construct(
         public ?HtmlString $slot = null,
-        public bool $padding = false,
+        public bool|int $padding = false,
         public bool $transparent = false,
     ) {}
 }
