@@ -43,7 +43,7 @@ final class ButtonData
         public string $componentElement = 'button',
         public string $labelElement = 'span',
         public bool $ripple = true,
-        public string $pressed = 'false',
+        public string|bool $pressed = 'false',
         public bool $toggle = false,
         public ?string $icon = null,
         public bool $reversePositions = false,

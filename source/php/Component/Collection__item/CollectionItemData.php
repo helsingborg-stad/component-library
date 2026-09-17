@@ -9,7 +9,7 @@ final class CollectionItemData
     public function __construct(
         public string $componentElement = 'div',
         public string $prefix = '',
-        public array|bool $icon = false,
+        public array|bool|string|null $icon = false,
         public array|bool $iconLast = false,
         public array|bool $action = false,
         public string $secondary = '',

@@ -29,6 +29,18 @@ if(function_exists('plugin_dir_path') && function_exists('plugin_url')) {
 
 define('COMPONENTLIBRARY_TEMPLATE_PATH', COMPONENTLIBRARY_PATH . 'templates/');
 
+if (function_exists('add_filter')) {
+    add_filter(
+        'ComponentLibrary/ViewPaths',
+        static function ($viewPaths): array {
+            return array_values(array_unique(array_merge(
+                [COMPONENTLIBRARY_PATH . 'source/php/Component'],
+                is_array($viewPaths) ? $viewPaths : [],
+            )));
+        },
+    );
+}
+
 if(function_exists('plugin_basename')) {
     load_plugin_textdomain('component-library', false, plugin_basename(dirname(__FILE__)) . '/languages');
 }

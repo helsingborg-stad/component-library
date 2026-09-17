@@ -24,5 +24,6 @@ final class GroupData
         public int|string|null $columns = null,
         public bool $normalizeChildren = true,
         public bool $fullWidth = false,
+        public bool|string $flexWrap = false
     ) {}
 }

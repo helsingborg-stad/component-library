@@ -12,6 +12,10 @@ class Typography extends \ComponentLibrary\Component\BaseController
         //Extract array for easy access (fetch only)
         extract($this->data);
 
+        if (is_array($slot ?? null)) {
+            $this->data['slot'] = '';
+        }
+
         //Set default
         $this->data['isPromotedHeading'] = false;
         $this->data['originalElement'] = $element;

@@ -13,6 +13,6 @@ final class LogotypeData
         public string $title = '',
         public string $placeholderText = 'Image missing',
         public bool $maskable = false,
-        public int|float|string|bool $aspectRatio = false,
+        public int|float|string|bool|null $aspectRatio = false,
     ) {}
 }

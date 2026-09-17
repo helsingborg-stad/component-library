@@ -7,7 +7,7 @@ namespace ComponentLibrary\Component\Slider;
 final class SliderData
 {
     public function __construct(
-        public bool|int $autoSlide = true,
+        public bool|int|null $autoSlide = true,
         public bool $peekSlides = false,
         public bool $navigationHover = true,
         public string $ratio = '16:9',

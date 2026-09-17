@@ -9,6 +9,7 @@ final class FormData
     public function __construct(
         public string $method = 'POST',
         public string $action = '#',
+        public ?bool $validate = null,
         public bool $validation = true,
         public string $errorMessage = '',
         public string $validateMessage = '',
