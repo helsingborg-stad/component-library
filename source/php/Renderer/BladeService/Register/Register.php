@@ -622,6 +622,10 @@ class Register
             return $value;
         }
 
+        if ($value instanceof \Illuminate\Contracts\Support\Htmlable) {
+            return $value;
+        }
+
         if (is_array($value)) {
             foreach ($value as $key => $item) {
                 $value[$key] = $this->normalizeComponentInput($item, $allowedDataClasses);

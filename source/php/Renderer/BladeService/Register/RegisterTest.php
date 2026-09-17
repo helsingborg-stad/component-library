@@ -7,10 +7,28 @@ namespace ComponentLibrary\Renderer\BladeService\Register;
 use ComponentLibrary\Cache\StaticCache;
 use ComponentLibrary\Helper\TagSanitizer;
 use HelsingborgStad\BladeService\BladeService;
+use Illuminate\Support\HtmlString;
 use PHPUnit\Framework\TestCase;
 
 class RegisterTest extends TestCase
 {
+    public function testItPreservesHtmlStringSlotInputWhenItsClassIsAllowed(): void
+    {
+        $register = new Register(
+            new BladeService([__DIR__ . '/../../../Component']),
+            new StaticCache(),
+            new TagSanitizer(),
+        );
+        $slot = new HtmlString('<span>Link content</span>');
+
+        $method = (new \ReflectionClass(Register::class))->getMethod('normalizeComponentInput');
+        $method->setAccessible(true);
+
+        $normalizedSlot = $method->invoke($register, $slot, [HtmlString::class]);
+
+        static::assertSame($slot, $normalizedSlot);
+    }
+
     public function testUntrustedPhpConfigPathIsRejected(): void
     {
         $register = new Register(
