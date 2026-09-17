@@ -12,7 +12,7 @@ final class IconData
     public function __construct(
         public string $size = 'inherit',
         public string $label = '',
-        public string $icon = '',
+        public ?string $icon = '',
         public string $color = '',
         public string $customColor = '',
         public string $componentElement = 'span',

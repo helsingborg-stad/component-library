@@ -19,7 +19,7 @@ final class Slider__itemData
         public array|bool $cta = [],
         public bool|string|ImageInterface $image = false,
         public bool|string $video = false,
-        public string $alt = '',
+        public ?string $alt = '',
         public string|bool $link = false,
         public string $linkDescription = '',
         public string $layout = 'bottom',
