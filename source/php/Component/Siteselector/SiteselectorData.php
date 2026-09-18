@@ -11,7 +11,5 @@ final class SiteselectorData
         public array $items = [],
         public int|bool $maxItems = false,
         public string $showMoreLabel = '',
-        public string $radius = 'full',
-        public string $color = 'primary',
     ) {}
 }
