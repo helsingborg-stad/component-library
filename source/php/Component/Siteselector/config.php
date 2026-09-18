@@ -9,5 +9,5 @@ return new ComponentConfig(
     slug: 'siteselector',
     view: 'siteselector.blade.php',
     data: SiteselectorData::class,
-    dependencies: ['sass' => ['components' => ['siteselector', 'nav', 'icon', 'button']]],
+    dependencies: ['sass' => ['components' => ['siteselector', 'nav', 'icon', 'button', 'popover']]],
 );
