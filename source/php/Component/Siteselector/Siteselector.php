@@ -154,6 +154,11 @@ class Siteselector extends \ComponentLibrary\Component\BaseController
             foreach ($items as &$item) {
                 if ($this->isCurrentDomain($item['href']) === true) {
                     $item['active'] = true;
+                    $item['href'] = false;
+                    $item['attributeList'] = array_merge(
+                        $item['attributeList'] ?? [],
+                        ['aria-current' => 'page'],
+                    );
                 } else {
                     $item['active'] = false;
                 }
