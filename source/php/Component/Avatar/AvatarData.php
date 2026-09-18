@@ -12,13 +12,13 @@ use ComponentLibrary\Integrations\Image\ImageInterface;
 final class AvatarData
 {
     /**
-     * @param string|ImageInterface|bool $image The profile image source.
+     * @param string|ImageInterface|bool|null $image The profile image source.
      * @param array $icon Attributes for the nested Icon component.
      * @param string $name The person's full name.
      * @param string $size The avatar size.
      */
     public function __construct(
-        public string|ImageInterface|bool $image = false,
+        public string|ImageInterface|bool|null $image = false,
         public array $icon = [],
         public string $name = '',
         public string $size = 'md',
