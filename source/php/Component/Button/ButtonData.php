@@ -12,7 +12,11 @@ final class ButtonData
     /**
      * @param string|null $text The visible label.
      * @param string $size The button size.
-     * @param string $color The button color scheme.
+     * @param string $color The button color scheme. Use "inherit" with the "basic",
+     *                      "outlined", or "filled" style to inherit currentColor from the
+     *                      containing surface. The filled style uses inverted surface colors.
+     *                      Its containing surface must provide --inherit-color-background for
+     *                      the inverted label and icon color.
      * @param string $type The HTML button type.
      * @param string $style The visual button style.
      * @param string $shape The visual button shape.
