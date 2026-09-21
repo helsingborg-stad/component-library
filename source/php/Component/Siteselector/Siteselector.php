@@ -9,16 +9,6 @@ class Siteselector extends \ComponentLibrary\Component\BaseController
         //Extract array for easy access (fetch only)
         extract($this->data);
 
-        //Border radius
-        if ($radius) {
-            $this->data['classList'][] = $this->getBaseClass('radius-' . $radius, true);
-        }
-
-        //Color scheme
-        if ($color) {
-            $this->data['classList'][] = $this->getBaseClass($color, true);
-        }
-
         //Disable max items
         if (!is_numeric($maxItems)) {
             $this->data['maxItems'] = $maxItems = false;
@@ -125,7 +115,9 @@ class Siteselector extends \ComponentLibrary\Component\BaseController
      */
     private function getCurrentDomain(): string
     {
-        return $_SERVER['HTTP_HOST'] ?? '';
+        $host = $_SERVER['HTTP_HOST'] ?? '';
+
+        return parse_url('https://' . $host, PHP_URL_HOST) ?: '';
     }
 
     /**
@@ -162,6 +154,11 @@ class Siteselector extends \ComponentLibrary\Component\BaseController
             foreach ($items as &$item) {
                 if ($this->isCurrentDomain($item['href']) === true) {
                     $item['active'] = true;
+                    $item['href'] = false;
+                    $item['attributeList'] = array_merge(
+                        $item['attributeList'] ?? [],
+                        ['aria-current' => 'page'],
+                    );
                 } else {
                     $item['active'] = false;
                 }
