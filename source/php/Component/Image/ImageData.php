@@ -9,7 +9,7 @@ use ComponentLibrary\Integrations\Image\ImageInterface;
 final class ImageData
 {
     public function __construct(
-        public string|ImageInterface|bool $src = false,
+        public string|ImageInterface|bool|null $src = false,
         public string|bool $srcset = false,
         public ?string $alt = '',
         public string $caption = '',
