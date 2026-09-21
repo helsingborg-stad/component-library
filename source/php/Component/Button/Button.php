@@ -11,6 +11,13 @@ class Button extends \ComponentLibrary\Component\BaseController
 
         $this->data['slotHasData'] = $this->slotHasData('slot');
 
+        // An inherited filled button uses an inline SVG surface behind the
+        // native HTML label. Slots remain regular content: arbitrary markup
+        // cannot be represented predictably by the cutout treatment.
+        $this->data['isCutoutFill'] = $style === 'filled'
+            && $color === 'inherit'
+            && !$this->data['slotHasData'];
+
         //Basic classes
         $this->data['classList'][] = $this->getBaseClass() . '__' . $style;
         $this->data['classList'][] = $this->getBaseClass() . '__' . $style . '--' . $color;

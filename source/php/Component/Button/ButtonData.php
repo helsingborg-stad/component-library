@@ -15,8 +15,9 @@ final class ButtonData
      * @param string $color The button color scheme. Use "inherit" with the "basic",
      *                      "outlined", or "filled" style to inherit currentColor from the
      *                      containing surface. The filled style uses inverted surface colors.
-     *                      Its containing surface must provide --inherit-color-background for
-     *                      the inverted label and icon color.
+     *                      Inline SVG renders only the fill; the native HTML label and
+     *                      icon retain their exact standard typography and layout. Their
+     *                      color is resolved from the nearest rendered ancestor surface.
      * @param string $type The HTML button type.
      * @param string $style The visual button style.
      * @param string $shape The visual button shape.
