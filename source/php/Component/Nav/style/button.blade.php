@@ -15,6 +15,6 @@
     'context' => [
         'component.nav.button'
     ],
-    'size' => $height == 'sm' ? 'sm' : 'md'
+    'size' => $item['buttonSize'] ?? ($buttonSize ?: ($height === 'sm' ? 'sm' : 'md')),
 ])
 @endbutton
