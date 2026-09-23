@@ -21,6 +21,8 @@ class NavDataTest extends TestCase
         static::assertSame('nav', $config->slug);
         static::assertSame(NavData::class, $config->data);
         static::assertSame([], $defaults['items']);
+        static::assertSame('', $defaults['buttonSize']);
+        static::assertSame('string', $types['buttonSize']);
         static::assertSame('boolean', $types['includeToggle']);
     }
 }
