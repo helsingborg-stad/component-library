@@ -13,6 +13,7 @@ use ComponentLibrary\Component\Fab\FabData;
 use ComponentLibrary\Component\Notice\NoticeData;
 use ComponentLibrary\Helper\TagSanitizer;
 use ComponentLibrary\Renderer\BladeService\BladeServiceCreator;
+use ComponentLibrary\Renderer\VendorDeprecationSilencer;
 use Illuminate\Support\HtmlString;
 use PHPUnit\Framework\TestCase;
 
@@ -152,7 +153,9 @@ BLADE);
             $register = $this->createRegister([$viewDirectory, __DIR__ . '/Component']);
             $register->registerInternalComponents(__DIR__ . '/Component');
 
-            $markup = $register->getEngine()->makeView('slot-regression')->render();
+            $markup = (new VendorDeprecationSilencer())->run(
+                fn (): string => $register->getEngine()->makeView('slot-regression')->render(),
+            );
 
             static::assertStringContainsString('<strong>Typography content</strong>', $markup);
             static::assertStringContainsString('<em>Above card content</em>', $markup);

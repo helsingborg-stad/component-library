@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ComponentLibrary\Renderer\BladeService;
 
+use ComponentLibrary\Renderer\VendorDeprecationSilencer;
 use HelsingborgStad\BladeService\BladeService;
 use HelsingborgStad\BladeService\BladeServiceInterface;
 
@@ -17,13 +18,10 @@ class BladeServiceCreator
      */
     public function create(array $viewPaths): BladeServiceInterface
     {
-        $errorReporting = error_reporting();
-        error_reporting($errorReporting & ~E_DEPRECATED);
-
-        try {
+        return (new VendorDeprecationSilencer())->run(
+            static function () use ($viewPaths): BladeServiceInterface {
             return new BladeService($viewPaths);
-        } finally {
-            error_reporting($errorReporting);
-        }
+            },
+        );
     }
 }
