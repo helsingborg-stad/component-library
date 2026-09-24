@@ -9,6 +9,8 @@ class Typography extends \ComponentLibrary\Component\BaseController
 
     public function init()
     {
+        $this->data = array_merge(get_object_vars(new TypographyData()), $this->data);
+
         //Extract array for easy access (fetch only)
         extract($this->data);
 
