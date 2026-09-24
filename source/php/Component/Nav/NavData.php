@@ -17,7 +17,7 @@ final class NavData
         public bool $allowStyle = true,
         public string $buttonStyle = 'filled',
         public string $buttonColor = 'primary',
-        public string $buttonSize = '',
+        public string $buttonSize = 'md',
         public string $expandLabel = 'Expand',
         public string $height = '',
         public bool $compressed = false,
