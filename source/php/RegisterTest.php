@@ -81,7 +81,7 @@ class RegisterTest extends TestCase
         $this->register->registerInternalComponents(__DIR__ . '/Component');
 
         static::assertSame(
-            'ComponentLibrary\\Integrations\\Image\\ImageInterface|string|boolean',
+            'ComponentLibrary\\Integrations\\Image\\ImageInterface|string|boolean|NULL',
             $this->register->data->avatar->argsTypes->image,
         );
         static::assertSame(AvatarData::class, $this->register->data->avatar->dataClass);
