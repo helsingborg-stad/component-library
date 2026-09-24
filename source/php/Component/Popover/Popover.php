@@ -39,9 +39,9 @@ class Popover extends \ComponentLibrary\Component\BaseController
         return in_array($animation, ['fade', 'slide-up', 'slide-down', 'slide-left', 'slide-right'], true) ? $animation : 'fade';
     }
 
-    private function getType(string $type): string
+    private function getType(?string $type): string
     {
-        return in_array($type, ['auto', 'hint', 'manual']) ? $type : 'auto';
+        return in_array($type, ['auto', 'hint', 'manual'], true) ? $type : 'auto';
     }
 
     private function getHorizontalPlacement(?string $horizontalPlacement): string
