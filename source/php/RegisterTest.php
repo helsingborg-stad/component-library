@@ -12,7 +12,7 @@ use ComponentLibrary\Component\Button\ButtonData;
 use ComponentLibrary\Component\Fab\FabData;
 use ComponentLibrary\Component\Notice\NoticeData;
 use ComponentLibrary\Helper\TagSanitizer;
-use HelsingborgStad\BladeService\BladeService;
+use ComponentLibrary\Renderer\BladeService\BladeServiceCreator;
 use Illuminate\Support\HtmlString;
 use PHPUnit\Framework\TestCase;
 
@@ -270,7 +270,7 @@ BLADE);
         $componentPath = __DIR__ . '/Component';
 
         $register = new class(
-            new BladeService($viewPaths ?? [$componentPath]),
+            (new BladeServiceCreator())->create($viewPaths ?? [$componentPath]),
             new StaticCache(),
             new TagSanitizer(),
         ) extends Register {

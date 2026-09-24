@@ -6,8 +6,8 @@ use ComponentLibrary\Component\Image\ImageData;
 use ComponentLibrary\ComponentConfiguration\ComponentDataReflector;
 use ComponentLibrary\Helper\TagSanitizer;
 use ComponentLibrary\Integrations\Image\ImageInterface;
+use ComponentLibrary\Renderer\BladeService\BladeServiceCreator;
 use ComponentLibrary\Renderer\Renderer;
-use HelsingborgStad\BladeService\BladeService;
 use PHPUnit\Framework\TestCase;
 
 class ImageComponentTest extends TestCase
@@ -76,7 +76,7 @@ class ImageComponentTest extends TestCase
         $this->assertStringContainsString('c-image--container-query', implode(' ', $result['classList']));
         $this->assertStringNotContainsString('srcset=', $result['imgAttributes']);
 
-        $renderer = new Renderer(new BladeService([__DIR__ . '/..']));
+        $renderer = new Renderer((new BladeServiceCreator())->create([__DIR__ . '/..']));
         $markup = $renderer->render('Image.image', $result);
 
         $this->assertSame(2, substr_count($markup, '<img'));
@@ -120,7 +120,7 @@ class ImageComponentTest extends TestCase
         $this->assertStringContainsString('object-position: 25% 75%;', $result['imgAttributes']);
         $this->assertStringContainsString('srcset=', $result['imgAttributes']);
 
-        $renderer = new Renderer(new BladeService([__DIR__ . '/..']));
+        $renderer = new Renderer((new BladeServiceCreator())->create([__DIR__ . '/..']));
         $markup = $renderer->render('Image.image', $result);
 
         $this->assertSame(1, substr_count($markup, '<img'));

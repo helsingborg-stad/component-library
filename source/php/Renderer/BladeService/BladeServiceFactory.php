@@ -8,7 +8,6 @@ use ComponentLibrary\Cache\StaticCache;
 use ComponentLibrary\Cache\TrySetWpCache;
 use ComponentLibrary\Helper\TagSanitizer;
 use ComponentLibrary\Renderer\NullWpService;
-use HelsingborgStad\BladeService\BladeService;
 use HelsingborgStad\BladeService\BladeServiceInterface;
 use WpService\Contracts\ApplyFilters;
 use WpService\Contracts\WpCacheGet;
@@ -28,7 +27,7 @@ class BladeServiceFactory
                 'No valid view paths were configured. Please ensure at least one valid directory path is provided.',
             );
         }
-        $bladeService = new BladeService($viewPaths);
+        $bladeService = (new BladeServiceCreator())->create($viewPaths);
         $register = new Register\Register(
             $bladeService,
             new TrySetWpCache(new StaticCache()),

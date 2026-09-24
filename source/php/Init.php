@@ -6,8 +6,8 @@ use ComponentLibrary\Cache\CacheInterface;
 use ComponentLibrary\Cache\StaticCache;
 use ComponentLibrary\Cache\TrySetWpCache;
 use ComponentLibrary\Helper\TagSanitizer;
+use ComponentLibrary\Renderer\BladeService\BladeServiceCreator;
 use ComponentLibrary\Register;
-use HelsingborgStad\BladeService\BladeService;
 use HelsingborgStad\BladeService\BladeServiceInterface;
 
 class Init
@@ -98,7 +98,7 @@ class Init
             return;
         }
 
-        $this->bladeService = new BladeService($sanitizedViewPaths);
+        $this->bladeService = (new BladeServiceCreator())->create($sanitizedViewPaths);
         $this->register = new Register(
             $this->bladeService,
             $this->getCache(),

@@ -6,7 +6,7 @@ namespace ComponentLibrary\Renderer\BladeService\Register;
 
 use ComponentLibrary\Cache\StaticCache;
 use ComponentLibrary\Helper\TagSanitizer;
-use HelsingborgStad\BladeService\BladeService;
+use ComponentLibrary\Renderer\BladeService\BladeServiceCreator;
 use Illuminate\Support\HtmlString;
 use PHPUnit\Framework\TestCase;
 
@@ -15,7 +15,7 @@ class RegisterTest extends TestCase
     public function testItPreservesHtmlStringSlotInputWhenItsClassIsAllowed(): void
     {
         $register = new Register(
-            new BladeService([__DIR__ . '/../../../Component']),
+            (new BladeServiceCreator())->create([__DIR__ . '/../../../Component']),
             new StaticCache(),
             new TagSanitizer(),
         );
@@ -32,7 +32,7 @@ class RegisterTest extends TestCase
     public function testUntrustedPhpConfigPathIsRejected(): void
     {
         $register = new Register(
-            new BladeService([__DIR__ . '/../../../Component']),
+            (new BladeServiceCreator())->create([__DIR__ . '/../../../Component']),
             new StaticCache(),
             new TagSanitizer(),
         );
@@ -52,7 +52,7 @@ class RegisterTest extends TestCase
     public function testJsonOnlyComponentDirectoryIsRejected(): void
     {
         $register = new Register(
-            new BladeService([__DIR__ . '/../../../Component']),
+            (new BladeServiceCreator())->create([__DIR__ . '/../../../Component']),
             new StaticCache(),
             new TagSanitizer(),
         );
