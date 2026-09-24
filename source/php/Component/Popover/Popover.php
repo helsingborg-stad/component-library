@@ -34,9 +34,9 @@ class Popover extends \ComponentLibrary\Component\BaseController
         }
     }
 
-    private function getAnimationType(string $animation): string
+    private function getAnimationType(?string $animation): string
     {
-        return in_array($animation, ['fade', 'slide-up', 'slide-down', 'slide-left', 'slide-right']) ? $animation : 'fade';
+        return in_array($animation, ['fade', 'slide-up', 'slide-down', 'slide-left', 'slide-right'], true) ? $animation : 'fade';
     }
 
     private function getType(string $type): string
