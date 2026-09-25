@@ -51,7 +51,7 @@ class Pagination extends \ComponentLibrary\Component\BaseController
             $this->data['previous'] = $this->handlePrefixUrlParam($linkPrefix, $this->data['current'] - 1) . $anchorTag;
         } else {
             $this->data['previous'] = '';
-            $this->data['previousDisabled'] = 'true';
+            $this->data['previousDisabled'] = true;
         }
 
         //Next data
@@ -59,7 +59,7 @@ class Pagination extends \ComponentLibrary\Component\BaseController
             $this->data['next'] = $this->handlePrefixUrlParam($linkPrefix, $this->data['current'] + 1) . $anchorTag;
         } else {
             $this->data['next'] = '';
-            $this->data['nextDisabled'] = 'true';
+            $this->data['nextDisabled'] = true;
         }
 
         //Sanitize links
