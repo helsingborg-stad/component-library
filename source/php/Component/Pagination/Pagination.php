@@ -92,7 +92,7 @@ class Pagination extends \ComponentLibrary\Component\BaseController
             return $url;
         }
 
-        //Get allowed query vars
+        //Get allowed query vars 
         $allowedQueryVars = apply_filters('query_vars', []);
 
         //Remove unregistered query vars
