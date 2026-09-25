@@ -10,7 +10,7 @@
             'color' => 'default',
             'icon' => 'chevron_left',
             'attributeList' => [
-                'disabled' => $previousDisabled,
+                $previousDisabled ? 'disabled' : '' => '',
                 'data-js-pagination-prev' => ''
             ],
             'href' => $previous,
@@ -50,7 +50,7 @@
                 'color' => 'default',
                 'icon' => 'chevron_right',
                 'attributeList' => [
-                    'disabled' => $nextDisabled,
+                    $nextDisabled ? 'disabled' : '' => '',
                     'data-js-pagination-next' => ''
                 ],
                 'href' => $next
