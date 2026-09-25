@@ -3,6 +3,7 @@
   'src' => $image,
   'alt' => $alt ?? null,
   'cover' => true,
-  'context' => ['component.slider', 'component.slider.image']
+  'context' => ['component.slider', 'component.slider.image'],
+  'preferSrcset' => true,
 ])
 @endimage
