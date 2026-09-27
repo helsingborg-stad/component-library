@@ -9,5 +9,8 @@ return new ComponentConfig(
     slug: 'field',
     view: 'field.blade.php',
     data: FieldData::class,
-    dependencies: ['sass' => ['components' => ['fields', 'icon']]],
+    dependencies: [
+        'sass' => ['components' => ['fields', 'icon']],
+        'utilities' => ['color'],
+    ],
 );

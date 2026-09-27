@@ -24,6 +24,8 @@ echo $html;
 
 `enqueueComponent('button')`, `enqueueStyle($handle, $url)`, and `enqueueScript($handle, $url)` can also be called manually. Handles are emitted once. A WordPress integration can implement `AssetEnqueuerInterface` and call `wp_enqueue_style` and `wp_enqueue_script`; render or discover components before `wp_head` so styles reach the head. The interface does not depend on WordPress.
 
+Hosts can also register and enqueue utility styles with `PhpAssetEnqueuer::registerUtility($name, $url, $order)` and `enqueueUtility($name)`. Component configuration may list utility dependencies under `dependencies: ['utilities' => ['overflow']]` for classes added after initial rendering. The collector preserves utility cascade order and deduplicates styles and scripts by URL as well as handle.
+
 ## Known issues
 Have any issues? This list is your first resort. 
 
