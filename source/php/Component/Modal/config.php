@@ -9,5 +9,5 @@ return new ComponentConfig(
     slug: 'modal',
     view: 'modal.blade.php',
     data: ModalData::class,
-    dependencies: ['sass' => ['components' => ['modal', 'icon', 'typography', 'button']]],
+    dependencies: ['sass' => ['components' => ['gallery--modal', 'icon', 'typography', 'button']]],
 );

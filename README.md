@@ -2,6 +2,28 @@
 
 A library of blade components compatible with WordPress.
 
+## Component assets
+
+Pass an `AssetEnqueuerInterface` to `Init` to receive an `enqueueComponent($slug, $dependencies)` call when each Blade component is rendered. The dependencies come from its `config.php`. Nested components register themselves too. The host owns URL resolution and decides where to print assets.
+
+For plain PHP, use `PhpAssetEnqueuer`. Register URLs before rendering, then insert its collected tags in the document head and before `</body>` after the view has rendered:
+
+```php
+use ComponentLibrary\Assets\PhpAssetEnqueuer;
+use ComponentLibrary\Init;
+
+$assets = new PhpAssetEnqueuer();
+$assets->registerComponent('button', '/assets/button.css', '/assets/button.js');
+$assets->enqueueStyle('base', '/assets/base.css'); // Manual, always needed
+$engine = (new Init($viewPaths, $assets))->getEngine();
+$html = $engine->makeView('page')->render();
+$html = str_replace('<!-- styles -->', $assets->renderStyles(), $html);
+$html = str_replace('<!-- scripts -->', $assets->renderScripts(), $html);
+echo $html;
+```
+
+`enqueueComponent('button')`, `enqueueStyle($handle, $url)`, and `enqueueScript($handle, $url)` can also be called manually. Handles are emitted once. A WordPress integration can implement `AssetEnqueuerInterface` and call `wp_enqueue_style` and `wp_enqueue_script`; render or discover components before `wp_head` so styles reach the head. The interface does not depend on WordPress.
+
 ## Known issues
 Have any issues? This list is your first resort. 
 
