@@ -124,8 +124,8 @@ class Init
             );
         }
 
-        self::$bladeServiceCache[$cacheKey] = $this->bladeService;
         if ($assetEnqueuer === null) {
+            self::$bladeServiceCache[$cacheKey] = $this->bladeService;
             self::$assetEnqueuerCache[$cacheKey] = $this->assetEnqueuer;
         }
     }
