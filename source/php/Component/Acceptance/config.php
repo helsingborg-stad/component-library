@@ -9,5 +9,8 @@ return new ComponentConfig(
     slug: 'acceptance',
     view: 'acceptance.blade.php',
     data: AcceptanceData::class,
-    dependencies: ['sass' => ['components' => ['acceptance', 'button', 'icon', 'typography', 'iframe', 'modal']]],
+    dependencies: [
+        'sass' => ['components' => ['acceptance', 'button', 'icon', 'typography', 'iframe', 'modal']],
+        'utilities' => ['z-index'],
+    ],
 );

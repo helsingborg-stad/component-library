@@ -2,6 +2,7 @@
 
 namespace ComponentLibrary;
 
+use ComponentLibrary\Assets\AssetEnqueuerInterface;
 use ComponentLibrary\Cache\CacheInterface;
 use ComponentLibrary\ComponentConfiguration\ComponentConfig;
 use ComponentLibrary\ComponentConfiguration\ComponentDataReflector;
@@ -32,6 +33,7 @@ class Register
         private BladeServiceInterface $blade,
         private CacheInterface $componentCache,
         private TagSanitizerInterface $tagSanitizer,
+        private ?AssetEnqueuerInterface $assetEnqueuer = null,
     ) {}
 
     /**
@@ -175,6 +177,7 @@ class Register
             $this->blade->registerComponent(
                 ucfirst($component->slug) . '.' . $component->slug,
                 function ($view) use ($component) {
+                    $this->assetEnqueuer?->enqueueComponent($component->slug, (array) $component->dependency);
                     $dataClass = is_string($component->dataClass ?? null) ? $component->dataClass : null;
 
                     $controllerName = $this->camelCase(

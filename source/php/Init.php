@@ -2,6 +2,8 @@
 
 namespace ComponentLibrary;
 
+use ComponentLibrary\Assets\AssetEnqueuerInterface;
+use ComponentLibrary\Assets\PhpAssetEnqueuer;
 use ComponentLibrary\Cache\CacheInterface;
 use ComponentLibrary\Cache\StaticCache;
 use ComponentLibrary\Cache\TrySetWpCache;
@@ -20,12 +22,15 @@ class Init
      * @var array<string, BladeServiceInterface>
      */
     private static array $bladeServiceCache = [];
+    private static array $assetEnqueuerCache = [];
 
     private $register = null;
     private BladeServiceInterface $bladeService;
+    private AssetEnqueuerInterface $assetEnqueuer;
 
-    public function __construct($externalViewPaths)
+    public function __construct($externalViewPaths, ?AssetEnqueuerInterface $assetEnqueuer = null)
     {
+        $this->assetEnqueuer = $assetEnqueuer ?? new PhpAssetEnqueuer();
         $paths = array(
             'viewPaths' => array(),
             'controllerPaths' => array(),
@@ -93,8 +98,9 @@ class Init
             ]),
         );
 
-        if (isset(self::$bladeServiceCache[$cacheKey])) {
+        if ($assetEnqueuer === null && isset(self::$bladeServiceCache[$cacheKey])) {
             $this->bladeService = self::$bladeServiceCache[$cacheKey];
+            $this->assetEnqueuer = self::$assetEnqueuerCache[$cacheKey];
             return;
         }
 
@@ -103,6 +109,7 @@ class Init
             $this->bladeService,
             $this->getCache(),
             new TagSanitizer(),
+            $this->assetEnqueuer,
         );
 
         foreach ($controllerPaths as $path) {
@@ -118,6 +125,9 @@ class Init
         }
 
         self::$bladeServiceCache[$cacheKey] = $this->bladeService;
+        if ($assetEnqueuer === null) {
+            self::$assetEnqueuerCache[$cacheKey] = $this->assetEnqueuer;
+        }
     }
 
     /**
@@ -126,6 +136,7 @@ class Init
     public static function clearBladeServiceCache(): void
     {
         self::$bladeServiceCache = [];
+        self::$assetEnqueuerCache = [];
     }
 
     private function getCache(): CacheInterface
@@ -136,5 +147,10 @@ class Init
     public function getEngine(): BladeServiceInterface
     {
         return $this->bladeService;
+    }
+
+    public function getAssetEnqueuer(): AssetEnqueuerInterface
+    {
+        return $this->assetEnqueuer;
     }
 }

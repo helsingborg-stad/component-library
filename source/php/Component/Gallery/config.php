@@ -9,5 +9,5 @@ return new ComponentConfig(
     slug: 'gallery',
     view: 'gallery.blade.php',
     data: GalleryData::class,
-    dependencies: ['sass' => ['components' => ['gallery', 'modal', 'image', 'button', 'icon']]],
+    dependencies: ['sass' => ['components' => ['gallery--modal', 'modal', 'image', 'button', 'icon']]],
 );
