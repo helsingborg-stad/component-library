@@ -5,6 +5,10 @@
     src="{{$item['url']}}"
     alt="{{$alt}}"
     style="{{$focus}}"
+    @if($item['dimensions'])
+      width="{{$item['dimensions'][0]}}"
+      height="{{$item['dimensions'][1]}}"
+    @endif
     {!! $imgAttributes !!}
   />
 @endforeach

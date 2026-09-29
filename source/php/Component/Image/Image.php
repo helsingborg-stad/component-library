@@ -12,6 +12,13 @@ class Image extends \ComponentLibrary\Component\BaseController
             $this->data['imgAttributeList'] = get_object_vars($this->data['imgAttributeList']);
         }
 
+        foreach (['width', 'height'] as $dimension) {
+            $value = $this->data['imgAttributeList'][$dimension] ?? null;
+            if ($value !== null && (!is_numeric($value) || (int) $value <= 0)) {
+                unset($this->data['imgAttributeList'][$dimension]);
+            }
+        }
+
         // Handle image processing
         if ($this->data['src'] instanceof ImageInterface) {
             $this->handleImageProcessing(
@@ -50,7 +57,12 @@ class Image extends \ComponentLibrary\Component\BaseController
         $this->addSrcsetToAttributes($this->data['srcset']);
 
         // Build img attributes
-        $this->data['imgAttributes'] = self::buildAttributes($this->data['imgAttributeList']);
+        $imgAttributeList = $this->data['imgAttributeList'];
+        if ($this->data['containerQueryData']) {
+            // Each candidate has its own dimensions in the container-query template.
+            unset($imgAttributeList['width'], $imgAttributeList['height']);
+        }
+        $this->data['imgAttributes'] = self::buildAttributes($imgAttributeList);
 
         // Build wrapper attributes
         if (!isset($this->data['wrapperAttributes'])) {
@@ -93,12 +105,17 @@ class Image extends \ComponentLibrary\Component\BaseController
             // Render a single <img>, letting the browser pick a candidate via srcset/sizes.
             // Container query data still supplies the wrapper's aspect ratio below.
             $this->data['containerQueryData'] = null;
-            $this->addResponsiveImageAttributes($this->data['srcset'], $this->data['focus']);
+            $this->addResponsiveImageAttributes($containerQueryData, $this->data['srcset'], $this->data['focus']);
         } else {
             // Default: one <img> per candidate size, switched by CSS container queries.
             $this->data['containerQueryData'] = $containerQueryData;
             if (is_array($containerQueryData) && !empty($containerQueryData)) {
                 $this->data['classList'][] = $this->getBaseClass('container-query', true);
+                foreach ($this->data['containerQueryData'] as &$item) {
+                    $item['dimensions'] = $this->resolveDimensionsFromCandidate($item)
+                        ?? $this->resolveDimensionsFromAttributes();
+                }
+                unset($item);
             }
         }
 
@@ -161,8 +178,8 @@ class Image extends \ComponentLibrary\Component\BaseController
     }
 
     /**
-     * Keep content images lazy by default while allowing callers such as Hero
-     * to opt into eager, high-priority loading through imgAttributeList.
+     * Keep content images lazy by default and use dimensions encoded in plain URLs
+     * when no image metadata or caller-supplied dimensions are available.
      */
     private function addDefaultImageAttributes(): void
     {
@@ -170,8 +187,8 @@ class Image extends \ComponentLibrary\Component\BaseController
             $this->data['imgAttributeList']['loading'] = 'lazy';
         }
 
-        $this->data['imgAttributeList']['width'] = '';
-        $this->data['imgAttributeList']['height'] = '';
+        $dimensions = $this->resolveDimensionsFromUrl($this->data['src']);
+        $this->addDimensionsToAttributes($dimensions);
     }
 
     /**
@@ -181,7 +198,7 @@ class Image extends \ComponentLibrary\Component\BaseController
      * back to the HTML default of 100vw. Used for LCP-critical images (e.g. Hero)
      * where downloading only one candidate matters more than an exact size match.
      */
-    private function addResponsiveImageAttributes($srcset, string $focus): void
+    private function addResponsiveImageAttributes(array $containerQueryData, $srcset, string $focus): void
     {
         if ($srcset && !isset($this->data['imgAttributeList']['sizes'])) {
             $this->data['imgAttributeList']['sizes'] = '100cqw';
@@ -192,6 +209,85 @@ class Image extends \ComponentLibrary\Component\BaseController
             $existingStyle .= ';';
         }
         $this->data['imgAttributeList']['style'] = trim($existingStyle . ' ' . $focus);
+
+        for ($index = count($containerQueryData) - 1; $index >= 0; $index--) {
+            $dimensions = $this->resolveDimensionsFromCandidate($containerQueryData[$index]);
+            if ($dimensions !== null) {
+                $this->addDimensionsToAttributes($dimensions);
+                break;
+            }
+        }
+    }
+
+    private function addDimensionsToAttributes(?array $dimensions): void
+    {
+        if ($dimensions === null) {
+            return;
+        }
+
+        if (!isset($this->data['imgAttributeList']['width'])) {
+            $this->data['imgAttributeList']['width'] = $dimensions[0];
+        }
+        if (!isset($this->data['imgAttributeList']['height'])) {
+            $this->data['imgAttributeList']['height'] = $dimensions[1];
+        }
+    }
+
+    private function resolveDimensionsFromAttributes(): ?array
+    {
+        $width = $this->data['imgAttributeList']['width'] ?? null;
+        $height = $this->data['imgAttributeList']['height'] ?? null;
+        if (is_numeric($width) && is_numeric($height) && (int) $width > 0 && (int) $height > 0) {
+            return [(int) $width, (int) $height];
+        }
+
+        return null;
+    }
+
+    private function resolveDimensionsFromCandidate(array $item): ?array
+    {
+        $imageSize = $item['imageSize'] ?? null;
+        if (is_array($imageSize) && isset($imageSize[0], $imageSize[1])) {
+            $width = (int) $imageSize[0];
+            $height = (int) $imageSize[1];
+            if ($width > 0 && $height > 0) {
+                return [$width, $height];
+            }
+        }
+
+        $aspectRatio = $item['aspectRatio'] ?? null;
+        if (is_string($aspectRatio) && preg_match('/^(\d+)\/(\d+)$/', $aspectRatio, $matches)) {
+            $width = (int) $matches[1];
+            $height = (int) $matches[2];
+            if ($width > 0 && $height > 0) {
+                return [$width, $height];
+            }
+        }
+
+        return $this->resolveDimensionsFromUrl($item['url'] ?? null);
+    }
+
+    private function resolveDimensionsFromUrl($url): ?array
+    {
+        if (!is_string($url) || $url === '') {
+            return null;
+        }
+
+        $path = parse_url($url, PHP_URL_PATH);
+        if (!is_string($path)) {
+            return null;
+        }
+
+        if (preg_match('/(\d{2,5})x(\d{2,5})(?:\D|$)/', $path, $matches)
+            || preg_match('~/(\d{2,5})/(\d{2,5})/?$~', $path, $matches)) {
+            $width = (int) $matches[1];
+            $height = (int) $matches[2];
+            if ($width > 0 && $height > 0) {
+                return [$width, $height];
+            }
+        }
+
+        return null;
     }
 
     private function handleFileTypeClass($src)

@@ -44,12 +44,14 @@ class ImageComponentTest extends TestCase
                     'uuid' => 'item-1-425',
                     'url' => 'https://example.com/image-425x177.jpg',
                     'media' => ['landscape' => '(min-width: 0px)', 'portrait' => '(min-width: 0px)'],
+                    'imageSize' => [425, 177],
                     'aspectRatio' => '425/177',
                 ],
                 [
                     'uuid' => 'item-1-1920',
                     'url' => 'https://example.com/image-1920x800.jpg',
                     'media' => ['landscape' => '(min-width: 425px)', 'portrait' => '(min-width: 425px)'],
+                    'imageSize' => [1920, 800],
                     'aspectRatio' => '1920/800',
                 ],
             ]);
@@ -79,9 +81,12 @@ class ImageComponentTest extends TestCase
         $renderer = new Renderer((new BladeServiceCreator())->create([__DIR__ . '/..']));
         $markup = $renderer->render('Image.image', $result);
 
-        $this->assertSame(2, substr_count($markup, '<img'));
-        $this->assertSame(2, substr_count($markup, 'width=""'));
-        $this->assertSame(2, substr_count($markup, 'height=""'));
+        preg_match_all('/<img\b[^>]*>/s', $markup, $images);
+        $this->assertCount(2, $images[0]);
+        $this->assertStringContainsString('width="425"', $images[0][0]);
+        $this->assertStringContainsString('height="177"', $images[0][0]);
+        $this->assertStringContainsString('width="1920"', $images[0][1]);
+        $this->assertStringContainsString('height="800"', $images[0][1]);
     }
 
     public function testImageUsesOneResponsiveAttributeContractWhenPreferSrcsetIsEnabled(): void
@@ -117,8 +122,8 @@ class ImageComponentTest extends TestCase
         $this->assertNull($result['containerQueryData']);
         $this->assertStringContainsString('loading="lazy"', $result['imgAttributes']);
         $this->assertStringContainsString('sizes="100cqw"', $result['imgAttributes']);
-        $this->assertStringContainsString('width=""', $result['imgAttributes']);
-        $this->assertStringContainsString('height=""', $result['imgAttributes']);
+        $this->assertStringContainsString('width="1920"', $result['imgAttributes']);
+        $this->assertStringContainsString('height="800"', $result['imgAttributes']);
         $this->assertStringContainsString('object-position: 25% 75%;', $result['imgAttributes']);
         $this->assertStringContainsString('srcset=', $result['imgAttributes']);
         $this->assertStringContainsString('425/177', $result['wrapperAttributes']);
@@ -151,9 +156,34 @@ class ImageComponentTest extends TestCase
         $this->assertStringContainsString('loading="eager"', $result['imgAttributes']);
         $this->assertStringContainsString('fetchpriority="high"', $result['imgAttributes']);
         $this->assertStringContainsString('sizes="100vw"', $result['imgAttributes']);
-        $this->assertStringContainsString('width=""', $result['imgAttributes']);
-        $this->assertStringContainsString('height=""', $result['imgAttributes']);
+        $this->assertStringContainsString('width="640"', $result['imgAttributes']);
+        $this->assertStringContainsString('height="480"', $result['imgAttributes']);
         $this->assertStringNotContainsString('loading="lazy"', $result['imgAttributes']);
+    }
+
+    public function testPlainImageUsesUrlDimensionsWhenAvailable(): void
+    {
+        $data = $this->getDefaultData();
+        $data['src'] = 'https://picsum.photos/id/1026/300/200';
+
+        $component = new ImageComponent($data, $this->createMock(CacheInterface::class), new TagSanitizer());
+        $attributes = $component->getData()['imgAttributes'];
+
+        $this->assertStringContainsString('width="300"', $attributes);
+        $this->assertStringContainsString('height="200"', $attributes);
+    }
+
+    public function testPlainImageOmitsDimensionsWhenUnavailable(): void
+    {
+        $data = $this->getDefaultData();
+        $data['src'] = 'https://example.com/image.jpg';
+        $data['imgAttributeList'] = ['width' => '', 'height' => ''];
+
+        $component = new ImageComponent($data, $this->createMock(CacheInterface::class), new TagSanitizer());
+        $attributes = $component->getData()['imgAttributes'];
+
+        $this->assertStringNotContainsString('width=', $attributes);
+        $this->assertStringNotContainsString('height=', $attributes);
     }
 
     private function getDefaultData(): array
