@@ -17,6 +17,7 @@ class Icon extends \ComponentLibrary\Component\BaseController
     private $altTextUndefined = 'Undefined';
     private static $runtimeCache = [
         'svgFromFile' => [],
+        'svgByPath' => [],
     ];
 
     public function init()
@@ -34,7 +35,8 @@ class Icon extends \ComponentLibrary\Component\BaseController
         // The check below handles a default hidden value.
         // Allows for the default value to be overwritten.
         if (is_null($filled)) {
-            $this->data['filled'] = $defaultFilled ?? true;
+            $filled = $defaultFilled ?? true;
+            $this->data['filled'] = $filled;
         }
 
         //Support for filled icons
@@ -46,6 +48,9 @@ class Icon extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . '--svg-link';
         } elseif (array_key_exists($customIconName, $customSvgIcons)) {
             $this->data['svgElementFromFile'] = $customSvgIcons[$customIconName];
+            $this->data['classList'][] = $this->getBaseClass() . '--svg-path';
+        } elseif (!empty($this->data['svgMode']) && ($svg = $this->loadNamedSvg((string) $icon, (bool) $filled)) !== null) {
+            $this->data['svgElementFromFile'] = $svg;
             $this->data['classList'][] = $this->getBaseClass() . '--svg-path';
         } else {
             $this->data['classList'] = array_merge($this->data['classList'] ?? [], [
@@ -95,6 +100,46 @@ class Icon extends \ComponentLibrary\Component\BaseController
         }
 
         return str_ends_with($icon, '.svg') !== false;
+    }
+
+    /**
+     * Resolve one trusted local SVG on demand. A theme can select its own icon
+     * catalogue and variant without registering thousands of custom SVG files.
+     */
+    private function loadNamedSvg(string $icon, bool $filled): ?string
+    {
+        if ($icon === '') {
+            return null;
+        }
+
+        $path = $this->resolveSvgPath($icon, $filled);
+
+        if (!is_string($path) || !is_file($path) || !is_readable($path)) {
+            return null;
+        }
+
+        if (!array_key_exists($path, self::$runtimeCache['svgByPath'])) {
+            $contents = file_get_contents($path);
+            self::$runtimeCache['svgByPath'][$path] = is_string($contents) && str_contains($contents, '<svg')
+                ? $contents
+                : null;
+        }
+
+        return self::$runtimeCache['svgByPath'][$path];
+    }
+
+    /**
+     * Return a trusted local file path, or null to keep font rendering.
+     *
+     * @return string|null
+     */
+    protected function resolveSvgPath(string $icon, bool $filled)
+    {
+        if (!function_exists('apply_filters')) {
+            return null;
+        }
+
+        return apply_filters('ComponentLibrary/Component/Icon/SvgPath', null, $icon, $filled, $this->data);
     }
 
     /**

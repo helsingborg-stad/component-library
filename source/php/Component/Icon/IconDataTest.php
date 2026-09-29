@@ -22,5 +22,7 @@ class IconDataTest extends TestCase
         static::assertSame(IconData::class, $config->data);
         static::assertNull($defaults['filled']);
         static::assertSame('boolean|NULL', $types['filled']);
+        static::assertFalse($defaults['svgMode']);
+        static::assertSame('boolean', $types['svgMode']);
     }
 }
