@@ -121,6 +121,7 @@ class ImageComponentTest extends TestCase
         $this->assertStringContainsString('height=""', $result['imgAttributes']);
         $this->assertStringContainsString('object-position: 25% 75%;', $result['imgAttributes']);
         $this->assertStringContainsString('srcset=', $result['imgAttributes']);
+        $this->assertStringContainsString('425/177', $result['wrapperAttributes']);
 
         $renderer = new Renderer((new BladeServiceCreator())->create([__DIR__ . '/..']));
         $markup = $renderer->render('Image.image', $result);

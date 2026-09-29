@@ -91,6 +91,7 @@ class Image extends \ComponentLibrary\Component\BaseController
 
         if (isset($this->data['preferSrcset']) && $this->data['preferSrcset']) {
             // Render a single <img>, letting the browser pick a candidate via srcset/sizes.
+            // Container query data still supplies the wrapper's aspect ratio below.
             $this->data['containerQueryData'] = null;
             $this->addResponsiveImageAttributes($this->data['srcset'], $this->data['focus']);
         } else {
