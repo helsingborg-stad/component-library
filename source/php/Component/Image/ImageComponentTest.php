@@ -80,6 +80,8 @@ class ImageComponentTest extends TestCase
         $markup = $renderer->render('Image.image', $result);
 
         $this->assertSame(2, substr_count($markup, '<img'));
+        $this->assertSame(2, substr_count($markup, 'width=""'));
+        $this->assertSame(2, substr_count($markup, 'height=""'));
     }
 
     public function testImageUsesOneResponsiveAttributeContractWhenPreferSrcsetIsEnabled(): void
@@ -115,8 +117,8 @@ class ImageComponentTest extends TestCase
         $this->assertNull($result['containerQueryData']);
         $this->assertStringContainsString('loading="lazy"', $result['imgAttributes']);
         $this->assertStringContainsString('sizes="100cqw"', $result['imgAttributes']);
-        $this->assertStringContainsString('width="1920"', $result['imgAttributes']);
-        $this->assertStringContainsString('height="800"', $result['imgAttributes']);
+        $this->assertStringContainsString('width=""', $result['imgAttributes']);
+        $this->assertStringContainsString('height=""', $result['imgAttributes']);
         $this->assertStringContainsString('object-position: 25% 75%;', $result['imgAttributes']);
         $this->assertStringContainsString('srcset=', $result['imgAttributes']);
 
@@ -134,6 +136,8 @@ class ImageComponentTest extends TestCase
             'loading' => 'eager',
             'fetchpriority' => 'high',
             'sizes' => '100vw',
+            'width' => 640,
+            'height' => 480,
         ];
 
         $component = new ImageComponent(
@@ -146,6 +150,8 @@ class ImageComponentTest extends TestCase
         $this->assertStringContainsString('loading="eager"', $result['imgAttributes']);
         $this->assertStringContainsString('fetchpriority="high"', $result['imgAttributes']);
         $this->assertStringContainsString('sizes="100vw"', $result['imgAttributes']);
+        $this->assertStringContainsString('width=""', $result['imgAttributes']);
+        $this->assertStringContainsString('height=""', $result['imgAttributes']);
         $this->assertStringNotContainsString('loading="lazy"', $result['imgAttributes']);
     }
 

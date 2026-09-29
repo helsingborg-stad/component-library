@@ -92,7 +92,7 @@ class Image extends \ComponentLibrary\Component\BaseController
         if (isset($this->data['preferSrcset']) && $this->data['preferSrcset']) {
             // Render a single <img>, letting the browser pick a candidate via srcset/sizes.
             $this->data['containerQueryData'] = null;
-            $this->addResponsiveImageAttributes($containerQueryData, $this->data['srcset'], $this->data['focus']);
+            $this->addResponsiveImageAttributes($this->data['srcset'], $this->data['focus']);
         } else {
             // Default: one <img> per candidate size, switched by CSS container queries.
             $this->data['containerQueryData'] = $containerQueryData;
@@ -168,6 +168,9 @@ class Image extends \ComponentLibrary\Component\BaseController
         if (!isset($this->data['imgAttributeList']['loading'])) {
             $this->data['imgAttributeList']['loading'] = 'lazy';
         }
+
+        $this->data['imgAttributeList']['width'] = '';
+        $this->data['imgAttributeList']['height'] = '';
     }
 
     /**
@@ -177,7 +180,7 @@ class Image extends \ComponentLibrary\Component\BaseController
      * back to the HTML default of 100vw. Used for LCP-critical images (e.g. Hero)
      * where downloading only one candidate matters more than an exact size match.
      */
-    private function addResponsiveImageAttributes(array $containerQueryData, $srcset, string $focus): void
+    private function addResponsiveImageAttributes($srcset, string $focus): void
     {
         if ($srcset && !isset($this->data['imgAttributeList']['sizes'])) {
             $this->data['imgAttributeList']['sizes'] = '100cqw';
@@ -188,39 +191,6 @@ class Image extends \ComponentLibrary\Component\BaseController
             $existingStyle .= ';';
         }
         $this->data['imgAttributeList']['style'] = trim($existingStyle . ' ' . $focus);
-
-        $dimensions = $this->resolveDimensionsFromContainerQueryData($containerQueryData);
-        if ($dimensions === null) {
-            return;
-        }
-
-        if (!isset($this->data['imgAttributeList']['width'])) {
-            $this->data['imgAttributeList']['width'] = $dimensions[0];
-        }
-        if (!isset($this->data['imgAttributeList']['height'])) {
-            $this->data['imgAttributeList']['height'] = $dimensions[1];
-        }
-    }
-
-    /**
-     * Use the largest generated candidate as the intrinsic image dimensions.
-     * The browser preserves this ratio even when CSS scales or crops the image.
-     */
-    private function resolveDimensionsFromContainerQueryData(array $containerQueryData): ?array
-    {
-        for ($index = count($containerQueryData) - 1; $index >= 0; $index--) {
-            $aspectRatio = $containerQueryData[$index]['aspectRatio'] ?? null;
-            if (!is_string($aspectRatio)) {
-                continue;
-            }
-
-            $dimensions = array_map('intval', explode('/', $aspectRatio, 2));
-            if (count($dimensions) === 2 && $dimensions[0] > 0 && $dimensions[1] > 0) {
-                return $dimensions;
-            }
-        }
-
-        return null;
     }
 
     private function handleFileTypeClass($src)
