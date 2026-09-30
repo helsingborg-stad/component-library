@@ -2,6 +2,7 @@
 
 namespace ComponentLibrary\Component\Icon;
 
+use Composer\InstalledVersions;
 use ComponentLibrary\Helper\Icons;
 
 /**
@@ -17,6 +18,7 @@ class Icon extends \ComponentLibrary\Component\BaseController
     private $altTextUndefined = 'Undefined';
     private static $runtimeCache = [
         'svgFromFile' => [],
+        'materialSvg' => [],
     ];
 
     public function init()
@@ -37,7 +39,7 @@ class Icon extends \ComponentLibrary\Component\BaseController
             $this->data['filled'] = $defaultFilled ?? true;
         }
 
-        //Support for filled icons
+        //Support for filled custom icons. Material SVGs use the selected style.
         $customIconName = $filled ? $icon . 'Filled' : $icon;
 
         $this->data['svgFromLink'] = $this->iconIsSvg($icon);
@@ -48,20 +50,13 @@ class Icon extends \ComponentLibrary\Component\BaseController
             $this->data['svgElementFromFile'] = $customSvgIcons[$customIconName];
             $this->data['classList'][] = $this->getBaseClass() . '--svg-path';
         } else {
+            $this->data['svgElementFromFile'] = self::materialSvg($icon, $variant, $weight);
             $this->data['classList'] = array_merge($this->data['classList'] ?? [], [
                 $this->createIconModifier($icon),
                 $this->getBaseClass() . '--material',
                 $this->getBaseClass() . '--material-' . $icon,
-                'material-symbols',
-                'material-symbols-rounded', //All classes added, to support all icon types
-                'material-symbols-sharp', //All classes added, to support all icon types
-                'material-symbols-outlined', //All classes added, to support all icon types
+                $this->getBaseClass() . '--svg-material',
             ]);
-            $this->data['attributeList']['data-material-symbol'] = $icon;
-        }
-
-        if (!empty($filled)) {
-            $this->data['classList'][] = 'material-symbols--filled';
         }
 
         if (!empty($customColor)) {
@@ -86,6 +81,29 @@ class Icon extends \ComponentLibrary\Component\BaseController
             $this->data['attributeList']['aria-hidden'] = 'true';
             $this->data['attributeList']['aria-label'] = '';
         }
+    }
+
+    private static function materialSvg($icon, string $variant, int $weight): string
+    {
+        if (!is_string($icon) || !preg_match('/^[a-z0-9_]+$/', $icon)) {
+            return '';
+        }
+
+        $variant = in_array($variant, ['outlined', 'rounded', 'sharp'], true) ? $variant : 'outlined';
+        $weight = in_array($weight, [200, 400, 600], true) ? $weight : 400;
+
+        $key = $variant . '/' . $weight . '/' . $icon;
+        if (isset(self::$runtimeCache['materialSvg'][$key])) {
+            return self::$runtimeCache['materialSvg'][$key];
+        }
+
+        $package = InstalledVersions::getInstallPath('helsingborg-stad/material-design-icons-json-svg-font');
+        $path = $package . '/' . $key . '.svg';
+        $svg = is_file($path) ? file_get_contents($path) : '';
+        $svg = is_string($svg)
+            ? preg_replace('/^<svg\b/', '<svg aria-hidden="true" focusable="false"', $svg, 1)
+            : '';
+        return self::$runtimeCache['materialSvg'][$key] = $svg ?? '';
     }
 
     private function iconIsSvg($icon)
