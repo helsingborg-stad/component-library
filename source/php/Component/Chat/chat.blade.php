@@ -1,5 +1,5 @@
 @element([
-    'id' => $id,
+    'id' => $id ?? null,
     'classList' => array_merge(
         [
             $baseClass,
