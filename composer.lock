@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "af925b1d65e6b4b37137a014a7333e1e",
+    "content-hash": "64d73d03c443cdb54b29f3d3a205981d",
     "packages": [
         {
             "name": "carbonphp/carbon-doctrine-types",
@@ -3717,13 +3717,14 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "carthage-software/mago": 5
+        "carthage-software/mago": 5,
+        "helsingborg-stad/material-design-icons-json-svg-font": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.0"
     },
-    "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "platform-dev": {},
+    "plugin-api-version": "2.9.0"
 }
