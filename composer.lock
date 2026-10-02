@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dd1e94a61f8947df4e6ea04b04b1401f",
+    "content-hash": "896a8c7f4e335e3272c996c9e82fd61b",
     "packages": [
         {
             "name": "carbonphp/carbon-doctrine-types",
@@ -225,21 +225,18 @@
             "time": "2024-05-27T13:51:35+00:00"
         },
         {
-            "name": "helsingborg-stad/material-design-icons-json-svg-font",
-            "version": "v1.0.0",
+            "name": "helsingborg-stad/material-design-icons-json-svg-font-reduced",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/helsingborg-stad/material-design-icons-json-svg-font.git",
-                "reference": "57da41fe1e0c7ceb7754171a6556b8ab631b57fd"
+                "url": "https://github.com/helsingborg-stad/material-design-icons-json-svg-font-reduced.git",
+                "reference": "199ff12b18ba1ea4a49f4f38273bc386ff066912"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/helsingborg-stad/material-design-icons-json-svg-font/zipball/57da41fe1e0c7ceb7754171a6556b8ab631b57fd",
-                "reference": "57da41fe1e0c7ceb7754171a6556b8ab631b57fd",
+                "url": "https://api.github.com/repos/helsingborg-stad/material-design-icons-json-svg-font-reduced/zipball/199ff12b18ba1ea4a49f4f38273bc386ff066912",
+                "reference": "199ff12b18ba1ea4a49f4f38273bc386ff066912",
                 "shasum": ""
-            },
-            "require": {
-                "php": ">=8.1"
             },
             "type": "library",
             "autoload": {
@@ -251,13 +248,13 @@
             "license": [
                 "Apache-2.0"
             ],
-            "description": "Material Symbols extracted from Google's variable fonts as SVG, JSON, and fonts",
-            "homepage": "https://github.com/helsingborg-stad/material-design-icons-json-svg-font",
+            "description": "Reduced Material Symbols assets for Helsingborgs stad: outlined, rounded and sharp SVGs at weights 200, 400 and 600, plus variable WOFF2 fonts.",
+            "homepage": "https://github.com/helsingborg-stad/material-design-icons-json-svg-font-reduced",
             "support": {
-                "issues": "https://github.com/helsingborg-stad/material-design-icons-json-svg-font/issues",
-                "source": "https://github.com/helsingborg-stad/material-design-icons-json-svg-font"
+                "issues": "https://github.com/helsingborg-stad/material-design-icons-json-svg-font-reduced/issues",
+                "source": "https://github.com/helsingborg-stad/material-design-icons-json-svg-font-reduced"
             },
-            "time": "2026-09-30T10:53:47+00:00"
+            "time": "2026-10-02T11:54:28+00:00"
         },
         {
             "name": "helsingborg-stad/wpservice",
@@ -3724,6 +3721,6 @@
     "platform": {
         "php": "^8.0"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.9.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.6.0"
 }

@@ -97,7 +97,7 @@ class Icon extends \ComponentLibrary\Component\BaseController
             return self::$runtimeCache['materialSvg'][$key];
         }
 
-        $package = InstalledVersions::getInstallPath('helsingborg-stad/material-design-icons-json-svg-font');
+        $package = InstalledVersions::getInstallPath('helsingborg-stad/material-design-icons-json-svg-font-reduced');
         $path = $package . '/' . $key . '.svg';
         $svg = is_file($path) ? file_get_contents($path) : '';
         $svg = is_string($svg)
