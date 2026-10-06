@@ -25,7 +25,17 @@ class Person extends \ComponentLibrary\Component\BaseController
         $this->data['fullName'] = empty($familyName) ? $givenName : $givenName . ' ' . $familyName;
 
         // Title
-        $this->data['fullTitle'] = empty($administrationUnit) ? $jobTitle : $jobTitle . ', ' . $administrationUnit;
+        $this->data['fullTitle'] = [];
+
+        if (!empty($jobTitle)) {
+            $this->data['fullTitle'][] = $jobTitle;
+        }
+
+        if (!empty($administrationUnit)) {
+            $this->data['fullTitle'][] = $administrationUnit;
+        }
+
+        $this->data['fullTitle'] = implode(', ', $this->data['fullTitle']);
 
         // Email
         $this->data['email'] = !empty($email) ? $email : false;
