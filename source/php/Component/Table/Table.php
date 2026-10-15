@@ -33,6 +33,7 @@ class Table extends \ComponentLibrary\Component\BaseController
 
         if ($isMultidimensional) {
             $this->data['classList'][] = $this->getBaseClass() . '--multidimensional';
+            $this->data['attributeList']['data-js-table-multidimensional'] = true;
         }
 
         if ($fullscreen && empty($title)) {
