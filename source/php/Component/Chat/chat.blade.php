@@ -13,4 +13,5 @@
     @includeWhen($title || $titleAreaSlotHasContent, 'Chat.partials.title-area')
     @include('Chat.partials.chat-area')
     @include('Chat.partials.message-template')
+    @include('Chat.partials.info-template')
 @endelement
