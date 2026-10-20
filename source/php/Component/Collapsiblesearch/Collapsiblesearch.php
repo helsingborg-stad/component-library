@@ -12,6 +12,18 @@ namespace ComponentLibrary\Component\Collapsiblesearch;
 class Collapsiblesearch extends \ComponentLibrary\Component\BaseController
 {
     /**
+     * Return an ID with a component-specific alphabetic prefix.
+     *
+     * @return string
+     */
+    public function getUid()
+    {
+        $id = !empty($this->data['id']) ? (string) $this->data['id'] : parent::getUid();
+
+        return str_starts_with($id, 'collapsiblesearch-') ? $id : 'collapsiblesearch-' . $id;
+    }
+
+    /**
      * Initialize component data.
      *
      * @return void

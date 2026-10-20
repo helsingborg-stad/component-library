@@ -8,7 +8,7 @@
     {{-- Search panel: hidden in closed state, visible when expanded --}}
     <form
         class="{{ $baseClass }}__panel"
-        id="collapsible-search-{{ $uid }}-panel"
+        id="{{ $uid }}-panel"
         role="search"
         aria-label="{{ $inputLabel }}"
         method="{{ $method }}"
@@ -62,7 +62,7 @@
             'classList'        => [$baseClass . '__close'],
             'attributeList'    => [
                 'data-js-collapsible-search-close' => '',
-                'aria-controls'                    => 'collapsible-search-' . $uid . '-panel',
+                'aria-controls'                    => $uid . '-panel',
             ],
         ])
         @endbutton
