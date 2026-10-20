@@ -57,6 +57,13 @@ class CollapsiblesearchTest extends PHPUnit\Framework\TestCase
     {
         $data = $this->make();
         $this->assertNotEmpty($data['uid']);
+        $this->assertStringStartsWith('collapsiblesearch-', $data['uid']);
+    }
+
+    public function testPrefixedIdIsNotPrefixedTwice(): void
+    {
+        $data = $this->make(['id' => 'collapsiblesearch-site-search']);
+        $this->assertEquals('collapsiblesearch-site-search', $data['uid']);
     }
 
     public function testWrapperHasDataAttribute(): void
