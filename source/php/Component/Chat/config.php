@@ -9,5 +9,5 @@ return new ComponentConfig(
     slug: 'chat',
     view: 'chat.blade.php',
     data: ChatData::class,
-    dependencies: ['sass' => ['components' => ['chat', 'chat__message', 'chat__input', 'element']]],
+    dependencies: ['sass' => ['components' => ['chat', 'chat__message', 'chat__input', 'element', 'chat__banner', 'chat__info']]],
 );
