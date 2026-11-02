@@ -9,7 +9,7 @@
     
     @if($autoSlide)
         <div class="{{ $baseClass }}__controls">
-            <button class="{{ $baseClass }}__autoslide-toggle" type="button" aria-pressed="false">
+            <button class="{{ $baseClass }}__autoslide-toggle" type="button">
                 @icon([
                     'icon' => 'play_circle',
                     'size' => 'xl',
