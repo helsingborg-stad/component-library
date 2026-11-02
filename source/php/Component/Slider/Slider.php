@@ -8,7 +8,7 @@ class Slider extends \ComponentLibrary\Component\BaseController
     {
         //Extract array for eazy access (fetch only)
         extract($this->data);
-        $this->data['id'] = $this->sanitizeIdAttribute(uniqid('sider_', true));
+        $this->data['id'] = $this->sanitizeIdAttribute(uniqid('slider_', true));
         $this->data['attributeList']['data-step'] = 0;
         $this->data['attributeList']['data-js-slider'] = 0;
         $this->data['attributeList']['data-js-slider-index'] = 0;
