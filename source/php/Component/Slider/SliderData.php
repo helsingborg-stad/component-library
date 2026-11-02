@@ -15,9 +15,13 @@ final class SliderData
         public string $type = 'slide',
         public bool $heroStyle = false,
         public bool $shadow = true,
+        public string|bool $title = false,
         public string|bool $customButtons = false,
         public array $arrowButtons = ['color' => 'primary', 'style' => 'filled'],
         public int $padding = 0,
         public int $gap = 2,
+        public int $slidesPerPage = 1,
+        public bool $slideByPage = false,
+        public bool $compactNavigation = true,
     ) {}
 }

@@ -9,7 +9,7 @@
         ],
         'attributeList' => [
             'data-js-slider-prev' => true,
-            'aria-controls' => 'slider_' . $id . '__track',
+            'aria-controls' => $id . '__track',
             'aria-label' => 'Previous slide',
         ]
     ])
@@ -24,7 +24,7 @@
         ],
         'attributeList' => [
             'data-js-slider-next' => true,
-            'aria-controls' => 'slider_' . $id . '__track',
+            'aria-controls' => $id . '__track',
             'aria-label' => 'Next slide',
         ]
     ])

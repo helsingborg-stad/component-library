@@ -1,7 +1,20 @@
 <div class="{{ $class }}" {!! $attribute !!}>
-    @includeWhen(!$customButtons, 'Slider.components.navigationButtons')
+    @if($title)
+        <div class="{{ $baseClass }}__header">
+            @typography([
+                'element' => 'h2',
+                'variant' => 'h2',
+                'classList' => [$baseClass . '__title']
+            ])
+                {{ $title }}
+            @endtypography
+            @includeWhen(!$customButtons, 'Slider.components.navigationButtons')
+        </div>
+    @else
+        @includeWhen(!$customButtons, 'Slider.components.navigationButtons')
+    @endif
 
-    <div class="{{ $baseClass }}__container" id="slider_{{ $id }}__track" data-js-slider-track tabindex="0" role="region" aria-roledescription="carousel">
+    <div class="{{ $baseClass }}__container" id="{{ $id }}__track" data-js-slider-track tabindex="0" role="region" aria-roledescription="carousel">
         <div class="{{ $baseClass }}__inner" data-js-slider-inner>
             {{ $slot }}
         </div>
