@@ -16,7 +16,9 @@ class Slider__item extends \ComponentLibrary\Component\BaseController
         $this->data['slotHasData'] = $this->slotHasData('slot');
 
         $this->data['classListDesktop'] = $this->getBaseClass() . '__image';
-        $this->data['classList'][] = 'splide__slide';
+        $this->data['attributeList']['data-js-slider-slide'] = true;
+        $this->data['attributeList']['role'] = 'group';
+        $this->data['attributeList']['aria-roledescription'] = 'slide';
 
         if (!empty($containerColor)) {
             $this->data['classList'][] = 'u-color__bg--' . $containerColor;
