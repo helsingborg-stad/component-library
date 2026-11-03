@@ -16,6 +16,7 @@ final class SliderData
         public bool $heroStyle = false,
         public bool $shadow = true,
         public string|bool $title = false,
+        public string|bool $preamble = false,
         public string|bool $customButtons = false,
         public array $arrowButtons = ['color' => 'primary', 'style' => 'filled'],
         public int $padding = 0,

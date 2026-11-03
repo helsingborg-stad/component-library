@@ -26,9 +26,13 @@ class Slider extends \ComponentLibrary\Component\BaseController
 
         $existingStyle = (string) ($this->data['attributeList']['style'] ?? '');
         $configuredSlidesPerPage = (int) ($this->data['attributeList']['data-slides-per-page'] ?? $slidesPerPage);
+        $configuredSlidesPerPage = max(1, $configuredSlidesPerPage);
         $sliderVariables = sprintf(
-            '--c-slider--configured-columns: %d; --c-slider--gap: %dpx; --c-slider--padding: %dpx;',
-            max(1, $configuredSlidesPerPage),
+            '--c-slider--configured-columns: %1$d; --c-slider--columns-1: 1; --c-slider--columns-2: %2$d; --c-slider--columns-3: %3$d; --c-slider--columns-4: %4$d; --c-slider--gap: %5$dpx; --c-slider--padding: %6$dpx;',
+            $configuredSlidesPerPage,
+            min($configuredSlidesPerPage, 2),
+            min($configuredSlidesPerPage, 3),
+            min($configuredSlidesPerPage, 4),
             max(0, $gap) * 8,
             max(0, $padding) * 8,
         );
@@ -58,6 +62,10 @@ class Slider extends \ComponentLibrary\Component\BaseController
 
         if ($title) {
             $this->data['classList'][] = 'c-slider--has-title';
+        }
+
+        if ($title || $preamble) {
+            $this->data['classList'][] = 'c-slider--has-header';
         }
 
         if ($autoSlide) {

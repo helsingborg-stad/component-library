@@ -1,14 +1,25 @@
 <div class="{{ $class }}" {!! $attribute !!}>
-    @if($title)
+    @if($title || $preamble)
         <div class="{{ $baseClass }}__header">
-            @typography([
-                'element' => 'h2',
-                'variant' => 'h2',
-                'classList' => [$baseClass . '__title']
-            ])
-                {{ $title }}
-            @endtypography
+            @if($title)
+                @typography([
+                    'element' => 'h2',
+                    'variant' => 'h4',
+                    'classList' => [$baseClass . '__title']
+                ])
+                    {{ $title }}
+                @endtypography
+            @endif
             @includeWhen(!$customButtons, 'Slider.components.navigationButtons')
+            @if($preamble)
+                @typography([
+                    'element' => 'p',
+                    'variant' => 'p',
+                    'classList' => [$baseClass . '__preamble']
+                ])
+                    {{ $preamble }}
+                @endtypography
+            @endif
         </div>
     @else
         @includeWhen(!$customButtons, 'Slider.components.navigationButtons')
