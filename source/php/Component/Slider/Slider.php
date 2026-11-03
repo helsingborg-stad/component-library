@@ -28,13 +28,13 @@ class Slider extends \ComponentLibrary\Component\BaseController
         $configuredSlidesPerPage = (int) ($this->data['attributeList']['data-slides-per-page'] ?? $slidesPerPage);
         $configuredSlidesPerPage = max(1, $configuredSlidesPerPage);
         $sliderVariables = sprintf(
-            '--c-slider--configured-columns: %1$d; --c-slider--columns-1: 1; --c-slider--columns-2: %2$d; --c-slider--columns-3: %3$d; --c-slider--columns-4: %4$d; --c-slider--gap: %5$dpx; --c-slider--padding: %6$dpx;',
+            '--c-slider--configured-columns: %1$d; --c-slider--columns-1: 1; --c-slider--columns-2: %2$d; --c-slider--columns-3: %3$d; --c-slider--columns-4: %4$d; --c-slider--gap-multiplier: %5$d; --c-slider--padding-multiplier: %6$d;',
             $configuredSlidesPerPage,
             min($configuredSlidesPerPage, 2),
             min($configuredSlidesPerPage, 3),
             min($configuredSlidesPerPage, 4),
-            max(0, $gap) * 8,
-            max(0, $padding) * 8,
+            max(0, $gap),
+            max(0, $padding),
         );
         $this->data['attributeList']['style'] = trim($existingStyle . ' ' . $sliderVariables);
 
