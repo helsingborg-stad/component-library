@@ -1,4 +1,4 @@
-<div class="c-slider__arrows" id="slider_{{$id}}">
+<div class="c-slider__arrows" id="{{$id}}">
     @button([
         'color' => $arrowButtons['color'],
         'icon' => 'keyboard_arrow_left',
@@ -9,6 +9,8 @@
         ],
         'attributeList' => [
             'data-js-slider-prev' => true,
+            'aria-controls' => $id . '__track',
+            'aria-label' => 'Previous slide',
         ]
     ])
     @endbutton
@@ -22,6 +24,8 @@
         ],
         'attributeList' => [
             'data-js-slider-next' => true,
+            'aria-controls' => $id . '__track',
+            'aria-label' => 'Next slide',
         ]
     ])
     @endbutton
