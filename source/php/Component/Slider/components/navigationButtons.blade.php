@@ -1,4 +1,4 @@
-<div class="c-slider__arrows" id="{{$id}}">
+<div class="c-slider__arrows" id="{{$id}}__arrows">
     @button([
         'color' => $arrowButtons['color'],
         'icon' => 'keyboard_arrow_left',
