@@ -14,7 +14,7 @@ final class CollectionItemData
         public array|bool|string|null $icon = false,
         public array|bool $iconLast = false,
         public array|bool $action = false,
-        public string $secondary = '',
+        public string|ComponentSlot $secondary = '',
         public string $link = '',
         public bool $bordered = false,
     ) {}

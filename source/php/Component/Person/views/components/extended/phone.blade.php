@@ -5,7 +5,7 @@
         'style' => 'basic',
         'href' => 'tel:' . $number,
         'icon' => $icon ?? 'call',
-        'reversePositions' => 'true',
+        'reversePositions' => true,
         'attributeList' => [
             'itemprop' => 'telephone'
         ],

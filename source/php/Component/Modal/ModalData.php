@@ -12,7 +12,7 @@ final class ModalData
     public function __construct(
         public string $heading = '',
         public string|HtmlString|ComponentSlot|null $slot = '',
-        public string $bottom = '',
+        public string|ComponentSlot $bottom = '',
         public string $overlay = 'light',
         public bool $isPanel = false,
         public string $id = '',
@@ -20,8 +20,9 @@ final class ModalData
         public bool $navigation = false,
         public string $size = '',
         public int $padding = 3,
-        public bool $borderRadius = false,
+        public string|bool $borderRadius = false,
         public bool $transparent = false,
         public string $closeButtonText = '',
+        public array|object $ariaLabels = [],
     ) {}
 }
