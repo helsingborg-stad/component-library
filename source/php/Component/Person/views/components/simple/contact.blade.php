@@ -12,7 +12,7 @@
                 'style' => 'basic',
                 'href' => 'mailto:' . $email,
                 'icon' => 'mail',
-                'reversePositions' => 'true',
+                'reversePositions' => true,
                 'attributeList' => [
                     'itemprop' => 'email',
                 ],
@@ -32,7 +32,7 @@
                     'style' => 'basic',
                     'href' => 'tel:' . $phone['number'],
                     'icon' => $phone['type'] == 'smartphone' ? 'smartphone' : 'call',
-                    'reversePositions' => 'true',
+                    'reversePositions' => true,
                     'attributeList' => [
                         'itemprop' => 'telephone',
                     ],

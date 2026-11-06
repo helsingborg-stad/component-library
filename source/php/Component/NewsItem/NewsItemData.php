@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace ComponentLibrary\Component\NewsItem;
 
+use ComponentLibrary\Integrations\Image\ImageInterface;
+
 /**
  * Typed input contract for the NewsItem component.
  */
@@ -13,7 +15,7 @@ final class NewsItemData
         public ?string $heading = null,
         public ?string $subHeading = null,
         public ?string $content = null,
-        public ?array $image = null,
+        public array|ImageInterface|null $image = null,
         public ?array $date = null,
         public ?string $readTime = null,
         public bool $standing = false,

@@ -27,5 +27,6 @@ final class FieldData
         public array $fieldAttributeList = [],
         public bool $moveAttributesListToFieldAttributes = true,
         public string $description = '',
+        public array|bool $datepicker = false,
     ) {}
 }

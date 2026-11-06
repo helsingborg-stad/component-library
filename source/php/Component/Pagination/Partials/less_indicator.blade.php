@@ -7,7 +7,7 @@
         'classList' => [
             $baseClass . '__link'
         ],
-        'text' => ($firstItem['key'] +1),
+        'text' => (string) ($firstItem['key'] +1),
         'attributeList' => [
             'aria-label' => $firstItem['label']
         ]

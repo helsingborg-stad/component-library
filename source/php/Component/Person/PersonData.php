@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace ComponentLibrary\Component\Person;
 
+use ComponentLibrary\Integrations\Image\ImageInterface;
+
 /**
  * Typed input contract for the Person component.
  */
@@ -18,7 +20,7 @@ final class PersonData
         public string|bool $address = false,
         public string|bool $visitingAddress = false,
         public string|bool $description = false,
-        public int|string|bool $image = false,
+        public int|string|bool|ImageInterface|null $image = false,
         public string|bool $administrationUnit = false,
         public array $socialMedia = [],
         public array $customSections = [],

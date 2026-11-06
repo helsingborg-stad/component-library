@@ -268,6 +268,7 @@ class Register
                     'context',
                     'attributeList',
                     'baseClass',
+                    'containerAware',
                     'lang',
                     'isBlock',
                     'isShortcode',
