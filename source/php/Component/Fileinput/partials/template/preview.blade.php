@@ -28,7 +28,7 @@
                 $baseClass . '__item-remove-button'
             ],
             'attributeList' => [
-                'aria-label' => $lang->buttonRemoveLabel,
+                'aria-label' => $buttonRemoveLabel,
                 'data-js-file' => 'remove'
             ],
             ])
