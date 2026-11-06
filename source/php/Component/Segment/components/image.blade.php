@@ -4,7 +4,7 @@
     'keepContent' => true,
     'keepWrapper' => $layout === 'card',
     'attributeList' => [
-        'aria-label' => $lang->visit . ': ' . $link,
+        'aria-label' => (is_object($lang) ? ($lang->visit ?? '') : ($lang['visit'] ?? '')) . ': ' . $link,
     ]
 ])
     @image([

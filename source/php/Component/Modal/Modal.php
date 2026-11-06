@@ -36,7 +36,7 @@ class Modal extends \ComponentLibrary\Component\BaseController
         }
 
         if (isset($ariaLabels)) {
-            $this->data['ariaLabels'] = $ariaLabels;
+            $this->data['ariaLabels'] = (array) $ariaLabels;
         }
 
         if ($transparent) {
