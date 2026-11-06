@@ -99,7 +99,7 @@ class Notice extends \ComponentLibrary\Component\BaseController
      */
     private function handleMessageData($message): array
     {
-        return array_merge(['title' => null, 'message' => null], (array) $message);
+        return array_merge(['title' => null, 'text' => null, 'message' => null], (array) $message);
     }
 
     /**
