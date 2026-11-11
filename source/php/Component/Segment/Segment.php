@@ -35,6 +35,7 @@ class Segment extends \ComponentLibrary\Component\BaseController
         // If no link and exactly one button, use that button as link
         if (!$link && ($buttons && is_array($buttons) && count($buttons) === 1)) {
             $this->data['link'] = $buttons[0]['href'];
+            $this->data['linkTarget'] = $buttons[0]['target'] ?? $buttons[0]['attributeList']['target'] ?? '_top';
         }
 
         $this->data['imageClassList'] = [];

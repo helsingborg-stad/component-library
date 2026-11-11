@@ -115,6 +115,7 @@ class Hero extends \ComponentLibrary\Component\BaseController
             if (!empty($buttonArgs['href']) && (!isset($buttonArgs['text']) || empty($buttonArgs['text']))) {
                 $this->data['linkArgs'] = array(
                     'href' => $buttonArgs['href'],
+                    'target' => $buttonArgs['target'] ?? $buttonArgs['attributeList']['target'] ?? '_top',
                     'classList' => ["{$this->getBaseClass()}__content--link"],
                 );
             }

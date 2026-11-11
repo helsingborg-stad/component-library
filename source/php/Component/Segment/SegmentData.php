@@ -37,5 +37,6 @@ final class SegmentData
         public bool $hasPlaceholder = true,
         public array|bool $lang = ['visit' => 'Visit'],
         public bool $containerAware = false,
+        public string $linkTarget = '_top',
     ) {}
 }

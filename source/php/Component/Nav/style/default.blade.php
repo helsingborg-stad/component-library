@@ -3,6 +3,7 @@
     'id' => $id . '-' . $item['id'] . '-' . $loop->index . '__label',
     'classList' => [$baseClass . '__link'],
     'href' => $item['href'],
+    'target' => $item['target'] ?? '_top',
     'xfn' => $item['xfn'] ?? false
   ])
     @if (!empty($item['icon']['icon']))

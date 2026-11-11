@@ -42,6 +42,7 @@
                     @button([
                         'text' => $action['text'] ?? 'Undefined',
                         'href' => $action['url'] ?? '#',
+                        'target' => $action['target'] ?? '_top',
                         'style' => 'basic',
                         'size' => 'sm',
                         'classList' => [

@@ -21,6 +21,8 @@ class SegmentDataTest extends TestCase
         static::assertSame('segment', $config->slug);
         static::assertSame(SegmentData::class, $config->data);
         static::assertFalse($defaults['image']);
+        static::assertSame('_top', $defaults['linkTarget']);
+        static::assertSame('string', $types['linkTarget']);
         static::assertSame('ComponentLibrary\\Integrations\\Image\\ImageInterface|string|boolean', $types['image']);
     }
 }
