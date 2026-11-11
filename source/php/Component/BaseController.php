@@ -588,7 +588,6 @@ class BaseController
         try {
             $reflection = new \ReflectionClass($obj);
             $property = $reflection->getProperty($prop);
-            $property->setAccessible(true);
             return $property->getValue($obj);
         } catch (\Throwable $e) {
             return false;

@@ -22,7 +22,6 @@ class RegisterTest extends TestCase
         $slot = new HtmlString('<span>Link content</span>');
 
         $method = (new \ReflectionClass(Register::class))->getMethod('normalizeComponentInput');
-        $method->setAccessible(true);
 
         $normalizedSlot = $method->invoke($register, $slot, [HtmlString::class]);
 
@@ -43,7 +42,6 @@ class RegisterTest extends TestCase
         file_put_contents($configPath, '<?php return [];');
 
         $method = (new \ReflectionClass(Register::class))->getMethod('readConfigFile');
-        $method->setAccessible(true);
 
         $this->expectException(\UnexpectedValueException::class);
         $method->invoke($register, $configPath);
@@ -62,7 +60,6 @@ class RegisterTest extends TestCase
         file_put_contents($componentDirectory . '/component.json', '{}');
 
         $method = (new \ReflectionClass(Register::class))->getMethod('getConfigFilePath');
-        $method->setAccessible(true);
 
         $this->expectException(\Exception::class);
         $method->invoke($register, $componentDirectory);
