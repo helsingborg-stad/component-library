@@ -108,7 +108,10 @@ class OptionTest extends TestCase
                     return null;
                 }
 
-                public function set(string $key, mixed $data, ?string $group = null): void {}
+                public function set(string $key, mixed $data, ?string $group = null): void
+                {
+                    // Intentionally empty: the test cache never stores anything.
+                }
             },
             new class implements TagSanitizerInterface {
                 public function removeATags(string $string): string

@@ -13,7 +13,7 @@ class OptionDataTest extends TestCase
     public function testTypedConfigDescribesTheOptionContract(): void
     {
         $reflector = new ComponentDataReflector();
-        $config = require __DIR__ . '/config.php';
+        $config = require_once __DIR__ . '/config.php';
         $defaults = $reflector->getDefaultArguments(OptionData::class);
 
         static::assertInstanceOf(ComponentConfig::class, $config);
