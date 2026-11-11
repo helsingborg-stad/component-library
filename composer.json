@@ -17,7 +17,7 @@
         "format": "vendor/bin/mago fmt"
     },
     "require": {
-        "php": "^8.0",
+        "php": "^8.2",
         "helsingborg-stad/blade": "^3.5.0",
         "helsingborg-stad/wpservice": "^2.0",
         "helsingborg-stad/material-design-icons-json-svg-font-reduced": "^1.0"
