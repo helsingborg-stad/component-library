@@ -23,6 +23,7 @@
         "helsingborg-stad/material-design-icons-json-svg-font-reduced": "^1.0"
     },
     "require-dev": {
+        "doctrine/instantiator": "2.0.*",
         "phpunit/phpunit": "^9.6",
         "mockery/mockery": "^1.6",
         "carthage-software/mago": "^1.0.0-rc.3"
