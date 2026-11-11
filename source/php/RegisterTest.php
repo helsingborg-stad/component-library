@@ -132,29 +132,29 @@ class RegisterTest extends TestCase
         $viewDirectory = sys_get_temp_dir() . '/component-library-slots-' . uniqid('', true);
         mkdir($viewDirectory, 0777, true);
         file_put_contents($viewDirectory . '/slot-regression.blade.php', <<<'BLADE'
-@typography(['element' => 'p'])
-    <strong>Typography content</strong>
-@endtypography
+            @typography(['element' => 'p'])
+                <strong>Typography content</strong>
+            @endtypography
 
-@card([])
-    @slot('aboveContent')
-        <em>Above card content</em>
-    @endslot
-@endcard
+            @card([])
+                @slot('aboveContent')
+                    <em>Above card content</em>
+                @endslot
+            @endcard
 
-@card([])
-    @typography(['element' => 'h2'])
-        <span>Nested typography content</span>
-    @endtypography
-@endcard
-BLADE);
+            @card([])
+                @typography(['element' => 'h2'])
+                    <span>Nested typography content</span>
+                @endtypography
+            @endcard
+            BLADE);
 
         try {
             $register = $this->createRegister([$viewDirectory, __DIR__ . '/Component']);
             $register->registerInternalComponents(__DIR__ . '/Component');
 
             $markup = (new VendorDeprecationSilencer())->run(
-                fn (): string => $register->getEngine()->makeView('slot-regression')->render(),
+                fn(): string => $register->getEngine()->makeView('slot-regression')->render(),
             );
 
             static::assertStringContainsString('<strong>Typography content</strong>', $markup);
@@ -249,7 +249,6 @@ BLADE);
         file_put_contents($configPath, '<?php return [];');
 
         $method = (new \ReflectionClass(Register::class))->getMethod('readConfigFile');
-        $method->setAccessible(true);
 
         $this->expectException(\UnexpectedValueException::class);
         $method->invoke($this->register, $configPath);
@@ -262,7 +261,6 @@ BLADE);
         file_put_contents($componentDirectory . '/component.json', '{}');
 
         $method = (new \ReflectionClass(Register::class))->getMethod('getConfigFilePath');
-        $method->setAccessible(true);
 
         $this->expectException(\Exception::class);
         $method->invoke($this->register, $componentDirectory);
@@ -300,6 +298,8 @@ BLADE);
 
     private function getButtonDefaults(): array
     {
-        return (new \ComponentLibrary\ComponentConfiguration\ComponentDataReflector())->getDefaultArguments(ButtonData::class);
+        return (new \ComponentLibrary\ComponentConfiguration\ComponentDataReflector())->getDefaultArguments(
+            ButtonData::class,
+        );
     }
 }
