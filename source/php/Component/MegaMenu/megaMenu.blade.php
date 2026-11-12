@@ -16,6 +16,7 @@
                         'color' => $parentStyleColor ?? 'primary',
                         'icon' => $item['icon']['icon'] !== "" ? $item['icon']['icon'] : 'chevron_right',
                         'href' => $item['href'],
+                        'target' => $item['target'] ?? '_top',
                         'classList' => [
                             $baseClass . '__link',
                             $baseClass . '__link--button',
@@ -25,6 +26,7 @@
                 @else
                     @link([
                         'href' => $item['href'],
+                        'target' => $item['target'] ?? '_top',
                         'classList' => [
                             $baseClass . '__link', 
                             $baseClass . '__link--title'
@@ -63,6 +65,7 @@
                                         'color' => $childStyleColor ?? 'primary',
                                         'icon' => $child['icon']['icon'] !== "" ? $child['icon']['icon'] : 'chevron_right',
                                         'href' => $child['href'],
+                                        'target' => $child['target'] ?? '_top',
                                         'size' => 'sm',
                                         'classList' => [
                                             $baseClass . '__link',
@@ -74,6 +77,7 @@
                                 @else
                                     @link([
                                         'href' => $child['href'],
+                                        'target' => $child['target'] ?? '_top',
                                         'classList' => [
                                             $baseClass . '__link', 
                                             $baseClass . '__link--child'

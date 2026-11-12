@@ -7,6 +7,18 @@ class HeroTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(class_exists(\ComponentLibrary\Component\Hero\Hero::class));
     }
 
+    public function testLinkDerivedFromButtonPreservesTarget()
+    {
+        $component = new \ComponentLibrary\Component\Hero\Hero(
+            $this->getComponentData([
+                'buttonArgs' => ['href' => 'https://example.com', 'text' => '', 'target' => '_blank'],
+            ]),
+            new \ComponentLibrary\Cache\StaticCache(),
+            new \ComponentLibrary\Helper\TagSanitizer(),
+        );
+        $this->assertSame('_blank', $component->getData()['linkArgs']['target']);
+    }
+
     /**
      * @dataProvider hasNoContentProvider
      */

@@ -1,5 +1,6 @@
 <div class="{{$baseClass}}__content">
     @card([
+        'attributeList' => $dynamicLink ? ['target' => $linkTarget ?? '_top'] : [],
         'link' => $dynamicLink ?? "",
         'classList' => [$baseClass . '__content-card']
     ])

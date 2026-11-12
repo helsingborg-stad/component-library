@@ -1,4 +1,5 @@
 @link([
+    'target' => $linkTarget ?? '_top',
     'href' => $link,
     'classList' => ['c-segment__image-container'],
     'keepContent' => true,

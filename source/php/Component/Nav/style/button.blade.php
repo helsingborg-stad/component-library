@@ -6,6 +6,7 @@
     'style' => $item['buttonStyle'] ?? $buttonStyle,
     'color' => $item['buttonColor'] ?? $buttonColor,
     'href' => $item['href'],
+    'target' => $item['target'] ?? '_top',
     'classList' => [
         $baseClass . '__button',
     ],
