@@ -21,6 +21,6 @@ class CardDataTest extends TestCase
         static::assertSame('card', $config->slug);
         static::assertSame(CardData::class, $config->data);
         static::assertFalse($defaults['image']);
-        static::assertSame('ComponentLibrary\\Integrations\\Image\\ImageInterface|boolean|array', $types['image']);
+        static::assertSame('ComponentLibrary\\Integrations\\Image\\ImageInterface|string|boolean|array', $types['image']);
     }
 }

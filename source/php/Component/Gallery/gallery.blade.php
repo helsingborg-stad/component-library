@@ -11,7 +11,7 @@
                 @image([
                     'src'=> $item['image'] ?? $item['smallImage'],
                     'alt' => $item['alt'],
-                    'caption' => $item['caption'],
+                    'caption' => $item['caption'] ?? '',
                     'fullWidth' => true,
                     'attributeList' => [
                         'data-open' => $uniqueId,
@@ -42,7 +42,7 @@
 
     @image([
         'src'=> '',
-        'caption'=> $item['caption']
+        'caption'=> $item['caption'] ?? ''
     ])
     @endimage
 

@@ -8,7 +8,7 @@ final class AcceptanceData
 {
     public function __construct(
         public array|object|bool $labels = false,
-        public string|bool $height = false,
+        public string|int|bool $height = false,
         public array|bool $src = false,
         public string|bool $policy = false,
         public string|bool $host = false,

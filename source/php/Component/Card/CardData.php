@@ -20,7 +20,7 @@ final class CardData
         public string $meta = '',
         public ?string $content = '',
         public array $buttons = [],
-        public array|ImageInterface|bool $image = false,
+        public array|ImageInterface|string|bool $image = false,
         public string $ratio = '16:9',
         public bool $collapsible = false,
         public ?array $tags = null,

@@ -1,10 +1,10 @@
 @button([
-    'text' => false,
+    'text' => null,
     'color' => 'default',
     'style' => 'basic',
     'href' => $url,
     'icon' => $media,
-    'reversePositions' => 'true',
+    'reversePositions' => true,
     'attributeList' => [
         'itemprop' => $media ?? 'socialmedia',
         'title' => $label ? ucfirst($label) : 'Social media',

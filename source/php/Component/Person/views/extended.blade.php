@@ -13,7 +13,7 @@
             'author' => $fullName,
             'authorRole' => $fullTitle ?? '',
             'avatar' => $image ?? null,
-            'placeholderAvatar' => $useAvatarFallback,
+            'placeholderAvatar' => (bool) $useAvatarFallback,
             'classList' => ['u-margin--2']
         ])
         @endsignature
