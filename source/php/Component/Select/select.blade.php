@@ -23,8 +23,7 @@
             'element' => 'div',
             'classList' => [
                 $baseClass . '__description',
-                'text-sm', 
-                'text-dark-gray'
+                'c-field__description'
             ]
         ])
             {{ $description }}
