@@ -26,15 +26,15 @@ class Accordion__item extends \ComponentLibrary\Component\BaseController
             : '1';
     }
 
-    private function getHeading()
+    private function getHeading(): array
     {
         $heading = $this->data['heading'] ?? null;
 
         if (empty($heading)) {
-            return null;
+            return [];
         }
 
-        if (!empty($heading) && !is_array($heading)) {
+        if (!is_array($heading)) {
             $heading = [$heading];
         }
 
