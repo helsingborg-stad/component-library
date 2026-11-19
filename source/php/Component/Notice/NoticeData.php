@@ -13,5 +13,6 @@ final class NoticeData
         public bool $stretch = false,
         public bool|string $dismissable = false,
         public array|bool $action = false,
+        public bool $altColor = false,
     ) {}
 }
