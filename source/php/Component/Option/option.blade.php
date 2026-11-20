@@ -14,11 +14,23 @@
         aria-checked="{{$checked ? 'true' : 'false'}}"
         tabindex="0"
         label="{{$label}}"
-        aria-labelledby="label_{{ $id }}"
+        aria-labelledby="{{ $labelTextId }}"
     >
     <label for="{{ $id }}" class="c-option__{{$type}}--label">
         <span class="c-option__{{$type}}--label-box"></span>
-        <span id="label_{{ $id }}" class="c-option__{{$type}}--label-text">{!! $label !!}</span>
+        @if($hasLabelExtras)
+            <span id="label_{{ $id }}" class="c-option__{{$type}}--label-text">
+                <span id="{{ $labelTextId }}">{!! $label !!}</span>
+                @if($descriptionId)
+                    <span id="{{ $descriptionId }}" class="c-option__description">{{ $description }}</span>
+                @endif
+                @if($stateIndicator)
+                    <span id="{{ $stateIndicator['id'] }}" class="{{ $stateIndicator['class'] }}">{{ $stateIndicator['text'] }}</span>
+                @endif
+            </span>
+        @else
+            <span id="label_{{ $id }}" class="c-option__{{$type}}--label-text">{!! $label !!}</span>
+        @endif
     </label>
     <div id="error_input_{{ $id }}_message" class="c-option__input-invalid-message">
         @icon([
