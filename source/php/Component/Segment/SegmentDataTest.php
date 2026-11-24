@@ -24,5 +24,7 @@ class SegmentDataTest extends TestCase
         static::assertSame('_top', $defaults['linkTarget']);
         static::assertSame('string', $types['linkTarget']);
         static::assertSame('ComponentLibrary\\Integrations\\Image\\ImageInterface|string|boolean', $types['image']);
+        static::assertArrayNotHasKey('textColor', $defaults);
+        static::assertArrayNotHasKey('overlay', $defaults);
     }
 }

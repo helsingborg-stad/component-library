@@ -40,6 +40,7 @@ class Segment extends \ComponentLibrary\Component\BaseController
 
         $this->data['imageClassList'] = [];
         $this->data['imageClassList'][] = $this->getBaseClass('image');
+        $this->data['hasImage'] = $hasImage = $this->hasImage($image);
 
         if ($this->data['content'] == strip_tags($this->data['content'] ?? '', [])) {
             // Create paragraphs
@@ -64,14 +65,9 @@ class Segment extends \ComponentLibrary\Component\BaseController
             $this->data['imageClassList'][] = 'u-margin__bottom--0';
         }
 
-        // Set text color
+        // Stretch to the viewport width.
         if ($stretch) {
             $this->data['classList'][] = 'c-segment--stretch';
-        }
-
-        // Set text color
-        if ($textColor) {
-            $this->data['classList'][] = 'c-segment--text-' . $textColor;
         }
 
         // Height
@@ -94,8 +90,8 @@ class Segment extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = 'c-segment--reverse';
         }
 
-        // Add overlay class
-        if ($layout === 'full-width' && ($title || $content) && !empty($image)) {
+        // Text rendered over a full-width image always receives the alpha-palette overlay.
+        if ($layout === 'full-width' && $hasImage && $this->hasContent()) {
             $this->data['classList'][] = 'c-segment' . '--has-overlay';
         }
 
@@ -113,8 +109,6 @@ class Segment extends \ComponentLibrary\Component\BaseController
             }
         }
 
-        // Handle has image
-        $this->data['hasImage'] = $hasImage = $this->hasImage($image);
         if (!$hasImage && !$hasPlaceholder) {
             $this->data['classList'][] = $this->getBaseClass('no-image', true);
         }
@@ -151,5 +145,22 @@ class Segment extends \ComponentLibrary\Component\BaseController
             return !empty($image);
         }
         return false;
+    }
+
+    /**
+     * Determine whether the segment renders content on top of a full-width image.
+     */
+    private function hasContent(): bool
+    {
+        return !empty($this->data['title'])
+            || !empty($this->data['content'])
+            || !empty($this->data['icon'])
+            || !empty($this->data['meta'])
+            || !empty($this->data['date'])
+            || !empty($this->data['tags'])
+            || !empty($this->data['buttons'])
+            || $this->data['aboveContentSlotHasData']
+            || $this->data['belowContentSlotHasData']
+            || $this->data['slotHasData'];
     }
 }
