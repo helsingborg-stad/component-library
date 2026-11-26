@@ -11,6 +11,7 @@
     'backdrop' => true,
     'animation' => 'slide-in-right',
 ])
+    @inheritboundry
     <nav class="{!! $class !!}" {!! $attribute !!}>
         @include('Drawer.partials.header')
         @include('Drawer.partials.body')
@@ -18,4 +19,5 @@
             {!! $afterMenu !!}
         @endif
     </nav>
+    @endinheritboundry
 @endpopover
