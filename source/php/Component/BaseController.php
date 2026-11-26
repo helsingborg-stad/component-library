@@ -3,6 +3,10 @@
 namespace ComponentLibrary\Component;
 
 use ComponentLibrary\Cache\CacheInterface;
+use ComponentLibrary\Filter\Component\AttributeFilter;
+use ComponentLibrary\Filter\Component\ClassFilter;
+use ComponentLibrary\Filter\Component\DataFilter;
+use ComponentLibrary\Filter\Component\FieldFilter;
 use ComponentLibrary\Helper\TagSanitizerInterface;
 use Illuminate\View\ComponentSlot;
 
@@ -50,8 +54,16 @@ class BaseController
     ) {
         //Load input data
         if (!is_null($data) && is_array($data)) {
+            if (isset($data['class']) && !array_key_exists('classList', $data)) {
+                $data['classList'] = ComponentDataStrings::parseClasses($data['class']);
+            }
+            if (isset($data['attribute']) && !array_key_exists('attributeList', $data)) {
+                $data['attributeList'] = ComponentDataStrings::parseAttributes($data['attribute']);
+            }
             $this->data = array_merge($this->data, $data);
         }
+
+        $this->synchronizePairs($this->data, []);
 
         //Add default context
         if (is_array($this->data['context'])) {
@@ -63,19 +75,11 @@ class BaseController
             ];
         }
 
-        //Applies a general wp filter
-        if (function_exists('apply_filters')) {
-            $this->data = apply_filters('ComponentLibrary/Component/Data', $this->data, $this);
-        }
-
-        //Applies a general wp filter
-        if (function_exists('apply_filters')) {
-            $this->data = apply_filters($this->createFilterName($this) . DIRECTORY_SEPARATOR . 'Data', $this->data);
-        }
-
-        if (function_exists('apply_filters')) {
-            $this->data['lang'] = apply_filters('ComponentLibrary/Component/Lang', $this->data['lang'] ?? []);
-        }
+        $this->data = (new DataFilter(
+            $this,
+            $this->createFilterName($this),
+            fn(array $data, array $before): array => $this->synchronizeFilteredData($data, $before),
+        ))->apply($this->data);
 
         //Run
         $this->init();
@@ -92,12 +96,16 @@ class BaseController
         $data = $this->data;
 
         //Generate classes string
-        $data['class'] = $this->getClass();
+        $data['classList'] = $this->getClass(false);
+        $data['class'] = implode(' ', $data['classList']);
 
         $data['baseClass'] = $this->getBaseClass();
 
         //Create attibute string
-        $data['attribute'] = $this->getAttribute();
+        $data['attributeList'] = $this->getAttribute(false);
+        $data['attribute'] = self::buildAttributes($data['attributeList']);
+
+        $this->synchronizePairs($data, $data);
 
         //Create id strings
         $data['id'] = $this->getId(); //"static" id dependent on the content
@@ -112,25 +120,52 @@ class BaseController
             return (string) self::buildAttributes($attributes);
         };
 
-        //Applies single filter for each data item (class and data exepted)
-        if (function_exists('apply_filters')) {
-            if (is_array($data) && !empty($data)) {
-                $filterName = $this->createFilterName($this) . DIRECTORY_SEPARATOR;
-
-                foreach ($data as $key => $item) {
-                    if (!in_array($key, array('data', 'classes', 'class'))) {
-                        $data[$key] = apply_filters(
-                            $filterName . ucfirst($key),
-                            $data[$key],
-                            $data['context'] ?? [],
-                        );
-                    }
-                }
-            }
-        }
+        $data = (new FieldFilter(
+            $this->createFilterName($this),
+            fn(array $data, array $before): array => $this->synchronizeFilteredData($data, $before),
+        ))->apply($data);
 
         //Return manipulated data array
         return (array) $data;
+    }
+
+    /** Reconcile a filter result with the data passed to that filter. */
+    private function synchronizeFilteredData(array $data, array $before): array
+    {
+        $this->synchronizePairs($data, $before);
+        return $data;
+    }
+
+    /**
+     * Synchronize list and string representations after a data filter.
+     *
+     * When both representations change, the list takes precedence.
+     *
+     * @param array $data Component data to synchronize in place.
+     * @param array $before Component data before the filter was applied.
+     * @return void
+     */
+    private function synchronizePairs(array &$data, array $before): void
+    {
+        foreach (['classList' => 'class', 'attributeList' => 'attribute'] as $list => $string) {
+            $listChanged = array_key_exists($list, $data) && (!array_key_exists($list, $before) || $data[$list] !== $before[$list]);
+            $stringChanged = array_key_exists($string, $data) && (!array_key_exists($string, $before) || $data[$string] !== $before[$string]);
+
+            if (!$listChanged && $stringChanged && is_string($data[$string])) {
+                if ($list === 'classList') {
+                    $data[$list] = ComponentDataStrings::parseClasses($data[$string]);
+                } else {
+                    $data[$list] = ComponentDataStrings::parseAttributes($data[$string]);
+                }
+            }
+            $data[$list] = is_array($data[$list] ?? null) ? $data[$list] : [];
+            $data[$list] = $list === 'classList'
+                ? ComponentDataStrings::classes($data[$list])
+                : ComponentDataStrings::attributes($data[$list]);
+            $data[$string] = $list === 'classList'
+                ? implode(' ', $data[$list])
+                : self::buildAttributes($data[$list]);
+        }
     }
 
     /**
@@ -198,26 +233,6 @@ class BaseController
     }
 
     /**
-     * Adds modifier classes to the class array
-     *
-     * @param array $class The current array of classes
-     * @param array $modifier The modifiers to add
-     * @return array The modified class array
-     */
-    private function setModifier($class, $modifier)
-    {
-        if (!empty($modifier)) {
-            foreach ($modifier as &$value) {
-                if ($value && is_string($value)) {
-                    $class[] = $this->getBaseClass() . '--' . $value;
-                }
-            }
-        }
-
-        return $class;
-    }
-
-    /**
      * Validate that all classes in classlist have their
      * own array item. Also check for empty values.
      *
@@ -248,7 +263,7 @@ class BaseController
      *
      * @return string Css classes
      */
-    private function getClass($implode = true)
+    private function getClass($implode = true, bool $applyFilters = true)
     {
         if (!$this->validClassList($this->data['classList'])) {
             trigger_error(
@@ -264,11 +279,8 @@ class BaseController
 
         //Store locally
         if (isset($this->data['classList']) && is_array($this->data['classList'])) {
-            array_unshift(
-                $this->data['classList'],
-                (string) $this->getBaseClass(),
-            );
-            $class = (array) $this->data['classList'];
+            $class = $this->data['classList'];
+            array_unshift($class, (string) $this->getBaseClass());
         } else {
             $class = array();
         }
@@ -276,35 +288,7 @@ class BaseController
         $namespaceParts = $this->getNameSpaceParts();
         $componentName = end($namespaceParts);
 
-        //Applies a general wp filter
-        if (function_exists('apply_filters')) {
-            $modifier = apply_filters('ComponentLibrary/Component/Modifier', [], $this->data['context']);
-            $class = $this->setModifier($class, $modifier);
-        }
-
-        //Applies component specific wp filter
-        if (function_exists('apply_filters')) {
-            $modifier = apply_filters(
-                'ComponentLibrary/Component/' . $componentName . '/Modifier',
-                [],
-                $this->data['context'],
-            );
-            $class = $this->setModifier($class, $modifier);
-        }
-
-        //Applies a general wp filter
-        if (function_exists('apply_filters')) {
-            $class = apply_filters('ComponentLibrary/Component/Class', $class);
-        }
-
-        //Applies component specific wp filter
-        if (function_exists('apply_filters')) {
-            $class = apply_filters(
-                'ComponentLibrary/Component/' . $componentName . '/Class',
-                $class,
-                $this->data['context'],
-            );
-        }
+        $class = (new ClassFilter($componentName, $this->getBaseClass(), $this->data['context']))->apply($class, $applyFilters);
 
         //Return manipulated classes as array
         if ($implode === false) {
@@ -362,7 +346,7 @@ class BaseController
         );
     }
 
-    private function getAttribute($implode = true)
+    private function getAttribute($implode = true, bool $applyFilters = true)
     {
         //Store locally
         if (isset($this->data['attributeList']) && is_array($this->data['attributeList'])) {
@@ -381,15 +365,7 @@ class BaseController
             $attribute['data-observe-resizes'] = '';
         }
 
-        //Applies a general wp filter
-        if (function_exists('apply_filters')) {
-            $attribute = apply_filters($this->createFilterName($this) . DIRECTORY_SEPARATOR . 'Attribute', $attribute);
-        }
-
-        //Applies a general wp filter
-        if (function_exists('apply_filters')) {
-            $attribute = apply_filters('ComponentLibrary/Component/Attribute', $attribute);
-        }
+        $attribute = (new AttributeFilter($this->createFilterName($this)))->apply($attribute, $applyFilters);
 
         //Sanitize "broken" css.
         if (isset($attribute['style'])) {
