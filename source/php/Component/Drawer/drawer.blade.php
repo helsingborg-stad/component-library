@@ -11,15 +11,11 @@
     'backdrop' => true,
     'animation' => 'slide-in-right',
 ])
-    @element([
-        'componentElement' => 'nav',
-        'classList' => $classList,
-        'attributeList' => $attributeList,
-    ])
+    <nav class="{!! $class !!}" {!! $attribute !!}>
         @include('Drawer.partials.header')
         @include('Drawer.partials.body')
         @if ($afterMenuSlotHasData)
             {!! $afterMenu !!}
         @endif
-    @endelement
+    </nav>
 @endpopover
