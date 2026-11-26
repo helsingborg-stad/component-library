@@ -11,6 +11,13 @@ class BaseControllerFilterNameFixture extends BaseController
 
 class BaseControllerTest extends PHPUnit\Framework\TestCase
 {
+    public function testComponentNameIsAvailableToViews(): void
+    {
+        $controller = new BaseControllerFilterNameFixture([], new StaticCache(), new TagSanitizer());
+
+        static::assertSame('basecontrollerfilternamefixture', $controller->getData()['componentName']);
+    }
+
     public function testCreateFilterNameReturnsStableValueForClass()
     {
         $reflection = new ReflectionClass(BaseControllerFilterNameFixture::class);

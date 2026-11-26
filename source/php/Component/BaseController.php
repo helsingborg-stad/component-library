@@ -96,6 +96,9 @@ class BaseController
 
         $data['baseClass'] = $this->getBaseClass();
 
+        // Expose the component's slug to views that delegate their root element.
+        $data['componentName'] = $this->getComponentSlug();
+
         //Create attibute string
         $data['attribute'] = $this->getAttribute();
 

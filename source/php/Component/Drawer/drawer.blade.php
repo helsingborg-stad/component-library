@@ -14,7 +14,7 @@
     @element([
         'componentElement' => 'nav',
         'classList' => $classList,
-        'attributeList' => $attributeList,
+        'attributeList' => array_merge(['data-component' => $componentName], $attributeList),
     ])
         @include('Drawer.partials.header')
         @include('Drawer.partials.body')
