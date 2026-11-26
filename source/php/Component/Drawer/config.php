@@ -9,5 +9,5 @@ return new ComponentConfig(
     slug: 'drawer',
     view: 'drawer.blade.php',
     data: DrawerData::class,
-    dependencies: ['sass' => ['components' => ['button', 'icon', 'nav', 'inheritboundry']]],
+    dependencies: ['sass' => ['components' => ['button', 'icon', 'nav', 'inheritboundary']]],
 );

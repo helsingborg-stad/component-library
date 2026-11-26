@@ -1,10 +1,10 @@
 <?php
 
-namespace ComponentLibrary\Component\Inheritboundry;
+namespace ComponentLibrary\Component\Inheritboundary;
 
 use Illuminate\Support\HtmlString;
 
-class Inheritboundry extends \ComponentLibrary\Component\BaseController
+class Inheritboundary extends \ComponentLibrary\Component\BaseController
 {
     public function init()
     {
