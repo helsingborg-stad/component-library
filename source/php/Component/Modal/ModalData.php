@@ -20,9 +20,9 @@ final class ModalData
         public bool $navigation = false,
         public string $size = '',
         public int $padding = 3,
-        public string|bool $borderRadius = false,
+        public ?string $borderRadius = null,
         public bool $transparent = false,
         public string $closeButtonText = '',
-        public array|object $ariaLabels = [],
+        public array $ariaLabels = [],
     ) {}
 }

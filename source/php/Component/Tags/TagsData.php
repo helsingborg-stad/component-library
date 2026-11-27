@@ -13,7 +13,7 @@ final class TagsData
         public array $icon = [],
         public string $afterLabel = '',
         public string|bool $format = false,
-        public int|bool $compress = false,
+        public ?int $compress = null,
         public array $tags = [],
     ) {}
 }

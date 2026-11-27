@@ -12,8 +12,8 @@
         @signature([
             'author' => $fullName,
             'authorRole' => $fullTitle ?? '',
-            'avatar' => $image ?? null,
-            'placeholderAvatar' => (bool) $useAvatarFallback,
+            'avatar' => $image ?: '',
+            'placeholderAvatar' => $useAvatarFallback,
             'classList' => ['u-margin--2']
         ])
         @endsignature
