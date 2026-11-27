@@ -40,6 +40,11 @@ class Notice extends \ComponentLibrary\Component\BaseController
             $this->data['classList'][] = $this->getBaseClass() . '--info';
         }
 
+        // Alternate shade of the state color
+        if (!empty($altColor)) {
+            $this->data['classList'][] = $this->getBaseClass() . '--alt';
+        }
+
         //Take up full width
         if ($stretch) {
             $this->data['classList'][] = $this->getBaseClass() . '--stretch';
