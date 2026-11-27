@@ -12,7 +12,7 @@
         @signature([
             'author' => $fullName,
             'authorRole' => $fullTitle ?? '',
-            'avatar' => $image ?? null,
+            'avatar' => $image ?: '',
             'placeholderAvatar' => $useAvatarFallback,
             'classList' => ['u-margin--2']
         ])

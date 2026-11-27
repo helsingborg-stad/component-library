@@ -33,7 +33,7 @@
                                 $baseClass . '__link',
                                 $key + 1 == $current ? $baseClass.'__item' . $currentClass : ''
                             ],
-                            'text' => $key +1
+                            'text' => (string) ($key +1)
                         ])
                         @endbutton
                     </{{$listItem}}>

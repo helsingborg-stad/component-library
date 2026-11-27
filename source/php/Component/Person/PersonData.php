@@ -18,7 +18,7 @@ final class PersonData
         public string|bool $address = false,
         public string|bool $visitingAddress = false,
         public string|bool $description = false,
-        public int|string|bool $image = false,
+        public string|bool $image = false,
         public string|bool $administrationUnit = false,
         public array $socialMedia = [],
         public array $customSections = [],

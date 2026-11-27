@@ -5,7 +5,7 @@
         'style' => 'basic',
         'href' => 'mailto:' . $email,
         'icon' => 'outgoing_mail',
-        'reversePositions' => 'true',
+        'reversePositions' => true,
         'attributeList' => [
             'itemprop' => 'email',
         ],

@@ -37,7 +37,6 @@
                 'ariaLabel' => ($ariaLabels['prev'] ?? ''),
                 'attributeList' => ['data-prev' => ''],
                 'classList' => [$baseClass . '__prev'],
-                'label' => 'Slide to previous',
                 'size' => 'lg',
             ])
             @endbutton
@@ -55,7 +54,6 @@
                 'ariaLabel' => ($ariaLabels['next'] ?? ''),
                 'attributeList' => ['data-next' => ''],
                 'classList' => [$baseClass . '__next'],
-                'label' => 'Slide to next',
                 'size' => 'lg',
             ])
             @endbutton

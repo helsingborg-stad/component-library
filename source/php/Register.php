@@ -4,6 +4,7 @@ namespace ComponentLibrary;
 
 use ComponentLibrary\Assets\AssetEnqueuerInterface;
 use ComponentLibrary\Cache\CacheInterface;
+use ComponentLibrary\Component\BaseComponentParams;
 use ComponentLibrary\ComponentConfiguration\ComponentConfig;
 use ComponentLibrary\ComponentConfiguration\ComponentDataReflector;
 use ComponentLibrary\Helper\TagSanitizerInterface;
@@ -260,18 +261,7 @@ class Register
                     );
                 }
             } elseif (
-                !in_array($key, [
-                    '__laravel_slots',
-                    'slot',
-                    'id',
-                    'classList',
-                    'context',
-                    'attributeList',
-                    'baseClass',
-                    'lang',
-                    'isBlock',
-                    'isShortcode',
-                ])
+                !in_array($key, BaseComponentParams::NAMES, true)
                 && !(is_object($value) && $value instanceof ComponentSlot)
             ) {
                 $this->triggerError(

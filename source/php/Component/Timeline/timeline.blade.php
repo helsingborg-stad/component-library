@@ -22,11 +22,11 @@
                 'content' => $event['content'],
                 'image' => isset($event['imageSrc']) && is_array($event['imageSrc'])
                     ? [
-                        'src' => $event['imageSrc'][0] ?? null,
+                        'src' => $event['imageSrc'][0] ?? false,
                         'alt' => $event['title'],
                         'backgroundColor' => 'none'
                     ]
-                    : ($event['imageSrc'] ?? null),
+                    : ($event['imageSrc'] ?? false),
             ])
             @endcard
         </li>
