@@ -11,6 +11,81 @@ class BaseControllerFilterNameFixture extends BaseController
 
 class BaseControllerTest extends PHPUnit\Framework\TestCase
 {
+    /** @runInSeparateProcess */
+    public function testListsAndStringsStayAlignedThroughFiltersAndRepeatedReads(): void
+    {
+        if (!function_exists('apply_filters')) {
+            eval('function apply_filters($name, $value, ...$args) { return ($GLOBALS["componentTestFilter"])($name, $value); }');
+        }
+        $GLOBALS['componentTestFilter'] = static function ($name, $value) {
+            if ($name === 'ComponentLibrary/Component/Data') {
+                $value['class'] = 'from-data-filter';
+            }
+            if ($name === 'BaseControllerFilterNameFixture/Data') {
+                \PHPUnit\Framework\Assert::assertSame(['from-data-filter'], $value['classList']);
+                $value['attribute'] = 'data-initial="yes" role="button"';
+            }
+            if ($name === 'ComponentLibrary/Component/Class') {
+                $value[] = 'filtered-class';
+                $value[] = 'custom filtered-class';
+            }
+            if ($name === 'ComponentLibrary/Component/Attribute') {
+                $value['title'] = 'A & B';
+                $value['ROLE'] = 'duplicate';
+            }
+            if ($name === 'BaseControllerFilterNameFixture/ClassList') {
+                $value[] = 'list-class';
+            }
+            if ($name === 'BaseControllerFilterNameFixture/Attribute' && is_string($value)) {
+                $value .= ' data-extra="hello &amp; goodbye" DATA-EXTRA="duplicate"';
+            }
+            return $value;
+        };
+
+        $controller = new BaseControllerFilterNameFixture(
+            ['classList' => ['custom'], 'attributeList' => ['role' => 'button']],
+            new StaticCache(),
+            new TagSanitizer(),
+        );
+        $first = $controller->getData();
+        $second = $controller->getData();
+        self::assertSame($first['classList'], $second['classList']);
+        self::assertSame(implode(' ', $first['classList']), $first['class']);
+        self::assertContains('from-data-filter', $first['classList']);
+        self::assertSame('yes', $first['attributeList']['data-initial']);
+        self::assertContains('filtered-class', $first['classList']);
+        self::assertSame(1, count(array_keys($first['classList'], 'custom', true)));
+        self::assertSame(1, count(array_keys($first['classList'], 'filtered-class', true)));
+        self::assertArrayNotHasKey('ROLE', $first['attributeList']);
+        self::assertArrayNotHasKey('DATA-EXTRA', $first['attributeList']);
+        self::assertContains('list-class', $first['classList']);
+        self::assertSame('hello & goodbye', $first['attributeList']['data-extra']);
+        self::assertSame('A & B', $first['attributeList']['title']);
+        self::assertSame(BaseController::buildAttributes($first['attributeList']), $first['attribute']);
+    }
+
+    /** @runInSeparateProcess */
+    public function testFilterPipelinesCanBeDisabled(): void
+    {
+        if (!function_exists('apply_filters')) {
+            eval('function apply_filters($name, $value, ...$args) { throw new \RuntimeException("Unexpected filter call"); }');
+        }
+        $filters = [
+            new \ComponentLibrary\Filter\Component\AttributeFilter('Example'),
+            new \ComponentLibrary\Filter\Component\ClassFilter('Example', 'c-example', []),
+            new \ComponentLibrary\Filter\Component\FieldFilter('Example', static fn($data) => $data),
+            new \ComponentLibrary\Filter\Component\DataFilter(
+                (new ReflectionClass(BaseControllerFilterNameFixture::class))->newInstanceWithoutConstructor(),
+                'Example',
+                static fn($data) => $data,
+            ),
+        ];
+        foreach ($filters as $filter) {
+            self::assertInstanceOf(\ComponentLibrary\Filter\Component\ComponentFilter::class, $filter);
+            self::assertSame(['example'], $filter->apply(['example'], false));
+        }
+    }
+
     public function testCreateFilterNameReturnsStableValueForClass()
     {
         $reflection = new ReflectionClass(BaseControllerFilterNameFixture::class);
